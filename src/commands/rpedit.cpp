@@ -61,10 +61,11 @@ void do_rpedit( std::shared_ptr<Character> ch, std::string argument )
 
         for(auto mprg : ch->InRoom->mprog.MudProgs())
         {
-            ch->Echo("%d>%s %s\r\n%s\r\n",
+            ch->Echo("%d>%s %s\r\n>%s\r\n%s\r\n",
                      ++cnt,
                      MobProgTypeToName( mprg->type ),
                      mprg->arglist.c_str(),
+                     mprg->SType == ScriptType::Imp ? "Imp" : "Legacy MProg",
                      mprg->comlist.c_str() );
         }
 

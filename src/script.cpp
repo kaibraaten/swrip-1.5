@@ -1733,6 +1733,7 @@ static void LuaPushMudProg(lua_State *L, std::shared_ptr<MPROG_DATA> mprog, size
     lua_pushinteger(L, idx);
     lua_newtable(L);
 
+    LuaSetfieldString(L, "ScriptType", mprog->SType == ScriptType::Imp ? "Imp" : "MProg");
     LuaSetfieldString(L, "MudProgType", MobProgTypeToName(mprog->type));
     LuaSetfieldString(L, "Arguments", mprog->arglist);
     LuaSetfieldString(L, "Code", StripCarriageReturn(mprog->comlist));

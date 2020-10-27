@@ -34,9 +34,10 @@ void do_opstat(std::shared_ptr<Character> ch, std::string arg)
 
     for(auto mprg : obj->Prototype->mprog.MudProgs())
     {
-        ch->Echo(">%s %s\r\n%s\r\n",
+        ch->Echo(">%s %s\r\n>%s\r\n%s\r\n",
                  MobProgTypeToName(mprg->type),
                  mprg->arglist.c_str(),
+                 mprg->SType == ScriptType::Imp ? "Imp" : "Legacy MProg",
                  mprg->comlist.c_str());
     }
 }

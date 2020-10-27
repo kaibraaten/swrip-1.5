@@ -43,12 +43,19 @@ public:
     std::shared_ptr<Room> room;
 };
 
+enum class ScriptType
+{
+    Imp,
+    MProg
+};
+
 class MPROG_DATA
 {
 public:
-    int         type = 0;
-    bool        triggered = false;
-    int         resetdelay = 0;
+    ScriptType SType = ScriptType::Imp;
+    int type = 0;
+    bool triggered = false;
+    int resetdelay = 0;
     std::string arglist;
     std::string comlist;
 };

@@ -1,1599 +1,2289 @@
 -- Throne City
--- Last saved Thursday 09-Jul-2020 23:19:12
+-- Last saved Tuesday 27-Oct-2020 11:58:44
 
 AreaEntry
 {
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         First = 700, 
+         Last = 799, 
+      }, 
+      Room = 
+      {
+         First = 700, 
+         Last = 799, 
+      }, 
+      Object = 
+      {
+         First = 700, 
+         Last = 799, 
+      }, 
+   }, 
+   LevelRanges = 
+   {
+      Hard = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+   }, 
+   ResetFrequency = 0, 
    Resets = 
    {
       [1] = 
       {
-         Arg2 = 10, 
-         Command = "M", 
-         Arg3 = 798, 
-         MiscData = 0, 
          Arg1 = 700, 
+         Arg3 = 798, 
+         Arg2 = 10, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [2] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 722, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 722, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [3] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 723, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 723, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [4] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 724, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 724, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [5] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 725, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 725, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [6] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 726, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 726, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [7] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 727, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 727, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [8] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 728, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 728, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [9] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 729, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 729, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [10] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 730, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 730, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [11] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 731, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 731, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [12] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 732, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 732, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [13] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 733, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 733, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [14] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 734, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 734, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [15] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 735, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 735, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [16] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 736, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 736, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [17] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 737, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 737, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [18] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 738, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 738, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [19] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 739, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 739, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [20] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 740, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 740, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [21] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 741, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 741, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [22] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 742, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 742, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [23] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 743, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 743, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [24] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 744, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 744, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [25] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 745, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 745, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [26] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 746, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 746, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [27] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 747, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 747, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [28] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 748, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 748, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [29] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 749, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 749, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [30] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 750, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 750, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [31] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 751, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 751, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [32] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 752, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 752, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [33] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 702, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 702, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [34] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 703, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 703, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [35] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 704, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 704, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [36] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 705, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 705, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [37] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 706, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 706, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [38] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 707, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 707, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [39] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 708, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 708, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [40] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 709, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 709, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [41] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 710, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 710, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [42] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 711, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 711, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [43] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 712, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 712, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [44] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 713, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 713, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [45] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 714, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 714, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [46] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 715, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 715, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [47] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 716, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 716, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [48] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 717, 
-         MiscData = 0, 
          Arg1 = 705, 
+         Arg3 = 717, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [49] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 718, 
-         MiscData = 0, 
          Arg1 = 706, 
+         Arg3 = 718, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [50] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 719, 
-         MiscData = 0, 
          Arg1 = 701, 
+         Arg3 = 719, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [51] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 720, 
-         MiscData = 0, 
          Arg1 = 702, 
+         Arg3 = 720, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [52] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 721, 
-         MiscData = 0, 
          Arg1 = 703, 
+         Arg3 = 721, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
       [53] = 
       {
-         Arg2 = 50, 
-         Command = "M", 
-         Arg3 = 722, 
-         MiscData = 0, 
          Arg1 = 704, 
+         Arg3 = 722, 
+         Arg2 = 50, 
+         MiscData = 0, 
+         Command = "M", 
       }, 
    }, 
-   HighEconomy = 0, 
+   ResetMessage = "", 
+   Mobiles = 
+   {
+      [704] = 
+      {
+         ArmorClass = 87, 
+         NumberOfAttacks = 0, 
+         DamRoll = 1, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "human woman", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "female", 
+         Vnum = 704, 
+         Level = 5, 
+         Position = "standing", 
+         ShortDescr = "a woman", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 1, 
+         Credits = 6, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A woman walks down the street.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [705] = 
+      {
+         ArmorClass = 80, 
+         NumberOfAttacks = 0, 
+         DamRoll = 1, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "byss citizen", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 80, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "male", 
+         Vnum = 705, 
+         Level = 8, 
+         Position = "standing", 
+         ShortDescr = "a citizen", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 1, 
+         Credits = 12, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A citizen minds his own business.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [706] = 
+      {
+         ArmorClass = 80, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "human citizen", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 80, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "female", 
+         Vnum = 706, 
+         Level = 8, 
+         Position = "standing", 
+         ShortDescr = "a citizen", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 0, 
+         Credits = 8, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A citizen minds her own business.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [799] = 
+      {
+         ArmorClass = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "human man", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 799, 
+         Level = 1, 
+         Position = "standing", 
+         ShortDescr = "a newly created human man", 
+         Description = "", 
+         HitRoll = 0, 
+         Credits = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "Some god abandoned a newly created human man here.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [700] = 
+      {
+         ArmorClass = 87, 
+         NumberOfAttacks = 0, 
+         DamRoll = 1, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "human man", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 700, 
+         Level = 5, 
+         Position = "standing", 
+         ShortDescr = "a man", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 1, 
+         Credits = 9, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A man walks down the road\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [701] = 
+      {
+         ArmorClass = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "human man", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 701, 
+         Level = 1, 
+         Position = "standing", 
+         ShortDescr = "a man", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 0, 
+         Credits = 2, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A man walks down the street.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [702] = 
+      {
+         ArmorClass = 82, 
+         NumberOfAttacks = 0, 
+         DamRoll = 1, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "business man", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 70, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 702, 
+         Level = 7, 
+         Position = "standing", 
+         ShortDescr = "a business man", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 1, 
+         Credits = 5, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A business man walks quickly by.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+      [703] = 
+      {
+         ArmorClass = 82, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+         Name = "business woman", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 70, 
+            HitSizeDice = 10, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "female", 
+         Vnum = 703, 
+         Level = 7, 
+         Position = "standing", 
+         ShortDescr = "a business woman", 
+         Description = "", 
+         Stats = 
+         {
+            Force = 0, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+         }, 
+         HitRoll = 0, 
+         Credits = 15, 
+         VipFlags = 
+         {
+            [10] = "Byss", 
+         }, 
+         Height = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         LongDescr = "A business woman walks quickly down the street.\
+", 
+         Race = "Human", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Alignment = 0, 
+      }, 
+   }, 
+   Name = "Throne City", 
    Rooms = 
    {
       [768] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 769, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 769, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 767, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 767, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 768, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 768, 
       }, 
       [769] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 770, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 770, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 768, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 768, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 769, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 769, 
       }, 
       [770] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 771, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 771, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 769, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 769, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 770, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 770, 
       }, 
       [771] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 772, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 772, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 770, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 770, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 771, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 771, 
       }, 
       [772] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 771, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 771, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 772, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 772, 
       }, 
       [773] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 727, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 727, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 774, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 774, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 773, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 773, 
       }, 
       [774] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 773, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 773, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 775, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 775, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 774, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 774, 
       }, 
       [775] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 774, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 774, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 776, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 776, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 775, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 775, 
       }, 
       [776] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 775, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 775, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 777, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 777, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 776, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 776, 
       }, 
       [777] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 776, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 776, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 778, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 778, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 777, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 777, 
       }, 
       [778] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 777, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 777, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 779, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 779, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 778, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 778, 
       }, 
       [779] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 778, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 778, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 780, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 780, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 779, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 779, 
       }, 
       [780] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 779, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 779, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 781, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 781, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 780, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 780, 
       }, 
       [781] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 780, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 780, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 782, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 782, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 781, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 781, 
       }, 
       [782] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 781, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 781, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 782, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 782, 
       }, 
       [783] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 784, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 784, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 783, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 783, 
       }, 
       [784] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 783, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 783, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 785, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 785, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 784, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 784, 
       }, 
       [785] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 784, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 784, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 786, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 786, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 785, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 785, 
       }, 
       [786] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 785, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 785, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 787, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 787, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 786, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 786, 
       }, 
       [787] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 786, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 786, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 788, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 788, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 787, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 787, 
       }, 
       [788] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 787, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 787, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 789, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 789, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 788, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 788, 
       }, 
       [789] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 788, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 788, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 790, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 790, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 789, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 789, 
       }, 
       [790] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 789, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 789, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 791, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 791, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 790, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 790, 
       }, 
       [791] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 790, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 790, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 792, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 792, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 791, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 791, 
       }, 
       [792] = 
       {
-         Description = "", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 791, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Vnum = 792, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [793] = 
-      {
-         Description = "", 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 794, 
+               Direction = "east", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
+               DestinationVnum = 791, 
                Keyword = "", 
-               DestinationVnum = 727, 
-               Distance = 0, 
                Key = -1, 
-               Direction = "south", 
                Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "Tarkin Road", 
          Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 792, 
+      }, 
+      [793] = 
+      {
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Vnum = 793, 
          TeleVnum = 0, 
-         Name = "North Gate", 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 794, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 727, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
          Tunnel = 0, 
+         Name = "North Gate", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 793, 
       }, 
       [794] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 795, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 793, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Before Throne City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "The small road you stand upon cuts through the barren byss desert. It\
 begins in its north end at a small port town. In the South it ends at the\
 walled throne city. The emporers citidel raises far above the city to the\
 south dissapearing into the clouds. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 795, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 793, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 794, 
-         TeleVnum = 0, 
-         Name = "Before Throne City", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [795] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 796, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 794, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Road To Throne City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "The small road you stand upon cuts through the barren byss desert. It\
 begins in its north end at a small port town. In the South it ends at the\
 walled throne city. The emporers citidel raises far above the city to the\
 south dissapearing into the clouds.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 796, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 794, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 795, 
-         TeleVnum = 0, 
-         Name = "Road To Throne City", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [796] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 797, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 795, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Road To Throne City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "The small road you stand upon cuts through the barren byss desert. It\
 begins in its north end at a small port town. In the South it ends at the\
 walled throne city. The emporers citidel raises far above the city to the\
 south dissapearing into the clouds. \
 ", 
+         Vnum = 796, 
+      }, 
+      [797] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 797, 
+               Direction = "south", 
                Distance = 0, 
+               DestinationVnum = 796, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "north", 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 795, 
+               Direction = "northwest", 
                Distance = 0, 
+               DestinationVnum = 798, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "south", 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 796, 
-         TeleVnum = 0, 
-         Name = "Road To Throne City", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [797] = 
-      {
+         Name = "Road To Throne City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "The small road you stand upon cuts through the barren byss desert. It\
 begins in its north end at a small port town. In the South it ends at the\
 walled throne city. The emporers citidel raises far above the city to the\
 south dissapearing into the clouds.\
 ", 
+         Vnum = 797, 
+      }, 
+      [798] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 796, 
+               Direction = "northwest", 
                Distance = 0, 
+               DestinationVnum = 799, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "south", 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 798, 
+               Direction = "southeast", 
                Distance = 0, 
+               DestinationVnum = 797, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "northwest", 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 797, 
-         TeleVnum = 0, 
-         Name = "Road To Throne City", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [798] = 
-      {
+         Name = "Road To Throne City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "The small road you stand upon cuts through the barren byss desert. It\
 begins in its north end at a small port town. In the South it ends at the\
 walled throne city. The emporers citidel raises far above the city to the\
 south dissapearing into the clouds. \
 ", 
+         Vnum = 798, 
+      }, 
+      [799] = 
+      {
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 799, 
+               Direction = "west", 
                Distance = 0, 
+               DestinationVnum = 28210, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "northwest", 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 797, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               DestinationVnum = 798, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 798, 
-         TeleVnum = 0, 
-         Name = "Road To Throne City", 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         Name = "Before a Small Town", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [799] = 
-      {
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You stand on a roadway just outside of a small port town on byss. Far to\
 the south lines the new seat of the empire: the rebuilt throne city and\
 emporers citadel.\
 ", 
+         Vnum = 799, 
+      }, 
+      [700] = 
+      {
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [4] = "CanLand", 
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 28210, 
+               Direction = "north", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
+               DestinationVnum = 701, 
                Keyword = "", 
-               DestinationVnum = 798, 
-               Distance = 0, 
                Key = -1, 
-               Direction = "southeast", 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 799, 
-         TeleVnum = 0, 
-         Name = "Before a Small Town", 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         Name = "Throne City Landing Pad", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [700] = 
-      {
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You stand on the enormous landing pad of Throne city, there is an assortmen\
 of Imperial craft here as well as pilots, technicians and an array of\
 various ranked Imperial officers. As full as the landing pad is you\
 imagine there's still enough room for an Imperial Star Destroyer, if you\
 could land one here, that is. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 701, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [4] = "CanLand", 
-         }, 
          Vnum = 700, 
-         TeleVnum = 0, 
-         Name = "Throne City Landing Pad", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [701] = 
       {
-         Description = "You stand in a short metal corridor attatched to the landing pad. Officers\
-come and go to the south and a very tough looking Imperial steps before\
-you, looking you over for contraband.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 702, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 700, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 701, 
          TeleVnum = 0, 
-         Name = "Throne City Checkpoint", 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 702, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 700, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
          Tunnel = 0, 
+         Name = "Throne City Checkpoint", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "You stand in a short metal corridor attatched to the landing pad. Officers\
+come and go to the south and a very tough looking Imperial steps before\
+you, looking you over for contraband.\
+", 
+         Vnum = 701, 
       }, 
       [702] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 753, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 752, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 701, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 703, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Within Imperial City", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You pass the security checkpoint and enter in the heart of the Empire. The\
 darkside hangs on you like sweat and you can feel the darkside in everyone\
 that passes by you. As you look around you see an assortmen of shops and\
@@ -1601,57 +2291,40 @@ stores, as well as the infamous Byss Bistro. Fixing your eyes on the\
 center of the city you look up in amazed horror as the Emperors Citadel\
 looms over all, disapearring into the sky, an ominous sight indeed.\
 ", 
+         Vnum = 702, 
+      }, 
+      [703] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 753, 
+               Direction = "east", 
                Distance = 0, 
+               DestinationVnum = 702, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "north", 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 752, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 701, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 703, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 704, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 702, 
-         TeleVnum = 0, 
-         Name = "Within Imperial City", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [703] = 
-      {
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss. This part of the city contains mainly residences and small store and\
 restaurants. Yet, the place as a cold evil, feel to it. The dark side of\
@@ -1659,39 +2332,40 @@ the force fills the air choking you with fear. In the center of the city\
 the emporers citadel looms ominously over the city disapearing into the\
 sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 702, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 704, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 703, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [704] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 703, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 705, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1699,39 +2373,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 703, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 705, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 704, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [705] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 704, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 706, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1739,39 +2414,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 704, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 706, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 705, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [706] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 705, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 707, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1779,39 +2455,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 706, 
+      }, 
+      [707] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 705, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 706, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 707, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 708, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 706, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [707] = 
-      {
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1834,39 +2511,40 @@ place as a cold, evil feel to it. The dark side of the force fills the air\
 choking you with fear. In the center of the city the emporers citadel\
 looms ominously over the city disapearing into the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 706, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 708, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 707, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [708] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 707, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 709, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1874,39 +2552,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 707, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 709, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 708, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [709] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 708, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 710, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1914,39 +2593,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 709, 
+      }, 
+      [710] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 708, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 709, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 710, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 711, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 709, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [710] = 
-      {
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1955,39 +2635,40 @@ city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 w\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 709, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 711, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 710, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [711] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 710, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 712, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -1995,39 +2676,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 710, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 712, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 711, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [712] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 713, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 711, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2035,39 +2717,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 713, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 711, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 712, 
-         TeleVnum = 0, 
-         Name = "Along the Western wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [713] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 714, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 712, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2075,39 +2758,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 713, 
+      }, 
+      [714] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 714, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 715, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 712, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 713, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 713, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [714] = 
-      {
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2115,39 +2799,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 714, 
+      }, 
+      [715] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 715, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 716, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 713, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 714, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 714, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [715] = 
-      {
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss. This part of the city contains mainly residences and small store and\
 restaurants. Yet, the place as a cold evil, feel to it. The dark side of\
@@ -2155,79 +2840,40 @@ the force fills the air choking you with fear. In the center of the city\
 the emporers citadel looms ominously over the city disapearing into the\
 sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 716, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 714, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 715, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [716] = 
       {
-         Description = "You walk along just inside of the great wall that surrounds throne city on\
-Byss.  This part of the city contains mainly residences and small store\
-and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
-of the force fills the air choking you with fear. In the center of the\
-city the emporers citadel looms ominously over the city disapearing into\
-the sky.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 717, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 715, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Vnum = 716, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [717] = 
-      {
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 717, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 715, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2235,48 +2881,90 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 716, 
+      }, 
+      [717] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 718, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 718, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 763, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 763, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               DestinationVnum = 716, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 716, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 717, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "You walk along just inside of the great wall that surrounds throne city on\
+Byss.  This part of the city contains mainly residences and small store\
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
+of the force fills the air choking you with fear. In the center of the\
+city the emporers citadel looms ominously over the city disapearing into\
+the sky.\
+", 
+         Vnum = 717, 
       }, 
       [718] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 719, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 717, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2284,39 +2972,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 719, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 717, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 718, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [719] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 720, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 718, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold evil, feel to it. The dark side\
@@ -2324,39 +3013,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 719, 
+      }, 
+      [720] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 720, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 721, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 718, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 719, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 719, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [720] = 
-      {
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss. This part of the city contains mainly residences and small store and\
 restaurants. Yet, the place as a cold, evil feel to it. The dark side of\
@@ -2364,39 +3054,40 @@ the force fills the air choking you with fear. In the center of the city\
 the emporers citadel looms ominously over the city disapearing into the\
 sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 721, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 719, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 720, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [721] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 722, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 720, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2404,39 +3095,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 722, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 720, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 721, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [722] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 723, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 721, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2444,39 +3136,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 723, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 721, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 722, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [723] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 724, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 722, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2484,39 +3177,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 724, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 722, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 723, 
-         TeleVnum = 0, 
-         Name = "Along the Western Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [724] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 725, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 723, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2524,39 +3218,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 725, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 723, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 724, 
-         TeleVnum = 0, 
-         Name = "Along the Western Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [725] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 726, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 724, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2564,39 +3259,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 726, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 724, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 725, 
-         TeleVnum = 0, 
-         Name = "Along the Western Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [726] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 727, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 725, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Western Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2604,97 +3300,99 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 727, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 725, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 726, 
-         TeleVnum = 0, 
-         Name = "Along the Western Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [727] = 
       {
-         Description = "You walk along just inside of the great wall that surrounds throne city on\
-Byss.  This part of the city contains mainly residences and small store\
-and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
-of the force fills the air choking you with fear. In the center of the\
-city the emporers citadel looms ominously over the city disapearing into\
-the sky. \
-", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 793, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 793, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 728, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 728, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               DestinationVnum = 773, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 773, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               DestinationVnum = 726, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 726, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 727, 
-         TeleVnum = 0, 
-         Name = "An Intersection ", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Intersection ", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "You walk along just inside of the great wall that surrounds throne city on\
+Byss.  This part of the city contains mainly residences and small store\
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
+of the force fills the air choking you with fear. In the center of the\
+city the emporers citadel looms ominously over the city disapearing into\
+the sky. \
+", 
+         Vnum = 727, 
       }, 
       [728] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 729, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 727, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Eastern Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2702,39 +3400,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 729, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 727, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 728, 
-         TeleVnum = 0, 
-         Name = "Along the Eastern Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [729] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 730, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 728, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Eastern Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2742,39 +3441,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 730, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 728, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 729, 
-         TeleVnum = 0, 
-         Name = "Along the Eastern Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [730] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 731, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 729, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Eastern Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2782,39 +3482,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 731, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 729, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 730, 
-         TeleVnum = 0, 
-         Name = "Along the Eastern Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [731] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 732, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 730, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Eastern Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2822,39 +3523,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 732, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 730, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 731, 
-         TeleVnum = 0, 
-         Name = "Along the Eastern Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [732] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 733, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 731, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along the Eastern Wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2862,39 +3564,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 733, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 731, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 732, 
-         TeleVnum = 0, 
-         Name = "Along the Eastern Wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [733] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 732, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 734, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2902,39 +3605,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 732, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 734, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 733, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [734] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 733, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 735, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2942,39 +3646,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 733, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 735, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 734, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [735] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 734, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 736, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -2982,39 +3687,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 734, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 736, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 735, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [736] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 735, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 737, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3022,39 +3728,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 736, 
+      }, 
+      [737] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 735, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 736, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 737, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 738, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 736, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [737] = 
-      {
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3062,39 +3769,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 736, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 738, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 737, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [738] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 737, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 739, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3102,39 +3810,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 737, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 739, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 738, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [739] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 738, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 740, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3142,39 +3851,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 738, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 740, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 739, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [740] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 739, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 741, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3182,39 +3892,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 739, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 741, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 740, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [741] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 740, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 742, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3222,39 +3933,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 740, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 742, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 741, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [742] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 741, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 743, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Imperial Alley", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3262,39 +3974,40 @@ of the force fills the air choking you with fear. In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
+         Vnum = 742, 
+      }, 
+      [743] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 741, 
+               Direction = "east", 
                Distance = 0, 
+               DestinationVnum = 742, 
+               Keyword = "", 
                Key = -1, 
-               Direction = "north", 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 743, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 744, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 742, 
-         TeleVnum = 0, 
-         Name = "Imperial Alley", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [743] = 
-      {
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss. This part of the city contains mainly residences and small store and\
 restaurants. Yet, the place as a cold, evil feel to it. The dark side of\
@@ -3302,73 +4015,75 @@ the force fills the air choking you with fear. In the center of the city\
 the emporers citadel looms ominously over the city disapearing into the\
 sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 742, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 744, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 743, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [744] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 743, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 743, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 745, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 745, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 744, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 744, 
       }, 
       [745] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 744, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 746, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3376,39 +4091,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 744, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 746, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 745, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [746] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 745, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 747, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3416,39 +4132,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 745, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 747, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 746, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [747] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 746, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 748, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3456,39 +4173,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 746, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 748, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 747, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [748] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 747, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 749, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3496,39 +4214,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 747, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 749, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 748, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [749] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 748, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 750, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3536,39 +4255,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 748, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 750, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 749, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [750] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 749, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 751, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3576,39 +4296,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 749, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 751, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 750, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [751] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 750, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 752, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3616,39 +4337,40 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 750, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 752, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 751, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [752] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 751, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 702, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Along Eastern wall", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
          Description = "You walk along just inside of the great wall that surrounds throne city on\
 Byss.  This part of the city contains mainly residences and small store\
 and restaurants.  Yet, the place as a cold, evil feel to it. The dark side\
@@ -3656,553 +4378,543 @@ of the force fills the air choking you with fear.  In the center of the\
 city the emporers citadel looms ominously over the city disapearing into\
 the sky. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 751, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 702, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
          Vnum = 752, 
-         TeleVnum = 0, 
-         Name = "Along Eastern wall", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [753] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 754, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 754, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 702, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 702, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 753, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 753, 
       }, 
       [754] = 
       {
-         Description = "", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 755, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 753, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Vnum = 754, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [755] = 
-      {
-         Description = "", 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 756, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 755, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 754, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 753, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "Citadel Way", 
          Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 754, 
+      }, 
+      [755] = 
+      {
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Vnum = 755, 
          TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 756, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 754, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
          Tunnel = 0, 
+         Name = "Citadel Way", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 755, 
       }, 
       [756] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 757, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 757, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 755, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 755, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 756, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 756, 
       }, 
       [757] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 758, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 758, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 756, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 756, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 757, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 757, 
       }, 
       [758] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 759, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 759, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 757, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 757, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 758, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 758, 
       }, 
       [759] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 760, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 760, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 758, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 758, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 759, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 759, 
       }, 
       [760] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 761, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 761, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 759, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 759, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 760, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 760, 
       }, 
       [761] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 762, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               DestinationVnum = 762, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 760, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 760, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 761, 
-         TeleVnum = 0, 
-         Name = "Citadel Way", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Citadel Way", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 761, 
       }, 
       [762] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 761, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               DestinationVnum = 761, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 762, 
-         TeleVnum = 0, 
-         Name = "Before the Emperors Citadel", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Before the Emperors Citadel", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 762, 
       }, 
       [763] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 764, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 764, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 717, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 717, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 763, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 763, 
       }, 
       [764] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 765, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 765, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 763, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 763, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 764, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 764, 
       }, 
       [765] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 766, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 766, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 764, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 764, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 765, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 765, 
       }, 
       [766] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 767, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 767, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 765, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 765, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 766, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 766, 
       }, 
       [767] = 
       {
-         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               DestinationVnum = 768, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               DestinationVnum = 768, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               DestinationVnum = 766, 
-               Distance = 0, 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               DestinationVnum = 766, 
+               Keyword = "", 
+               Key = -1, 
                Description = "", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 767, 
-         TeleVnum = 0, 
-         Name = "Tarkin Road", 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Tarkin Road", 
+         Sector = "city", 
+         TeleDelay = 0, 
+         Tag = "", 
+         Description = "", 
+         Vnum = 767, 
       }, 
    }, 
-   ResetFrequency = 0, 
    FileFormatVersion = 1, 
+   Filename = "throne_city.lua", 
+   LowEconomy = 6244527, 
    Objects = 
    {
       [700] = 
       {
-         Description = "A a wristwatch is here.", 
-         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
+         ShortDescr = "a a wristwatch", 
          ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4212,21 +4924,21 @@ the sky. \
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "a wristwatch", 
+         Layers = 0, 
+         Description = "A a wristwatch is here.", 
          ItemType = "trash", 
          Vnum = 700, 
-         Weight = 1, 
-         Name = "a wristwatch", 
-         ShortDescr = "a a wristwatch", 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [799] = 
       {
-         Description = "A a pebble is here.", 
-         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
+         ShortDescr = "a a pebble", 
          ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4236,625 +4948,13 @@ the sky. \
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "a pebble", 
+         Layers = 0, 
+         Description = "A a pebble is here.", 
          ItemType = "trash", 
          Vnum = 799, 
-         Weight = 1, 
-         Name = "a pebble", 
-         ShortDescr = "a a pebble", 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
    }, 
    Author = "Trevor", 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
-   ResetMessage = "", 
-   Mobiles = 
-   {
-      [704] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "human woman", 
-         Race = "Human", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 50, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 5, 
-         LongDescr = "A woman walks down the street.\
-", 
-         DamRoll = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 704, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 87, 
-         Sex = "female", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a woman", 
-         Credits = 6, 
-      }, 
-      [705] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "byss citizen", 
-         Race = "Human", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 80, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 8, 
-         LongDescr = "A citizen minds his own business.\
-", 
-         DamRoll = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 705, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 80, 
-         Sex = "male", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a citizen", 
-         Credits = 12, 
-      }, 
-      [706] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "human citizen", 
-         Race = "Human", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 80, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 8, 
-         LongDescr = "A citizen minds her own business.\
-", 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 706, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 80, 
-         Sex = "female", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a citizen", 
-         Credits = 8, 
-      }, 
-      [799] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "human man", 
-         Race = "Human", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-         }, 
-         HitRoll = 0, 
-         Level = 1, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 799, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Some god abandoned a newly created human man here.\
-", 
-         DefaultPosition = "standing", 
-         ShortDescr = "a newly created human man", 
-         Credits = 0, 
-      }, 
-      [700] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "human man", 
-         Race = "Human", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 50, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 5, 
-         LongDescr = "A man walks down the road\
-", 
-         DamRoll = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 700, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 87, 
-         Sex = "undistinguished", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a man", 
-         Credits = 9, 
-      }, 
-      [701] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "human man", 
-         Race = "Human", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 1, 
-         LongDescr = "A man walks down the street.\
-", 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 701, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 0, 
-         Sex = "undistinguished", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a man", 
-         Credits = 2, 
-      }, 
-      [702] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "business man", 
-         Race = "Human", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 70, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 7, 
-         LongDescr = "A business man walks quickly by.\
-", 
-         DamRoll = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 702, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 82, 
-         Sex = "undistinguished", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a business man", 
-         Credits = 5, 
-      }, 
-      [703] = 
-      {
-         Alignment = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-         }, 
-         Weight = 0, 
-         Name = "business woman", 
-         Race = "Human", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitPlus = 70, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Level = 7, 
-         LongDescr = "A business woman walks quickly down the street.\
-", 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Vnum = 703, 
-         Description = "", 
-         Height = 0, 
-         ArmorClass = 82, 
-         Sex = "female", 
-         VipFlags = 
-         {
-            [10] = "Byss", 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a business woman", 
-         Credits = 15, 
-      }, 
-   }, 
-   Name = "Throne City", 
-   LowEconomy = 6244948, 
-   VnumRanges = 
-   {
-      Room = 
-      {
-         First = 700, 
-         Last = 799, 
-      }, 
-      Mob = 
-      {
-         First = 700, 
-         Last = 799, 
-      }, 
-      Object = 
-      {
-         First = 700, 
-         Last = 799, 
-      }, 
-   }, 
-   Filename = "throne_city.lua", 
+   HighEconomy = 0, 
 }

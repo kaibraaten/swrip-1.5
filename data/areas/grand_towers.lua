@@ -1,4342 +1,31 @@
 -- Grand Towers Appartments
--- Last saved Thursday 09-Jul-2020 23:19:12
+-- Last saved Tuesday 27-Oct-2020 11:58:44
 
 AreaEntry
 {
-   Rooms = 
-   {
-      [5000] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5000, 
-         Name = "The Guest Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5001, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [10] = "Safe", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5001] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5001, 
-         Name = "The Lobby", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5002, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 303, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5011, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5002] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5002, 
-         Name = "A Turbolift: Main Lobby", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5001, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5003, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5003] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5003, 
-         Name = "A Turbolift: Floor 100", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5016, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5004, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5002, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5004] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5004, 
-         Name = "A Turbolift: Floor 200", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5021, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5005, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5003, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5005] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5005, 
-         Name = "A Turbolift: Floor 300", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5026, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5006, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5004, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5006] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5006, 
-         Name = "A Turbolift: Floor 400", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5031, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5007, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5005, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5007] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5007, 
-         Name = "A Turbolift: Floor 500", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5036, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5008, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5006, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5008] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5008, 
-         Name = "A Turbolift: Floor 600", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5099, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5009, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5007, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5009] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5009, 
-         Name = "A Turbolift: Floor 700", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5100, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5113, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5104, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5108, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5010, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [6] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5008, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5010] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5010, 
-         Name = "A Turbolift: Floor 800", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5009, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5011] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5011, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5040, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5001, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5041, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5012, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5012] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5012, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5043, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5011, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5042, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5013, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5013] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5013, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5045, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5012, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5044, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5014, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5014] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5014, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5047, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5013, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5046, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5015, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5015] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5015, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5049, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5014, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5048, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5098, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5016] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5016, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5003, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5096, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5017, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5017] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5017, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5051, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5016, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5050, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5018, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5018] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5018, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5052, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5017, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5053, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5019, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5019] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5019, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5055, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5018, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5054, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5020, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5020] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5020, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5057, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5019, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5056, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5097, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5021] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5021, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5004, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5094, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5022, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5022] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5022, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5059, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5021, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5058, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5023, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5023] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5023, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5061, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5022, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5060, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5024, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5024] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5024, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5063, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5023, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5062, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5025, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5025] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5025, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5065, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5024, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5064, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5095, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5026] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5026, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5005, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5092, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5027, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5027] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5027, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5067, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5026, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5066, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5028, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5028] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5028, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5069, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5027, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5068, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5029, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5029] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5029, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5071, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5028, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5070, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5030, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5030] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5030, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5073, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5029, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5072, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5093, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5031] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5031, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5006, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5090, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5032, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5032] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5032, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5074, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5031, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5075, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5033, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5033] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5033, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5077, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5032, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5076, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5034, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5034] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5034, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5079, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5033, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5078, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5035, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5035] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5035, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5081, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5034, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5080, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5091, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5036] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5036, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5007, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5089, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5037, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5037] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5037, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5083, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5036, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5082, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5038, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5038] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5038, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5085, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5037, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5084, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5039, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5039] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5039, 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5086, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5038, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5087, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5088, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
-         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
-decorated. The walls are a redish wood and a plush brown carpet lines the\
-floor. The doors are spaced evenly apart and are all numbered.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5040] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5040, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5011, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5041] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5041, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5011, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5042] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5042, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5012, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5043] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5043, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5012, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5044] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5044, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5013, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
-feel heal $n\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5045] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5045, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5013, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5046] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5046, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5014, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5047] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5047, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5014, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5048] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5048, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5015, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5049] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5049, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5015, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5050] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5050, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5017, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5051] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5051, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5017, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5052] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5052, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5018, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5053] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5053, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5018, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5054] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5054, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5019, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5055] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5055, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5019, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5056] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5056, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5020, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5057] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5057, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5020, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5058] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5058, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5022, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5059] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5059, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5022, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5060] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5060, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5023, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5061] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5061, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5023, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5062] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5062, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5024, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5063] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5063, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5024, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5064] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5064, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5025, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5065] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5065, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5025, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5066] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5066, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5027, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5067] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5067, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5027, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5068] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5068, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5028, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5069] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5069, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5028, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5070] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5070, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5029, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5071] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5071, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5029, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5072] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5072, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5030, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5073] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5073, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5030, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5074] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5074, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5032, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5075] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5075, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5032, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5076] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5076, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5033, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5077] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5077, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5033, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5078] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5078, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5034, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5079] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5079, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5034, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5080] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5080, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5035, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5081] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5081, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5035, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5082] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5082, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5037, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5083] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5083, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5037, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5084] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5084, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5038, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5085] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5085, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5038, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5086] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5086, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5039, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5087] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5087, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5039, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5088] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5088, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5039, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5089] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5089, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5036, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5090] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5090, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5031, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5091] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5091, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5035, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5092] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5092, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5026, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5093] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5093, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5030, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5094] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5094, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5021, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5095] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5095, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5025, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5096] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5096, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5016, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5097] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5097, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5020, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5098] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5098, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5015, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [5099] = 
-      {
-         TeleDelay = 0, 
-         Vnum = 5099, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 5008, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-   }, 
-   Author = "Durga", 
-   ResetFrequency = 0, 
-   Name = "Grand Towers Appartments", 
    LevelRanges = 
    {
-      Hard = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
       Soft = 
       {
          Low = 0, 
          High = 105, 
       }, 
-   }, 
-   HighEconomy = 0, 
-   FileFormatVersion = 1, 
-   Resets = 
-   {
-      [1] = 
+      Hard = 
       {
-         Arg1 = 5099, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg3 = 5001, 
+         Low = 0, 
+         High = 105, 
       }, 
    }, 
    Filename = "grand_towers.lua", 
-   Objects = 
-   {
-      [5000] = 
-      {
-         Vnum = 5000, 
-         Weight = 1, 
-         Name = "dummy", 
-         Cost = 0, 
-         Description = "Some god dropped a newly created dummy here.", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         ShortDescr = "a newly created dummy", 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-      }, 
-      [5099] = 
-      {
-         Vnum = 5099, 
-         Weight = 1, 
-         Name = "plant", 
-         Cost = 0, 
-         Description = "A plant sits in the corner.", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         ShortDescr = "a plant", 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-      }, 
-   }, 
-   Mobiles = 
-   {
-      [5000] = 
-      {
-         Weight = 0, 
-         Name = "dummy", 
-         ArmorClass = 0, 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "Some god abandoned a newly created dummy here.\
-", 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Strength = 10, 
-         }, 
-         Level = 1, 
-         HitRoll = 0, 
-         Height = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Vnum = 5000, 
-         ShortDescr = "a newly created dummy", 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-      }, 
-      [5099] = 
-      {
-         Weight = 0, 
-         Name = "dummy", 
-         ArmorClass = 0, 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "Some god abandoned a newly created dummy here.\
-", 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Strength = 10, 
-         }, 
-         Level = 1, 
-         HitRoll = 0, 
-         Height = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Vnum = 5099, 
-         ShortDescr = "a newly created dummy", 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-      }, 
-   }, 
-   LowEconomy = 130050000, 
    ResetMessage = "", 
    VnumRanges = 
    {
-      Object = 
+      Mob = 
       {
          First = 5000, 
          Last = 5099, 
       }, 
-      Mob = 
+      Object = 
       {
          First = 5000, 
          Last = 5099, 
@@ -4347,4 +36,4416 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          Last = 5099, 
       }, 
    }, 
+   HighEconomy = 0, 
+   Mobiles = 
+   {
+      [5000] = 
+      {
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Height = 0, 
+         LongDescr = "Some god abandoned a newly created dummy here.\
+", 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "a newly created dummy", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Weight = 0, 
+         Position = "standing", 
+         ArmorClass = 0, 
+         Description = "", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Race = "Human", 
+         Name = "dummy", 
+         Vnum = 5000, 
+         Sex = "undistinguished", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [5099] = 
+      {
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Height = 0, 
+         LongDescr = "Some god abandoned a newly created dummy here.\
+", 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "a newly created dummy", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Weight = 0, 
+         Position = "standing", 
+         ArmorClass = 0, 
+         Description = "", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Race = "Human", 
+         Name = "dummy", 
+         Vnum = 5099, 
+         Sex = "undistinguished", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+   }, 
+   Rooms = 
+   {
+      [5000] = 
+      {
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [10] = "Safe", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5000, 
+         Sector = "city", 
+         Name = "The Guest Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5001, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5001] = 
+      {
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5001, 
+         Sector = "city", 
+         Name = "The Lobby", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5002, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 303, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5011, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5002] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5002, 
+         Sector = "city", 
+         Name = "A Turbolift: Main Lobby", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5001, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5003, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5003] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5003, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 100", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5016, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5004, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5002, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5004] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5004, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 200", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5021, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5005, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5003, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5005] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5005, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 300", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5026, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5006, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5004, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5006] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5006, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 400", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5031, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5007, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5005, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5007] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5007, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 500", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5036, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5008, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5006, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5008] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5008, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 600", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5099, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5009, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5007, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5009] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5009, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 700", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5100, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5113, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5104, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5108, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               DestinationVnum = 5010, 
+               Direction = "up", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [6] = 
+            {
+               DestinationVnum = 5008, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5010] = 
+      {
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5010, 
+         Sector = "city", 
+         Name = "A Turbolift: Floor 800", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5009, 
+               Direction = "down", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5011] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5011, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5040, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5001, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5041, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5012, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5012] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5012, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5043, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5011, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5042, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5013, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5013] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5013, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5045, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5012, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5044, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5014, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5014] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully\
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5014, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5047, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5013, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5046, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5015, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5015] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5015, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5049, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5014, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5048, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5098, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5016] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5016, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5003, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5096, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5017, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5017] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5017, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5051, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5016, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5050, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5018, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5018] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5018, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5052, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5017, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5053, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5019, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5019] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5019, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5055, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5018, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5054, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5020, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5020] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5020, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5057, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5019, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5056, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5097, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5021] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5021, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5004, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5094, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5022, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5022] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5022, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5059, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5021, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5058, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5023, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5023] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5023, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5061, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5022, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5060, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5024, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5024] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5024, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5063, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5023, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5062, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5025, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5025] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5025, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5065, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5024, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5064, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5095, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5026] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5026, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5005, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5092, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5027, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5027] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5027, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5067, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5026, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5066, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5028, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5028] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5028, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5069, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5027, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5068, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5029, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5029] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5029, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5071, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5028, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5070, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5030, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5030] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5030, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5073, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5029, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5072, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5093, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5031] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5031, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5006, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5090, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5032, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5032] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5032, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5074, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5031, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5075, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5033, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5033] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5033, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5077, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5032, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5076, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5034, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5034] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5034, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5079, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5033, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5078, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5035, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5035] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5035, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5081, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5034, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5080, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5091, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5036] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5036, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5007, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5089, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5037, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5037] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5037, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5083, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5036, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5082, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5038, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5038] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5038, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5085, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5037, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5084, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5039, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5039] = 
+      {
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "The hallway seems to stretch forever. It is brightly lit and cheerfully \
+decorated. The walls are a redish wood and a plush brown carpet lines the\
+floor. The doors are spaced evenly apart and are all numbered.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5039, 
+         Sector = "city", 
+         Name = "A Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5086, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               DestinationVnum = 5038, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               DestinationVnum = 5087, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               DestinationVnum = 5088, 
+               Direction = "west", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5040] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5040, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5011, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5041] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5041, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5011, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5042] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5042, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5012, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5043] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5043, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5012, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5044] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+               Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
+feel heal $n\
+", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5044, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5013, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5045] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5045, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5013, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5046] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5046, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5014, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5047] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5047, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5014, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5048] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5048, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5015, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5049] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5049, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5015, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5050] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5050, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5017, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5051] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5051, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5017, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5052] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5052, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5018, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5053] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5053, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5018, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5054] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5054, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5019, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5055] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5055, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5019, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5056] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5056, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5020, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5057] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5057, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5020, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5058] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5058, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5022, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5059] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5059, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5022, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5060] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5060, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5023, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5061] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5061, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5023, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5062] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5062, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5024, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5063] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5063, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5024, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5064] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5064, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5025, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5065] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5065, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5025, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5066] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5066, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5027, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5067] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5067, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5027, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5068] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5068, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5028, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5069] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5069, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5028, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5070] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5070, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5029, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5071] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5071, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5029, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5072] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5072, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5030, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5073] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5073, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5030, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5074] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5074, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5032, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5075] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5075, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5032, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5076] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5076, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5033, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5077] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5077, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5033, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5078] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5078, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5034, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5079] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5079, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5034, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5080] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5080, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5035, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5081] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5081, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5035, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5082] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5082, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5037, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5083] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5083, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5037, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5084] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5084, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5038, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5085] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5085, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5038, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5086] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5086, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5039, 
+               Direction = "south", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5087] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5087, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5039, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5088] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5088, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5039, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5089] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5089, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5036, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5090] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5090, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5031, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5091] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5091, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5035, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5092] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5092, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5026, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5093] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5093, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5030, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5094] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5094, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5021, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5095] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5095, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5025, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5096] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5096, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5016, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5097] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5097, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5020, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5098] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5098, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5015, 
+               Direction = "east", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+      [5099] = 
+      {
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 5099, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               DestinationVnum = 5008, 
+               Direction = "north", 
+               Distance = 0, 
+               Keyword = "", 
+               Key = -1, 
+               Description = "", 
+            }, 
+         }, 
+      }, 
+   }, 
+   Objects = 
+   {
+      [5000] = 
+      {
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "dummy", 
+         Vnum = 5000, 
+         Description = "Some god dropped a newly created dummy here.", 
+         Layers = 0, 
+         ShortDescr = "a newly created dummy", 
+      }, 
+      [5099] = 
+      {
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "plant", 
+         Vnum = 5099, 
+         Description = "A plant sits in the corner.", 
+         Layers = 0, 
+         ShortDescr = "a plant", 
+      }, 
+   }, 
+   FileFormatVersion = 1, 
+   Author = "Durga", 
+   Resets = 
+   {
+      [1] = 
+      {
+         MiscData = 1, 
+         Arg1 = 5099, 
+         Arg3 = 5001, 
+         Arg2 = 1, 
+         Command = "O", 
+      }, 
+   }, 
+   Name = "Grand Towers Appartments", 
+   ResetFrequency = 0, 
+   LowEconomy = 130050000, 
 }

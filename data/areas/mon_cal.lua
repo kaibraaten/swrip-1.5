@@ -1,32 +1,73 @@
 -- Mon Calamri
--- Last saved Tuesday 04-Aug-2020 12:37:59
+-- Last saved Tuesday 27-Oct-2020 11:58:44
 
 AreaEntry
 {
+   Filename = "mon_cal.lua", 
+   HighEconomy = 0, 
+   Author = "Ackbar", 
+   Name = "Mon Calamri", 
    Rooms = 
    {
       [21000] = 
       {
-         Name = "Coral City Center", 
-         Flags = 
-         {
-            [15] = "NoDropAll", 
-         }, 
-         Vnum = 21000, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "&Y In Honor of the Great Admiral Ackbar.\
 \13Who died giving his life for Freedom of all Underwater Creatures.\
 \13We can only look tot he heavens for bravery like his.\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Center", 
+         Vnum = 21000, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Anna Avenue lies to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21001, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "To the east lies Barster Road.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21036, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "Anna Avenue lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21042, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "To the west lies Barster Road.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21039, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&P You are standing within the expanse of the famous Mon Calamrian City of\
 Coral City .  A metallic statue of Admiral Ackbar occupies the square's\
 center, surrounded by gardens of shrubbery which enhance the air of\
@@ -35,68 +76,46 @@ away in the cardinal directions, while to the east and west are smooth\
 carved rock roads. The roof tops of a buildings can be seen rising to the\
 south east.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [15] = "NoDropAll", 
+         }, 
+      }, 
+      [21001] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Anna Avenue", 
+         Vnum = 21001, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21001, 
-               Description = "Anna Avenue lies to the north.\
+               Description = "Anna Avenue lies in this direction.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21002, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21036, 
-               Description = "To the east lies Barster Road.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21042, 
-               Description = "Anna Avenue lies to the south.\
+               Description = "The road to the south leads to the main  Square.\
 ", 
-            }, 
-            [4] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21039, 
-               Description = "To the west lies Barster Road.\
-", 
+               DestinationVnum = 21000, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21001] = 
-      {
-         Name = "Anna Avenue", 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 21001, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&P You continue down Anna Avenue. This rather attractive road is the main\
 heartline of the city. If you wish to travel anywhere this is the quickest\
 \
@@ -104,123 +123,104 @@ and safest route. To the south east you can see the tops of newly created\
 shops waiting for customers to  sell thier wares to. Directly south you\
 can see the circular center of Coral City.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [18] = "NoDrop", 
+         }, 
+      }, 
+      [21002] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21002, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21002, 
-               Description = "Anna Avenue lies in this direction.\
+               Description = "The worn metallic roads of Anna Avenue lie in this direction.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21003, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21000, 
-               Description = "The road to the south leads to the main  Square.\
+               Description = "A peculiar section of Anna Avenue lies to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21001, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21002] = 
-      {
-         Name = "Anna Avenue", 
-         Vnum = 21002, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&P You continue down Anna Avenue. This rather attractive road is the main\
 heartline of the city. If you wish to travel anywhere this is the quickest\
 and safest route. To the south east you can see the tops of newly created\
 shops waiting for customers to  sell thier wares to. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Anna Avenue", 
+      }, 
+      [21003] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21003, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21003, 
-               Description = "The worn metallic roads of Anna Avenue lie in this direction.\
+               Description = "Anna Avenue and Security Road cross just north of here.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21004, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21001, 
-               Description = "A peculiar section of Anna Avenue lies to the south.\
+               Description = "A rather bland portion of Anna Avenue lies to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21002, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21003] = 
-      {
-         Name = "Anna Avenue", 
-         Vnum = 21003, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&P You continue down Anna Avenue. This rather attractive road is the main\
 heartline of the city. If you wish to travel anywhere this is the quickest\
 and safest route. to the north you can see an intersection. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21004, 
-               Description = "Anna Avenue and Security Road cross just north of here.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21002, 
-               Description = "A rather bland portion of Anna Avenue lies to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Anna Avenue", 
       }, 
       [21004] = 
       {
-         Name = "Intersection of Anna Avenue and Security Road", 
-         Vnum = 21004, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - The North Docking bay of Akatamer\
 \13East  - Security Road\
 \13        - To Luke Street\
@@ -232,10 +232,54 @@ and safest route. to the north you can see an intersection. \
 \13West  - Security Road\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21004, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The northern Docking bay can be seen in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21100, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Security Road extends to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21005, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "Going south will bring you near the heart of the city.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21003, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "Security Road extends to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21035, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&RYou stand at the intersection of &PAnna Avenue&R and Security Road.  This\
 main road is home to the Mon Calamari Police. It is highly recommended\
 that you do not walk down this street with rifle a blaze. Soft greenery\
@@ -244,62 +288,56 @@ To the north you can see the north docking bay where the transport ships\
 continualy stop. Security Road lies to the east and west, while &P Anna\
 Avenue &R can be seen to the north and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Anna Avenue and Security Road", 
+      }, 
+      [21005] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21005, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21100, 
-               Description = "The northern Docking bay can be seen in this direction.\
-", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21132, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21005, 
-               Description = "Security Road extends to the east.\
+               Description = "Security Road lies to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21006, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21003, 
-               Description = "Going south will bring you near the heart of the city.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21035, 
-               Description = "Security Road extends to the west.\
+               Description = "The intersection of Anna Avenue and Security Road is to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21004, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21005] = 
-      {
-         Name = "Main Security Office", 
-         Vnum = 21005, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&R This portion of Security Road seems extremly well taken care of.  A\
 whistling northern wind can be heard passing the large Security building\
 to the north.  The extremly large building was made out of grinded lava\
@@ -307,147 +345,109 @@ rock from the planet ocean floor. This extremly hard surface is known for\
 it's ability to keep criminals inside. Security Road stretches  to the\
 east and west.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21132, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21006, 
-               Description = "Security Road lies to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21004, 
-               Description = "The intersection of Anna Avenue and Security Road is to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Main Security Office", 
       }, 
       [21006] = 
       {
-         Name = "Security Road", 
-         Vnum = 21006, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "statue", 
                Description = "The statue is of the Late members of S.P.I.N. belived to be past\
 \13away.\
 \13", 
+               Keyword = "statue", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21006, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Security Road is to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21007, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Security Road extends westward.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21005, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&RYou are on a straight section of Security Road.  A statue depicting a\
 party of adventurers fighting off a Imperial Stortrooper sits in the\
 center of the road.  Blinking back a tear, you remember hearing this tale\
 in a local Factory , and realize that the statue is a memorial.  Security\
 Road extends to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Security Road", 
+      }, 
+      [21007] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21007, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21007, 
-               Description = "Security Road is to the east.\
+               Description = "Security Road meets Luke Street to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21008, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21005, 
-               Description = "Security Road extends westward.\
+               Description = "Security Road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21006, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21007] = 
-      {
-         Name = "Security Road", 
-         Vnum = 21007, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&R You are walking down Security Road.  The long road, which lines the\
 northern wall of Coral City, meets up with Oceanview Street to the east to\
 form one of the four corners of Coral City. Beyond these four corners is a\
 small walkway guarded by a Mon built breakwater that turns back the\
 largest ocean on a habital planet. The street continues westward.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21008, 
-               Description = "Security Road meets Luke Street to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21006, 
-               Description = "Security Road continues to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Security Road", 
       }, 
       [21008] = 
       {
-         Name = "Meeting of Oceanview Street and Security Road ", 
-         Vnum = 21008, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "West  - Security Road\
 \13        - To Anna Avenue\
 \13        - To Monock Road\
@@ -456,52 +456,76 @@ largest ocean on a habital planet. The street continues westward.\
 \13        - To Trading Post  Street\
 \13        - To Law Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21008, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "Luke Street lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21009, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Security Road lies to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21007, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&B Oceanview Street and Security Road come together here to form one of the\
 four corners of Coral City. Oceanview Street lies to the south, while\
 Security Road stretches westward.To the south you can see Mon Calamrian\
 New Rebublic troops practicing military drills incase and invasion ever\
 occurs again. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Meeting of Oceanview Street and Security Road ", 
+      }, 
+      [21009] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21009, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21009, 
-               Description = "Luke Street lies to the south.\
+               Direction = "north", 
+               Description = "Luke Street meets up with Security Road to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21008, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21007, 
-               Description = "Security Road lies to the west.\
+               Direction = "south", 
+               Description = "Luke Street continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21010, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21009] = 
-      {
-         Name = "Oceanview Street", 
-         Vnum = 21009, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&B This section of Oceanview Street is reserved for the Mon Calamrian\
 defense team.  E- Web Blaster's and Com - blasters are stacked high into\
 the air, almost within reach of the  New Rebublic guards on the outpost.\
@@ -510,42 +534,42 @@ to the west. Oceanview Street stretches to the north and south.  You also\
 see in the enterance a body scanner that will make sure you have no\
 weapons on you.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Oceanview Street", 
+      }, 
+      [21010] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21010, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21008, 
-               Description = "Luke Street meets up with Security Road to the north.\
+               Description = "Luke Street continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21009, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21010, 
-               Description = "Luke Street continues to the south.\
+               Description = "The road ranges to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21011, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21010] = 
-      {
-         Name = "Oceanview Street", 
-         Vnum = 21010, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&B This portion of Oceanview Street is rather poor and unkempt.  Rags\
 \
 litter the street, and several of the city's unfortunate have set up\
@@ -554,84 +578,60 @@ road, a beggar's home no doubt.  They prefer this road thanks to the\
 constant tourists that travelk it. Oceanview Street continues to the north\
 and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Oceanview Street", 
+      }, 
+      [21011] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21011, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21009, 
-               Description = "Luke Street continues to the north.\
+               Description = "Luke Street extends northward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21010, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21011, 
-               Description = "The road ranges to the south.\
+               Description = "Barster Road and Luke Street cross to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21012, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21011] = 
-      {
-         Name = "Oceanview Street", 
-         Vnum = 21011, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&BYou are walking down the northern half of Oceanview Street at a brisk\
 pace. To the east is the towering  security wall of Coral City ,blocking\
 your view of the awsome ocean.   Oceanview Street ranges to the north and\
 south.  The road is extremly polished and looks as if not to many Mon\
 Calamrian's travel down it.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21010, 
-               Description = "Luke Street extends northward.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21012, 
-               Description = "Barster Road and Luke Street cross to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Oceanview Street", 
       }, 
       [21012] = 
       {
-         Name = "Intersection of Barster Road and Oceanview Street", 
-         Vnum = 21012, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Luke Street\
 \13        - To Security Road\
 \13East  - The East Docking bay of Akatmer\
@@ -641,112 +641,112 @@ Calamrian's travel down it.\
 \13West  - Barster Road\
 \13        - To Akatamer Square\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21012, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Luke Street is to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21011, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "To the east is the eastern Docking bay.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21113, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "You can see Luke Street stretch far to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21013, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "Barster Road lies to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21038, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&B You stand at the intersection of Barster Road and Oceanview Street.  To\
 the east you can see the massive east Docking bay of Coral City. This is\
 one of the main smuggling bay's of the city.While Oceanview Street lies to\
 the north and south, and Barster Road runs west.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Barster Road and Oceanview Street", 
+      }, 
+      [21013] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21013, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21011, 
-               Description = "Luke Street is to the north.\
+               Description = "Barster Road and Luke Street cross just north of here.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21012, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21113, 
-               Description = "To the east is the eastern Docking bay.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21013, 
-               Description = "You can see Luke Street stretch far to the south.\
+               Description = "The Trading Post  and Luke Street intersection is south of here.\
 ", 
-            }, 
-            [4] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21038, 
-               Description = "Barster Road lies to the east.\
-", 
+               DestinationVnum = 21014, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21013] = 
-      {
-         Name = "Oceanview Street", 
-         Vnum = 21013, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&B You take a brief pause on your way down Oceanview Street, and you can\
 hear the chirping of some strange bird like creature  coming from the\
 other side of the extending breakwall.  Upon catching your breath from the\
 salty air, you gather  your belongings and continue on your way.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21012, 
-               Description = "Barster Road and Luke Street cross just north of here.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21014, 
-               Description = "The Trading Post  and Luke Street intersection is south of here.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Oceanview Street", 
       }, 
       [21014] = 
       {
-         Name = "Intersection of Trading post Street and Oceanview Street ", 
-         Vnum = 21014, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Luke Street\
 \13        - To Barster Road\
 \13        - To Security Road\
@@ -754,103 +754,103 @@ salty air, you gather  your belongings and continue on your way.\
 \13        - To Law Avenue\
 \13West  - Trading Post Street\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21014, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Luke Street lies in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21013, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "Luke Street stretches southward as far as the eye can see.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21015, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "The Trading posts of Akatamer await your arrival and Credits.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21050, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&B You stand at the intersection of Trading Post Street and Luke Street.\
 You look out and can see the waves crash upon the breakwall To the west\
 are the glorious pavilions and shops of Coral City, while Oceanview Street\
 continues to the north and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Trading post Street and Oceanview Street ", 
+      }, 
+      [21015] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21015, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21013, 
-               Description = "Luke Street lies in this direction.\
+               Description = "Trading post Street and Luke Street meet to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21014, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21015, 
-               Description = "Luke Street stretches southward as far as the eye can see.\
+               Description = "Gazing southward, you see the southeastern corner of Akatamer.\
 ", 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21050, 
-               Description = "The Trading posts of Akatamer await your arrival and Credits.\
-", 
+               DestinationVnum = 21016, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21015] = 
-      {
-         Name = "Oceanview Street.", 
-         Vnum = 21015, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&B This portion of Oceanview street allows you see rest and watch one of\
 the two suns set. Two crome like  benches sit on opposite sides of the\
 polished rock road, enticing you to rest.  You can see Law Avenue meeting\
 up with Oceanview Street to the south, while to the north is the Trading\
 Post Street  and Oceanview Street intersection.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21014, 
-               Description = "Trading post Street and Luke Street meet to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21016, 
-               Description = "Gazing southward, you see the southeastern corner of Akatamer.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Oceanview Street.", 
       }, 
       [21016] = 
       {
-         Name = "Meeting of Oceanview Street and Law Avenue ", 
-         Vnum = 21016, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Luke Street\
 \13        - To trading Post Street\
 \13        - To Barster Road\
@@ -859,10 +859,43 @@ Post Street  and Oceanview Street intersection.\
 \13        - To Anna Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21016, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Luke Street lies to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21015, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6905, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue lies to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21017, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&WOceanview  Street and Law Avenue come together here to form one of the\
 four corners of Coral City. This attractive street recived it's name\
 \
@@ -870,51 +903,18 @@ becasue the creators of the city's layout placed it on a hill allowing you\
 to look at the ocean.Oceanview Street lies to the north, while Law Avenue\
 stretches westward.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21015, 
-               Description = "Luke Street lies to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 6905, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21017, 
-               Description = "Law Avenue lies to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Meeting of Oceanview Street and Law Avenue ", 
       }, 
       [21017] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21017, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Companions and Mounts\
 \13East  - Law Avenue\
 \13        - To Luke Street\
@@ -922,65 +922,98 @@ stretches westward.\
 \13        - To Anna Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21017, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Law Avenue joins Luke Street to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21016, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue stretches westward.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21018, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&WYou are walking down the newly paved Law Avenue, the road which lines the\
 southern wall of Coral City recives constant traffic and is ofen the\
 center of attraction.  The dust  here seems wet and muddy. you must be\
 getting closer to the ocean  To the east is one of the four corners  of\
 Coral City, while Law Avenue continues westward. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21016, 
-               Description = "Law Avenue joins Luke Street to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21018, 
-               Description = "Law Avenue stretches westward.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21018] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21018, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "statue ", 
-               Description = "In honor of the late GHETT, founder of the special forces team S.P.I.N.\
-\13True friend, and hero to all of us. \
+               Description = "The plaque reads: 'May you rest in peace, Ghett of S.P.I.N..'\
 \13", 
+               Keyword = "plaque", 
             }, 
             [2] = 
             {
-               Keyword = "plaque", 
-               Description = "The plaque reads: 'May you rest in peace, Ghett of S.P.I.N..'\
+               Description = "In honor of the late GHETT, founder of the special forces team S.P.I.N.\
+\13True friend, and hero to all of us. \
 \13", 
+               Keyword = "statue ", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21018, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21138, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "The road extends eastward.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21017, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue stretches westward as far as the eye can see.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21019, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W A tall statue attracts your attention on this portion of Law Avenue. \
 The platiki metallic  sculpture is of a Calamrian in his late years\
 wielding a E-web Blaster against an unseen attacker, although from the\
@@ -988,51 +1021,18 @@ man's posture it is obvious that his opponent was enormous.  A small\
 golden plaque sits near the statue, explaining its importance.  The newly\
 paved road stretches both east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21138, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21017, 
-               Description = "The road extends eastward.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21019, 
-               Description = "Law Avenue stretches westward as far as the eye can see.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21019] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21019, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Jawa Traders\
 \13East  - Law Avenue\
 \13        - To Luke Street\
@@ -1040,10 +1040,47 @@ paved road stretches both east and west. \
 \13        - To Anna Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21019, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21051, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Law Avenue continues to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21018, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Anna Avenue and Law Avenue cross to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21020, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W Walking on Law Avenue you pass a building that explains the roads name,\
 City Hall. It is here you goto pay tickets and fines, along with chat with\
 \
@@ -1056,55 +1093,18 @@ walkway.  Plants from nearby planets are now growing along side the\
 walkway to make it more inviting. Unfortunately the interior is not yet\
 finished so you can not take a tour.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21051, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21018, 
-               Description = "Law Avenue continues to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21020, 
-               Description = "Anna Avenue and Law Avenue cross to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21020] = 
       {
-         Name = "Intersection of Anna Avenue and Law Avenue", 
-         Vnum = 21020, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Anna Avenue\
 \13        - To Trading Post Street\
 \13        - To Barster Road\
@@ -1116,72 +1116,72 @@ finished so you can not take a tour.\
 \13West  - Law Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21020, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "To the north is Anna Avenue.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21044, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "You see the legendary Law Avenue.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21019, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "To the south is Akatamer's southern Docking bay.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21074, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue extends to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21021, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W You stand at the intersection of Anna Avenue and Law Avenue.  Gazing to\
 the south, you see the massive south Docking bay of Coral City. It is\
 there most new traders enter the city. It also there that new bounty\
 hunters enter. The newly covered roads of Anna Avenue and Law Avenue lie\
 in the four cardinal directions.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21044, 
-               Description = "To the north is Anna Avenue.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21019, 
-               Description = "You see the legendary Law Avenue.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21074, 
-               Description = "To the south is Akatamer's southern Docking bay.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21021, 
-               Description = "Law Avenue extends to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Anna Avenue and Law Avenue", 
       }, 
       [21021] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21021, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Akatamer square\
 \13\
 \13East  - Law Avenue\
@@ -1190,60 +1190,60 @@ in the four cardinal directions.\
 \13West  - Law Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21021, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21073, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Law Avenue and Anna Road cross to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21020, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue ranges to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21022, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W You are traveling down one of the newly covered section of Law Avenue at\
 a brisk pace. To the north is the Mon Calamrian Factory , a building known\
 throughout the the world for its rare metal melting.  You feel almost like\
 paying the building a visit.  Law Avenue extends to the east and west.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21073, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21020, 
-               Description = "Law Avenue and Anna Road cross to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21022, 
-               Description = "Law Avenue ranges to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21022] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21022, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Anikeim's fashion  Clothing\
 \13West  - Law Avenue\
 \13        - To Monock Road\
@@ -1251,67 +1251,67 @@ paying the building a visit.  Law Avenue extends to the east and west.\
 \13        - To Luke Street\
 \13        - To Anna Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&W You are walking down a rather commercial part of Law Avenue. Merchants\
-and droids hassle you to spend your credits as you attempt to continue on\
-your way. Glancing to the north, you see  the only shop worth visiting,\
-owned by the respectable Lokist the Tailor.  Law Avenue stretches to the\
-east and west. \
-", 
+         Sector = "city", 
+         Vnum = 21022, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "A fashion shop is situated to the north.\
+", 
                Keyword = "door", 
-               Key = -1, 
+               DestinationVnum = 21066, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21066, 
-               Description = "A fashion shop is situated to the north.\
-", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21021, 
                Description = "Law Avenue extends to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21021, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21023, 
                Description = "Law Avenue stretches westward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21023, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
+         Description = "&W You are walking down a rather commercial part of Law Avenue. Merchants\
+and droids hassle you to spend your credits as you attempt to continue on\
+your way. Glancing to the north, you see  the only shop worth visiting,\
+owned by the respectable Lokist the Tailor.  Law Avenue stretches to the\
+east and west. \
+", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21023] = 
       {
-         Name = "Law Avenue", 
-         Vnum = 21023, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - An Abandoned defense building\
 \13        - To the Guild of Pilots\
 \13\
@@ -1321,65 +1321,65 @@ east and west. \
 \13        - To Anna Avenue\
 \13        - To Luke Street\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21023, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 21186, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Law Avenue continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21022, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Law Avenue clashes with Monock Road to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21024, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W This stretch of Law Avenue is well trimed and well kept, like most of\
 the streets now in Coral City.  Looking northward, you see a small defense\
 building that looks like it saw some where and tear twenty years  ago.\
 Most of the remains are unenterable.  The lengthy polished rock road\
 extends to the east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21186, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21022, 
-               Description = "Law Avenue continues in this direction.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21024, 
-               Description = "Law Avenue clashes with Monock Road to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Law Avenue", 
       }, 
       [21024] = 
       {
-         Name = "Meeting of Monock Road and Law Avenue", 
-         Vnum = 21024, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Monock Road\
 \13        - To Trading Post  Street\
 \13        - To Barster Road\
@@ -1388,52 +1388,52 @@ extends to the east and west. \
 \13        - To Anna Avenue\
 \13        - To Luke Street\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21024, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Monock Road lies to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21025, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Law Avenue lies to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21023, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&W Monock Road and Law Avenue come together here to form one of the four\
 corners of Coral City.  A metal staircase leads up onto the main city's\
 Security Post, from where even the strongest Imperial Stormtrooper  can be\
 repelled. Monock Road lies to the north, while Law Avenue stretches\
 eastward.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21025, 
-               Description = "Monock Road lies to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21023, 
-               Description = "Law Avenue lies to the east.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Meeting of Monock Road and Law Avenue", 
       }, 
       [21025] = 
       {
-         Name = "Monock Road", 
-         Vnum = 21025, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Monock Road\
 \13        - To Security Road\
 \13        - To Barster Road\
@@ -1443,10 +1443,44 @@ eastward.\
 \13South - Monock Road\
 \13        - To Law Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21025, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Thieves Alley is east of here.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21026, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "The Thieves Alley is east of here.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21063, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "One of the four corners of Akatamer is located to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21024, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&p You pick up your pace as you travel down this portion of Monock Road.\
 \
 Gazing eastward, you see what is easily the darkest alley in the city,\
@@ -1454,52 +1488,18 @@ though a glimmer of light can be seen flickering in the shadows of the\
 slim street.  To the north is an intersection, while Monock Road continues\
 to the south. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21026, 
-               Description = "Thieves Alley is east of here.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21063, 
-               Description = "The Thieves Alley is east of here.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21024, 
-               Description = "One of the four corners of Akatamer is located to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Monock Road", 
       }, 
       [21026] = 
       {
-         Name = "Intersection of Trading Post  Street and Monock Road", 
-         Vnum = 21026, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Monock Road\
 \13        - To Security Road\
 \13        - To Barster Road\
@@ -1507,101 +1507,101 @@ to the south. \
 \13South - Monock Road\
 \13        - To Law Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21026, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Monock Road lies in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21027, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "You gaze at the pavillions and shops of Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21045, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "To the south is Monock Road.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21025, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&Y You stand at the intersection of Trading Post  Street and Monock Road. \
 A wall towers over you to the west, keeping intruders (mostly Quarren) out\
 of Coral City unannounced.  To the east are the newly built shops of Coral\
 City, while Monock Road continues to the north and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Trading Post  Street and Monock Road", 
+      }, 
+      [21027] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21027, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21027, 
-               Description = "Monock Road lies in this direction.\
+               Description = "Barster Road and Monock Road cross to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21028, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21045, 
-               Description = "You gaze at the pavillions and shops of Trading Post  Street.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21025, 
-               Description = "To the south is Monock Road.\
+               Description = "Trading Post  Street and Monock Road cross just south of here.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21026, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21027] = 
-      {
-         Name = "Monock Road", 
-         Vnum = 21027, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&p You are walking down a poorer section of Monock Road.  The carved rock\
 roads  seem unkept and poorly made, definitely unusual in this city which\
 represents hope and order.  The street ranges to the north and south.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21028, 
-               Description = "Barster Road and Monock Road cross to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21026, 
-               Description = "Trading Post  Street and Monock Road cross just south of here.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Monock Road", 
       }, 
       [21028] = 
       {
-         Name = "Intersection of Barster Road and Monock Road", 
-         Vnum = 21028, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "West  - The Western Docking bay of Akatamer\
 \13South - Monock Road\
 \13        - To Trading Post  Street\
@@ -1611,201 +1611,201 @@ represents hope and order.  The street ranges to the north and south.\
 \13North - Monock Road\
 \13        - To Security Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21028, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The metallic streets of Monock Road lie to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21029, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Walking in this direction will lead you into the very heart of the city.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21041, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "Monock Road lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21027, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "To the west is the west Docking bay of Akatamer.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21088, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&p You stand at the intersection of Barster Road and Monock Road.  Gazing\
 to the west, you see the huge west Docking bay of Coral City.  The carved\
 rock roads of Barster  and Monock  lie in the four cardinal directions.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Barster Road and Monock Road", 
+      }, 
+      [21029] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21029, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21029, 
-               Description = "The metallic streets of Monock Road lie to the north.\
+               Description = "Monock Road stretches northward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21030, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21041, 
-               Description = "Walking in this direction will lead you into the very heart of the city.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21027, 
-               Description = "Monock Road lies to the south.\
+               Description = "The intersection of Barster Road and Monock Road is south of here.\
 ", 
-            }, 
-            [4] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21088, 
-               Description = "To the west is the west Docking bay of Akatamer.\
-", 
+               DestinationVnum = 21028, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21029] = 
-      {
-         Name = "Monock Road", 
-         Vnum = 21029, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&p You stand at the intersection of Barster Road and Monock Road.  Gazing\
 to the west, you see the huge west Docking bay of Coral City.  The carved\
 rock roads of Barster  and Monock  lie in two directions north and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Monock Road", 
+      }, 
+      [21030] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21030, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21030, 
-               Description = "Monock Road stretches northward.\
+               Description = "Monock Road extends northward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21031, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
+               DestinationVnum = 21067, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
                Direction = "south", 
-               DestinationVnum = 21028, 
-               Description = "The intersection of Barster Road and Monock Road is south of here.\
+               Description = "Monock Road stretches southward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21029, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21030] = 
-      {
-         Name = "Monock Road", 
-         Vnum = 21030, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&pYou walk through a poor, almost abandoned section of Coaral City. \
 Indeed, this portion of Monock Road is neither traveled nor clean. The\
 worn carved surface road continues to the north and south.This area is one\
 the mayor is not palnning to tackle for awile. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Monock Road", 
+      }, 
+      [21031] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21031, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21031, 
-               Description = "Monock Road extends northward.\
+               Description = "Monock Road meets with Security Road to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21032, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21067, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21029, 
-               Description = "Monock Road stretches southward.\
+               Description = "Monock Road lies to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21030, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21031] = 
-      {
-         Name = "Monock Road", 
-         Vnum = 21031, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&pYou walk through a poor, almost abandoned section of Coaral City. \
 Indeed, this portion of Monock Road is neither traveled nor clean. The\
 worn carved surface road continues to the north and south.This area is one\
 the mayor is not planning to tackle for awile.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21032, 
-               Description = "Monock Road meets with Security Road to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21030, 
-               Description = "Monock Road lies to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Monock Road", 
       }, 
       [21032] = 
       {
-         Name = "Meeting of Monock Road and Security Road", 
-         Vnum = 21032, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East - Security Road\
 \13        - to Anna Avenue\
 \13        - to Luke Street\
@@ -1814,186 +1814,186 @@ the mayor is not planning to tackle for awile.\
 \13        - to Trading Post  Street\
 \13        - to Law Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21032, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Security Road lies to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21033, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "Monock Road lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21031, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&R Monock Road and Security Road come together here to form one of the four\
 corners of Coral City.  From here you can smell the ocean sea salt form\
 the nearby breakwall to the west. It reminds you of the fun you have\
 swimming in the huge ocean that surrounds this city. Monock Road lies to\
 the south, while Security Road stretches \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Meeting of Monock Road and Security Road", 
+      }, 
+      [21033] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21033, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21033, 
-               Description = "Security Road lies to the east.\
+               Description = "Security Road stretches eastward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21034, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21031, 
-               Description = "Monock Road lies to the south.\
+               Direction = "west", 
+               Description = "Security Road and Monock Road meet to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21032, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21033] = 
-      {
-         Name = "Security Road", 
-         Vnum = 21033, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&RYou stand on  Security Road staring at the two suns or the stars above\
 your head, depending on time.  This newly paved street is made of polished\
 rock that glimers when the first sun comes up. In the distence you can see\
 Mon Calamrian children playing in the nearby park. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Security Road", 
+      }, 
+      [21034] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21034, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21034, 
-               Description = "Security Road stretches eastward.\
+               Description = "Security Road lies to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21035, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
+               DestinationVnum = 21131, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
                Direction = "west", 
-               DestinationVnum = 21032, 
-               Description = "Security Road and Monock Road meet to the west.\
+               Description = "Security Road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21033, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21034] = 
-      {
-         Name = "Security Road", 
-         Vnum = 21034, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&RYou travel down a newly lanscaped area of Security Road.  In the new park\
 created to the south you can hear strange animal noises that remind you of\
 the days back when you used to go to the galactic zoo.  The mysterious\
 melody relaxes you as you start to whistle with the birds in a city of\
 peace and goodness.  Security Road stretches east and west.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Security Road", 
+      }, 
+      [21035] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21035, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21035, 
-               Description = "Security Road lies to the east.\
+               Description = "The intersection of Anna Avenue and Security Road is east of here.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21004, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21131, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21033, 
-               Description = "Security Road continues to the west.\
+               Description = "Security Road stretches westward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21034, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21035] = 
-      {
-         Name = "Security Road", 
-         Vnum = 21035, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&R You are walking cautiously through this part of Security Road.  Lately\
 you have heard rumors of thieves prowling these parts, mocking the very\
 name of the road.  But that is mostly not likely. The newly paved street\
 \
 ranges to the east and west.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21004, 
-               Description = "The intersection of Anna Avenue and Security Road is east of here.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21034, 
-               Description = "Security Road stretches westward.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Security Road", 
       }, 
       [21036] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21036, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13South - The Archives\
@@ -2004,51 +2004,51 @@ ranges to the east and west.\
 \13        - To Monock Road\
 \13        - To Akatamer Square\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21036, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Barster Road stretches onward in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21037, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The road to the west leads to Akatamer Square.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21000, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You quicken your pace as you walk down the newly carved road of Barster\
 . With very little to see this just becomes another leg on your journey\
 through town. Gazing to the north, you see the the two suns in the sky in\
 all its beauty.  To the east and west is the  Barster Road  \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21037, 
-               Description = "Barster Road stretches onward in this direction.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21000, 
-               Description = "The road to the west leads to Akatamer Square.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
       }, 
       [21037] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21037, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13South - Akatamer Tower of jedi's \
@@ -2058,61 +2058,61 @@ all its beauty.  To the east and west is the  Barster Road  \
 \13        - To Monock Road\
 \13        - To Akatamer Square\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21037, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Barster Road continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21038, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The enterence to Akatamer's Tower of Jedi's are to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21126, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Barster Road continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21036, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c While walking Barster Road, you gaze up at the Akatamer medical\
 facility, whose entrance lies to the south. New plantlife grows along side\
 the road,&G adding a buitiful haze of green. &c The lengthy rock carved\
 out road stretches to the east and west.&x\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21038, 
-               Description = "Barster Road continues in this direction.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21126, 
-               Description = "The enterence to Akatamer's Tower of Jedi's are to the south.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21036, 
-               Description = "Barster Road continues in this direction.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
       }, 
       [21038] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21038, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13South - Akatamer Academy\
@@ -2121,65 +2121,65 @@ out road stretches to the east and west.&x\
 \13        - To Monock Road\
 \13        - To Akatamer Square\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&c Young and giddy Mon Calmarians pass you as you travel this portion of\
-Barster Road.  Gazing southward, you see the illustrious Coral City\
-Academy, which has the responsibility of educateting new Mon Calamarian's.\
- The newly carved rock road of Barster  continue to the east and west.\
-", 
+         Sector = "city", 
+         Vnum = 21038, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21012, 
                Description = "The intersection of Barster Road and Luke Street lies to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21012, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
+               DestinationVnum = 21133, 
                Distance = 0, 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21133, 
-               Description = "", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21037, 
                Description = "Barster Road stretches to the west as far as the eye can see.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21037, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
+         Description = "&c Young and giddy Mon Calmarians pass you as you travel this portion of\
+Barster Road.  Gazing southward, you see the illustrious Coral City\
+Academy, which has the responsibility of educateting new Mon Calamarian's.\
+ The newly carved rock road of Barster  continue to the east and west.\
+", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
       }, 
       [21039] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21039, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13        - To Anna Avenue\
@@ -2189,52 +2189,52 @@ Academy, which has the responsibility of educateting new Mon Calamarian's.\
 \13        - To Monock Road\
 \13\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21039, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The road to the east leads to Akatamer Square.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21000, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Barster Road stretches onward as far as the eye can see.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21040, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You quicken your pace as you walk down the newly carved road of Barster\
 . With very little to see this just becomes another leg on your journey\
 through town. Gazing to the north, you see the the two suns in the sky in\
 all its beauty.  To the east is Coral City Square, while Barster Road\
 leads on to the west.   \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21000, 
-               Description = "The road to the east leads to Akatamer Square.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21040, 
-               Description = "Barster Road stretches onward as far as the eye can see.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
       }, 
       [21040] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21040, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13        - To Anna Avenue\
@@ -2243,67 +2243,67 @@ leads on to the west.   \
 \13West  - Barster Road\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&cHere the city's only and extremly large  Hotel stands to the south It was\
-constructed fromt he remains of crashed space vessel. It is considered\
-sheek to stay in this coverted junk heap (Who figures?)You make note to\
-remember  this location for later.  Gazing to the east and west, you can\
-see nothing but Barster Road. \
-", 
+         Sector = "city", 
+         Vnum = 21040, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21039, 
                Description = "Barster Road stretches further eastward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21039, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "The town hotel  awaits.\
+", 
                Keyword = "door", 
-               Key = -1, 
+               DestinationVnum = 21069, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21069, 
-               Description = "The town hotel  awaits.\
-", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21041, 
                Description = "Barster Road stretches further westward.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21041, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
+         Description = "&cHere the city's only and extremly large  Hotel stands to the south It was\
+constructed fromt he remains of crashed space vessel. It is considered\
+sheek to stay in this coverted junk heap (Who figures?)You make note to\
+remember  this location for later.  Gazing to the east and west, you can\
+see nothing but Barster Road. \
+", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
       }, 
       [21041] = 
       {
-         Name = "Barster Road", 
-         Vnum = 21041, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "East  - Barster Road\
 \13        - To Luke Street\
 \13        - To Anna Avenue\
@@ -2312,10 +2312,49 @@ see nothing but Barster Road. \
 \13West  - Barster Road\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21041, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Barster Road continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21040, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The tavern lies to the south.\
+", 
+               Keyword = "door", 
+               DestinationVnum = 21068, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "Barster Road and Monock Road cross to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21028, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c Cheery laughter can be heard in this section of Barster Road.  Listening\
 closely, you are not surprised to find the laughter coming from the\
 Cantinia to the south.  People from differnt planets passing by also seem\
@@ -2323,99 +2362,60 @@ interested in those who can find joy in these dark times. This tavern is\
 best place to find new friends, bith good and evil. Barster Road ranges to\
 the east and west.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Barster Road", 
+      }, 
+      [21042] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21042, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21040, 
-               Description = "Barster Road continues in this direction.\
+               Direction = "north", 
+               Description = "The road to the north leads to Akatamer Square.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21000, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
                Direction = "south", 
-               DestinationVnum = 21068, 
-               Description = "The tavern lies to the south.\
+               Description = "A bustling intersection lies to the south.\
 ", 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21028, 
-               Description = "Barster Road and Monock Road cross to the west.\
-", 
+               DestinationVnum = 21043, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21042] = 
-      {
-         Name = "Anna Avenue", 
-         Vnum = 21042, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&PYou are travelling upon the southern portion of Anna Avenue.  The newly\
 constructed buildings of the Coral City Trading Post street rise high into\
 the air to the east and west.  The metallic road stretches to the north\
 and south, where you can see a bustling intersection of Mon Calamrian\
 shopers.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21000, 
-               Description = "The road to the north leads to Akatamer Square.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21043, 
-               Description = "A bustling intersection lies to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Anna Avenue", 
       }, 
       [21043] = 
       {
-         Name = "Intersection of Anna Avenue and Trading Post  Street", 
-         Vnum = 21043, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Anna Avenue\
 \13        - To Security Road\
 \13        - To Barster Road\
@@ -2427,72 +2427,72 @@ shopers.\
 \13West  - Trading Post  Street\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21043, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Anna Avenue lies to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21042, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "You can see the exotic Trading Post s of Akatamer.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21048, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "Anna Avenue stretches to the south as far as the eye can see.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21044, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "You can see the exotic Trading Post s of Akatamer.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21047, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YYou stand at the intersection of Anna Avenue and Trading Post  Street. \
 The intersection bustles with activity as citizens go about their\
 business. To the east and west runs Trading Post  Street, lined with the\
 exotic and local shops of Coral City, while Anna Avenue lies to the north\
 and south. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21042, 
-               Description = "Anna Avenue lies to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21048, 
-               Description = "You can see the exotic Trading Post s of Akatamer.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21044, 
-               Description = "Anna Avenue stretches to the south as far as the eye can see.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21047, 
-               Description = "You can see the exotic Trading Post s of Akatamer.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Intersection of Anna Avenue and Trading Post  Street", 
       }, 
       [21044] = 
       {
-         Name = "Anna Avenue", 
-         Vnum = 21044, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Anna Avenue\
 \13        - To Trading Post  Street\
 \13        - To Barster Road\
@@ -2503,62 +2503,62 @@ and south. \
 \13South - Anna Avenue\
 \13        - To Law Avenue\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21044, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "Intersection of Anna Avenue and Trading Post  Street\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21043, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The intersection of Anna Avenue and Law Avenue lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21020, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "You can't make out any details about the dark alley.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21065, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&PWhile traversing the busy, smooth carved road of Coral City, you notice a\
 \
 particularly dark alley to the west which citizens commonly avoid. As  you\
  imagine running into a cloaked thief lurking in the shadows. Anna Avenue\
 extends to the north and south.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21043, 
-               Description = "Intersection of Anna Avenue and Trading Post  Street\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21020, 
-               Description = "The intersection of Anna Avenue and Law Avenue lies to the south.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21065, 
-               Description = "You can't make out any details about the dark alley.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Anna Avenue", 
       }, 
       [21045] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21045, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - The Scribe's Tent\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2570,60 +2570,60 @@ extends to the north and south.\
 \13 \
 \13I have moved closer to the mines to increase my profits.\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "To the north is where a rock seller used to hold shop, on the door is a\
-small sign. it does keep your wife happy. Trading Post  Street extends to\
-the east and west. \
-", 
+         Sector = "city", 
+         Vnum = 21045, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21046, 
                Description = "More shops attract your attention to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21046, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21052, 
                Description = "A jewelry shop has been set up in the tent to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21052, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21026, 
                Description = "Trading Post  Street meets up with Monock Road to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21026, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
+         Description = "To the north is where a rock seller used to hold shop, on the door is a\
+small sign. it does keep your wife happy. Trading Post  Street extends to\
+the east and west. \
+", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21046] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21046, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - The Spide Dealer\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2632,79 +2632,72 @@ the east and west. \
 \13West  - Trading Post  Street\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21046, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The Spice Trader's is to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21054, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "More shops attract your attention to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21047, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "The Akatamer mail service is situated in a building to the south.\
+\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21053, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "More shops attract your attention to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21045, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YCitizens of Coral City waddle  around you, anxious to finish their\
 shopping. Gazing northward, you can see a female Rodian drying a multitude\
 of spices, while to the south you see Coral City's courier service. \
 Trading Post  Street ranges to the east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21054, 
-               Description = "The Spice Trader's is to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21047, 
-               Description = "More shops attract your attention to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21053, 
-               Description = "The Akatamer mail service is situated in a building to the south.\
-\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21045, 
-               Description = "More shops attract your attention to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21047] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21047, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "note", 
-               Description = "Sorry due to costs of shipping I have moved my shop below closer to the\
-\13mine.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "sign post signpost", 
                Description = "North - Hermit's Tent\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2713,10 +2706,51 @@ Trading Post  Street ranges to the east and west. \
 \13West  - Trading Post  Street\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
+            }, 
+            [2] = 
+            {
+               Description = "Sorry due to costs of shipping I have moved my shop below closer to the\
+\13mine.\
+\13", 
+               Keyword = "note", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21047, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "You see the intersection of Anna Avenue and Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21043, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "A mapmaker store lies to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21056, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "More shops attract your attention to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21046, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YThe newly carved polished stone rock road is buzzing with activity. \
 Eager shouts from numerous new buildings encourage potential customers to\
 come inspect a shopkeeper's;wares.  To the north is Anikem's new shop,\
@@ -2724,52 +2758,18 @@ while a Map Builder  just moved in to the south.  Trading Post  Street\
 stretches to the east and west. \
 There is a small note tacked up on the north door.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21043, 
-               Description = "You see the intersection of Anna Avenue and Trading Post  Street.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21056, 
-               Description = "A mapmaker store lies to the south.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21046, 
-               Description = "More shops attract your attention to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21048] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21048, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - The Bantha Barbecue\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2778,10 +2778,55 @@ There is a small note tacked up on the north door.\
 \13        - To Anna Avenue\
 \13        - Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21048, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The barbecue stand lies in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21057, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "More shops attract your attention in this direction.\
+\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21049, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "You can see a stocky Mon Calamrian repairing equipment.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21058, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "The intersection of Anna Avenue and Trading Post  Street lies to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21043, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YThe newly carved rock road is buzzing with activity.  Eager shouts from\
 the newly built buildings encourage potential customers to come inspect a\
 shopkeeper's wares.  To the north you can smaell the sweet aroma that is\
@@ -2789,63 +2834,18 @@ the Bantha barbecue Shop , while the building to the south is dedicated to\
 repairing broken items.  Trading Post  Street stretches to the east and\
 west.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21057, 
-               Description = "The barbecue stand lies in this direction.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21049, 
-               Description = "More shops attract your attention in this direction.\
-\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21058, 
-               Description = "You can see a stocky Mon Calamrian repairing equipment.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21043, 
-               Description = "The intersection of Anna Avenue and Trading Post  Street lies to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21049] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21049, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - The Akatamer Bakery\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2854,72 +2854,72 @@ west.\
 \13        - To Anna Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21049, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "You can see a bakery to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21060, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "More shops attract your attention in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21050, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "The Bobba waresis to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21059, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "More shops attract your attention in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21048, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YCitizens of Coral City scamper about you, eager to finish their shopping.\
 The aroma of fresh bread assails your nose, coming from a bakery from the\
 north, and you can see Armory clanging from the wind on the shop to the\
 south.ity's armoury to the south.  Trading Post  Street ranges to the east\
 and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21060, 
-               Description = "You can see a bakery to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21050, 
-               Description = "More shops attract your attention in this direction.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21059, 
-               Description = "The Bobba waresis to the south.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21048, 
-               Description = "More shops attract your attention in this direction.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21050] = 
       {
-         Name = "Trading Post  Street", 
-         Vnum = 21050, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign post signpost", 
                Description = "North - Blue Milk Dairy Products\
 \13East  - Trading Post  Street\
 \13        - To Luke Street\
@@ -2928,114 +2928,124 @@ and west. \
 \13        - To Anna Avenue\
 \13        - To Monock Road\
 \13", 
+               Keyword = "sign post signpost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21050, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The dairy to the north deals in all blue milk dairy products.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21061, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "Trading Post  Street joins up with Luke Street to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21014, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "Weapons can be bought or sold in the store to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21062, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "More shops attract you in this direction.\
+\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21049, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&YYou smile at the familiar sight of Trading Post  Street and its glorious\
 newly built buildings. The buzz of vibro-blades can be heard from the\
 south, while the blue milk dairy is situated to the north.  Trading Post \
 Street extends east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21061, 
-               Description = "The dairy to the north deals in all blue milk dairy products.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21014, 
-               Description = "Trading Post  Street joins up with Luke Street to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21062, 
-               Description = "Weapons can be bought or sold in the store to the south.\
-", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21049, 
-               Description = "More shops attract you in this direction.\
-\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Trading Post  Street", 
       }, 
       [21051] = 
       {
-         Name = "Interior of City Hall", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21051, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
+         Name = "Interior of City Hall", 
+         Vnum = 21051, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21019, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21019, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [21052] = 
       {
-         Name = "The Shining Emerald", 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21052, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost - 100,000 credits 16 CHA\
 \13Sorry ultima-pearls not included.\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Shining Emerald", 
+         Vnum = 21052, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "An opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21045, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O A locked display box dominates this particular shop.  Under the glass of\
 the box are two of the only three known ulti-ma pearls in existence., each\
 lying gently upon a miniscule cushion. Various other items are displayed\
@@ -3043,43 +3053,43 @@ in differnt boxes. Hanging from the walls are various paintings, while\
 sculptures take up the rest of the floor space. A north door leads back\
 out onto Trading Post Street.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21045, 
-               Description = "An opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21053] = 
       {
-         Name = "Coral City Courier Office", 
-         Flags = 
-         {
-            [18] = "NoDrop", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21053, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost - Mail Service is Governemnt Own sorry!\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Courier Office", 
+         Vnum = 21053, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "An opening in the building leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21046, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O An immense computer set against the southern wall of the Building has\
 been organized into small consoles, each containing letters to and from\
 the citizens of Coral City through Star mail.  Errand boys are constantly\
@@ -3087,42 +3097,43 @@ coming in and collecting disks for delivery.  In the center of the room is\
 a large glatic_net mail terminal where people from around the world can\
 send mail. A door to the north leads back out onto Trading Post  Street .\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21046, 
-               Description = "An opening in the building leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [18] = "NoDrop", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21054] = 
       {
-         Name = "The Spice dealer", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21054, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost - 50,000 Must be a smuggler of 40\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Spice dealer", 
+         Vnum = 21054, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "The opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21046, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OThis newly contructed building is filled with the scent of dried spices.\
 Wooden shelves are lined with spices, each of varying colors. A counter\
 sits in the center of the room. Walking nearer, you notice a small plaque\
@@ -3130,42 +3141,41 @@ on the counter which reads 'Success lies in Spices'. Dispite numerous\
 attempts to outlaw spices , they are still legal in this city. A door\
 south leads back out onto Trading Post  Street.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21046, 
-               Description = "The opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21055] = 
-      {
-         Name = "Anakiem's Rocks", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21055, 
-         Tag = "", 
+      }, 
+      [21055] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost ", 
                Description = "Cost - Not for Sale\
 \13", 
+               Keyword = "cost ", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Anakiem's Rocks", 
+         Vnum = 21055, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6882, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O A musty odor fills your nostrils as you inhale.  Shelves hug the walls\
 of this newly created building, each shelf filled with  items from the\
 mines or ocean floor.  As you begin to inspect several of the shelves, you\
@@ -3173,42 +3183,43 @@ notice they are all covered in dust and dirt.  A square wooden counter\
 sits in the center of the room, and to to the south a door leads back out\
 onto Trading Post  Street. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 6882, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21056] = 
-      {
-         Name = "Maps", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21056, 
-         Tag = "", 
+      }, 
+      [21056] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost ", 
                Description = "Cost - 50,000 credits Wis 16\
 \13Also Mon Calamarian\
 \13", 
+               Keyword = "cost ", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Maps", 
+         Vnum = 21056, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "An opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21047, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OYou find yourself in a rather small and empty shop.  Parchments tied into\
 neat packs lie about in an unorganized manner in the back corner.  A\
 counter in the center of the room houses numerous state of the art\
@@ -3217,36 +3228,36 @@ printer is havinga hard time converting to new technology, and is even\
 contemplating retiring. A door to the  north leads back out onto Trading\
 Post  Street. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21047, 
-               Description = "An opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21057] = 
-      {
-         Name = "The Bantha Barbecue Shop", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21057, 
-         Tag = "", 
+      }, 
+      [21057] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Bantha Barbecue Shop", 
+         Vnum = 21057, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "An opening in the tent allows you to return to Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21048, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OThe smell of fresh meat grilled to a perfection as only chef Wannie knows\
 how is present in the air of this shop.  Kept cool in frosted vaults, the\
 city chef sells his meats here, imported from planets far distant or\
@@ -3254,43 +3265,43 @@ harvested form the ocean. There are a few tables scattered around for you\
 to sit at, and share stories with your friends.Through the door to the\
 south is Trading Post  Street.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21048, 
-               Description = "An opening in the tent allows you to return to Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21058] = 
-      {
-         Name = "The Unlit saber", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21058, 
-         Tag = "", 
+      }, 
+      [21058] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost ", 
                Description = "Cost - 38.000 credist \
 \13Must be Engineer of 50\
 \13", 
+               Keyword = "cost ", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Unlit saber", 
+         Vnum = 21058, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21048, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O You stand within the modernized building of the city's Repair tech. On\
 the floor behind the counter you can see various pieces of Equimpment; a\
 poor fellow distroyed. ; Most of Torvals's business is from the military,\
@@ -3301,42 +3312,42 @@ To repair obj or weapon type:  repair (obj)\
 \
 Sorry there is a small fee for the job.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21048, 
-               Description = "The opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21059] = 
-      {
-         Name = "Bobba's wares", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21059, 
-         Tag = "", 
+      }, 
+      [21059] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost 80,000 plus a Dinner with Bobba Fett\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Bobba's wares", 
+         Vnum = 21059, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21049, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O This Mon Calamarian is a dedicated creator of armor and shields.  Having\
 lost her son to shabby equipment, she took up the job of putting\
 protective suits of armor together. She is also  extremly infatuated with\
@@ -3344,84 +3355,84 @@ the legendary Bobba Fett, and collects any holographics  or drawings of\
 this great Bounty Hunter. The enterance leads back out north onto Trading\
 Post  Street.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21049, 
-               Description = "The opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21060] = 
-      {
-         Name = "The Akatamer Bakery", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21060, 
-         Tag = "", 
+      }, 
+      [21060] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost - 28,000 And a Love for Bread\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Akatamer Bakery", 
+         Vnum = 21060, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "An opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21049, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OUpon entering the Akatamer Bakery, you find yourself surrounded by\
 citizens of the marvelous city, each waiting in line for their daily\
 bread. This Mon Calamrian is famous for his fine baked bread made from\
 refined seaweed. This green food is terrific with every meal. The door to\
 the south leads back out onto Trading Post  Street. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21049, 
-               Description = "An opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21061] = 
-      {
-         Name = "The Blue Sea-Cow", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21061, 
-         Tag = "", 
+      }, 
+      [21061] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost 28,000 credits a you must marry off His daughter.\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Blue Sea-Cow", 
+         Vnum = 21061, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "An opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21050, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OThis small shop smells strongly of blue cheese, as dozens of types of\
 cheeses have been laid out and labeled properly on several long shelves. \
 You notice many bottles of blue milk, considered to be more important than\
@@ -3429,42 +3440,42 @@ even water, carefully stacked in the northeast corner.  This Mon girl is\
 staioned here by here father to sell this rare drink froma seacow. Through\
 the door Trading Post  Street lies to the south.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21050, 
-               Description = "An opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21062] = 
-      {
-         Name = "Vibro-Fizz", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21062, 
-         Tag = "", 
+      }, 
+      [21062] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost - 89,000 credits and Engineering\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Vibro-Fizz", 
+         Vnum = 21062, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The opening in the tent leads back out onto Trading Post  Street.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21050, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&ORacks line the walls of this store, each filled to the brim with weapons.\
 You grin evilly at the items of destruction, and try out a couple on the\
 practice dummies hung from the ceiling.  A counter in the center of the\
@@ -3472,172 +3483,155 @@ room is where the keeper of this shop does business.  He is an extremly\
 large calamarian who knows his stuff. The door to the north leads back out\
 onto Trading Post  Street.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21050, 
-               Description = "The opening in the tent leads back out onto Trading Post  Street.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [21063] = 
       {
-         Name = "Thieves Alley", 
-         Vnum = 21063, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21063, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The Thieves Alley continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21064, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Monock Road lies to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21025, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You are walking through a particularly dark and unkempt alley of Coral\
 City. Whomp rats scurry across the metallic ground, squeaking at you. \
 Empty crates and tattered rags are lying about.  The alley stretches to\
 the east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21064, 
-               Description = "The Thieves Alley continues in this direction.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21025, 
-               Description = "Monock Road lies to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Thieves Alley", 
       }, 
       [21064] = 
       {
-         Name = "Thieves Alley", 
-         Vnum = 21064, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21064, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The Thieves Alley continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21065, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The Thieves Alley continues in this direction.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21063, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You are walking through a particularly dark and unkempt alley of Coral\
 City. Whomp rats scurry across the metallic ground, squeaking at you. \
 Empty crates and tattered rags are lying about.  The alley stretches to\
 the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Thieves Alley", 
+      }, 
+      [21065] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21065, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21065, 
-               Description = "The Thieves Alley continues in this direction.\
+               Description = "Anna Avenue lies to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21044, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21063, 
                Description = "The Thieves Alley continues in this direction.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21064, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21065] = 
-      {
-         Name = "Thieves Alley", 
-         Vnum = 21065, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "You are walking through a particularly dark and unkempt alley of Akatamer.\
 Whomp rats scurry across the metallicground, squeaking at you.  Empty crates and\
 tattered rags are lying about.  The alley opens up to Anna Avenue to the\
 \
 east, while to the west the darkness deepens.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21044, 
-               Description = "Anna Avenue lies to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21064, 
-               Description = "The Thieves Alley continues in this direction.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Thieves Alley", 
       }, 
       [21066] = 
       {
-         Name = "Annir's Clothing", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21066, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&O The shop you have entered smells heavily of dried bantha leather. \
-Gazing about, you see all manners of clothing, from leather to silk.  A\
-coral counter lines the northern wall of the shop, and several stalls line\
-the eastern wall, where you can try on your clothes (after you pay for\
-them.).  A door to the south leads back out onto Law Avenue. \
-", 
+         Name = "Annir's Clothing", 
+         Vnum = 21066, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Description = "The door leads back out onto Law Avenue\
+", 
                Keyword = "door", 
-               Key = -1, 
+               DestinationVnum = 21022, 
                Distance = 0, 
                Flags = 
                {
@@ -3646,15 +3640,14 @@ them.).  A door to the south leads back out onto Law Avenue. \
                   [21] = "Searchable", 
                   [3] = "Secret", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21022, 
-               Description = "The door leads back out onto Law Avenue\
-", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Description = "", 
                Keyword = "hatch", 
-               Key = -1, 
+               DestinationVnum = 21180, 
                Distance = 0, 
                Flags = 
                {
@@ -3662,69 +3655,102 @@ them.).  A door to the south leads back out onto Law Avenue. \
                   [21] = "Searchable", 
                   [11] = "Hidden", 
                }, 
-               Direction = "down", 
-               DestinationVnum = 21180, 
-               Description = "", 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
+         Description = "&O The shop you have entered smells heavily of dried bantha leather. \
+Gazing about, you see all manners of clothing, from leather to silk.  A\
+coral counter lines the northern wall of the shop, and several stalls line\
+the eastern wall, where you can try on your clothes (after you pay for\
+them.).  A door to the south leads back out onto Law Avenue. \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [21067] = 
       {
-         Name = "Companions and Mounts", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21067, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Companions and Mounts", 
+         Vnum = 21067, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21030, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&O You walk into a large shop which smells of Banthas.  Behind the long\
 wooden counter are dozens of cages containing varying types of animals. \
 You can hear the sounds of creatures coming from a store room in the back\
 of the shop.  A path to the west leads back out onto the busy Monnock St.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21030, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21068] = 
       {
-         Name = "The Tavern", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21068, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
                Description = "Cost 160,000 credits  (includes both stores)\
 \13", 
+               Keyword = "cost", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "The Tavern", 
+         Vnum = 21068, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "A door leads out onto Barster Road.\
+", 
+               Keyword = "door", 
+               DestinationVnum = 21041, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "The hotel  lies to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21069, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&OYou enter the city's lavish cantinia, in fact the only bar inside the\
 city;itself, appropriately connected to the city's hotel  to the east\
 through a hallway. That way visitors can just get drunk then head over to\
@@ -3733,60 +3759,57 @@ dull headache. To the east is the town hotel , while the fresh air of the\
 \
 outdoors stands at bay to the north.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21069] = 
+      {
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "Cost 160,000 credits  (includes both stores)\
+\13", 
+               Keyword = "cost", 
+            }, 
+         }, 
+         Name = "The Akatamer hotel ", 
+         Vnum = 21069, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "Barster Road lies to the north.\
+", 
                Keyword = "door", 
-               Key = -1, 
+               DestinationVnum = 21040, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21041, 
-               Description = "A door leads out onto Barster Road.\
-", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21069, 
-               Description = "The hotel  lies to the east.\
+               Direction = "west", 
+               Description = "The tavern lies to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21068, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21069] = 
-      {
-         Name = "The Akatamer hotel ", 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [10] = "Safe", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21069, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "cost", 
-               Description = "Cost 160,000 credits  (includes both stores)\
-\13", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&OHere a weary traveller can seek a good rest in comfort without fear of\
 theft or, worse yet, murder.  A long counter stretches across much of the\
 room, and for a few credits the hotel keeper will gladly rent you one of\
@@ -3795,135 +3818,136 @@ south beyond a door barred by the hotel keeper are the rooms.\
  \
 You may safely quit here.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [10] = "Safe", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21071] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "&C Inside Bacta Tank", 
+         Vnum = 21071, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21040, 
-               Description = "Barster Road lies to the north.\
-", 
-            }, 
-            [2] = 
-            {
+               Direction = "south", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21068, 
-               Description = "The tavern lies to the west.\
-", 
+               DestinationVnum = 21127, 
+               Key = -1, 
             }, 
          }, 
          Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21071] = 
-      {
-         Name = "&C Inside Bacta Tank", 
+         Description = "This room is for the severly wounded. Please donot take advantage of this\
+great Facility or the Mon Calamarian Officals will have to remove the\
+bacta tank. \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n The healing warmth of the bacta spreads over your\
+body.\
+feel heal $n\
+", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [16] = "Silence", 
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21071, 
-         Tag = "", 
+      }, 
+      [21072] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "rand_prog", 
-               Code = "mpechoat $n The healing warmth of the bacta spreads over your\
-body.\
-feel heal $n\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "This room is for the severly wounded. Please donot take advantage of this\
-great Facility or the Mon Calamarian Officals will have to remove the\
-bacta tank. \
-", 
+         Name = "Restarea", 
+         Vnum = 21072, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21127, 
+               Direction = "west", 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21100, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21072] = 
-      {
-         Name = "Restarea", 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21072, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z This lavish room comes complete with plush bantha leather seat benches.\
 A brand new drinking fountain that diperses fresh salt water for drinking.\
 And a new cooking droid here to serve some of the great Mon Calamari food.\
 The floor is a soft grey colored marble like rock sanded to a smooth\
 surface. \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21073] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Factory Enterence", 
+         Vnum = 21073, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21100, 
+               Direction = "north", 
                Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21151, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21021, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21073] = 
-      {
-         Name = "Factory Enterence", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21073, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c &C You stand before huge doors of the Krantz mining ore factory complex.\
  the doors are kept closed, yet the bared windows are cracked open to give\
 all the heat and noise inside a means of escaping.  The doors are made of\
@@ -3931,49 +3955,51 @@ some sort of black metal, most likely found on the ocean floor  seemingly\
 impenatrable, and has the Krontz symbol K carved into them  You are not\
 sure if the doors are meant to keep intruders out, or workers in...\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21074] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Inside the Southern Docking bay", 
+         Vnum = 21074, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
                Direction = "north", 
-               DestinationVnum = 21151, 
-               Description = "", 
+               Description = "Two roads cross to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21020, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21021, 
-               Description = "", 
+               Description = "The Docking bay leads outside of Akatamer.\
+", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21075, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21073, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21074] = 
-      {
-         Name = "Inside the Southern Docking bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 21074, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z You stand inside the southern Docking bay of Coral City. Ships of all\
 sizes line the many enterences.There is only four docking bays on Mon\
 Calamari that is known to the public and all four exsist on the outskirts\
@@ -3981,59 +4007,67 @@ of the city. They were originally created as Imperial Slave ports but were\
 later converted to Docking bays.To the north is the intersection of Anna\
 Avenue and Law Avenue.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21020, 
-               Description = "Two roads cross to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "Docking bay", 
-               Key = 21073, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21075, 
-               Description = "The Docking bay leads outside of Akatamer.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21075] = 
-      {
-         Name = "Outside the Southern Docking bay", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Vnum = 21075, 
-         Tag = "", 
+      }, 
+      [21075] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "foliage", 
                Description = "Searching thoroughly, you discover a manhole hidden beneath one of the\
 \13many harbor edges.\
 \13", 
+               Keyword = "foliage", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Outside the Southern Docking bay", 
+         Vnum = 21075, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The Docking bay leads into the city of Akatamer.\
+", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21074, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21073, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "A path begins to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21123, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "A path begins to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21076, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4041,58 +4075,45 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the eastand west. While to the north you\
 can hear the sounds of ships landing and taking off.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [21076] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21076, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "Docking bay", 
-               Key = 21073, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21074, 
-               Description = "The Docking bay leads into the city of Akatamer.\
+               Direction = "east", 
+               Description = "To the east the southern Docking bay of Akatamer.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21075, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21123, 
-               Description = "A path begins to the east.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21076, 
-               Description = "A path begins to the west.\
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21077, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21076] = 
-      {
-         Name = "On a Road west of the Southern Docking Bay", 
-         Vnum = 21076, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4100,126 +4121,126 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 \
 the city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road west of the Southern Docking Bay", 
+      }, 
+      [21077] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21077, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21075, 
-               Description = "To the east the southern Docking bay of Akatamer.\
+               Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21076, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21077, 
                Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21078, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21077] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21077, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You are on carved out rock road rounding the southern wall of Akatamer.\
 The familiar sound of running water emanates from the Mon Calamarian ocean\
 to the south. The large breakwater was created to keep the nasty wind\
 storms that come up from spalshing 50 ft. waves upon the city.  The road\
 stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21078] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21078, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21076, 
-               Description = "The road continues to the east.\
+               Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21077, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21078, 
-               Description = "The road continues to the west.\
+               Description = "The trail continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21079, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21078] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21078, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21079] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21079, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21077, 
                Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21078, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21079, 
-               Description = "The trail continues to the west.\
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21080, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21079] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21079, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4227,42 +4248,42 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west.  You can hear the\
 ocean getting nearer to the west.  \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21080] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21080, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21078, 
-               Description = "The path continues to the east.\
+               Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21079, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21080, 
-               Description = "The road continues to the west.\
+               Description = "The path continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21081, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21080] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21080, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4270,134 +4291,134 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. You can see the ocean\
 front just off a dock to the west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21081] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21081, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21079, 
-               Description = "The road continues to the east.\
+               Direction = "north", 
+               Description = "A path begins to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21082, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21081, 
-               Description = "The path continues to the west.\
+               Direction = "east", 
+               Description = "A road begins to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21080, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6908, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21081] = 
-      {
-         Name = "Before the Dock", 
-         Vnum = 21081, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c  You have come to the western most spot of the city. before you is a\
 large dock leading out to the ocean..  Its supports are cracked,and the\
 entire structure seems liable to fall into the ocean at any moment. To the\
 north and east are two plain man made roads. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Before the Dock", 
+      }, 
+      [21082] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21082, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21082, 
-               Description = "A path begins to the north.\
+               Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21083, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21080, 
-               Description = "A road begins to the east.\
+               Direction = "south", 
+               Description = "The trail continues to the south.\
 ", 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 6908, 
-               Description = "", 
+               DestinationVnum = 21081, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21082] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21082, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21083] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21083, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21083, 
-               Description = "The path continues to the north.\
+               Description = "The trail continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21084, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21081, 
-               Description = "The trail continues to the south.\
+               Description = "The path continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21082, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21083] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21083, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4405,42 +4426,42 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south.You look into the sky\
 and see a common Mon Calamarian bird above.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21084, 
-               Description = "The trail continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21082, 
-               Description = "The path continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21084] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21084, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21084, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The road continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21085, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The path continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21083, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4448,42 +4469,42 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. A cool ocean breeze\
 crosses your skin. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21085, 
-               Description = "The road continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21083, 
-               Description = "The path continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21085] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21085, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21085, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The path continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21086, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The road continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21084, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4491,88 +4512,99 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. A cool ocean breeze\
 crosses your skin. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21086] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21086, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21086, 
-               Description = "The path continues to the north.\
+               Description = "The western entrance to Akatamer lies to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21087, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21084, 
-               Description = "The road continues to the south.\
+               Description = "The Water Shuttle continues rounding the city wall of Akatamer.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21085, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21086] = 
-      {
-         Name = "On a Road south of the Western Docking Bay", 
-         Vnum = 21086, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road south of the Western Docking Bay", 
+      }, 
+      [21087] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Outside the Western Docking bay", 
+         Vnum = 21087, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21087, 
-               Description = "The western entrance to Akatamer lies to the north.\
+               Description = "A path begins to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21089, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21085, 
-               Description = "The Water Shuttle continues rounding the city wall of Akatamer.\
+               Direction = "east", 
+               Description = "The Docking bay leads into the city of Akatamer.\
 ", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21088, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21070, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "A road begins to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21086, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21087] = 
-      {
-         Name = "Outside the Western Docking bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 21087, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4580,62 +4612,50 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. To the east you can\
 hear alot of starship activity coming from the nearby docking bay.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21089, 
-               Description = "A path begins to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "Docking bay", 
-               Key = 21070, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "east", 
-               DestinationVnum = 21088, 
-               Description = "The Docking bay leads into the city of Akatamer.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21086, 
-               Description = "A road begins to the south.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21088] = 
-      {
-         Name = "Inside the Western Docking bay", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Vnum = 21088, 
-         Tag = "", 
+      }, 
+      [21088] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Inside the Western Docking bay", 
+         Vnum = 21088, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "Two roads cross to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21028, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The road continues deep into the metallic waste land s of Haon Dor.\
+", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21087, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21070, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&z You stand in the western dockingbay, do to the massive damage this place\
 took by the empire , only small shuttles can enter this docking bay. This\
 platform was designed as a slave port for Mon Calamrian workers by the\
@@ -4643,48 +4663,45 @@ Empire years ago, but were later easily converted in to Docking Bay's for\
 the Rebellion's greatest ship builder. You can hear the soft wind of the\
 ocean to the west.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [21089] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21089, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21028, 
-               Description = "Two roads cross to the east.\
+               Direction = "north", 
+               Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21090, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "Docking bay", 
-               Key = 21070, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21087, 
-               Description = "The road continues deep into the metallic waste land s of Haon Dor.\
+               Direction = "south", 
+               Description = "The western Docking bay is to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21087, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21089] = 
-      {
-         Name = "On a Road north of the Western Docking Bay", 
-         Vnum = 21089, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4692,220 +4709,220 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. To the south you can\
 hear alot of starship activity coming from the nearby docking bay.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21090, 
-               Description = "The path continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21087, 
-               Description = "The western Docking bay is to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road north of the Western Docking Bay", 
       }, 
       [21090] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21090, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign", 
                Description = "The sign reads:\
 \13 Hail Mon Calamrian!  You stand before the Ocean, a\
 \13...which is populated by one of the smaller races of \
 \13the world.  Do Not enter this zone any further...\
 \13We see no use for New Rebublic law now..\
 \13", 
+               Keyword = "sign", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21090, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The path continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21091, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The road continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21089, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21091, 
-               Description = "The path continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21089, 
-               Description = "The road continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21091] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21091, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21091, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The path continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21092, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The road continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21090, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21092, 
-               Description = "The path continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21090, 
-               Description = "The road continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21092] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21092, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21092, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The path continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21093, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The trail continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21091, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21093, 
-               Description = "The path continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21091, 
-               Description = "The trail continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21093] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21093, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21093, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "A gentle sea breeze is coming in from the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21094, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The path continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21092, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the north and south. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21094] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21094, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21094, 
-               Description = "A gentle sea breeze is coming in from the north.\
+               Direction = "east", 
+               Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21095, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21092, 
-               Description = "The path continues to the south.\
+               Description = "The road continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21093, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21094] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21094, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the western\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -4913,134 +4930,134 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and south. \
 \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21095] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21095, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21095, 
                Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21096, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21093, 
-               Description = "The road continues to the south.\
+               Direction = "west", 
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21094, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21095] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21095, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21096, 
-               Description = "The path continues to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21094, 
-               Description = "The road continues to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21096] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21096, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "holodisk", 
                Description = "water and ocean plantlife lye on the top of the holodisk:\
 \13You place the disk into your reader ,,,,it says :\
 \13Akatamer's Time Will Come, Hail the New Empire.\
 \13", 
+               Keyword = "holodisk", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21096, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The trail continues to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21097, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The path continues to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21095, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21097] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21097, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21097, 
-               Description = "The trail continues to the east.\
+               Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21098, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21095, 
                Description = "The path continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21096, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21097] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21097, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -5048,42 +5065,42 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. You can feel a soft\
 breeze from the ocean beyond.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21098] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21098, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21098, 
-               Description = "The road continues to the east.\
+               Description = "Akatamer's northern Docking bay is to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21099, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21096, 
-               Description = "The path continues to the west.\
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21097, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21098] = 
-      {
-         Name = "On the Road West of the Northern Docking Bay", 
-         Vnum = 21098, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -5091,46 +5108,57 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. You can feel a soft\
 drop of water from the ocean beyond.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On the Road West of the Northern Docking Bay", 
+      }, 
+      [21099] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Outside the Northern Docking bay", 
+         Vnum = 21099, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21099, 
-               Description = "Akatamer's northern Docking bay is to the east.\
+               Description = "The path begins to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21101, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21097, 
-               Description = "The road continues to the west.\
+               Direction = "south", 
+               Description = "The Docking bay leads into Akatamer.\
 ", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21100, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21071, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "The road begins to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21098, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21099] = 
-      {
-         Name = "Outside the Northern Docking bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 21099, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -5139,63 +5167,59 @@ the city.  The road stretches to the east and west. To the south you can\
 hear alot of hustle and bustle of ships taking off.\
 \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "field", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [21100] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Inside the Northern Docking bay", 
+         Vnum = 21100, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21101, 
-               Description = "The path begins to the east.\
+               Direction = "north", 
+               Description = "The Docking bay leads out of Akatamer.\
 ", 
-            }, 
-            [2] = 
-            {
                Keyword = "Docking bay", 
-               Key = 21071, 
+               DestinationVnum = 21099, 
                Distance = 0, 
                Flags = 
                {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21100, 
-               Description = "The Docking bay leads into Akatamer.\
-", 
+               Key = 21071, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21072, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21098, 
-               Description = "The road begins to the west.\
+               Direction = "south", 
+               Description = "Two roads meet to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21004, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "field", 
          Tunnel = 0, 
-      }, 
-      [21100] = 
-      {
-         Name = "Inside the Northern Docking bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [4] = "CanLand", 
-         }, 
-         Vnum = 21100, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z You stand in the main docking bay of the planet Mon Calamari. This state\
 of the art Dockingbay recently recived a facelift to allow for a better\
 image of the planet. The floor is now a polished metal, that reflexs the\
@@ -5206,57 +5230,46 @@ transport. To the North is outside the city. While to the South is the\
 intersection of Anna Avenue and Security Road. We hope you enjoy your stay\
 here at Coral City (formally Akatamer)!\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [4] = "CanLand", 
+         }, 
+      }, 
+      [21101] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21101, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "Docking bay", 
-               Key = 21071, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21099, 
-               Description = "The Docking bay leads out of Akatamer.\
+               Direction = "east", 
+               Description = "The trail continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21102, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21072, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21004, 
-               Description = "Two roads meet to the south.\
+               Direction = "west", 
+               Description = "Akatamer's northern Docking bay is to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21099, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21101] = 
-      {
-         Name = "On the Road East of the Northern Docking Bay", 
-         Vnum = 21101, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -5264,49 +5277,49 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. To the west you can\
 hear alot of hustle and bustle of ships taking off.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21102, 
-               Description = "The trail continues to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21099, 
-               Description = "Akatamer's northern Docking bay is to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On the Road East of the Northern Docking Bay", 
       }, 
       [21102] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21102, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign", 
                Description = "The sign reads:\
 \13 Welcome to Akatamer - Upper World - City of Hope.\
 \13", 
+               Keyword = "sign", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21102, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The road continues to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21103, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The path continues to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21101, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 \
@@ -5314,84 +5327,84 @@ Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21103] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21103, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21103, 
                Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21105, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21101, 
-               Description = "The path continues to the west.\
+               Description = "The trail continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21102, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21103] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21103, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21105] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21105, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21105, 
-               Description = "The road continues to the east.\
+               Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21106, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21102, 
-               Description = "The trail continues to the west.\
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21103, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21105] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21105, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -5399,127 +5412,127 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west. You see a Mon Clamrian\
 bird soaring in the sky.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21106] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21106, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21106, 
-               Description = "The path continues to the east.\
+               Direction = "south", 
+               Description = "The path continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21107, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21103, 
-               Description = "The road continues to the west.\
+               Description = "The path stretches westward.\
+\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21105, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21106] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21106, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the northern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the South and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21107] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21107, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21107, 
-               Description = "The path continues to the south.\
+               Direction = "north", 
+               Description = "The path curves around the northeastern corner.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21106, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21105, 
-               Description = "The path stretches westward.\
-\
+               Direction = "south", 
+               Description = "The road continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21108, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21107] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21107, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the eastern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
 keep the nasty wind storms that come up from splashing 50 ft. waves upon\
 the city.  The road stretches to the South and North. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21106, 
-               Description = "The path curves around the northeastern corner.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21108, 
-               Description = "The road continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21108] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21108, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21108, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The trail stretches northward.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21107, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The path continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21109, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5527,42 +5540,42 @@ Calamarian ocean to the north. The large breakwater was created to keep\
 the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North.  \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21107, 
-               Description = "The trail stretches northward.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21109, 
-               Description = "The path continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21109] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21109, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21109, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The road heads northward.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21108, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The road extends to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21110, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5570,84 +5583,84 @@ the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North.  \
 \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21110] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21110, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21108, 
-               Description = "The road heads northward.\
+               Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21109, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21110, 
-               Description = "The road extends to the south.\
+               Description = "The road continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21111, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21110] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21110, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
 the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21111] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21111, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21109, 
                Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21110, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21111, 
-               Description = "The road continues to the south.\
+               Description = "Akatamer's eastern Docking bay is to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21112, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21111] = 
-      {
-         Name = "On the Road North of The Eastern Docking Bay", 
-         Vnum = 21111, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5656,46 +5669,57 @@ city.  The road stretches to the South and North. To the south you can\
 \
 hear starships taking off.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On the Road North of The Eastern Docking Bay", 
+      }, 
+      [21112] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Outside the Eastern Docking bay", 
+         Vnum = 21112, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21110, 
-               Description = "The path continues to the north.\
+               Description = "A path begins to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21111, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21112, 
-               Description = "Akatamer's eastern Docking bay is to the south.\
+               Description = "A road begins to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21114, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "The Docking bay leads into Akatamer.\
+", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21113, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21072, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21112] = 
-      {
-         Name = "Outside the Eastern Docking bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 21112, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5703,110 +5727,95 @@ the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. To the east you can hear\
 starships taking off.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21111, 
-               Description = "A path begins to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21114, 
-               Description = "A road begins to the south.\
-", 
-            }, 
-            [3] = 
-            {
-               Keyword = "Docking bay", 
-               Key = 21072, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21113, 
-               Description = "The Docking bay leads into Akatamer.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21113] = 
-      {
-         Name = "Inside the Eastern Docking bay", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Vnum = 21113, 
-         Tag = "", 
+      }, 
+      [21113] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Inside the Eastern Docking bay", 
+         Vnum = 21113, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The Docking bay leads out of Akatamer.\
+", 
+               Keyword = "Docking bay", 
+               DestinationVnum = 21112, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21072, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "Two roads cross to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21012, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&z You stand inside the eastern Docking bay of Coral City.  This docking\
 \
 bay gets very little use, very little survalanice..and consequently is\
 known for it's secretive cargo. To the west is the intersection of Barster\
 Road and Luke Street. \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [21114] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21114, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "Docking bay", 
-               Key = 21072, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "east", 
-               DestinationVnum = 21112, 
-               Description = "The Docking bay leads out of Akatamer.\
+               Direction = "north", 
+               Description = "The eastern Docking bay is to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21112, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21012, 
-               Description = "Two roads cross to the west.\
+               Direction = "south", 
+               Description = "The road continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21115, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21114] = 
-      {
-         Name = "On the Road South of The Eastern Docking Bay", 
-         Vnum = 21114, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5814,168 +5823,168 @@ the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. To the north you can\
 hear starships taking off.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21112, 
-               Description = "The eastern Docking bay is to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21115, 
-               Description = "The road continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On the Road South of The Eastern Docking Bay", 
       }, 
       [21115] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21115, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21115, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The trail continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21114, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The path continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21116, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
 the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. .\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21114, 
-               Description = "The trail continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21116, 
-               Description = "The path continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21116] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21116, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21116, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The road continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21115, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The path continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21117, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
 the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. .\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21115, 
-               Description = "The road continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21117, 
-               Description = "The path continues to the south.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21117] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21117, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21117, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "The path continues to the north.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21116, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "The road continues to the south.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21118, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
 the nasty wind storms that come up from splashing 50 ft. waves upon the\
 city.  The road stretches to the South and North. .\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21118] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21118, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21116, 
                Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21117, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21118, 
                Description = "The road continues to the south.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21119, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21118] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21118, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk on  a carved out rock road rounding the eastern wall of Coral\
 City.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the north. The large breakwater was created to keep\
@@ -5984,42 +5993,42 @@ city.  The road stretches to the South and North. You can feel a soft mist\
 coming from the ocean.\
 \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21119] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21119, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21117, 
                Description = "The path continues to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21118, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21119, 
-               Description = "The road continues to the south.\
+               Direction = "west", 
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21120, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21119] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21119, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You begin to get tired of walking on  a carved out rock road rounding\
 the eastern wall of Coral City.  The familiar sound of running water\
 emanates from the Mon Calamarian ocean to the north. The large breakwater\
@@ -6027,42 +6036,42 @@ was created to keep the nasty wind storms that come up from splashing 50\
 ft. waves upon the city.  The road stretches to the West and North. You\
 can feel a soft mist coming from the ocean.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21118, 
-               Description = "The path continues to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21120, 
-               Description = "The road continues to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21120] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21120, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21120, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The path continues to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21119, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The road continues to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21121, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You begin to get tired of walking on  a carved out rock road rounding\
 the southern wall of Coral City.  The familiar sound of running water\
 emanates from the Mon Calamarian ocean to the south. The large breakwater\
@@ -6070,42 +6079,42 @@ was created to keep the nasty wind storms that come up from splashing 50\
 ft. waves upon the city.  The road stretches to the West and East. You can\
 feel a soft mist coming from the ocean.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21119, 
-               Description = "The path continues to the east.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21121, 
-               Description = "The road continues to the west.\
-", 
-            }, 
-         }, 
-         Sector = "city", 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
       }, 
       [21121] = 
       {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21121, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Vnum = 21121, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "The road continues to the east.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21120, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "The path continues to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21122, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "&c You begin to get tired of walking on  a carved out rock road rounding\
 the southern wall of Coral City.  The familiar sound of running water\
 emanates from the Mon Calamarian ocean to the south. The large breakwater\
@@ -6113,84 +6122,84 @@ was created to keep the nasty wind storms that come up from splashing 50\
 ft. waves upon the city.  The road stretches to the West and East. You can\
 feel a soft mist coming from the ocean.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21122] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21122, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21120, 
                Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21121, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21122, 
                Description = "The path continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21123, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21122] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21122, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You walk briskly on carved out rock road rounding the southern wall of\
 Akatamer.  The familiar sound of running water emanates from the Mon\
 Calamarian ocean to the south. The large breakwater was created to keep\
 the nasty wind storms that come up from spalshing 50 ft. waves upon the\
 city.  The road stretches to the east and west. \
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21123] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Vnum = 21123, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21121, 
-               Description = "The road continues to the east.\
+               Description = "The path continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21122, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21123, 
-               Description = "The path continues to the west.\
+               Description = "The road continues to the west.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21075, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21123] = 
-      {
-         Name = "On a Road Rounding Coral City.", 
-         Vnum = 21123, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c You continue to travel on  a carved out rock road rounding the southern\
 wall of Coral City.  The familiar sound of running water emanates from the\
 Mon Calamarian ocean to the north. The large breakwater was created to\
@@ -6198,90 +6207,92 @@ keep the nasty wind storms that come up from spalshing 50 ft. waves upon\
 the city.  The road stretches to the east and west.  You can feel brief\
 splashes of water as the ocean spills over the breakwall.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "On a Road Rounding Coral City.", 
+      }, 
+      [21124] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "An Empty Home", 
+         Vnum = 21124, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21122, 
-               Description = "The path continues to the east.\
+               Description = "The road continues to the east.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21123, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21075, 
-               Description = "The road continues to the west.\
+               Description = "To the west is the southern Docking bay of Akatamer.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21075, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21124] = 
-      {
-         Name = "An Empty Home", 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21124, 
-         Tag = "", 
+      }, 
+      [21126] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Name = "&p Mon Calamri Medical Facility", 
+         Vnum = 21126, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21123, 
-               Description = "The road continues to the east.\
+               Direction = "north", 
+               Description = "Barster Road is to the north.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21037, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21075, 
-               Description = "To the west is the southern Docking bay of Akatamer.\
+               Direction = "south", 
+               Description = "The Tower of Mon Calamri lies to the south.\
 ", 
+               Keyword = "door", 
+               DestinationVnum = 21127, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21126] = 
-      {
-         Name = "&p Mon Calamri Medical Facility", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 21126, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c Before you is a large plain rock building used for healing the sick. The\
 rock surface was once a coral underwater creature but is now a memorial to\
 what once was. Here you can enter and recive top of the line treatment,\
@@ -6289,52 +6300,21 @@ from some of the greatest medical minds in the galexy. &R The pathway was\
 properly framed with imported red plantlife. &c This is another one of\
 those steps the new city officols are doing to clean up this city.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21037, 
-               Description = "Barster Road is to the north.\
-", 
-            }, 
-            [2] = 
-            {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21127, 
-               Description = "The Tower of Mon Calamri lies to the south.\
-", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21127] = 
-      {
-         Name = "&pWithin the Mon Calamri Medical Facility", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
-            [3] = "Indoors", 
          }, 
-         Vnum = 21127, 
-         Tag = "", 
+      }, 
+      [21127] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign", 
                Description = "&R due to money shortages we no longer can allow free\
 \13treatment.\
 \13 \
@@ -6342,10 +6322,48 @@ those steps the new city officols are doing to clean up this city.\
 \13 \
 \13Sorry we no longer take Glactic Insurance.\
 \13", 
+               Keyword = "sign", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "&pWithin the Mon Calamri Medical Facility", 
+         Vnum = 21127, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21126, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21129, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "An immense library is at the end of the corridor to the west.\
+", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21128, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&C You walk beneath the impossibly high arches which support the Mon\
 Calamari Medical facility.  Walls crafted of smooth coral rock are covered\
 with extravegant Calamrian art which create a dazzling array of shimmering\
@@ -6355,97 +6373,73 @@ store While the south leads to the main Bacta tanks. There is a sign at\
 \
 the enterance to the south. \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21128] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Waiting Room", 
+         Vnum = 21128, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21126, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21129, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21128, 
-               Description = "An immense library is at the end of the corridor to the west.\
+               Description = "The corridor leads back to the main hall.\
 ", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21127, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21128] = 
-      {
-         Name = "Waiting Room", 
+         Description = "&c This room while not highly decorated is a perfect place for adventurers\
+who are grouping with a injured partener. The floor is a well polished and\
+clean coral rock. While the walls are decorated with hand drawn pictures\
+from Mon Calamarian children. \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
          Flags = 
          {
             [10] = "Safe", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21128, 
-         Tag = "", 
+      }, 
+      [21129] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&c This room while not highly decorated is a perfect place for adventurers\
-who are grouping with a injured partener. The floor is a well polished and\
-clean coral rock. While the walls are decorated with hand drawn pictures\
-from Mon Calamarian children. \
-", 
+         Name = "Medical Supply Store", 
+         Vnum = 21129, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "east", 
                DestinationVnum = 21127, 
-               Description = "The corridor leads back to the main hall.\
-", 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21129] = 
-      {
-         Name = "Medical Supply Store", 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21129, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&C This small area of the building was sectioned off to allow travelers to\
 Mon Calamari the option to purchase medical equipment. The walls are a\
 polished coral rock which give off a pinkish reflection. The floor has a\
@@ -6453,90 +6447,117 @@ polished coral rock which give off a pinkish reflection. The floor has a\
 medical track on it to allow easy transport of victims to and from areas\
 of the Medical facility. To the West is the Main hallway\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21127, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21130] = 
-      {
-         Name = "New Rebublic Mon Headquaters", 
+         Tag = "", 
          Flags = 
          {
             [10] = "Safe", 
-            [30] = "Prototype", 
+            [3] = "Indoors", 
          }, 
-         Vnum = 21130, 
-         Tag = "", 
+      }, 
+      [21130] = 
+      {
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "dirt ", 
                Description = "There apears to be a small residue of dirt trailing from the entrance to\
 \13the north east corner\
 \13", 
+               Keyword = "dirt ", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z This high tech space appears to have no exits except for the main door.\
-The walls are a smooth pink coral surface decorated with pictures and\
-space charts. There appears to be dirt on the checkered pattern floor and\
-a small lighting unit is suspeneded from the ceiling.\
-", 
+         Name = "New Rebublic Mon Headquaters", 
+         Vnum = 21130, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "", 
                Keyword = "door", 
-               Key = -1, 
+               DestinationVnum = 21009, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21009, 
-               Description = "", 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "&z This high tech space appears to have no exits except for the main door.\
+The walls are a smooth pink coral surface decorated with pictures and\
+space charts. There appears to be dirt on the checkered pattern floor and\
+a small lighting unit is suspeneded from the ceiling.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [30] = "Prototype", 
+         }, 
       }, 
       [21131] = 
       {
-         Name = "Coral City Park", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21131, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign", 
                Description = "Please fell free to stop by at anytime, just DON\"T leave your children\
 \13here, unattended.\
 \13", 
+               Keyword = "sign", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Park", 
+         Vnum = 21131, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21034, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21135, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "southeast", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21134, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21137, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&G A attractive black metal gate frames the enterence to Coral City's\
 newest relaxation area. The Security Park, is home to a few rare \
 creatures flown in and captured by customs. Due to the lack of space for\
@@ -6545,63 +6566,59 @@ It also allows for Mon Calamarian youth to have a safe and fun place to\
 play in. There is a large sign above the metal frame that welcome's all to\
 the park.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [21132] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Security Lobby", 
+         Vnum = 21132, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21034, 
+               Direction = "east", 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21139, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21135, 
                Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21005, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "southeast", 
-               DestinationVnum = 21134, 
+               Direction = "west", 
                Description = "", 
-            }, 
-            [4] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "southwest", 
-               DestinationVnum = 21137, 
-               Description = "", 
+               DestinationVnum = 21145, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21132] = 
-      {
-         Name = "Security Lobby", 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21132, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z You enter the main office of the Mon Calamari Security. This room is\
 slightly, less extravegant then the rest, and has more of a rough ocean\
 bottom feel. The walls  are decorated with pictures of wanted men, and the\
@@ -6610,88 +6627,84 @@ inported from the depths of the ocean floor. In front of you is a large\
 counter to which you see alot of people working behind. At the counter is\
 a sign that says step up for assistance.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21139, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21005, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21145, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [30] = "Prototype", 
+         }, 
       }, 
       [21133] = 
       {
-         Name = "Coral City Academy", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21133, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
+         Name = "Coral City Academy", 
+         Vnum = 21133, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21038, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21038, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21134] = 
-      {
-         Name = "Coral City Park", 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21134, 
-         Tag = "", 
+      }, 
+      [21134] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Park", 
+         Vnum = 21134, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21135, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "northwest", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21131, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21136, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&G This area was once a apartment complex, but due to the recent renovation\
 project, the city mayor decided this would be a better idea. The ground is\
 covered by a imported weed from a nearby planet. It is well known for it's\
@@ -6700,53 +6713,62 @@ trampling and activity it will see. This grass like surface is new to Mon\
 Calamarians and they find it extremely interesting, while the Quarren's\
 find it just frivlous. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21135, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "northwest", 
-               DestinationVnum = 21131, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "southwest", 
-               DestinationVnum = 21136, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21135] = 
-      {
-         Name = "Coral City Park", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21135, 
-         Tag = "", 
+      }, 
+      [21135] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Park", 
+         Vnum = 21135, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21131, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21134, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21136, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21137, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&G This area was once a apartment complex, but due to the recent renovation\
 project, the city mayor decided this would be a better idea. The ground is\
 covered by a imported weed from a nearby planet. It is well known for\
@@ -6756,62 +6778,53 @@ Mon Calamarians and they find it extremely interesting, while the\
 Quarren's find it just frivlous.  You can see a large white leafed tree\
 sitting in the middle of the park.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21131, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21134, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21136, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21137, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21136] = 
-      {
-         Name = "Coral City Park", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21136, 
-         Tag = "", 
+      }, 
+      [21136] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Park", 
+         Vnum = 21136, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21135, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "northeast", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21134, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "northwest", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21137, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&G This area was once a apartment complex, but due to the recent renovation\
 project, the city mayor decided this would be a better idea. The ground is\
 covered by a imported weed from a nearby planet. It is well known for\
@@ -6821,53 +6834,53 @@ Mon Calamarians and they find it extremely interesting, while the\
 Quarren's find it just frivlous.  There is a large brown fence keeping the\
 animals and people in surrounding  the edge of the park\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21135, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "northeast", 
-               DestinationVnum = 21134, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "northwest", 
-               DestinationVnum = 21137, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21137] = 
-      {
-         Name = "Coral City Park", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21137, 
-         Tag = "", 
+      }, 
+      [21137] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Coral City Park", 
+         Vnum = 21137, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21135, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "northeast", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21131, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "southeast", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21136, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&GThis area was once a apartment complex, but due to the recent renovation\
 project, the city mayor decided this would be a better idea. The ground is\
 covered by a imported weed from a nearby planet. It is well known for\
@@ -6878,56 +6891,35 @@ Mon Calamarians and they find it extremely interesting, while the\
 Quarren's find it just frivlous.  There is a large fence that surrounds\
 the area to keep animals and people in.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [21138] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "First Bank of Mon (Main Branch)", 
+         Vnum = 21138, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21135, 
+               Direction = "south", 
                Description = "", 
-            }, 
-            [2] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "northeast", 
-               DestinationVnum = 21131, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
+               DestinationVnum = 21018, 
                Key = -1, 
-               Distance = 0, 
-               Direction = "southeast", 
-               DestinationVnum = 21136, 
-               Description = "", 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21138] = 
-      {
-         Name = "First Bank of Mon (Main Branch)", 
-         Flags = 
-         {
-            [8] = "Bank", 
-            [30] = "Prototype", 
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21138, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z This marble like surfaced bank allows for easy transactions between you\
 and your currencey. There is a large table in the center of the room to\
 sign your life away along with, a counter towards the back where a very\
@@ -6936,49 +6928,33 @@ of the ceiling you can see a rather expensive security system tracking\
 your everymove. The First bank of Mon's motto isn't \"your money is safe\
 with us for no reason.\" To make a bank transaction please type bank.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21018, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [8] = "Bank", 
+            [30] = "Prototype", 
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21139] = 
       {
-         Name = "Security Corridor", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21139, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
-automated firing. The damp hallway is a dark grey with light grey flashes\
-as you pass the cells. Very little activity occurs here as most criminals\
-can't escape with over 20' of rock between them and the corridor. You  are\
-safe and sure not to hear any of them. There is a large bashproof door to\
-the east with an electronic doorslides for safty.\
-", 
+         Name = "Security Corridor", 
+         Vnum = 21139, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "", 
                Keyword = "Door", 
-               Key = 21428, 
+               DestinationVnum = 21140, 
                Distance = 0, 
                Flags = 
                {
@@ -6988,77 +6964,78 @@ the east with an electronic doorslides for safty.\
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21140, 
-               Description = "", 
+               Key = 21428, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21150, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21150, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21132, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21132, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
+automated firing. The damp hallway is a dark grey with light grey flashes\
+as you pass the cells. Very little activity occurs here as most criminals\
+can't escape with over 20' of rock between them and the corridor. You  are\
+safe and sure not to hear any of them. There is a large bashproof door to\
+the east with an electronic doorslides for safty.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
       }, 
       [21140] = 
       {
-         Name = "Security Corridor", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21140, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
-automated firing. The dmap hallway is a dark grey with light grey flashes\
-as you pass the cells Very little activity occurs here as most criminals\
-can't escape and with over 20' of rock between them and the corridor you\
-are sure not to hear any of them.\
-", 
+         Name = "Security Corridor", 
+         Vnum = 21140, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21141, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21141, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21139, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21139, 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Direction = "southeast", 
+               Description = "", 
                Keyword = "door", 
-               Key = 21140, 
+               DestinationVnum = 21149, 
                Distance = 0, 
                Flags = 
                {
@@ -7067,41 +7044,41 @@ are sure not to hear any of them.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Direction = "southeast", 
-               DestinationVnum = 21149, 
-               Description = "", 
+               Key = 21140, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
+automated firing. The dmap hallway is a dark grey with light grey flashes\
+as you pass the cells Very little activity occurs here as most criminals\
+can't escape and with over 20' of rock between them and the corridor you\
+are sure not to hear any of them.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21141] = 
       {
-         Name = "Security Corridor", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21141, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
-automated firing. The dmap hallway is a dark grey with light grey flashes\
-as you pass the cells Very little activity occurs here as most criminals\
-can't escape and with over 20' of rock between them and the corridor you\
-are sure not to hear any of them.\
-", 
+         Name = "Security Corridor", 
+         Vnum = 21141, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "", 
                Keyword = "door", 
-               Key = 21140, 
+               DestinationVnum = 21148, 
                Distance = 0, 
                Flags = 
                {
@@ -7110,120 +7087,120 @@ are sure not to hear any of them.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21148, 
-               Description = "", 
+               Key = 21140, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21140, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21140, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "west", 
-               DestinationVnum = 21142, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21142, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21142] = 
-      {
-         Name = "Security Corridor", 
+         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
+automated firing. The dmap hallway is a dark grey with light grey flashes\
+as you pass the cells Very little activity occurs here as most criminals\
+can't escape and with over 20' of rock between them and the corridor you\
+are sure not to hear any of them.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21142, 
-         Tag = "", 
+      }, 
+      [21142] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Security Corridor", 
+         Vnum = 21142, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21141, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21147, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [23] = "BashProof", 
+               }, 
+               Key = 21140, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21143, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
 automated firing. The dmap hallway is a dark grey with light grey flashes\
 as you pass the cells Very little activity occurs here as most criminals\
 can't escape and with over 20' of rock between them and the corridor you\
 are sure not to hear any of them. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21141, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "door", 
-               Key = 21140, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [23] = "BashProof", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21147, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21143, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21143] = 
       {
-         Name = "Security Corridor", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21143, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
-automated firing. The dmap hallway is a dark grey with light grey flashes\
-as you pass the cells Very little activity occurs here as most criminals\
-can't escape and with over 20' of rock between them and the corridor you\
-are sure not to hear any of them.\
-", 
+         Name = "Security Corridor", 
+         Vnum = 21143, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "", 
                Keyword = "door", 
-               Key = 21140, 
+               DestinationVnum = 21146, 
                Distance = 0, 
                Flags = 
                {
@@ -7232,107 +7209,109 @@ are sure not to hear any of them.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21146, 
-               Description = "", 
+               Key = 21140, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21142, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21142, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21144, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21144, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21144] = 
-      {
-         Name = "Security Corridor", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21144, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
 automated firing. The dmap hallway is a dark grey with light grey flashes\
 as you pass the cells Very little activity occurs here as most criminals\
 can't escape and with over 20' of rock between them and the corridor you\
 are sure not to hear any of them.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21144] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Security Corridor", 
+         Vnum = 21144, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21143, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21143, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
+               DestinationVnum = 21145, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [11] = "Hidden", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21145, 
-               Description = "", 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21145] = 
-      {
-         Name = "Chief Security Officer's Office", 
+         Description = "&z The Security Corridor is well guarded with cameras and wall lasers for\
+automated firing. The dmap hallway is a dark grey with light grey flashes\
+as you pass the cells Very little activity occurs here as most criminals\
+can't escape and with over 20' of rock between them and the corridor you\
+are sure not to hear any of them.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
+            [3] = "Indoors", 
          }, 
-         Vnum = 21145, 
-         Tag = "", 
+      }, 
+      [21145] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "The chief of security's office is now vacant. As the last chief was ordered\
-to leave by the Crime Syndacate Mon Calamari is currently looking for a\
-BRAVE security officer to replace him. If interested please contact\
-Ackbar. Sorry you must be Mon Calamari to fulfill duties\
-", 
+         Name = "Chief Security Officer's Office", 
+         Vnum = 21145, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "", 
                Keyword = "", 
-               Key = -1, 
+               DestinationVnum = 21144, 
                Distance = 0, 
                Flags = 
                {
@@ -7342,46 +7321,66 @@ Ackbar. Sorry you must be Mon Calamari to fulfill duties\
                   [23] = "BashProof", 
                   [11] = "Hidden", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21144, 
-               Description = "", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "east", 
-               DestinationVnum = 21132, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21132, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "The chief of security's office is now vacant. As the last chief was ordered\
+to leave by the Crime Syndacate Mon Calamari is currently looking for a\
+BRAVE security officer to replace him. If interested please contact\
+Ackbar. Sorry you must be Mon Calamari to fulfill duties\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
       }, 
       [21146] = 
       {
-         Name = "Cell Block 1138", 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21146, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "patch", 
                Description = "&R George Lucas\
 \13&x\
 \13", 
+               Keyword = "patch", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Cell Block 1138", 
+         Vnum = 21146, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21143, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = 21140, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
 solid rock imported form the ocean floor carved roughly to leave jagged\
 edges. It is rumored that the guards like to throw prisoners up against\
@@ -7390,57 +7389,32 @@ tray  hole the guards use to feed the prisoner. There is a humid and musty\
 smell, and hot temperature will make a non-mon quite uncomfortable. There\
 is no use screaming as the walls are over 20 ft thick.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "door", 
-               Key = 21140, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21143, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [30] = "Prototype", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21147] = 
       {
-         Name = "Cell Block 1139", 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [30] = "Prototype", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21147, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
-solid rock imported form the ocean floor carved roughly to leave jagged\
-edges. It is rumored that the guards like to throw prisoners up against\
-the walls if they get out of hand There is no window except for the small\
-tray  hole the guards use to feed the prisoner. There is a humid and musty\
-smell, and hot temperature will make a non-mon quite uncomfortable. There\
-is no use screaming as the walls are over 20 ft thick.\
-", 
+         Name = "Cell Block 1139", 
+         Vnum = 21147, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "", 
                Keyword = "door", 
-               Key = 21140, 
+               DestinationVnum = 21142, 
                Distance = 0, 
                Flags = 
                {
@@ -7449,44 +7423,90 @@ is no use screaming as the walls are over 20 ft thick.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21142, 
-               Description = "", 
+               Key = 21140, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
+solid rock imported form the ocean floor carved roughly to leave jagged\
+edges. It is rumored that the guards like to throw prisoners up against\
+the walls if they get out of hand There is no window except for the small\
+tray  hole the guards use to feed the prisoner. There is a humid and musty\
+smell, and hot temperature will make a non-mon quite uncomfortable. There\
+is no use screaming as the walls are over 20 ft thick.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [30] = "Prototype", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [21148] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Name = "Cell Block 1140", 
+         Vnum = 21148, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21141, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [23] = "BashProof", 
+               }, 
+               Key = 21140, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
+solid rock imported form the ocean floor carved roughly to leave jagged\
+edges. It is rumored that the guards like to throw prisoners up against\
+the walls if they get out of hand There is no window except for the small\
+tray  hole the guards use to feed the prisoner. There is a humid and musty\
+smell, and hot temperature will make a non-mon quite uncomfortable. There\
+is no use screaming as the walls are over 20 ft thick.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [16] = "Silence", 
             [30] = "Prototype", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21148, 
-         Tag = "", 
+      }, 
+      [21149] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
-solid rock imported form the ocean floor carved roughly to leave jagged\
-edges. It is rumored that the guards like to throw prisoners up against\
-the walls if they get out of hand There is no window except for the small\
-tray  hole the guards use to feed the prisoner. There is a humid and musty\
-smell, and hot temperature will make a non-mon quite uncomfortable. There\
-is no use screaming as the walls are over 20 ft thick.\
-", 
+         Name = "Cell Block 1141", 
+         Vnum = 21149, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "northwest", 
+               Description = "", 
                Keyword = "door", 
-               Key = 21140, 
+               DestinationVnum = 21140, 
                Distance = 0, 
                Flags = 
                {
@@ -7495,87 +7515,62 @@ is no use screaming as the walls are over 20 ft thick.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Direction = "west", 
-               DestinationVnum = 21141, 
-               Description = "", 
+               Key = 21140, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21149] = 
-      {
-         Name = "Cell Block 1141", 
+         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
+solid rock imported form the ocean floor carved roughly to leave jagged\
+edges. It is rumored that the guards like to throw prisoners up against\
+the walls if they get out of hand There is no window except for the small\
+tray  hole the guards use to feed the prisoner. There is a humid and musty\
+smell, and hot temperature will make a non-mon quite uncomfortable. There\
+is no use screaming as the walls are over 20 ft thick.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
             [3] = "Indoors", 
          }, 
-         Vnum = 21149, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of\
-solid rock imported form the ocean floor carved roughly to leave jagged\
-edges. It is rumored that the guards like to throw prisoners up against\
-the walls if they get out of hand There is no window except for the small\
-tray  hole the guards use to feed the prisoner. There is a humid and musty\
-smell, and hot temperature will make a non-mon quite uncomfortable. There\
-is no use screaming as the walls are over 20 ft thick.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "door", 
-               Key = 21140, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [23] = "BashProof", 
-               }, 
-               Direction = "northwest", 
-               DestinationVnum = 21140, 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
       }, 
       [21150] = 
       {
-         Name = "Security Station", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21150, 
-         Tag = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "lever", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "computer", 
                Description = "There is a state of the art computer panel with a televison screen for each\
 \13cell\
 \13block.\
 \13In the center of the computer panel is a large lever.\
 \13", 
+               Keyword = "computer", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Keyword = "lever", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Security Station", 
+         Vnum = 21150, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21139, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&z This small cubicle is where a very alert and strong guard stays at\
 attention. For it is here that the main door opens from and allows access\
 to the jail cells. There is a small computer panel on the wall surrounded\
@@ -7584,35 +7579,53 @@ recline feature.  The walls and floors are smooth surface unlike the\
 surrounding area. It is most likely that this station was recently\
 installed.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21139, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21151] = 
-      {
-         Name = "Security Desk", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21151, 
-         Tag = "", 
+      }, 
+      [21151] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Security Desk", 
+         Vnum = 21151, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21152, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21073, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21155, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&c There is a big round desk in the middle of the room here, with all sorts\
 of security equipment secured around it.  It looks like some sort of\
 high-tech, punch in area for workers to check in. There is a room to the\
@@ -7622,53 +7635,44 @@ extravegant golden sign on it.  This room is tastefully done in a coral\
 pink and dark purple decor which makes it feel somewhat exciting. You can\
 smell in the distence the heavy smoke of iron ore mealting. \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21152, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21073, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21155, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21152] = 
-      {
-         Name = "Worker's Lobby", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21152, 
-         Tag = "", 
+      }, 
+      [21152] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Worker's Lobby", 
+         Vnum = 21152, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21160, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21151, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "&c This is a nice, sunlit area, strewn about with cushions and benches and\
 other pieces of Calamrian comforts.  Along one wall is a array of service\
 machines that sell food and drinks.  There is a mini kitchen near the\
@@ -7676,263 +7680,241 @@ windows, for the employee's lunches.  The walls are covered with pitures\
 of home and of some of the workers children. On the table you even see a\
 Mon Calamarian Fish Scout cookiee order form.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "north", 
-               DestinationVnum = 21160, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21151, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21153] = 
-      {
-         Name = "Floating in a void", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 21153, 
-         Tag = "", 
+      }, 
+      [21153] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
+         Name = "Floating in a void", 
+         Vnum = 21153, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "south", 
-               DestinationVnum = 21152, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21152, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
       }, 
       [21155] = 
       {
-         Name = "Customer Check-In", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21155, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Customer Check-In", 
+         Vnum = 21155, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "North-Halway", 
+               Keyword = "", 
+               DestinationVnum = 21156, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21151, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "This part of the factory is set up for customer relations with clients.\
 There is a protocol droid sitting here to set up meetings, answer\
 telecommunica ions and take orders for materials to be sent all over the\
 galaxy. The carpet here \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21156, 
-               Description = "North-Halway", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21151, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21156] = 
-      {
-         Name = "Hallway", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21156, 
-         Tag = "", 
+      }, 
+      [21156] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Hallway", 
+         Vnum = 21156, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "North-End of Hall", 
+               Keyword = "", 
+               DestinationVnum = 21158, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Description = "East-Equipment Sales", 
+               Keyword = "", 
+               DestinationVnum = 21157, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Description = "South-Customer Checkin", 
+               Keyword = "", 
+               DestinationVnum = 21155, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "You are walking along a plush hallway.  Large windows line the western wall\
 and a door is set to the east.  The markings on the door indicate a\
 salesroom \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21158, 
-               Description = "North-End of Hall", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "east", 
-               DestinationVnum = 21157, 
-               Description = "East-Equipment Sales", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21155, 
-               Description = "South-Customer Checkin", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21157] = 
-      {
-         Name = "Equipment Sales", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21157, 
-         Tag = "", 
+      }, 
+      [21157] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Equipment Sales", 
+         Vnum = 21157, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "West-Hallway", 
+               Keyword = "", 
+               DestinationVnum = 21156, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "You barely step into the room and are stopped by a large counter.  A short \
 squat Protocol Droid stands here taking orders and feeding the information \
 into its counterpart, a large assembly droid.  Bins of parts and pieces line the\
 walls behind the counter waiting for thier turn to be used in som useful pieces\
 of equipment for you.", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21156, 
-               Description = "West-Hallway", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21158] = 
-      {
-         Name = "End of Hall", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21158, 
-         Tag = "", 
+      }, 
+      [21158] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "Here a magnetic lift sits waiting to take customers up to the ship repair\
-", 
+         Name = "End of Hall", 
+         Vnum = 21158, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "East-Workshop", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21159, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21159, 
-               Description = "East-Workshop", 
+               Key = 0, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "South-Hallway", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21156, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "south", 
-               DestinationVnum = 21156, 
-               Description = "South-Hallway", 
+               Key = 0, 
             }, 
             [3] = 
             {
+               Direction = "up", 
+               Description = "Up-Ship Repair", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21170, 
                Distance = 0, 
                Flags = 
                {
@@ -7940,69 +7922,110 @@ of equipment for you.",
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "up", 
-               DestinationVnum = 21170, 
-               Description = "Up-Ship Repair", 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
+         Description = "Here a magnetic lift sits waiting to take customers up to the ship repair\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [21159] = 
       {
-         Name = "Workshop", 
-         Flags = 
-         {
-            [26] = "Factory", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21159, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Workshop", 
+         Vnum = 21159, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "West-End of Hall", 
+               Keyword = "", 
+               DestinationVnum = 21158, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "This is the largest and most elaborate workshop you have everseen. A\
 magnetic balanced laser guided lathe sits along the north wall and further\
 in is several plasma cutters and a bench of specialty tools of all shapes\
 and sizes.  Along the south wall lies a circuit building station complete\
 with touch screen  \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [26] = "Factory", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21160] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Security Check-Point", 
+         Vnum = 21160, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "North- Observation Room", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21161, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "west", 
-               DestinationVnum = 21158, 
-               Description = "West-End of Hall", 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21152, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Description = "Down-Workers Entrance", 
+               Keyword = "", 
+               DestinationVnum = 21162, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21160] = 
-      {
-         Name = "Security Check-Point", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21160, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "Several Infra Scanners sweep over you for an ID check.  You can rest\
 assured that if you are wanted on Mon Calamar you won't make it past this\
 point.  Sever l Large swiveling blasters guard the room so that no one\
@@ -8012,63 +8035,70 @@ the proceedings.  To the south is the \
 To the north is the observation booth, while down is the worker's\
 entrance.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21161, 
-               Description = "North- Observation Room", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21152, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "down", 
-               DestinationVnum = 21162, 
-               Description = "Down-Workers Entrance", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21161] = 
-      {
-         Name = "Observation Room", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21161, 
-         Tag = "", 
+      }, 
+      [21161] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Observation Room", 
+         Vnum = 21161, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "South-Security Checkpoint", 
+               Keyword = "", 
+               DestinationVnum = 21160, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Description = "Up-Ship Yard", 
+               Keyword = "", 
+               DestinationVnum = 21172, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [17] = "CanEnter", 
+                  [18] = "CanLeave", 
+               }, 
+               Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Description = "Down-Mainframe Computer", 
+               Keyword = "", 
+               DestinationVnum = 21165, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [17] = "CanEnter", 
+                  [18] = "CanLeave", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "Several large windows overlook the factory below and hundreds of dials and\
 readouts display conditions on the floor below. A few comfortable chairs\
 sit  here placed for easy observation of everything.  This is obviously\
@@ -8079,96 +8109,113 @@ To the south is the check-point, Up is the platform, while down is the\
 computer\
 mainframe.\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21160, 
-               Description = "South-Security Checkpoint", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [17] = "CanEnter", 
-                  [18] = "CanLeave", 
-               }, 
-               Direction = "up", 
-               DestinationVnum = 21172, 
-               Description = "Up-Ship Yard", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [17] = "CanEnter", 
-                  [18] = "CanLeave", 
-               }, 
-               Direction = "down", 
-               DestinationVnum = 21165, 
-               Description = "Down-Mainframe Computer", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21162] = 
-      {
-         Name = "Workers Entrance", 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Vnum = 21162, 
-         Tag = "", 
+      }, 
+      [21162] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "Workers Entrance", 
+         Vnum = 21162, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Description = "West-Lift Station", 
+               Keyword = "", 
+               DestinationVnum = 21163, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Description = "Up-Security Checkpoint", 
+               Keyword = "", 
+               DestinationVnum = 21160, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [17] = "CanEnter", 
+                  [18] = "CanLeave", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "Rows upon Rows of Equipment lockers stand here holding workers personal\
 items and tools for work.  This is presumably where those who work at the\
 factory  suit up for the day.  There are two exits from here up to the\
 security checkpoi t  In the Direction up you can goto the lift station\
 while west is the security post. \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21163] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Lift Station", 
+         Vnum = 21163, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "North-Cooling Section", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21164, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "west", 
-               DestinationVnum = 21163, 
-               Description = "West-Lift Station", 
+               Key = 0, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Description = "East-Workers Entrance", 
                Keyword = "", 
+               DestinationVnum = 21162, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
                Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "up", 
+               Description = "Up-Warehouse", 
+               Keyword = "", 
+               DestinationVnum = 21171, 
                Distance = 0, 
                Flags = 
                {
@@ -8176,68 +8223,150 @@ while west is the security post. \
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "up", 
-               DestinationVnum = 21160, 
-               Description = "Up-Security Checkpoint", 
+               Key = 0, 
+            }, 
+            [4] = 
+            {
+               Direction = "northeast", 
+               Description = "Northeast-Mainframe Computer", 
+               Keyword = "", 
+               DestinationVnum = 21165, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21163] = 
-      {
-         Name = "Lift Station", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21163, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "The cooled parts arrive here on a conveyor from the north where they are\
 loaded into large boxes and the boxes are loaded on to a repulsor lift and\
 taken up to  the uppermost floor for storage and transfer onto shipping\
 barges.  From here y u can go east to the workers entrance, you can go\
 north further up the line, or up to the warehouse..or ne to the mainframe.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21164] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Cooling Station", 
+         Vnum = 21164, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Description = "North-Molding and Forming", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21166, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "north", 
-               DestinationVnum = 21164, 
-               Description = "North-Cooling Section", 
+               Key = 0, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Description = "East-Mainframe Computer", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21165, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21162, 
-               Description = "East-Workers Entrance", 
+               Key = 0, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Description = "South-Lift Station", 
                Keyword = "", 
+               DestinationVnum = 21163, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
                Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "Here the converyor makes a series of sharp turns to S its way from the\
+north as dozens of droids turn cooling air hoses on the parts to cool them\
+before they  make it to the lift station to the south.  Looking east you\
+can see the system that controls the entire facility and from the north\
+loud clanging and hissing \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21165] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Mainframe Computer", 
+         Vnum = 21165, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "North-Smelting", 
+               Keyword = "", 
+               DestinationVnum = 21167, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "West-Cooling Section", 
+               Keyword = "", 
+               DestinationVnum = 21164, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "up", 
+               Description = "Up-Observation Room", 
+               Keyword = "", 
+               DestinationVnum = 21161, 
                Distance = 0, 
                Flags = 
                {
@@ -8245,110 +8374,52 @@ north further up the line, or up to the warehouse..or ne to the mainframe.\
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "up", 
-               DestinationVnum = 21171, 
-               Description = "Up-Warehouse", 
+               Key = 0, 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
                Direction = "northeast", 
-               DestinationVnum = 21165, 
-               Description = "Northeast-Mainframe Computer", 
-            }, 
-         }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21164] = 
-      {
-         Name = "Cooling Station", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21164, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "Here the converyor makes a series of sharp turns to S its way from the\
-north as dozens of droids turn cooling air hoses on the parts to cool them\
-before they  make it to the lift station to the south.  Looking east you\
-can see the system that controls the entire facility and from the north\
-loud clanging and hissing \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
+               Description = "Northeast-Sorting and Seperating", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21168, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "north", 
+               Key = 0, 
+            }, 
+            [5] = 
+            {
+               Direction = "northwest", 
+               Description = "Northwest-Molding and Forming", 
+               Keyword = "", 
                DestinationVnum = 21166, 
-               Description = "North-Molding and Forming", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21165, 
-               Description = "East-Mainframe Computer", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
                Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
+            }, 
+            [6] = 
+            {
+               Direction = "southwest", 
+               Description = "Southwest-Lift Station", 
+               Keyword = "", 
                DestinationVnum = 21163, 
-               Description = "South-Lift Station", 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21165] = 
-      {
-         Name = "Mainframe Computer", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21165, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "Here before you is a huge cylinderical object that stretchs from floor to\
 ceili g lights run the entire circumfrence of the object and wires string\
 about running  away from the massive computer in all directions.  Several\
@@ -8356,40 +8427,280 @@ operator stations ci cle the factory's heart and soul as to monitor and\
 solve any problems that occur at a moments notice.  It is possible to\
 reach almost any station along the line fr m\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21166] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Molding and Forming", 
+         Vnum = 21166, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "", 
                Keyword = "", 
-               Key = 0, 
                Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "north", 
                DestinationVnum = 21167, 
-               Description = "North-Smelting", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Description = "South- Cooling Section", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21164, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "west", 
-               DestinationVnum = 21164, 
-               Description = "West-Cooling Section", 
+               Key = 0, 
             }, 
             [3] = 
             {
+               Direction = "southeast", 
+               Description = "Southeast-Mainframe Computer", 
                Keyword = "", 
+               DestinationVnum = 21165, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
                Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "Here is where the super heated pipes carring the melted down ore end.  They pore\
+their precious cargo into shape shifting molds that set the steel into whatever\
+shape the clients of this factory require.  They are then lifted on to the conveyor\
+by special droids designed to withstand the heat.  After that they are sent south \
+to the cooling section.  You could go east to find out where the pipes are filled.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21167] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Smelting", 
+         Vnum = 21167, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "East-Sorting and Seperating", 
+               Keyword = "", 
+               DestinationVnum = 21168, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "South-Mainframe Computer", 
+               Keyword = "", 
+               DestinationVnum = 21165, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Description = "West- Molding and Forming", 
+               Keyword = "", 
+               DestinationVnum = 21166, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "After the ore is seperated further east, it comes here to be dropped in a\
+huge vat that melts it down.  Huge specially heated pipes connect to the\
+vat here an \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21168] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Sorting and Seperating", 
+         Vnum = 21168, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Description = "North-Recieving", 
+               Keyword = "", 
+               DestinationVnum = 21169, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "West-Smelting", 
+               Keyword = "", 
+               DestinationVnum = 21167, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "southwest", 
+               Description = "Southwest-Mainframe Computer", 
+               Keyword = "", 
+               DestinationVnum = 21165, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "After the raw ore and other materials are recieved to the north it comes\
+here. The materials that are used for maintence and electronic\
+construction are seper ted from the ore here. As well unexecatable pieces\
+of ore are returned to the molin \
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21169] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Recieving", 
+         Vnum = 21169, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Description = "South-Sorting and Seperating", 
+               Keyword = "", 
+               DestinationVnum = 21168, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "Here is where the moling miner machines return to drop off the ore after stripping\
+it from the floor of the ocean below.  Other things are also recieved here as well,\
+Parts for maintence of crucial machines and critical components that can not be\
+created on site.  The sorting area to the south is responsible for deciphering where \
+materials need to go,  here though the main concern is unloading the constant \
+stream of machines as quickly as possible.", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21170] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Ship Repair", 
+         Vnum = 21170, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "East-Warehouse", 
+               Keyword = "", 
+               DestinationVnum = 21171, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
+               Key = 0, 
+            }, 
+            [2] = 
+            {
+               Direction = "down", 
+               Description = "Down-End of Hall", 
+               Keyword = "", 
+               DestinationVnum = 21158, 
                Distance = 0, 
                Flags = 
                {
@@ -8397,306 +8708,10 @@ reach almost any station along the line fr m\
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "up", 
-               DestinationVnum = 21161, 
-               Description = "Up-Observation Room", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
                Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "northeast", 
-               DestinationVnum = 21168, 
-               Description = "Northeast-Sorting and Seperating", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "northwest", 
-               DestinationVnum = 21166, 
-               Description = "Northwest-Molding and Forming", 
-            }, 
-            [6] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "southwest", 
-               DestinationVnum = 21163, 
-               Description = "Southwest-Lift Station", 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21166] = 
-      {
-         Name = "Molding and Forming", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21166, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "Here is where the super heated pipes carring the melted down ore end.  They pore\
-their precious cargo into shape shifting molds that set the steel into whatever\
-shape the clients of this factory require.  They are then lifted on to the conveyor\
-by special droids designed to withstand the heat.  After that they are sent south \
-to the cooling section.  You could go east to find out where the pipes are filled.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21167, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21164, 
-               Description = "South- Cooling Section", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "southeast", 
-               DestinationVnum = 21165, 
-               Description = "Southeast-Mainframe Computer", 
-            }, 
-         }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21167] = 
-      {
-         Name = "Smelting", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21167, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "After the ore is seperated further east, it comes here to be dropped in a\
-huge vat that melts it down.  Huge specially heated pipes connect to the\
-vat here an \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "east", 
-               DestinationVnum = 21168, 
-               Description = "East-Sorting and Seperating", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21165, 
-               Description = "South-Mainframe Computer", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21166, 
-               Description = "West- Molding and Forming", 
-            }, 
-         }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21168] = 
-      {
-         Name = "Sorting and Seperating", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21168, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "After the raw ore and other materials are recieved to the north it comes\
-here. The materials that are used for maintence and electronic\
-construction are seper ted from the ore here. As well unexecatable pieces\
-of ore are returned to the molin \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "north", 
-               DestinationVnum = 21169, 
-               Description = "North-Recieving", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21167, 
-               Description = "West-Smelting", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "southwest", 
-               DestinationVnum = 21165, 
-               Description = "Southwest-Mainframe Computer", 
-            }, 
-         }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21169] = 
-      {
-         Name = "Recieving", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21169, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "Here is where the moling miner machines return to drop off the ore after stripping\
-it from the floor of the ocean below.  Other things are also recieved here as well,\
-Parts for maintence of crucial machines and critical components that can not be\
-created on site.  The sorting area to the south is responsible for deciphering where \
-materials need to go,  here though the main concern is unloading the constant \
-stream of machines as quickly as possible.", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21168, 
-               Description = "South-Sorting and Seperating", 
-            }, 
-         }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21170] = 
-      {
-         Name = "Ship Repair", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21170, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "A huge hangar surrounds you and large cranes susspended from the ceiling\
 work  continuosly peeling old armor off of ships and pulling worn engine\
 casings.  Maintence droids of all shapes and sizes swarm over the ships\
@@ -8704,26 +8719,58 @@ here beeping and whiring at an almost frantic pace.  You get the feeling\
 that although this is an iron ore factory they recieve a substancial\
 income from the repair of ships\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21171] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Warehouse", 
+         Vnum = 21171, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Description = "East-Ship Yard", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21172, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21171, 
-               Description = "East-Warehouse", 
+               Key = 0, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Description = "West-Ship Repair", 
                Keyword = "", 
+               DestinationVnum = 21170, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [17] = "CanEnter", 
+               }, 
                Key = 0, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Description = "Down- Lift Station", 
+               Keyword = "", 
+               DestinationVnum = 21163, 
                Distance = 0, 
                Flags = 
                {
@@ -8731,68 +8778,54 @@ income from the repair of ships\
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "down", 
-               DestinationVnum = 21158, 
-               Description = "Down-End of Hall", 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21171] = 
-      {
-         Name = "Warehouse", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 21171, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "As the repulsor lifts the huge packages of parts bound for other worlds.\
 Binary load lifters sweep them up and move them into neat stacks to await \
 transport.  Many of the boxes marked armor are sent west to the ship\
 repair area and still many other boxes are being sent through huge doors\
 to the east \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [21172] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "inside", 
+         Vnum = 21172, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Description = "West-Warehouse", 
                Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21171, 
                Distance = 0, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [17] = "CanEnter", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21172, 
-               Description = "East-Ship Yard", 
+               Key = 0, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Description = "Down-Observation Room", 
                Keyword = "", 
-               Key = 0, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21170, 
-               Description = "West-Ship Repair", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = 0, 
+               DestinationVnum = 21161, 
                Distance = 0, 
                Flags = 
                {
@@ -8800,24 +8833,9 @@ to the east \
                   [17] = "CanEnter", 
                   [18] = "CanLeave", 
                }, 
-               Direction = "down", 
-               DestinationVnum = 21163, 
-               Description = "Down- Lift Station", 
+               Key = 0, 
             }, 
          }, 
-         Sector = "inside", 
-         Tunnel = 0, 
-      }, 
-      [21172] = 
-      {
-         Name = "Shipping Platform", 
-         Vnum = 21172, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "Here a platform that holds at least five cargo ships at any given time is a\
 bee hive of activity.  Binary load lifters beep at you to get out of the\
 way as the   charge back and forth between waiting barges and the\
@@ -8825,327 +8843,314 @@ warehouse to the west. A  small lev tube sits out of the way at one corner\
 of the platform. It seems to  \
 West is the warehouse and Down is the observation booth.\
 ", 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         Name = "Shipping Platform", 
+      }, 
+      [21180] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Secret Room", 
+         Vnum = 21180, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = 0, 
+               Direction = "east", 
+               Description = "", 
+               Keyword = "hatch", 
+               DestinationVnum = 21181, 
                Distance = 0, 
                Flags = 
                {
-                  [18] = "CanLeave", 
-                  [17] = "CanEnter", 
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
                }, 
-               Direction = "west", 
-               DestinationVnum = 21171, 
-               Description = "West-Warehouse", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Description = "", 
                Keyword = "", 
-               Key = 0, 
                Distance = 0, 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [17] = "CanEnter", 
-                  [18] = "CanLeave", 
-               }, 
-               Direction = "down", 
-               DestinationVnum = 21161, 
-               Description = "Down-Observation Room", 
+               DestinationVnum = 21066, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "inside", 
          Tunnel = 0, 
-      }, 
-      [21180] = 
-      {
-         Name = "Secret Room", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21180, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z As you look up you can see a few light rays slipping down from the\
 cracks in the hard wood floor above. There is a small light positioned in\
 the corner of the room. The floor is carved out stone and rather ruffand\
 dark. The walls lead around to a small steal circular hatch. If you become\
 quiet you can hear small business transactions occuring above.\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [21181] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Tunnel", 
+         Vnum = 21181, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Description = "", 
                Keyword = "hatch", 
+               DestinationVnum = 21180, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
                Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "down", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21182, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "You stand in a dark tunnel system made out of a mined ore obviously the\
+work of the Quarren. The walls are ribbed and appear to be fastened by\
+metal pins along the seam. Above you can see the hatch, while below you\
+look down and see nothing but complete darkness.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [21182] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Tunnel", 
+         Vnum = 21182, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "up", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21181, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "down", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21183, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "You stand in a dark tunnel system made out of a mined ore obviously the\
+work of the Quarren. The walls are ribbed and appear to be fastened by\
+metal pins along the seam. Above you can see only darkness, while below\
+you look down and see a glimmer of light coming from the darkness.\
+", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [21183] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Security Clearance Room", 
+         Vnum = 21183, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21184, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21181, 
-               Description = "", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "up", 
-               DestinationVnum = 21066, 
                Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21181] = 
-      {
-         Name = "Tunnel", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21181, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "You stand in a dark tunnel system made out of a mined ore obviously the\
-work of the Quarren. The walls are ribbed and appear to be fastened by\
-metal pins along the seam. Above you can see the hatch, while below you\
-look down and see nothing but complete darkness.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "hatch", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21180, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Direction = "down", 
                DestinationVnum = 21182, 
-               Description = "", 
-            }, 
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
-      }, 
-      [21182] = 
-      {
-         Name = "Tunnel", 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21182, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "You stand in a dark tunnel system made out of a mined ore obviously the\
-work of the Quarren. The walls are ribbed and appear to be fastened by\
-metal pins along the seam. Above you can see only darkness, while below\
-you look down and see a glimmer of light coming from the darkness.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
                Key = -1, 
-               Distance = 0, 
-               Direction = "up", 
-               DestinationVnum = 21181, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "down", 
-               DestinationVnum = 21183, 
-               Description = "", 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21183] = 
-      {
-         Name = "Security Clearance Room", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Vnum = 21183, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&c  Looking around you know this place is one of danger and definitely\
 doesn't belong here in Coral City. The Walls are carved out magma with\
 extremly state of the art security cameras scanning your every bio-stat.\
 Attached to the sides of the doors are small laser pods used to make sure\
 someone doesn't pass who is not allowed.  \
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [21184] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Imperial Spy Base", 
+         Vnum = 21184, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "door", 
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21185, 
                Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Description = "", 
+               Keyword = "door", 
+               DestinationVnum = 21183, 
                Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "east", 
-               DestinationVnum = 21184, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
                Key = -1, 
-               Distance = 0, 
-               Direction = "up", 
-               DestinationVnum = 21182, 
-               Description = "", 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21184] = 
-      {
-         Name = "Imperial Spy Base", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21184, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "&z You stand in a rather large room full of computer and survailence\
 equipment. There are strange markings on the displays .You are familiar\
 with the markings, Imperial code language . Apparently the rumors about\
 the Quarren are true. \
 &x\
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "south", 
-               DestinationVnum = 21185, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "door", 
-               Key = -1, 
-               Distance = 0, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "west", 
-               DestinationVnum = 21183, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
       }, 
       [21185] = 
       {
-         Name = "Floating in a void", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21185, 
-         Tag = "", 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
+         Name = "Floating in a void", 
+         Vnum = 21185, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
                Direction = "north", 
-               DestinationVnum = 21184, 
                Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21184, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21186] = 
-      {
-         Name = "&G Universe Construction Co.", 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [30] = "Prototype", 
-            [2] = "NoMob", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
          }, 
-         Vnum = 21186, 
-         Tag = "", 
+      }, 
+      [21186] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
+         Name = "&G Universe Construction Co.", 
+         Vnum = 21186, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Description = "", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21187, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 21023, 
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "Welcome to the Universe Construction Co. , We are always looking for new\
 builders. In this room is the Construction Board. On it will be\
 assignments and a way to check in. This is not a place to ask for a zone\
@@ -9154,166 +9159,143 @@ simple rule will result in you getting smacked with my back fin!!!!\
 To the east you see a large Library!\
 Contact Ackbar for more info!\
 ", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [2] = "NoMob", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [21187] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Construction Blueprints", 
+         Vnum = 21187, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "east", 
-               DestinationVnum = 21187, 
+               Direction = "west", 
                Description = "", 
-            }, 
-            [2] = 
-            {
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Direction = "south", 
-               DestinationVnum = 21023, 
-               Description = "", 
+               DestinationVnum = 21186, 
+               Key = -1, 
             }, 
          }, 
-         Sector = "city", 
          Tunnel = 0, 
-      }, 
-      [21187] = 
-      {
-         Name = "Construction Blueprints", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Vnum = 21187, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Description = "Here you will find some background info available for your reading.\
 Understand this is not all you can use but a basic idea to start with. Got\
 any more info on projects were doing ..Well email me them at\
 MonCal@netscape.net \
 ", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Direction = "west", 
-               DestinationVnum = 21186, 
-               Description = "", 
-            }, 
-         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
+         Tag = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
       }, 
       [21445] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Name = "Floating in a void", 
+         Vnum = 21445, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Vnum = 21445, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
-         Exits = 
-         {
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
       }, 
       [21499] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Name = "Floating in a void", 
+         Vnum = 21499, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Vnum = 21499, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
-         Exits = 
-         {
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
       }, 
       [21436] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Name = "Floating in a void", 
+         Vnum = 21436, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         Description = "", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Vnum = 21436, 
-         Tag = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Description = "", 
-         Exits = 
-         {
-         }, 
-         Sector = "city", 
-         Tunnel = 0, 
       }, 
    }, 
    Objects = 
    {
       [21000] = 
       {
-         ActionDescription = "", 
-         Cost = 61000, 
-         Name = "potion violet glowing", 
-         Flags = 
-         {
-            [0] = "Glow", 
-            [6] = "Magic", 
-            [8] = "Bless", 
-         }, 
-         ShortDescr = "a glowing violet potion", 
-         Vnum = 21000, 
-         Description = "A glowing violet potion has been carelessly left here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "violet", 
                Description = "Textures of both deep red and pale purple swirl together inside the vial.\
 \13", 
+               Keyword = "violet", 
             }, 
          }, 
+         Name = "potion violet glowing", 
+         Vnum = 21000, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "potion", 
          Weight = 2, 
+         Description = "A glowing violet potion has been carelessly left here.", 
+         Cost = 61000, 
          ObjectValues = 
          {
             [1] = 28, 
@@ -9323,30 +9305,31 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 25, 
          }, 
-         Layers = 0, 
-      }, 
-      [21001] = 
-      {
+         ShortDescr = "a glowing violet potion", 
          ActionDescription = "", 
-         Cost = 6500, 
-         Name = "potion purple glowing", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
+            [8] = "Bless", 
          }, 
-         ShortDescr = "a glowing purple potion", 
-         Vnum = 21001, 
-         Description = "A glowing purple potion has been carelessly left here.", 
+      }, 
+      [21001] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "potion purple glowing", 
+         Vnum = 21001, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "potion", 
          Weight = 2, 
+         Description = "A glowing purple potion has been carelessly left here.", 
+         Cost = 6500, 
          ObjectValues = 
          {
             [1] = 15, 
@@ -9356,30 +9339,30 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 25, 
          }, 
-         Layers = 0, 
-      }, 
-      [21002] = 
-      {
+         ShortDescr = "a glowing purple potion", 
          ActionDescription = "", 
-         Cost = 2400, 
-         Name = "puce potion glowing", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
          }, 
-         ShortDescr = "a glowing puce potion", 
-         Vnum = 21002, 
-         Description = "A glowing puce potion has been carelessly left here.", 
+      }, 
+      [21002] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "puce potion glowing", 
+         Vnum = 21002, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "potion", 
          Weight = 2, 
+         Description = "A glowing puce potion has been carelessly left here.", 
+         Cost = 2400, 
          ObjectValues = 
          {
             [1] = 61, 
@@ -9389,30 +9372,30 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
-      }, 
-      [21003] = 
-      {
+         ShortDescr = "a glowing puce potion", 
          ActionDescription = "", 
-         Cost = 750, 
-         Name = "potion maroon glowing", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
          }, 
-         ShortDescr = "a glowing maroon potion", 
-         Vnum = 21003, 
-         Description = "A glowing maroon potion has been carelessly left here.", 
+      }, 
+      [21003] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "potion maroon glowing", 
+         Vnum = 21003, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "potion", 
          Weight = 2, 
+         Description = "A glowing maroon potion has been carelessly left here.", 
+         Cost = 750, 
          ObjectValues = 
          {
             [1] = 16, 
@@ -9422,30 +9405,30 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
-      }, 
-      [21004] = 
-      {
+         ShortDescr = "a glowing maroon potion", 
          ActionDescription = "", 
-         Cost = 15000, 
-         Name = "potion blue glowing", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
          }, 
-         ShortDescr = "glowing blue potion", 
-         Vnum = 21004, 
-         Description = "A glowing blue potion has been carelessly left here.", 
+      }, 
+      [21004] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "potion blue glowing", 
+         Vnum = 21004, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "trash", 
          Weight = 2, 
+         Description = "A glowing blue potion has been carelessly left here.", 
+         Cost = 15000, 
          ObjectValues = 
          {
             [1] = 49, 
@@ -9455,24 +9438,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 22, 
          }, 
-         Layers = 0, 
+         ShortDescr = "glowing blue potion", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [6] = "Magic", 
+         }, 
       }, 
       [21133] = 
       {
-         ActionDescription = "%s savour$q a piece of $p.", 
-         Cost = 200, 
-         Name = "smoked womp rat", 
-         ShortDescr = "smoked womp rat", 
-         Vnum = 21133, 
-         Description = "A freshly smoked womp rat lies here giving off a hickory scent.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "smoked womp rat", 
+         Vnum = 21133, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "A freshly smoked womp rat lies here giving off a hickory scent.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -9483,24 +9471,24 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s savour$q a piece of $p.", 
+         ShortDescr = "smoked womp rat", 
       }, 
       [21134] = 
       {
-         ActionDescription = "%s delicately nibble$q on a piece of $p.", 
-         Cost = 200, 
-         Name = "roast kinewe", 
-         ShortDescr = "Roast kinewe", 
-         Vnum = 21134, 
-         Description = "A plump roast kinewe bird has been carelessly left on the ground here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "roast kinewe", 
+         Vnum = 21134, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "A plump roast kinewe bird has been carelessly left on the ground here.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -9511,24 +9499,24 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s delicately nibble$q on a piece of $p.", 
+         ShortDescr = "Roast kinewe", 
       }, 
       [21135] = 
       {
-         ActionDescription = "%s savor$q $p.", 
-         Cost = 200, 
-         Name = "chanterelle mushrooms", 
-         ShortDescr = "some freshly picked chanterelle mushrooms", 
-         Vnum = 21135, 
-         Description = "Some freshly picked chanterelle mushrooms have been left behind here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "chanterelle mushrooms", 
+         Vnum = 21135, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "Some freshly picked chanterelle mushrooms have been left behind here.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -9539,24 +9527,24 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s savor$q $p.", 
+         ShortDescr = "some freshly picked chanterelle mushrooms", 
       }, 
       [21136] = 
       {
-         ActionDescription = "%s quickly down$q $p.", 
-         Cost = 200, 
-         Name = "bag black walnuts", 
-         ShortDescr = "a bag of fresh black nuts", 
-         Vnum = 21136, 
-         Description = "Nuts shells lie discarded around a small bag left here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "bag black walnuts", 
+         Vnum = 21136, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "Nuts shells lie discarded around a small bag left here.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -9567,57 +9555,57 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s quickly down$q $p.", 
+         ShortDescr = "a bag of fresh black nuts", 
       }, 
       [21137] = 
       {
-         ActionDescription = "%s savagely gnaw$q on $p.", 
-         Cost = 200, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Name = "leg dewback", 
+         Vnum = 21137, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ItemType = "food", 
+         Weight = 2, 
+         Description = "A freshly cooked leg of dewback has been dropped here.", 
+         Cost = 200, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         ShortDescr = "a leg of dewback", 
+         ActionDescription = "%s savagely gnaw$q on $p.", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a leg of dewback", 
-         Vnum = 21137, 
-         Description = "A freshly cooked leg of dewback has been dropped here.", 
-         ExtraDescriptions = 
-         {
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ItemType = "food", 
-         Weight = 2, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Layers = 0, 
       }, 
       [21010] = 
       {
-         ActionDescription = "", 
-         Cost = 75, 
-         Name = "mug ale", 
-         ShortDescr = "a mug of ale", 
-         Vnum = 21010, 
-         Description = "A large mug of ale sits here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "mug ale", 
+         Vnum = 21010, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "drink_container", 
+         Description = "A large mug of ale sits here.", 
+         Cost = 75, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -9628,24 +9616,24 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 12, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a mug of ale", 
       }, 
       [21139] = 
       {
-         ActionDescription = "%s quickly consume$q $p.", 
-         Cost = 200, 
-         Name = "Grana seeds", 
-         ShortDescr = "a handful of Grana seeds", 
-         Vnum = 21139, 
-         Description = "A handfull of salty Grana seeds has been left hhere.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Grana seeds", 
+         Vnum = 21139, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "A handfull of salty Grana seeds has been left hhere.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -9656,25 +9644,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s quickly consume$q $p.", 
+         ShortDescr = "a handful of Grana seeds", 
       }, 
       [21140] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "key master silver", 
-         ShortDescr = "&z A set of silver master keys &x", 
-         Vnum = 21140, 
-         Description = "&z A set of silver master keys was left here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "key master silver", 
+         Vnum = 21140, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "key", 
+         Description = "&z A set of silver master keys was left here.", 
+         Cost = 0, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -9685,25 +9673,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "&z A set of silver master keys &x", 
       }, 
       [21141] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "flag", 
-         ShortDescr = "A flag", 
-         Vnum = 21141, 
-         Description = "&c A Flag of War", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "flag", 
+         Vnum = 21141, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "treasure", 
+         Description = "&c A Flag of War", 
+         Cost = 0, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -9714,29 +9702,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "A flag", 
       }, 
       [21014] = 
       {
-         ActionDescription = "", 
-         Cost = 4, 
-         Name = "salami", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a slice of salami", 
-         Vnum = 21014, 
-         Description = "A slice of salami sits in the man made.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "salami", 
+         Vnum = 21014, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
          Weight = 1, 
+         Description = "A slice of salami sits in the man made.", 
+         Cost = 4, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9746,29 +9730,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
-      }, 
-      [21015] = 
-      {
+         ShortDescr = "a slice of salami", 
          ActionDescription = "", 
-         Cost = 9, 
-         Name = "beef", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a big chunk of beef", 
-         Vnum = 21015, 
-         Description = "A large chunk of raw beef lies here.", 
+      }, 
+      [21015] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "beef", 
+         Vnum = 21015, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
          Weight = 5, 
+         Description = "A large chunk of raw beef lies here.", 
+         Cost = 9, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9778,29 +9762,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-      }, 
-      [21016] = 
-      {
+         ShortDescr = "a big chunk of beef", 
          ActionDescription = "", 
-         Cost = 10, 
-         Name = "turkey", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a cooked turkey", 
-         Vnum = 21016, 
-         Description = "A  cooked Mon bird, which looks quite edible, lies on the tray.", 
+      }, 
+      [21016] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "turkey", 
+         Vnum = 21016, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
          Weight = 2, 
+         Description = "A  cooked Mon bird, which looks quite edible, lies on the tray.", 
+         Cost = 10, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9810,23 +9794,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
-      }, 
-      [21017] = 
-      {
+         ShortDescr = "a cooked turkey", 
          ActionDescription = "", 
-         Cost = 4, 
-         Name = "bottle blue milk", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a bottle of blue milk", 
-         Vnum = 21017, 
-         Description = "A bottle of imported blue milk sits upright on the ground.", 
+      }, 
+      [21017] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "bottle blue milk", 
+         Vnum = 21017, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -9834,6 +9816,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "drink_container", 
          Weight = 3, 
+         Description = "A bottle of imported blue milk sits upright on the ground.", 
+         Cost = 4, 
          ObjectValues = 
          {
             [1] = 10, 
@@ -9843,23 +9827,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
-      }, 
-      [21018] = 
-      {
+         ShortDescr = "a bottle of blue milk", 
          ActionDescription = "", 
-         Cost = 10, 
-         Name = "wheel cheese", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a wheel of cheese", 
-         Vnum = 21018, 
-         Description = "A round wheel of cheese looks very good.", 
+      }, 
+      [21018] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "wheel cheese", 
+         Vnum = 21018, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -9867,6 +9849,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "food", 
          Weight = 3, 
+         Description = "A round wheel of cheese looks very good.", 
+         Cost = 10, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9876,23 +9860,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-      }, 
-      [21019] = 
-      {
+         ShortDescr = "a wheel of cheese", 
          ActionDescription = "", 
-         Cost = 1, 
-         Name = "lemonade cup", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a cup of lemonade", 
-         Vnum = 21019, 
-         Description = "A cup of spiked lemonade makes your thirst quench easily.", 
+      }, 
+      [21019] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "lemonade cup", 
+         Vnum = 21019, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -9900,6 +9882,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "drink_container", 
          Weight = 1, 
+         Description = "A cup of spiked lemonade makes your thirst quench easily.", 
+         Cost = 1, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -9909,23 +9893,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-      }, 
-      [21020] = 
-      {
+         ShortDescr = "a cup of lemonade", 
          ActionDescription = "", 
-         Cost = 15, 
-         Name = "cake", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a chocolate cake", 
-         Vnum = 21020, 
-         Description = "A large chocolate cake awaits someone to eat it.", 
+      }, 
+      [21020] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "cake", 
+         Vnum = 21020, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -9933,6 +9915,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "food", 
          Weight = 1, 
+         Description = "A large chocolate cake awaits someone to eat it.", 
+         Cost = 15, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9942,29 +9926,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
-      }, 
-      [21021] = 
-      {
+         ShortDescr = "a chocolate cake", 
          ActionDescription = "", 
-         Cost = 2, 
-         Name = "loaf bread", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a loaf of bread", 
-         Vnum = 21021, 
-         Description = "A scrumptious loaf of bread lies here, making your taste buds swirl.", 
+      }, 
+      [21021] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "loaf bread", 
+         Vnum = 21021, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
          Weight = 2, 
+         Description = "A scrumptious loaf of bread lies here, making your taste buds swirl.", 
+         Cost = 2, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -9974,25 +9958,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a loaf of bread", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
       }, 
       [21022] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "cherry pie", 
-         ShortDescr = "a cherry pie", 
-         Vnum = 21022, 
-         Description = "A cherry pie makes your mouth water.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "cherry pie", 
+         Vnum = 21022, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "food", 
+         Description = "A cherry pie makes your mouth water.", 
+         Cost = 100, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -10003,24 +9991,24 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a cherry pie", 
       }, 
       [21023] = 
       {
-         ActionDescription = "", 
-         Cost = 30, 
-         Name = "pen", 
-         ShortDescr = "a writing computer pen", 
-         Vnum = 21023, 
-         Description = "A writing computer pen lies on the ground, unowned.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "pen", 
+         Vnum = 21023, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "pen", 
+         Description = "A writing computer pen lies on the ground, unowned.", 
+         Cost = 30, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -10031,25 +10019,16 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a writing computer pen", 
       }, 
       [21420] = 
       {
-         ActionDescription = "", 
-         Cost = 45000, 
-         Name = "hologram", 
-         Flags = 
-         {
-            [1] = "Hum", 
-         }, 
-         ShortDescr = "A hologram", 
-         Vnum = 21420, 
-         Description = "A hologram parchment sits here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "parchment", 
                Description = "You find you are suddenly able to read the ancient words transcribed upon the\
 \13piece of parchment.  The more you read, the more visible the words become...\
 \13\
@@ -10068,10 +10047,10 @@ MonCal@netscape.net \
 \13To view a topics, simply type the number of the item you wish to read.\
 \13\
 \13", 
+               Keyword = "parchment", 
             }, 
             [2] = 
             {
-               Keyword = "1", 
                Description = "The Legend of the Parchment\
 \13\
 \13During the excavation for New Akatamer, a chest of weapons and artifacts\
@@ -10090,10 +10069,10 @@ MonCal@netscape.net \
 \13ancient Quarren.  Although some of the information is now obsolete,\
 \13some of the info still be of use.\
 \13", 
+               Keyword = "1", 
             }, 
             [3] = 
             {
-               Keyword = "2", 
                Description = "1.) Try to join a clan , it is always better to be with #'s\
 \13\
 \13\
@@ -10108,10 +10087,10 @@ MonCal@netscape.net \
 \13is wise to talk the things mentioned here over with other players.\
 \13\
 \13", 
+               Keyword = "2", 
             }, 
             [4] = 
             {
-               Keyword = "3", 
                Description = "Preparation is the foundation to success.  A weaker player who is prepared\
 \13shielded and having your weapons wielded at all times when you are not in\
 \13a safe place.  It also means having the force you need and being able to\
@@ -10125,10 +10104,10 @@ MonCal@netscape.net \
 \13fumbling around hunting for supplies -- you will likely die.   (Type look\
 \0133A for Area Knowledge)  \
 \13", 
+               Keyword = "3", 
             }, 
             [5] = 
             {
-               Keyword = "3a", 
                Description = "Area Knowledge\
 \13\
 \13Area Knowledge is important to survival whether engaging in pkilling or mob\
@@ -10137,16 +10116,16 @@ MonCal@netscape.net \
 \13recall from.  This knowledge may save you in the future.\
 \13\
 \13", 
+               Keyword = "3a", 
             }, 
             [6] = 
             {
-               Keyword = "4", 
                Description = "Sorry this info could not be obtained.\
 \13", 
+               Keyword = "4", 
             }, 
             [7] = 
             {
-               Keyword = "4a", 
                Description = "Dealing with Immunities\
 \13\
 \13Some players and mobs are immune to different types of weapons and spells.\
@@ -10172,10 +10151,10 @@ MonCal@netscape.net \
 \13\
 \13dividends in many ways.\
 \13", 
+               Keyword = "4a", 
             }, 
             [8] = 
             {
-               Keyword = "5", 
                Description = "Disarm\
 \13\
 \13If you can disarm an opponent and take their weapon, you can get a great\
@@ -10198,10 +10177,10 @@ MonCal@netscape.net \
 \13then backstab them.  Naughty but Nice!\
 \13\
 \13", 
+               Keyword = "5", 
             }, 
             [9] = 
             {
-               Keyword = "6", 
                Description = "Config +FLEE\
 \13\
 \13Many players like this until they flee into a death trap.  In general, it's\
@@ -10209,14 +10188,19 @@ MonCal@netscape.net \
 \13problems recalling.\
 \13\
 \13", 
+               Keyword = "6", 
             }, 
          }, 
+         Name = "hologram", 
+         Vnum = 21420, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "book", 
          Weight = 1, 
+         Description = "A hologram parchment sits here.", 
+         Cost = 45000, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10226,21 +10210,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ShortDescr = "A hologram", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [1] = "Hum", 
+         }, 
       }, 
       [21421] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "bus stop sign", 
-         ShortDescr = "a sign", 
-         Vnum = 21421, 
-         Description = "A pluogus bus stop sign.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         ItemType = "furniture", 
-         Weight = 1, 
+         Name = "bus stop sign", 
+         Vnum = 21421, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10250,29 +10234,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         Description = "A pluogus bus stop sign.", 
+         Cost = 0, 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "a sign", 
       }, 
       [21422] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "small crystal", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a small crystal", 
-         Vnum = 21422, 
-         Description = "A small crystal catches your eye.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "small crystal", 
+         Vnum = 21422, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "crystal", 
          Weight = 1, 
+         Description = "A small crystal catches your eye.", 
+         Cost = 100, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10282,29 +10266,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-      }, 
-      [21423] = 
-      {
+         ShortDescr = "a small crystal", 
          ActionDescription = "", 
-         Cost = 3000, 
-         Name = "relacite crystal", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a relacite crystal", 
-         Vnum = 21423, 
-         Description = "A crystal was dropped here.", 
+      }, 
+      [21423] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "relacite crystal", 
+         Vnum = 21423, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "crystal", 
          Weight = 1, 
+         Description = "A crystal was dropped here.", 
+         Cost = 3000, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10314,29 +10298,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-      }, 
-      [21424] = 
-      {
+         ShortDescr = "a relacite crystal", 
          ActionDescription = "", 
-         Cost = 2000, 
-         Name = "Kathracite crystal", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a kathracite crystal", 
-         Vnum = 21424, 
-         Description = "Something shiney catches your eye.", 
+      }, 
+      [21424] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Kathracite crystal", 
+         Vnum = 21424, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "crystal", 
          Weight = 1, 
+         Description = "Something shiney catches your eye.", 
+         Cost = 2000, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10346,29 +10330,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
-      }, 
-      [21425] = 
-      {
+         ShortDescr = "a kathracite crystal", 
          ActionDescription = "", 
-         Cost = 5000, 
-         Name = "mephite crystal", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a mephite crystal", 
-         Vnum = 21425, 
-         Description = "Something shiney catches your eye.", 
+      }, 
+      [21425] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "mephite crystal", 
+         Vnum = 21425, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "crystal", 
          Weight = 1, 
+         Description = "Something shiney catches your eye.", 
+         Cost = 5000, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10378,26 +10362,26 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a mephite crystal", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
       }, 
       [21042] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "board general", 
-         ShortDescr = "the general board", 
-         Vnum = 21042, 
-         Description = "The Akatamer board hangs here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "book", 
                Description = "", 
+               Keyword = "book", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Weight = 1001, 
+         Name = "board general", 
+         Vnum = 21042, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10407,25 +10391,20 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         Description = "The Akatamer board hangs here.", 
+         Cost = 0, 
+         Weight = 1001, 
+         ActionDescription = "", 
+         ShortDescr = "the general board", 
       }, 
       [21427] = 
       {
-         ActionDescription = "", 
-         Cost = 45000, 
-         Name = "lever omputer terminal", 
-         Flags = 
-         {
-            [1] = "Hum", 
-         }, 
-         ShortDescr = "A computer terminal lever", 
-         Vnum = 21427, 
-         Description = "&b A computer terminal rests aginst the wall here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "parchment", 
                Description = "You find you are suddenly able to read the ancient words transcribed upon the\
 \13piece of parchment.  The more you read, the more visible the words become...\
 \13\
@@ -10444,10 +10423,10 @@ MonCal@netscape.net \
 \13To view a topics, simply type the number of the item you wish to read.\
 \13\
 \13", 
+               Keyword = "parchment", 
             }, 
             [2] = 
             {
-               Keyword = "1", 
                Description = "The Legend of the Parchment\
 \13\
 \13During the excavation for New Akatamer, a chest of weapons and artifacts\
@@ -10466,10 +10445,10 @@ MonCal@netscape.net \
 \13ancient Quarren.  Although some of the information is now obsolete,\
 \13some of the info still be of use.\
 \13", 
+               Keyword = "1", 
             }, 
             [3] = 
             {
-               Keyword = "2", 
                Description = "1.) Try to join a clan , it is always better to be with #'s\
 \13\
 \13\
@@ -10484,10 +10463,10 @@ MonCal@netscape.net \
 \13is wise to talk the things mentioned here over with other players.\
 \13\
 \13", 
+               Keyword = "2", 
             }, 
             [4] = 
             {
-               Keyword = "3", 
                Description = "Preparation is the foundation to success.  A weaker player who is prepared\
 \13shielded and having your weapons wielded at all times when you are not in\
 \13a safe place.  It also means having the force you need and being able to\
@@ -10502,10 +10481,10 @@ MonCal@netscape.net \
 \13fumbling around hunting for supplies -- you will likely die.   (Type look\
 \0133A for Area Knowledge)  \
 \13", 
+               Keyword = "3", 
             }, 
             [5] = 
             {
-               Keyword = "3a", 
                Description = "Area Knowledge\
 \13\
 \13Area Knowledge is important to survival whether engaging in pkilling or mob\
@@ -10514,16 +10493,16 @@ MonCal@netscape.net \
 \13recall from.  This knowledge may save you in the future.\
 \13\
 \13", 
+               Keyword = "3a", 
             }, 
             [6] = 
             {
-               Keyword = "4", 
                Description = "Sorry this info could not be obtained.\
 \13", 
+               Keyword = "4", 
             }, 
             [7] = 
             {
-               Keyword = "4a", 
                Description = "Dealing with Immunities\
 \13\
 \13Some players and mobs are immune to different types of weapons and spells.\
@@ -10549,10 +10528,10 @@ MonCal@netscape.net \
 \13and send them in to test for a death trap.  Having friends in the mud pays\
 \13dividends in many ways.\
 \13", 
+               Keyword = "4a", 
             }, 
             [8] = 
             {
-               Keyword = "5", 
                Description = "Disarm\
 \13\
 \13If you can disarm an opponent and take their weapon, you can get a great\
@@ -10572,10 +10551,10 @@ MonCal@netscape.net \
 \13then backstab them.  Naughty but Nice!\
 \13\
 \13", 
+               Keyword = "5", 
             }, 
             [9] = 
             {
-               Keyword = "6", 
                Description = "Config +FLEE\
 \13\
 \13Many players like this until they flee into a death trap.  In general, it's\
@@ -10583,19 +10562,24 @@ MonCal@netscape.net \
 \13problems recalling.\
 \13\
 \13", 
+               Keyword = "6", 
             }, 
             [10] = 
             {
-               Keyword = "computer terminal", 
                Description = "", 
+               Keyword = "computer terminal", 
             }, 
          }, 
+         Name = "lever omputer terminal", 
+         Vnum = 21427, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "lever", 
          Weight = 1, 
+         Description = "&b A computer terminal rests aginst the wall here.", 
+         Cost = 45000, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10605,25 +10589,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ShortDescr = "A computer terminal lever", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [1] = "Hum", 
+         }, 
       }, 
       [21428] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "key ", 
-         ShortDescr = "Key", 
-         Vnum = 21428, 
-         Description = "Key", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "key ", 
+         Vnum = 21428, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "key", 
+         Description = "Key", 
+         Cost = 0, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -10634,24 +10622,17 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "Key", 
       }, 
       [21045] = 
       {
-         ActionDescription = "", 
-         Cost = 1000, 
-         Name = "crystal staff", 
-         Flags = 
-         {
-            [0] = "Glow", 
-            [6] = "Magic", 
-         }, 
-         ShortDescr = "a sparkling crystal staff", 
-         Vnum = 21045, 
-         Description = "A sparkling crystal staff has been left lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "crystal staff", 
+         Vnum = 21045, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -10659,6 +10640,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "_wand", 
          Weight = 1, 
+         Description = "A sparkling crystal staff has been left lying here.", 
+         Cost = 1000, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -10668,30 +10651,30 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 12, 
          }, 
-         Layers = 0, 
-      }, 
-      [21046] = 
-      {
+         ShortDescr = "a sparkling crystal staff", 
          ActionDescription = "", 
-         Cost = 1000, 
-         Name = "bag rune-covered", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
          }, 
-         ShortDescr = "a rune-covered bag", 
-         Vnum = 21046, 
-         Description = "A strange bag, covered in dust, has been left here.", 
+      }, 
+      [21046] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "bag rune-covered", 
+         Vnum = 21046, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "container", 
          Weight = 1, 
+         Description = "A strange bag, covered in dust, has been left here.", 
+         Cost = 1000, 
          ObjectValues = 
          {
             [1] = 1, 
@@ -10701,21 +10684,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 75, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a rune-covered bag", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [6] = "Magic", 
+         }, 
       }, 
       [21048] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "mail board stack", 
-         ShortDescr = "a stack of holomail", 
-         Vnum = 21048, 
-         Description = "A stack of holomail is piled high here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         ItemType = "furniture", 
-         Weight = 1001, 
+         Name = "mail board stack", 
+         Vnum = 21048, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10725,30 +10709,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         Description = "A stack of holomail is piled high here.", 
+         Cost = 0, 
+         Weight = 1001, 
+         ActionDescription = "", 
+         ShortDescr = "a stack of holomail", 
       }, 
       [21049] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "ball light", 
-         Flags = 
-         {
-            [0] = "Glow", 
-            [6] = "Magic", 
-         }, 
-         ShortDescr = "a bright ball of light", 
-         Vnum = 21049, 
-         Description = "A bright ball of light shimmers in the air.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "ball light", 
+         Vnum = 21049, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "light", 
          Weight = 1, 
+         Description = "A bright ball of light shimmers in the air.", 
+         Cost = 100, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10758,21 +10741,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a bright ball of light", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [6] = "Magic", 
+         }, 
       }, 
       [21435] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "augurer guild board", 
-         ShortDescr = "the board of the augurer guild", 
-         Vnum = 21435, 
-         Description = "Data Info Center - (Terminal)", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         ItemType = "furniture", 
-         Weight = 1, 
+         Name = "augurer guild board", 
+         Vnum = 21435, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -10782,24 +10766,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         Description = "Data Info Center - (Terminal)", 
+         Cost = 0, 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "the board of the augurer guild", 
       }, 
       [21055] = 
       {
-         ActionDescription = "", 
-         Cost = 500, 
-         Name = "thief ring", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [5] = "Invis", 
-         }, 
-         ShortDescr = "a thief's ring", 
-         Vnum = 21055, 
-         Description = "A ring which will bring good luck lies here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "thief ring", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 31, 
+               Modifier = 2, 
+            }, 
+         }, 
+         Vnum = 21055, 
          WearFlags = 
          {
             [1] = "Finger", 
@@ -10807,14 +10796,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 2, 
-               Location = 31, 
-            }, 
-         }, 
+         Description = "A ring which will bring good luck lies here.", 
+         Cost = 500, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -10824,78 +10807,76 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 3, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a thief's ring", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+            [5] = "Invis", 
+         }, 
       }, 
       [21056] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "Rumors say that these rings protect from magical enchantments...\
+\13", 
+               Keyword = "ring", 
+            }, 
+         }, 
          Name = "ring", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 17, 
+               Modifier = -3, 
+            }, 
+            [2] = 
+            {
+               Location = 27, 
+               Modifier = 3072, 
+            }, 
+         }, 
+         Vnum = 21056, 
+         WearFlags = 
+         {
+            [1] = "Finger", 
+            [0] = "Take", 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
+         Description = "An iron ring has fallen here.", 
+         Cost = 100, 
+         ObjectValues = 
+         {
+            [1] = 3, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ShortDescr = "a ring of the city guard", 
+         ActionDescription = "", 
          Flags = 
          {
             [0] = "Glow", 
             [6] = "Magic", 
             [19] = "LargeSize", 
          }, 
-         ShortDescr = "a ring of the city guard", 
-         Vnum = 21056, 
-         Description = "An iron ring has fallen here.", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "ring", 
-               Description = "Rumors say that these rings protect from magical enchantments...\
-\13", 
-            }, 
-         }, 
-         WearFlags = 
-         {
-            [1] = "Finger", 
-            [0] = "Take", 
-         }, 
-         ItemType = "armor", 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 3072, 
-               Location = 27, 
-            }, 
-            [2] = 
-            {
-               Modifier = -3, 
-               Location = 17, 
-            }, 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 3, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Layers = 0, 
       }, 
       [21057] = 
       {
-         ActionDescription = "", 
-         Cost = 30, 
-         Name = "a neck guard", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a neck guard", 
-         Vnum = 21057, 
-         Description = "A large neck guard was dropped here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "a neck guard", 
+         Vnum = 21057, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -10903,6 +10884,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 3, 
+         Description = "A large neck guard was dropped here.", 
+         Cost = 30, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -10912,24 +10895,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-      }, 
-      [21058] = 
-      {
+         ShortDescr = "a neck guard", 
          ActionDescription = "", 
-         Cost = 150, 
-         Name = "crested plate", 
          Flags = 
          {
             [19] = "LargeSize", 
             [13] = "Inventory", 
          }, 
-         ShortDescr = "a New rebublic crested breastplate", 
-         Vnum = 21058, 
-         Description = "A New Rebublic breastplate has fallen here.", 
+      }, 
+      [21058] = 
+      {
+         Layers = 128, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "crested plate", 
+         Vnum = 21058, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -10937,6 +10918,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 8, 
+         Description = "A New Rebublic breastplate has fallen here.", 
+         Cost = 150, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -10946,23 +10929,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 6, 
          }, 
-         Layers = 128, 
-      }, 
-      [21059] = 
-      {
+         ShortDescr = "a New rebublic crested breastplate", 
          ActionDescription = "", 
-         Cost = 50, 
-         Name = "a helm", 
          Flags = 
          {
             [19] = "LargeSize", 
+            [13] = "Inventory", 
          }, 
-         ShortDescr = "a helm", 
-         Vnum = 21059, 
-         Description = "A helm is here.", 
+      }, 
+      [21059] = 
+      {
+         Layers = 4, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "a helm", 
+         Vnum = 21059, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -10970,6 +10952,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 8, 
+         Description = "A helm is here.", 
+         Cost = 50, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -10979,23 +10963,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 4, 
-      }, 
-      [21060] = 
-      {
+         ShortDescr = "a helm", 
          ActionDescription = "", 
-         Cost = 20, 
-         Name = "guard leggings", 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         ShortDescr = "guard leggings", 
-         Vnum = 21060, 
-         Description = "A set of guard leggings has fallen here.", 
+      }, 
+      [21060] = 
+      {
+         Layers = 16, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "guard leggings", 
+         Vnum = 21060, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11003,6 +10985,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 4, 
+         Description = "A set of guard leggings has fallen here.", 
+         Cost = 20, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -11012,23 +10996,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 16, 
-      }, 
-      [21061] = 
-      {
+         ShortDescr = "guard leggings", 
          ActionDescription = "", 
-         Cost = 40, 
-         Name = "boots black", 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         ShortDescr = "black boots", 
-         Vnum = 21061, 
-         Description = "A set of boots has fallen here.", 
+      }, 
+      [21061] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "boots black", 
+         Vnum = 21061, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11036,6 +11018,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 2, 
+         Description = "A set of boots has fallen here.", 
+         Cost = 40, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -11045,23 +11029,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 0, 
-      }, 
-      [21062] = 
-      {
+         ShortDescr = "black boots", 
          ActionDescription = "", 
-         Cost = 20, 
-         Name = "guard sleeves", 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         ShortDescr = "guard sleeves", 
-         Vnum = 21062, 
-         Description = "A set of guard sleeves has fallen here.", 
+      }, 
+      [21062] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "guard sleeves", 
+         Vnum = 21062, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11069,6 +11051,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 3, 
+         Description = "A set of guard sleeves has fallen here.", 
+         Cost = 20, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -11078,23 +11062,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-      }, 
-      [21063] = 
-      {
+         ShortDescr = "guard sleeves", 
          ActionDescription = "", 
-         Cost = 40, 
-         Name = "guard gauntlets", 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         ShortDescr = "guard gauntlets", 
-         Vnum = 21063, 
-         Description = "Some guard gauntlets have fallen here.", 
+      }, 
+      [21063] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "guard gauntlets", 
+         Vnum = 21063, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11102,6 +11084,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 4, 
+         Description = "Some guard gauntlets have fallen here.", 
+         Cost = 40, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -11111,24 +11095,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-      }, 
-      [21064] = 
-      {
+         ShortDescr = "guard gauntlets", 
          ActionDescription = "", 
-         Cost = 75, 
-         Name = "bracer", 
          Flags = 
          {
             [19] = "LargeSize", 
-            [13] = "Inventory", 
          }, 
-         ShortDescr = "a bracer", 
-         Vnum = 21064, 
-         Description = "A bracer was dropped here.", 
+      }, 
+      [21064] = 
+      {
+         Layers = 128, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "bracer", 
+         Vnum = 21064, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11136,6 +11117,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 2, 
+         Description = "A bracer was dropped here.", 
+         Cost = 75, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -11145,23 +11128,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 4, 
          }, 
-         Layers = 128, 
+         ShortDescr = "a bracer", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+            [13] = "Inventory", 
+         }, 
       }, 
       [21065] = 
       {
-         ActionDescription = "", 
-         Cost = 600, 
-         Name = "calamarian energy shield", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a calamarian energy shield", 
-         Vnum = 21065, 
-         Description = "A calamarian energy shield was dropped here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "calamarian energy shield", 
+         Vnum = 21065, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11169,6 +11151,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 6, 
+         Description = "A calamarian energy shield was dropped here.", 
+         Cost = 600, 
          ObjectValues = 
          {
             [1] = 7, 
@@ -11178,24 +11162,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 7, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a calamarian energy shield", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
       }, 
       [21066] = 
       {
-         ActionDescription = "", 
-         Cost = 50, 
-         Name = "rubber visor", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a rubber visor", 
-         Vnum = 21066, 
-         Description = "A rubber visor was misplaced here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "rubber visor", 
+         Vnum = 21066, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11203,6 +11184,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 1, 
+         Description = "A rubber visor was misplaced here.", 
+         Cost = 50, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -11212,24 +11195,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 3, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a rubber visor", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+            [13] = "Inventory", 
+         }, 
       }, 
       [21067] = 
       {
-         ActionDescription = "", 
-         Cost = 10, 
-         Name = "torch", 
-         ShortDescr = "a torch", 
-         Vnum = 21067, 
-         Description = "A plain electric torch has been left lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "torch", 
+         Vnum = 21067, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "light", 
+         Description = "A plain electric torch has been left lying here.", 
+         Cost = 10, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11240,23 +11228,30 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a torch", 
       }, 
       [21068] = 
       {
-         ActionDescription = "", 
-         Cost = 300, 
-         Name = "com-blaster", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a com-blaster", 
-         Vnum = 21068, 
-         Description = "A com-blaster has fallen here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "com-blaster", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+            [2] = 
+            {
+               Location = 19, 
+               Modifier = 3, 
+            }, 
+         }, 
+         Vnum = 21068, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11264,19 +11259,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "weapon", 
          Weight = 3, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 3, 
-               Location = 19, 
-            }, 
-            [2] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
-            }, 
-         }, 
+         Description = "A com-blaster has fallen here.", 
+         Cost = 300, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11286,23 +11270,21 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a com-blaster", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
       }, 
       [21069] = 
       {
-         ActionDescription = "", 
-         Cost = 300, 
-         Name = "hand blaster", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ShortDescr = "hand blaster", 
-         Vnum = 21069, 
-         Description = "A hand blaster has fallen here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "hand blaster", 
+         Vnum = 21069, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11310,6 +11292,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "weapon", 
          Weight = 6, 
+         Description = "A hand blaster has fallen here.", 
+         Cost = 300, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11319,25 +11303,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ShortDescr = "hand blaster", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
       }, 
       [21070] = 
       {
-         ActionDescription = "", 
-         Cost = 1000, 
-         Name = "Key", 
-         ShortDescr = "Key to Docking Bay", 
-         Vnum = 21070, 
-         Description = "Key to Docking Bay", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Key", 
+         Vnum = 21070, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "armor", 
+         Description = "Key to Docking Bay", 
+         Cost = 1000, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11348,25 +11336,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "Key to Docking Bay", 
       }, 
       [21071] = 
       {
-         ActionDescription = "", 
-         Cost = 1000, 
-         Name = "Key", 
-         ShortDescr = "the key to the northern Docking bay of Akatamer", 
-         Vnum = 21071, 
-         Description = "The key to Akatamer's northern Docking bay lies here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Key", 
+         Vnum = 21071, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "armor", 
+         Description = "The key to Akatamer's northern Docking bay lies here.", 
+         Cost = 1000, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11377,25 +11365,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "the key to the northern Docking bay of Akatamer", 
       }, 
       [21072] = 
       {
-         ActionDescription = "", 
-         Cost = 1000, 
-         Name = "Key", 
-         ShortDescr = "the key to the eastern Docking bay of Akatamer", 
-         Vnum = 21072, 
-         Description = "The key to Akatamer's eastern Docking bay lies here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Key", 
+         Vnum = 21072, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "armor", 
+         Description = "The key to Akatamer's eastern Docking bay lies here.", 
+         Cost = 1000, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11406,25 +11394,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "the key to the eastern Docking bay of Akatamer", 
       }, 
       [21073] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "Key", 
-         ShortDescr = "Key to Southern Docking Bay.", 
-         Vnum = 21073, 
-         Description = "The Key to the southern Docking Bay", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Key", 
+         Vnum = 21073, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "armor", 
+         Description = "The Key to the southern Docking Bay", 
+         Cost = 0, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11435,25 +11423,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "Key to Southern Docking Bay.", 
       }, 
       [21076] = 
       {
-         ActionDescription = "", 
-         Cost = 200, 
-         Name = "leather shirt", 
-         ShortDescr = "a leather shirt", 
-         Vnum = 21076, 
-         Description = "Someone has left a bantha leather shirt lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "leather shirt", 
+         Vnum = 21076, 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
          ItemType = "armor", 
+         Description = "Someone has left a bantha leather shirt lying here.", 
+         Cost = 200, 
          Weight = 4, 
          ObjectValues = 
          {
@@ -11464,25 +11452,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 3, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a leather shirt", 
       }, 
       [21077] = 
       {
-         ActionDescription = "", 
-         Cost = 150, 
-         Name = "pants leather", 
-         ShortDescr = "some leather pants", 
-         Vnum = 21077, 
-         Description = "Some bantha leather pants are lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "pants leather", 
+         Vnum = 21077, 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
          ItemType = "armor", 
+         Description = "Some bantha leather pants are lying here.", 
+         Cost = 150, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -11493,25 +11481,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "some leather pants", 
       }, 
       [21078] = 
       {
-         ActionDescription = "", 
-         Cost = 75, 
-         Name = "leather sleeves", 
-         ShortDescr = "some leather sleeves", 
-         Vnum = 21078, 
-         Description = "Some bantha leather sleeves have been abandoned here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "leather sleeves", 
+         Vnum = 21078, 
          WearFlags = 
          {
             [0] = "Take", 
             [8] = "Arms", 
          }, 
          ItemType = "armor", 
+         Description = "Some bantha leather sleeves have been abandoned here.", 
+         Cost = 75, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11522,25 +11510,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "some leather sleeves", 
       }, 
       [21079] = 
       {
-         ActionDescription = "", 
-         Cost = 125, 
-         Name = "leather boots", 
-         ShortDescr = "some leather boots", 
-         Vnum = 21079, 
-         Description = "A pair of bantha leather boots are lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "leather boots", 
+         Vnum = 21079, 
          WearFlags = 
          {
             [0] = "Take", 
             [6] = "Feet", 
          }, 
          ItemType = "armor", 
+         Description = "A pair of bantha leather boots are lying here.", 
+         Cost = 125, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -11551,25 +11539,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "some leather boots", 
       }, 
       [21080] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "leather gloves pair", 
-         ShortDescr = "a pair of leather gloves", 
-         Vnum = 21080, 
-         Description = "Two bantha leather gloves are lying on the ground.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "leather gloves pair", 
+         Vnum = 21080, 
          WearFlags = 
          {
             [0] = "Take", 
             [7] = "Hands", 
          }, 
          ItemType = "armor", 
+         Description = "Two bantha leather gloves are lying on the ground.", 
+         Cost = 100, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11580,24 +11568,17 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a pair of leather gloves", 
       }, 
       [21081] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "steel knife", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "a steel knife", 
-         Vnum = 21081, 
-         Description = "A gleaming knife shines brightly here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "steel knife", 
+         Vnum = 21081, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11605,6 +11586,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "weapon", 
          Weight = 1, 
+         Description = "A gleaming knife shines brightly here.", 
+         Cost = 100, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11614,24 +11597,22 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-      }, 
-      [21082] = 
-      {
+         ShortDescr = "a steel knife", 
          ActionDescription = "", 
-         Cost = 200, 
-         Name = "Mon-blaster", 
          Flags = 
          {
             [19] = "LargeSize", 
             [13] = "Inventory", 
          }, 
-         ShortDescr = "Mon blaster", 
-         Vnum = 21082, 
-         Description = "An Mon Blaster has been carelessly left here.", 
+      }, 
+      [21082] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Mon-blaster", 
+         Vnum = 21082, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -11639,6 +11620,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "weapon", 
          Weight = 4, 
+         Description = "An Mon Blaster has been carelessly left here.", 
+         Cost = 200, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -11648,24 +11631,29 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 7, 
          }, 
-         Layers = 0, 
+         ShortDescr = "Mon blaster", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+            [13] = "Inventory", 
+         }, 
       }, 
       [21083] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "Key", 
-         ShortDescr = "hotel  key", 
-         Vnum = 21083, 
-         Description = "This item doesn't need a long :P", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "Key", 
+         Vnum = 21083, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "key", 
+         Description = "This item doesn't need a long :P", 
+         Cost = 0, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11676,24 +11664,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "hotel  key", 
       }, 
       [21094] = 
       {
-         ActionDescription = "", 
-         Cost = 10000, 
-         Name = "ring golden band", 
-         Flags = 
-         {
-            [0] = "Glow", 
-            [6] = "Magic", 
-         }, 
-         ShortDescr = "a strange golden band", 
-         Vnum = 21094, 
-         Description = "A strange golden band has been left lying here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "ring golden band", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 27, 
+               Modifier = 3072, 
+            }, 
+         }, 
+         Vnum = 21094, 
          WearFlags = 
          {
             [1] = "Finger", 
@@ -11701,14 +11690,8 @@ MonCal@netscape.net \
          }, 
          ItemType = "armor", 
          Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 3072, 
-               Location = 27, 
-            }, 
-         }, 
+         Description = "A strange golden band has been left lying here.", 
+         Cost = 10000, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -11718,54 +11701,46 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
+         ShortDescr = "a strange golden band", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [6] = "Magic", 
+         }, 
       }, 
       [21426] = 
       {
-         ActionDescription = "", 
-         Cost = 200, 
-         Name = "gill mask", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
          ShortDescr = "&O A Mon Gill", 
-         Vnum = 21426, 
-         Description = "&O A Mon Gill was left here on the ground.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "gill mask", 
                Description = "&O The mon gill while very effective has a very short life span.\
 \13", 
+               Keyword = "gill mask", 
             }, 
          }, 
+         Name = "gill mask", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 26, 
+               Modifier = -2147483648, 
+            }, 
+         }, 
+         Vnum = 21426, 
          WearFlags = 
          {
             [0] = "Take", 
             [4] = "Head", 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "rand_prog", 
-               Code = "mpecho &R^R Warning, Gill Mask Failure &x ^x\
-", 
-               Arguments = "1", 
-            }, 
-         }, 
          ItemType = "armor", 
          Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -2147483648, 
-               Location = 26, 
-            }, 
-         }, 
+         Description = "&O A Mon Gill was left here on the ground.", 
+         Cost = 200, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11775,24 +11750,38 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpecho &R^R Warning, Gill Mask Failure &x ^x\
+", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "1", 
+            }, 
+         }, 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
       }, 
       [21138] = 
       {
-         ActionDescription = "%s quickly eat$q $p.", 
-         Cost = 200, 
-         Name = "wild mustard greens", 
-         ShortDescr = "some wild seaweed greens", 
-         Vnum = 21138, 
-         Description = "Some freshly gathered wild seaweed have been forgotten here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "wild mustard greens", 
+         Vnum = 21138, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "food", 
+         Description = "Some freshly gathered wild seaweed have been forgotten here.", 
+         Cost = 200, 
          Weight = 2, 
          ObjectValues = 
          {
@@ -11803,25 +11792,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "%s quickly eat$q $p.", 
+         ShortDescr = "some wild seaweed greens", 
       }, 
       [21008] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "beer bottle", 
-         ShortDescr = "a bottle of beer", 
-         Vnum = 21008, 
-         Description = "A small bottle, tipped on its side, drips on the ground.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "beer bottle", 
+         Vnum = 21008, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "drink_container", 
+         Description = "A small bottle, tipped on its side, drips on the ground.", 
+         Cost = 100, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -11832,47 +11821,25 @@ MonCal@netscape.net \
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a bottle of beer", 
       }, 
       [21111] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "manor painting", 
-         Flags = 
-         {
-            [8] = "Bless", 
-         }, 
-         ShortDescr = "an oil painting", 
-         Vnum = 21111, 
-         Description = "A painting of a glorious security post hangs on the wall, catching your eye.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "painting manor house", 
                Description = "You move closer to take a look at the image in the painting.  The post is\
 \13beautiful, inviting and imposing all at the same time.  You find yourself\
 \13wondering what it would be like to work in such a place...\
 \13", 
+               Keyword = "painting manor house", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Weight = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "exa_prog", 
-               Code = "mpechoat $n A magical force suddenly takes hold of you, pulling you in!\
-mpechoat $n When you right yourself, you look around to collect your bearings,\
-mpechoat $n and find yourself standing before the manor...\
-mptrans $n 2400\
-mpecho $n fades before your eyes while examining the painting of the manor.\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
+         Name = "manor painting", 
+         Vnum = 21111, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11882,36 +11849,39 @@ mpecho $n fades before your eyes while examining the painting of the manor.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-      }, 
-      [21112] = 
-      {
-         ActionDescription = "", 
+         ItemType = "furniture", 
+         ShortDescr = "an oil painting", 
+         Description = "A painting of a glorious security post hangs on the wall, catching your eye.", 
          Cost = 0, 
-         Name = "solemn painting unholy", 
+         Weight = 1, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "exa_prog", 
-               Code = "mpechoat $n Your feel your body as it dissolves into elements of color,\
-mpechoat $n sphotel ing slowly into the oils of the dark painting...\
-mpechoaround $n Stepping forward to examine the painting, $n's body begins to\
-mpechoaround $n liquesce, dissolving into a kaleidoscope of colors, sphotel ing\
-mpechoaround $n funnel-like into the oiled textures of the solemn image.\
-mptransfer $n 2171\
+               Code = "mpechoat $n A magical force suddenly takes hold of you, pulling you in!\
+mpechoat $n When you right yourself, you look around to collect your bearings,\
+mpechoat $n and find yourself standing before the manor...\
+mptrans $n 2400\
+mpecho $n fades before your eyes while examining the painting of the manor.\
 ", 
+               MudProgType = "exa_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
          }, 
-         ShortDescr = "a dark, solemn painting", 
-         Vnum = 21112, 
-         Description = "A dark, solemn painting hangs here in the shadows, collecting dust.", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [8] = "Bless", 
+         }, 
+      }, 
+      [21112] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "solemn painting unholy", 
                Description = "Gazing at the painting, you find yourself entranced by the image of a\
 \13woman kneeling at the foot of a grave, mourning the loss of her child.\
 \13As tears stream down her face, she finds the arms of an angel wrapped\
@@ -11920,10 +11890,11 @@ mptransfer $n 2171\
 \13the painting, screaming as the angel of darkness drags you, too, \
 \13unto the unholy grounds of the dead.\
 \13", 
+               Keyword = "solemn painting unholy", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Weight = 50, 
+         Name = "solemn painting unholy", 
+         Vnum = 21112, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11933,25 +11904,44 @@ mptransfer $n 2171\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         Description = "A dark, solemn painting hangs here in the shadows, collecting dust.", 
+         Cost = 0, 
+         Weight = 50, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n Your feel your body as it dissolves into elements of color,\
+mpechoat $n sphotel ing slowly into the oils of the dark painting...\
+mpechoaround $n Stepping forward to examine the painting, $n's body begins to\
+mpechoaround $n liquesce, dissolving into a kaleidoscope of colors, sphotel ing\
+mpechoaround $n funnel-like into the oiled textures of the solemn image.\
+mptransfer $n 2171\
+", 
+               MudProgType = "exa_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
+         ActionDescription = "", 
+         ShortDescr = "a dark, solemn painting", 
       }, 
       [21113] = 
       {
-         ActionDescription = "", 
-         Cost = 2, 
-         Name = "map", 
-         Flags = 
-         {
-            [8] = "Bless", 
-         }, 
-         ShortDescr = "A ratted up map", 
-         Vnum = 21113, 
-         Description = "A ratted up map was left here.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "map", 
+               Description = "You move closer to take a look at the image in the painting.  The post is\
+\13beautiful, inviting and imposing all at the same time.  You find yourself\
+\13wondering what it would be like to work in such a place...\
+\13", 
+               Keyword = "painting manor house", 
+            }, 
+            [2] = 
+            {
                Description = "&cHead down the ladder, watch out because the water is cold.\
 \13Then you swimm 5 legs toward the northern polor.\
 \13Then dive down one depth.\
@@ -11965,22 +11955,19 @@ mptransfer $n 2171\
 \13Two legs southern polar/sunrise\
 \13One leg to the sunrise.\
 \13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "painting manor house", 
-               Description = "You move closer to take a look at the image in the painting.  The post is\
-\13beautiful, inviting and imposing all at the same time.  You find yourself\
-\13wondering what it would be like to work in such a place...\
-\13", 
+               Keyword = "map", 
             }, 
          }, 
+         Name = "map", 
+         Vnum = 21113, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          ItemType = "furniture", 
          Weight = 1, 
+         Description = "A ratted up map was left here.", 
+         Cost = 2, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -11990,51 +11977,82 @@ mptransfer $n 2171\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-      }, 
-      [21114] = 
-      {
+         ShortDescr = "A ratted up map", 
          ActionDescription = "", 
-         Cost = 0, 
-         Name = "statue", 
          Flags = 
          {
             [8] = "Bless", 
          }, 
-         ShortDescr = "&c A large bronze statue ", 
-         Vnum = 21114, 
-         Description = "&c A large bronze statue stands tall here.", 
+      }, 
+      [21114] = 
+      {
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "statue", 
-               Description = "&c This large bronze statue is of a great Mon Calamarian individual, who\
-\13helped end the first Imperial force and the second Death Star. There is  a\
-\13small frame on the sign with a gold inprint on it.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "painting manor house", 
                Description = "You move closer to take a look at the image in the painting.  The post is\
 \13beautiful, inviting and imposing all at the same time.  You find yourself\
 \13wondering what it would be like to work in such a place...\
 \13", 
+               Keyword = "painting manor house", 
+            }, 
+            [2] = 
+            {
+               Description = "&c This large bronze statue is of a great Mon Calamarian individual, who\
+\13helped end the first Imperial force and the second Death Star. There is  a\
+\13small frame on the sign with a gold inprint on it.\
+\13", 
+               Keyword = "statue", 
             }, 
          }, 
+         Name = "statue", 
+         Vnum = 21114, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          ItemType = "furniture", 
+         ShortDescr = "&c A large bronze statue ", 
+         Description = "&c A large bronze statue stands tall here.", 
+         Cost = 0, 
          Weight = 1, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "act_prog", 
                Code = "mpecho You feel all your prayers are being answered from above.\
 ", 
+               MudProgType = "act_prog", 
+               ScriptType = "MProg", 
                Arguments = "bow pray", 
             }, 
          }, 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [8] = "Bless", 
+         }, 
+      }, 
+      [21115] = 
+      {
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "What you've never seen a chair before??\
+\13", 
+               Keyword = "Chair", 
+            }, 
+         }, 
+         Name = "bed prison", 
+         Vnum = 21115, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -12044,71 +12062,42 @@ mptransfer $n 2171\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-      }, 
-      [21115] = 
-      {
-         ActionDescription = "", 
+         ItemType = "furniture", 
+         Description = "&z A metal prison bed lies aginst the wall. &x", 
          Cost = 0, 
-         Name = "bed prison", 
+         Weight = 1, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "act_prog", 
                Code = "mpecho You plop flat in the large metal bed relaxing..\
 mpecho thinking this is not to bad when...\
 mpecho  BOING!\
 mpecho  A spring pokes you in the back.\
 mpforce $n stand\
 ", 
+               MudProgType = "act_prog", 
+               ScriptType = "MProg", 
                Arguments = "100 p sits down.", 
             }, 
          }, 
+         ActionDescription = "", 
          ShortDescr = "&z A metal prison bed ", 
-         Vnum = 21115, 
-         Description = "&z A metal prison bed lies aginst the wall. &x", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Chair", 
-               Description = "What you've never seen a chair before??\
-\13", 
-            }, 
-         }, 
-         ItemType = "furniture", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
       }, 
       [21116] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         Name = "suction john toilet waste", 
-         ShortDescr = "&c A TI-0 suction waste machine", 
-         Vnum = 21116, 
-         Description = "&c A TI-0 suction waste machine is placed in the corner.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "Chair", 
                Description = "What you've never seen a chair before??\
 \13", 
+               Keyword = "Chair", 
             }, 
          }, 
-         ItemType = "trash", 
-         Weight = 1, 
+         Name = "suction john toilet waste", 
+         Vnum = 21116, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -12118,24 +12107,29 @@ mpforce $n stand\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
+         ItemType = "trash", 
+         Description = "&c A TI-0 suction waste machine is placed in the corner.", 
+         Cost = 0, 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "&c A TI-0 suction waste machine", 
       }, 
       [21117] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
-         Name = "vest gamorean double strap", 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ShortDescr = "&G A gamorrean double strap vest &x", 
-         Vnum = 21117, 
-         Description = "&G A gamorrean double strap vest was left here. &x", 
+         Layers = 8, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "vest gamorean double strap", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 14, 
+               Modifier = -10, 
+            }, 
+         }, 
+         Vnum = 21117, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -12144,14 +12138,8 @@ mpforce $n stand\
          }, 
          ItemType = "armor", 
          Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -10, 
-               Location = 14, 
-            }, 
-         }, 
+         Description = "&G A gamorrean double strap vest was left here. &x", 
+         Cost = 100, 
          ObjectValues = 
          {
             [1] = 7, 
@@ -12161,23 +12149,35 @@ mpforce $n stand\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 8, 
-      }, 
-      [21118] = 
-      {
+         ShortDescr = "&G A gamorrean double strap vest &x", 
          ActionDescription = "", 
-         Cost = 125, 
-         Name = "boots lizard feet cover", 
          Flags = 
          {
             [19] = "LargeSize", 
+            [13] = "Inventory", 
          }, 
-         ShortDescr = "&b Lizard skin feet covers.", 
-         Vnum = 21118, 
-         Description = "&b Lizard skin feet covers were left here &x.", 
+      }, 
+      [21118] = 
+      {
+         Layers = 4, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "boots lizard feet cover", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 14, 
+               Modifier = -20, 
+            }, 
+            [2] = 
+            {
+               Location = 47, 
+               Modifier = 100, 
+            }, 
+         }, 
+         Vnum = 21118, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -12185,19 +12185,8 @@ mpforce $n stand\
          }, 
          ItemType = "armor", 
          Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 100, 
-               Location = 47, 
-            }, 
-            [2] = 
-            {
-               Modifier = -20, 
-               Location = 14, 
-            }, 
-         }, 
+         Description = "&b Lizard skin feet covers were left here &x.", 
+         Cost = 125, 
          ObjectValues = 
          {
             [1] = 8, 
@@ -12207,25 +12196,29 @@ mpforce $n stand\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 4, 
+         ShortDescr = "&b Lizard skin feet covers.", 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
       }, 
       [21009] = 
       {
-         ActionDescription = "", 
-         Cost = 50, 
-         Name = "whiskey bottle", 
-         ShortDescr = "a bottle of whiskey", 
-         Vnum = 21009, 
-         Description = "A bottle of whiskey spills drops on the ground.", 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Name = "whiskey bottle", 
+         Vnum = 21009, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
          ItemType = "drink_container", 
+         Description = "A bottle of whiskey spills drops on the ground.", 
+         Cost = 50, 
          Weight = 1, 
          ObjectValues = 
          {
@@ -12236,36 +12229,47 @@ mpforce $n stand\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
+         ActionDescription = "", 
+         ShortDescr = "a bottle of whiskey", 
       }, 
    }, 
-   Author = "Ackbar", 
-   FileFormatVersion = 1, 
-   Flags = 
-   {
-      [0] = "NoPkill", 
-   }, 
-   LowEconomy = 187437345, 
    Mobiles = 
    {
       [21000] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A elderly saint wearing only a dark robe wanders here.\
 ", 
+         Name = "healer jedi saint", 
+         Alignment = 1000, 
+         Vnum = 21000, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 25, 
+            HitPlus = 300, 
+            HitSizeDice = 500, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 25, 
-            HitSizeDice = 500, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
          Languages = 
          {
             Speaking = 
@@ -12294,23 +12298,25 @@ mpforce $n stand\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
@@ -12319,56 +12325,40 @@ mpforce $n stand\
             [0] = "parry", 
             [8] = "_08", 
          }, 
-         DamRoll = 0, 
-         Name = "healer jedi saint", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 50, 
+         DamRoll = 0, 
          ShortDescr = "elderly saint", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "female", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         AffectedBy = 
+         Damage = 
          {
-            [7] = "Sanctuary", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21000, 
          Description = "", 
       }, 
       [21001] = 
       {
-         Alignment = 0, 
+         Race = "Quarren", 
          LongDescr = "Anakiem the shopkeeper stands here.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Name = "Anakiem shopkeeper", 
+         Alignment = 0, 
+         Vnum = 21001, 
+         Position = "standing", 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -12378,25 +12368,27 @@ mpforce $n stand\
                [0] = "none", 
             }, 
             KeeperShortDescr = "Anikem the shopkeeper", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
                Code = "smile\
 nod\
 ' ahh the rare corusca crystal is what you seek \
@@ -12404,8 +12396,29 @@ nod\
 ' Seek him out if you seek that crystal.\
 smile $n\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "corusca", 
             }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -12422,22 +12435,56 @@ smile $n\
                [5] = "mon calamarian", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = -300, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
-         Race = "Quarren", 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 4, 
+         ShortDescr = "Anikem the shopkeeper", 
+         Credits = 0, 
+         NumberOfAttacks = 6, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 34, 
+         Damage = 
+         {
+            DamSizeDice = 100, 
+            DamPlus = 100, 
+            DamNoDice = 20, 
+         }, 
+         Description = "", 
+      }, 
+      [21002] = 
+      {
+         Race = "Twi'lek", 
+         LongDescr = "Torval the repir tech works on armor.\
+", 
+         Name = "Torval repair", 
+         Alignment = 0, 
+         Vnum = 21002, 
+         Position = "standing", 
+         Description = "", 
          Immune = 
          {
             [10] = "sleep", 
@@ -12446,90 +12493,51 @@ smile $n\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 4, 
-         Name = "Anakiem shopkeeper", 
-         ArmorClass = -300, 
-         Level = 50, 
-         ShortDescr = "Anikem the shopkeeper", 
-         Damage = 
-         {
-            DamPlus = 100, 
-            DamSizeDice = 100, 
-            DamNoDice = 20, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 34, 
-         NumberOfAttacks = 6, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21001, 
-         Description = "", 
-      }, 
-      [21002] = 
-      {
-         Alignment = 0, 
-         LongDescr = "Torval the repir tech works on armor.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Code = "Say hello, if you don't have a weapon for me to repair please leave I'm\
-mpecho busy!\
-", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "rand_prog", 
                Code = "mpecho You hear loud bangs as Torval hammers out dents in the\
 mpecho weapons\
 ", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
                Arguments = "10 ", 
             }, 
+            [2] = 
+            {
+               Code = "Say hello, if you don't have a weapon for me to repair please leave I'm\
+mpecho busy!\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -12546,16 +12554,49 @@ mpecho weapons\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = -300, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the repair tech", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 1, 
+            DamPlus = 1000, 
+            DamNoDice = 1, 
+         }, 
          RepairShop = 
          {
-            ProfitFix = 120, 
-            KeeperShortDescr = "the repair tech", 
-            ShopType = 1, 
             BusinessHours = 
             {
-               Close = 23, 
                Open = 0, 
+               Close = 23, 
             }, 
             FixTypes = 
             {
@@ -12563,13 +12604,20 @@ mpecho weapons\
                [2] = "none", 
                [0] = "none", 
             }, 
+            ShopType = 1, 
+            ProfitFix = 120, 
+            KeeperShortDescr = "the repair tech", 
          }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-         }, 
-         Race = "Twi'lek", 
+      }, 
+      [21003] = 
+      {
+         Race = "Wookiee", 
+         LongDescr = "The Rodian spice dealer stands behind the counter.\
+", 
+         Name = "Shana spice dealer", 
+         Alignment = 0, 
+         Vnum = 21003, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -12578,67 +12626,19 @@ mpecho weapons\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "Torval repair", 
-         ArmorClass = -300, 
-         Level = 50, 
-         ShortDescr = "the repair tech", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21002, 
-         Description = "", 
-      }, 
-      [21003] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The Rodian spice dealer stands behind the counter.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -12648,12 +12648,27 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the spice dealer", 
+            ProfitSell = 90, 
             ProfitBuy = 115, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -12669,22 +12684,55 @@ mpecho weapons\
                [5] = "mon calamarian", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the spice dealer", 
+         Credits = 0, 
+         NumberOfAttacks = 6, 
+         Weight = 0, 
+         Sex = "female", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 100, 
+            DamNoDice = 4, 
+         }, 
+         Description = "", 
+      }, 
+      [21004] = 
+      {
          Race = "Wookiee", 
+         LongDescr = "The Shuttleee sits here.\
+", 
+         Name = "Shuttleee", 
+         Alignment = 0, 
+         Vnum = 21004, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -12693,67 +12741,19 @@ mpecho weapons\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "Shana spice dealer", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the spice dealer", 
-         Damage = 
-         {
-            DamPlus = 100, 
-            DamSizeDice = 5, 
-            DamNoDice = 4, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 6, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21003, 
-         Description = "", 
-      }, 
-      [21004] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The Shuttleee sits here.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -12763,12 +12763,27 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the Shuttleee", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -12783,76 +12798,98 @@ mpecho weapons\
                [0] = "basic", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         Race = "Wookiee", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 0, 
-         Name = "Shuttleee", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Shuttleee", 
-         Damage = 
+         AttackFlags = 
          {
-            DamPlus = 100, 
-            DamSizeDice = 5, 
-            DamNoDice = 4, 
+            [4] = "punch", 
+            [5] = "kick", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Shuttleee", 
+         Credits = 0, 
+         NumberOfAttacks = 6, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 6, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 100, 
+            DamNoDice = 4, 
+         }, 
+         Description = "", 
+      }, 
+      [21006] = 
+      {
+         Race = "Human", 
+         LongDescr = "The skill teacher awaits a student.\
+", 
+         Name = "guildmaster", 
+         Alignment = -1000, 
+         Vnum = 21006, 
+         Position = "standing", 
+         Resistant = 
+         {
+            [1] = "cold", 
+            [4] = "blunt", 
+            [20] = "magic", 
+         }, 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
          AffectedBy = 
          {
+            [19] = "Flying", 
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21004, 
-         Description = "", 
-      }, 
-      [21006] = 
-      {
-         Alignment = -1000, 
-         LongDescr = "The skill teacher awaits a student.\
-", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -12871,29 +12908,16 @@ mpecho weapons\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Position = "standing", 
+         ArmorClass = 0, 
          Susceptible = 
          {
             [0] = "fire", 
             [5] = "pierce", 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
          AttackFlags = 
          {
             [12] = "_12", 
@@ -12901,97 +12925,32 @@ mpecho weapons\
             [6] = "_06", 
             [11] = "_11", 
          }, 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Resistant = 
-         {
-            [1] = "cold", 
-            [4] = "blunt", 
-            [20] = "magic", 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         DamRoll = 0, 
-         Name = "guildmaster", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 50, 
+         DamRoll = 0, 
          ShortDescr = "skill teacher", 
-         Damage = 
-         {
-            DamPlus = 20, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 3, 
-         AffectedBy = 
+         Damage = 
          {
-            [19] = "Flying", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
+            DamSizeDice = 1, 
+            DamPlus = 20, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21006, 
          Description = "", 
       }, 
       [21007] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Mon Calamrian doll", 
          Alignment = 1000, 
-         LongDescr = "A Calamrian doll hangs limply here.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 100, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
          Vnum = 21007, 
+         Position = "standing", 
          Immune = 
          {
             [1] = "cold", 
@@ -13017,57 +12976,97 @@ mpecho weapons\
             [21] = "paralysis", 
             [0] = "fire", 
          }, 
-         Name = "Mon Calamrian doll", 
-         ArmorClass = 0, 
-         Level = 1, 
-         ShortDescr = "the Calamrian doll", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Human", 
-         Height = 0, 
          Description = "", 
-         Sex = "female", 
-      }, 
-      [21009] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A Builder offers you his selection of Mon made ships.\
-", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 100, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
-            [6] = "StayArea", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         DamRoll = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          Credits = 0, 
+         LongDescr = "A Calamrian doll hangs limply here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "the Calamrian doll", 
+      }, 
+      [21009] = 
+      {
+         Race = "Human", 
+         LongDescr = "A Builder offers you his selection of Mon made ships.\
+", 
+         Name = "Ship builder", 
+         Alignment = 0, 
+         Vnum = 21009, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13077,14 +13076,21 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the Builder", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -13096,20 +13102,57 @@ mpecho weapons\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Builder", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
          }, 
+         Description = "", 
+      }, 
+      [21010] = 
+      {
          Race = "Human", 
+         LongDescr = "The cute Calamrian waitress awaits your order.\
+", 
+         Name = "waitress", 
+         Alignment = 0, 
+         Vnum = 21010, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -13118,64 +13161,43 @@ mpecho weapons\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "Ship builder", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Builder", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         HitChance = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21009, 
-         Description = "", 
-      }, 
-      [21010] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The cute Calamrian waitress awaits your order.\
-", 
          Flags = 
          {
             [1] = "Sentinel", 
             [2] = "Scavenger", 
             [0] = "Npc", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
+         ArmorClass = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13185,14 +13207,81 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the waitress", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the waitress", 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
          Weight = 0, 
+         Sex = "female", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         Description = "", 
+      }, 
+      [21011] = 
+      {
+         Race = "Human", 
+         LongDescr = "A thin Calamrian printer sits behind a stack of papers.\
+", 
+         Name = "printer", 
+         Alignment = 0, 
+         Vnum = 21011, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -13202,83 +13291,17 @@ mpecho weapons\
             Speaks = 
             {
                [0] = "basic", 
+               [5] = "mon calamarian", 
             }, 
          }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         DamRoll = 0, 
-         Name = "waitress", 
          ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the waitress", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21010, 
-         Description = "", 
-      }, 
-      [21011] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A thin Calamrian printer sits behind a stack of papers.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13288,141 +13311,62 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the printer", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         DamRoll = 0, 
-         Name = "printer", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the printer", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 3, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21011, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the printer", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
          Description = "", 
       }, 
       [21012] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "The Guild's Shuttleer meditates here.\
 \
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-            [10] = "Practice", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
+         Name = "Shuttleer father", 
+         Alignment = 1000, 
+         Vnum = 21012, 
          Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
          Immune = 
          {
             [21] = "paralysis", 
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         DamRoll = 0, 
-         Name = "Shuttleer father", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Guild Father", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 5, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [7] = "Sanctuary", 
@@ -13430,35 +13374,84 @@ mpecho weapons\
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         HitChance = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21012, 
-         Description = "", 
-      }, 
-      [21013] = 
-      {
-         Alignment = 0, 
-         LongDescr = "Monei the bartender stands behind his counter.\
-", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
+            [6] = "StayArea", 
+            [10] = "Practice", 
          }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Guild Father", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 800, 
+            DamNoDice = 100, 
+         }, 
+         Description = "", 
+      }, 
+      [21013] = 
+      {
+         Race = "Human", 
+         LongDescr = "Monei the bartender stands behind his counter.\
+", 
+         Name = "Monei bartender", 
+         Alignment = 0, 
+         Vnum = 21013, 
+         Position = "standing", 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13468,37 +13461,61 @@ mpecho weapons\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the bartender Monei", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "rand_prog", 
-               Code = "mpemote You hear the bartender say, \"I wish those dman vendors would shut\
-up!\"\
+               Code = "Say Pull up a chair and have a drink, we only live once ya know.\
 ", 
-               Arguments = "10 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
             }, 
             [2] = 
             {
-               MudProgType = "all_greet_prog", 
-               Code = "Say Pull up a chair and have a drink, we only live once ya know.\
+               Code = "mpemote You hear the bartender say, \"I wish those dman vendors would shut\
+up!\"\
 ", 
-               Arguments = "100", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "10 ", 
             }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -13514,22 +13531,55 @@ up!\"\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the bartender Monei", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 100, 
+            DamPlus = 800, 
+            DamNoDice = 5, 
+         }, 
+         Description = "", 
+      }, 
+      [21014] = 
+      {
          Race = "Human", 
+         LongDescr = "&C Joyta, Mon Calamarian Jewler displays here jems in the case.\
+", 
+         Name = "jeweler", 
+         Alignment = 0, 
+         Vnum = 21014, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -13538,67 +13588,19 @@ up!\"\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "Monei bartender", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the bartender Monei", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 100, 
-            DamNoDice = 5, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21013, 
-         Description = "", 
-      }, 
-      [21014] = 
-      {
-         Alignment = 0, 
-         LongDescr = "&C Joyta, Mon Calamarian Jewler displays here jems in the case.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13608,49 +13610,59 @@ up!\"\
                [0] = "none", 
             }, 
             KeeperShortDescr = "Joyta, Mon Calamarian Jewler", 
+            ProfitSell = 90, 
             ProfitBuy = 95, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Code = "Say Hello $n in the mood for buying some Jewlery?\
+               Code = "Yell Come in , I've got the best Jewlery in the Galexy!\
 ", 
-               Arguments = "hi hello ", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "5 ", 
             }, 
             [2] = 
             {
-               MudProgType = "speech_prog", 
-               Code = "Say Good come take a look at my display!\
+               Code = "Say Hello $n in the mood for buying some Jewlery?\
 ", 
-               Arguments = "yes", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "hi hello ", 
             }, 
             [3] = 
             {
+               Code = "Say Good come take a look at my display!\
+", 
                MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "yes", 
+            }, 
+            [4] = 
+            {
                Code = "say Sorry those are not for sale, protected by the governement.\
 say Shhhh , I hear there are more in the ocean, get me one and I'll pay you\
 a high\
 price.\
 say but you didn't here that from me.\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "ultima pearl ultima_pearl", 
             }, 
-            [4] = 
-            {
-               MudProgType = "rand_prog", 
-               Code = "Yell Come in , I've got the best Jewlery in the Galexy!\
-", 
-               Arguments = "5 ", 
-            }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -13664,85 +13676,65 @@ say but you didn't here that from me.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         DamRoll = 0, 
-         Name = "jeweler", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 50, 
+         DamRoll = 0, 
          ShortDescr = "Joyta, Mon Calamarian Jewler", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "female", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21014, 
          Description = "", 
       }, 
       [21015] = 
       {
-         Alignment = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
+         Race = "Human", 
+         Description = "", 
          LongDescr = "Rax the armourer is here fitting a Mon Calamrian  helm.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Name = "rax armourer", 
+         Alignment = 0, 
+         Vnum = 21015, 
+         Position = "standing", 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13752,30 +13744,53 @@ say but you didn't here that from me.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the Rax armourer", 
+            ProfitSell = 90, 
             ProfitBuy = 130, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
                Code = "Say Welcome $n Heard you were in town.\
 say If you want any equipment just tell me.\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -13791,16 +13806,49 @@ say If you want any equipment just tell me.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Rax armourer", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "female", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 1, 
+            DamPlus = 1000, 
+            DamNoDice = 1, 
+         }, 
          RepairShop = 
          {
-            ProfitFix = 100, 
-            KeeperShortDescr = "the Rax armourer", 
-            ShopType = 1, 
             BusinessHours = 
             {
-               Close = 23, 
                Open = 0, 
+               Close = 23, 
             }, 
             FixTypes = 
             {
@@ -13808,13 +13856,20 @@ say If you want any equipment just tell me.\
                [2] = "none", 
                [0] = "none", 
             }, 
+            ShopType = 1, 
+            ProfitFix = 100, 
+            KeeperShortDescr = "the Rax armourer", 
          }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-         }, 
+      }, 
+      [21016] = 
+      {
          Race = "Human", 
+         LongDescr = "The weaponsmith Bonta, labors over a lengthy blade.\
+", 
+         Name = "bonta weaponsmith", 
+         Alignment = 0, 
+         Vnum = 21016, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -13823,67 +13878,19 @@ say If you want any equipment just tell me.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "rax armourer", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Rax armourer", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21015, 
-         Description = "", 
-      }, 
-      [21016] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The weaponsmith Bonta, labors over a lengthy blade.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -13893,25 +13900,32 @@ say If you want any equipment just tell me.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the Bonta weaponsmith", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
                Code = "Say Welcome to my shop care to buy a weapon?\
 mpecho Bonta grins at you evily.\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -13926,20 +13940,57 @@ mpecho Bonta grins at you evily.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Bonta weaponsmith", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
          }, 
+         Description = "", 
+      }, 
+      [21017] = 
+      {
          Race = "Human", 
+         LongDescr = "The postmaster sorts the day's mail.\
+", 
+         Name = "postmaster", 
+         Alignment = 0, 
+         Vnum = 21017, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -13948,61 +13999,23 @@ mpecho Bonta grins at you evily.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "bonta weaponsmith", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Bonta weaponsmith", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         HitChance = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21016, 
-         Description = "", 
-      }, 
-      [21017] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The postmaster sorts the day's mail.\
-", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -14014,15 +14027,53 @@ mpecho Bonta grins at you evily.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the postmaster", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         Description = "", 
+      }, 
+      [21018] = 
+      {
          Race = "Human", 
+         LongDescr = "A chef Wannie greets you.\
+", 
+         Name = "chef", 
+         Alignment = 0, 
+         Vnum = 21018, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14031,62 +14082,19 @@ mpecho Bonta grins at you evily.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "postmaster", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the postmaster", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 3, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21017, 
-         Description = "", 
-      }, 
-      [21018] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A chef Wannie greets you.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -14096,31 +14104,39 @@ mpecho Bonta grins at you evily.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the chef Wannie", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "rand_prog", 
-               Code = "Yell Barbecue, fresh and hot, falls of the bones. \
+               Code = "Say Hello just step right up and get my galexy famous barbecue.\
 ", 
-               Arguments = "5 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
             }, 
             [2] = 
             {
-               MudProgType = "all_greet_prog", 
-               Code = "Say Hello just step right up and get my galexy famous barbecue.\
+               Code = "Yell Barbecue, fresh and hot, falls of the bones. \
 ", 
-               Arguments = "100", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "5 ", 
             }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -14135,20 +14151,57 @@ mpecho Bonta grins at you evily.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the chef Wannie", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            DamSizeDice = 1, 
+            DamPlus = 800, 
+            DamNoDice = 1, 
          }, 
+         Description = "", 
+      }, 
+      [21019] = 
+      {
          Race = "Human", 
+         LongDescr = "The Mon Calamarian baker is here, covered with seaweed flour.\
+", 
+         Name = "baker", 
+         Alignment = 0, 
+         Vnum = 21019, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14157,62 +14210,19 @@ mpecho Bonta grins at you evily.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "chef", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the chef Wannie", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 3, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21018, 
-         Description = "", 
-      }, 
-      [21019] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The Mon Calamarian baker is here, covered with seaweed flour.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -14222,31 +14232,39 @@ mpecho Bonta grins at you evily.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the baker", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "rand_prog", 
-               Code = "Yell Fresh Hot Seaweed Bread, Get it while it's Hot!\
+               Code = "say Welcome to my shop when you want to buy just yell!\
 ", 
-               Arguments = "5", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
             }, 
             [2] = 
             {
-               MudProgType = "all_greet_prog", 
-               Code = "say Welcome to my shop when you want to buy just yell!\
+               Code = "Yell Fresh Hot Seaweed Bread, Get it while it's Hot!\
 ", 
-               Arguments = "100", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "5", 
             }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -14261,20 +14279,57 @@ mpecho Bonta grins at you evily.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the baker", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            DamSizeDice = 1, 
+            DamPlus = 500, 
+            DamNoDice = 1, 
          }, 
+         Description = "", 
+      }, 
+      [21020] = 
+      {
          Race = "Human", 
+         LongDescr = "A young Mon Calamarian girl smiles as you enter.\
+", 
+         Name = "Mon Calamrian girl", 
+         Alignment = 0, 
+         Vnum = 21020, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14283,62 +14338,19 @@ mpecho Bonta grins at you evily.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "baker", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the baker", 
-         Damage = 
-         {
-            DamPlus = 500, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 3, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21019, 
-         Description = "", 
-      }, 
-      [21020] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A young Mon Calamarian girl smiles as you enter.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -14348,39 +14360,48 @@ mpecho Bonta grins at you evily.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the Mon Calamrian girl", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
                Code = "say Hello, can I intrest you in anything?\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
             [2] = 
             {
-               MudProgType = "speech_prog", 
                Code = "Say Noy noe $n I'm working...maybe later!\
 stare $n\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "sex you fuck", 
             }, 
             [3] = 
             {
-               MudProgType = "rand_prog", 
                Code = "Yell Fresh blue seacow milk, get it while it's here.\
 ", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
                Arguments = "5", 
             }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -14395,20 +14416,57 @@ stare $n\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = -150, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         SaveVs = 
+         Height = 0, 
+         Level = 100, 
+         DamRoll = 20, 
+         ShortDescr = "the Mon Calamrian girl", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "female", 
+         DefaultPosition = "standing", 
+         HitRoll = 20, 
+         Damage = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 10, 
          }, 
+         Description = "", 
+      }, 
+      [21021] = 
+      {
          Race = "Human", 
+         LongDescr = "&z Lokist the tailor is here showing off the latest fashion.\
+", 
+         Name = "Lokist tailor", 
+         Alignment = 0, 
+         Vnum = 21021, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14417,62 +14475,19 @@ stare $n\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 20, 
-         Name = "Mon Calamrian girl", 
-         ArmorClass = -150, 
-         Level = 100, 
-         ShortDescr = "the Mon Calamrian girl", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 20, 
-         NumberOfAttacks = 3, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         Height = 0, 
-         Vnum = 21020, 
-         Description = "", 
-      }, 
-      [21021] = 
-      {
-         Alignment = 0, 
-         LongDescr = "&z Lokist the tailor is here showing off the latest fashion.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -14482,12 +14497,27 @@ stare $n\
                [0] = "none", 
             }, 
             KeeperShortDescr = "&z Lokist the tailor", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -14503,22 +14533,55 @@ stare $n\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "&z Lokist the tailor", 
+         Credits = 0, 
+         NumberOfAttacks = 6, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 100, 
+            DamNoDice = 4, 
+         }, 
+         Description = "", 
+      }, 
+      [21022] = 
+      {
          Race = "Human", 
+         LongDescr = "The bantha keeper tends to his animals.\
+", 
+         Name = "bantha keeper", 
+         Alignment = 0, 
+         Vnum = 21022, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14527,64 +14590,31 @@ stare $n\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "Lokist tailor", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "&z Lokist the tailor", 
-         Damage = 
-         {
-            DamPlus = 100, 
-            DamSizeDice = 5, 
-            DamNoDice = 4, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 6, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         SaveVs = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21021, 
-         Description = "", 
-      }, 
-      [21022] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The bantha keeper tends to his animals.\
-", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Languages = 
          {
             Speaking = 
@@ -14596,22 +14626,55 @@ stare $n\
                [0] = "basic", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the bantha keeper", 
+         Credits = 0, 
+         NumberOfAttacks = 6, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 100, 
+            DamNoDice = 4, 
+         }, 
+         Description = "", 
+      }, 
+      [21023] = 
+      {
          Race = "Human", 
+         LongDescr = "A master thief is here to demonstrate the ways of thievery.\
+", 
+         Name = "thief master", 
+         Alignment = 0, 
+         Vnum = 21023, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14620,65 +14683,32 @@ stare $n\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "bantha keeper", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the bantha keeper", 
-         Damage = 
-         {
-            DamPlus = 100, 
-            DamSizeDice = 5, 
-            DamNoDice = 4, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 6, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         SaveVs = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21022, 
-         Description = "", 
-      }, 
-      [21023] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A master thief is here to demonstrate the ways of thievery.\
-", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Languages = 
          {
             Speaking = 
@@ -14690,22 +14720,56 @@ stare $n\
                [0] = "basic", 
             }, 
          }, 
-         Position = "standing", 
-         SaveVs = 
+         ArmorClass = 0, 
+         Stats = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [19] = "disarm", 
+         }, 
          AttackFlags = 
          {
             [6] = "_06", 
             [9] = "_09", 
          }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Master Thief", 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         Description = "", 
+      }, 
+      [21025] = 
+      {
          Race = "Human", 
+         LongDescr = "The hotel keeper stands here, looking rather gruff.\
+", 
+         Name = "hotel keeper", 
+         Alignment = 0, 
+         Vnum = 21025, 
+         Position = "standing", 
+         Description = "", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14714,103 +14778,16 @@ stare $n\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [19] = "disarm", 
-         }, 
-         DamRoll = 0, 
-         Name = "thief master", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Master Thief", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21023, 
-         Description = "", 
-      }, 
-      [21025] = 
-      {
-         Alignment = 0, 
-         LongDescr = "The hotel keeper stands here, looking rather gruff.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Code = "if inroom($i) == 21146\
-if inroom($n) == 21146\
-  mptransfer $n 21069\
-  mpat $n mea $n The hotel keeper leads you out.\
-endif\
-endif\
-", 
-               Arguments = "leave exit", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "Say Welcome $n your room awits you.\
-", 
-               Arguments = "", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say Welcome $n your room awaits.\
-", 
-               Arguments = "100", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "bribe_prog", 
                Code = "if inroom($i) == 21069\
   say Go on back and pick a room.\
   , points over his shoulder.\
@@ -14820,8 +14797,58 @@ endif\
   mppurge coins\
 endif\
 ", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
                Arguments = "200", 
             }, 
+            [2] = 
+            {
+               Code = "if inroom($i) == 21146\
+if inroom($n) == 21146\
+  mptransfer $n 21069\
+  mpat $n mea $n The hotel keeper leads you out.\
+endif\
+endif\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "leave exit", 
+            }, 
+            [3] = 
+            {
+               Code = "Say Welcome $n your room awits you.\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "", 
+            }, 
+            [4] = 
+            {
+               Code = "say Welcome $n your room awaits.\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -14837,16 +14864,50 @@ endif\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the hotel keeper", 
+         Credits = 0, 
+         NumberOfAttacks = 4, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 15, 
+            DamPlus = 1000, 
+            DamNoDice = 100, 
+         }, 
          RepairShop = 
          {
-            ProfitFix = 100, 
-            KeeperShortDescr = "the hotel keeper", 
-            ShopType = 1, 
             BusinessHours = 
             {
-               Close = 23, 
                Open = 0, 
+               Close = 23, 
             }, 
             FixTypes = 
             {
@@ -14854,14 +14915,20 @@ endif\
                [2] = "none", 
                [0] = "none", 
             }, 
+            ShopType = 1, 
+            ProfitFix = 100, 
+            KeeperShortDescr = "the hotel keeper", 
          }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
+      }, 
+      [21028] = 
+      {
          Race = "Human", 
+         LongDescr = "A pensive sage mulls over new Jedi's .\
+", 
+         Name = "sage man", 
+         Alignment = 0, 
+         Vnum = 21028, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14870,67 +14937,24 @@ endif\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "hotel keeper", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the hotel keeper", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 15, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 4, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
+         HitChance = 
          {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
          }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21025, 
-         Description = "", 
-      }, 
-      [21028] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A pensive sage mulls over new Jedi's .\
-", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -14942,15 +14966,53 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the sage", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 800, 
+            DamNoDice = 100, 
+         }, 
+         Description = "", 
+      }, 
+      [21029] = 
+      {
          Race = "Human", 
+         LongDescr = "A large man stands here, selling equipment for adventurers.\
+", 
+         Name = "storekeeper", 
+         Alignment = 0, 
+         Vnum = 21029, 
+         Position = "standing", 
          Immune = 
          {
             [10] = "sleep", 
@@ -14959,62 +15021,19 @@ endif\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "sage man", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the sage", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 5, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21028, 
-         Description = "", 
-      }, 
-      [21029] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A large man stands here, selling equipment for adventurers.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -15024,14 +15043,20 @@ endif\
                [0] = "none", 
             }, 
             KeeperShortDescr = "the storekeeper", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -15063,85 +15088,84 @@ endif\
                [14] = "gamorrese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 0, 
-         Name = "storekeeper", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 50, 
+         DamRoll = 0, 
          ShortDescr = "the storekeeper", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 10, 
-            DamNoDice = 100, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 4, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 4, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
+            DamSizeDice = 10, 
+            DamPlus = 1000, 
+            DamNoDice = 100, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21029, 
          Description = "", 
       }, 
       [21031] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "The ranger Shuttleer demonstrates combat maneuvers.\
 ", 
+         Name = "man ranger", 
+         Alignment = 0, 
+         Vnum = 21031, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -15153,77 +15177,63 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         DamRoll = 0, 
-         Name = "man ranger", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the ranger Shuttleer", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 5, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21031, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the ranger Shuttleer", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamPlus = 800, 
+            DamNoDice = 100, 
+         }, 
          Description = "", 
       }, 
       [21416] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "newbie mob", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created newbie mob here.\
-", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
+         Vnum = 21416, 
+         Position = "standing", 
+         Description = "", 
          HitChance = 
          {
             HitNoDice = 0, 
-            HitSizeDice = 0, 
             HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -15235,85 +15245,53 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21416, 
-         Name = "newbie mob", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created newbie mob", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created newbie mob here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created newbie mob", 
       }, 
       [21034] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A robed woman is here, Shuttleing initiate officers.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
+         Name = "woman Shuttleer", 
+         Alignment = 0, 
+         Vnum = 21034, 
          Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
          Immune = 
          {
             [10] = "sleep", 
@@ -15322,62 +15300,108 @@ endif\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "woman Shuttleer", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the officers Shuttleer", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 10, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 4, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "female", 
          Height = 0, 
-         Vnum = 21034, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the officers Shuttleer", 
+         Credits = 0, 
+         NumberOfAttacks = 4, 
+         Weight = 0, 
+         Sex = "female", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamPlus = 1000, 
+            DamNoDice = 100, 
+         }, 
          Description = "", 
       }, 
       [21035] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A giant man stands here, waiting to Shuttle young warriors.\
 ", 
+         Name = "man Shuttleer", 
+         Alignment = 0, 
+         Vnum = 21035, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -15389,81 +15413,82 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         DamRoll = 0, 
-         Name = "man Shuttleer", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Warrior Shuttleer", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 100, 
-            DamNoDice = 5, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 5, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21035, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Warrior Shuttleer", 
+         Credits = 0, 
+         NumberOfAttacks = 5, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 100, 
+            DamPlus = 800, 
+            DamNoDice = 5, 
+         }, 
          Description = "", 
       }, 
       [21420] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A dark figure lurks here, hiding in the shadows.\
 ", 
-         Flags = 
+         Name = "dark figure bounty hunter", 
+         Alignment = 0, 
+         Vnum = 21420, 
+         Position = "standing", 
+         Immune = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         AffectedBy = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 200, 
+            [15] = "Sneak", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
          }, 
-         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
+               Code = "if isnpc($n)\
+else\
+  mpechoat $n A man hidden in the shadows beckons you over to him.\
+  tell $n I have some information which may be of some value...\
+  tell $n And for a price I will perhaps share it with you.\
+endif\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "25", 
+            }, 
+            [2] = 
+            {
                Code = "if isnpc($n)\
 else\
   mpechoat $n The dark figure stares unflinchingly into your eyes.\
@@ -15471,11 +15496,12 @@ else\
     mpechoat $n $I matter-of-factly says, '200 credits.'\
 endif\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "p how much", 
             }, 
-            [2] = 
+            [3] = 
             {
-               MudProgType = "speech_prog", 
                Code = "if isnpc($n)\
 else\
   mpechoat $n The dark figure stares unflinchingly into your eyes.\
@@ -15483,11 +15509,12 @@ else\
    mpechoat $n $I matter-of-factly says, '200 credits.'\
 endif\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "p what price", 
             }, 
-            [3] = 
+            [4] = 
             {
-               MudProgType = "bribe_prog", 
                Code = "mpecho $n $I quickly tucks the coins inside his pocket, stepping toward\
 $n.\
 say $n 'I took this from a Mon Calamrian... a weak, sniveling Calamrian I\
@@ -15509,22 +15536,22 @@ mpjunk all.hologram\
 say good...doing business with you, $n\
 hide\
 ", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
                Arguments = "45000", 
             }, 
-            [4] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "if isnpc($n)\
-else\
-  mpechoat $n A man hidden in the shadows beckons you over to him.\
-  tell $n I have some information which may be of some value...\
-  tell $n And for a price I will perhaps share it with you.\
-endif\
-", 
-               Arguments = "25", 
-            }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 200, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -15538,60 +15565,46 @@ endif\
                [24] = "quarrenese", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         DamRoll = 0, 
-         Name = "dark figure bounty hunter", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 10, 
+         DamRoll = 0, 
          ShortDescr = "the bounty hunter", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 1, 
+         Weight = 0, 
+         Sex = "undistinguished", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 1, 
-         AffectedBy = 
+         Damage = 
          {
-            [15] = "Sneak", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         Height = 0, 
-         Vnum = 21420, 
          Description = "A dark Mon Calamrian stands before you, seemingly wearing the shadows around him\
 like a cloak.  His gaze bores into your soul, and he appears to beckon\
 you over to speak with him.  The glint of a blaster by his side alerts you\
@@ -15600,25 +15613,45 @@ that this man is probably bounty hunter.\
       }, 
       [21037] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A Mon Calamrian guard patrols the streets of the city.\
 ", 
-         Flags = 
+         Name = "guard man", 
+         Alignment = 1000, 
+         Vnum = 21037, 
+         Position = "standing", 
+         Immune = 
          {
-            [0] = "Npc", 
-            [6] = "StayArea", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         AffectedBy = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
+            [5] = "DetectHidden", 
          }, 
-         Credits = 0, 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
             [0] = "spec_guardian", 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
          }, 
          Languages = 
          {
@@ -15634,84 +15667,65 @@ that this man is probably bounty hunter.\
                [24] = "quarrenese", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          VipFlags = 
          {
             [5] = "Mon Calamari", 
-         }, 
-         Weight = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard man", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 20, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 3, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 1, 
+            DamPlus = 20, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21037, 
          Description = "", 
       }, 
       [21041] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "guard", 
          Alignment = 1000, 
-         LongDescr = "A tired guard is here.\
-", 
+         Vnum = 21041, 
+         Position = "sleeping", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-         }, 
-         Credits = 100, 
-         Position = "sleeping", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -15723,64 +15737,68 @@ that this man is probably bounty hunter.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 90, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21041, 
-         Name = "guard", 
-         ArmorClass = 90, 
+         Height = 0, 
          Level = 5, 
-         ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 3, 
-            DamSizeDice = 3, 
-            DamNoDice = 2, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 100, 
+         LongDescr = "A tired guard is here.\
+", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
          Sex = "male", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 3, 
+            DamPlus = 3, 
+            DamNoDice = 2, 
+         }, 
+         ShortDescr = "the guard", 
       }, 
       [21043] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A E-Web guard stares out over the area.\
 ", 
+         Name = "E-web guard", 
+         Alignment = 0, 
+         Vnum = 21043, 
+         Position = "standing", 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 500, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -15792,117 +15810,63 @@ that this man is probably bounty hunter.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         DamRoll = 0, 
-         Name = "E-web guard", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 0, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 500, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21043, 
          Description = "", 
       }, 
       [21044] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A executioner stands silently before you.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
+         Name = "executioner", 
+         Alignment = 0, 
+         Vnum = 21044, 
          Position = "standing", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Weight = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
          Immune = 
          {
             [21] = "paralysis", 
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         DamRoll = 0, 
-         Name = "executioner", 
-         ArmorClass = 0, 
-         Level = 50, 
-         ShortDescr = "the Executioner", 
-         Damage = 
-         {
-            DamPlus = 800, 
-            DamSizeDice = 1, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 4, 
          AffectedBy = 
          {
             [2] = "DetectEvil", 
@@ -15912,41 +15876,91 @@ that this man is probably bounty hunter.\
             [22] = "TrueSight", 
             [7] = "Sanctuary", 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          Height = 0, 
-         Vnum = 21044, 
+         Level = 50, 
+         DamRoll = 0, 
+         ShortDescr = "the Executioner", 
+         Credits = 0, 
+         NumberOfAttacks = 4, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 1, 
+            DamPlus = 800, 
+            DamNoDice = 1, 
+         }, 
          Description = "", 
       }, 
       [21045] = 
       {
+         Race = "Yevetha", 
+         DefaultPosition = "standing", 
+         Name = "dog stray", 
          Alignment = 0, 
-         LongDescr = "A stray Mosny dog noses along the street.\
-", 
+         Vnum = 21045, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 35, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 35, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -15967,89 +15981,57 @@ that this man is probably bounty hunter.\
                [30] = "durese", 
             }, 
          }, 
+         ArmorClass = 100, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21045, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 5, 
+         DamRoll = 0, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         Name = "dog stray", 
-         ArmorClass = 100, 
-         Level = 5, 
-         ShortDescr = "a stray", 
+         Credits = 0, 
+         LongDescr = "A stray Mosny dog noses along the street.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "female", 
+         HitRoll = 0, 
          Damage = 
          {
-            DamPlus = 2, 
             DamSizeDice = 5, 
+            DamPlus = 2, 
             DamNoDice = 2, 
          }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Yevetha", 
-         Height = 0, 
-         Description = "", 
-         Sex = "female", 
+         ShortDescr = "a stray", 
       }, 
       [21431] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A proud man stands here, deliberating over his theories.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30000, 
-         }, 
-         Credits = 0, 
+         Name = "kinalsta man", 
+         Alignment = 0, 
+         Vnum = 21431, 
          Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
          Immune = 
          {
             [10] = "sleep", 
@@ -16058,73 +16040,99 @@ that this man is probably bounty hunter.\
             [13] = "nonmagic", 
             [21] = "paralysis", 
          }, 
-         DamRoll = 0, 
-         Name = "kinalsta man", 
-         ArmorClass = 0, 
-         Level = 51, 
-         ShortDescr = "Kinalsta", 
-         Damage = 
-         {
-            DamPlus = 1000, 
-            DamSizeDice = 10, 
-            DamNoDice = 100, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30000, 
+            HitSizeDice = 1, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21431, 
+         Level = 51, 
+         DamRoll = 0, 
+         ShortDescr = "Kinalsta", 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamPlus = 1000, 
+            DamNoDice = 100, 
+         }, 
          Description = "", 
       }, 
       [21433] = 
       {
-         Alignment = 40, 
+         Race = "Human", 
          LongDescr = "A sleeping Security Guard rests here.\
 ", 
+         Name = "guard sleeping", 
+         Alignment = 40, 
+         Vnum = 21433, 
+         Position = "incapacitated", 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "incapacitated", 
-         Weight = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "mpecho You hear the sweat sounds of a guard snoring.\
-say &c ZZZZZZZZZZzzzzzzzzzz    ZZZZZZZZZZZZZzzzzzzzzzz\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
          Languages = 
          {
             Speaking = 
@@ -16136,130 +16144,64 @@ say &c ZZZZZZZZZZzzzzzzzzzz    ZZZZZZZZZZZZZzzzzzzzzzz\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpecho You hear the sweat sounds of a guard snoring.\
+say &c ZZZZZZZZZZzzzzzzzzzz    ZZZZZZZZZZZZZzzzzzzzzzz\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Name = "guard sleeping", 
-         ArmorClass = 0, 
-         Level = 49, 
-         ShortDescr = "A sleeping Security Guard", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "undistinguished", 
          Height = 0, 
-         Vnum = 21433, 
+         Level = 49, 
+         DamRoll = 0, 
+         ShortDescr = "A sleeping Security Guard", 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
          Description = "", 
       }, 
       [21434] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "woman sec secretary female", 
          Alignment = -750, 
-         LongDescr = "A Mon Calamrian Secretary sits here doing important things.\
-\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 0, 
-            HitPlus = 100, 
-         }, 
-         Credits = 1, 
-         Position = "standing", 
-         Weight = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "Say Ya ya ya take a number $n.\
-Say please fill out these forms and give me 200 credits for the\
-say apointment.\
-", 
-               Arguments = "hurt sick injured bleeding emergency ", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "Say Sorry we have paying customers here. Move along!\
-", 
-               Arguments = "insurance poor money broke", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "bribe_prog", 
-               Code = "Say Well, well you do have money! Have a good time.\
-mptransfer $n 21071\
-", 
-               Arguments = "200", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "Say Please state your emergency, I'm busy here.\
-mpecho You see the secretary return to watching\
-\
-mpecho her favorite soap.\
-", 
-               Arguments = "hi hello", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
          Vnum = 21434, 
+         Position = "standing", 
          Immune = 
          {
             [1] = "cold", 
@@ -16285,58 +16227,154 @@ mpecho her favorite soap.\
             [21] = "paralysis", 
             [0] = "fire", 
          }, 
-         Name = "woman sec secretary female", 
-         ArmorClass = 0, 
-         Level = 1, 
-         ShortDescr = "A female Secretary ", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Human", 
-         Height = 0, 
          Description = "", 
-         Sex = "female", 
-      }, 
-      [21435] = 
-      {
-         Alignment = 0, 
-         LongDescr = "&P A Mon Calamarian Nurse sorts through medical supplies.\
-", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 100, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "Say Please state your emergency, I'm busy here.\
+mpecho You see the secretary return to watching\
+\
+mpecho her favorite soap.\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "hi hello", 
+            }, 
+            [2] = 
+            {
+               Code = "Say Ya ya ya take a number $n.\
+Say please fill out these forms and give me 200 credits for the\
+say apointment.\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "hurt sick injured bleeding emergency ", 
+            }, 
+            [3] = 
+            {
+               Code = "Say Sorry we have paying customers here. Move along!\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "insurance poor money broke", 
+            }, 
+            [4] = 
+            {
+               Code = "Say Well, well you do have money! Have a good time.\
+mptransfer $n 21071\
+", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
+               Arguments = "200", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         DamRoll = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Credits = 1, 
+         LongDescr = "A Mon Calamrian Secretary sits here doing important things.\
+\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "A female Secretary ", 
+      }, 
+      [21435] = 
+      {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "mon nurse", 
+         Alignment = 0, 
+         Vnum = 21435, 
+         Position = "standing", 
+         Description = "Dressed in a conservitive suit and always looking around suspisiously. This\
+character has got to be upto something.\
+", 
          HitChance = 
          {
             HitNoDice = 10, 
-            HitSizeDice = 10, 
             HitPlus = 510, 
+            HitSizeDice = 10, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = -27, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -16346,101 +16384,80 @@ mpecho her favorite soap.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "&P A Mon Calamarian Nurse", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21435, 
-         Name = "mon nurse", 
-         ArmorClass = -27, 
+         Height = 0, 
          Level = 51, 
-         ShortDescr = "&P A Mon Calamarian Nurse", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 10, 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "Dressed in a conservitive suit and always looking around suspisiously. This\
-character has got to be upto something.\
+         Credits = 0, 
+         LongDescr = "&P A Mon Calamarian Nurse sorts through medical supplies.\
 ", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "female", 
+         HitRoll = 10, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 5, 
+         }, 
+         ShortDescr = "&P A Mon Calamarian Nurse", 
       }, 
       [21052] = 
       {
-         Alignment = 0, 
+         Race = "Human", 
          LongDescr = "A strange figure lurks furtively.\
 ", 
+         Name = "thief figure", 
+         Alignment = 0, 
+         Vnum = 21052, 
+         Position = "standing", 
+         Resistant = 
+         {
+            [11] = "charm", 
+         }, 
+         AffectedBy = 
+         {
+            [16] = "Hide", 
+            [5] = "DetectHidden", 
+            [15] = "Sneak", 
+         }, 
+         SpecFuns = 
+         {
+            [0] = "spec_thief", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitPlus = 50, 
+            HitSizeDice = 40, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 40, 
-            HitPlus = 50, 
-         }, 
-         Credits = 0, 
-         SpecFuns = 
-         {
-            [0] = "spec_thief", 
-         }, 
-         Position = "standing", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "greet_prog", 
-               Code = "mpecho From behind the shadows you can feel somone lighten your pockets.\
-mpforce $n give 25 credits thief\
-mpecho You turn around and see noone.\
-", 
-               Arguments = "29", 
-            }, 
-         }, 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -16453,85 +16470,82 @@ mpecho You turn around and see noone.\
                [5] = "mon calamarian", 
             }, 
          }, 
+         ArmorClass = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpecho From behind the shadows you can feel somone lighten your pockets.\
+mpforce $n give 25 credits thief\
+mpecho You turn around and see noone.\
+", 
+               MudProgType = "greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "29", 
+            }, 
+         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Resistant = 
-         {
-            [11] = "charm", 
-         }, 
-         DamRoll = 0, 
-         Name = "thief figure", 
-         ArmorClass = 0, 
-         Level = 8, 
-         ShortDescr = "the thief", 
-         Damage = 
-         {
-            DamPlus = 5, 
-            DamSizeDice = 2, 
-            DamNoDice = 3, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
-         {
-            [16] = "Hide", 
-            [5] = "DetectHidden", 
-            [15] = "Sneak", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21052, 
+         Level = 8, 
+         DamRoll = 0, 
+         ShortDescr = "the thief", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 2, 
+            DamPlus = 5, 
+            DamNoDice = 3, 
+         }, 
          Description = "", 
       }, 
       [21437] = 
       {
-         Alignment = 40, 
+         Race = "Human", 
          LongDescr = "&R A sleeping Mount shop keeper lies here.\
 ", 
+         Name = "sleeping shop ", 
+         Alignment = 40, 
+         Vnum = 21437, 
+         Position = "incapacitated", 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [3] = "DetectInvis", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [6] = "StayArea", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "incapacitated", 
-         Weight = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "rand_prog", 
-               Code = "mpecho You hear the soft sounds of ZZZZZZZZZzzzzzzzz coming from the shop\
-mpecho keeper!\
-", 
-               Arguments = "35", 
-            }, 
          }, 
          Languages = 
          {
@@ -16544,48 +16558,54 @@ mpecho keeper!\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpecho You hear the soft sounds of ZZZZZZZZZzzzzzzzz coming from the shop\
+mpecho keeper!\
+", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
+               Arguments = "35", 
+            }, 
+         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Name = "sleeping shop ", 
-         ArmorClass = 0, 
-         Level = 49, 
-         ShortDescr = "&R A sleeping Mount shop keeper ", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [3] = "DetectInvis", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "undistinguished", 
          Height = 0, 
-         Vnum = 21437, 
+         Level = 49, 
+         DamRoll = 0, 
+         ShortDescr = "&R A sleeping Mount shop keeper ", 
+         Credits = 0, 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
          Description = "This shop keeper is of a very young age, most likely hi father left him\
 here to rent out the\
 beasts.\
@@ -16593,21 +16613,22 @@ beasts.\
       }, 
       [21438] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "&c An Elite Security Officer , Hyko stands here.\
 ", 
-         Flags = 
+         Name = "elite officer hyko", 
+         Alignment = 1000, 
+         Vnum = 21438, 
+         Position = "standing", 
+         Immune = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         AffectedBy = 
          {
-            HitNoDice = 8, 
-            HitSizeDice = 10, 
-            HitPlus = 400, 
+            [5] = "DetectHidden", 
          }, 
-         Credits = 0, 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
@@ -16617,28 +16638,35 @@ beasts.\
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Code = "Say &z Sorry pal but your mouth just bought you a night in jail!\
-mptransfer $n 21147\
-", 
-               Arguments = "fuck ass suck dick ", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "all_greet_prog", 
                Code = "Say &z Hey if your not supposed to be here, leave before\
 Say &z I place you in one of those.\
 mpecho The guard points toward the jail cell.\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
+            [2] = 
+            {
+               Code = "Say &z Sorry pal but your mouth just bought you a night in jail!\
+mptransfer $n 21147\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "fuck ass suck dick ", 
+            }, 
          }, 
-         Position = "standing", 
-         VipFlags = 
+         HitChance = 
          {
-            [5] = "Mon Calamari", 
+            HitNoDice = 8, 
+            HitPlus = 400, 
+            HitSizeDice = 10, 
          }, 
-         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -16652,79 +16680,87 @@ mpecho The guard points toward the jail cell.\
                [24] = "quarrenese", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         DamRoll = 6, 
-         Name = "elite officer hyko", 
-         ArmorClass = 0, 
-         Level = 40, 
-         ShortDescr = "&c An Elite Security Officer , Hyko ", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 4, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 6, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
          Height = 0, 
-         Vnum = 21438, 
+         Level = 40, 
+         DamRoll = 6, 
+         ShortDescr = "&c An Elite Security Officer , Hyko ", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 6, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 4, 
+         }, 
          Description = "", 
       }, 
       [21055] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "beggar man beggarprog", 
          Alignment = 300, 
-         LongDescr = "A decrepit old beggar sits on the cobbles of the road, pleading.\
+         Vnum = 21055, 
+         Position = "standing", 
+         Description = "The old man is clad in the rags of what was once a military outfit.\
+He eyes you warily and holds out a tin cup in supplication...\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 20, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 20, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         ArmorClass = 100, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
                Code = "if name($n) == dog stray\
   emote pets the dog.\
   mpforce stray lick beggar\
@@ -16736,159 +16772,96 @@ else\
   beg $n\
 endif\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
             [2] = 
             {
-               MudProgType = "rand_prog", 
                Code = ", rummages in one of many pouches, searching for gold no doubt.\
 ", 
+               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
                Arguments = "5", 
             }, 
             [3] = 
             {
-               MudProgType = "bribe_prog", 
                Code = "say OHHH MY!!!\
 mpecho The beggar suddenly clutches his chest and doubles over.\
 mpecho In the blink of an eye, he is dead. \
 mpecho The surprise and shock must have been too much for him.\
 mpat 21194 mpforce cleric mpat beggarprog mppurge beggarprog\
 ", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
                Arguments = "1000", 
             }, 
             [4] = 
             {
-               MudProgType = "bribe_prog", 
                Code = "say I cannot express my gratitude in words $n!\
 kis $n\
 say If only others were so generous.\
 ", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
             [5] = 
             {
-               MudProgType = "bribe_prog", 
                Code = "say Thank you for such a worthy donation.\
 thank $n\
 ", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
                Arguments = "10", 
             }, 
          }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21055, 
-         Name = "beggar man beggarprog", 
-         ArmorClass = 100, 
+         Height = 0, 
          Level = 3, 
-         ShortDescr = "the beggar", 
-         Damage = 
-         {
-            DamPlus = 3, 
-            DamSizeDice = 3, 
-            DamNoDice = 2, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "The old man is clad in the rags of what was once a military outfit.\
-He eyes you warily and holds out a tin cup in supplication...\
+         Credits = 0, 
+         LongDescr = "A decrepit old beggar sits on the cobbles of the road, pleading.\
 ", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "male", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 3, 
+            DamPlus = 3, 
+            DamNoDice = 2, 
+         }, 
+         ShortDescr = "the beggar", 
       }, 
       [21056] = 
       {
-         Alignment = 0, 
+         Race = "_78", 
          LongDescr = "A proud Calmese bird perches regally here, defiant to all.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [8] = "Pet", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 75, 
-            HitPlus = 100, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [9] = "antarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [9] = "antarian", 
-            }, 
-         }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "_78", 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         DamRoll = 0, 
          Name = "Calmese", 
-         ArmorClass = -20, 
-         Level = 15, 
-         ShortDescr = "the regal calmese", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 10, 
-            DamNoDice = 3, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
+         Alignment = 0, 
+         Vnum = 21056, 
+         Position = "standing", 
          AffectedBy = 
          {
             [19] = "Flying", 
@@ -16896,29 +16869,107 @@ He eyes you warily and holds out a tin cup in supplication...\
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitPlus = 100, 
+            HitSizeDice = 75, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [8] = "Pet", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [9] = "antarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [9] = "antarian", 
+            }, 
+         }, 
+         ArmorClass = -20, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "undistinguished", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+         }, 
          Height = 0, 
-         Vnum = 21056, 
+         Level = 15, 
+         DamRoll = 0, 
+         ShortDescr = "the regal calmese", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamPlus = 10, 
+            DamNoDice = 3, 
+         }, 
          Description = "The Calmese returns your stare with unfeeling eyes.  Its beak and talons\
 appear as though they could rend even the toughest of flesh.\
 ", 
       }, 
       [21057] = 
       {
+         Race = "_86", 
+         DefaultPosition = "standing", 
+         Name = "bantha", 
          Alignment = 0, 
-         LongDescr = "A smelly white bantha slowly trods in a circle.\
+         Vnum = 21057, 
+         Position = "standing", 
+         Resistant = 
+         {
+            [1] = "cold", 
+         }, 
+         Description = "This white bantha sports a brilliant white coat and  lies at your approach.\
+She appears ready to serve anyone.\
 ", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitPlus = 100, 
+            HitSizeDice = 100, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -16926,13 +16977,6 @@ appear as though they could rend even the toughest of flesh.\
             [18] = "Mountable", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 100, 
-            HitPlus = 100, 
-         }, 
-         Credits = 0, 
          Languages = 
          {
             Speaking = 
@@ -16951,70 +16995,78 @@ appear as though they could rend even the toughest of flesh.\
                [9] = "antarian", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 80, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          Susceptible = 
          {
             [11] = "charm", 
-         }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Vnum = 21057, 
-         Resistant = 
-         {
-            [1] = "cold", 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         Name = "bantha", 
-         ArmorClass = 80, 
+         Height = 0, 
          Level = 20, 
-         ShortDescr = "the smelly bantha", 
+         DamRoll = 0, 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
+         Credits = 0, 
+         LongDescr = "A smelly white bantha slowly trods in a circle.\
+", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "female", 
+         HitRoll = 0, 
          Damage = 
          {
-            DamPlus = 10, 
             DamSizeDice = 10, 
+            DamPlus = 10, 
             DamNoDice = 3, 
          }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "_86", 
-         Height = 0, 
-         Description = "This white bantha sports a brilliant white coat and  lies at your approach.\
-She appears ready to serve anyone.\
-", 
-         Sex = "female", 
+         ShortDescr = "the smelly bantha", 
       }, 
       [21058] = 
       {
+         Race = "Dewback", 
+         DefaultPosition = "standing", 
+         Name = "dewback", 
          Alignment = 0, 
-         LongDescr = "A mighty green dewback beats angrily at the ground here.\
+         Vnum = 21058, 
+         Position = "standing", 
+         Resistant = 
+         {
+            [1] = "cold", 
+         }, 
+         Description = "The green dewback snorts as you examine him.  His green scales shine\
+brightly regardless of light and the dewback seems as though it could\
+move tirelessly for days. dewbacks are scarse here...mostly for pets.\
 ", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitPlus = 250, 
+            HitSizeDice = 100, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -17022,13 +17074,6 @@ She appears ready to serve anyone.\
             [18] = "Mountable", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 100, 
-            HitPlus = 250, 
-         }, 
-         Credits = 0, 
          Languages = 
          {
             Speaking = 
@@ -17053,90 +17098,74 @@ She appears ready to serve anyone.\
                [11] = "barabel", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 80, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          Susceptible = 
          {
             [11] = "charm", 
-         }, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Vnum = 21058, 
-         Resistant = 
-         {
-            [1] = "cold", 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         Name = "dewback", 
-         ArmorClass = 80, 
+         Height = 0, 
          Level = 25, 
-         ShortDescr = "the dewback", 
+         DamRoll = 0, 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
+         Credits = 0, 
+         LongDescr = "A mighty green dewback beats angrily at the ground here.\
+", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         HitRoll = 0, 
          Damage = 
          {
-            DamPlus = 30, 
             DamSizeDice = 10, 
+            DamPlus = 30, 
             DamNoDice = 3, 
          }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Dewback", 
-         Height = 0, 
-         Description = "The green dewback snorts as you examine him.  His green scales shine\
-brightly regardless of light and the dewback seems as though it could\
-move tirelessly for days. dewbacks are scarse here...mostly for pets.\
-", 
-         Sex = "male", 
+         ShortDescr = "the dewback", 
       }, 
       [21059] = 
       {
+         Race = "_74", 
+         DefaultPosition = "standing", 
+         Name = "teke lizard", 
          Alignment = 0, 
-         LongDescr = "A teke lizard scampers away from your booted feet.\
+         Vnum = 21059, 
+         Position = "standing", 
+         Susceptible = 
+         {
+            [11] = "charm", 
+         }, 
+         Description = "The teke lizard appears frightened out of its mind...\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitPlus = 50, 
+            HitSizeDice = 75, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [8] = "Pet", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 75, 
-            HitPlus = 50, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Susceptible = 
-         {
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -17149,70 +17178,70 @@ move tirelessly for days. dewbacks are scarse here...mostly for pets.\
                [9] = "antarian", 
             }, 
          }, 
+         ArmorClass = 20, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21059, 
-         Name = "teke lizard", 
-         ArmorClass = 20, 
+         Height = 0, 
          Level = 5, 
-         ShortDescr = "teke lizard", 
-         Damage = 
-         {
-            DamPlus = 20, 
-            DamSizeDice = 10, 
-            DamNoDice = 3, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "_74", 
-         Height = 0, 
-         Description = "The teke lizard appears frightened out of its mind...\
+         Credits = 0, 
+         LongDescr = "A teke lizard scampers away from your booted feet.\
 ", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamPlus = 20, 
+            DamNoDice = 3, 
+         }, 
+         ShortDescr = "teke lizard", 
       }, 
       [21060] = 
       {
+         Race = "_73", 
+         DefaultPosition = "standing", 
+         Name = "dog", 
          Alignment = 0, 
-         LongDescr = "A mon calamrian mutt paces in circles here, sniffing the ground.\
+         Vnum = 21060, 
+         Position = "standing", 
+         Susceptible = 
+         {
+            [11] = "charm", 
+         }, 
+         Description = "The Mon Calmarian mutt constantly sniffs the ground, searching for its prey.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitPlus = 85, 
+            HitSizeDice = 75, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [8] = "Pet", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 75, 
-            HitPlus = 85, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Susceptible = 
-         {
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -17234,68 +17263,77 @@ move tirelessly for days. dewbacks are scarse here...mostly for pets.\
                [7] = "ewokese", 
             }, 
          }, 
+         ArmorClass = 30, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21060, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 10, 
+         DamRoll = 0, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         Name = "dog", 
-         ArmorClass = 30, 
-         Level = 10, 
-         ShortDescr = "the Mon Calmarian mutt", 
+         Credits = 0, 
+         LongDescr = "A mon calamrian mutt paces in circles here, sniffing the ground.\
+", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 0, 
          Damage = 
          {
-            DamPlus = 10, 
             DamSizeDice = 5, 
+            DamPlus = 10, 
             DamNoDice = 5, 
          }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "_73", 
-         Height = 0, 
-         Description = "The Mon Calmarian mutt constantly sniffs the ground, searching for its prey.\
-", 
-         Sex = "undistinguished", 
+         ShortDescr = "the Mon Calmarian mutt", 
       }, 
       [21061] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A heavy guard walks the wall of the city.\
 ", 
+         Name = "guard man", 
+         Alignment = 1000, 
+         Vnum = 21061, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
          Languages = 
          {
             Speaking = 
@@ -17307,76 +17345,66 @@ move tirelessly for days. dewbacks are scarse here...mostly for pets.\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 5, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard man", 
-         ArmorClass = 5, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 3, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21061, 
          Description = "", 
       }, 
       [21062] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A Docking bay guard tends the western Docking bay.\
 ", 
-         Flags = 
+         Name = "guard", 
+         Alignment = 1000, 
+         Vnum = 21062, 
+         Position = "standing", 
+         Immune = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         AffectedBy = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 150, 
+            [5] = "DetectHidden", 
          }, 
-         Credits = 0, 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
@@ -17386,28 +17414,35 @@ move tirelessly for days. dewbacks are scarse here...mostly for pets.\
          {
             [1] = 
             {
+               Code = "un w\
+op w\
+", 
                MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "6", 
+            }, 
+            [2] = 
+            {
                Code = "close w\
 \
 lock w\
 ", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
                Arguments = "20", 
             }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "un w\
-op w\
-", 
-               Arguments = "6", 
-            }, 
          }, 
-         Position = "standing", 
-         VipFlags = 
+         HitChance = 
          {
-            [5] = "Mon Calamari", 
+            HitNoDice = 15, 
+            HitPlus = 150, 
+            HitSizeDice = 15, 
          }, 
-         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -17419,71 +17454,66 @@ op w\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         DamRoll = 2, 
-         Name = "guard", 
-         ArmorClass = 0, 
-         Level = 15, 
-         ShortDescr = "the Docking bay guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 2, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
          }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
          Height = 0, 
-         Vnum = 21062, 
+         Level = 15, 
+         DamRoll = 2, 
+         ShortDescr = "the Docking bay guard", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 2, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
          Description = "", 
       }, 
       [21063] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A Docking bay guard tends the outer Docking bay.\
 ", 
-         Flags = 
+         Name = "man guard", 
+         Alignment = 1000, 
+         Vnum = 21063, 
+         Position = "standing", 
+         Immune = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         AffectedBy = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
+            [5] = "DetectHidden", 
          }, 
-         Credits = 0, 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
@@ -17493,22 +17523,34 @@ op w\
          {
             [1] = 
             {
-               MudProgType = "time_prog", 
-               Code = "close e\
-lock e\
-", 
-               Arguments = "20", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
                Code = "un e\
 op e\
 ", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
                Arguments = "6", 
             }, 
+            [2] = 
+            {
+               Code = "close e\
+lock e\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
          }, 
-         Position = "standing", 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -17520,100 +17562,111 @@ op e\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "man guard", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21063, 
          Description = "", 
       }, 
       [21064] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A Docking bay guard tends the north Docking bay.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Name = "guard man", 
+         Alignment = 1000, 
+         Vnum = 21064, 
+         Position = "standing", 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
             [0] = "spec_guardian", 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "time_prog", 
-               Code = "close n\
-lock n\
-", 
-               Arguments = "20", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
                Code = "un n\
 op n\
 ", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
                Arguments = "6", 
             }, 
+            [2] = 
+            {
+               Code = "close n\
+lock n\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -17626,103 +17679,96 @@ op n\
                [0] = "basic", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          VipFlags = 
          {
             [5] = "Mon Calamari", 
-         }, 
-         Weight = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard man", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21064, 
          Description = "", 
       }, 
       [21065] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A Docking bay guard tends the outer Docking bay.\
 ", 
+         Name = "guard", 
+         Alignment = 1000, 
+         Vnum = 21065, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "close s\
+lock s\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
+            [2] = 
+            {
+               Code = "unlock s\
+op s\
+\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "6", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "unlock s\
-op s\
-\
-", 
-               Arguments = "6", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "close s\
-lock s\
-", 
-               Arguments = "20", 
-            }, 
-         }, 
-         Position = "standing", 
          Languages = 
          {
             Speaking = 
@@ -17734,99 +17780,110 @@ lock s\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 15, 
-            DamSizeDice = 4, 
-            DamNoDice = 3, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 15, 
+            DamNoDice = 3, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21065, 
          Description = "", 
       }, 
       [21066] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A guard of watches you as you move by.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Name = "guard", 
+         Alignment = 1000, 
+         Vnum = 21066, 
+         Position = "standing", 
          SpecFuns = 
          {
             [1] = "spec_police_attack", 
             [0] = "spec_guardian", 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "time_prog", 
-               Code = "close e\
-lock e\
-", 
-               Arguments = "20", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
                Code = "un e\
 op e\
 ", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
                Arguments = "6", 
             }, 
+            [2] = 
+            {
+               Code = "close e\
+lock e\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -17839,128 +17896,54 @@ op e\
                [0] = "basic", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
          VipFlags = 
          {
             [5] = "Mon Calamari", 
-         }, 
-         Weight = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 3, 
-         AffectedBy = 
+         Damage = 
          {
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21066, 
          Description = "", 
       }, 
       [21067] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A guard of the city stands here.\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "close w\
-lock w\
-", 
-               Arguments = "20", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "un w\
-op w\
-", 
-               Arguments = "6", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
+         Name = "man guard", 
+         Alignment = 1000, 
+         Vnum = 21067, 
          Position = "standing", 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Weight = 0, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
          Resistant = 
          {
             [20] = "magic", 
@@ -17968,195 +17951,48 @@ op w\
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         DefenseFlags = 
+         Immune = 
          {
-            [1] = "dodge", 
-            [0] = "parry", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         DamRoll = 2, 
-         Name = "man guard", 
-         ArmorClass = 0, 
-         Level = 15, 
-         ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 2, 
-         NumberOfAttacks = 2, 
          AffectedBy = 
          {
             [13] = "Protect", 
             [5] = "DetectHidden", 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21067, 
-         Description = "", 
-      }, 
-      [21068] = 
-      {
-         Alignment = 1000, 
-         LongDescr = "A guard of the city stands at the ready.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 150, 
-         }, 
-         Credits = 0, 
-         SpecFuns = 
-         {
-            [1] = "spec_police_attack", 
-            [0] = "spec_guardian", 
-         }, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "time_prog", 
-               Code = "close s\
-lock s\
+               Code = "un w\
+op w\
 ", 
-               Arguments = "20", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "6", 
             }, 
             [2] = 
             {
+               Code = "close w\
+lock w\
+", 
                MudProgType = "time_prog", 
-               Code = "un s\
-op s\
-", 
-               Arguments = "6", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
             }, 
-         }, 
-         Position = "standing", 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         DamRoll = 2, 
-         Name = "guard", 
-         ArmorClass = 0, 
-         Level = 15, 
-         ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 2, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21068, 
-         Description = "", 
-      }, 
-      [21069] = 
-      {
-         Alignment = 1000, 
-         LongDescr = "An guard keeps vigilant watch here.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
          }, 
          HitChance = 
          {
             HitNoDice = 15, 
-            HitSizeDice = 15, 
             HitPlus = 300, 
+            HitSizeDice = 15, 
          }, 
-         Credits = 0, 
-         SpecFuns = 
+         Flags = 
          {
-            [1] = "spec_police_attack", 
-            [0] = "spec_guardian", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "close n\
-lock n\
-close manhole\
-", 
-               Arguments = "20", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "un n\
-op n\
-", 
-               Arguments = "6", 
-            }, 
-         }, 
-         Position = "standing", 
          Languages = 
          {
             Speaking = 
@@ -18168,65 +18004,284 @@ op n\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 2, 
-         Name = "guard", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 2, 
          ShortDescr = "the guard", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 2, 
-         NumberOfAttacks = 2, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
+         Description = "", 
+      }, 
+      [21068] = 
+      {
+         Race = "Human", 
+         LongDescr = "A guard of the city stands at the ready.\
+", 
+         Name = "guard", 
+         Alignment = 1000, 
+         Vnum = 21068, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
          }, 
+         SpecFuns = 
+         {
+            [1] = "spec_police_attack", 
+            [0] = "spec_guardian", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "un s\
+op s\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "6", 
+            }, 
+            [2] = 
+            {
+               Code = "close s\
+lock s\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 150, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
          Height = 0, 
+         Level = 15, 
+         DamRoll = 2, 
+         ShortDescr = "the guard", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 2, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
+         Description = "", 
+      }, 
+      [21069] = 
+      {
+         Race = "Human", 
+         LongDescr = "An guard keeps vigilant watch here.\
+", 
+         Name = "guard", 
+         Alignment = 1000, 
          Vnum = 21069, 
+         Position = "standing", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         SpecFuns = 
+         {
+            [1] = "spec_police_attack", 
+            [0] = "spec_guardian", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "un n\
+op n\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "6", 
+            }, 
+            [2] = 
+            {
+               Code = "close n\
+lock n\
+close manhole\
+", 
+               MudProgType = "time_prog", 
+               ScriptType = "MProg", 
+               Arguments = "20", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         Height = 0, 
+         Level = 15, 
+         DamRoll = 2, 
+         ShortDescr = "the guard", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 2, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
          Description = "", 
       }, 
       [21070] = 
       {
+         Race = "_86", 
+         DefaultPosition = "standing", 
+         Name = "ratler", 
          Alignment = 0, 
-         LongDescr = "A pack ratler lumbers about, carrying its master's belongings.\
+         Vnum = 21070, 
+         Position = "standing", 
+         Description = "This fat, lumbering creature is tame and unkept. You find yourself\
+wondering what it carries.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 40, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -18234,15 +18289,6 @@ op n\
             [18] = "Mountable", 
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 40, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18271,143 +18317,141 @@ op n\
                [18] = "_clan", 
             }, 
          }, 
+         ArmorClass = 150, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21070, 
-         Name = "ratler", 
-         ArmorClass = 150, 
+         Height = 0, 
          Level = 6, 
-         ShortDescr = "the pack ratler", 
-         Damage = 
-         {
-            DamPlus = 8, 
-            DamSizeDice = 3, 
-            DamNoDice = 3, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "_86", 
-         Height = 0, 
-         Description = "This fat, lumbering creature is tame and unkept. You find yourself\
-wondering what it carries.\
+         Credits = 0, 
+         LongDescr = "A pack ratler lumbers about, carrying its master's belongings.\
 ", 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 3, 
+            DamPlus = 8, 
+            DamNoDice = 3, 
+         }, 
+         ShortDescr = "the pack ratler", 
       }, 
       [21071] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "A E-Web guard peers over the area.\
 ", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
+         Name = "E-Web Guard", 
+         Alignment = 1000, 
+         Vnum = 21071, 
          Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Race = "Human", 
          Immune = 
          {
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         DamRoll = 2, 
-         Name = "E-Web Guard", 
-         ArmorClass = 0, 
-         Level = 15, 
-         ShortDescr = "the E-web", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 2, 
-         NumberOfAttacks = 3, 
          AffectedBy = 
          {
             [5] = "DetectHidden", 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
          Height = 0, 
-         Vnum = 21071, 
+         Level = 15, 
+         DamRoll = 2, 
+         ShortDescr = "the E-web", 
+         Credits = 0, 
+         NumberOfAttacks = 3, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 2, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
          Description = "", 
       }, 
       [21073] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21073, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18419,63 +18463,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21073, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21074] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21074, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18487,63 +18531,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21074, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21075] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21075, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18555,63 +18599,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21075, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21076] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21076, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18623,63 +18667,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21076, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21077] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21077, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18691,63 +18735,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21077, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21078] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21078, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18759,63 +18803,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21078, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21079] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
+         Vnum = 21079, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -18827,143 +18871,63 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21079, 
-         Name = "Key", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
       }, 
       [21080] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Key", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created key here.\
-", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
+         Vnum = 21080, 
+         Position = "standing", 
+         Description = "", 
          HitChance = 
          {
             HitNoDice = 0, 
-            HitSizeDice = 0, 
             HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Vnum = 21080, 
-         Name = "Key", 
-         ArmorClass = 0, 
-         Level = 1, 
-         ShortDescr = "a newly created key", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
-         Sex = "undistinguished", 
-      }, 
-      [21081] = 
-      {
-         Alignment = 0, 
-         LongDescr = "&p An elderly entertainment man rests on the bed contimplating filming a movie.\
-&x\
-\
-", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say Hey tell me your here to buy my new script... Intersteller Wars?\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
          Languages = 
          {
             Speaking = 
@@ -18975,55 +18939,144 @@ wondering what it carries.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21081, 
-         Name = "man elderly george lucas", 
-         ArmorClass = 62, 
-         Level = 15, 
-         ShortDescr = "&p An elderly entertainment man ", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
+         Height = 0, 
+         Level = 1, 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created key here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created key", 
+      }, 
+      [21081] = 
+      {
          Race = "Human", 
-         Height = 0, 
+         DefaultPosition = "standing", 
+         Name = "man elderly george lucas", 
+         Alignment = 0, 
+         Vnum = 21081, 
+         Position = "standing", 
          Description = "This bearded human was jailed after he lost control and shot several Mon\
 Calamari individuals. His clothes are ragged and it is rumored that at one\
 time he was well known for his excellent Sci-Fiction writing. There is a\
 small patch with writing on it. \
 ", 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitPlus = 150, 
+            HitSizeDice = 10, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 62, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "say Hey tell me your here to buy my new script... Intersteller Wars?\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Height = 0, 
+         Level = 15, 
+         DamRoll = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Credits = 0, 
+         LongDescr = "&p An elderly entertainment man rests on the bed contimplating filming a movie.\
+&x\
+\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         ShortDescr = "&p An elderly entertainment man ", 
       }, 
       [21082] = 
       {
+         Race = "Gamorrean", 
+         DefaultPosition = "standing", 
+         Name = "gamorrean male Toisk", 
          Alignment = 0, 
-         LongDescr = "&G Toisk, A rather dumb Gamorrean male sits here counting the cracks in the\
-floor.\
-", 
+         Vnum = 21082, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
@@ -19031,117 +19084,69 @@ floor.\
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
+            Speaking = 
+            {
+               [14] = "gamorrese", 
+            }, 
+            Speaks = 
+            {
+               [14] = "gamorrese", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
+         ArmorClass = 10, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Height = 0, 
+         Level = 10, 
+         DamRoll = 0, 
          VipFlags = 
          {
             [7] = "Gamorr", 
          }, 
+         Credits = 0, 
+         LongDescr = "&G Toisk, A rather dumb Gamorrean male sits here counting the cracks in the\
+floor.\
+", 
+         NumberOfAttacks = 2, 
          Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [14] = "gamorrese", 
-            }, 
-            Speaks = 
-            {
-               [14] = "gamorrese", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Vnum = 21082, 
-         Name = "gamorrean male Toisk", 
-         ArmorClass = 10, 
-         Level = 10, 
-         ShortDescr = "&G Toisk, A rather dumb Gamorrean male", 
+         Sex = "male", 
+         HitRoll = 0, 
          Damage = 
          {
-            DamPlus = 0, 
             DamSizeDice = 6, 
+            DamPlus = 0, 
             DamNoDice = 2, 
          }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Race = "Gamorrean", 
-         Height = 0, 
-         Description = "", 
-         Sex = "male", 
+         ShortDescr = "&G Toisk, A rather dumb Gamorrean male", 
       }, 
       [21083] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "&z A Tk-13y voice active security scanner frames the enterace. &z\
 ", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
-         }, 
-         Credits = 0, 
-         SpecFuns = 
-         {
-            [0] = "spec_customs_weapons", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
+         Name = "scanner enterance", 
+         Alignment = 1000, 
+         Vnum = 21083, 
          Position = "standing", 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Weight = 0, 
-         Race = "Human", 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
          Resistant = 
          {
             [20] = "magic", 
@@ -19149,51 +19154,104 @@ floor.\
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         DefenseFlags = 
+         Immune = 
          {
-            [1] = "dodge", 
-            [0] = "parry", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         DamRoll = 0, 
-         Name = "scanner enterance", 
-         ArmorClass = 0, 
-         Level = 15, 
-         ShortDescr = "&z A Tk-13y Security scanner", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 2, 
          AffectedBy = 
          {
             [13] = "Protect", 
             [5] = "DetectHidden", 
          }, 
+         SpecFuns = 
+         {
+            [0] = "spec_customs_weapons", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Sex = "male", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
          Height = 0, 
-         Vnum = 21083, 
+         Level = 15, 
+         DamRoll = 0, 
+         ShortDescr = "&z A Tk-13y Security scanner", 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
+         }, 
          Description = "", 
       }, 
       [21084] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Greeting Protocol Droid", 
          Alignment = 0, 
-         LongDescr = "A power droid is here.\
+         Vnum = 21084, 
+         Position = "standing", 
+         Description = "The binary load lifter is a big droid used mainly for lifting and\
+moving large objects. Its very simple processing unit can only handle\
+very simple commands as there is very little need for an intelligent\
+droid laborer.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -19203,15 +19261,6 @@ floor.\
             [30] = "Prototype", 
             [26] = "Droid", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -19223,142 +19272,69 @@ floor.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 75, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21084, 
-         Name = "Greeting Protocol Droid", 
-         ArmorClass = 75, 
+         Height = 0, 
          Level = 10, 
-         ShortDescr = "&z Greeting Protocol Droid stands here.", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "The binary load lifter is a big droid used mainly for lifting and\
-moving large objects. Its very simple processing unit can only handle\
-very simple commands as there is very little need for an intelligent\
-droid laborer.\
+         Credits = 0, 
+         LongDescr = "A power droid is here.\
 ", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "&z Greeting Protocol Droid stands here.", 
       }, 
       [21100] = 
       {
-         Alignment = 0, 
-         LongDescr = "Protocol Droid Secretary Greets you\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Vnum = 21100, 
-         Name = "Protocol Droid Secretary", 
-         ArmorClass = 0, 
-         Level = 1, 
-         ShortDescr = "Protocol Droid", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 6, 
-            DamNoDice = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 2, 
-         HitRoll = 3, 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
          Race = "Human", 
-         Height = 0, 
+         DefaultPosition = "standing", 
+         Name = "Protocol Droid Secretary", 
+         Alignment = 0, 
+         Vnum = 21100, 
+         Position = "standing", 
          Description = "As busy as this guy is he still takes the time to help each and\
 every customer that walks into the room.  His silver coated frame\
 gleems brightly and you can see that he will remain in service \
 for some time barring any accidents.\
 ", 
-         Sex = "undistinguished", 
-      }, 
-      [21101] = 
-      {
-         Alignment = 0, 
-         LongDescr = "A janitor droid scoots about picking up your trash\
-", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
          HitChance = 
          {
             HitNoDice = 0, 
-            HitSizeDice = 0, 
             HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -19370,78 +19346,154 @@ for some time barring any accidents.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21101, 
-         Name = "Janitor", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "A janitor Droid", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
+         DamRoll = 2, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Protocol Droid Secretary Greets you\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 3, 
+         Damage = 
+         {
+            DamSizeDice = 6, 
+            DamPlus = 0, 
+            DamNoDice = 2, 
+         }, 
+         ShortDescr = "Protocol Droid", 
+      }, 
+      [21101] = 
+      {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "Janitor", 
+         Alignment = 0, 
+         Vnum = 21101, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         DamRoll = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A janitor droid scoots about picking up your trash\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "A janitor Droid", 
       }, 
       [21445] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "drunk quarren", 
          Alignment = 0, 
-         LongDescr = "A quarren drunk stumbles here.\
+         Vnum = 21445, 
+         Position = "standing", 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitPlus = 110, 
+            HitSizeDice = 10, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 110, 
+            Speaking = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         ArmorClass = 72, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "bribe_prog", 
-               Code = "Say well thanks $n\
-mpoload 21113\
-give map $n\
-", 
-               Arguments = "200 ", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
                Code = "Say hello, You new here $n? or have I talked to you I don't know, \
 say hey bartender get me another drink.\
 mpecho You see the bartender poor the quarren another drink.\
@@ -19451,166 +19503,162 @@ mpecho you see he has no credits.\
 Say hey $n give me 200 credits and I'll give you a map to the Quarren city\
 .\
 ", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
                Arguments = "hi hello", 
             }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
+            [2] = 
             {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
+               Code = "Say well thanks $n\
+mpoload 21113\
+give map $n\
+", 
+               MudProgType = "bribe_prog", 
+               ScriptType = "MProg", 
+               Arguments = "200 ", 
             }, 
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21445, 
-         Name = "drunk quarren", 
-         ArmorClass = 72, 
+         Height = 0, 
          Level = 11, 
-         ShortDescr = "A quarren drunk ", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
+         Credits = 0, 
+         LongDescr = "A quarren drunk stumbles here.\
 ", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         ShortDescr = "A quarren drunk ", 
       }, 
       [21448] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "clerk mon bank", 
          Alignment = 0, 
-         LongDescr = "&G A \"First Bank of Mon\" bank clerk counts credits to be sorted.\
-", 
+         Vnum = 21448, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         ArmorClass = -25, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
                Code = "Say  &c Hello, welcome to the first bank of Mon ,\
 Say &c Here your money is safe with us.\
 smile $n\
 mpecho &R You are reasured of that fact as you feal a red\
 mpecho &R laser beam scan you for your bio-info.\
 ", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
                Arguments = "100", 
             }, 
          }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21448, 
-         Name = "clerk mon bank", 
-         ArmorClass = -25, 
+         Height = 0, 
          Level = 50, 
-         ShortDescr = "&G A \"First Bank of Mon\" bank clerk", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "&G A \"First Bank of Mon\" bank clerk counts credits to be sorted.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 5, 
+         }, 
+         ShortDescr = "&G A \"First Bank of Mon\" bank clerk", 
       }, 
       [21447] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "child mon", 
          Alignment = 0, 
-         LongDescr = "A Mon child digs in the ground.\
-", 
+         Vnum = 21447, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [7] = "Wimpy", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -19622,64 +19670,64 @@ mpecho &R laser beam scan you for your bio-info.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21447, 
-         Name = "child mon", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "A Mon child", 
-         Damage = 
-         {
-            DamPlus = 3, 
-            DamSizeDice = 3, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 1, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "A Mon child digs in the ground.\
+", 
+         NumberOfAttacks = 1, 
+         Weight = 0, 
          Sex = "male", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 3, 
+            DamPlus = 3, 
+            DamNoDice = 1, 
+         }, 
+         ShortDescr = "A Mon child", 
       }, 
       [21446] = 
       {
+         Race = "Quarren", 
+         DefaultPosition = "standing", 
+         Name = "quarren child", 
          Alignment = 0, 
-         LongDescr = "A Quarren child plays here.\
-", 
+         Vnum = 21446, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 30, 
+            HitSizeDice = 1, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [7] = "Wimpy", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -19692,63 +19740,63 @@ mpecho &R laser beam scan you for your bio-info.\
                [24] = "quarrenese", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21446, 
-         Name = "quarren child", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "A Quarren child plays here.", 
-         Damage = 
-         {
-            DamPlus = 3, 
-            DamSizeDice = 3, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 1, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Quarren", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "A Quarren child plays here.\
+", 
+         NumberOfAttacks = 1, 
+         Weight = 0, 
          Sex = "male", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 3, 
+            DamPlus = 3, 
+            DamNoDice = 1, 
+         }, 
+         ShortDescr = "A Quarren child plays here.", 
       }, 
       [21499] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "final mob", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created final mob here.\
-", 
+         Vnum = 21499, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -19760,67 +19808,83 @@ mpecho &R laser beam scan you for your bio-info.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21499, 
-         Name = "final mob", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created final mob", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created final mob here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created final mob", 
       }, 
       [21444] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "food dispensor", 
          Alignment = 0, 
-         LongDescr = "&R A XT-4y Food Dispensor sits here.\
-", 
+         Vnum = 21444, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         HitChance = 
+         Languages = 
          {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
+         ArmorClass = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -19830,83 +19894,79 @@ mpecho &R laser beam scan you for your bio-info.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "&R A XT-4y Food Dispensor ", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21444, 
-         Name = "food dispensor", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "&R A XT-4y Food Dispensor ", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "&R A XT-4y Food Dispensor sits here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "&R A XT-4y Food Dispensor ", 
       }, 
       [21436] = 
       {
-         Alignment = 1000, 
+         Race = "Human", 
          LongDescr = "&C A TK-71 cooking droid stands behind the grill waiting.\
 ", 
-         Flags = 
+         Name = "Cooking Droid", 
+         Alignment = 1000, 
+         Vnum = 21436, 
+         Position = "standing", 
+         Resistant = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         HitChance = 
+         Immune = 
          {
-            HitNoDice = 15, 
-            HitSizeDice = 15, 
-            HitPlus = 300, 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         Credits = 0, 
+         AffectedBy = 
+         {
+            [13] = "Protect", 
+            [5] = "DetectHidden", 
+         }, 
          Shop = 
          {
-            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -19916,12 +19976,19 @@ mpecho &R laser beam scan you for your bio-info.\
                [0] = "none", 
             }, 
             KeeperShortDescr = "A TK-71 cooking droid", 
+            ProfitSell = 90, 
             ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 15, 
+            HitPlus = 300, 
+            HitSizeDice = 15, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -19936,87 +20003,68 @@ mpecho &R laser beam scan you for your bio-info.\
                [5] = "mon calamarian", 
             }, 
          }, 
-         Position = "standing", 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Weight = 0, 
-         Race = "Human", 
-         Immune = 
+         Stats = 
          {
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Resistant = 
-         {
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [10] = "sleep", 
-            [11] = "charm", 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
          }, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         DamRoll = 0, 
-         Name = "Cooking Droid", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 15, 
+         DamRoll = 0, 
          ShortDescr = "A TK-71 cooking droid", 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
+         Credits = 0, 
+         NumberOfAttacks = 2, 
+         Weight = 0, 
+         Sex = "male", 
          DefaultPosition = "standing", 
          HitRoll = 0, 
-         NumberOfAttacks = 2, 
-         AffectedBy = 
+         Damage = 
          {
-            [13] = "Protect", 
-            [5] = "DetectHidden", 
+            DamSizeDice = 4, 
+            DamPlus = 10, 
+            DamNoDice = 1, 
          }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         Height = 0, 
-         Vnum = 21436, 
          Description = "", 
       }, 
       [21415] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "newbie mob", 
          Alignment = 0, 
-         LongDescr = "Some god abandoned a newly created newbie mob here.\
-", 
+         Vnum = 21415, 
+         Position = "standing", 
+         Description = "", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Position = "standing", 
-         Weight = 0, 
          Languages = 
          {
             Speaking = 
@@ -20028,99 +20076,71 @@ mpecho &R laser beam scan you for your bio-info.\
                [0] = "basic", 
             }, 
          }, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21415, 
-         Name = "newbie mob", 
-         ArmorClass = 0, 
+         Height = 0, 
          Level = 1, 
-         ShortDescr = "a newly created newbie mob", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
-         Height = 0, 
-         Description = "", 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created newbie mob here.\
+", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "undistinguished", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created newbie mob", 
       }, 
       [21400] = 
       {
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Name = "takiki mon police clerk", 
          Alignment = 0, 
-         LongDescr = "Takiki, A Mon Calamarian police clerk\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 110, 
-         }, 
-         Credits = 0, 
+         Vnum = 21400, 
          Position = "standing", 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         Weight = 0, 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
+", 
          SpecFuns = 
          {
             [1] = "spec_customs_weapons", 
             [0] = "spec_police", 
          }, 
-         MudProgs = 
+         HitChance = 
          {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "Say Hello how can I help you....well come on..\
-", 
-               Arguments = "hi", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "Say Sorry $n come back with someone who cares.\
-", 
-               Arguments = "crime killed prison free", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "mpecho As you enter the clerk looks up\
-mpecho stares you down..\
-laugh\
-mpecho Then returns to work.\
-", 
-               Arguments = "100", 
-            }, 
+            HitNoDice = 2, 
+            HitPlus = 110, 
+            HitSizeDice = 10, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
          Languages = 
          {
@@ -20134,3217 +20154,3250 @@ mpecho Then returns to work.\
                [5] = "mon calamarian", 
             }, 
          }, 
+         ArmorClass = 72, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "Say Hello how can I help you....well come on..\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "hi", 
+            }, 
+            [2] = 
+            {
+               Code = "Say Sorry $n come back with someone who cares.\
+", 
+               MudProgType = "speech_prog", 
+               ScriptType = "MProg", 
+               Arguments = "crime killed prison free", 
+            }, 
+            [3] = 
+            {
+               Code = "mpecho As you enter the clerk looks up\
+mpecho stares you down..\
+laugh\
+mpecho Then returns to work.\
+", 
+               MudProgType = "all_greet_prog", 
+               ScriptType = "MProg", 
+               Arguments = "100", 
+            }, 
+         }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
             PoisonDeath = 0, 
-            ParaPetri = 0, 
          }, 
-         Vnum = 21400, 
-         Name = "takiki mon police clerk", 
-         ArmorClass = 72, 
-         Level = 11, 
-         ShortDescr = "Takiki, A Mon Calamarian police clerk", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         DefaultPosition = "standing", 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 10, 
             Charisma = 10, 
             Constitution = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Luck = 10, 
             Intelligence = 10, 
+            Dexterity = 10, 
             Wisdom = 10, 
+            Strength = 10, 
          }, 
-         Race = "Human", 
          Height = 0, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
+         Level = 11, 
+         DamRoll = 0, 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
+         Credits = 0, 
+         LongDescr = "Takiki, A Mon Calamarian police clerk\
 ", 
+         NumberOfAttacks = 0, 
+         Weight = 0, 
          Sex = "female", 
+         HitRoll = 0, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         ShortDescr = "Takiki, A Mon Calamarian police clerk", 
       }, 
    }, 
-   HighEconomy = 0, 
+   VnumRanges = 
+   {
+      Object = 
+      {
+         Last = 21435, 
+         First = 21000, 
+      }, 
+      Mob = 
+      {
+         Last = 21499, 
+         First = 21000, 
+      }, 
+      Room = 
+      {
+         Last = 21499, 
+         First = 21000, 
+      }, 
+   }, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
    Resets = 
    {
       [1] = 
       {
          Arg1 = 21045, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21003, 
+         Command = "M", 
       }, 
       [2] = 
       {
          Arg1 = 21055, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21010, 
+         Command = "M", 
       }, 
       [3] = 
       {
          Arg1 = 21037, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21012, 
+         Command = "M", 
       }, 
       [4] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [5] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [6] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [7] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [8] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [9] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [10] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [11] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [12] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [13] = 
       {
          Arg1 = 21037, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21018, 
+         Command = "M", 
       }, 
       [14] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [15] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [16] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [17] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [18] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [19] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [20] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [21] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [22] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [23] = 
       {
          Arg1 = 21052, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21026, 
+         Command = "M", 
       }, 
       [24] = 
       {
          Arg1 = 21037, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21029, 
+         Command = "M", 
       }, 
       [25] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [26] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [27] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [28] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [29] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [30] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [31] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [32] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [33] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [34] = 
       {
          Arg1 = 21045, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21048, 
+         Command = "M", 
       }, 
       [35] = 
       {
          Arg1 = 21017, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21053, 
+         Command = "M", 
       }, 
       [36] = 
       {
          Arg1 = 21048, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21053, 
+         Command = "O", 
       }, 
       [37] = 
       {
          Arg1 = 38, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21053, 
+         Command = "O", 
       }, 
       [38] = 
       {
          Arg1 = 21001, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21055, 
+         Command = "M", 
       }, 
       [39] = 
       {
-         Command = "G", 
-         Arg1 = 21422, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21422, 
       }, 
       [40] = 
       {
-         Command = "G", 
-         Arg1 = 21423, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21423, 
       }, 
       [41] = 
       {
-         Command = "G", 
-         Arg1 = 21424, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21424, 
       }, 
       [42] = 
       {
-         Command = "G", 
-         Arg1 = 21425, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21425, 
       }, 
       [43] = 
       {
          Arg1 = 21011, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21056, 
+         Command = "M", 
       }, 
       [44] = 
       {
          Arg1 = 21018, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21057, 
+         Command = "M", 
       }, 
       [45] = 
       {
-         Command = "G", 
-         Arg1 = 21014, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21014, 
       }, 
       [46] = 
       {
-         Command = "G", 
-         Arg1 = 21015, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21015, 
       }, 
       [47] = 
       {
-         Command = "G", 
-         Arg1 = 21016, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21016, 
       }, 
       [48] = 
       {
          Arg1 = 21002, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21058, 
+         Command = "M", 
       }, 
       [49] = 
       {
          Arg1 = 21019, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21060, 
+         Command = "M", 
       }, 
       [50] = 
       {
-         Command = "G", 
-         Arg1 = 21020, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21020, 
       }, 
       [51] = 
       {
-         Command = "G", 
-         Arg1 = 21021, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21021, 
       }, 
       [52] = 
       {
          Arg1 = 21020, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21061, 
+         Command = "M", 
       }, 
       [53] = 
       {
-         Command = "G", 
-         Arg1 = 21017, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21017, 
       }, 
       [54] = 
       {
-         Command = "G", 
-         Arg1 = 21018, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21018, 
       }, 
       [55] = 
       {
-         Command = "G", 
-         Arg1 = 21019, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21019, 
       }, 
       [56] = 
       {
          Arg1 = 21016, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21062, 
+         Command = "M", 
       }, 
       [57] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [58] = 
       {
-         Command = "G", 
-         Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21069, 
       }, 
       [59] = 
       {
-         Command = "G", 
-         Arg1 = 21081, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21081, 
       }, 
       [60] = 
       {
-         Command = "G", 
-         Arg1 = 21082, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21082, 
       }, 
       [61] = 
       {
          Arg1 = 21037, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21062, 
+         Command = "M", 
       }, 
       [62] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [63] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [64] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [65] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [66] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [67] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [68] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [69] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [70] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [71] = 
       {
          Arg1 = 21055, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21063, 
+         Command = "O", 
       }, 
       [72] = 
       {
          Arg1 = 21052, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21064, 
+         Command = "M", 
       }, 
       [73] = 
       {
          Arg1 = 21052, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21064, 
+         Command = "M", 
       }, 
       [74] = 
       {
          Arg1 = 21055, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21064, 
+         Command = "O", 
       }, 
       [75] = 
       {
          Arg1 = 21055, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21065, 
+         Command = "O", 
       }, 
       [76] = 
       {
          Arg1 = 21061, 
-         Arg2 = 4, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 4, 
          Arg3 = 21080, 
+         Command = "M", 
       }, 
       [77] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [78] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [79] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [80] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [81] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [82] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [83] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [84] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [85] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [86] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [87] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [88] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [89] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [90] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [91] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21087, 
+         Command = "M", 
       }, 
       [92] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [93] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [94] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [95] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [96] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [97] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [98] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [99] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [100] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [101] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [102] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [103] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [104] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [105] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [106] = 
       {
          Arg1 = 21070, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [107] = 
       {
          Arg1 = 21087, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [108] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21088, 
+         Command = "M", 
       }, 
       [109] = 
       {
          Arg1 = 21070, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [110] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [111] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [112] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [113] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [114] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [115] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [116] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [117] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [118] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [119] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [120] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [121] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [122] = 
       {
          Arg1 = 21088, 
-         Arg2 = 3, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 3, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [123] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21099, 
+         Command = "M", 
       }, 
       [124] = 
       {
          Arg1 = 21071, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [125] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [126] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [127] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [128] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [129] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [130] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [131] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [132] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [133] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [134] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [135] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [136] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [137] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [138] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [139] = 
       {
          Arg1 = 21099, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [140] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21112, 
+         Command = "M", 
       }, 
       [141] = 
       {
          Arg1 = 21072, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [142] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [143] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [144] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [145] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [146] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [147] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [148] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [149] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [150] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [151] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [152] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [153] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [154] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [155] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [156] = 
       {
          Arg1 = 21112, 
-         Arg2 = 3, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 3, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [157] = 
       {
          Arg1 = 21003, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21054, 
+         Command = "M", 
       }, 
       [158] = 
       {
-         Command = "G", 
-         Arg1 = 32230, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 32230, 
       }, 
       [159] = 
       {
-         Command = "G", 
-         Arg1 = 10487, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 10487, 
       }, 
       [160] = 
       {
          Arg1 = 21037, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21054, 
+         Command = "M", 
       }, 
       [161] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [162] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [163] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [164] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [165] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [166] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [167] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [168] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [169] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [170] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21075, 
+         Command = "M", 
       }, 
       [171] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [172] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [173] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [174] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [175] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [176] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [177] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [178] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [179] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [180] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [181] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [182] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [183] = 
       {
          Arg1 = 21073, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [184] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [185] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [186] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21075, 
+         Command = "M", 
       }, 
       [187] = 
       {
          Arg1 = 21075, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [188] = 
       {
          Arg1 = 21059, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21119, 
+         Command = "M", 
       }, 
       [189] = 
       {
          Arg1 = 21061, 
-         Arg2 = 4, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 4, 
          Arg3 = 21114, 
+         Command = "M", 
       }, 
       [190] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [191] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [192] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [193] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [194] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [195] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [196] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [197] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [198] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [199] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [200] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 15, 
+         Command = "E", 
       }, 
       [201] = 
       {
          Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 11, 
+         Command = "E", 
       }, 
       [202] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [203] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [204] = 
       {
-         Command = "G", 
-         Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21056, 
       }, 
       [205] = 
       {
-         Command = "G", 
-         Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21058, 
       }, 
       [206] = 
       {
-         Command = "G", 
-         Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21059, 
       }, 
       [207] = 
       {
-         Command = "G", 
-         Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21060, 
       }, 
       [208] = 
       {
-         Command = "G", 
-         Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21061, 
       }, 
       [209] = 
       {
-         Command = "G", 
-         Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21062, 
       }, 
       [210] = 
       {
-         Command = "G", 
-         Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21063, 
       }, 
       [211] = 
       {
-         Command = "G", 
-         Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21066, 
       }, 
       [212] = 
       {
-         Command = "G", 
-         Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21067, 
       }, 
       [213] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [214] = 
       {
-         Command = "G", 
-         Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21058, 
       }, 
       [215] = 
       {
-         Command = "G", 
-         Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21062, 
       }, 
       [216] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [217] = 
       {
-         Command = "G", 
-         Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21057, 
       }, 
       [218] = 
       {
-         Command = "G", 
-         Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21060, 
       }, 
       [219] = 
       {
-         Command = "G", 
-         Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21061, 
       }, 
       [220] = 
       {
-         Command = "G", 
-         Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21064, 
       }, 
       [221] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [222] = 
       {
-         Command = "G", 
-         Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21063, 
       }, 
       [223] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [224] = 
       {
-         Command = "G", 
-         Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21067, 
       }, 
       [225] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [226] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [227] = 
       {
-         Command = "G", 
-         Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21057, 
       }, 
       [228] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [229] = 
       {
-         Command = "G", 
-         Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21064, 
       }, 
       [230] = 
       {
-         Command = "G", 
-         Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21068, 
       }, 
       [231] = 
       {
-         Command = "G", 
-         Arg1 = 21022, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21022, 
       }, 
       [232] = 
       {
-         Command = "G", 
-         Arg1 = 21019, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21019, 
       }, 
       [233] = 
       {
-         Command = "G", 
-         Arg1 = 21020, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21020, 
       }, 
       [234] = 
       {
-         Command = "G", 
-         Arg1 = 10317, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 10317, 
       }, 
       [235] = 
       {
-         Command = "G", 
-         Arg1 = 10312, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 10312, 
       }, 
       [236] = 
       {
-         Command = "G", 
-         Arg1 = 10424, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 10424, 
       }, 
       [237] = 
       {
          Arg1 = 21059, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21114, 
+         Command = "M", 
       }, 
       [238] = 
       {
          Arg1 = 21059, 
-         Arg2 = 4, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 4, 
          Arg3 = 21106, 
+         Command = "M", 
       }, 
       [239] = 
       {
          Arg1 = 21059, 
-         Arg2 = 5, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 5, 
          Arg3 = 21094, 
+         Command = "M", 
       }, 
       [240] = 
       {
          Arg1 = 21059, 
-         Arg2 = 6, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 6, 
          Arg3 = 21089, 
+         Command = "M", 
       }, 
       [241] = 
       {
          Arg1 = 21435, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21129, 
+         Command = "M", 
       }, 
       [242] = 
       {
-         Command = "G", 
-         Arg1 = 32254, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 32254, 
       }, 
       [243] = 
       {
          Arg1 = 32231, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21071, 
+         Command = "O", 
       }, 
       [244] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21100, 
+         Command = "M", 
       }, 
       [245] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [246] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [247] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [248] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [249] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [250] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [251] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [252] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [253] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [254] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [255] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [256] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [257] = 
       {
          Arg1 = 21071, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [258] = 
       {
          Arg1 = 21421, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21100, 
+         Command = "O", 
       }, 
       [259] = 
       {
          Arg1 = 21100, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [260] = 
       {
          Arg1 = 21068, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21074, 
+         Command = "M", 
       }, 
       [261] = 
       {
          Arg1 = 21073, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [262] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [263] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [264] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [265] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [266] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [267] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [268] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [269] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [270] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [271] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [272] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [273] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [274] = 
       {
          Arg1 = 21074, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [275] = 
       {
          Arg1 = 21014, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21052, 
+         Command = "M", 
       }, 
       [276] = 
       {
-         Command = "G", 
-         Arg1 = 21094, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21094, 
       }, 
       [277] = 
       {
-         Command = "G", 
-         Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21056, 
       }, 
       [278] = 
       {
          Arg1 = 21444, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21128, 
+         Command = "M", 
       }, 
       [279] = 
       {
-         Command = "G", 
-         Arg1 = 6824, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 6824, 
       }, 
       [280] = 
       {
-         Command = "G", 
-         Arg1 = 32283, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 32283, 
       }, 
       [281] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21113, 
+         Command = "M", 
       }, 
       [282] = 
       {
          Arg1 = 21056, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "E", 
       }, 
       [283] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 3, 
+         Command = "E", 
       }, 
       [284] = 
       {
          Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [285] = 
       {
          Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [286] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 7, 
+         Command = "E", 
       }, 
       [287] = 
       {
          Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [288] = 
       {
          Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 10, 
+         Command = "E", 
       }, 
       [289] = 
       {
          Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 9, 
+         Command = "E", 
       }, 
       [290] = 
       {
          Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 14, 
+         Command = "E", 
       }, 
       [291] = 
       {
          Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 20, 
+         Command = "E", 
       }, 
       [292] = 
       {
          Arg1 = 21067, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "E", 
       }, 
       [293] = 
       {
          Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [294] = 
       {
          Arg1 = 21072, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [295] = 
       {
          Arg1 = 21113, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [296] = 
       {
          Arg1 = 21436, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21072, 
+         Command = "M", 
       }, 
       [297] = 
       {
-         Command = "G", 
-         Arg1 = 6814, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 6814, 
       }, 
       [298] = 
       {
-         Command = "G", 
-         Arg1 = 6824, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 6824, 
       }, 
       [299] = 
       {
-         Command = "G", 
-         Arg1 = 6822, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 6822, 
       }, 
       [300] = 
       {
-         Command = "G", 
-         Arg1 = 6825, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 6825, 
       }, 
       [301] = 
       {
-         Command = "G", 
-         Arg1 = 21133, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21133, 
       }, 
       [302] = 
       {
          Arg1 = 32208, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21072, 
+         Command = "O", 
       }, 
       [303] = 
       {
          Arg1 = 21059, 
-         Arg2 = 7, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 7, 
          Arg3 = 21135, 
+         Command = "M", 
       }, 
       [304] = 
       {
          Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21135, 
+         Command = "M", 
       }, 
       [305] = 
       {
          Arg1 = 21447, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21134, 
+         Command = "M", 
       }, 
       [306] = 
       {
          Arg1 = 21446, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21134, 
+         Command = "M", 
       }, 
       [307] = 
       {
          Arg1 = 21446, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21134, 
+         Command = "M", 
       }, 
       [308] = 
       {
          Arg1 = 21447, 
-         Arg2 = 2, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 2, 
          Arg3 = 21134, 
+         Command = "M", 
       }, 
       [309] = 
       {
          Arg1 = 21446, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21137, 
+         Command = "M", 
       }, 
       [310] = 
       {
          Arg1 = 21447, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21137, 
+         Command = "M", 
       }, 
       [311] = 
       {
          Arg1 = 21446, 
-         Arg2 = 4, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 4, 
          Arg3 = 21136, 
+         Command = "M", 
       }, 
       [312] = 
       {
          Arg1 = 21447, 
-         Arg2 = 4, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 4, 
          Arg3 = 21136, 
+         Command = "M", 
       }, 
       [313] = 
       {
          Arg1 = 21037, 
-         Arg2 = 8, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 8, 
          Arg3 = 21007, 
+         Command = "M", 
       }, 
       [314] = 
       {
          Arg1 = 21037, 
-         Arg2 = 9, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 9, 
          Arg3 = 21011, 
+         Command = "M", 
       }, 
       [315] = 
       {
          Arg1 = 21037, 
-         Arg2 = 10, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 10, 
          Arg3 = 21015, 
+         Command = "M", 
       }, 
       [316] = 
       {
          Arg1 = 21037, 
-         Arg2 = 11, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 11, 
          Arg3 = 21021, 
+         Command = "M", 
       }, 
       [317] = 
       {
          Arg1 = 21037, 
-         Arg2 = 12, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 12, 
          Arg3 = 21027, 
+         Command = "M", 
       }, 
       [318] = 
       {
          Arg1 = 21037, 
-         Arg2 = 13, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 13, 
          Arg3 = 21032, 
+         Command = "M", 
       }, 
       [319] = 
       {
          Arg1 = 21037, 
-         Arg2 = 14, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 14, 
          Arg3 = 21001, 
+         Command = "M", 
       }, 
       [320] = 
       {
          Arg1 = 21015, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21059, 
+         Command = "M", 
       }, 
       [321] = 
       {
-         Command = "G", 
-         Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21057, 
       }, 
       [322] = 
       {
-         Command = "G", 
-         Arg1 = 21058, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21058, 
       }, 
       [323] = 
       {
-         Command = "G", 
-         Arg1 = 21059, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21059, 
       }, 
       [324] = 
       {
-         Command = "G", 
-         Arg1 = 21060, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21060, 
       }, 
       [325] = 
       {
-         Command = "G", 
-         Arg1 = 29008, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 29008, 
       }, 
       [326] = 
       {
-         Command = "G", 
-         Arg1 = 21062, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21062, 
       }, 
       [327] = 
       {
-         Command = "G", 
-         Arg1 = 21063, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21063, 
       }, 
       [328] = 
       {
-         Command = "G", 
-         Arg1 = 21064, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21064, 
       }, 
       [329] = 
       {
-         Command = "G", 
-         Arg1 = 21065, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21065, 
       }, 
       [330] = 
       {
-         Command = "G", 
-         Arg1 = 21066, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21066, 
       }, 
       [331] = 
       {
-         Command = "G", 
-         Arg1 = 29007, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 29007, 
       }, 
       [332] = 
       {
-         Command = "G", 
-         Arg1 = 21061, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21061, 
       }, 
       [333] = 
       {
-         Command = "G", 
-         Arg1 = 29006, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 29006, 
       }, 
       [334] = 
       {
-         Command = "G", 
-         Arg1 = 21426, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21426, 
       }, 
       [335] = 
       {
-         Command = "G", 
-         Arg1 = 10311, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 10311, 
       }, 
       [336] = 
       {
          Arg1 = 21448, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21138, 
+         Command = "M", 
       }, 
       [337] = 
       {
          Arg1 = 21433, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21150, 
+         Command = "M", 
       }, 
       [338] = 
       {
          Arg1 = 21427, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21150, 
+         Command = "O", 
       }, 
       [339] = 
       {
          Arg1 = 21037, 
-         Arg2 = 12, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 12, 
          Arg3 = 21145, 
+         Command = "M", 
       }, 
       [340] = 
       {
          Arg1 = 21114, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21000, 
+         Command = "O", 
       }, 
       [341] = 
       {
          Arg1 = 21115, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21148, 
+         Command = "O", 
       }, 
       [342] = 
       {
          Arg1 = 21116, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21148, 
+         Command = "O", 
       }, 
       [343] = 
       {
          Arg1 = 21148, 
-         Arg2 = 3, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 3, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [344] = 
       {
          Arg1 = 21141, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [345] = 
       {
          Arg1 = 21140, 
-         Arg2 = 8, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 8, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [346] = 
       {
          Arg1 = 21116, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21149, 
+         Command = "O", 
       }, 
       [347] = 
       {
          Arg1 = 21115, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21149, 
+         Command = "O", 
       }, 
       [348] = 
       {
          Arg1 = 21149, 
-         Arg2 = 7, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 7, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [349] = 
       {
          Arg1 = 21139, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [350] = 
       {
          Arg1 = 21142, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [351] = 
       {
          Arg1 = 21143, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [352] = 
       {
          Arg1 = 21438, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21144, 
+         Command = "M", 
       }, 
       [353] = 
       {
          Arg1 = 21140, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 17, 
+         Command = "E", 
       }, 
       [354] = 
       {
          Arg1 = 21081, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21146, 
+         Command = "M", 
       }, 
       [355] = 
       {
          Arg1 = 21115, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21146, 
+         Command = "O", 
       }, 
       [356] = 
       {
          Arg1 = 21116, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21146, 
+         Command = "O", 
       }, 
       [357] = 
       {
          Arg1 = 21146, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [358] = 
       {
          Arg1 = 21073, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [359] = 
       {
          Arg1 = 21082, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21147, 
+         Command = "M", 
       }, 
       [360] = 
       {
          Arg1 = 21117, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 5, 
+         Command = "E", 
       }, 
       [361] = 
       {
          Arg1 = 28015, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 6, 
+         Command = "E", 
       }, 
       [362] = 
       {
          Arg1 = 21118, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 8, 
+         Command = "E", 
       }, 
       [363] = 
       {
          Arg1 = 21115, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21147, 
+         Command = "O", 
       }, 
       [364] = 
       {
          Arg1 = 21116, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21147, 
+         Command = "O", 
       }, 
       [365] = 
       {
          Arg1 = 21147, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 2, 
+         Command = "D", 
       }, 
       [366] = 
       {
          Arg1 = 21400, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21132, 
+         Command = "M", 
       }, 
       [367] = 
       {
-         Command = "G", 
-         Arg1 = 21069, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21069, 
       }, 
       [368] = 
       {
          Arg1 = 21132, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [369] = 
       {
          Arg1 = 21058, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21067, 
+         Command = "M", 
       }, 
       [370] = 
       {
          Arg1 = 21057, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21067, 
+         Command = "M", 
       }, 
       [371] = 
       {
          Arg1 = 21437, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21067, 
+         Command = "M", 
       }, 
       [372] = 
       {
          Arg1 = 60, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "E", 
+         Arg2 = 1, 
          Arg3 = 16, 
+         Command = "E", 
       }, 
       [373] = 
       {
          Arg1 = 21058, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21067, 
+         Command = "M", 
       }, 
       [374] = 
       {
          Arg1 = 21058, 
-         Arg2 = 3, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 3, 
          Arg3 = 21067, 
+         Command = "M", 
       }, 
       [375] = 
       {
          Arg1 = 21083, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21130, 
+         Command = "M", 
       }, 
       [376] = 
       {
          Arg1 = 21130, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [377] = 
       {
          Arg1 = 21126, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [378] = 
       {
          Arg1 = 21434, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21127, 
+         Command = "M", 
       }, 
       [379] = 
       {
          Arg1 = 21127, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [380] = 
       {
          Arg1 = 21040, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [381] = 
       {
          Arg1 = 21025, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21069, 
+         Command = "M", 
       }, 
       [382] = 
       {
          Arg1 = 21069, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [383] = 
       {
          Arg1 = 21013, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21068, 
+         Command = "M", 
       }, 
       [384] = 
       {
-         Command = "G", 
-         Arg1 = 21009, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21009, 
       }, 
       [385] = 
       {
-         Command = "G", 
-         Arg1 = 21008, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21008, 
       }, 
       [386] = 
       {
-         Command = "G", 
-         Arg1 = 21010, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21010, 
       }, 
       [387] = 
       {
          Arg1 = 21445, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21068, 
+         Command = "M", 
       }, 
       [388] = 
       {
          Arg1 = 21068, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [389] = 
       {
          Arg1 = 21041, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [390] = 
       {
          Arg1 = 21022, 
-         Arg2 = 0, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 0, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [391] = 
       {
          Arg1 = 21021, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "M", 
+         Arg2 = 1, 
          Arg3 = 21066, 
+         Command = "M", 
       }, 
       [392] = 
       {
-         Command = "G", 
-         Arg1 = 21076, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21076, 
       }, 
       [393] = 
       {
-         Command = "G", 
-         Arg1 = 21077, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21077, 
       }, 
       [394] = 
       {
-         Command = "G", 
-         Arg1 = 21078, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21078, 
       }, 
       [395] = 
       {
-         Command = "G", 
-         Arg1 = 21079, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21079, 
       }, 
       [396] = 
       {
-         Command = "G", 
-         Arg1 = 21080, 
-         Arg2 = 1, 
          MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+         Arg1 = 21080, 
       }, 
       [397] = 
       {
          Arg1 = 21066, 
-         Arg2 = 2, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 2, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [398] = 
       {
          Arg1 = 21066, 
-         Arg2 = 5, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 5, 
          Arg3 = 0, 
+         Command = "D", 
       }, 
       [399] = 
       {
          Arg1 = 21180, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [400] = 
       {
          Arg1 = 21184, 
-         Arg2 = 3, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 3, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [401] = 
       {
          Arg1 = 21183, 
-         Arg2 = 1, 
          MiscData = 0, 
-         Command = "D", 
+         Arg2 = 1, 
          Arg3 = 1, 
+         Command = "D", 
       }, 
       [402] = 
       {
          Arg1 = 21435, 
-         Arg2 = 1, 
          MiscData = 1, 
-         Command = "O", 
+         Arg2 = 1, 
          Arg3 = 21187, 
-      }, 
-   }, 
-   VnumRanges = 
-   {
-      Room = 
-      {
-         First = 21000, 
-         Last = 21499, 
-      }, 
-      Mob = 
-      {
-         First = 21000, 
-         Last = 21499, 
-      }, 
-      Object = 
-      {
-         First = 21000, 
-         Last = 21435, 
-      }, 
-   }, 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
-      Soft = 
-      {
-         Low = 0, 
-         High = 105, 
+         Command = "O", 
       }, 
    }, 
    ResetMessage = "Imperial TIE fighters scream past above, patrolling this occupied city.", 
    ResetFrequency = 0, 
-   Filename = "mon_cal.lua", 
-   Name = "Mon Calamri", 
+   FileFormatVersion = 1, 
+   Flags = 
+   {
+      [0] = "NoPkill", 
+   }, 
+   LowEconomy = 187437344, 
 }

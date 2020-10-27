@@ -513,9 +513,16 @@ void RoomProgEnterTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & ENTER_PROG)
     {
-        RoomProgSetSupermob(ch->InRoom);
-        RoomProgPercentCheck(supermob, ch, nullptr, nullptr, ENTER_PROG);
-        ReleaseSupermob();
+        if(false)
+        {
+
+        }
+        else
+        {
+            RoomProgSetSupermob(ch->InRoom);
+            RoomProgPercentCheck(supermob, ch, nullptr, nullptr, ENTER_PROG);
+            ReleaseSupermob();
+        }
     }
 }
 

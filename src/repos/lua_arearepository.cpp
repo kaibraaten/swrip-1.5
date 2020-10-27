@@ -805,6 +805,11 @@ static void LoadMudProg(lua_State *L, int subscript, MProg *mprog)
                       {
                           prog->type = MobProgNameToType(name);
                       });
+    LuaGetfieldString(L, "ScriptType",
+                      [prog](const auto &name)
+                      {
+                          prog->SType = StrCmp(name, "Imp") == 0 ? ScriptType::Imp : ScriptType::MProg;
+                      });
     LuaGetfieldString(L, "Arguments",
                       [prog](const auto &args)
                       {

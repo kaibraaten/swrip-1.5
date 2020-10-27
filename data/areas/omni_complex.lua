@@ -1,63 +1,38 @@
 -- Omnipresent Complex
--- Last saved Thursday 09-Jul-2020 23:19:12
+-- Last saved Tuesday 27-Oct-2020 11:58:44
 
 AreaEntry
 {
+   Author = "Kuran", 
+   Mobiles = 
+   {
+   }, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 150, 
+         First = 100, 
+      }, 
+      Object = 
+      {
+         Last = 150, 
+         First = 100, 
+      }, 
+      Room = 
+      {
+         Last = 150, 
+         First = 100, 
+      }, 
+   }, 
+   ResetFrequency = 0, 
+   HighEconomy = 0, 
+   ResetMessage = "&gCan't sleep, the newbies will eat me.&w", 
+   FileFormatVersion = 1, 
    Rooms = 
    {
       [100] = 
       {
-         TeleDelay = 0, 
-         Vnum = 100, 
-         Name = "Omnipresent Being's Monitoring Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 104, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 102, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 106, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 125, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 105, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-         }, 
          Description = "You are in the center of the Omnipresent Being's domain.  From this;complex\
 the all knowing, all powerful beings that control this galaxy;do their\
 work. There is a computer terminal in the center of the room used to\
@@ -67,336 +42,383 @@ with the Supreme Being's offices. Up is a one way passage to the Isolation\
 Room, where misbehaving mortal beings are sent to cool off. To the east is\
 an Omnipresent-to-Mortal conference room.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [17] = "LogSpeech", 
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [101] = 
-      {
          TeleDelay = 0, 
-         Vnum = 101, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 125, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 104, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 102, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 125, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+            }, 
+            [5] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 105, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "up", 
             }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 100, 
+         Name = "Omnipresent Being's Monitoring Room", 
+      }, 
+      [101] = 
+      {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [102] = 
-      {
          TeleDelay = 0, 
-         Vnum = 102, 
-         Name = "The Omnipresent Being's Mortal Engagement Room", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 100, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "west", 
+               DestinationVnum = 125, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
             }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 101, 
+         Name = "An Empty Home", 
+      }, 
+      [102] = 
+      {
          Description = "You are in the conference room where the Omnipresent Beings engage\
 the mortal beings in questioning, and occasionally punishment.  The\
 room is bare and there are no apparent exits except the one to the\
 west.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [103] = 
-      {
          TeleDelay = 0, 
-         Vnum = 103, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
                DestinationVnum = 100, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
                Distance = 0, 
-               DestinationVnum = 101, 
                Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 102, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 110, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
             }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 102, 
+         Name = "The Omnipresent Being's Mortal Engagement Room", 
+      }, 
+      [103] = 
+      {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [104] = 
-      {
          TeleDelay = 0, 
-         Vnum = 104, 
-         Name = "Omnipresent Builders' Galactic Discourse Center", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 100, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 100, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 101, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 102, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "south", 
             }, 
+            [4] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 110, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+            }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 103, 
+         Name = "An Empty Home", 
+      }, 
+      [104] = 
+      {
          Description = "From this chamber, all major construction projects which take place in the\
 galaxy are carefully planned and executed.  A terminal for the discourse\
 of this topic has been carefully mounted in the far wall, and is blinking\
 for some reason.  The only exit apparent to you is south.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [26] = "Factory", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [105] = 
-      {
          TeleDelay = 0, 
-         Vnum = 105, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 100, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+            }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 104, 
+         Name = "Omnipresent Builders' Galactic Discourse Center", 
+      }, 
+      [105] = 
+      {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 105, 
+         Name = "An Empty Home", 
       }, 
       [106] = 
       {
-         TeleDelay = 0, 
-         Vnum = 106, 
-         Name = "Omnipresent Being's Office Complex", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 100, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 107, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "door office", 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 119, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 111, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 110, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [6] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 112, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "southeast", 
-            }, 
-            [7] = 
-            {
-               Flags = 
-               {
-                  [17] = "CanEnter", 
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 108, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "glimmer teleport teleporter silphion", 
-               Direction = "somewhere", 
-            }, 
-         }, 
          Description = "The air here is thick with the sounds of creation.  The Supreme Beings\
 do much of their Galactic building in rooms adjoining this one.  In all,\
 there are four seperate offices accessable from here, along with the\
 Reality Control center, which is directly above this room.  North leads\
 back to the hub of the complex.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-      }, 
-      [107] = 
-      {
          TeleDelay = 0, 
-         Vnum = 107, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 100, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Keyword = "door office", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 107, 
                Distance = 0, 
-               DestinationVnum = 106, 
                Key = -1, 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
                Description = "", 
-               Keyword = "door", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 119, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 111, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
             }, 
+            [5] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 110, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
+            }, 
+            [6] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 112, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+            }, 
+            [7] = 
+            {
+               Description = "", 
+               Keyword = "glimmer teleport teleporter silphion", 
+               Flags = 
+               {
+                  [17] = "CanEnter", 
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               DestinationVnum = 108, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "somewhere", 
+            }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 106, 
+         Name = "Omnipresent Being's Office Complex", 
+      }, 
+      [107] = 
+      {
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "speech_prog", 
                Code = "if isimmort($n)\
     if position($n) == sitting\
         mpechoat $n You're an immortal, and you're sitting.\
@@ -435,43 +457,37 @@ if not knowsskill($n) == meditate\
     mpechoat $n How can you not know meditate?\
 endif\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "foobar", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "door", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
             }, 
          }, 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
+         Tag = "", 
+         Vnum = 107, 
+         Name = "An Empty Home", 
       }, 
       [108] = 
       {
-         TeleDelay = 0, 
-         Vnum = 108, 
-         Name = "The Real Universe", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 110, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
          Description = "The glimmer you saw was a teleporter, a gate.  One that took you to where\
 no mortal or immortal has ever laid their eyes before. You are inside\
 total blackness, illuminated only by the dancing sprites of electrons\
@@ -480,470 +496,477 @@ composing one entire wall, flickers with information of the universe you\
 just left.  Opposite of it, with an input/output deck raised beside it, a\
 simple cot was provided for the watcher. Welcome to the universe.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [23] = "Hotel", 
             [26] = "Factory", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [109] = 
-      {
          TeleDelay = 0, 
-         Vnum = 109, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 121, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               DestinationVnum = 110, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "down", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 108, 
+         Name = "The Real Universe", 
+      }, 
+      [109] = 
+      {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 121, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "south", 
             }, 
             [2] = 
             {
+               Description = "", 
+               Keyword = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
                DestinationVnum = 118, 
+               Distance = 0, 
                Key = 9599, 
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
             }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
+         Tag = "", 
+         Vnum = 109, 
+         Name = "An Empty Home", 
       }, 
       [110] = 
       {
-         TeleDelay = 0, 
-         Vnum = 110, 
-         Name = "The Omnipresent Mail Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 106, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
-         }, 
          Description = "Well this room was feeling a little unused so it quit its old job and\
 decided to become a mail room instead.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "down", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 110, 
+         Name = "The Omnipresent Mail Room", 
       }, 
       [111] = 
       {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Vnum = 111, 
-         Name = "An Empty Home", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 106, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "east", 
             }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
+         Tag = "", 
+         Vnum = 111, 
+         Name = "An Empty Home", 
       }, 
       [112] = 
       {
-         TeleDelay = 0, 
-         Vnum = 112, 
-         Name = "An Empty Home", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 106, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "northwest", 
-            }, 
-         }, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [113] = 
-      {
          TeleDelay = 0, 
-         Vnum = 113, 
-         Name = "Main Room of Darrik's Quarters", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 114, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northwest", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 112, 
+         Name = "An Empty Home", 
+      }, 
+      [113] = 
+      {
+         Description = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [9] = "Private", 
+         }, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 114, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "east", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               DestinationVnum = 116, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 116, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "south", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               DestinationVnum = 115, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 115, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               DestinationVnum = 119, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 119, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "up", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               DestinationVnum = 118, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 118, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "down", 
             }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [9] = "Private", 
-         }, 
+         Tag = "", 
+         Vnum = 113, 
+         Name = "Main Room of Darrik's Quarters", 
       }, 
       [114] = 
       {
+         Description = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [9] = "Private", 
+         }, 
          TeleDelay = 0, 
-         Vnum = 114, 
-         Name = "Mail Room", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 113, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 113, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
             }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [9] = "Private", 
-         }, 
+         Tag = "", 
+         Vnum = 114, 
+         Name = "Mail Room", 
       }, 
       [115] = 
       {
-         TeleDelay = 0, 
-         Vnum = 115, 
-         Name = "OOC Board room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 113, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
          Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [9] = "Private", 
          }, 
-      }, 
-      [116] = 
-      {
          TeleDelay = 0, 
-         Vnum = 116, 
-         Name = "Tech Board room", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 113, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 113, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 115, 
+         Name = "OOC Board room", 
+      }, 
+      [116] = 
+      {
+         Description = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [9] = "Private", 
+         }, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 113, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "north", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               DestinationVnum = 117, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 117, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "east", 
             }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Flags = 
-         {
-            [9] = "Private", 
-         }, 
+         Tag = "", 
+         Vnum = 116, 
+         Name = "Tech Board room", 
       }, 
       [117] = 
       {
-         TeleDelay = 0, 
-         Vnum = 117, 
-         Name = "Tech Idea Board Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 116, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "west", 
-            }, 
-         }, 
          Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [9] = "Private", 
          }, 
-      }, 
-      [118] = 
-      {
          TeleDelay = 0, 
-         Vnum = 118, 
-         Name = "Living Room", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 122, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 116, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
             }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 113, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "up", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 120, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "down", 
-            }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 117, 
+         Name = "Tech Idea Board Room", 
+      }, 
+      [118] = 
+      {
+         Description = "", 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [30] = "Prototype", 
             [9] = "Private", 
          }, 
-      }, 
-      [119] = 
-      {
          TeleDelay = 0, 
-         Vnum = 119, 
-         Name = "An Empty Home", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 106, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "north", 
+               DestinationVnum = 122, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               DestinationVnum = 113, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
+               DestinationVnum = 113, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 120, 
+               Distance = 0, 
+               Key = -1, 
                Direction = "down", 
             }, 
          }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 118, 
+         Name = "Living Room", 
+      }, 
+      [119] = 
+      {
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [120] = 
-      {
          TeleDelay = 0, 
-         Vnum = 120, 
-         Name = "Workshop", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               Flags = 
-               {
-                  [24] = "NoMob", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 118, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "up", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 106, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 113, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "down", 
             }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 119, 
+         Name = "An Empty Home", 
+      }, 
+      [120] = 
+      {
+         Description = "", 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [9] = "Private", 
@@ -952,62 +975,64 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [26] = "Factory", 
             [25] = "Refinery", 
          }, 
-      }, 
-      [121] = 
-      {
          TeleDelay = 0, 
-         Vnum = 121, 
-         Name = "Transport Room", 
+         Sector = "city", 
          Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+               }, 
+               DestinationVnum = 118, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
+            }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 120, 
+         Name = "Workshop", 
+      }, 
+      [121] = 
+      {
+         Description = "", 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [9] = "Private", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 121, 
+         Name = "Transport Room", 
       }, 
       [122] = 
       {
-         TeleDelay = 0, 
-         Vnum = 122, 
-         Name = "Darrik's Mortal Relation Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [24] = "NoMob", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 118, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               Direction = "east", 
-            }, 
-         }, 
          Description = "The dark, damp room is filled with various torture devices.  Several \
 manacles are attached to the walls, a rack lies against a blank wall, and\
 an iron maiden stands near the door. An ewok  lies strapped to a table,\
 while a blade whooshes back and forth, getting closer and closer to its\
 chest. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [8] = "Bank", 
@@ -1015,102 +1040,109 @@ chest. \
             [19] = "ClanStoreroom", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [123] = 
-      {
          TeleDelay = 0, 
-         Vnum = 123, 
-         Name = "Vequir Shipyards", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Flags = 
-               {
-                  [25] = "Window", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 124, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "south", 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+               }, 
+               DestinationVnum = 118, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
             }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 122, 
+         Name = "Darrik's Mortal Relation Room", 
+      }, 
+      [123] = 
+      {
          Description = "Vequir Construction Yards, one of the new yards created after the death of\
 the Emperor, works mainly for the civilian classes. Large midsize\
 freighters and fast starfighters are moved out in large numbers to various\
 sites around the galaxy.  On occasion, a ship can be bought before it\
 leaves this site. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-      }, 
-      [124] = 
-      {
          TeleDelay = 0, 
-         Vnum = 124, 
-         Name = "Vequir Construction Yards", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 123, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "north", 
+               Flags = 
+               {
+                  [25] = "Window", 
+               }, 
+               DestinationVnum = 124, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
             }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 123, 
+         Name = "Vequir Shipyards", 
+      }, 
+      [124] = 
+      {
          Description = "The construction yards stretch for miles in deep space.  Durasteel\
 structures support half-built frames and  innards of the hundreds of\
 ships. Construction droids and maintenance workers cover each ship like a\
 swarm of insects.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-      }, 
-      [125] = 
-      {
          TeleDelay = 0, 
-         Vnum = 125, 
-         Name = "Omnipresent Being's Workshop", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               DestinationVnum = 100, 
-               Key = -1, 
                Description = "", 
                Keyword = "", 
-               Direction = "east", 
+               DestinationVnum = 123, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
             }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 124, 
+         Name = "Vequir Construction Yards", 
+      }, 
+      [125] = 
+      {
+         Description = "", 
          TeleVnum = 0, 
-         Sector = "inside", 
          Flags = 
          {
             [16] = "Silence", 
@@ -1121,428 +1153,429 @@ swarm of insects.\
             [6] = "NoDrive", 
             [23] = "Hotel", 
          }, 
-      }, 
-      [150] = 
-      {
          TeleDelay = 0, 
-         Vnum = 150, 
-         Name = "Floating in a void", 
+         Sector = "inside", 
          Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 100, 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+            }, 
          }, 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
          Tunnel = 0, 
+         Tag = "", 
+         Vnum = 125, 
+         Name = "Omnipresent Being's Workshop", 
+      }, 
+      [150] = 
+      {
+         Description = "", 
          TeleVnum = 0, 
-         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Tag = "", 
+         Vnum = 150, 
+         Name = "Floating in a void", 
       }, 
    }, 
-   Author = "Kuran", 
-   ResetFrequency = 0, 
-   Name = "Omnipresent Complex", 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
-      Soft = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
-   }, 
-   HighEconomy = 0, 
-   FileFormatVersion = 1, 
    Resets = 
    {
       [1] = 
       {
-         Arg1 = 100, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 100, 
+         Arg1 = 100, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [2] = 
       {
-         Arg1 = 107, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 3, 
          Arg3 = 0, 
+         Arg1 = 107, 
+         Arg2 = 3, 
+         MiscData = 0, 
       }, 
       [3] = 
       {
-         Arg1 = 32201, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 102, 
+         Arg1 = 32201, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [4] = 
       {
-         Arg1 = 38, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 114, 
+         Arg1 = 38, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [5] = 
       {
-         Arg1 = 119, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 0, 
          Arg3 = 0, 
+         Arg1 = 119, 
+         Arg2 = 0, 
+         MiscData = 0, 
       }, 
       [6] = 
       {
-         Arg1 = 109, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 3, 
          Arg3 = 0, 
+         Arg1 = 109, 
+         Arg2 = 3, 
+         MiscData = 0, 
       }, 
       [7] = 
       {
-         Arg1 = 104, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 118, 
+         Arg1 = 104, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [8] = 
       {
-         Arg1 = 38, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 110, 
+         Arg1 = 38, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [9] = 
       {
-         Arg1 = 103, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 106, 
+         Arg1 = 103, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [10] = 
       {
-         Arg1 = 106, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 106, 
+         Arg1 = 106, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [11] = 
       {
-         Arg1 = 106, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 106, 
+         Arg2 = 1, 
+         MiscData = 0, 
       }, 
       [12] = 
       {
-         Arg1 = 106, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 2, 
          Arg3 = 0, 
+         Arg1 = 106, 
+         Arg2 = 2, 
+         MiscData = 0, 
       }, 
       [13] = 
       {
-         Arg1 = 106, 
          Command = "D", 
-         MiscData = 0, 
-         Arg2 = 4, 
          Arg3 = 0, 
+         Arg1 = 106, 
+         Arg2 = 4, 
+         MiscData = 0, 
       }, 
       [14] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 32280, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [15] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 32210, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [16] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 10497, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [17] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 10494, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [18] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 10314, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [19] = 
       {
-         MiscData = 1, 
+         Command = "G", 
          Arg1 = 32281, 
          Arg2 = 1, 
-         Command = "G", 
+         MiscData = 1, 
       }, 
       [20] = 
       {
-         Arg1 = 10420, 
          Command = "P", 
-         MiscData = 0, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10420, 
+         Arg2 = 1, 
+         MiscData = 0, 
       }, 
       [21] = 
       {
-         Arg1 = 10420, 
          Command = "P", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10420, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
       [22] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 2, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 2, 
       }, 
       [23] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 3, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 3, 
       }, 
       [24] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 4, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 4, 
       }, 
       [25] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 5, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 5, 
       }, 
       [26] = 
       {
-         Arg1 = 25, 
          Command = "P", 
-         MiscData = 6, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 25, 
+         Arg2 = 1, 
+         MiscData = 6, 
       }, 
       [27] = 
       {
-         Arg1 = 32261, 
          Command = "P", 
-         MiscData = 7, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 32261, 
+         Arg2 = 1, 
+         MiscData = 7, 
       }, 
       [28] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 8, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 8, 
       }, 
       [29] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 9, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 9, 
       }, 
       [30] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 10, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 10, 
       }, 
       [31] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 11, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 11, 
       }, 
       [32] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 12, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 12, 
       }, 
       [33] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 13, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 13, 
       }, 
       [34] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 14, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 14, 
       }, 
       [35] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 15, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 15, 
       }, 
       [36] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 16, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 16, 
       }, 
       [37] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 17, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 17, 
       }, 
       [38] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 18, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 18, 
       }, 
       [39] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 19, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 19, 
       }, 
       [40] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 20, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 20, 
       }, 
       [41] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 21, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 21, 
       }, 
       [42] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 22, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 22, 
       }, 
       [43] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 23, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 23, 
       }, 
       [44] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 24, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 24, 
       }, 
       [45] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 25, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 25, 
       }, 
       [46] = 
       {
-         Arg1 = 10429, 
          Command = "P", 
-         MiscData = 26, 
-         Arg2 = 1, 
          Arg3 = 0, 
+         Arg1 = 10429, 
+         Arg2 = 1, 
+         MiscData = 26, 
       }, 
       [47] = 
       {
-         Arg1 = 90, 
          Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
          Arg3 = 115, 
+         Arg1 = 90, 
+         Arg2 = 1, 
+         MiscData = 1, 
       }, 
    }, 
+   LowEconomy = 30457103, 
    Objects = 
    {
       [104] = 
       {
-         Vnum = 104, 
-         Weight = 1, 
-         Name = "A long couch", 
-         Cost = 0, 
          Description = "A comfortable couch was placed here", 
          ObjectValues = 
          {
@@ -1553,25 +1586,21 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "furniture", 
+         Cost = 0, 
          ShortDescr = "a couch", 
-         ActionDescription = "", 
+         Weight = 1, 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
+         ActionDescription = "", 
+         Vnum = 104, 
+         Name = "A long couch", 
       }, 
       [106] = 
       {
-         Vnum = 106, 
-         Weight = 1, 
-         Name = "multiplay board", 
-         Cost = 0, 
          Description = "Multiplay Board", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -1581,20 +1610,24 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Cost = 0, 
          ShortDescr = "multiplay board", 
+         Weight = 1, 
          ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "trash", 
          Layers = 0, 
+         Vnum = 106, 
+         Name = "multiplay board", 
       }, 
       [100] = 
       {
-         Vnum = 100, 
-         Weight = 1, 
-         Name = "terminal omnipresent monitor", 
-         Cost = 0, 
          Description = "The Monitoring Terminal has been installed here.", 
          ObjectValues = 
          {
@@ -1605,20 +1638,20 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          ShortDescr = "the Monitoring Terminal", 
-         ActionDescription = "", 
+         Weight = 1, 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Layers = 0, 
+         ItemType = "trash", 
+         ActionDescription = "", 
+         Vnum = 100, 
+         Name = "terminal omnipresent monitor", 
       }, 
       [101] = 
       {
-         Vnum = 101, 
-         Weight = 1, 
-         Name = "terminal omnipresent coding", 
-         Cost = 0, 
          Description = "The Terminal of the Omnipresent Coders is here, leaking source code.", 
          ObjectValues = 
          {
@@ -1629,25 +1662,21 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          ShortDescr = "the Coding Terminal", 
-         ActionDescription = "", 
+         Weight = 1, 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Layers = 0, 
+         ItemType = "trash", 
+         ActionDescription = "", 
+         Vnum = 101, 
+         Name = "terminal omnipresent coding", 
       }, 
       [102] = 
       {
-         Vnum = 102, 
-         Weight = 1, 
-         Name = "terminal quest galactic control blinking", 
-         Cost = 0, 
          Description = "The Quest Board is here, and is blinking.", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -1657,20 +1686,24 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Cost = 0, 
          ShortDescr = "the Terminal for Galactic Control", 
+         Weight = 1, 
          ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "trash", 
          Layers = 0, 
+         Vnum = 102, 
+         Name = "terminal quest galactic control blinking", 
       }, 
       [103] = 
       {
-         Vnum = 103, 
-         Weight = 1, 
-         Name = "silphion silphions wormhole teleporter glimmer", 
-         Cost = 0, 
          Description = "&zThe teleporter's glimmer offers faint glimpses into the real world.", 
          ObjectValues = 
          {
@@ -1681,41 +1714,36 @@ swarm of insects.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          ShortDescr = "durgas wormhole", 
-         ActionDescription = "", 
+         Weight = 1, 
+         Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Layers = 0, 
+         ItemType = "trash", 
+         ActionDescription = "", 
+         Vnum = 103, 
+         Name = "silphion silphions wormhole teleporter glimmer", 
       }, 
    }, 
-   Filename = "omni_complex.lua", 
-   Mobiles = 
+   LevelRanges = 
    {
-   }, 
-   VnumRanges = 
-   {
-      Object = 
+      Soft = 
       {
-         First = 100, 
-         Last = 150, 
+         Low = 0, 
+         High = 105, 
       }, 
-      Mob = 
+      Hard = 
       {
-         First = 100, 
-         Last = 150, 
-      }, 
-      Room = 
-      {
-         First = 100, 
-         Last = 150, 
+         Low = 0, 
+         High = 105, 
       }, 
    }, 
-   LowEconomy = 30457103, 
-   ResetMessage = "&gCan't sleep, the newbies will eat me.&w", 
    Flags = 
    {
       [1] = "_01", 
    }, 
+   Filename = "omni_complex.lua", 
+   Name = "Omnipresent Complex", 
 }
