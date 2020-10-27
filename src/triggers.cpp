@@ -29,6 +29,24 @@ static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Cha
                              std::shared_ptr<Object> obj,
                              const Vo &vo, int type);
 
+/*
+static std::list<std::shared_ptr<MPROG_DATA>> GetMProgScripts(const std::list<std::shared_ptr<MPROG_DATA>> &mudProgs)
+{
+    return Filter(mudProgs, [](const auto &prog)
+                            {
+                                return prog->SType == ScriptType::MProg;
+                            });
+}
+
+static std::list<std::shared_ptr<MPROG_DATA>> GetImpScripts(const std::list<std::shared_ptr<MPROG_DATA>> &mudProgs)
+{
+    return Filter(mudProgs, [](const auto &prog)
+                            {
+                                return prog->SType == ScriptType::Imp;
+                            });
+}
+*/
+
 void MobProgActTrigger(const std::string &buf,
                        std::shared_ptr<Character> mob,
                        std::shared_ptr<Character> ch,
@@ -99,7 +117,15 @@ void MobProgBribeTrigger(std::shared_ptr<Character> mob,
             if(mprg->type & BRIBE_PROG
                && amount >= atoi(mprg->arglist.c_str()))
             {
-                MudProgDriver(mprg->comlist, mob, ch, obj, nullptr, false);
+                if(false)
+                {
+
+                }
+                else
+                {
+                    MudProgDriver(mprg->comlist, mob, ch, obj, nullptr, false);
+                }
+                
                 break;
             }
         }
@@ -513,6 +539,7 @@ void RoomProgEnterTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & ENTER_PROG)
     {
+        
         if(false)
         {
 

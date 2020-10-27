@@ -40,6 +40,21 @@
 #include <map>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
+
+//////////////////////////////////////////////////////
+#include <imp/scanner/scanner.hpp>
+#include <imp/runtime/functionvalue.hpp>
+#include <imp/runtime/stringvalue.hpp>
+#include <imp/runtime/runtimescope.hpp>
+#include <imp/runtime/standardlibrary.hpp>
+#include <imp/parser/program.hpp>
+#include "impscript/impcharacter.hpp"
+#include "impscript/improom.hpp"
+#include "impscript/scriptscheduler.hpp"
+#include "impscript/scriptrunner.hpp"
+#include "impscript/mudlibrary.hpp"
+//////////////////////////////////////////////////////
+
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
@@ -2412,7 +2427,67 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
     }
 }
 
-void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
+static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
+{
+    auto standardLib = std::make_shared<Imp::StandardLibrary>();
+    auto mudLib = std::make_shared<MudLibrary>(standardLib);
+    auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
+    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("data/scripts"));
+    return globalScope;
+}
+
+static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code)
+{
+    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto prog = Imp::Program::Parse(scanner);
+
+    return prog;
+}
+
+static void ImpDispatchPercentCheck(const std::string &comlist,
+                                    std::shared_ptr<Character> mob,
+                                    int type)
+{
+    std::istringstream inbuf(comlist);
+    std::list<std::string> code;
+    std::string line;
+    
+    while(std::getline(inbuf, line))
+    {
+        code.push_back(line);
+    }
+    
+    if(type == ENTRY_PROG)
+    {
+        auto globalScope = MakeImpScope();
+        auto prog = ParseImpProgram(code);
+        auto doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
+                                std::shared_ptr<Imp::RuntimeScope> scope)
+                           {
+                               auto func = scope->Find("on_entry", program.get());
+
+                               if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                               {
+                                   auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                                   std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                       {
+                                           std::make_shared<ImpCharacter>(mob),
+                                           std::make_shared<ImpRoom>(mob->InRoom)
+                                       };
+                                   on_entry->EvalFuncCall(params, program.get());
+                               }
+                               else
+                               {
+                                   Imp::RuntimeValue::RuntimeError("on_entry isn't a function!", program.get());
+                               }
+                           };
+        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
+        Schedule(scriptRunner);
+    }
+}
+
+void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                         std::shared_ptr<Object> obj,
                          const Vo &vo, int type)
 {
     for(auto mprg : mob->Prototype->mprog.MudProgs())
@@ -2420,7 +2495,14 @@ void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Charact
         if(mprg->type & type
            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
-            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            if(mprg->SType == ScriptType::Imp)
+            {
+                ImpDispatchPercentCheck(mprg->comlist, mob, type);
+            }
+            else
+            {
+                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
 
             if(type != GREET_PROG && type != ALL_GREET_PROG)
                 break;
