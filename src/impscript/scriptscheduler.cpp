@@ -74,19 +74,11 @@ void ScriptScheduler::Dispatch()
         {
             pImpl->PendingScripts.pop();
             auto scriptRunner = entry.second;
+            double waitDuration = scriptRunner->Resume();
 
-            try
+            if(waitDuration > 0)
             {
-                double waitDuration = scriptRunner->Resume();
-
-                if(waitDuration > 0)
-                {
-                    pImpl->PendingScripts.push({ std::chrono::system_clock::now() + std::chrono::milliseconds((int)(waitDuration * 1000)), scriptRunner });
-                }
-            }
-            catch(const Imp::ImpException &ex)
-            {
-                Log->Bug("%s", ex.what());
+                pImpl->PendingScripts.push({ std::chrono::system_clock::now() + std::chrono::milliseconds((int)(waitDuration * 1000)), scriptRunner });
             }
         }
     }

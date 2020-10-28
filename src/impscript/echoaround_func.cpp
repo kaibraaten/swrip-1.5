@@ -3,10 +3,12 @@
 #include <imp/runtime/stringvalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
+#include "impscript/impobject.hpp"
 #include "impscript/echoaround_func.hpp"
 #include "constants.hpp"
 #include "act.hpp"
 #include "mud.hpp"
+#include "object.hpp"
 
 EchoAroundFunc::EchoAroundFunc()
     : Imp::FunctionValue("echoaround")
@@ -35,6 +37,23 @@ std::shared_ptr<Imp::RuntimeValue> EchoAroundFunc::EvalFuncCall(const std::vecto
     {
         auto ch = std::dynamic_pointer_cast<ImpCharacter>(arg1)->Entity(where);
         Act(AT_PLAIN, message, ch, nullptr, nullptr, ActTarget::Room);
+    }
+    else if(dynamic_cast<ImpObject*>(arg1.get()))
+    {
+        auto obj = std::dynamic_pointer_cast<ImpObject>(arg1)->Entity(where);
+
+        if(obj->InRoom)
+        {
+            EchoToRoom(AT_PLAIN, obj->InRoom, Capitalize(message));
+        }
+        else if(obj->CarriedBy)
+        {
+            Act(AT_PLAIN, message, obj->CarriedBy, nullptr, nullptr, ActTarget::Char);
+        }
+        else
+        {
+            Imp::RuntimeValue::RuntimeError("Object not carried or in room in echoaround() param 1.", where);
+        }
     }
     else
     {

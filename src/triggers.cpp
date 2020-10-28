@@ -775,24 +775,25 @@ static std::list<std::string> SplitIntoLines(const std::string &comlist)
 }
 
 static void DispatchImpFunction(const std::string &funcName,
-                                std::initializer_list<std::shared_ptr<Imp::RuntimeValue>> params,
+                                std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
                                 const std::list<std::string> &code)
 {
     auto globalScope = MakeImpScope();
     auto prog = ParseImpProgram(code);
-    auto func = globalScope->Find(funcName, prog.get());
-    auto doAfterEval = [func, funcName, params](std::shared_ptr<Imp::Program> program,
-                                                std::shared_ptr<Imp::RuntimeScope> scope)
+    
+    auto doAfterEval = [funcName, params](std::shared_ptr<Imp::Program> program,
+                                          std::shared_ptr<Imp::RuntimeScope> scope)
     {
+        auto func = scope->Find(funcName, program.get());
+        
         if(dynamic_cast<Imp::FunctionValue *>(func.get()) != nullptr)
         {
             auto callback = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-            std::vector<std::shared_ptr<Imp::RuntimeValue>> p(params.begin(), params.end());
-            callback->EvalFuncCall(p, program.get());
+            callback->EvalFuncCall(params, program.get());
         }
         else
         {
-            Imp::RuntimeValue::RuntimeError(funcName + "on_rand isn't a function!",
+            Imp::RuntimeValue::RuntimeError(funcName + " isn't a function!",
                                             program.get());
         }
     };
@@ -801,9 +802,9 @@ static void DispatchImpFunction(const std::string &funcName,
     Schedule(scriptRunner);
 }
 
-static std::pair<std::string, std::initializer_list<std::shared_ptr<Imp::RuntimeValue>>> GetImpProgData(std::shared_ptr<Object> obj,
-                                                                                                        std::shared_ptr<Character> actor,
-                                                                                                        const Vo &vo, int type)
+static std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpProgData(std::shared_ptr<Object> obj,
+                                                                                              std::shared_ptr<Character> actor,
+                                                                                              const Vo &vo, int type)
 {
     if(type == RAND_PROG)
     {
@@ -846,8 +847,10 @@ static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<
 
             if(mprg->SType == ScriptType::Imp)
             {
-                std::pair<std::string, std::initializer_list<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpProgData(obj, actor, vo, type);
-                DispatchImpFunction(data.first, data.second, SplitIntoLines(mprg->comlist));
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpProgData(obj, actor, vo, type);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
             }
             else
             {
