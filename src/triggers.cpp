@@ -818,6 +818,46 @@ static std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> G
     {
         return { "on_remove", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
     }
+    else if(type == EXA_PROG)
+    {
+        return { "on_examine", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == SAC_PROG)
+    {
+        return { "on_junk", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == DAMAGE_PROG)
+    {
+        return { "on_damage", { std::make_shared<ImpObject>(obj) } };
+    }
+    else if(type == REPAIR_PROG)
+    {
+        return { "on_repair", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == DROP_PROG)
+    {
+        return { "on_drop", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == ZAP_PROG)
+    {
+        return { "on_zap", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == GREET_PROG)
+    {
+        return { "on_greet", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == GET_PROG)
+    {
+        return { "on_get", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == PUSH_PROG)
+    {
+        return { "on_push", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == PULL_PROG)
+    {
+        return { "on_pull", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
+    }
     else if(type == USE_PROG)
     {
         auto victim = vo.Ch;
