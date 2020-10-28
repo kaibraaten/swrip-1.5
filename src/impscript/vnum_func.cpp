@@ -33,6 +33,10 @@ std::shared_ptr<Imp::RuntimeValue> VnumFunc::EvalFuncCall(const std::vector<std:
         {
             vnum = ch->Entity(where)->Prototype->Vnum;
         }
+        else
+        {
+            return std::make_shared<Imp::NoneValue>();
+        }
     }
     else if((dynamic_cast<ImpRoom*>(entity.get())))
     {

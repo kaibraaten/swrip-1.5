@@ -52,7 +52,7 @@ std::shared_ptr<Imp::RuntimeValue> EchoAroundFunc::EvalFuncCall(const std::vecto
         }
         else
         {
-            Imp::RuntimeValue::RuntimeError("Object not carried or in room in echoaround() param 1.", where);
+            // Intentionally left blank.
         }
     }
     else

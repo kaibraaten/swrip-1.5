@@ -11,7 +11,6 @@ ExitFunc::ExitFunc()
 
 std::shared_ptr<Imp::RuntimeValue> ExitFunc::EvalFuncCall(const std::vector<std::shared_ptr<Imp::RuntimeValue>> &actualParams, const Imp::ImpSyntax *where)
 {
-    Imp::CheckNumParams(actualParams, 1, "exit", where);
     throw ImpExitException();
     return std::make_shared<Imp::NoneValue>();
 }
