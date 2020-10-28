@@ -13,7 +13,7 @@ void do_sleep(std::shared_ptr<Character> ch, std::string argument)
     {
     case POS_SLEEPING:
         ch->Echo("You are already sleeping.\r\n");
-        break;
+        return;
 
     case POS_RESTING:
     case POS_SITTING:
@@ -75,7 +75,7 @@ void do_sleep(std::shared_ptr<Character> ch, std::string argument)
 
     case POS_FIGHTING:
         ch->Echo("You are busy fighting!\r\n");
-        break;
+        return;
 
     default:
         break;

@@ -554,17 +554,9 @@ void RoomProgEnterTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & ENTER_PROG)
     {
-
-        if(false)
-        {
-
-        }
-        else
-        {
-            RoomProgSetSupermob(ch->InRoom);
-            RoomProgPercentCheck(supermob, ch, nullptr, nullptr, ENTER_PROG);
-            ReleaseSupermob();
-        }
+        RoomProgSetSupermob(ch->InRoom);
+        RoomProgPercentCheck(supermob, ch, nullptr, nullptr, ENTER_PROG);
+        ReleaseSupermob();
     }
 }
 
@@ -603,7 +595,7 @@ void RoomProgDeathTrigger(std::shared_ptr<Character> killer, std::shared_ptr<Cha
     if(ch->InRoom->mprog.progtypes & RDEATH_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
-        RoomProgPercentCheck(supermob, ch, nullptr, nullptr, RDEATH_PROG);
+        RoomProgPercentCheck(supermob, ch, nullptr, killer, RDEATH_PROG);
         ReleaseSupermob();
     }
 }
@@ -875,6 +867,52 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMo
     }
 }
 
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpRoomProgData(std::shared_ptr<Room> room,
+                                                                                           std::shared_ptr<Character> actor,
+                                                                                           const Vo &vo, int type)
+{
+    if(type == LEAVE_PROG)
+    {
+        return { "on_leave", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == ENTER_PROG)
+    {
+        return { "on_enter", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == SLEEP_PROG)
+    {
+        return { "on_sleep", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == REST_PROG)
+    {
+        return { "on_rest", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == RFIGHT_PROG)
+    {
+        return { "on_fight", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == RDEATH_PROG)
+    {
+        return { "on_death", { std::make_shared<ImpRoom>(room), std::make_shared<ImpCharacter>(actor), std::make_shared<ImpCharacter>(vo.Ch) } };
+    }
+    else if(type == RAND_PROG)
+    {
+        return { "on_rand", { std::make_shared<ImpRoom>(room) } };
+    }
+    else if(type == HOUR_PROG)
+    {
+        return { "on_hour", { std::make_shared<ImpRoom>(room) } };
+    }
+    else if(type == TIME_PROG)
+    {
+        return { "on_time", { std::make_shared<ImpRoom>(room) } };
+    }
+    else
+    {
+        return { "UNSUPPORTED_TRIGGER_TYPE", {} };
+    }
+}
+
 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpObjProgData(std::shared_ptr<Object> obj,
                                                                                           std::shared_ptr<Character> actor,
                                                                                           const Vo &vo, int type)
@@ -996,10 +1034,22 @@ static void RoomProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr
         if(mprg->type & type
            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
-            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            if(mprg->SType == ScriptType::Imp)
+            {
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(actor->InRoom, actor, vo, type);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+            }
+            else
+            {
+                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
 
             if(type != ENTER_PROG)
+            {
                 break;
+            }
         }
     }
 }
@@ -1026,7 +1076,18 @@ static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Ch
            && (!mprg->triggered || mprg->type & HOUR_PROG))
         {
             mprg->triggered = true;
-            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+
+            if(mprg->SType == ScriptType::Imp)
+            {
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, nullptr, nullptr, type);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+            }
+            else
+            {
+                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
         }
     }
 }

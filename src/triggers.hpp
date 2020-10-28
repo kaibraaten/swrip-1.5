@@ -62,6 +62,9 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpOb
 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMobProgData(std::shared_ptr<Character> mob,
                                                                                           std::shared_ptr<Character> actor,
                                                                                           const Vo &vo, int type);
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpRoomProgData(std::shared_ptr<Room> room,
+                                                                                           std::shared_ptr<Character> actor,
+                                                                                           const Vo &vo, int type);
 void DispatchImpFunction(const std::string &funcName,
                          std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
                          const std::list<std::string> &code);

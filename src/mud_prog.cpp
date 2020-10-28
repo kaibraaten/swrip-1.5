@@ -2384,7 +2384,17 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                            || *end == '\r'
                            || *end == '\0'))
                     {
-                        MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                        if(mprg->SType == ScriptType::Imp)
+                        {
+                            std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                            auto funcName = data.first;
+                            auto params = data.second;
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                        }
+                        else
+                        {
+                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                        }
                         break;
                     }
                     else
@@ -2414,7 +2424,17 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                || *end == '\r'
                                || *end == '\0'))
                         {
-                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                            if(mprg->SType == ScriptType::Imp)
+                            {
+                                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                                auto funcName = data.first;
+                                auto params = data.second;
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            }
+                            else
+                            {
+                                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                            }
                             break;
                         }
                         else
@@ -2741,7 +2761,7 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                     {
                         if(mprg->SType == ScriptType::Imp)
                         {
-                            std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                            std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
                             DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
@@ -2779,7 +2799,7 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                         {
                             if(mprg->SType == ScriptType::Imp)
                             {
-                                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
                                 DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
