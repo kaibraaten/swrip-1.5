@@ -54,6 +54,7 @@
 #include "impscript/scriptrunner.hpp"
 #include "impscript/mudlibrary.hpp"
 //////////////////////////////////////////////////////
+#include "triggers.hpp"
 
 #include "mud.hpp"
 #include "character.hpp"
@@ -2427,170 +2428,6 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
     }
 }
 
-static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
-{
-    auto standardLib = std::make_shared<Imp::StandardLibrary>();
-    auto mudLib = std::make_shared<MudLibrary>(standardLib);
-    auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
-    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("data/scripts"));
-    return globalScope;
-}
-
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code)
-{
-    auto scanner = std::make_shared<Imp::Scanner>(code);
-    auto prog = Imp::Program::Parse(scanner);
-
-    return prog;
-}
-
-static void ImpDispatchPercentCheck(const std::string &comlist,
-                                    std::shared_ptr<Character> mob,
-                                    std::shared_ptr<Character> actor,
-                                    int type)
-{
-    std::istringstream inbuf(comlist);
-    std::list<std::string> code;
-    std::string line;
-    
-    while(std::getline(inbuf, line))
-    {
-        code.push_back(line);
-    }
-
-    auto globalScope = MakeImpScope();
-    auto prog = ParseImpProgram(code);
-    std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval;
-    
-    if(type == ENTRY_PROG)
-    {
-        doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
-                            std::shared_ptr<Imp::RuntimeScope> scope)
-                      {
-                          auto func = scope->Find("on_entry", program.get());
-
-                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                          {
-                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                  {
-                                      std::make_shared<ImpCharacter>(mob),
-                                      std::make_shared<ImpRoom>(mob->InRoom)
-                                  };
-                              on_entry->EvalFuncCall(params, program.get());
-                          }
-                          else
-                          {
-                              Imp::RuntimeValue::RuntimeError("on_entry isn't a function!",
-                                                              program.get());
-                          }
-                      };
-    }
-    else if(type == GREET_PROG || type == ALL_GREET_PROG)
-    {
-        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
-                            std::shared_ptr<Imp::RuntimeScope> scope)
-                      {
-                          auto func = scope->Find("on_greet", program.get());
-
-                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                          {
-                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                  {
-                                      std::make_shared<ImpCharacter>(mob),
-                                      std::make_shared<ImpCharacter>(actor)
-                                  };
-                              on_entry->EvalFuncCall(params, program.get());
-                          }
-                          else
-                          {
-                              Imp::RuntimeValue::RuntimeError("on_greet isn't a function!",
-                                                              program.get());
-                          }
-                      };
-    }
-    else if(type == FIGHT_PROG)
-    {
-        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
-                            std::shared_ptr<Imp::RuntimeScope> scope)
-                      {
-                          auto func = scope->Find("on_fight", program.get());
-
-                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                          {
-                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                  {
-                                      std::make_shared<ImpCharacter>(mob),
-                                      std::make_shared<ImpCharacter>(actor)
-                                  };
-                              on_entry->EvalFuncCall(params, program.get());
-                          }
-                          else
-                          {
-                              Imp::RuntimeValue::RuntimeError("on_fight isn't a function!",
-                                                              program.get());
-                          }
-                      };
-    }
-    else if(type == DEATH_PROG)
-    {
-        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
-                            std::shared_ptr<Imp::RuntimeScope> scope)
-                      {
-                          auto func = scope->Find("on_death", program.get());
-
-                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                          {
-                              auto on_death = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                  {
-                                      std::make_shared<ImpCharacter>(mob),
-                                      std::make_shared<ImpCharacter>(actor)
-                                  };
-                              on_death->EvalFuncCall(params, program.get());
-                          }
-                          else
-                          {
-                              Imp::RuntimeValue::RuntimeError("on_death isn't a function!",
-                                                              program.get());
-                          }
-                      };
-    }
-    else if(type == RAND_PROG)
-    {
-        doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
-                            std::shared_ptr<Imp::RuntimeScope> scope)
-                      {
-                          auto func = scope->Find("on_rand", program.get());
-
-                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                          {
-                              auto on_rand = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                  {
-                                      std::make_shared<ImpCharacter>(mob)
-                                  };
-                              on_rand->EvalFuncCall(params, program.get());
-                          }
-                          else
-                          {
-                              Imp::RuntimeValue::RuntimeError("on_rand isn't a function!",
-                                                              program.get());
-                          }
-                      };
-    }
-    else
-    {
-        return;
-    }
-    
-    auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
-    Schedule(scriptRunner);
-}
-
-
 void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                          std::shared_ptr<Object> obj,
                          const Vo &vo, int type)
@@ -2602,7 +2439,10 @@ void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Charact
         {
             if(mprg->SType == ScriptType::Imp)
             {
-                ImpDispatchPercentCheck(mprg->comlist, mob, actor, type);
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, vo, type);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
             }
             else
             {
@@ -2760,9 +2600,19 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                            || *end == '\r'
                            || *end == '\0'))
                     {
-                        MudProgSetSupermob(iobj);
-                        MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
-                        ReleaseSupermob();
+                        if(mprg->SType == ScriptType::Imp)
+                        {
+                            std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
+                            auto funcName = data.first;
+                            auto params = data.second;
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                        }
+                        else
+                        {
+                            MudProgSetSupermob(iobj);
+                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                            ReleaseSupermob();
+                        }
                         break;
                     }
                     else
@@ -2788,9 +2638,20 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                || *end == '\r'
                                || *end == '\0'))
                         {
-                            MudProgSetSupermob(iobj);
-                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
-                            ReleaseSupermob();
+                            if(mprg->SType == ScriptType::Imp)
+                            {
+                                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
+                                auto funcName = data.first;
+                                auto params = data.second;
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            }
+                            else
+                            {
+                                MudProgSetSupermob(iobj);
+                                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                                ReleaseSupermob();
+                            }
+
                             break;
                         }
                         else
@@ -2878,9 +2739,19 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                            || *end == '\r'
                            || *end == '\0'))
                     {
-                        RoomProgSetSupermob(room);
-                        MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
-                        ReleaseSupermob();
+                        if(mprg->SType == ScriptType::Imp)
+                        {
+                            std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                            auto funcName = data.first;
+                            auto params = data.second;
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                        }
+                        else
+                        {
+                            RoomProgSetSupermob(room);
+                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                            ReleaseSupermob();
+                        }
                         break;
                     }
                     else
@@ -2906,9 +2777,19 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                                || *end == '\r'
                                || *end == '\0'))
                         {
-                            RoomProgSetSupermob(room);
-                            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
-                            ReleaseSupermob();
+                            if(mprg->SType == ScriptType::Imp)
+                            {
+                                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
+                                auto funcName = data.first;
+                                auto params = data.second;
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            }
+                            else
+                            {
+                                RoomProgSetSupermob(room);
+                                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+                                ReleaseSupermob();
+                            }
                             break;
                         }
                         else

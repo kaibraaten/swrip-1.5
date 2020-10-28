@@ -14,6 +14,7 @@
 #include <imp/runtime/functionvalue.hpp>
 #include <imp/runtime/nonevalue.hpp>
 #include <imp/runtime/stringvalue.hpp>
+#include <imp/runtime/intvalue.hpp>
 #include <imp/runtime/runtimescope.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
@@ -44,24 +45,6 @@ static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Ch
 static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                              std::shared_ptr<Object> obj,
                              const Vo &vo, int type);
-
-/*
-static std::list<std::shared_ptr<MPROG_DATA>> GetMProgScripts(const std::list<std::shared_ptr<MPROG_DATA>> &mudProgs)
-{
-    return Filter(mudProgs, [](const auto &prog)
-                            {
-                                return prog->SType == ScriptType::MProg;
-                            });
-}
-
-static std::list<std::shared_ptr<MPROG_DATA>> GetImpScripts(const std::list<std::shared_ptr<MPROG_DATA>> &mudProgs)
-{
-    return Filter(mudProgs, [](const auto &prog)
-                            {
-                                return prog->SType == ScriptType::Imp;
-                            });
-}
-*/
 
 void MobProgActTrigger(const std::string &buf,
                        std::shared_ptr<Character> mob,
@@ -133,9 +116,12 @@ void MobProgBribeTrigger(std::shared_ptr<Character> mob,
             if(mprg->type & BRIBE_PROG
                && amount >= atoi(mprg->arglist.c_str()))
             {
-                if(false)
+                if(mprg->SType == ScriptType::Imp)
                 {
-
+                    std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, amount, BRIBE_PROG);
+                    auto funcName = data.first;
+                    auto params = data.second;
+                    DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
                 }
                 else
                 {
@@ -180,8 +166,17 @@ void MobProgGiveTrigger(std::shared_ptr<Character> mob,
                && (!StrCmp(obj->Name, mprg->arglist)
                    || !StrCmp("all", buf)))
             {
-
-                MudProgDriver(mprg->comlist, mob, ch, obj, Vo(), false);
+                if(mprg->SType == ScriptType::Imp)
+                {
+                    std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, obj, GIVE_PROG);
+                    auto funcName = data.first;
+                    auto params = data.second;
+                    DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                }
+                else
+                {
+                    MudProgDriver(mprg->comlist, mob, ch, obj, Vo(), false);
+                }
                 break;
             }
         }
@@ -238,7 +233,17 @@ void MobProgHitPercentTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Ch
             if(mprg->type & HITPRCNT_PROG
                && 100 * mob->HitPoints.Current / mob->HitPoints.Max < atoi(mprg->arglist.c_str()))
             {
-                MudProgDriver(mprg->comlist, mob, ch, nullptr, nullptr, false);
+                if(mprg->SType == ScriptType::Imp)
+                {
+                    std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, nullptr, HITPRCNT_PROG);
+                    auto funcName = data.first;
+                    auto params = data.second;
+                    DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                }
+                else
+                {
+                    MudProgDriver(mprg->comlist, mob, ch, nullptr, nullptr, false);
+                }
                 break;
             }
         }
@@ -290,7 +295,17 @@ void MobProgScriptTrigger(std::shared_ptr<Character> mob)
                    || mob->mprog.mpscriptpos != 0
                    || atoi(mprg->arglist.c_str()) == time_info.Hour)
                 {
-                    MudProgDriver(mprg->comlist, mob, nullptr, nullptr, nullptr, true);
+                    if(mprg->SType == ScriptType::Imp)
+                    {
+                        std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, SCRIPT_PROG);
+                        auto funcName = data.first;
+                        auto params = data.second;
+                        DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                    }
+                    else
+                    {
+                        MudProgDriver(mprg->comlist, mob, nullptr, nullptr, nullptr, true);
+                    }
                 }
             }
         }
@@ -760,7 +775,7 @@ static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string
     return prog;
 }
 
-static std::list<std::string> SplitIntoLines(const std::string &comlist)
+std::list<std::string> SplitIntoLines(const std::string &comlist)
 {
     std::istringstream inbuf(comlist);
     std::list<std::string> code;
@@ -774,18 +789,18 @@ static std::list<std::string> SplitIntoLines(const std::string &comlist)
     return code;
 }
 
-static void DispatchImpFunction(const std::string &funcName,
-                                std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
-                                const std::list<std::string> &code)
+void DispatchImpFunction(const std::string &funcName,
+                         std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
+                         const std::list<std::string> &code)
 {
     auto globalScope = MakeImpScope();
     auto prog = ParseImpProgram(code);
-    
+
     auto doAfterEval = [funcName, params](std::shared_ptr<Imp::Program> program,
                                           std::shared_ptr<Imp::RuntimeScope> scope)
     {
         auto func = scope->Find(funcName, program.get());
-        
+
         if(dynamic_cast<Imp::FunctionValue *>(func.get()) != nullptr)
         {
             auto callback = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
@@ -802,9 +817,67 @@ static void DispatchImpFunction(const std::string &funcName,
     Schedule(scriptRunner);
 }
 
-static std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpProgData(std::shared_ptr<Object> obj,
-                                                                                              std::shared_ptr<Character> actor,
-                                                                                              const Vo &vo, int type)
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMobProgData(std::shared_ptr<Character> mob,
+                                                                                          std::shared_ptr<Character> actor,
+                                                                                          const Vo &vo, int type)
+{
+    if(type == ENTRY_PROG)
+    {
+        return { "on_entry", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpRoom>(mob->InRoom) } };
+    }
+    else if(type == GREET_PROG || type == ALL_GREET_PROG)
+    {
+        return { "on_greet", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == FIGHT_PROG)
+    {
+        return { "on_fight", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == DEATH_PROG)
+    {
+        return { "on_death", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == RAND_PROG)
+    {
+        return { "on_rand", { std::make_shared<ImpCharacter>(mob) } };
+    }
+    else if(type == BRIBE_PROG)
+    {
+        return { "on_bribe", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor), std::make_shared<Imp::IntValue>(vo.Integer) } };
+    }
+    else if(type == HITPRCNT_PROG)
+    {
+        return { "on_hitpercent", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor) } };
+    }
+    else if(type == GIVE_PROG)
+    {
+        return { "on_give", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor), std::make_shared<ImpObject>(vo.Obj) } };
+    }
+    else if(type == SPEECH_PROG)
+    {
+        return { "on_speech", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor), std::make_shared<Imp::StringValue>(vo.Txt) } };
+    }
+    else if(type == SCRIPT_PROG)
+    {
+        return { "on_script", { std::make_shared<ImpCharacter>(mob) } };
+    }
+    else if(type == HOUR_PROG)
+    {
+        return { "on_hour", { std::make_shared<ImpCharacter>(mob) } };
+    }
+    else if(type == TIME_PROG)
+    {
+        return { "on_time", { std::make_shared<ImpCharacter>(mob) } };
+    }
+    else
+    {
+        return { "UNSUPPORTED_TRIGGER_TYPE", {} };
+    }
+}
+
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpObjProgData(std::shared_ptr<Object> obj,
+                                                                                          std::shared_ptr<Character> actor,
+                                                                                          const Vo &vo, int type)
 {
     if(type == RAND_PROG)
     {
@@ -858,6 +931,10 @@ static std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> G
     {
         return { "on_pull", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor) } };
     }
+    else if(type == SPEECH_PROG)
+    {
+        return { "on_speech", { std::make_shared<ImpObject>(obj), std::make_shared<ImpCharacter>(actor), std::make_shared<Imp::StringValue>(vo.Txt) } };
+    }
     else if(type == USE_PROG)
     {
         auto victim = vo.Ch;
@@ -887,7 +964,7 @@ static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<
 
             if(mprg->SType == ScriptType::Imp)
             {
-                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpProgData(obj, actor, vo, type);
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, vo, type);
                 auto funcName = data.first;
                 auto params = data.second;
                 DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
@@ -974,7 +1051,18 @@ static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Cha
            && (!mprg->triggered || mprg->type & HOUR_PROG))
         {
             mprg->triggered = true;
-            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+
+            if(mprg->SType == ScriptType::Imp)
+            {
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, type);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+            }
+            else
+            {
+                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
         }
     }
 }

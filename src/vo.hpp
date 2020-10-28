@@ -19,6 +19,12 @@ struct Vo
 
     }
 
+    Vo(const std::string &txt)
+        : Txt(txt)
+    {
+
+    }
+
     Vo(std::shared_ptr<Object> obj)
         : Obj(obj)
     {
@@ -33,6 +39,12 @@ struct Vo
 
     Vo(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
         : Ch(ch), Obj(obj)
+    {
+
+    }
+
+    Vo(long i)
+        : Integer(i)
     {
 
     }
@@ -54,6 +66,8 @@ struct Vo
     std::shared_ptr<Character> Ch;
     std::shared_ptr<Object> Obj;
     std::shared_ptr<class Room> Room;
+    std::string Txt;
+    long Integer = 0;
     int *IntPtr = nullptr;
 };
 

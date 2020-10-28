@@ -3,8 +3,11 @@
 
 #include <memory>
 #include <string>
+#include <utility>
+#include <vector>
 #include "types.hpp"
 #include "vo.hpp"
+#include <imp/runtime/runtimevalue.hpp>
 
 void MobProgActTrigger(const std::string &buf, std::shared_ptr<Character> mob,
                        std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, const Vo &vo);
@@ -52,4 +55,16 @@ void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, std
                        std::shared_ptr<Object> obj, const Vo &vo);
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, std::shared_ptr<Character> ch,
                         std::shared_ptr<Object> obj, const Vo &vo);
+
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpObjProgData(std::shared_ptr<Object> obj,
+                                                                                          std::shared_ptr<Character> actor,
+                                                                                          const Vo &vo, int type);
+std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMobProgData(std::shared_ptr<Character> mob,
+                                                                                          std::shared_ptr<Character> actor,
+                                                                                          const Vo &vo, int type);
+void DispatchImpFunction(const std::string &funcName,
+                         std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
+                         const std::list<std::string> &code);
+std::list<std::string> SplitIntoLines(const std::string &comlist);
+
 #endif
