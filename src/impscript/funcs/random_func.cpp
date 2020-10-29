@@ -2,7 +2,7 @@
 #include <imp/utility.hpp>
 #include <imp/runtime/nonevalue.hpp>
 #include <imp/runtime/listvalue.hpp>
-#include "impscript/random_func.hpp"
+#include "impscript/funcs/random_func.hpp"
 
 RandomFunc::RandomFunc()
     : Imp::FunctionValue("random")

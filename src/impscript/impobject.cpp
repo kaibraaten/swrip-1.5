@@ -93,3 +93,8 @@ std::shared_ptr<Imp::RuntimeValue> ImpObject::EvalStr(const Imp::ImpSyntax *wher
     auto obj = Entity(where);
     return std::make_shared<Imp::StringValue>(obj->ShortDescr);
 }
+
+std::shared_ptr<Imp::RuntimeValue> ImpObject::EvalNot(const Imp::ImpSyntax *where)
+{
+    return std::make_shared<Imp::BoolValue>(pImpl->Entity.expired());
+}

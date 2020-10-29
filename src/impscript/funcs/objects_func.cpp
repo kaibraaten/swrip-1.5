@@ -4,7 +4,7 @@
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
 #include "impscript/impobject.hpp"
-#include "impscript/objects_func.hpp"
+#include "impscript/funcs/objects_func.hpp"
 #include "room.hpp"
 #include "character.hpp"
 #include "object.hpp"

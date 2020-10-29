@@ -1562,6 +1562,7 @@ constexpr auto CONT_LOCKED = 8;
  */
 constexpr vnum_t ROOM_VNUM_LIMBO = 2;
 constexpr vnum_t ROOM_VNUM_POLY = 3;
+constexpr vnum_t ROOM_VNUM_SPAWNLOCATION = 4;
 constexpr vnum_t ROOM_VNUM_HELL = 6;
 constexpr vnum_t ROOM_VNUM_CHAT = 32144;
 constexpr vnum_t ROOM_VNUM_TEMPLE = 32144;

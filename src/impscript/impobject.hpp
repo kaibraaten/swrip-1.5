@@ -16,6 +16,7 @@ public:
                                                  const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalNotEqual(std::shared_ptr<Imp::RuntimeValue> v,
                                                     const Imp::ImpSyntax *where) override;
+    std::shared_ptr<Imp::RuntimeValue> EvalNot(const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalStr(const Imp::ImpSyntax *where) override;
     std::shared_ptr<Object> Entity(const Imp::ImpSyntax *where) const;
     

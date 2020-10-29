@@ -828,3 +828,8 @@ static bool can_dual(const std::shared_ptr<Character> ch)
 
     return true;
 }
+
+void WearObj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
+{
+    wear_obj(ch, obj, true, -1);
+}

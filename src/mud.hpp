@@ -959,6 +959,8 @@ DECLARE_SPEC_FUN(spec_police);
 DECLARE_SPEC_FUN(spec_clan_guard);
 DECLARE_SPEC_FUN(spec_newbie_pilot);
 
+void WearObj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
+
  /* copyover.c */
 void RecoverFromCopyover();
 

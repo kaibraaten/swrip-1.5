@@ -1,6 +1,6 @@
 #include <imp/utility.hpp>
 #include <imp/runtime/nonevalue.hpp>
-#include "impscript/exit_func.hpp"
+#include "impscript/funcs/exit_func.hpp"
 #include "impscript/exitexception.hpp"
 
 ExitFunc::ExitFunc()

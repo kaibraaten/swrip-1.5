@@ -3,7 +3,7 @@
 #include <imp/runtime/stringvalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
-#include "impscript/echo_func.hpp"
+#include "impscript/funcs/echo_func.hpp"
 #include "constants.hpp"
 #include "act.hpp"
 #include "mud.hpp"

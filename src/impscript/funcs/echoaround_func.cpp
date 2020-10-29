@@ -4,7 +4,7 @@
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
 #include "impscript/impobject.hpp"
-#include "impscript/echoaround_func.hpp"
+#include "impscript/funcs/echoaround_func.hpp"
 #include "constants.hpp"
 #include "act.hpp"
 #include "mud.hpp"

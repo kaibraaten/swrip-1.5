@@ -8,8 +8,10 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "triggers.hpp"
+#include "log.hpp"
 
 //////////////////////////////////////////////////////
+#include <imp/except/impexception.hpp>
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/functionvalue.hpp>
 #include <imp/runtime/nonevalue.hpp>
@@ -785,28 +787,35 @@ void DispatchImpFunction(const std::string &funcName,
                          std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
                          const std::list<std::string> &code)
 {
-    auto globalScope = MakeImpScope();
-    auto prog = ParseImpProgram(code);
-
-    auto doAfterEval = [funcName, params](std::shared_ptr<Imp::Program> program,
-                                          std::shared_ptr<Imp::RuntimeScope> scope)
+    try
     {
-        auto func = scope->Find(funcName, program.get());
+        auto globalScope = MakeImpScope();
+        auto prog = ParseImpProgram(code);
 
-        if(dynamic_cast<Imp::FunctionValue *>(func.get()) != nullptr)
-        {
-            auto callback = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-            callback->EvalFuncCall(params, program.get());
-        }
-        else
-        {
-            Imp::RuntimeValue::RuntimeError(funcName + " isn't a function!",
-                                            program.get());
-        }
-    };
+        auto doAfterEval = [funcName, params](std::shared_ptr<Imp::Program> program,
+                                              std::shared_ptr<Imp::RuntimeScope> scope)
+                           {
+                               auto func = scope->Find(funcName, program.get());
 
-    auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
-    Schedule(scriptRunner);
+                               if(dynamic_cast<Imp::FunctionValue *>(func.get()) != nullptr)
+                               {
+                                   auto callback = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                                   callback->EvalFuncCall(params, program.get());
+                               }
+                               else
+                               {
+                                   Imp::RuntimeValue::RuntimeError(funcName + " isn't a function!",
+                                                                   program.get());
+                               }
+                           };
+
+        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
+        Schedule(scriptRunner);
+    }
+    catch(const Imp::ImpException &ex)
+    {
+        Log->Bug("%s", ex.what());
+    }
 }
 
 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMobProgData(std::shared_ptr<Character> mob,

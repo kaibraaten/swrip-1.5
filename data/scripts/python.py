@@ -14,17 +14,21 @@ def map(function, sequence):
 def filter(pred, seq):
     def counttrue():
         counter = 0
+
         for n in seq:
             if pred(n):
                 counter = counter + 1                
+
         return counter
         
     newlist = [None] * counttrue()
     idx = 0
+
     for n in seq:
         if pred(n):
             newlist[idx] = n
             idx = idx + 1
+
     return newlist
 
 # Accumulate result of values returned by function as applied to every object
@@ -32,8 +36,10 @@ def filter(pred, seq):
 # and min() below for examples of what it can be used for.
 def reduce(function, seq, initial):
     accumulator = initial
+
     for n in seq:
         accumulator = function(accumulator, n)
+
     return accumulator
 
 # Return the sum of adding all objects together.
@@ -72,6 +78,7 @@ def all(seq):
     for element in seq:
         if not element:
             return False
+
     return True
 
 # Return True if any element of the sequence is true. If the iterable
@@ -80,6 +87,7 @@ def any(seq):
     for element in seq:
         if element:
             return True
+
     return False
 
 # Return seq as a new list sorted in ascending order.

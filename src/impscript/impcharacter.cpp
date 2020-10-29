@@ -94,3 +94,8 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalStr(const Imp::ImpSyntax *w
     auto str = IsNpc(ch) ? ch->ShortDescr : ch->Name;
     return std::make_shared<Imp::StringValue>(str);
 }
+
+std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNot(const Imp::ImpSyntax *where)
+{
+    return std::make_shared<Imp::BoolValue>(pImpl->Entity.expired());
+}

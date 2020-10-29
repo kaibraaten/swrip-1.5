@@ -3,7 +3,7 @@
 #include <imp/runtime/listvalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
-#include "impscript/characters_func.hpp"
+#include "impscript/funcs/characters_func.hpp"
 #include "room.hpp"
 
 CharactersFunc::CharactersFunc()

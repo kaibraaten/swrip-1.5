@@ -5,7 +5,7 @@
 #include "impscript/impcharacter.hpp"
 #include "impscript/improom.hpp"
 #include "impscript/impobject.hpp"
-#include "impscript/vnum_func.hpp"
+#include "impscript/funcs/vnum_func.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "protomob.hpp"

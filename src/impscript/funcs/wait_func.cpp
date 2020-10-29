@@ -2,8 +2,8 @@
 #include <imp/runtime/floatvalue.hpp>
 #include <imp/runtime/nonevalue.hpp>
 #include <imp/runtime/runtimescope.hpp>
-#include "wait_func.hpp"
-#include "threaddatavalue.hpp"
+#include "impscript/funcs/wait_func.hpp"
+#include "impscript/threaddatavalue.hpp"
 
 WaitFunc::WaitFunc()
     : Imp::FunctionValue("wait")

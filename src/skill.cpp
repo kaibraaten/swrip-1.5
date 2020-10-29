@@ -58,7 +58,6 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
     {
         sn = (first + top) >> 1;
         skill = SkillTable[sn];
-        //const auto dofunptr = skill->SkillFunction.target<void(*)(std::shared_ptr<Character>, std::string)>();
         const auto spellfunptr = skill->SpellFunction.target<ch_ret(*)(int, int, std::shared_ptr<Character>, const Vo&)>();
         
         if(CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
