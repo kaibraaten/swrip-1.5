@@ -25,7 +25,7 @@ std::shared_ptr<Imp::RuntimeValue> VnumFunc::EvalFuncCall(const std::vector<std:
     auto entity = actualParams[0];
     vnum_t vnum = INVALID_VNUM;
     
-    if((dynamic_cast<ImpCharacter*>(entity.get())))
+    if(dynamic_cast<ImpCharacter*>(entity.get()))
     {
         auto ch = std::dynamic_pointer_cast<ImpCharacter>(entity);
 
@@ -38,12 +38,12 @@ std::shared_ptr<Imp::RuntimeValue> VnumFunc::EvalFuncCall(const std::vector<std:
             return std::make_shared<Imp::NoneValue>();
         }
     }
-    else if((dynamic_cast<ImpRoom*>(entity.get())))
+    else if(dynamic_cast<ImpRoom*>(entity.get()))
     {
         auto room = std::dynamic_pointer_cast<ImpRoom>(entity);
         vnum = room->Entity(where)->Vnum;
     }
-    else if((dynamic_cast<ImpObject*>(entity.get())))
+    else if(dynamic_cast<ImpObject*>(entity.get()))
     {
         auto obj = std::dynamic_pointer_cast<ImpObject>(entity);
         vnum = obj->Entity(where)->Prototype->Vnum;

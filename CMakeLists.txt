@@ -580,6 +580,7 @@ src/impscript/funcs/echoaround_func.cpp
 src/impscript/funcs/equip_func.cpp
 src/impscript/funcs/equipped_func.cpp
 src/impscript/funcs/exit_func.cpp
+src/impscript/funcs/getroom_func.cpp
 src/impscript/funcs/inroom_func.cpp
 src/impscript/funcs/interpret_func.cpp
 src/impscript/funcs/isfighting_func.cpp

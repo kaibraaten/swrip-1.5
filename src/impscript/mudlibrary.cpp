@@ -7,6 +7,7 @@
 #include "impscript/funcs/equip_func.hpp"
 #include "impscript/funcs/equipped_func.hpp"
 #include "impscript/funcs/exit_func.hpp"
+#include "impscript/funcs/getroom_func.hpp"
 #include "impscript/funcs/inroom_func.hpp"
 #include "impscript/funcs/interpret_func.hpp"
 #include "impscript/funcs/isfighting_func.hpp"
@@ -32,6 +33,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("equip", std::make_shared<EquipFunc>());
     Assign("equipped", std::make_shared<EquippedFunc>());
     Assign("exit", std::make_shared<ExitFunc>()); // Override default
+    Assign("getroom", std::make_shared<GetRoomFunc>());
     Assign("inroom", std::make_shared<InRoomFunc>());
     Assign("interpret", std::make_shared<InterpretFunc>());
     Assign("isfighting", std::make_shared<IsFightingFunc>());
