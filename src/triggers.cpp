@@ -42,7 +42,7 @@ static void RoomProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr
 static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                               std::shared_ptr<Object> obj,
                               const Vo &vo, int type);
-static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+static void MobProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                              std::shared_ptr<Object> obj,
                              const Vo &vo, int type);
 
@@ -315,14 +315,14 @@ void MobProgScriptTrigger(std::shared_ptr<Character> mob)
 void MobProgHourTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & HOUR_PROG)
-        mprog_time_check(mob, nullptr, nullptr, nullptr, HOUR_PROG);
+        MobProgTimeCheck(mob, nullptr, nullptr, nullptr, HOUR_PROG);
 }
 
 void MobProgTimeTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & TIME_PROG)
     {
-        mprog_time_check(mob, nullptr, nullptr, nullptr, TIME_PROG);
+        MobProgTimeCheck(mob, nullptr, nullptr, nullptr, TIME_PROG);
     }
 }
 
@@ -1092,7 +1092,7 @@ static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Ch
     }
 }
 
-static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+static void MobProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                              std::shared_ptr<Object> obj,
                              const Vo &vo, int type)
 {
