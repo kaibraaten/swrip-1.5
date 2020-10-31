@@ -1,7 +1,9 @@
+#include <deque>
 #include "imp/runtime/stringvalue.hpp"
 #include "imp/runtime/intvalue.hpp"
 #include "imp/runtime/nonevalue.hpp"
 #include "imp/runtime/boolvalue.hpp"
+#include "imp/runtime/listvalue.hpp"
 
 namespace Imp
 {
@@ -182,5 +184,17 @@ namespace Imp
     std::shared_ptr<RuntimeValue> StringValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(pImpl->Value);
+    }
+
+    std::shared_ptr<RuntimeValue> StringValue::EvalList(const ImpSyntax *where)
+    {
+        std::deque<std::shared_ptr<RuntimeValue>> data;
+
+        for(auto c : pImpl->Value)
+        {
+            data.push_back(std::make_shared<StringValue>(std::string(1, c)));
+        }
+
+        return std::make_shared<ListValue>(data);
     }
 }

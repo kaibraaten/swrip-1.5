@@ -173,4 +173,9 @@ namespace Imp
     {
         return std::make_shared<StringValue>(ShowInfo());
     }
+
+    std::shared_ptr<RuntimeValue> ListValue::EvalList(const ImpSyntax *where)
+    {
+        return std::make_shared<ListValue>(pImpl->Value);
+    }
 }

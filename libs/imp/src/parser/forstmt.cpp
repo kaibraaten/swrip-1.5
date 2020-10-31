@@ -43,20 +43,13 @@ namespace Imp
     std::shared_ptr<RuntimeValue> ForStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
         auto controlExpression = pImpl->expr->Eval(curScope);
+        auto lst = controlExpression->EvalList(this);
+        auto values = std::dynamic_pointer_cast<ListValue>(lst)->Value();
 
-        if(dynamic_cast<ListValue*>(controlExpression.get()))
+        for(int i = 0; i < values.size(); ++i)
         {
-            auto values = ((ListValue *)controlExpression.get())->Value();
-
-            for(int i = 0; i < values.size(); ++i)
-            {
-                curScope->Assign(pImpl->name->GetName(), values[i]);
-                pImpl->body->Eval(curScope);
-            }
-        }
-        else
-        {
-            RuntimeValue::RuntimeError("Control expression must be a list in for statement.", this);
+            curScope->Assign(pImpl->name->GetName(), values[i]);
+            pImpl->body->Eval(curScope);
         }
 
         return std::make_shared<NoneValue>();

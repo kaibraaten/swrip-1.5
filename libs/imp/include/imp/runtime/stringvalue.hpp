@@ -26,6 +26,7 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalNot(const ImpSyntax *where) override;
         std::shared_ptr<RuntimeValue> EvalLen(const ImpSyntax *where) override;
         std::shared_ptr<RuntimeValue> EvalStr(const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalList(const ImpSyntax *where) override;
 
     private:
         struct Impl;

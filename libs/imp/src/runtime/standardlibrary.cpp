@@ -91,6 +91,23 @@ namespace Imp
         }
     };
 
+    class ListFunc : public FunctionValue
+    {
+    public:
+        ListFunc()
+            : FunctionValue("list")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
+        {
+            CheckNumParams(actualParams, 1, "list", where);
+            auto arg1 = actualParams[0];
+            return arg1->EvalList(where);
+        }
+    };
+
     class IntFunc : public FunctionValue
     {
     public:
@@ -302,6 +319,7 @@ namespace Imp
         Assign("range", std::make_shared<RangeFunc>());
         Assign("input", std::make_shared<InputFunc>());
         Assign("str", std::make_shared<StrFunc>());
+        Assign("list", std::make_shared<ListFunc>());
         Assign("int", std::make_shared<IntFunc>());
         Assign("float", std::make_shared<FloatFunc>());
         Assign("print", std::make_shared<PrintFunc>());

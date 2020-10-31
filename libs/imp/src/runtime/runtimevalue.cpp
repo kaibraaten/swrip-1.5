@@ -169,4 +169,10 @@ namespace Imp
         RuntimeError("str operator undefined for " + TypeName() + "!", where);
         return nullptr;
     }
+
+    std::shared_ptr<RuntimeValue> RuntimeValue::EvalList(const ImpSyntax *where)
+    {
+        RuntimeError(TypeName() + " is not an iterable!", where);
+        return nullptr;
+    }
 }

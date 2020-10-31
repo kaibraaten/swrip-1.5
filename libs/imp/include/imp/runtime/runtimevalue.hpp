@@ -41,6 +41,7 @@ namespace Imp
         virtual std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where);
         virtual std::shared_ptr<RuntimeValue> EvalPositive(const ImpSyntax *where);
         virtual std::shared_ptr<RuntimeValue> EvalStr(const ImpSyntax *where);
+        virtual std::shared_ptr<RuntimeValue> EvalList(const ImpSyntax *where);
         virtual std::shared_ptr<RuntimeValue> EvalSubscription(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where);
         virtual std::shared_ptr<RuntimeValue> EvalSubtract(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where);
         virtual void EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, const ImpSyntax *where);

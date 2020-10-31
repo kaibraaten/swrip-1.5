@@ -1,10 +1,12 @@
 #include <sstream>
+#include <deque>
 #include <unordered_map>
 #include "imp/runtime/dictvalue.hpp"
 #include "imp/runtime/boolvalue.hpp"
 #include "imp/runtime/intvalue.hpp"
 #include "imp/runtime/stringvalue.hpp"
 #include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/listvalue.hpp"
 
 namespace Imp
 {
@@ -129,5 +131,17 @@ namespace Imp
     std::shared_ptr<RuntimeValue> DictValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
+    }
+
+    std::shared_ptr<RuntimeValue> DictValue::EvalList(const ImpSyntax *where)
+    {
+        std::deque<std::shared_ptr<RuntimeValue>> data;
+
+        for(const auto &p : pImpl->Value)
+        {
+            data.push_back(std::make_shared<StringValue>(p.first));
+        }
+
+        return std::make_shared<ListValue>(data);
     }
 }
