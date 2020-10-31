@@ -75,20 +75,22 @@ def odd(x):
 # Return True if all elements of the sequence are true (or if the sequence
 # is empty).
 def all(seq):
-    for element in seq:
+    def accumulator(result, element):
         if not element:
             return False
-
-    return True
+        else:
+            return result
+    return reduce(accumulator, seq, True)
 
 # Return True if any element of the sequence is true. If the iterable
 # is empty, return False.
 def any(seq):
-    for element in seq:
+    def accumulator(result, element):
         if element:
             return True
-
-    return False
+        else:
+            return result
+    return reduce(accumulator, seq, False)
 
 # Return seq as a new list sorted in ascending order.
 # The heap sort algorithm used actually does in-place sorting, but
