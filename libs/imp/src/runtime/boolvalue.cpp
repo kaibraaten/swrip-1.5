@@ -48,6 +48,11 @@ namespace Imp
             return std::make_shared<BoolValue>(false);
         }
 
+        if(dynamic_cast<BoolValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(GetBoolValue("== operand", where) == v->GetBoolValue("== operand", where));
+        }
+
         RuntimeError("Type error for ==.", where);
         return nullptr;
     }
@@ -57,6 +62,11 @@ namespace Imp
         if(dynamic_cast<NoneValue *>(v.get()))
         {
             return std::make_shared<BoolValue>(true);
+        }
+
+        if(dynamic_cast<BoolValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(GetBoolValue("!= operand", where) != v->GetBoolValue("!= operand", where));
         }
 
         RuntimeError("Type error for !=.", where);
