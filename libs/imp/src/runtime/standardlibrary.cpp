@@ -287,6 +287,23 @@ namespace Imp
         }
     };
 
+    class TypeFunc : public FunctionValue
+    {
+    public:
+        TypeFunc()
+            : FunctionValue("type")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
+        {
+            CheckNumParams(actualParams, 1, "type", where);
+            auto v1 = actualParams[0];
+            return std::make_shared<StringValue>(v1->TypeName());
+        }
+    };
+
     class ExitFunc : public FunctionValue
     {
     public:
@@ -325,5 +342,6 @@ namespace Imp
         Assign("print", std::make_shared<PrintFunc>());
         Assign("len", std::make_shared<LenFunc>());
         Assign("exit", std::make_shared<ExitFunc>());
+        Assign("type", std::make_shared<TypeFunc>());
     }
 }

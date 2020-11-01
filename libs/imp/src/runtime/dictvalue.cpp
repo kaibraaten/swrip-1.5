@@ -118,6 +118,7 @@ namespace Imp
         {
             std::string subscript = inx->GetStringValue("[...] index", where);
             pImpl->Value[subscript] = val;
+            return;
         }
 
         RuntimeError("Type error for [...]", where);
