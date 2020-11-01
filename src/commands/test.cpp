@@ -32,7 +32,7 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "repos/shuttlerepository.hpp"
 #include "repos/arearepository.hpp"
-
+#include "repos/imprepository.hpp"
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
@@ -49,7 +49,8 @@
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
 static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code);
-void do_test( std::shared_ptr<Character> ch, std::string argument )
+
+void do_test(std::shared_ptr<Character> ch, std::string argument)
 {
 #ifdef HAVE_UNAME
     if( !StrCmp( argument, "uname" ) )
@@ -315,6 +316,18 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                            };
         auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
         Schedule(scriptRunner);
+    }
+    else if(StrCmp(argument, "imprepos") == 0)
+    {
+        for(auto script : ImpScripts->Entities())
+        {
+            if(!script.Package.empty())
+            {
+                ch->Echo("%s.", script.Package.c_str());
+            }
+            
+            ch->Echo("%s\t%s\r\n", script.Module.c_str(), script.Body.front().c_str());
+        }
     }
     else
     {

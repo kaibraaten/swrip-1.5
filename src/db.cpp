@@ -61,6 +61,7 @@ namespace fs = std::filesystem;
 #include "repos/vendorrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "repos/macrorepository.hpp"
+#include "repos/imprepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -1336,6 +1337,7 @@ void AllocateRepositories()
     Vendors = NewVendorRepository();
     Homes = NewHomeRepository();
     Macros = NewMacroRepository();
+    ImpScripts = NewImpRepository();
 }
 
 void MakeWizlist()
