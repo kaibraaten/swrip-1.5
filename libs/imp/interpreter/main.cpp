@@ -70,7 +70,7 @@ static std::shared_ptr<Imp::RuntimeScope> MakeScope()
     auto lib = std::make_shared<Imp::StandardLibrary>();
     //auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
-    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("scripts"));
+    globalScope->Assign("__scriptpath__", std::make_shared<Imp::StringValue>("scripts"));
 
     return globalScope;
 }

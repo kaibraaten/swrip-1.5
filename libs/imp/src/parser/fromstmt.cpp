@@ -65,7 +65,7 @@ namespace Imp
 
         if(!fileWasOpened)
         {
-            auto pathPrefix = curScope->Find("SCRIPT_PATH", this)->GetStringValue("SCRIPT_PATH", this);
+            auto pathPrefix = curScope->Find("__scriptpath__", this)->GetStringValue("__scriptpath__", this);
 
             if(!pathPrefix.empty() && pathPrefix[pathPrefix.size() - 1] != '/')
             {

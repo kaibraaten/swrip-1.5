@@ -757,7 +757,7 @@ static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     auto standardLib = std::make_shared<Imp::StandardLibrary>();
     auto mudLib = std::make_shared<MudLibrary>(standardLib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
-    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("data/scripts"));
+    globalScope->Assign("__scriptpath__", std::make_shared<Imp::StringValue>("data/scripts"));
     return globalScope;
 }
 

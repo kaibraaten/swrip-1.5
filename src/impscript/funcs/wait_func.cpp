@@ -25,7 +25,7 @@ std::shared_ptr<Imp::RuntimeValue> WaitFunc::EvalFuncCall(const std::vector<std:
 
         if(duration > 0)
         {
-            auto threadData = std::dynamic_pointer_cast<ThreadDataValue>(curScope->Find("_THREADDATA_", where));
+            auto threadData = std::dynamic_pointer_cast<ThreadDataValue>(curScope->Find("__threaddata__", where));
             threadData->WaitDuration = duration;
             threadData->YesReallyDone = true;
             threadData->ScriptDone.notify_one();

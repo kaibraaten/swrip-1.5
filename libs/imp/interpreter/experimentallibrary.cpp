@@ -64,7 +64,7 @@ double ScriptRunner::Impl::Resume()
     if(!scriptWaiting)
     {
         ThreadData = std::make_shared<ThreadDataValue>(ScriptDone, WakeUp);
-        Scope->Assign("_THREADDATA_", ThreadData);
+        Scope->Assign("__threaddata__", ThreadData);
         TheThread = std::make_shared<std::thread>(&ScriptRunner::Impl::DispatchScript, this);
     }
     else
@@ -146,7 +146,7 @@ public:
 
             if(duration > 0)
             {
-                auto threadData = std::dynamic_pointer_cast<ThreadDataValue>(curScope->Find("_THREADDATA_", where));
+                auto threadData = std::dynamic_pointer_cast<ThreadDataValue>(curScope->Find("__threaddata__", where));
                 threadData->WaitDuration = duration;
                 threadData->YesReallyDone = true;
                 threadData->ScriptDone.notify_one();

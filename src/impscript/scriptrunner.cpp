@@ -41,7 +41,7 @@ double ScriptRunner::Impl::Resume()
     if(!scriptWaiting)
     {
         ThreadData = std::make_shared<ThreadDataValue>(ScriptDone, WakeUp);
-        Scope->Assign("_THREADDATA_", ThreadData);
+        Scope->Assign("__threaddata__", ThreadData);
         TheThread = std::make_shared<std::thread>(&ScriptRunner::Impl::DispatchScript, this);
     }
     else

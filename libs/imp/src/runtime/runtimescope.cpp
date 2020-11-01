@@ -20,7 +20,7 @@ namespace Imp
     RuntimeScope::RuntimeScope(std::shared_ptr<RuntimeScope> outer)
         : pImpl(std::make_unique<Impl>(outer))
     {
-        Assign("SCRIPT_PATH", std::make_shared<StringValue>(""));
+        Assign("__scriptpath__", std::make_shared<StringValue>(""));
     }
 
     RuntimeScope::~RuntimeScope()
