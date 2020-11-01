@@ -47,15 +47,15 @@ static std::list<ImpScriptEntry> GetScriptEntries(const std::string &pathToDir)
             
             if(entry.is_directory())
             {
-                auto result = GetScriptEntries(path);
+                auto result = GetScriptEntries(path.string());
                 list.insert(list.end(), result.begin(), result.end());
+                continue;
             }
             else if(!entry.is_regular_file())
             {
                 continue;
             }
-
-            if(StringSuffix(".py", path.string()))
+            else if(StringSuffix(".py", path.string()))
             {
                 continue;
             }
