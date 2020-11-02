@@ -25,7 +25,7 @@ namespace Imp
         return false;
     }
 
-    long RuntimeValue::GetIntValue(const std::string &what, const ImpSyntax *where)
+    int64_t RuntimeValue::GetIntValue(const std::string &what, const ImpSyntax *where)
     {
         RuntimeError("Type error: " + what + " is not a float!", where);
         return 0;

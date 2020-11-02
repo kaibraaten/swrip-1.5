@@ -9,16 +9,16 @@ namespace Imp
 {
     struct IntValue::Impl
     {
-        Impl(long v)
+        Impl(int64_t v)
             : Value(v)
         {
 
         }
 
-        long Value = 0;
+        int64_t Value = 0;
     };
 
-    IntValue::IntValue(long v)
+    IntValue::IntValue(int64_t v)
         : pImpl(std::make_unique<Impl>(v))
     {
         
@@ -44,7 +44,7 @@ namespace Imp
         return pImpl->Value != 0;
     }
 
-    long IntValue::GetIntValue(const std::string &what, const ImpSyntax *where)
+    int64_t IntValue::GetIntValue(const std::string &what, const ImpSyntax *where)
     {
         return pImpl->Value;
     }
@@ -132,7 +132,7 @@ namespace Imp
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
-            long divisor = v->GetIntValue("// operand", where);
+            int64_t divisor = v->GetIntValue("// operand", where);
 
             if(divisor == 0)
             {
@@ -161,7 +161,7 @@ namespace Imp
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
-            long divisor = v->GetIntValue("% operand", where);
+            int64_t divisor = v->GetIntValue("% operand", where);
 
             if(divisor == 0)
             {

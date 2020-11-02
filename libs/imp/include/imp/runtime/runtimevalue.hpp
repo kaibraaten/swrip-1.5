@@ -21,7 +21,7 @@ namespace Imp
         virtual std::string ShowInfo() = 0;
 
         virtual bool GetBoolValue(const std::string &what, const ImpSyntax *where);
-        virtual long GetIntValue(const std::string &what, const ImpSyntax *where);
+        virtual int64_t GetIntValue(const std::string &what, const ImpSyntax *where);
         virtual double GetFloatValue(const std::string &what, const ImpSyntax *where);
         virtual std::string GetStringValue(const std::string &what, const ImpSyntax *where);
 

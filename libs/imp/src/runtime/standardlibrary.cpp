@@ -37,7 +37,7 @@ namespace Imp
 
             std::deque<std::shared_ptr<RuntimeValue>> range;
 
-            for(long i = v1->GetIntValue("range() param1", where);
+            for(int64_t i = v1->GetIntValue("range() param1", where);
                 i < v2->GetIntValue("range() param2", where);
                 ++i)
             {

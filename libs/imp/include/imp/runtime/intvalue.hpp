@@ -8,13 +8,13 @@ namespace Imp
     class IntValue : public RuntimeValue
     {
     public:
-        IntValue(long v);
+        IntValue(int64_t v);
         ~IntValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, const ImpSyntax *where) override;
         double GetFloatValue(const std::string &what, const ImpSyntax *where) override;
-        long GetIntValue(const std::string &what, const ImpSyntax *where) override;
+        int64_t GetIntValue(const std::string &what, const ImpSyntax *where) override;
         std::shared_ptr<RuntimeValue> EvalNegate(const ImpSyntax *where) override;
         std::shared_ptr<RuntimeValue> EvalPositive(const ImpSyntax *where) override;
         std::shared_ptr<RuntimeValue> EvalAdd(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where) override;
