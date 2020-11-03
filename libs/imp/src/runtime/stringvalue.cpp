@@ -83,7 +83,7 @@ namespace Imp
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
-            long times = v->GetIntValue("* operand", where);
+            int64_t times = v->GetIntValue("* operand", where);
             std::string output = "";
 
             for(int i = 0; i < times; ++i)

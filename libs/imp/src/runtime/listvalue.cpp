@@ -115,7 +115,7 @@ namespace Imp
         if(dynamic_cast<IntValue*>(v.get()))
         {
             std::deque<std::shared_ptr<RuntimeValue>> newList;
-            long times = v->GetIntValue("* operand", where);
+            int64_t times = v->GetIntValue("* operand", where);
 
             for(int i = 0; i < times; ++i)
             {

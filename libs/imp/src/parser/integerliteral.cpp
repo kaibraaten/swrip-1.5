@@ -6,7 +6,7 @@ namespace Imp
 {
     struct IntegerLiteral::Impl
     {
-        long Value = 0;
+        int64_t Value = 0;
     };
 
     IntegerLiteral::IntegerLiteral(int n)

@@ -487,7 +487,7 @@ namespace Imp
         }
         else
         {
-            long value = std::stol(numberAsString);
+            int64_t value = std::stol(numberAsString);
             token = std::make_shared<Token>(TokenKind::IntegerToken, CurLineNum());
             token->IntegerLit(value);
         }

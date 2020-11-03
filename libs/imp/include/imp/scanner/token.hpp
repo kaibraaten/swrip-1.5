@@ -26,8 +26,8 @@ namespace Imp
         void Name(const std::string &name);
         std::string StringLit() const;
         void StringLit(const std::string &stringLit);
-        long IntegerLit() const;
-        void IntegerLit(long integerLot);
+        int64_t IntegerLit() const;
+        void IntegerLit(int64_t integerLot);
         double FloatLit() const;
         void FloatLit(double floatLit);
         int LineNum() const;

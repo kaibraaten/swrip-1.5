@@ -137,7 +137,7 @@ namespace Imp
             else if(dynamic_cast<IntValue *>(param.get())
                     || dynamic_cast<FloatValue *>(param.get()))
             {
-                retVal = std::make_shared<IntValue>((long)param->GetFloatValue("int() param", where));
+                retVal = std::make_shared<IntValue>((int64_t)param->GetFloatValue("int() param", where));
             }
             else
             {

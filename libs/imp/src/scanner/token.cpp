@@ -14,7 +14,7 @@ namespace Imp
         TokenKind Kind;
         std::string Name;
         std::string StringLit;
-        long IntegerLit = 0;
+        int64_t IntegerLit = 0;
         double FloatLit = 0;
         int LineNum = 0;
     };
@@ -149,12 +149,12 @@ namespace Imp
         pImpl->StringLit = stringLit;
     }
 
-    long Token::IntegerLit() const
+    int64_t Token::IntegerLit() const
     {
         return pImpl->IntegerLit;
     }
 
-    void Token::IntegerLit(long integerLot)
+    void Token::IntegerLit(int64_t integerLot)
     {
         pImpl->IntegerLit = integerLot;
     }
