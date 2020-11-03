@@ -16,8 +16,8 @@ namespace Imp
         std::vector<std::shared_ptr<PrimarySuffix>> suffices;
     };
 
-    Primary::Primary(int n)
-        : ImpSyntax(n),
+    Primary::Primary(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -30,7 +30,7 @@ namespace Imp
 
     std::shared_ptr<Primary> Primary::Parse(std::shared_ptr<Scanner> s)
     {
-        auto aspPrimary = std::make_shared<Primary>(s->CurLineNum());
+        auto aspPrimary = std::make_shared<Primary>(s->ScriptName(), s->CurLineNum());
         aspPrimary->pImpl->atom = Atom::Parse(s);
 
         while(s->CurToken()->Kind() == TokenKind::LeftBracketToken

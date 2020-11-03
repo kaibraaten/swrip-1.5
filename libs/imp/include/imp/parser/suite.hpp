@@ -8,7 +8,7 @@ namespace Imp
     class Suite : public ImpSyntax
     {
     public:
-        Suite(int n);
+        Suite(const std::string &scriptname, int n);
         ~Suite();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Suite> Parse(std::shared_ptr<Scanner> s);

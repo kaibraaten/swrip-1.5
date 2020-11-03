@@ -12,8 +12,8 @@ namespace Imp
         std::shared_ptr<Suite> body;
     };
 
-    WhileStmt::WhileStmt(int n)
-        : CompoundStmt(n),
+    WhileStmt::WhileStmt(const std::string &scriptname, int n)
+        : CompoundStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -36,7 +36,7 @@ namespace Imp
 
     std::shared_ptr<WhileStmt> WhileStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto aws = std::make_shared<WhileStmt>(s->CurLineNum());
+        auto aws = std::make_shared<WhileStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::WhileToken);
         aws->pImpl->test = Expr::Parse(s);
         Skip(s, TokenKind::ColonToken);

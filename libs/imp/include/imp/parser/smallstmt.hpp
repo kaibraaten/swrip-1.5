@@ -11,7 +11,7 @@ namespace Imp
         static std::shared_ptr<SmallStmt> Parse(std::shared_ptr<Scanner> s);
 
     protected:
-        SmallStmt(int n);
+        SmallStmt(const std::string &scriptname, int n);
     };
 }
 

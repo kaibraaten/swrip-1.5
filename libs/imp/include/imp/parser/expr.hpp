@@ -8,7 +8,7 @@ namespace Imp
     class Expr : public ImpSyntax
     {
     public:
-        Expr(int n);
+        Expr(const std::string &scriptname, int n);
         ~Expr();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Expr> Parse(std::shared_ptr<Scanner> s);

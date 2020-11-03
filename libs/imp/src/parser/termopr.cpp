@@ -4,8 +4,8 @@
 
 namespace Imp
 {
-    TermOpr::TermOpr(int n)
-        : ImpSyntax(n),
+    TermOpr::TermOpr(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         opr(TokenKind::PlusToken)
     {
 
@@ -13,7 +13,7 @@ namespace Imp
 
     std::shared_ptr<TermOpr> TermOpr::Parse(std::shared_ptr<Scanner> s)
     {
-        auto termOpr = std::make_shared<TermOpr>(s->CurLineNum());
+        auto termOpr = std::make_shared<TermOpr>(s->ScriptName(), s->CurLineNum());
         TokenKind kind = s->CurToken()->Kind();
 
         if(kind == TokenKind::PlusToken
@@ -24,7 +24,8 @@ namespace Imp
         }
         else
         {
-            ParserError("Expected a term operator but found a " + TokenName(kind) + "!", s->CurLineNum());
+            ParserError("Expected a term operator but found a " + TokenName(kind) + "!",
+                        s->ScriptName(), s->CurLineNum());
         }
 
         return termOpr;

@@ -8,7 +8,7 @@ namespace Imp
     class IfStmt : public CompoundStmt
     {
     public:
-        IfStmt(int n);
+        IfStmt(const std::string &scriptname, int n);
         ~IfStmt();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<IfStmt> Parse(std::shared_ptr<Scanner> s);

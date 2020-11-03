@@ -8,7 +8,7 @@ namespace Imp
     class Assignment : public SmallStmt
     {
     public:
-        Assignment(int n);
+        Assignment(const std::string &scriptname, int n);
         ~Assignment();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Assignment> Parse(std::shared_ptr<Scanner> s);

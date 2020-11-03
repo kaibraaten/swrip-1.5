@@ -8,7 +8,7 @@ namespace Imp
     class AndTest : public ImpSyntax
     {
     public:
-        AndTest(int n);
+        AndTest(const std::string &scriptname, int n);
         ~AndTest();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<AndTest> Parse(std::shared_ptr<Scanner> s);

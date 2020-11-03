@@ -8,7 +8,7 @@ namespace Imp
     class Lambda : public Atom
     {
     public:
-        Lambda(int n);
+        Lambda(const std::string &scriptname, int n);
         ~Lambda();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Lambda> Parse(std::shared_ptr<Scanner> s);

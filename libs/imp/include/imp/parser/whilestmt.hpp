@@ -8,7 +8,7 @@ namespace Imp
     class WhileStmt : public CompoundStmt
     {
     public:
-        WhileStmt(int n);
+        WhileStmt(const std::string &scriptname, int n);
         ~WhileStmt();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<WhileStmt> Parse(std::shared_ptr<Scanner> s);

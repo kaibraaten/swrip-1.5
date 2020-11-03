@@ -8,7 +8,7 @@ namespace Imp
     class IntegerLiteral : public Atom
     {
     public:
-        IntegerLiteral(int n);
+        IntegerLiteral(const std::string &scriptname, int n);
         ~IntegerLiteral();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<IntegerLiteral> Parse(std::shared_ptr<Scanner> s);

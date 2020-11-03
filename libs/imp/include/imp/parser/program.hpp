@@ -8,7 +8,7 @@ namespace Imp
     class Program : public ImpSyntax
     {
     public:
-        Program(int);
+        Program(const std::string &scriptname, int);
         ~Program();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Program> Parse(std::shared_ptr<Scanner> s);

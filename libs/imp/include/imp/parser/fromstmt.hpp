@@ -8,7 +8,7 @@ namespace Imp
     class FromStmt : public SmallStmt
     {
     public:
-        FromStmt(int n);
+        FromStmt(const std::string &scriptname, int n);
         ~FromStmt();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<FromStmt> Parse(std::shared_ptr<Scanner> s);

@@ -24,8 +24,8 @@ namespace Imp
         std::vector<CompTerm> terms;
     };
 
-    Comparison::Comparison(int n)
-        : ImpSyntax(n),
+    Comparison::Comparison(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -38,7 +38,7 @@ namespace Imp
 
     std::shared_ptr<Comparison> Comparison::Parse(std::shared_ptr<Scanner> s)
     {
-        auto comp = std::make_shared<Comparison>(s->CurLineNum());
+        auto comp = std::make_shared<Comparison>(s->ScriptName(), s->CurLineNum());
         CompTerm term(Term::Parse(s));
         comp->pImpl->terms.push_back(term);
 
@@ -91,12 +91,13 @@ namespace Imp
                 break;
 
             default:
-                throw RuntimeException("Illegal comparison operator: " + TokenName(kind) + "!");
+                RuntimeValue::RuntimeError("Illegal comparison operator: " + TokenName(kind) + "!", this);
+                break;
             }
 
             if((dynamic_cast<BoolValue*>(result.get())) == nullptr)
             {
-                throw RuntimeException("Expected " + TokenName(kind) + " comparison to return bool!");
+                RuntimeValue::RuntimeError("Expected " + TokenName(kind) + " comparison to return bool!", this);
             }
 
             if(!result->GetBoolValue(TokenName(kind) + " operand", this))

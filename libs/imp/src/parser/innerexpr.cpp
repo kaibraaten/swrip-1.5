@@ -9,8 +9,8 @@ namespace Imp
         std::shared_ptr<Expr> expr;
     };
 
-    InnerExpr::InnerExpr(int n)
-        : Atom(n),
+    InnerExpr::InnerExpr(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -23,7 +23,7 @@ namespace Imp
 
     std::shared_ptr<InnerExpr> InnerExpr::Parse(std::shared_ptr<Scanner> s)
     {
-        auto innerExpr = std::make_shared<InnerExpr>(s->CurLineNum());
+        auto innerExpr = std::make_shared<InnerExpr>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LeftParToken);
         innerExpr->pImpl->expr = Expr::Parse(s);
         Skip(s, TokenKind::RightParToken);

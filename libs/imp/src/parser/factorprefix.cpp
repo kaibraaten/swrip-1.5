@@ -4,8 +4,8 @@
 
 namespace Imp
 {
-    FactorPrefix::FactorPrefix(int n)
-        : ImpSyntax(n),
+    FactorPrefix::FactorPrefix(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         opr(TokenKind::PlusToken)
     {
         
@@ -13,7 +13,7 @@ namespace Imp
 
     std::shared_ptr<FactorPrefix> FactorPrefix::Parse(std::shared_ptr<Scanner> s)
     {
-        auto factorPrefix = std::make_shared<FactorPrefix>(s->CurLineNum());
+        auto factorPrefix = std::make_shared<FactorPrefix>(s->ScriptName(), s->CurLineNum());
         TokenKind kind = s->CurToken()->Kind();
 
         switch(kind)
@@ -24,7 +24,8 @@ namespace Imp
             break;
 
         default:
-            ParserError("Expected a factor prefix but found a " + TokenName(kind) + "!", s->CurLineNum());
+            ParserError("Expected a factor prefix but found a " + TokenName(kind) + "!",
+                        s->ScriptName(), s->CurLineNum());
             break;
         }
 

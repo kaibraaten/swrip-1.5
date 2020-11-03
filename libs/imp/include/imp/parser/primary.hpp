@@ -8,7 +8,7 @@ namespace Imp
     class Primary : public ImpSyntax
     {
     public:
-        Primary(int n);
+        Primary(const std::string &scriptname, int n);
         ~Primary();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Primary> Parse(std::shared_ptr<Scanner> s);

@@ -11,7 +11,8 @@
 
 static std::list<std::string> LoadScript(const std::string &filename);
 static void ShowUsage();
-static std::shared_ptr<Imp::Program> MakeProg(const std::list<std::string> &code);
+static std::shared_ptr<Imp::Program> MakeProg(const std::string &scriptname,
+                                              const std::list<std::string> &code);
 static std::shared_ptr<Imp::RuntimeScope> MakeScope();
 
 int main(int argc, char *argv[])
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
         }
 
         auto scope = MakeScope();
-        auto prog = MakeProg(code);
+        auto prog = MakeProg(argv[2], code);
         prog->Eval(scope);
     }
     catch(const std::exception &ex)
@@ -58,9 +59,10 @@ static void ShowUsage()
     std::cout << "       runimp -f <filename.py>" << std::endl;
 }
 
-static std::shared_ptr<Imp::Program> MakeProg(const std::list<std::string> &code)
+static std::shared_ptr<Imp::Program> MakeProg(const std::string &scriptname,
+                                              const std::list<std::string> &code)
 {
-    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);
     return prog;
 }

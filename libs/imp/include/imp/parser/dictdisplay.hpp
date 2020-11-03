@@ -8,7 +8,7 @@ namespace Imp
     class DictDisplay : public Atom
     {
     public:
-        DictDisplay(int n);
+        DictDisplay(const std::string &scriptname, int n);
         ~DictDisplay();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<DictDisplay> Parse(std::shared_ptr<Scanner> s);

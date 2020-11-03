@@ -7,8 +7,8 @@
 
 namespace Imp
 {
-    CompoundStmt::CompoundStmt(int n)
-        : Statement(n)
+    CompoundStmt::CompoundStmt(const std::string &scriptname, int n)
+        : Statement(scriptname, n)
     {
 
     }
@@ -37,7 +37,8 @@ namespace Imp
 
         default:
             ParserError("Expected a compound statement but found a " +
-                        TokenName(s->CurToken()->Kind()) + "!", s->CurLineNum());
+                        TokenName(s->CurToken()->Kind()) + "!",
+                        s->ScriptName(), s->CurLineNum());
             break;
         }
 

@@ -10,8 +10,8 @@ namespace Imp
         TokenKind bracketKind;
     };
 
-    PrimarySuffix::PrimarySuffix(int n)
-        : ImpSyntax(n),
+    PrimarySuffix::PrimarySuffix(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -38,7 +38,8 @@ namespace Imp
             break;
 
         default:
-            ParserError("Expected a primary suffix but found a " + TokenName(s->CurToken()->Kind()) + "!", s->CurLineNum());
+            ParserError("Expected a primary suffix but found a " + TokenName(s->CurToken()->Kind()) + "!",
+                        s->ScriptName(), s->CurLineNum());
             break;
         }
 

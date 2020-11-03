@@ -12,8 +12,8 @@ namespace Imp
         std::list<std::pair<std::shared_ptr<StringLiteral>, std::shared_ptr<Expr>>> elements;
     };
 
-    DictDisplay::DictDisplay(int n)
-        : Atom(n),
+    DictDisplay::DictDisplay(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -26,7 +26,7 @@ namespace Imp
 
     std::shared_ptr<DictDisplay> DictDisplay::Parse(std::shared_ptr<Scanner> s)
     {
-        auto dictDisplay = std::make_shared<DictDisplay>(s->CurLineNum());
+        auto dictDisplay = std::make_shared<DictDisplay>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LeftBraceToken);
 
         if(s->CurToken()->Kind() != TokenKind::RightBraceToken)

@@ -44,8 +44,8 @@ namespace Imp
         std::string ModuleName;
     };
 
-    FromStmt::FromStmt(int n)
-        : SmallStmt(n),
+    FromStmt::FromStmt(const std::string &scriptname, int n)
+        : SmallStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -77,7 +77,7 @@ namespace Imp
 
         if(fileWasOpened)
         {
-            auto scanner = std::make_shared<Imp::Scanner>(code);
+            auto scanner = std::make_shared<Imp::Scanner>(filename, code);
             auto prog = Program::Parse(scanner);
             prog->Eval(curScope);
             return std::make_shared<NoneValue>();
@@ -89,7 +89,7 @@ namespace Imp
 
     std::shared_ptr<FromStmt> FromStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto fromStmt = std::make_shared<FromStmt>(s->CurLineNum());
+        auto fromStmt = std::make_shared<FromStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::FromToken);
         fromStmt->pImpl->ModuleName = Name::Parse(s)->GetName();
         Skip(s, TokenKind::ImportToken);

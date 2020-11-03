@@ -13,7 +13,7 @@ namespace Imp
         TokenKind BracketKind() const;
 
     protected:
-        PrimarySuffix(int n);
+        PrimarySuffix(const std::string &scriptname, int n);
 
     private:
         struct Impl;

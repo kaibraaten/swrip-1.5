@@ -4,8 +4,8 @@
 
 namespace Imp
 {
-    CompOpr::CompOpr(int n)
-        : ImpSyntax(n),
+    CompOpr::CompOpr(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         opr(TokenKind::DoubleEqualToken)
     {
 
@@ -13,7 +13,7 @@ namespace Imp
 
     std::shared_ptr<CompOpr> CompOpr::Parse(std::shared_ptr<Scanner> s)
     {
-        auto compOpr = std::make_shared<CompOpr>(s->CurLineNum());
+        auto compOpr = std::make_shared<CompOpr>(s->ScriptName(), s->CurLineNum());
         TokenKind kind = s->CurToken()->Kind();
 
         if(kind == TokenKind::LessToken
@@ -28,7 +28,8 @@ namespace Imp
         }
         else
         {
-            ParserError("Expected a comparison operator but found a " + TokenName(kind) + "!", s->CurLineNum());
+            ParserError("Expected a comparison operator but found a " + TokenName(kind) + "!",
+                        s->ScriptName(), s->CurLineNum());
         }
 
         return compOpr;

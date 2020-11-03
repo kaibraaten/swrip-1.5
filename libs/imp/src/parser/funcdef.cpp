@@ -17,8 +17,8 @@ namespace Imp
         std::vector<std::shared_ptr<Name>> arguments;
     };
 
-    FuncDef::FuncDef(int n)
-        : CompoundStmt(n),
+    FuncDef::FuncDef(const std::string &scriptname, int n)
+        : CompoundStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -45,7 +45,7 @@ namespace Imp
 
     std::shared_ptr<FuncDef> FuncDef::Parse(std::shared_ptr<Scanner> s)
     {
-        auto funcDef = std::make_shared<FuncDef>(s->CurLineNum());
+        auto funcDef = std::make_shared<FuncDef>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::DefToken);
         funcDef->pImpl->name = Name::Parse(s);
         Skip(s, TokenKind::LeftParToken);

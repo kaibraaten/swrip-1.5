@@ -8,7 +8,7 @@ namespace Imp
     class Arguments : public PrimarySuffix
     {
     public:
-        Arguments(int n);
+        Arguments(const std::string &scriptname, int n);
         ~Arguments();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Arguments> Parse(std::shared_ptr<Scanner> s);

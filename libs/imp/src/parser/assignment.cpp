@@ -17,8 +17,8 @@ namespace Imp
         std::vector<std::shared_ptr<Subscription>> subscriptions;
     };
 
-    Assignment::Assignment(int n)
-        : SmallStmt(n),
+    Assignment::Assignment(const std::string &scriptname, int n)
+        : SmallStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -57,7 +57,7 @@ namespace Imp
 
     std::shared_ptr<Assignment> Assignment::Parse(std::shared_ptr<Scanner> s)
     {
-        auto assignment = std::make_shared<Assignment>(s->CurLineNum());
+        auto assignment = std::make_shared<Assignment>(s->ScriptName(), s->CurLineNum());
 
         assignment->pImpl->name = Name::Parse(s);
 

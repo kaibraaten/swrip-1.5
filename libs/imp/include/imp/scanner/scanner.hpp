@@ -13,11 +13,13 @@ namespace Imp
     class Scanner
     {
     public:
-        Scanner(const std::list<std::string> &sourceCode);
+        Scanner(const std::string &scriptname,
+                const std::list<std::string> &sourceCode);
         ~Scanner();
         std::shared_ptr<Token> CurToken() const;
         void ReadNextToken();
         int CurLineNum() const;
+        std::string ScriptName() const;
         bool IsCompOpr() const;
         bool IsFactorPrefix() const;
         bool IsFactorOpr() const;

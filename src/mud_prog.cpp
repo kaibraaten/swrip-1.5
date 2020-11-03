@@ -2389,7 +2389,8 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                MakeScriptName(mob, type));
                         }
                         else
                         {
@@ -2429,7 +2430,8 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                    MakeScriptName(mob, type));
                             }
                             else
                             {
@@ -2462,7 +2464,8 @@ void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Charact
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, vo, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                    MakeScriptName(mob, type));
             }
             else
             {
@@ -2625,7 +2628,8 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                MakeScriptName(obj, type));
                         }
                         else
                         {
@@ -2663,7 +2667,8 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                    MakeScriptName(obj, type));
                             }
                             else
                             {
@@ -2764,7 +2769,8 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                MakeScriptName(room, type));
                         }
                         else
                         {
@@ -2802,7 +2808,8 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist));
+                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                                    MakeScriptName(room, type));
                             }
                             else
                             {

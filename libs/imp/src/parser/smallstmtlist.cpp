@@ -11,8 +11,8 @@ namespace Imp
         std::list<std::shared_ptr<SmallStmt>> smallStatements;
     };
 
-    SmallStmtList::SmallStmtList(int n)
-        : Statement(n),
+    SmallStmtList::SmallStmtList(const std::string &scriptname, int n)
+        : Statement(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -35,7 +35,7 @@ namespace Imp
 
     std::shared_ptr<SmallStmtList> SmallStmtList::Parse(std::shared_ptr<Scanner> s)
     {
-        auto smallStmtList = std::make_shared<SmallStmtList>(s->CurLineNum());
+        auto smallStmtList = std::make_shared<SmallStmtList>(s->ScriptName(), s->CurLineNum());
 
         while(s->CurToken()->Kind() != TokenKind::NewLineToken)
         {

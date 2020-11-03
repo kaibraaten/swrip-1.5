@@ -8,7 +8,7 @@ namespace Imp
     class ForStmt : public CompoundStmt
     {
     public:
-        ForStmt(int n);
+        ForStmt(const std::string &scriptname, int n);
         ~ForStmt();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<ForStmt> Parse(std::shared_ptr<Scanner> s);

@@ -11,8 +11,8 @@ namespace Imp
         std::vector<std::shared_ptr<AndTest>> AndTests;
     };
 
-    Expr::Expr(int n)
-        : ImpSyntax(n),
+    Expr::Expr(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -25,7 +25,7 @@ namespace Imp
 
     std::shared_ptr<Expr> Expr::Parse(std::shared_ptr<Scanner> s)
     {
-        auto ae = std::make_shared<Expr>(s->CurLineNum());
+        auto ae = std::make_shared<Expr>(s->ScriptName(), s->CurLineNum());
 
         while(true)
         {

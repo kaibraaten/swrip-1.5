@@ -11,8 +11,8 @@ namespace Imp
         std::vector<std::shared_ptr<Expr>> exprs;
     };
 
-    Arguments::Arguments(int n)
-        : PrimarySuffix(n),
+    Arguments::Arguments(const std::string &scriptname, int n)
+        : PrimarySuffix(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -25,7 +25,7 @@ namespace Imp
 
     std::shared_ptr<Arguments> Arguments::Parse(std::shared_ptr<Scanner> s)
     {
-        auto args = std::make_shared<Arguments>(s->CurLineNum());
+        auto args = std::make_shared<Arguments>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LeftParToken);
 
         if(s->CurToken()->Kind() != TokenKind::RightParToken)

@@ -21,8 +21,8 @@ namespace Imp
         std::vector<PrimaryData> primaries;
     };
 
-    Factor::Factor(int n)
-        : ImpSyntax(n),
+    Factor::Factor(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -35,7 +35,7 @@ namespace Imp
 
     std::shared_ptr<Factor> Factor::Parse(std::shared_ptr<Scanner> s)
     {
-        auto factor = std::make_shared<Factor>(s->CurLineNum());
+        auto factor = std::make_shared<Factor>(s->ScriptName(), s->CurLineNum());
         PrimaryData p;
 
         if(s->IsFactorPrefix())
@@ -103,7 +103,8 @@ namespace Imp
                 break;
 
             default:
-                throw RuntimeException("Illegal term operator: " + TokenName(k) + "!");
+                RuntimeValue::RuntimeError("Illegal term operator: " + TokenName(k) + "!", this);
+                break;
             }
         }
 

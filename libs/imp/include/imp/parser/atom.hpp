@@ -11,7 +11,7 @@ namespace Imp
         static std::shared_ptr<Atom> Parse(std::shared_ptr<Scanner> s);
 
     protected:
-        Atom(int n);
+        Atom(const std::string &scriptname, int n);
     };
 }
 

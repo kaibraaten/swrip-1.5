@@ -8,7 +8,7 @@ namespace Imp
     class NotTest : public ImpSyntax
     {
     public:
-        NotTest(int n);
+        NotTest(const std::string &scriptname, int n);
         ~NotTest();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<NotTest> Parse(std::shared_ptr<Scanner> s);

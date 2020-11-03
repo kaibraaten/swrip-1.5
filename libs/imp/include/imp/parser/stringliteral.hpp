@@ -8,7 +8,7 @@ namespace Imp
     class StringLiteral : public Atom
     {
     public:
-        StringLiteral(int n);
+        StringLiteral(const std::string &scriptname, int n);
         ~StringLiteral();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<StringLiteral> Parse(std::shared_ptr<Scanner> s);

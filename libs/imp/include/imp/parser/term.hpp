@@ -8,7 +8,7 @@ namespace Imp
     class Term : public ImpSyntax
     {
     public:
-        Term(int n);
+        Term(const std::string &scriptname, int n);
         ~Term();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Term> Parse(std::shared_ptr<Scanner> s);

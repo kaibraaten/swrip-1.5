@@ -9,8 +9,8 @@ namespace Imp
         double Value = 0.0;
     };
 
-    FloatLiteral::FloatLiteral(int n)
-        : Atom(n),
+    FloatLiteral::FloatLiteral(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -23,7 +23,7 @@ namespace Imp
 
     std::shared_ptr<FloatLiteral> FloatLiteral::Parse(std::shared_ptr<Scanner> s)
     {
-        auto floatLiteral = std::make_shared<FloatLiteral>(s->CurLineNum());
+        auto floatLiteral = std::make_shared<FloatLiteral>(s->ScriptName(), s->CurLineNum());
         floatLiteral->pImpl->Value = s->CurToken()->FloatLit();
         Skip(s, TokenKind::FloatToken);
         return floatLiteral;

@@ -8,7 +8,7 @@ namespace Imp
     class BooleanLiteral : public Atom
     {
     public:
-        BooleanLiteral(int n);
+        BooleanLiteral(const std::string &scriptname, int n);
         ~BooleanLiteral();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<BooleanLiteral> Parse(std::shared_ptr<Scanner> s);

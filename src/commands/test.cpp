@@ -48,7 +48,8 @@
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code);
+static std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
+                                                     const std::list<std::string> &code);
 
 void do_test(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -294,7 +295,7 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
             };
 
         auto globalScope = MakeImpScope();
-        auto prog = ParseImpProgram(code);
+        auto prog = ParseImpProgram("<test.cpp>", code);
         auto doAfterEval = [ch](std::shared_ptr<Imp::Program> program, std::shared_ptr<Imp::RuntimeScope> scope)
                            {
                                auto func = scope->Find("on_test", program.get());
@@ -358,9 +359,9 @@ static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     return globalScope;
 }
 
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code)
+static std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname, const std::list<std::string> &code)
 {
-    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);
 
     return prog;

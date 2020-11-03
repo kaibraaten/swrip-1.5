@@ -8,7 +8,7 @@ namespace Imp
     class ExprStmt : public SmallStmt
     {
     public:
-        ExprStmt(int n);
+        ExprStmt(const std::string &scriptname, int n);
         ~ExprStmt();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<ExprStmt> Parse(std::shared_ptr<Scanner> s);

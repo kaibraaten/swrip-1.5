@@ -37,7 +37,7 @@ TEST(ScannerTests, TestSmallProgram)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do
@@ -57,7 +57,7 @@ TEST(ScannerTests, TestStringLiteral)
         "'Kai Braaten'"
     };
     std::string expected = "Kai Braaten";
-    Scanner s(source);
+    Scanner s("unit test", source);
 
     // Act
     s.ReadNextToken();
@@ -135,7 +135,7 @@ TEST(ScannerTests, ForLoop)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do
@@ -193,7 +193,7 @@ TEST(ScannerTests, Expressions)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do
@@ -224,7 +224,7 @@ TEST(ScannerTests, Numbers)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do
@@ -267,7 +267,7 @@ TEST(ScannerTests, Indents)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do
@@ -321,7 +321,7 @@ TEST(ScannerTests, Defs)
         TokenKind::EofToken
     };
 
-    Scanner s(source);
+    Scanner s("unit test", source);
     auto iter = expected.begin();
 
     do

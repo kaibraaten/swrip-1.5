@@ -20,8 +20,8 @@ namespace Imp
         std::shared_ptr<Suite> elseBlock;
     };
 
-    IfStmt::IfStmt(int n)
-        : CompoundStmt(n),
+    IfStmt::IfStmt(const std::string &scriptname, int n)
+        : CompoundStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -57,7 +57,7 @@ namespace Imp
 
     std::shared_ptr<IfStmt> IfStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto ifStmt = std::make_shared<IfStmt>(s->CurLineNum());
+        auto ifStmt = std::make_shared<IfStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::IfToken);
 
         do
@@ -80,7 +80,6 @@ namespace Imp
             Skip(s, TokenKind::ColonToken);
             ifStmt->pImpl->elseBlock = Suite::Parse(s);
         }
-
 
         return ifStmt;
     }

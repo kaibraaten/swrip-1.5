@@ -8,7 +8,7 @@ namespace Imp
     class FactorPrefix : public ImpSyntax
     {
     public:
-        FactorPrefix(int n);
+        FactorPrefix(const std::string &scriptname, int n);
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<FactorPrefix> Parse(std::shared_ptr<Scanner> s);
 

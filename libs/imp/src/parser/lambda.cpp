@@ -13,8 +13,8 @@ namespace Imp
         std::shared_ptr<Expr> body;
     };
 
-    Lambda::Lambda(int n)
-        : Atom(n),
+    Lambda::Lambda(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -27,7 +27,7 @@ namespace Imp
 
     std::shared_ptr<Lambda> Lambda::Parse(std::shared_ptr<Scanner> s)
     {
-        auto lambdaExpr = std::make_shared<Lambda>(s->CurLineNum());
+        auto lambdaExpr = std::make_shared<Lambda>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LambdaToken);
 
         if(s->CurToken()->Kind() != TokenKind::ColonToken)

@@ -9,8 +9,8 @@ namespace Imp
         std::string Name;
     };
 
-    Name::Name(int n)
-        : Atom(n),
+    Name::Name(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -23,7 +23,7 @@ namespace Imp
 
     std::shared_ptr<Name> Name::Parse(std::shared_ptr<Scanner> s)
     {
-        auto n = std::make_shared<Name>(s->CurLineNum());
+        auto n = std::make_shared<Name>(s->ScriptName(), s->CurLineNum());
         n->pImpl->Name = s->CurToken()->Name();
         s->ReadNextToken();
         return n;

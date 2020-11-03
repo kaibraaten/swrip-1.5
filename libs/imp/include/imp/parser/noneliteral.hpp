@@ -8,7 +8,7 @@ namespace Imp
     class NoneLiteral : public Atom
     {
     public:
-        NoneLiteral(int n);
+        NoneLiteral(const std::string &scriptname, int n);
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<NoneLiteral> Parse(std::shared_ptr<Scanner> s);
     };

@@ -12,8 +12,8 @@ namespace Imp
         std::shared_ptr<Expr> returnExpr;
     };
 
-    ReturnStmt::ReturnStmt(int n)
-        : SmallStmt(n),
+    ReturnStmt::ReturnStmt(const std::string &scriptname, int n)
+        : SmallStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -42,7 +42,7 @@ namespace Imp
 
     std::shared_ptr<ReturnStmt> ReturnStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto returnStmt = std::make_shared<ReturnStmt>(s->CurLineNum());
+        auto returnStmt = std::make_shared<ReturnStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::ReturnToken);
 
         if(s->CurToken()->Kind() != TokenKind::NewLineToken)

@@ -8,8 +8,8 @@
 
 namespace Imp
 {
-    SmallStmt::SmallStmt(int n)
-        : ImpSyntax(n)
+    SmallStmt::SmallStmt(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n)
     {
 
     }

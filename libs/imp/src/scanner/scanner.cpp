@@ -176,7 +176,7 @@ namespace Imp
 
     struct Scanner::Impl
     {
-        Impl(const std::list<std::string> &sourceCode);
+        Impl(const std::string &scriptname, const std::list<std::string> &sourceCode);
         void ScannerError(const std::string &message);
         int CurLineNum() const;
         bool IsCompOpr();
@@ -198,17 +198,20 @@ namespace Imp
         std::list<std::string> SourceCode;
         std::stack<int> Indents;
         int lineNum = 0;
+        std::string ScriptName;
     };
 
-    Scanner::Impl::Impl(const std::list<std::string> &sourceCode)
-        : SourceCode(sourceCode)
+    Scanner::Impl::Impl(const std::string &scriptname,
+                        const std::list<std::string> &sourceCode)
+        : SourceCode(sourceCode),
+        ScriptName(scriptname)
     {
         Indents.push(0);
     }
 
     void Scanner::Impl::ScannerError(const std::string &message)
     {
-        std::string m = "Imp scanner error";
+        std::string m = "[" + ScriptName + "] Imp scanner error";
 
         if(CurLineNum() > 0)
         {
@@ -538,8 +541,9 @@ namespace Imp
     }
 
     // Scanner class
-    Scanner::Scanner(const std::list<std::string> &sourceCode)
-        : pImpl(std::make_unique<Impl>(sourceCode))
+    Scanner::Scanner(const std::string &scriptname,
+                     const std::list<std::string> &sourceCode)
+        : pImpl(std::make_unique<Impl>(scriptname, sourceCode))
     {
 
     }
@@ -587,5 +591,10 @@ namespace Imp
     bool Scanner::AnyEqualToken() const
     {
         return pImpl->AnyEqualToken();
+    }
+
+    std::string Scanner::ScriptName() const
+    {
+        return pImpl->ScriptName;
     }
 }

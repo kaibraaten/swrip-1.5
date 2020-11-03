@@ -8,7 +8,7 @@ namespace Imp
     class FuncDef : public CompoundStmt
     {
     public:
-        FuncDef(int n);
+        FuncDef(const std::string &scriptname, int n);
         ~FuncDef();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<FuncDef> Parse(std::shared_ptr<Scanner> s);

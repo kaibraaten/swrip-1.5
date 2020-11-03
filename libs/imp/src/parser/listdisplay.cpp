@@ -11,8 +11,8 @@ namespace Imp
         std::list<std::shared_ptr<Expr>> exprs;
     };
 
-    ListDisplay::ListDisplay(int n)
-        : Atom(n),
+    ListDisplay::ListDisplay(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -25,7 +25,7 @@ namespace Imp
 
     std::shared_ptr<ListDisplay> ListDisplay::Parse(std::shared_ptr<Scanner> s)
     {
-        auto listDisplay = std::make_shared<ListDisplay>(s->CurLineNum());
+        auto listDisplay = std::make_shared<ListDisplay>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LeftBracketToken);
 
         if(s->CurToken()->Kind() != TokenKind::RightBracketToken)

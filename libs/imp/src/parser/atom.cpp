@@ -13,8 +13,8 @@
 
 namespace Imp
 {
-    Atom::Atom(int n)
-        : ImpSyntax(n)
+    Atom::Atom(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n)
     {
 
     }
@@ -67,7 +67,8 @@ namespace Imp
             break;
 
         default:
-            ParserError("Expected an expression atom but found a " + TokenName(s->CurToken()->Kind()) + "!", s->CurLineNum());
+            ParserError("Expected an expression atom but found a " + TokenName(s->CurToken()->Kind()) + "!",
+                        s->ScriptName(), s->CurLineNum());
         }
 
         return aa;

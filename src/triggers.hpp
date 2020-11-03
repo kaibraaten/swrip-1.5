@@ -67,7 +67,11 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpRo
                                                                                            const Vo &vo, int type);
 void DispatchImpFunction(const std::string &funcName,
                          std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
-                         const std::list<std::string> &code);
+                         const std::list<std::string> &code,
+                         const std::string &scriptname);
 std::list<std::string> SplitIntoLines(const std::string &comlist);
+std::string MakeScriptName(std::shared_ptr<Character> mob, int type);
+std::string MakeScriptName(std::shared_ptr<Object> obj, int type);
+std::string MakeScriptName(std::shared_ptr<Room> room, int type);
 
 #endif

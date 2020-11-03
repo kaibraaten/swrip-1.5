@@ -11,7 +11,7 @@ namespace Imp
         static std::shared_ptr<CompoundStmt> Parse(std::shared_ptr<Scanner> s);
 
     protected:
-        CompoundStmt(int n);
+        CompoundStmt(const std::string &scriptname, int n);
     };
 }
 

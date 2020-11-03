@@ -8,7 +8,7 @@ namespace Imp
     class ListDisplay : public Atom
     {
     public:
-        ListDisplay(int n);
+        ListDisplay(const std::string &scriptname, int n);
         ~ListDisplay();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<ListDisplay> Parse(std::shared_ptr<Scanner> s);

@@ -29,8 +29,8 @@ namespace Imp
         std::vector<FactorData> factors;
     };
 
-    Term::Term(int n)
-        : ImpSyntax(n),
+    Term::Term(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -43,7 +43,7 @@ namespace Imp
 
     std::shared_ptr<Term> Term::Parse(std::shared_ptr<Scanner> s)
     {
-        auto term = std::make_shared<Term>(s->CurLineNum());
+        auto term = std::make_shared<Term>(s->ScriptName(), s->CurLineNum());
         term->pImpl->factors.push_back(FactorData(Factor::Parse(s)));
 
         while(s->IsTermOpr())
@@ -77,7 +77,8 @@ namespace Imp
                 break;
 
             default:
-                throw RuntimeException("Illegal term operator: " + TokenName(k) + "!");
+                RuntimeValue::RuntimeError("Illegal term operator: " + TokenName(k) + "!", this);
+                break;
             }
         }
 

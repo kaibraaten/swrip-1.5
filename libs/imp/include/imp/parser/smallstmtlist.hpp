@@ -8,7 +8,7 @@ namespace Imp
     class SmallStmtList : public Statement
     {
     public:
-        SmallStmtList(int n);
+        SmallStmtList(const std::string &scriptname, int n);
         ~SmallStmtList();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<SmallStmtList> Parse(std::shared_ptr<Scanner> s);

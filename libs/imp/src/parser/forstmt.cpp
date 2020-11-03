@@ -16,8 +16,8 @@ namespace Imp
         std::shared_ptr<Suite> body;
     };
 
-    ForStmt::ForStmt(int n)
-        : CompoundStmt(n),
+    ForStmt::ForStmt(const std::string &scriptname, int n)
+        : CompoundStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -30,7 +30,7 @@ namespace Imp
 
     std::shared_ptr<ForStmt> ForStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto forStmt = std::make_shared<ForStmt>(s->CurLineNum());
+        auto forStmt = std::make_shared<ForStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::ForToken);
         forStmt->pImpl->name = Name::Parse(s);
         Skip(s, TokenKind::InToken);

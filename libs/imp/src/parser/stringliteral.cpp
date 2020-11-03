@@ -9,8 +9,8 @@ namespace Imp
         std::string Value;
     };
 
-    StringLiteral::StringLiteral(int n)
-        : Atom(n),
+    StringLiteral::StringLiteral(const std::string &scriptname, int n)
+        : Atom(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -23,7 +23,7 @@ namespace Imp
 
     std::shared_ptr<StringLiteral> StringLiteral::Parse(std::shared_ptr<Scanner> s)
     {
-        auto stringLiteral = std::make_shared<StringLiteral>(s->CurLineNum());
+        auto stringLiteral = std::make_shared<StringLiteral>(s->ScriptName(), s->CurLineNum());
         stringLiteral->pImpl->Value = s->CurToken()->StringLit();
         Skip(s, TokenKind::StringToken);
         return stringLiteral;

@@ -14,8 +14,8 @@ namespace Imp
         std::list<std::shared_ptr<Statement>> statements;
     };
 
-    Suite::Suite(int n)
-        : ImpSyntax(n),
+    Suite::Suite(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -45,7 +45,7 @@ namespace Imp
 
     std::shared_ptr<Suite> Suite::Parse(std::shared_ptr<Scanner> s)
     {
-        auto suite = std::make_shared<Suite>(s->CurLineNum());
+        auto suite = std::make_shared<Suite>(s->ScriptName(), s->CurLineNum());
 
         if(s->CurToken()->Kind() == TokenKind::NewLineToken)
         {

@@ -5,8 +5,8 @@
 
 namespace Imp
 {
-    Statement::Statement(int n)
-        : ImpSyntax(n)
+    Statement::Statement(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n)
     {
 
     }

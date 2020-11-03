@@ -8,7 +8,7 @@ namespace Imp
     class FloatLiteral : public Atom
     {
     public:
-        FloatLiteral(int n);
+        FloatLiteral(const std::string &scriptname, int n);
         ~FloatLiteral();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<FloatLiteral> Parse(std::shared_ptr<Scanner> s);

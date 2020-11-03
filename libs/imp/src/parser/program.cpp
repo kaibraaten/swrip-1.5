@@ -11,8 +11,8 @@ namespace Imp
         std::list<std::shared_ptr<Statement>> stmts;
     };
 
-    Program::Program(int n)
-        : ImpSyntax(n),
+    Program::Program(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -35,7 +35,7 @@ namespace Imp
 
     std::shared_ptr<Program> Program::Parse(std::shared_ptr<Scanner> s)
     {
-        auto program = std::make_shared<Program>(s->CurLineNum());
+        auto program = std::make_shared<Program>(s->ScriptName(), s->CurLineNum());
 
         while(s->CurToken()->Kind() != TokenKind::EofToken)
         {

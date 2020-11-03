@@ -9,8 +9,8 @@ namespace Imp
         std::shared_ptr<Expr> expr;
     };
 
-    ExprStmt::ExprStmt(int n)
-        : SmallStmt(n),
+    ExprStmt::ExprStmt(const std::string &scriptname, int n)
+        : SmallStmt(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -28,7 +28,7 @@ namespace Imp
 
     std::shared_ptr<ExprStmt> ExprStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto exprStmt = std::make_shared<ExprStmt>(s->CurLineNum());
+        auto exprStmt = std::make_shared<ExprStmt>(s->ScriptName(), s->CurLineNum());
         exprStmt->pImpl->expr = Expr::Parse(s);
         return exprStmt;
     }

@@ -4,15 +4,15 @@
 
 namespace Imp
 {
-    NoneLiteral::NoneLiteral(int n)
-        : Atom(n)
+    NoneLiteral::NoneLiteral(const std::string &scriptname, int n)
+        : Atom(scriptname, n)
     {
 
     }
 
     std::shared_ptr<NoneLiteral> NoneLiteral::Parse(std::shared_ptr<Scanner> s)
     {
-        auto noneLiteral = std::make_shared<NoneLiteral>(s->CurLineNum());
+        auto noneLiteral = std::make_shared<NoneLiteral>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::NoneToken);
         return noneLiteral;
     }

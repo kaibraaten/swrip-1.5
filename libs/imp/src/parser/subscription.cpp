@@ -9,8 +9,8 @@ namespace Imp
         std::shared_ptr<Expr> expr;
     };
 
-    Subscription::Subscription(int n)
-        : PrimarySuffix(n),
+    Subscription::Subscription(const std::string &scriptname, int n)
+        : PrimarySuffix(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -23,7 +23,7 @@ namespace Imp
 
     std::shared_ptr<Subscription> Subscription::Parse(std::shared_ptr<Scanner> s)
     {
-        auto sub = std::make_shared<Subscription>(s->CurLineNum());
+        auto sub = std::make_shared<Subscription>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::LeftBracketToken);
         sub->pImpl->expr = Expr::Parse(s);
         Skip(s, TokenKind::RightBracketToken);

@@ -11,8 +11,8 @@ namespace Imp
         std::vector<std::shared_ptr<NotTest>> NotTests;
     };
 
-    AndTest::AndTest(int n)
-        : ImpSyntax(n),
+    AndTest::AndTest(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -25,7 +25,7 @@ namespace Imp
 
     std::shared_ptr<AndTest> AndTest::Parse(std::shared_ptr<Scanner> s)
     {
-        auto at = std::make_shared<AndTest>(s->CurLineNum());
+        auto at = std::make_shared<AndTest>(s->ScriptName(), s->CurLineNum());
 
         while(true)
         {

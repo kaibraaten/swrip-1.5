@@ -8,7 +8,7 @@ namespace Imp
     class PassStmt : public SmallStmt
     {
     public:
-        PassStmt(int n);
+        PassStmt(const std::string &scriptname, int n);
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<PassStmt> Parse(std::shared_ptr<Scanner> s);
     };

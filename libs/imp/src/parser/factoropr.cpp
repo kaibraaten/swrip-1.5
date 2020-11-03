@@ -4,8 +4,8 @@
 
 namespace Imp
 {
-    FactorOpr::FactorOpr(int n)
-        : ImpSyntax(n),
+    FactorOpr::FactorOpr(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         opr(TokenKind::AstToken)
     {
 
@@ -13,7 +13,7 @@ namespace Imp
 
     std::shared_ptr<FactorOpr> FactorOpr::Parse(std::shared_ptr<Scanner> s)
     {
-        auto factorOpr = std::make_shared<FactorOpr>(s->CurLineNum());
+        auto factorOpr = std::make_shared<FactorOpr>(s->ScriptName(), s->CurLineNum());
         TokenKind kind = s->CurToken()->Kind();
 
         switch(kind)
@@ -26,7 +26,8 @@ namespace Imp
             break;
 
         default:
-            ParserError("Expected a factor operator but found a " + TokenName(kind) + "!", s->CurLineNum());
+            ParserError("Expected a factor operator but found a " + TokenName(kind) + "!",
+                        s->ScriptName(), s->CurLineNum());
             break;
         }
 

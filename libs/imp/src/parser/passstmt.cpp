@@ -4,8 +4,8 @@
 
 namespace Imp
 {
-    PassStmt::PassStmt(int n)
-        : SmallStmt(n)
+    PassStmt::PassStmt(const std::string &scriptname, int n)
+        : SmallStmt(scriptname, n)
     {
 
     }
@@ -17,7 +17,7 @@ namespace Imp
 
     std::shared_ptr<PassStmt> PassStmt::Parse(std::shared_ptr<Scanner> s)
     {
-        auto passStmt = std::make_shared<PassStmt>(s->CurLineNum());
+        auto passStmt = std::make_shared<PassStmt>(s->ScriptName(), s->CurLineNum());
         Skip(s, TokenKind::PassToken);
         return passStmt;
     }

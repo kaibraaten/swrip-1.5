@@ -4,9 +4,9 @@
 
 namespace Imp
 {
-    void ParserError(std::string message, int lineNum)
+    void ParserError(const std::string &message, const std::string &scriptname, int lineNum)
     {
-        std::string msg = "Imp parser error";
+        std::string msg = "[" + scriptname + "] Imp parser error";
 
         if(lineNum > 0)
         {
@@ -23,7 +23,8 @@ namespace Imp
 
         if(current != tk)
         {
-            ParserError("Expected " + TokenName(tk) + " but found " + TokenName(current) + "!", s->CurLineNum());
+            ParserError("Expected " + TokenName(tk) + " but found " + TokenName(current) + "!",
+                        s->ScriptName(), s->CurLineNum());
         }
 
         s->ReadNextToken();
@@ -32,19 +33,22 @@ namespace Imp
     // Impl
     struct ImpSyntax::Impl
     {
-        Impl(int n)
-            : LineNum(n)
+        Impl(const std::string &scriptname, int n)
+            : ScriptName(scriptname),
+            LineNum(n)
         {
 
         }
 
+        std::string ScriptName;
         int LineNum = 0;
     };
 
     // ImpSyntax
-    ImpSyntax::ImpSyntax(int n)
-        : pImpl(std::make_unique<Impl>(n))
+    ImpSyntax::ImpSyntax(const std::string &scriptname, int n)
+        : pImpl(std::make_unique<Impl>(scriptname, n))
     {
+
     }
 
     ImpSyntax::~ImpSyntax()
@@ -54,5 +58,10 @@ namespace Imp
     int ImpSyntax::LineNum() const
     {
         return pImpl->LineNum;
+    }
+
+    std::string ImpSyntax::ScriptName() const
+    {
+        return pImpl->ScriptName;
     }
 }

@@ -8,7 +8,7 @@ namespace Imp
     class Comparison : public ImpSyntax
     {
     public:
-        Comparison(int n);
+        Comparison(const std::string &scriptname, int n);
         ~Comparison();
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Comparison> Parse(std::shared_ptr<Scanner> s);

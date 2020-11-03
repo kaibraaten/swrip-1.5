@@ -11,7 +11,7 @@ namespace Imp
         static std::shared_ptr<Statement> Parse(std::shared_ptr<Scanner> s);
 
     protected:
-        Statement(int n);
+        Statement(const std::string &scriptname, int n);
     };
 }
 

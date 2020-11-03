@@ -11,8 +11,8 @@ namespace Imp
         bool _Not = false;
     };
 
-    NotTest::NotTest(int n)
-        : ImpSyntax(n),
+    NotTest::NotTest(const std::string &scriptname, int n)
+        : ImpSyntax(scriptname, n),
         pImpl(std::make_unique<Impl>())
     {
 
@@ -25,7 +25,7 @@ namespace Imp
 
     std::shared_ptr<NotTest> NotTest::Parse(std::shared_ptr<Scanner> s)
     {
-        auto notTest = std::make_shared<NotTest>(s->CurLineNum());
+        auto notTest = std::make_shared<NotTest>(s->ScriptName(), s->CurLineNum());
 
         if(s->CurToken()->Kind() == TokenKind::NotToken)
         {

@@ -4,14 +4,17 @@
 
 namespace Imp
 {
-    void RuntimeValue::RuntimeError(const std::string &msg, int lineNum)
+    void RuntimeValue::RuntimeError(const std::string &msg,
+                                    const std::string &scriptname,
+                                    int lineNum)
     {
-        throw RuntimeException("Imp runtime error on line " + std::to_string(lineNum) + ": " + msg);
+        throw RuntimeException("[" + scriptname + "] Imp runtime error on line " + std::to_string(lineNum) + ": " + msg);
     }
 
-    void RuntimeValue::RuntimeError(const std::string &msg, const ImpSyntax *where)
+    void RuntimeValue::RuntimeError(const std::string &msg,
+                                    const ImpSyntax *where)
     {
-        RuntimeError(msg, where->LineNum());
+        RuntimeError(msg, where->ScriptName(), where->LineNum());
     }
 
     RuntimeValue::~RuntimeValue()
