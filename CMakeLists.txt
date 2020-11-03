@@ -588,6 +588,7 @@ src/impscript/funcs/isjedi_func.cpp
 src/impscript/funcs/isnpc_func.cpp
 src/impscript/funcs/level_func.cpp
 src/impscript/funcs/objects_func.cpp
+src/impscript/funcs/objtype_func.cpp
 src/impscript/funcs/random_func.cpp
 src/impscript/funcs/say_func.cpp
 src/impscript/funcs/skill_func.cpp

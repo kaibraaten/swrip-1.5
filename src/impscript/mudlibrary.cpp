@@ -15,6 +15,7 @@
 #include "impscript/funcs/isnpc_func.hpp"
 #include "impscript/funcs/level_func.hpp"
 #include "impscript/funcs/objects_func.hpp"
+#include "impscript/funcs/objtype_func.hpp"
 #include "impscript/funcs/random_func.hpp"
 #include "impscript/funcs/say_func.hpp"
 #include "impscript/funcs/skill_func.hpp"
@@ -41,6 +42,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("isnpc", std::make_shared<IsNpcFunc>());
     Assign("level", std::make_shared<LevelFunc>());
     Assign("objects", std::make_shared<ObjectsFunc>());
+    Assign("objtype", std::make_shared<ObjTypeFunc>());
     Assign("random", std::make_shared<RandomFunc>());
     Assign("say", std::make_shared<SayFunc>());
     Assign("skill", std::make_shared<SkillFunc>());

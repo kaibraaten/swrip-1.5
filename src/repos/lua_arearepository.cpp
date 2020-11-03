@@ -907,7 +907,16 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaGetfieldString(L, "Race",
                       [mob](auto raceName)
                       {
-                          mob->Race = GetNpcRace(raceName);
+                          auto race = GetNpcRace(raceName);
+
+                          if(race != -1)
+                          {
+                              mob->Race = race;
+                          }
+                          else
+                          {
+                              mob->Race = RACE_HUMAN;
+                          }
                       });
     LuaGetfieldInt(L, "Height", &mob->Height);
     LuaGetfieldInt(L, "Weight", &mob->Weight);

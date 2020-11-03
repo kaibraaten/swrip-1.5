@@ -28,3 +28,8 @@ def ovnumcarry(actor, objvnum):
 
     return reduce(count_occurances, objects(actor), 0)
 
+
+# Return number of objects of 'objtype' is inside 'obj', where
+# 'objtype' is a string.
+def otypeinobj(obj, otype):
+    return reduce(lambda accu, o: objtype(o) == otype and accu + 1 or accu, objects(obj), 0)
