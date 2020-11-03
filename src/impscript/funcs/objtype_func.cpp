@@ -20,7 +20,7 @@ std::shared_ptr<Imp::RuntimeValue> ObjTypeFunc::EvalFuncCall(const std::vector<s
     if(dynamic_cast<ImpObject*>(arg1.get()))
     {
         auto obj = std::dynamic_pointer_cast<ImpObject>(arg1)->Entity(where);
-        return std::make_shared<Imp::StringValue>(GetItemTypeName(obj));
+        return std::make_shared<Imp::StringValue>(ToLower(GetItemTypeName(obj)));
     }
     else
     {

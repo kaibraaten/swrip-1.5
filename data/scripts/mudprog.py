@@ -10,26 +10,28 @@ def ovnuminv(actor, objvnum):
     def count_occurances(accu, obj):
         if not equipped(obj) and vnum(obj) == objvnum:
             accu = accu + count(obj)
-
         return accu
-
     return reduce(count_occurances, objects(actor), 0)
 
-# Return number of objects with vnum == objvnum carried by actor.
-# Note the difference between ovnumcarry() and ovnuminv().
-# ovnuminv() skips past equipped items, while ovnumcarry()
-# looks at every object.
-def ovnumcarry(actor, objvnum):
+# Return number of objects with vnum == objvnum in container.
+# If container is a character, then return ALL items whether
+# they're equipped or not
+#
+# Replaces ovnumcarry, ovnuminobj, iscarrying, ovnumroom
+def ovnumincontainer(container, objvnum):
     def count_occurances(accu, obj):
         if vnum(obj) == objvnum:
             accu = accu + count(obj)
-
         return accu
+    return reduce(count_occurances, objects(container), 0)
 
-    return reduce(count_occurances, objects(actor), 0)
-
-
-# Return number of objects of 'objtype' is inside 'obj', where
-# 'objtype' is a string.
-def otypeinobj(obj, otype):
-    return reduce(lambda accu, o: objtype(o) == otype and accu + 1 or accu, objects(obj), 0)
+# Return number of instances obj objects with a certain item type
+# in a container.
+#
+# Replaces otypeinobj, otypecarry, otyperoom
+def otypeincontainer(obj, otype):
+    def count_occurances(accu, o):
+        if objtype(o) == otype:
+            accu = accu + count(o)
+        return accu
+    return reduce(count_occurances, objects(obj), 0)

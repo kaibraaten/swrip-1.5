@@ -57,4 +57,4 @@ def jsp_on_greet(mob, actor):
 
         if skill(actor, "grip"):
             wait(2.0)
-            say(mob, "If your want to practice your grip skill, I can try disarming you when you say DISARM ME.")
+            say(mob, "If you want to practice your grip skill, I can try disarming you when you say DISARM ME.")
