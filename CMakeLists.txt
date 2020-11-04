@@ -580,6 +580,7 @@ src/impscript/funcs/echoaround_func.cpp
 src/impscript/funcs/equip_func.cpp
 src/impscript/funcs/equipped_func.cpp
 src/impscript/funcs/exit_func.cpp
+src/impscript/funcs/getdata_func.cpp
 src/impscript/funcs/getroom_func.cpp
 src/impscript/funcs/inroom_func.cpp
 src/impscript/funcs/interpret_func.cpp
@@ -591,6 +592,7 @@ src/impscript/funcs/objects_func.cpp
 src/impscript/funcs/objtype_func.cpp
 src/impscript/funcs/random_func.cpp
 src/impscript/funcs/say_func.cpp
+src/impscript/funcs/setdata_func.cpp
 src/impscript/funcs/skill_func.cpp
 src/impscript/funcs/spawnobj_func.cpp
 src/impscript/funcs/transfer_func.cpp

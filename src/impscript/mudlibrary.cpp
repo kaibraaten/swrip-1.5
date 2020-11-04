@@ -7,6 +7,7 @@
 #include "impscript/funcs/equip_func.hpp"
 #include "impscript/funcs/equipped_func.hpp"
 #include "impscript/funcs/exit_func.hpp"
+#include "impscript/funcs/getdata_func.hpp"
 #include "impscript/funcs/getroom_func.hpp"
 #include "impscript/funcs/inroom_func.hpp"
 #include "impscript/funcs/interpret_func.hpp"
@@ -18,6 +19,7 @@
 #include "impscript/funcs/objtype_func.hpp"
 #include "impscript/funcs/random_func.hpp"
 #include "impscript/funcs/say_func.hpp"
+#include "impscript/funcs/setdata_func.hpp"
 #include "impscript/funcs/skill_func.hpp"
 #include "impscript/funcs/spawnobj_func.hpp"
 #include "impscript/funcs/transfer_func.hpp"
@@ -34,6 +36,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("equip", std::make_shared<EquipFunc>());
     Assign("equipped", std::make_shared<EquippedFunc>());
     Assign("exit", std::make_shared<ExitFunc>()); // Override default
+    Assign("getdata", std::make_shared<GetDataFunc>());
     Assign("getroom", std::make_shared<GetRoomFunc>());
     Assign("inroom", std::make_shared<InRoomFunc>());
     Assign("interpret", std::make_shared<InterpretFunc>());
@@ -45,6 +48,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("objtype", std::make_shared<ObjTypeFunc>());
     Assign("random", std::make_shared<RandomFunc>());
     Assign("say", std::make_shared<SayFunc>());
+    Assign("setdata", std::make_shared<SetDataFunc>());
     Assign("skill", std::make_shared<SkillFunc>());
     Assign("spawnobj", std::make_shared<SpawnObjFunc>());
     Assign("transfer", std::make_shared<TransferFunc>());

@@ -23,6 +23,7 @@
 #include <cassert>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
+#include <imp/runtime/runtimescope.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
@@ -49,6 +50,7 @@
 struct Character::Impl
 {
     int TopLevel = 0;
+    std::shared_ptr<Imp::RuntimeScope> RuntimeData = std::make_shared<Imp::RuntimeScope>();
     std::list<std::shared_ptr<Affect>> Affects;
     std::list<std::shared_ptr<Object>> Objects;
     std::list<std::shared_ptr<Timer>> Timers;
@@ -140,6 +142,11 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
 Character::~Character()
 {
 
+}
+
+std::shared_ptr<Imp::RuntimeScope> Character::RuntimeData() const
+{
+    return pImpl->RuntimeData;
 }
 
 int Character::TopLevel() const

@@ -28,6 +28,27 @@ namespace Imp
 
     }
 
+    std::list<std::string> RuntimeScope::Serialize() const
+    {
+        std::list<std::string> data;
+
+        if(pImpl->Outer != nullptr)
+        {
+            auto outerData = pImpl->Outer->Serialize();
+            data.insert(data.begin(),
+                        outerData.begin(),
+                        outerData.end());
+        }
+
+        for(const auto &tuple : pImpl->decls)
+        {
+            std::string line = tuple.first + " = " + tuple.second->ShowInfo();
+            data.push_back(line);
+        }
+
+        return data;
+    }
+    
     void RuntimeScope::Assign(const std::string &id, std::shared_ptr<RuntimeValue> value)
     {
         pImpl->decls[id] = value;

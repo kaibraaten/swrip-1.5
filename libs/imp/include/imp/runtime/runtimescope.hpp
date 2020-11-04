@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <list>
 
 namespace Imp
 {
@@ -17,6 +18,8 @@ namespace Imp
         void Assign(const std::string &id, std::shared_ptr<RuntimeValue> value);
         std::shared_ptr<RuntimeValue> Find(const std::string &id, const ImpSyntax *where);
 
+        std::list<std::string> Serialize() const;
+        
     private:
         struct Impl;
         std::unique_ptr<Impl> pImpl;

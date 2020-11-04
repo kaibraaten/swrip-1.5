@@ -21,11 +21,16 @@ def on_test2(room, actor):
         echo(actor, "  No objects.")
 
 def on_test(room, actor):
-    for n in range(0, 10):
-        echo(actor, "T minus " + str(10 - n) + " and counting.")
-        wait(1.5)
-        
-    echo(actor, "Ignition!")
+    inner = {"lol": "lulz", "foo": 123}
+    data = {"name": str(actor), "inner": inner, "inroom": vnum(room)}
+    setdata(actor, "data", data)
+    setdata(actor, "inroom", vnum(room))
+    echo(actor, "You're in " + str(getdata(actor, "inroom")))
+    #for n in range(0, 2):
+    #    echo(actor, "T minus " + str(10 - n) + " and counting.")
+    #    wait(1.5)
+    #    
+    #echo(actor, "Ignition!")
 
 def test_greet(mob, actor):
     emotes = ["seems happy.", "farts so loud that the room shakes.", "is thirsty."]

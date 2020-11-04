@@ -309,6 +309,14 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
                                            std::make_shared<ImpCharacter>(ch)
                                        };
                                    on_test->EvalFuncCall(params, program.get());
+/*
+                                   auto environment = scope->Serialize();
+
+                                   for(auto item : environment)
+                                   {
+                                       Log->Info("%s", item.c_str());
+                                   }
+*/
                                }
                                else
                                {
@@ -328,6 +336,15 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
             }
             
             ch->Echo("%s\t%s\r\n", script.Module.c_str(), script.Body.front().c_str());
+        }
+    }
+    else if(StrCmp(argument, "myscope") == 0)
+    {
+        auto environment = ch->RuntimeData()->Serialize();
+
+        for(auto item : environment)
+        {
+            ch->Echo("%s\r\n", item.c_str());
         }
     }
     else

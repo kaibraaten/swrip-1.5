@@ -36,6 +36,11 @@
 #include "mprog.hpp"
 #include "stats.hpp"
 
+namespace Imp
+{
+    class RuntimeScope;
+}
+
 class Character
 {
 public:
@@ -68,6 +73,8 @@ public:
 
     int TopLevel() const;
     void TopLevel(int newLevel);
+
+    std::shared_ptr<Imp::RuntimeScope> RuntimeData() const;
     
     // Player AND mob
     std::function<bool(std::shared_ptr<Character>)> spec_fun;
