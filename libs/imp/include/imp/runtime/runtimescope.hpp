@@ -17,7 +17,7 @@ namespace Imp
         virtual ~RuntimeScope();
         void Assign(const std::string &id, std::shared_ptr<RuntimeValue> value);
         std::shared_ptr<RuntimeValue> Find(const std::string &id, const ImpSyntax *where);
-
+        bool Exists(const std::string &id) const;
         std::list<std::string> Serialize() const;
         
     private:

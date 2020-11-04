@@ -1,6 +1,7 @@
 #include <imp/utility.hpp>
 #include <imp/runtime/stringvalue.hpp>
 #include <imp/runtime/runtimescope.hpp>
+#include <imp/runtime/nonevalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/funcs/getdata_func.hpp"
 #include "character.hpp"
@@ -37,5 +38,12 @@ std::shared_ptr<Imp::RuntimeValue> GetDataFunc::EvalFuncCall(const std::vector<s
         Imp::RuntimeValue::RuntimeError("Type error in getdata() param 2.", where);
     }
 
-    return ch->RuntimeData()->Find(key, where);
+    if(ch->RuntimeData()->Exists(key))
+    {
+        return ch->RuntimeData()->Find(key, where);
+    }
+    else
+    {
+        return std::make_shared<Imp::NoneValue>();
+    }
 }

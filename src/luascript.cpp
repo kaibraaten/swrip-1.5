@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <cassert>
+#include <imp/runtime/runtimescope.hpp>
 #include "mud.hpp"
 #include "luascript.hpp"
 #include "log.hpp"
@@ -1053,6 +1054,18 @@ static void LuaPushCharacterStats(lua_State *L, std::shared_ptr<Character> ch)
     LuaPushStats(L, &ch->StatMods, "StatModifiers");
 }
 
+static void LuaPushRuntimeData(lua_State *L, std::shared_ptr<Imp::RuntimeScope> scope)
+{
+    auto data = scope->Serialize();
+    auto pushData = [](lua_State *luaState, size_t idx, std::string line)
+                    {
+                        lua_pushinteger(luaState, idx);
+                        lua_pushstring(luaState, line.c_str());
+                        lua_settable(luaState, -3);
+                    };
+    LuaPushCollection(L, data, "RuntimeData", pushData);
+}
+
 void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       std::function<void(lua_State *, std::shared_ptr<Character>)> pushExtra)
 {
@@ -1094,6 +1107,8 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaPushCharacterAffects(L, ch->Affects());
     LuaPushObjects(L, ch->Objects(), "Inventory");
 
+    LuaPushRuntimeData(L, ch->RuntimeData());
+    
     pushExtra(L, ch);
     
     ReEquipCharacter(ch);

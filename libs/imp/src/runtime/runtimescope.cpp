@@ -73,4 +73,22 @@ namespace Imp
             return nullptr;
         }
     }
+
+    bool RuntimeScope::Exists(const std::string &id) const
+    {
+        auto iter = pImpl->decls.find(id);
+
+        if(iter != pImpl->decls.end())
+        {
+            return true;
+        }
+        else if(pImpl->Outer != nullptr)
+        {
+            return pImpl->Outer->Exists(id);
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
