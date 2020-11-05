@@ -23,10 +23,16 @@ def on_test2(room, actor):
         echo(actor, "  No objects.")
 
 def on_test(room, actor):
-    quest = get_zim_bottle_quest()
-    echo(actor, str(quest))
-    setqueststage(actor, quest, 10)
+    quest = get_zim_kill_vermin()
+    currentstage = getqueststage(actor, quest)
 
+    if currentstage == None:
+        echo(actor, str(quest))
+        startquest(actor, quest)
+        setqueststage(actor, quest, 20)
+    else:
+        echo(actor, "Already doing that quest.")
+        
 def test_greet(mob, actor):
     emotes = ["seems happy.", "farts so loud that the room shakes.", "is thirsty."]
     room = inroom(mob)
