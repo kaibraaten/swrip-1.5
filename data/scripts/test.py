@@ -1,3 +1,5 @@
+from quest.zim import *
+
 def on_test2(room, actor):
     echo(actor, "Characters in " + str(room) + " (vnum " + str(vnum(room)) + "):")
 
@@ -21,14 +23,10 @@ def on_test2(room, actor):
         echo(actor, "  No objects.")
 
 def on_test(room, actor):
-    setdata(actor, "foo", 1)
-    setdata(actor, "lol", [None, {"boo": [2.4, 1]}])
-    a = getdata(actor, "lol")
-    if a:
-        echo(actor, "Found it: " + str(a))
-    else:
-        echo(actor, "No dice.")
-        
+    quest = get_zim_bottle_quest()
+    echo(actor, str(quest))
+    setqueststage(actor, quest, 10)
+
 def test_greet(mob, actor):
     emotes = ["seems happy.", "farts so loud that the room shakes.", "is thirsty."]
     room = inroom(mob)

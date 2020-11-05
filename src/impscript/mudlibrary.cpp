@@ -6,6 +6,7 @@
 #include "impscript/funcs/echoaround_func.hpp"
 #include "impscript/funcs/equip_func.hpp"
 #include "impscript/funcs/equipped_func.hpp"
+#include "impscript/funcs/error_func.hpp"
 #include "impscript/funcs/exit_func.hpp"
 #include "impscript/funcs/getdata_func.hpp"
 #include "impscript/funcs/getroom_func.hpp"
@@ -35,6 +36,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("echoaround", std::make_shared<EchoAroundFunc>());
     Assign("equip", std::make_shared<EquipFunc>());
     Assign("equipped", std::make_shared<EquippedFunc>());
+    Assign("error", std::make_shared<ErrorFunc>());
     Assign("exit", std::make_shared<ExitFunc>()); // Override default
     Assign("getdata", std::make_shared<GetDataFunc>());
     Assign("getroom", std::make_shared<GetRoomFunc>());

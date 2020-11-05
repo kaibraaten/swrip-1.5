@@ -579,6 +579,7 @@ src/impscript/funcs/echo_func.cpp
 src/impscript/funcs/echoaround_func.cpp
 src/impscript/funcs/equip_func.cpp
 src/impscript/funcs/equipped_func.cpp
+src/impscript/funcs/error_func.cpp
 src/impscript/funcs/exit_func.cpp
 src/impscript/funcs/getdata_func.cpp
 src/impscript/funcs/getroom_func.cpp

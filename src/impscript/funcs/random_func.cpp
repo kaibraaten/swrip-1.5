@@ -15,7 +15,7 @@ std::shared_ptr<Imp::RuntimeValue> RandomFunc::EvalFuncCall(const std::vector<st
     Imp::CheckNumParams(actualParams, 1, "random", where);
     auto impList = actualParams[0];
     
-    if((dynamic_cast<Imp::ListValue*>(impList.get())))
+    if(dynamic_cast<Imp::ListValue*>(impList.get()))
     {
         auto lst = std::dynamic_pointer_cast<Imp::ListValue>(impList)->Value();
 

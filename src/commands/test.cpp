@@ -347,6 +347,11 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("%s\r\n", item.c_str());
         }
     }
+    else if(StrCmp(argument, "wipescope") == 0)
+    {
+        ch->RuntimeData(std::make_shared<Imp::RuntimeScope>());
+        ch->Echo("Ok.\r\n");
+    }
     else
     {
         ch->Echo("Unknown argument.\r\n");
