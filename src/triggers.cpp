@@ -771,7 +771,7 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
     return false;
 }
 
-static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
+std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
 {
     auto standardLib = std::make_shared<Imp::StandardLibrary>();
     auto mudLib = std::make_shared<MudLibrary>(standardLib);
@@ -780,8 +780,8 @@ static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     return globalScope;
 }
 
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
-                                                     const std::list<std::string> &code)
+std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
+                                              const std::list<std::string> &code)
 {
     auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);

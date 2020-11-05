@@ -14,6 +14,7 @@
 #include "race.hpp"
 #include "protomob.hpp"
 #include "repos/objectrepository.hpp"
+#include "triggers.hpp"
 
 lua_State *LuaMasterState = nullptr;
 
@@ -1654,6 +1655,13 @@ std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::st
     return mobs;
 }
 
+static void LoadRuntimeData(lua_State *L, size_t idx,
+                            std::vector<std::string> *expressions)
+{
+    std::string expr = lua_tostring(L, -1);
+    expressions->push_back(expr);
+}
+
 void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       std::function<void(lua_State *, std::shared_ptr<Character>)> loadExtra)
 {
@@ -1740,6 +1748,14 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
         }
     }
 
+    std::vector<std::string> expressions;
+    LuaLoadArray(L, "RuntimeData", LoadRuntimeData, &expressions);
+    std::list<std::string> code(expressions.begin(), expressions.end());
+    auto program = ParseImpProgram("char " + ch->Name + " runtimedata", code);
+    auto scope = std::make_shared<Imp::RuntimeScope>();
+    program->Eval(scope);
+    ch->RuntimeData(scope);
+    
     loadExtra(L, ch);
 }
 

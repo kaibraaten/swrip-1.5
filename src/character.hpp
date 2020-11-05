@@ -75,6 +75,7 @@ public:
     void TopLevel(int newLevel);
 
     std::shared_ptr<Imp::RuntimeScope> RuntimeData() const;
+    void RuntimeData(std::shared_ptr<Imp::RuntimeScope> scope);
     
     // Player AND mob
     std::function<bool(std::shared_ptr<Character>)> spec_fun;

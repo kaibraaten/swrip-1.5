@@ -149,6 +149,11 @@ std::shared_ptr<Imp::RuntimeScope> Character::RuntimeData() const
     return pImpl->RuntimeData;
 }
 
+void Character::RuntimeData(std::shared_ptr<Imp::RuntimeScope> scope)
+{
+    pImpl->RuntimeData = scope;
+}
+
 int Character::TopLevel() const
 {
     if(!IsNpc()
