@@ -20,7 +20,7 @@ def get_zim_kill_vermin():
 
     stage10 = addqueststage(quest, 10)
     setlogentry(stage10, "Zim wants me to kill pests in the sewers.")
-    objective1 = addobjective(stage10, 1, "Kill pests.", 10)
+    objective1 = addobjective(stage10, 1, "Kill pests", 3)
 
     stage20 = addqueststage(quest, 20)
     setlogentry(stage20, "I should inform Zim of my success.")

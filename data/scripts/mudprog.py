@@ -25,13 +25,13 @@ def ovnumincontainer(container, objvnum):
         return accu
     return reduce(count_occurances, objects(container), 0)
 
-# Return number of instances obj objects with a certain item type
+# Return number of instances of objects with a certain item type
 # in a container.
 #
 # Replaces otypeinobj, otypecarry, otyperoom
-def otypeincontainer(obj, otype):
+def otypeincontainer(container, otype):
     def count_occurances(accu, o):
         if objtype(o) == otype:
             accu = accu + count(o)
         return accu
-    return reduce(count_occurances, objects(obj), 0)
+    return reduce(count_occurances, objects(container), 0)
