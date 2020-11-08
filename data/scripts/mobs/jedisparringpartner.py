@@ -1,7 +1,7 @@
 from python import *
 from mudprog import *
 
-def jsp_on_rand(mob):
+def on_rand(mob):
     # Load up and replace lightsaber battery every now and then.
     def replace_battery():
         batteryvnum = 10324
@@ -36,7 +36,7 @@ def jsp_on_rand(mob):
     if random(range(1, 21)) == 1:
         replace_battery()
     
-def jsp_on_speech(mob, actor, txt):
+def on_speech(mob, actor, txt):
     if skill(actor, "grip"):
         if isfighting(mob, actor):
             say(mob, "En guarde!")
@@ -46,7 +46,7 @@ def jsp_on_speech(mob, actor, txt):
     else:
         say(mob, "You'd better learn the GRIP skill first.")
 
-def jsp_on_greet(mob, actor):
+def on_greet(mob, actor):
     if not isnpc(actor):
         wait(2.0)
         say(mob, "Welcome, I'm your sparring partner today.")

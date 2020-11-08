@@ -1,5 +1,5 @@
 # Scripts for Zim the Failed Jedi
-def zim_on_greet(zim, actor):
+def on_greet(zim, actor):
     if not isnpc(actor) and isjedi(actor):
         if level(actor) >= 25:
             wait(1.0)
@@ -18,7 +18,7 @@ def zim_on_greet(zim, actor):
     else:
         echo(actor, str(zim) + " looks you over disapprovingly.")
 
-def zim_on_rand(zim):
+def on_rand(zim):
     num = random(range(1, 4))
     if num == 1:
         echoaround(zim, str(zim) + " hiccups loudly.")

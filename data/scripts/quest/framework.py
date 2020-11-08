@@ -52,7 +52,7 @@ def setqueststage(actor, quest, stage):
     id = getquestid(quest)
 
     if qdata[id] == None:
-        qdata[id] = {"stage": {"id": 0, "objectives": {}}}
+        error("setqueststage: Actor has not started quest.")
         
     qdata[id]["stage"]["id"] = stage
     questupdate(actor, quest["stages"][str(stage)]["logentry"])
@@ -88,11 +88,16 @@ def startquest(actor, quest):
     
     if pquests[getquestid(quest)] != None:
         error("Player already on quest.")
+    else:
+        pquests[getquestid(quest)] = {"stage": {"id": 0, "objectives": {}}}
         
     questupdate(actor, "Quest started: " + quest["title"])
     setqueststage(actor, quest, firststage)
 
 def updateobjective(actor, quest, stageid, objectiveid):
+    if getdata(actor, "quests") == None:
+        return
+    
     qdata = getdata(actor, "quests")[getquestid(quest)]
 
     if qdata != None and qdata["stage"]["id"] == stageid:
@@ -119,9 +124,12 @@ def updateobjective(actor, quest, stageid, objectiveid):
             questupdate(actor, otext)
 
 def stagecompleted(actor, quest, stageid):
+    if getdata(actor, "quests") == None or getdata(actor, "quests")[getquestid(quest)] == None:
+        return False
+    
     for o in quest["stages"][str(stageid)]["objectives"]:
         oid = str(o)
-        times_completed = int(getdata(actor, "quests")[getquestid(quest)]["stage"]["objectives"][oid]["times_completed"])
+        times_completed = getdata(actor, "quests")[getquestid(quest)]["stage"]["objectives"][oid]["times_completed"]
         times_to_complete = quest["stages"][str(stageid)]["objectives"][oid]["times_to_complete"]
 
         if times_completed < times_to_complete:

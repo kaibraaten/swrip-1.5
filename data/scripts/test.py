@@ -2,30 +2,37 @@ from quest.zim import *
 
 def on_test(room, actor):
     quest = get_zim_kill_vermin()
-    currentstage = getqueststage(actor, quest)
+    def some():
+        currentstage = getqueststage(actor, quest)
 
-    if currentstage == None:
-        echo(actor, str(quest))
-        wait(1.0)
-        startquest(actor, quest)
+        if currentstage == None:
+            echo(actor, str(quest))
+            wait(1.0)
+            startquest(actor, quest)
 
-        for i in range(0, 10):
-            if stagecompleted(actor, quest, 10):
-                wait(1.0)
-                setqueststage(actor, quest, 20)
-            else:
-                wait(1.0)
-                updateobjective(actor, quest, 10, 1)
+            for i in range(0, 10):
+                if stagecompleted(actor, quest, 10):
+                    setqueststage(actor, quest, 20)
+                else:
+                    wait(1.0)
+                    updateobjective(actor, quest, 10, 1)
 
-        for i in range(0, 10):
-            if stagecompleted(actor, quest, 20):
-                echo(actor, "Already completed that stage.")
-            else:
-                wait(1.0)
-                updateobjective(actor, quest, 20, 1)
-    else:
-        echo(actor, "Already doing that quest.")
+            for i in range(0, 10):
+                if stagecompleted(actor, quest, 20):
+                    echo(actor, "Already completed that stage.")
+                else:
+                    wait(1.0)
+                    updateobjective(actor, quest, 20, 1)
+        else:
+            echo(actor, "Already doing that quest.")
 
+    def thing():
+        setdata(actor, "quests", {})
+        updateobjective(actor, quest, 10, 1)
+
+    #some()
+    thing()
+    
 def on_test2(room, actor):
     echo(actor, "Characters in " + str(room) + " (vnum " + str(vnum(room)) + "):")
 
