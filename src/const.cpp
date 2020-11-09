@@ -3602,7 +3602,7 @@ const std::array<const char * const, Flag::MAX> ChannelNames =
 {
     "Auction",
     "Chat",
-    "_02",
+    "Script",
     "ImmTalk",
     "Music",
     "Ask",

@@ -169,6 +169,7 @@ enum class LogType
     High,
     Comm,
     All,
+    Script,
     Max
 };
 
@@ -1738,7 +1739,7 @@ namespace Flag
  */
 constexpr auto CHANNEL_AUCTION = BV00;
 constexpr auto CHANNEL_CHAT = BV01;
-
+constexpr auto CHANNEL_SCRIPT = BV02;
 constexpr auto CHANNEL_IMMTALK = BV03;
 constexpr auto CHANNEL_MUSIC = BV04;
 constexpr auto CHANNEL_ASK = BV05;

@@ -1,5 +1,6 @@
 #include <imp/runtime/nonevalue.hpp>
 #include "impscript/mudlibrary.hpp"
+#include "impscript/funcs/addcredits_func.hpp"
 #include "impscript/funcs/characters_func.hpp"
 #include "impscript/funcs/count_func.hpp"
 #include "impscript/funcs/echo_func.hpp"
@@ -16,6 +17,7 @@
 #include "impscript/funcs/isjedi_func.hpp"
 #include "impscript/funcs/isnpc_func.hpp"
 #include "impscript/funcs/level_func.hpp"
+#include "impscript/funcs/log_func.hpp"
 #include "impscript/funcs/objects_func.hpp"
 #include "impscript/funcs/objtype_func.hpp"
 #include "impscript/funcs/random_func.hpp"
@@ -24,12 +26,14 @@
 #include "impscript/funcs/skill_func.hpp"
 #include "impscript/funcs/spawnobj_func.hpp"
 #include "impscript/funcs/transfer_func.hpp"
+#include "impscript/funcs/type_func.hpp"
 #include "impscript/funcs/vnum_func.hpp"
 #include "impscript/funcs/wait_func.hpp"
 
 MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     : Imp::RuntimeScope(outer)
 {
+    Assign("addcredits", std::make_shared<AddCreditsFunc>());
     Assign("characters", std::make_shared<CharactersFunc>());
     Assign("count", std::make_shared<CountFunc>());
     Assign("echo", std::make_shared<EchoFunc>());
@@ -46,6 +50,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("isjedi", std::make_shared<IsJediFunc>());
     Assign("isnpc", std::make_shared<IsNpcFunc>());
     Assign("level", std::make_shared<LevelFunc>());
+    Assign("log", std::make_shared<LogFunc>());
     Assign("objects", std::make_shared<ObjectsFunc>());
     Assign("objtype", std::make_shared<ObjTypeFunc>());
     Assign("random", std::make_shared<RandomFunc>());
@@ -54,6 +59,7 @@ MudLibrary::MudLibrary(std::shared_ptr<Imp::RuntimeScope> outer)
     Assign("skill", std::make_shared<SkillFunc>());
     Assign("spawnobj", std::make_shared<SpawnObjFunc>());
     Assign("transfer", std::make_shared<TransferFunc>());
+    Assign("type", std::make_shared<TypeFunc>());
     Assign("vnum", std::make_shared<VnumFunc>());
     Assign("wait", std::make_shared<WaitFunc>());
     

@@ -10,7 +10,7 @@ def makequest(id, title):
     return {"id": id, "title": title, "stages": {}}
 
 def addqueststage(quest, stageidx):
-    stage = {"objectives": {}, "completion": False}
+    stage = {"objectives": {}, "completion": False, "rewards": {"credits": None, "items": None}}
     quest["stages"][str(stageidx)] = stage
     return stage
 
@@ -23,6 +23,14 @@ def setcompletionstage(stage):
 def setlogentry(stage, txt):
     stage["logentry"] = txt
 
+def addstagereward(stage, reward):
+    if type(reward) == "int":
+        stage["rewards"]["credits"] = reward
+    elif type(reward) == "list":
+        stage["rewards"]["items"] = reward
+    else:
+        error("Type error for addstagereward() param 2: " + type(reward))
+
 def addobjective(stage, oid, txt, times_to_complete):
     if times_to_complete < 1:
         error("addobjective(): times_to_complete must be > 0.")
@@ -34,12 +42,31 @@ def addobjective(stage, oid, txt, times_to_complete):
 def getquestid(quest):
     return quest["id"]
 
+def getquesttitle(quest):
+    return quest["title"]
+
 ###############################################################
 #
 # Functions to manipulate characters.
 #
 ###############################################################
 def setqueststage(actor, quest, stage):
+    def issuerewards(rewards):
+        if rewards["credits"]:
+            amount = rewards["credits"]
+            questupdate(actor, "Reward: You receive " + str(amount) + " credits.")
+            addcredits(actor, amount)
+
+        if rewards["items"]:
+            for ovnum in rewards["items"]:
+                obj = spawnobj(ovnum)
+                if obj != None:
+                    questupdate(actor, "Reward: You receive " + str(obj) + ".")
+                    transfer(obj, actor)
+
+    if isnpc(actor):
+        return
+
     if quest["stages"][str(stage)] == None:
         error("Quest " + str(getquestid(quest)) + " does not have stage " + str(stage) + ".")
         
@@ -53,7 +80,16 @@ def setqueststage(actor, quest, stage):
 
     if qdata[id] == None:
         error("setqueststage: Actor has not started quest.")
-        
+
+    currentstage = qdata[id]["stage"]["id"]
+
+    if currentstage == stage:
+        return
+
+    if currentstage and not stagecompleted(actor, quest, currentstage):
+        log("setquestage: Attempt to change stage for " + str(actor) + " but current stage not completed.")
+        return
+
     qdata[id]["stage"]["id"] = stage
     questupdate(actor, quest["stages"][str(stage)]["logentry"])
     objectives = quest["stages"][str(stage)]["objectives"]
@@ -68,17 +104,28 @@ def setqueststage(actor, quest, stage):
 
         questupdate(actor, "New objective: " + otext)
 
+    issuerewards(quest["stages"][str(stage)]["rewards"])
+
 def getqueststage(actor, quest):
+    if isnpc(actor):
+        return
+
     qdata = getdata(actor, "quests")
-    if qdata == None:
+    if qdata == None or qdata[getquestid(quest)] == None:
         return None
 
     return qdata[getquestid(quest)]["stage"]
 
 def questupdate(actor, message):
+    if isnpc(actor):
+        return
+
     echo(actor, "&B[QUEST] " + message + "&d")
     
 def startquest(actor, quest):
+    if isnpc(actor):
+        return
+
     firststage = min(map(lambda x: int(x), list(quest["stages"])))
     pquests = getdata(actor, "quests")
     
@@ -89,12 +136,38 @@ def startquest(actor, quest):
     if pquests[getquestid(quest)] != None:
         error("Player already on quest.")
     else:
-        pquests[getquestid(quest)] = {"stage": {"id": 0, "objectives": {}}}
+        pquests[getquestid(quest)] = {"stage": {"id": None, "objectives": {}}}
         
     questupdate(actor, "Quest started: " + quest["title"])
     setqueststage(actor, quest, firststage)
 
+def queststarted(actor, quest):
+    if isnpc(actor):
+        return False
+
+    pquests = getdata(actor, "quests")
+
+    if pquests != None and pquests[getquestid(quest)] != None:
+        return True
+    else:
+        return False
+
+def questcompleted(actor, quest):
+    if isnpc(actor):
+        return
+
+    pquests = getdata(actor, "quests")
+
+    if pquests == None or pquests[getquestid(quest)] == None:
+        return False
+
+    stageid = pquests[getquestid(quest)]["stage"]["id"]
+    return quest["stages"][str(stageid)]["completion"]
+
 def updateobjective(actor, quest, stageid, objectiveid):
+    if isnpc(actor):
+        return
+
     if getdata(actor, "quests") == None:
         return
     
@@ -124,6 +197,9 @@ def updateobjective(actor, quest, stageid, objectiveid):
             questupdate(actor, otext)
 
 def stagecompleted(actor, quest, stageid):
+    if isnpc(actor):
+        return False
+
     if getdata(actor, "quests") == None or getdata(actor, "quests")[getquestid(quest)] == None:
         return False
     
@@ -136,3 +212,6 @@ def stagecompleted(actor, quest, stageid):
             return False
 
     return True
+
+def questinprogress(actor, quest):
+    return queststarted(actor, quest) and not questcompleted(actor, quest)

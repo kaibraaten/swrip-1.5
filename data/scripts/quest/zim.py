@@ -26,4 +26,10 @@ def get_zim_kill_vermin():
     setlogentry(stage20, "I should inform Zim of my success.")
     objective1 = addobjective(stage20, 1, "Return to Zim.", 1)
 
+    stage30 = addqueststage(quest, 30)
+    setlogentry(stage30, "I cleared out some pests in the Mos Eisley sewers.")
+    setcompletionstage(stage30)
+    addstagereward(stage30, 1000)
+    addstagereward(stage30, [25])
+
     return quest

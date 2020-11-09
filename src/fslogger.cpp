@@ -23,6 +23,7 @@ public:
     void Boot(const char *str, ...) override;
     void LogStringPlus(const std::string &str, LogType log_type, short level) override;
     void Info(const char *fmt, ...) override;
+    void Script(const char *fmt, ...) override;
 };
 
 /*
@@ -142,6 +143,10 @@ void FileSystemLogger::LogStringPlus(const std::string &str, LogType log_type, s
         ToChannel(buf, CHANNEL_COMM, "Comm", level);
         break;
 
+    case LogType::Script:
+        ToChannel(buf, CHANNEL_SCRIPT, "Script", level);
+        break;
+        
     case LogType::All:
         break;
 
@@ -178,6 +183,17 @@ void FileSystemLogger::LogStringPlus(const std::string &str, LogType log_type, s
             }
         }
     }
+}
+
+void FileSystemLogger::Script(const char *fmt, ...)
+{
+    char buf[MAX_STRING_LENGTH * 2];
+    va_list args;
+    va_start(args, fmt);
+    vsprintf(buf, fmt, args);
+    va_end(args);
+
+    LogStringPlus(buf, LogType::Script, LEVEL_LOG);
 }
 
 void FileSystemLogger::Info(const char *fmt, ...)

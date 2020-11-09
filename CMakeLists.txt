@@ -573,6 +573,7 @@ src/impscript/improom.cpp
 src/impscript/scriptrunner.cpp
 src/impscript/scriptscheduler.cpp
 src/impscript/threaddatavalue.cpp
+src/impscript/funcs/addcredits_func.cpp
 src/impscript/funcs/characters_func.cpp
 src/impscript/funcs/count_func.cpp
 src/impscript/funcs/echo_func.cpp
@@ -589,6 +590,7 @@ src/impscript/funcs/isfighting_func.cpp
 src/impscript/funcs/isjedi_func.cpp
 src/impscript/funcs/isnpc_func.cpp
 src/impscript/funcs/level_func.cpp
+src/impscript/funcs/log_func.cpp
 src/impscript/funcs/objects_func.cpp
 src/impscript/funcs/objtype_func.cpp
 src/impscript/funcs/random_func.cpp
@@ -597,6 +599,7 @@ src/impscript/funcs/setdata_func.cpp
 src/impscript/funcs/skill_func.cpp
 src/impscript/funcs/spawnobj_func.cpp
 src/impscript/funcs/transfer_func.cpp
+src/impscript/funcs/type_func.cpp
 src/impscript/funcs/vnum_func.cpp
 src/impscript/funcs/wait_func.cpp
 src/mpcommands/mpapplyb.cpp

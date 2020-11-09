@@ -16,6 +16,7 @@ public:
     virtual void Boot(const char *str, ...) __attribute__((format(printf, 2, 3))) = 0;
     virtual void LogStringPlus(const std::string &str, LogType log_type, short level) = 0;
     virtual void Info(const char *fmt, ...) __attribute__((format(printf, 2, 3))) = 0;
+    virtual void Script(const char *fmt, ...) __attribute__((format(printf, 2, 3))) = 0;
 };
 
 #endif

@@ -560,7 +560,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
         if((!IsImmortal(vch) && channel != CHANNEL_ARENA)
            || (vch->TopLevel() < SysData.LevelOfBuildChannel && channel == CHANNEL_BUILD)
            || (vch->TopLevel() < SysData.LevelOfLogChannel
-               && (channel == CHANNEL_LOG || channel == CHANNEL_COMM)))
+               && (channel == CHANNEL_LOG || channel == CHANNEL_COMM || channel == CHANNEL_SCRIPT)))
         {
             continue;
         }
