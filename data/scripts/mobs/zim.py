@@ -2,23 +2,12 @@
 from quest.zim import *
 
 def on_greet(zim, actor):
-    def checkquest(quest):
-        if questinprogress(actor, quest):
-            updateobjective(actor, quest, 20, 1)
-            setqueststage(actor, quest, 30)
-
-            if questcompleted(actor, quest):
-                #issuereward(actor, quest)
-                echo(actor, "Seems Zim forgot your reward.")
-
     if not isnpc(actor) and isjedi(actor):
-        quest = get_zim_kill_vermin()
-        checkquest(quest)
+        zim_kill_vermin_check_for_completion(actor)
 
-        if not queststarted(actor, quest):
+        if not queststarted(actor, zim_kill_vermin()):
             wait(1.0)
-            say(actor, "Hey " + str(actor) + ", could you do me a big favor?")
-            echo(actor, "[HINT] Say YES to begin quest.")
+            zim_kill_vermin_offer_quest(zim, actor)
         else:
             if level(actor) >= 25:
                 wait(1.0)
@@ -46,8 +35,6 @@ def on_rand(zim):
     else:
         echoaround(zim, str(zim) + " mutters something.")
 
+# Called by "speech yes" trigger.
 def on_speech(zim, actor, txt):
-    quest = get_zim_kill_vermin()
-
-    if not queststarted(actor, quest):
-        startquest(actor, quest)
+    zim_kill_vermin_quest_accepted(actor)

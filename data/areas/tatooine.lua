@@ -20895,10 +20895,7 @@ and gleaming.\
                ScriptType = "Imp", 
                Code = "from quest.zim import *\
 def on_death(rat, killer):\
-    quest = get_zim_kill_vermin()\
-    updateobjective(killer, quest, 10, 1)\
-    if stagecompleted(killer, quest, 10):\
-        setqueststage(killer, quest, 20)\
+    zim_kill_vermin_on_death(killer)\
 ", 
                Arguments = "100", 
                MudProgType = "death_prog", 

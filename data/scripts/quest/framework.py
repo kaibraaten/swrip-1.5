@@ -114,16 +114,16 @@ def getqueststage(actor, quest):
     if qdata == None or qdata[getquestid(quest)] == None:
         return None
 
-    return qdata[getquestid(quest)]["stage"]
+    return qdata[getquestid(quest)]["stage"]["id"]
 
 def questupdate(actor, message):
     if isnpc(actor):
         return
 
-    echo(actor, "&B[QUEST] " + message + "&d")
+    echo(actor, "&O[QUEST] " + message + "&d")
     
 def startquest(actor, quest):
-    if isnpc(actor):
+    if isnpc(actor) or queststarted(actor, quest):
         return
 
     firststage = min(map(lambda x: int(x), list(quest["stages"])))
@@ -215,3 +215,6 @@ def stagecompleted(actor, quest, stageid):
 
 def questinprogress(actor, quest):
     return queststarted(actor, quest) and not questcompleted(actor, quest)
+
+def stageinprogress(actor, quest, stageid):
+    return questinprogress(actor, quest) and getqueststage(actor, quest) == stageid
