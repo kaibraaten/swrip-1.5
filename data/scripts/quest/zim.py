@@ -27,7 +27,7 @@ def zim_kill_vermin():
     setlogentry(stage30, "I cleared out some pests in the Mos Eisley sewers.")
     setcompletionstage(stage30)
     addstagereward(stage30, 1000)
-    addstagereward(stage30, [25]) # Add item reward with vnum 25.
+    addstagereward(stage30, [10323]) # Add practice lightsaber
 
     return quest
 

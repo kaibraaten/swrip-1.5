@@ -377,6 +377,7 @@ std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_
 /*
  * Command functions.
  */
+DECLARE_CMD_FUN(do_questlog);
 DECLARE_CMD_FUN(do_upgradehome);
 DECLARE_CMD_FUN(do_addresident);
 DECLARE_CMD_FUN(do_remresident);

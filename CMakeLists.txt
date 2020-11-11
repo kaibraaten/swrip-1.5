@@ -398,6 +398,7 @@ src/commands/purge.cpp
 src/commands/push.cpp
 src/commands/put.cpp
 src/commands/quaff.cpp
+src/commands/questlog.cpp
 src/commands/quit.cpp
 src/commands/radar.cpp
 src/commands/rank.cpp
