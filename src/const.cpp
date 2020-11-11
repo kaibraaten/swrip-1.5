@@ -2643,38 +2643,38 @@ const std::array<const char * const, Flag::MAX> PcFlags =
 const std::array<const char * const, Flag::MAX> TrapFlags
 {
     "Room",
-        "Obj",
-        "Enter",
-        "Leave",
-        "Open",
-        "Close",
-        "Get",
-        "Put",
-        "Pick",
-        "Unlock",
-        "North",
-        "South",
-        "East",
-        "West",
-        "Up",
-        "Down",
-        "Examine",
-        "Northeast",
-        "Northwest",
-        "Southeast",
-        "Southwest",
-        "_21",
-        "_22",
-        "_23",
-        "_24",
-        "_25",
-        "_26",
-        "_27",
-        "_28",
-        "_29",
-        "_30",
-        "_31"
-        };
+    "Obj",
+    "Enter",
+    "Leave",
+    "Open",
+    "Close",
+    "Get",
+    "Put",
+    "Pick",
+    "Unlock",
+    "North",
+    "South",
+    "East",
+    "West",
+    "Up",
+    "Down",
+    "Examine",
+    "Northeast",
+    "Northwest",
+    "Southeast",
+    "Southwest",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
+};
 
 const std::array<const char * const, Flag::MAX> RisFlags =
 {
@@ -3028,8 +3028,8 @@ const std::array<const char * const, Flag::MAX> mprog_flags =
 {
     "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
     "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
-    "look", "exa", "zap", "get", "drop", "damage", "repair", "randiw",
-    "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
+    "look", "exa", "zap", "get", "drop", "damage", "repair", "spawn",
+    "_24", "pull", "push", "sleep", "rest", "leave", "script", "use"
 };
 
 const std::array<const char * const, Flag::MAX> SpellFlag =

@@ -2965,6 +2965,7 @@ std::unordered_map<int, const char *const> MudProgTypes =
     { REST_PROG, "rest_prog" },
     { LEAVE_PROG, "leave_prog" },
     { USE_PROG, "use_prog" },
+    { SPAWN_PROG, "spawn_prog" },
     { ERROR_PROG, "ERROR_PROG" }
 };
 

@@ -11,6 +11,7 @@
 #include <imp/runtime/runtimescope.hpp>
 #include <imp/parser/program.hpp>
 
+void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob);
 void MobProgActTrigger(const std::string &buf, std::shared_ptr<Character> mob,
                        std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, const Vo &vo);
 void MobProgBribeTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch, int amount);

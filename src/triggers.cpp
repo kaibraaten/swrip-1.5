@@ -891,6 +891,10 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMo
     {
         return { "on_time", { std::make_shared<ImpCharacter>(mob) } };
     }
+    else if(type == SPAWN_PROG)
+    {
+        return { "on_spawn", { std::make_shared<ImpCharacter>(mob) } };
+    }
     else
     {
         return { "UNSUPPORTED_TRIGGER_TYPE", {} };
@@ -1157,6 +1161,26 @@ static void MobProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Cha
             else
             {
                 MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
+        }
+    }
+}
+
+void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob)
+{
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & SPAWN_PROG)
+    {
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
+        {
+            if(mprg->type & SPAWN_PROG && mprg->SType == ScriptType::Imp)
+            {
+                std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, SPAWN_PROG);
+                auto funcName = data.first;
+                auto params = data.second;
+                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                    MakeScriptName(mob, SPAWN_PROG));
+                break;
             }
         }
     }

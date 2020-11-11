@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "protomob.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -77,6 +78,7 @@ void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
         CharacterToRoom(victim, ch->InRoom);
         Act(AT_IMMORT, "$n has created $N!", ch, NULL, victim, ActTarget::Room);
         ch->Echo("Ok.\r\n");
+        ImpScriptSpawnTrigger(victim);
     }
     else
     {

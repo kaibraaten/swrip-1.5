@@ -48,6 +48,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "exit.hpp"
+#include "triggers.hpp"
 
 static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
 static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3);
@@ -1579,7 +1580,17 @@ void ResetArea(std::shared_ptr<Area> pArea)
             EconomizeMobileGold(mob);
             level = urange(0, mob->TopLevel() - 2, LEVEL_AVATAR);
 
-            if(mob->VipFlags != 0 && pArea->Planet)
+            // Insert spawn trigger here
+            ImpScriptSpawnTrigger(mob);
+            
+            // Check if mob died in spawn trigger (then issue bug log,
+            // because having a mob that dies the moment it spawned must
+            // be an error.
+            if(CharacterDiedRecently(mob))
+            {
+                Log->Bug("ResetArea: Mob %d died when running spawn trigger.", pReset->Arg1);
+            }
+            else if(mob->VipFlags != 0 && pArea->Planet)
             {
                 pArea->Planet->Population++;
             }
