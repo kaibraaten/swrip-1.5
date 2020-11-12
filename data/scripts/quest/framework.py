@@ -136,7 +136,7 @@ def startquest(actor, quest):
     if pquests[getquestid(quest)] != None:
         error("Player already on quest.")
     else:
-        pquests[getquestid(quest)] = {"stage": {"id": None, "objectives": {}}}
+        makepquestdata(actor, quest)
         
     questupdate(actor, "Quest started: " + quest["title"])
     setqueststage(actor, quest, firststage)
@@ -145,9 +145,9 @@ def queststarted(actor, quest):
     if isnpc(actor):
         return False
 
-    pquests = getdata(actor, "quests")
+    pquest = getpquestdata(actor, quest)
 
-    if pquests != None and pquests[getquestid(quest)] != None:
+    if pquest != None:
         return True
     else:
         return False
@@ -156,22 +156,19 @@ def questcompleted(actor, quest):
     if isnpc(actor):
         return
 
-    pquests = getdata(actor, "quests")
+    pquest = getpquestdata(actor, quest)
 
-    if pquests == None or pquests[getquestid(quest)] == None:
+    if pquest == None:
         return False
 
-    stageid = pquests[getquestid(quest)]["stage"]["id"]
+    stageid = pquest["stage"]["id"]
     return quest["stages"][str(stageid)]["completion"]
 
 def updateobjective(actor, quest, stageid, objectiveid):
     if isnpc(actor):
         return
 
-    if getdata(actor, "quests") == None:
-        return
-    
-    qdata = getdata(actor, "quests")[getquestid(quest)]
+    qdata = getpquestdata(actor, quest)
 
     if qdata != None and qdata["stage"]["id"] == stageid:
         stage = qdata["stage"]
@@ -200,12 +197,12 @@ def stagecompleted(actor, quest, stageid):
     if isnpc(actor):
         return False
 
-    if getdata(actor, "quests") == None or getdata(actor, "quests")[getquestid(quest)] == None:
+    if getpquestdata(actor, quest) == None:
         return False
     
     for o in quest["stages"][str(stageid)]["objectives"]:
         oid = str(o)
-        times_completed = getdata(actor, "quests")[getquestid(quest)]["stage"]["objectives"][oid]["times_completed"]
+        times_completed = getpquestdata(actor, quest)["stage"]["objectives"][oid]["times_completed"]
         times_to_complete = quest["stages"][str(stageid)]["objectives"][oid]["times_to_complete"]
 
         if times_completed < times_to_complete:
@@ -218,3 +215,17 @@ def questinprogress(actor, quest):
 
 def stageinprogress(actor, quest, stageid):
     return questinprogress(actor, quest) and getqueststage(actor, quest) == stageid
+
+# Make entry in actor's data.
+def makepquestdata(actor, quest):
+    data = {"stage": {"id": None, "objectives": {}}, "title": getquesttitle(quest)}
+    if getdata(actor, "quests") == None:
+        setdata(actor, "quests", {})
+
+    qdata = getdata(actor, "quests")
+    qdata[getquestid(quest)] = data
+
+def getpquestdata(actor, quest):
+    data = getdata(actor, "quests")
+    if data:
+        return data[getquestid(quest)]
