@@ -568,6 +568,7 @@ src/commands/yell.cpp
 src/commands/zap.cpp
 src/commands/zones.cpp
 src/impscript/mudlibrary.cpp
+src/impscript/imp.cpp
 src/impscript/impcharacter.cpp
 src/impscript/impobject.cpp
 src/impscript/improom.cpp

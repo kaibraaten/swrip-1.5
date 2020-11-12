@@ -33,23 +33,14 @@
 #include "repos/shuttlerepository.hpp"
 #include "repos/arearepository.hpp"
 #include "repos/imprepository.hpp"
-#include <imp/scanner/scanner.hpp>
-#include <imp/runtime/standardlibrary.hpp>
-#include <imp/parser/program.hpp>
-#include <imp/except/impexception.hpp>
-#include <imp/runtime/stringvalue.hpp>
 #include <imp/runtime/functionvalue.hpp>
+#include "impscript/imp.hpp"
 #include "impscript/impcharacter.hpp"
-#include "impscript/mudlibrary.hpp"
 #include "impscript/improom.hpp"
-#include "impscript/impobject.hpp"
 #include "impscript/scriptrunner.hpp"
 #include "impscript/scriptscheduler.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
-static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
-                                                     const std::list<std::string> &code);
 
 void do_test(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -370,21 +361,4 @@ static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum)
     }
 
     return nullptr;
-}
-
-static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
-{
-    auto standardLib = std::make_shared<Imp::StandardLibrary>();
-    auto mudLib = std::make_shared<MudLibrary>(standardLib);
-    auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
-    globalScope->Assign("__scriptpath__", std::make_shared<Imp::StringValue>("data/scripts"));
-    return globalScope;
-}
-
-static std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname, const std::list<std::string> &code)
-{
-    auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
-    auto prog = Imp::Program::Parse(scanner);
-
-    return prog;
 }

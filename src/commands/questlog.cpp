@@ -1,8 +1,8 @@
 #include <imp/runtime/stringvalue.hpp>
 #include "mud.hpp"
-#include "triggers.hpp"
 #include "character.hpp"
 #include "impscript/impcharacter.hpp"
+#include "impscript/imp.hpp"
 
 void do_questlog(std::shared_ptr<Character> ch, std::string arguments)
 {

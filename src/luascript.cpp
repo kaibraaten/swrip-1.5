@@ -14,7 +14,7 @@
 #include "race.hpp"
 #include "protomob.hpp"
 #include "repos/objectrepository.hpp"
-#include "triggers.hpp"
+#include "impscript/imp.hpp"
 
 lua_State *LuaMasterState = nullptr;
 

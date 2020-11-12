@@ -8,8 +8,6 @@
 #include "types.hpp"
 #include "vo.hpp"
 #include <imp/runtime/runtimevalue.hpp>
-#include <imp/runtime/runtimescope.hpp>
-#include <imp/parser/program.hpp>
 
 void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob);
 void MobProgActTrigger(const std::string &buf, std::shared_ptr<Character> mob,
@@ -68,17 +66,9 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMo
 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpRoomProgData(std::shared_ptr<Room> room,
                                                                                            std::shared_ptr<Character> actor,
                                                                                            const Vo &vo, int type);
-void DispatchImpFunction(const std::string &funcName,
-                         std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
-                         const std::list<std::string> &code,
-                         const std::string &scriptname);
 std::list<std::string> SplitIntoLines(const std::string &comlist);
 std::string MakeScriptName(std::shared_ptr<Character> mob, int type);
 std::string MakeScriptName(std::shared_ptr<Object> obj, int type);
 std::string MakeScriptName(std::shared_ptr<Room> room, int type);
-
-std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
-std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
-                                              const std::list<std::string> &code);
 
 #endif

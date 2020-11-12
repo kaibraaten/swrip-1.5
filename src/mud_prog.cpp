@@ -53,6 +53,8 @@
 #include "impscript/scriptscheduler.hpp"
 #include "impscript/scriptrunner.hpp"
 #include "impscript/mudlibrary.hpp"
+#include "impscript/imp.hpp"
+
 //////////////////////////////////////////////////////
 #include "triggers.hpp"
 
