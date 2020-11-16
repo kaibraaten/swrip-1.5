@@ -1,6 +1,7 @@
 #ifndef _CERIS_ALGORITHMS_HPP_
 #define _CERIS_ALGORITHMS_HPP_
 
+#include <ranges>
 #include <algorithm>
 #include <iterator>
 #include <vector>
@@ -10,10 +11,9 @@ template<typename Container, typename UnaryPredicate>
 auto Filter(const Container &original, UnaryPredicate pred)
 {
     Container filteredElements;
-    copy_if(std::begin(original),
-            std::end(original),
-            std::back_inserter(filteredElements),
-            pred);
+    std::ranges::copy_if(original,
+                         std::back_inserter(filteredElements),
+                         pred);
     return filteredElements;
 }
 
@@ -35,36 +35,31 @@ auto RandomizeOrder(const Container &original)
     return randomized;
 }
 
-template<typename Container, typename UnaryPredicate>
-auto Find(const Container &original, UnaryPredicate pred)
+auto Find(const auto &original, auto pred)
 {
-    auto i = find_if(std::begin(original), std::end(original), pred);
+    auto i = std::ranges::find_if(original, pred);
     return i != std::end(original) ? *i : nullptr;
 }
 
-template<typename Container, typename T>
-bool Contains(const Container &container, T element)
+bool Contains(const auto &sequence, auto element)
 {
-    auto i = find(std::begin(container), std::end(container), element);
-    return i != std::end(container);
+    auto i = std::ranges::find(sequence, element);
+    return i != std::end(sequence);
 }
 
-template<typename Container, typename UnaryPredicate>
-size_t Count(const Container &container, UnaryPredicate pred)
+size_t Count(const auto &container, auto pred)
 {
-    return count_if(std::begin(container), std::end(container), pred);
+    return std::ranges::count_if(container, pred);
 }
 
-template<typename Container, typename UnaryFunction>
-void ForEach(const Container &container, UnaryFunction func)
+void ForEach(const auto &container, auto func)
 {
-    for_each(std::begin(container), std::end(container), func);
+    std::ranges::for_each(container, func);
 }
 
-template<typename T>
-auto MergeSequences(const T &a, const T &b)
+auto MergeSequences(const auto &a, const auto &b)
 {
-    T output = a;
+    auto output = a;
 
     for(const auto &element : b)
     {

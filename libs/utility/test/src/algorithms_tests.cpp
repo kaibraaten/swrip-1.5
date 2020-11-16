@@ -21,10 +21,10 @@ protected:
     {
         static const std::array<std::pair<std::string, int>, 4> data
         {
-         std::make_pair("Kai", 42),
-         { "Sofie", 2 },
-         { "Victoria", 25 },
-         { "Emma", 28 }
+            std::make_pair("Kai", 42),
+            { "Sofie", 2 },
+            { "Victoria", 25 },
+            { "Emma", 28 }
         };
 
         for(auto item : data)
@@ -47,10 +47,9 @@ protected:
     std::list<Person *> People;
 };
 
-template<typename T>
 struct EveryOther
 {
-    bool operator()(const T &unused) const
+    bool operator()(const auto &unused) const
     {
         return ++_counter % 2 == 0;
     }
@@ -61,29 +60,29 @@ private:
 
 TEST_F(AlgorithmsTests, Filter_WorksWithList)
 {
-    std::list<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
-    std::list<const char *> reduced = Filter(original, EveryOther<const char *>());
+    std::list original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    std::list reduced = Filter(original, EveryOther());
 
     EXPECT_EQ(reduced.size(), original.size() / 2);
 }
 
 TEST_F(AlgorithmsTests, Filter_WorksWithVector)
 {
-    std::vector<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
-    std::vector<const char *> reduced = Filter(original, EveryOther<const char *>());
+    std::vector original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    std::vector reduced = Filter(original, EveryOther());
 
     EXPECT_EQ(reduced.size(), original.size() / 2);
 }
 
 TEST_F(AlgorithmsTests, Filter_WorksWithLambda)
 {
-    std::list<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    std::list original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
     size_t counter = 0;
-    std::list<const char *> reduced = Filter(original,
-                                             [&counter](auto)
-                                             {
-                                                 return ++counter % 2 == 0;
-                                             });
+    std::list reduced = Filter(original,
+                               [&counter](auto)
+                               {
+                                   return ++counter % 2 == 0;
+                               });
 
     EXPECT_EQ(reduced.size(), original.size() / 2);
 }
@@ -97,9 +96,9 @@ static bool DoesNotContainA(const char *txt)
 
 TEST_F(AlgorithmsTests, Filter_WorksWithFunctionPointer)
 {
-    std::list<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    std::list original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
 
-    std::list<const char *> reduced = Filter(original, DoesNotContainA);
+    std::list reduced = Filter(original, DoesNotContainA);
 
     EXPECT_EQ(reduced.size(), original.size() - 1);
 }
@@ -107,20 +106,20 @@ TEST_F(AlgorithmsTests, Filter_WorksWithFunctionPointer)
 #ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(AlgorithmsTests, Reverse_WorksWithList)
 {
-    const std::list<const char *> expected{ "fff", "eee", "ddd", "ccc", "bbb", "aaa" };
-    const std::list<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    const std::list expected{ "fff", "eee", "ddd", "ccc", "bbb", "aaa" };
+    const std::list original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
 
-    const std::list<const char *> actual = Reverse(original);
+    const std::list actual = Reverse(original);
 
     EXPECT_EQ(expected, actual);
 }
 
 TEST_F(AlgorithmsTests, Reverse_WorksWithVector)
 {
-    const std::vector<const char *> expected{ "fff", "eee", "ddd", "ccc", "bbb", "aaa" };
-    const std::vector<const char *> original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
+    const std::vector expected{ "fff", "eee", "ddd", "ccc", "bbb", "aaa" };
+    const std::vector original{ "aaa", "bbb", "ccc", "ddd", "eee", "fff" };
 
-    const std::vector<const char *> actual = Reverse(original);
+    const std::vector actual = Reverse(original);
 
     EXPECT_EQ(expected, actual);
 }
@@ -208,10 +207,10 @@ TEST_F(AlgorithmsTests, Contains_FalseIfNotFound)
 TEST_F(AlgorithmsTests, RandomizeOrder_SameLengthAsOriginal)
 {
     // Arrange
-    std::list<int> original{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    std::list original{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     // Act
-    std::list<int> randomized = RandomizeOrder(original);
+    std::list randomized = RandomizeOrder(original);
 
     // Assert
     EXPECT_EQ(randomized.size(), original.size());
