@@ -13,7 +13,7 @@ public:
   virtual void Load() = 0;
 };
 
-extern std::shared_ptr<ShipRepository> Ships;
+inline std::shared_ptr<ShipRepository> Ships;
 std::shared_ptr<ShipRepository> NewShipRepository();
 std::string GetShipFilename( std::shared_ptr<Ship> ship );
 

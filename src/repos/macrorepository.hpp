@@ -15,6 +15,6 @@ public:
 };
 
 std::shared_ptr<MacroRepository> NewMacroRepository();
-extern std::shared_ptr<MacroRepository> Macros;
+inline std::shared_ptr<MacroRepository> Macros;
 
 #endif

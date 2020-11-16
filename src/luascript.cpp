@@ -1789,3 +1789,248 @@ void LuaPushMudProgs(lua_State *L, const MProg *mprog)
         lua_settable(L, -3);
     }
 }
+
+void PushVnumEntry(lua_State *L, const std::string &key, vnum_t value)
+{
+    lua_pushstring(L, key.c_str());
+    lua_pushinteger(L, value);
+    lua_settable(L, -3);
+}
+
+static void PushVnumConstantsObjects(lua_State *L)
+{
+    lua_newtable(L);
+
+    lua_pushstring(L, "Objects");
+    lua_newtable(L);
+
+    PushVnumEntry(L, "OBJ_VNUM_DEED", OBJ_VNUM_DEED);
+    PushVnumEntry(L, "OBJ_VNUM_MONEY_ONE", OBJ_VNUM_MONEY_ONE);
+    PushVnumEntry(L, "OBJ_VNUM_MONEY_SOME", OBJ_VNUM_MONEY_SOME);
+    PushVnumEntry(L, "OBJ_VNUM_DROID_CORPSE", OBJ_VNUM_DROID_CORPSE);
+    PushVnumEntry(L, "OBJ_VNUM_CORPSE_NPC", OBJ_VNUM_CORPSE_NPC);
+    PushVnumEntry(L, "OBJ_VNUM_CORPSE_PC", OBJ_VNUM_CORPSE_PC);
+    PushVnumEntry(L, "OBJ_VNUM_BLOODSTAIN", OBJ_VNUM_BLOODSTAIN);
+    PushVnumEntry(L, "OBJ_VNUM_SCRAPS", OBJ_VNUM_SCRAPS);
+    PushVnumEntry(L, "OBJ_VNUM_LIGHT_BALL", OBJ_VNUM_LIGHT_BALL);
+    PushVnumEntry(L, "OBJ_VNUM_SKIN", OBJ_VNUM_SKIN);
+    PushVnumEntry(L, "OBJ_VNUM_SHOPPING_BAG", OBJ_VNUM_SHOPPING_BAG);
+    PushVnumEntry(L, "OBJ_VNUM_FIRE", OBJ_VNUM_FIRE);
+    PushVnumEntry(L, "OBJ_VNUM_TRAP", OBJ_VNUM_TRAP);
+    PushVnumEntry(L, "OBJ_VNUM_BLACK_POWDER", OBJ_VNUM_BLACK_POWDER);
+    PushVnumEntry(L, "OBJ_VNUM_NOTE", OBJ_VNUM_NOTE);
+    PushVnumEntry(L, "OBJ_VNUM_SCHOOL_BLADE", OBJ_VNUM_SCHOOL_BLADE);
+    PushVnumEntry(L, "OBJ_VNUM_SCHOOL_LIGHTSABER", OBJ_VNUM_SCHOOL_LIGHTSABER);
+    PushVnumEntry(L, "OBJ_VNUM_SCHOOL_GLOWROD", OBJ_VNUM_SCHOOL_GLOWROD);
+    PushVnumEntry(L, "OBJ_VNUM_SCHOOL_DIPLOMA", OBJ_VNUM_SCHOOL_DIPLOMA);
+    PushVnumEntry(L, "OBJ_VNUM_SCHOOL_COMLINK", OBJ_VNUM_SCHOOL_COMLINK);
+    PushVnumEntry(L, "OBJ_VNUM_BLASTECH_E11", OBJ_VNUM_BLASTECH_E11);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_BLASTER", OBJ_VNUM_CRAFTING_BLASTER);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_LIGHTSABER", OBJ_VNUM_CRAFTING_LIGHTSABER);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_BLADE", OBJ_VNUM_CRAFTING_BLADE);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_GRENADE", OBJ_VNUM_CRAFTING_GRENADE);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_LANDMINE", OBJ_VNUM_CRAFTING_LANDMINE);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_GLOWROD", OBJ_VNUM_CRAFTING_GLOWROD);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_SHIELD", OBJ_VNUM_CRAFTING_SHIELD);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_COMLINK", OBJ_VNUM_CRAFTING_COMLINK);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_BOWCASTER", OBJ_VNUM_CRAFTING_BOWCASTER);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_CONTAINER", OBJ_VNUM_CRAFTING_CONTAINER);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_ARMOR", OBJ_VNUM_CRAFTING_ARMOR);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_DISGUISE", OBJ_VNUM_CRAFTING_DISGUISE);
+    PushVnumEntry(L, "OBJ_VNUM_CRAFTING_SPICE", OBJ_VNUM_CRAFTING_SPICE);
+    
+    lua_settable(L, -3);
+}
+
+static void PushVnumConstantsRooms(lua_State *L)
+{
+    lua_pushstring(L, "Rooms");
+    lua_newtable(L);
+    
+    PushVnumEntry(L, "ROOM_VNUM_VENSTOR", ROOM_VNUM_VENSTOR);
+    PushVnumEntry(L, "ROOM_JAIL_MON_CALAMARI_1", ROOM_JAIL_MON_CALAMARI_1);
+    PushVnumEntry(L, "ROOM_JAIL_MON_CALAMARI_2", ROOM_JAIL_MON_CALAMARI_2);
+    PushVnumEntry(L, "ROOM_JAIL_QUARREN_1", ROOM_JAIL_QUARREN_1);
+    PushVnumEntry(L, "ROOM_JAIL_QUARREN_2", ROOM_JAIL_QUARREN_2);
+    PushVnumEntry(L, "ROOM_JAIL_ADARI", ROOM_JAIL_ADARI);
+    PushVnumEntry(L, "ROOM_VNUM_LIMBO", ROOM_VNUM_LIMBO);
+    PushVnumEntry(L, "ROOM_VNUM_POLY", ROOM_VNUM_POLY);
+    PushVnumEntry(L, "ROOM_VNUM_SPAWNLOCATION", ROOM_VNUM_SPAWNLOCATION);
+    PushVnumEntry(L, "ROOM_VNUM_HELL", ROOM_VNUM_HELL);
+    PushVnumEntry(L, "ROOM_VNUM_SCHOOL", ROOM_VNUM_SCHOOL);
+    PushVnumEntry(L, "ROOM_START_PLAYER", ROOM_START_PLAYER);
+    PushVnumEntry(L, "ROOM_START_IMMORTAL", ROOM_START_IMMORTAL);
+    PushVnumEntry(L, "ROOM_LIMBO_SHIPYARD", ROOM_LIMBO_SHIPYARD);
+    PushVnumEntry(L, "ROOM_PLUOGUS_QUIT", ROOM_PLUOGUS_QUIT);
+    PushVnumEntry(L, "ROOM_VNUM_PLACE_BOUNTY", ROOM_VNUM_PLACE_BOUNTY);
+    PushVnumEntry(L, "ROOM_VNUM_CLONING_CYLINDER", ROOM_VNUM_CLONING_CYLINDER);
+    PushVnumEntry(L, "ROOM_VNUM_CLONING_PAY_COUNTER", ROOM_VNUM_CLONING_PAY_COUNTER);
+    PushVnumEntry(L, "ROOM_VNUM_CLONING_CLINIC", ROOM_VNUM_CLONING_CLINIC);
+    
+    lua_settable(L, -3);
+}
+
+static void PushVnumConstantsMobiles(lua_State *L)
+{
+    lua_pushstring(L, "Mobiles");
+    lua_newtable(L);
+
+    PushVnumEntry(L, "MOB_VNUM_VENDOR", MOB_VNUM_VENDOR);
+    PushVnumEntry(L, "MOB_VNUM_ANIMATED_CORPSE", MOB_VNUM_ANIMATED_CORPSE);
+    PushVnumEntry(L, "MOB_VNUM_SUPERMOB", MOB_VNUM_SUPERMOB);
+    PushVnumEntry(L, "MOB_VNUM_STORMTROOPER", MOB_VNUM_STORMTROOPER);
+    PushVnumEntry(L, "MOB_VNUM_IMP_GUARD", MOB_VNUM_IMP_GUARD);
+    PushVnumEntry(L, "MOB_VNUM_NR_GUARD", MOB_VNUM_NR_GUARD);
+    PushVnumEntry(L, "MOB_VNUM_NR_TROOPER", MOB_VNUM_NR_TROOPER);
+    PushVnumEntry(L, "MOB_VNUM_MERCINARY", MOB_VNUM_MERCINARY);
+    PushVnumEntry(L, "MOB_VNUM_BOUNCER", MOB_VNUM_BOUNCER);
+    PushVnumEntry(L, "MOB_VNUM_IMP_ELITE", MOB_VNUM_IMP_ELITE);
+    PushVnumEntry(L, "MOB_VNUM_IMP_PATROL", MOB_VNUM_IMP_PATROL);
+    PushVnumEntry(L, "MOB_VNUM_IMP_FORCES", MOB_VNUM_IMP_FORCES);
+    PushVnumEntry(L, "MOB_VNUM_NR_ELITE", MOB_VNUM_NR_ELITE);
+    PushVnumEntry(L, "MOB_VNUM_NR_PATROL", MOB_VNUM_NR_PATROL);
+    PushVnumEntry(L, "MOB_VNUM_NR_FORCES", MOB_VNUM_NR_FORCES);
+    PushVnumEntry(L, "MOB_VNUM_MERC_ELITE", MOB_VNUM_MERC_ELITE);
+    PushVnumEntry(L, "MOB_VNUM_MERC_PATROL", MOB_VNUM_MERC_PATROL);
+    PushVnumEntry(L, "MOB_VNUM_MERC_FORCES", MOB_VNUM_MERC_FORCES);
+    
+    lua_settable(L, -3);
+}
+
+void LuaPushVnumConstants()
+{
+    auto pushVnums = [](lua_State *L)
+                     {
+                         lua_newtable(L);
+                         
+                         PushVnumConstantsObjects(L);
+                         PushVnumConstantsRooms(L);
+                         PushVnumConstantsMobiles(L);
+                         
+                         lua_setglobal(L, "vnumconstants");
+                     };
+    
+    LuaSaveDataFile(DATA_DIR "vnumconstants.lua", pushVnums, "vnumconstants");
+}
+
+static void LoadVnumConstantsObjects(lua_State *L)
+{
+    int idx = lua_gettop(L);
+
+    lua_getfield(L, idx, "Objects");
+
+    if (!lua_isnil(L, ++idx))
+    {
+        LuaGetfieldLong(L, "OBJ_VNUM_DEED", &OBJ_VNUM_DEED);
+        LuaGetfieldLong(L, "OBJ_VNUM_MONEY_ONE", &OBJ_VNUM_MONEY_ONE);
+        LuaGetfieldLong(L, "OBJ_VNUM_MONEY_SOME", &OBJ_VNUM_MONEY_SOME);
+        LuaGetfieldLong(L, "OBJ_VNUM_DROID_CORPSE", &OBJ_VNUM_DROID_CORPSE);
+        LuaGetfieldLong(L, "OBJ_VNUM_CORPSE_NPC", &OBJ_VNUM_CORPSE_NPC);
+        LuaGetfieldLong(L, "OBJ_VNUM_CORPSE_PC", &OBJ_VNUM_CORPSE_PC);
+        LuaGetfieldLong(L, "OBJ_VNUM_BLOODSTAIN", &OBJ_VNUM_BLOODSTAIN);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCRAPS", &OBJ_VNUM_SCRAPS);
+        LuaGetfieldLong(L, "OBJ_VNUM_LIGHT_BALL", &OBJ_VNUM_LIGHT_BALL);
+        LuaGetfieldLong(L, "OBJ_VNUM_SKIN", &OBJ_VNUM_SKIN);
+        LuaGetfieldLong(L, "OBJ_VNUM_SHOPPING_BAG", &OBJ_VNUM_SHOPPING_BAG);
+        LuaGetfieldLong(L, "OBJ_VNUM_FIRE", &OBJ_VNUM_FIRE);
+        LuaGetfieldLong(L, "OBJ_VNUM_TRAP", &OBJ_VNUM_TRAP);
+        LuaGetfieldLong(L, "OBJ_VNUM_BLACK_POWDER", &OBJ_VNUM_BLACK_POWDER);
+        LuaGetfieldLong(L, "OBJ_VNUM_NOTE", &OBJ_VNUM_NOTE);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCHOOL_BLADE", &OBJ_VNUM_SCHOOL_BLADE);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCHOOL_LIGHTSABER", &OBJ_VNUM_SCHOOL_LIGHTSABER);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCHOOL_GLOWROD", &OBJ_VNUM_SCHOOL_GLOWROD);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCHOOL_DIPLOMA", &OBJ_VNUM_SCHOOL_DIPLOMA);
+        LuaGetfieldLong(L, "OBJ_VNUM_SCHOOL_COMLINK", &OBJ_VNUM_SCHOOL_COMLINK);
+        LuaGetfieldLong(L, "OBJ_VNUM_BLASTECH_E11", &OBJ_VNUM_BLASTECH_E11);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_BLASTER", &OBJ_VNUM_CRAFTING_BLASTER);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_LIGHTSABER", &OBJ_VNUM_CRAFTING_LIGHTSABER);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_BLADE", &OBJ_VNUM_CRAFTING_BLADE);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_GRENADE", &OBJ_VNUM_CRAFTING_GRENADE);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_LANDMINE", &OBJ_VNUM_CRAFTING_LANDMINE);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_GLOWROD", &OBJ_VNUM_CRAFTING_GLOWROD);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_SHIELD", &OBJ_VNUM_CRAFTING_SHIELD);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_COMLINK", &OBJ_VNUM_CRAFTING_COMLINK);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_BOWCASTER", &OBJ_VNUM_CRAFTING_BOWCASTER);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_CONTAINER", &OBJ_VNUM_CRAFTING_CONTAINER);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_ARMOR", &OBJ_VNUM_CRAFTING_ARMOR);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_DISGUISE", &OBJ_VNUM_CRAFTING_DISGUISE);
+        LuaGetfieldLong(L, "OBJ_VNUM_CRAFTING_SPICE", &OBJ_VNUM_CRAFTING_SPICE);
+    }
+
+    lua_pop(L, 1);
+}
+
+static void LoadVnumConstantsRooms(lua_State *L)
+{
+    int idx = lua_gettop(L);
+
+    lua_getfield(L, idx, "Rooms");
+
+    if (!lua_isnil(L, ++idx))
+    {
+        LuaGetfieldLong(L, "ROOM_VNUM_VENSTOR", &ROOM_VNUM_VENSTOR);
+        LuaGetfieldLong(L, "ROOM_JAIL_MON_CALAMARI_1", &ROOM_JAIL_MON_CALAMARI_1);
+        LuaGetfieldLong(L, "ROOM_JAIL_MON_CALAMARI_2", &ROOM_JAIL_MON_CALAMARI_2);
+        LuaGetfieldLong(L, "ROOM_JAIL_QUARREN_1", &ROOM_JAIL_QUARREN_1);
+        LuaGetfieldLong(L, "ROOM_JAIL_QUARREN_2", &ROOM_JAIL_QUARREN_2);
+        LuaGetfieldLong(L, "ROOM_JAIL_ADARI", &ROOM_JAIL_ADARI);
+        LuaGetfieldLong(L, "ROOM_VNUM_LIMBO", &ROOM_VNUM_LIMBO);
+        LuaGetfieldLong(L, "ROOM_VNUM_POLY", &ROOM_VNUM_POLY);
+        LuaGetfieldLong(L, "ROOM_VNUM_SPAWNLOCATION", &ROOM_VNUM_SPAWNLOCATION);
+        LuaGetfieldLong(L, "ROOM_VNUM_HELL", &ROOM_VNUM_HELL);
+        LuaGetfieldLong(L, "ROOM_VNUM_SCHOOL", &ROOM_VNUM_SCHOOL);
+        LuaGetfieldLong(L, "ROOM_START_PLAYER", &ROOM_START_PLAYER);
+        LuaGetfieldLong(L, "ROOM_START_IMMORTAL", &ROOM_START_IMMORTAL);
+        LuaGetfieldLong(L, "ROOM_LIMBO_SHIPYARD", &ROOM_LIMBO_SHIPYARD);
+        LuaGetfieldLong(L, "ROOM_PLUOGUS_QUIT", &ROOM_PLUOGUS_QUIT);
+        LuaGetfieldLong(L, "ROOM_VNUM_PLACE_BOUNTY", &ROOM_VNUM_PLACE_BOUNTY);
+        LuaGetfieldLong(L, "ROOM_VNUM_CLONING_CYLINDER", &ROOM_VNUM_CLONING_CYLINDER);
+        LuaGetfieldLong(L, "ROOM_VNUM_CLONING_PAY_COUNTER", &ROOM_VNUM_CLONING_PAY_COUNTER);
+        LuaGetfieldLong(L, "ROOM_VNUM_CLONING_CLINIC", &ROOM_VNUM_CLONING_CLINIC);
+    }
+
+    lua_pop(L, 1);
+}
+
+static void LoadVnumConstantsMobiles(lua_State *L)
+{
+    int idx = lua_gettop(L);
+
+    lua_getfield(L, idx, "Mobiles");
+
+    if (!lua_isnil(L, ++idx))
+    {
+        LuaGetfieldLong(L, "MOB_VNUM_VENDOR", &MOB_VNUM_VENDOR);
+        LuaGetfieldLong(L, "MOB_VNUM_ANIMATED_CORPSE", &MOB_VNUM_ANIMATED_CORPSE);
+        LuaGetfieldLong(L, "MOB_VNUM_SUPERMOB", &MOB_VNUM_SUPERMOB);
+        LuaGetfieldLong(L, "MOB_VNUM_STORMTROOPER", &MOB_VNUM_STORMTROOPER);
+        LuaGetfieldLong(L, "MOB_VNUM_IMP_GUARD", &MOB_VNUM_IMP_GUARD);
+        LuaGetfieldLong(L, "MOB_VNUM_NR_GUARD", &MOB_VNUM_NR_GUARD);
+        LuaGetfieldLong(L, "MOB_VNUM_NR_TROOPER", &MOB_VNUM_NR_TROOPER);
+        LuaGetfieldLong(L, "MOB_VNUM_MERCINARY", &MOB_VNUM_MERCINARY);
+        LuaGetfieldLong(L, "MOB_VNUM_BOUNCER", &MOB_VNUM_BOUNCER);
+        LuaGetfieldLong(L, "MOB_VNUM_IMP_ELITE", &MOB_VNUM_IMP_ELITE);
+        LuaGetfieldLong(L, "MOB_VNUM_IMP_PATROL", &MOB_VNUM_IMP_PATROL);
+        LuaGetfieldLong(L, "MOB_VNUM_IMP_FORCES", &MOB_VNUM_IMP_FORCES);
+        LuaGetfieldLong(L, "MOB_VNUM_NR_ELITE", &MOB_VNUM_NR_ELITE);
+        LuaGetfieldLong(L, "MOB_VNUM_NR_PATROL", &MOB_VNUM_NR_PATROL);
+        LuaGetfieldLong(L, "MOB_VNUM_NR_FORCES", &MOB_VNUM_NR_FORCES);
+        LuaGetfieldLong(L, "MOB_VNUM_MERC_ELITE", &MOB_VNUM_MERC_ELITE);
+        LuaGetfieldLong(L, "MOB_VNUM_MERC_PATROL", &MOB_VNUM_MERC_PATROL);
+        LuaGetfieldLong(L, "MOB_VNUM_MERC_FORCES", &MOB_VNUM_MERC_FORCES);
+    }
+
+    lua_pop(L, 1);
+}
+
+void LuaLoadVnumConstants()
+{
+    auto loader = [](lua_State *L)
+                  {
+                      LoadVnumConstantsObjects(L);
+                      LoadVnumConstantsRooms(L);
+                      LoadVnumConstantsMobiles(L);
+                      return 0;
+                  };
+    LuaLoadDataFile(DATA_DIR "vnumconstants.lua", loader, "VnumConstantsEntry");
+}

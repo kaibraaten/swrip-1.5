@@ -7,8 +7,6 @@
 
 #define BAN_LIST DATA_DIR "banned.lua"
 
-std::shared_ptr<BanRepository> Bans;
-
 //////////////////////////////////////////////////////
 class LuaBanRepository : public BanRepository
 {

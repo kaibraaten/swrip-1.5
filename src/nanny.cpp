@@ -59,8 +59,6 @@ static const char echo_on_str[] = { static_cast<char>(IAC),
                                     static_cast<char>(WONT),
                                     TELOPT_ECHO,
                                     '\0' };
-extern bool wizlock;
-
 /*
  * Local functions
  */

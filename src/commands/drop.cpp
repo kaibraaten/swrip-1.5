@@ -74,17 +74,15 @@ void do_drop(std::shared_ptr<Character> ch, std::string argument)
 
             for(auto obj : objectsToExtract)
             {
-                switch(obj->Prototype->Vnum)
+                if(obj->Prototype->Vnum == OBJ_VNUM_MONEY_ONE)
                 {
-                case OBJ_VNUM_MONEY_ONE:
                     number += 1;
                     ExtractObject(obj);
-                    break;
-
-                case OBJ_VNUM_MONEY_SOME:
+                }
+                else if(obj->Prototype->Vnum == OBJ_VNUM_MONEY_SOME)
+                {
                     number += obj->Value[OVAL_MONEY_AMOUNT];
                     ExtractObject(obj);
-                    break;
                 }
             }
 

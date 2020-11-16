@@ -117,6 +117,10 @@ function savers.savehome(home, filename)
    singlesave(home, filename, "-- Home " .. home.Vnum .. "\n", "\nHomeEntry")
 end
 
+function savers.savevnumconstants(vnumconstants, filename)
+   singlesave(vnumconstants, filename, "-- \n", "\nVnumConstantsEntry")
+end
+
 function savers.savefoo(foo, filename)
    singlesave(foo, filename, "-- \n", "\nFooEntry")
 end

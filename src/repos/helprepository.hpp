@@ -17,7 +17,7 @@ public:
   virtual void Save() const = 0;
 };
 
-extern std::shared_ptr<HelpFileRepository> HelpFiles;
+inline std::shared_ptr<HelpFileRepository> HelpFiles;
 std::shared_ptr<HelpFileRepository> NewHelpFileRepository();
 
 #endif

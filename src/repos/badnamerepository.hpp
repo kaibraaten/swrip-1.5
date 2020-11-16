@@ -12,7 +12,7 @@ public:
   virtual void Save() const = 0;
 };
 
-extern std::shared_ptr<BadNameRepository> BadNames;
+inline std::shared_ptr<BadNameRepository> BadNames;
 std::shared_ptr<BadNameRepository> NewBadNameRepository();
 
 #endif

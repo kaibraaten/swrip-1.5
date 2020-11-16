@@ -7,8 +7,6 @@
 
 #define CLAN_DIR DATA_DIR "clans/"
 
-std::shared_ptr<ClanRepository> Clans;
-
 class LuaClanRepository : public ClanRepository
 {
 public:

@@ -55,16 +55,7 @@ bool bootup = false;
 /*
  * Global variables.
  */
-int num_descriptors = 0;
-bool mud_down = false;       /* Shutdown                     */
-bool wizlock = false;     /* Game is wizlocked            */
-time_t boot_time = 0;
-HourMinSec set_boot_time_struct;
-HourMinSec *set_boot_time = nullptr;
-tm *new_boot_time = nullptr;
-tm new_boot_struct;
-std::string str_boot_time;
-time_t current_time = 0;       /* Time of this pulse           */
+static HourMinSec set_boot_time_struct;
 socket_t control = 0;            /* Controlling descriptor       */
 socket_t newdesc = 0;            /* New descriptor               */
 fd_set in_set;             /* Set of desc's for reading    */

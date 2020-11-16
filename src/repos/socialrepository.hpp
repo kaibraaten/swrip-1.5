@@ -18,7 +18,7 @@ public:
   virtual std::shared_ptr<Social> FindByName(const std::string &name) const = 0;
 };
 
-extern std::shared_ptr<SocialRepository> Socials;
+inline std::shared_ptr<SocialRepository> Socials;
 std::shared_ptr<SocialRepository> NewSocialRepository();
 
 #endif

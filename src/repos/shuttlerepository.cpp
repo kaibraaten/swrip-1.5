@@ -6,8 +6,6 @@
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 
-std::shared_ptr<ShuttleRepository> Shuttles;
-
 class LuaShuttleRepository : public ShuttleRepository
 {
 public:

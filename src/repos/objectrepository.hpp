@@ -13,8 +13,8 @@ protected:
   ObjectRepository() = default;
 };
 
-extern ObjectRepository *Objects;
+inline std::shared_ptr<ObjectRepository> Objects;
 
-ObjectRepository *NewObjectRepository();
+std::shared_ptr<ObjectRepository> NewObjectRepository();
 
 #endif

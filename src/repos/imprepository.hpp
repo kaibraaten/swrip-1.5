@@ -20,7 +20,7 @@ public:
     virtual std::list<ImpScriptEntry> FindByFullText(const std::string &path) = 0;
 };
 
-extern std::shared_ptr<ImpRepository> ImpScripts;
+inline std::shared_ptr<ImpRepository> ImpScripts;
 std::shared_ptr<ImpRepository> NewImpRepository();
 
 #endif

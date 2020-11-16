@@ -5,8 +5,6 @@
 
 #define BOARD_DIR DATA_DIR "boards/"
 
-std::shared_ptr<BoardRepository> Boards;
-
 std::string GetBoardFilename(const std::shared_ptr<Board> &board)
 {
     char fullPath[MAX_STRING_LENGTH];

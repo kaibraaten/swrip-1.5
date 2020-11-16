@@ -10,11 +10,6 @@
 #include "lua_macrorepository.hpp"
 #include "fs_imprepository.hpp"
 
-std::shared_ptr<HomeRepository> Homes;
-std::shared_ptr<VendorRepository> Vendors;
-std::shared_ptr<MacroRepository> Macros;
-std::shared_ptr<ImpRepository> ImpScripts;
-
 std::shared_ptr<AreaRepository> NewAreaRepository()
 {
     return NewLuaAreaRepository();

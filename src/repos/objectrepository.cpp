@@ -1,13 +1,11 @@
 #include "objectrepository.hpp"
 
-ObjectRepository *Objects = nullptr;
-
 class InMemoryObjectRepository : public ObjectRepository
 {
 
 };
 
-ObjectRepository *NewObjectRepository()
+std::shared_ptr<ObjectRepository> NewObjectRepository()
 {
-    return new InMemoryObjectRepository();
+    return std::make_shared<InMemoryObjectRepository>();
 }

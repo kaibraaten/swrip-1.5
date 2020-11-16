@@ -138,11 +138,11 @@ constexpr auto LEVEL_AVATAR = MAX_LEVEL - 5;
 constexpr auto LEVEL_LOG = LEVEL_CREATOR;
 constexpr auto LEVEL_HIGOD = LEVEL_GREATER;
 
-constexpr vnum_t MOB_VNUM_VENDOR = 4;  /*vnum of vendor*/
+inline vnum_t MOB_VNUM_VENDOR = 4;  /*vnum of vendor*/
 constexpr auto LEVEL_BUY_VENDOR = 50;  /* minimum level to buy a vendor */
 constexpr auto COST_BUY_VENDOR = 1000000;  /* cost of a vendor */
-constexpr vnum_t OBJ_VNUM_DEED = 4;  /* vnum of deed */
-constexpr vnum_t ROOM_VNUM_VENSTOR = 4;  /* where messed up vendors go! */
+inline vnum_t OBJ_VNUM_DEED = 4;  /* vnum of deed */
+inline vnum_t ROOM_VNUM_VENSTOR = 4;  /* where messed up vendors go! */
 
 constexpr auto PULSE_PER_SECOND = 4;
 constexpr auto PULSE_MINUTE = 60 * PULSE_PER_SECOND;
@@ -565,25 +565,23 @@ constexpr auto MAX_NUMBER_OF_TURRETS_IN_SHIP = 10;
  * Well known mob virtual numbers.
  * Defined in #MOBILES.
  */
-constexpr vnum_t MOB_VNUM_ANIMATED_CORPSE = 5;
-constexpr vnum_t MOB_VNUM_POLY_WOLF = 10;
-
-constexpr vnum_t MOB_VNUM_SUPERMOB = 3;
-constexpr vnum_t MOB_VNUM_STORMTROOPER = 20;
-constexpr vnum_t MOB_VNUM_IMP_GUARD = 21;
-constexpr vnum_t MOB_VNUM_NR_GUARD = 22;
-constexpr vnum_t MOB_VNUM_NR_TROOPER = 23;
-constexpr vnum_t MOB_VNUM_MERCINARY = 24;
-constexpr vnum_t MOB_VNUM_BOUNCER = 25;
-constexpr vnum_t MOB_VNUM_IMP_ELITE = 26;
-constexpr vnum_t MOB_VNUM_IMP_PATROL = 27;
-constexpr vnum_t MOB_VNUM_IMP_FORCES = 28;
-constexpr vnum_t MOB_VNUM_NR_ELITE = 29;
-constexpr vnum_t MOB_VNUM_NR_PATROL = 30;
-constexpr vnum_t MOB_VNUM_NR_FORCES = 31;
-constexpr vnum_t MOB_VNUM_MERC_ELITE = 32;
-constexpr vnum_t MOB_VNUM_MERC_PATROL = 33;
-constexpr vnum_t MOB_VNUM_MERC_FORCES = 34;
+inline vnum_t MOB_VNUM_ANIMATED_CORPSE = 5;
+inline vnum_t MOB_VNUM_SUPERMOB = 3;
+inline vnum_t MOB_VNUM_STORMTROOPER = 20;
+inline vnum_t MOB_VNUM_IMP_GUARD = 21;
+inline vnum_t MOB_VNUM_NR_GUARD = 22;
+inline vnum_t MOB_VNUM_NR_TROOPER = 23;
+inline vnum_t MOB_VNUM_MERCINARY = 24;
+inline vnum_t MOB_VNUM_BOUNCER = 25;
+inline vnum_t MOB_VNUM_IMP_ELITE = 26;
+inline vnum_t MOB_VNUM_IMP_PATROL = 27;
+inline vnum_t MOB_VNUM_IMP_FORCES = 28;
+inline vnum_t MOB_VNUM_NR_ELITE = 29;
+inline vnum_t MOB_VNUM_NR_PATROL = 30;
+inline vnum_t MOB_VNUM_NR_FORCES = 31;
+inline vnum_t MOB_VNUM_MERC_ELITE = 32;
+inline vnum_t MOB_VNUM_MERC_PATROL = 33;
+inline vnum_t MOB_VNUM_MERC_FORCES = 34;
 
 /*
  * ACT bits for mobs.
@@ -631,11 +629,11 @@ namespace Flag
     }
 }
 
-constexpr vnum_t ROOM_JAIL_MON_CALAMARI_1 = 21148;
-constexpr vnum_t ROOM_JAIL_MON_CALAMARI_2 = 21149;
-constexpr vnum_t ROOM_JAIL_QUARREN_1 = 6931;
-constexpr vnum_t ROOM_JAIL_QUARREN_2 = 6932;
-constexpr vnum_t ROOM_JAIL_ADARI = 29108;
+inline vnum_t ROOM_JAIL_MON_CALAMARI_1 = 21148;
+inline vnum_t ROOM_JAIL_MON_CALAMARI_2 = 21149;
+inline vnum_t ROOM_JAIL_QUARREN_1 = 6931;
+inline vnum_t ROOM_JAIL_QUARREN_2 = 6932;
+inline vnum_t ROOM_JAIL_ADARI = 29108;
 
 /*
  * Bits for 'affected_by'.
@@ -978,56 +976,43 @@ constexpr auto TRAP_SW = BV20;
  * Well known object virtual numbers.
  * Defined in #OBJECTS.
  */
-constexpr vnum_t OBJ_VNUM_MONEY_ONE = 2;
-constexpr vnum_t OBJ_VNUM_MONEY_SOME = 3;
-
-constexpr vnum_t OBJ_VNUM_DROID_CORPSE = 9;
-constexpr vnum_t OBJ_VNUM_CORPSE_NPC = 10;
-constexpr vnum_t OBJ_VNUM_CORPSE_PC = 11;
-constexpr vnum_t OBJ_VNUM_BLOODSTAIN = 18;
-constexpr vnum_t OBJ_VNUM_SCRAPS = 19;
-
-constexpr vnum_t OBJ_VNUM_MUSHROOM = 20;
-constexpr vnum_t OBJ_VNUM_LIGHT_BALL = 21;
-constexpr vnum_t OBJ_VNUM_SPRING = 22;
-
-constexpr vnum_t OBJ_VNUM_SKIN = 23;
-
-constexpr vnum_t OBJ_VNUM_SLICE = 24;
-constexpr vnum_t OBJ_VNUM_SHOPPING_BAG = 25;
-
-constexpr vnum_t OBJ_VNUM_FIRE = 30;
-constexpr vnum_t OBJ_VNUM_TRAP = 31;
-constexpr vnum_t OBJ_VNUM_PORTAL = 32;
-
-
-constexpr vnum_t OBJ_VNUM_BLACK_POWDER = 33;
-
-constexpr vnum_t OBJ_VNUM_SCROLL_SCRIBING = 34;
-constexpr vnum_t OBJ_VNUM_NOTE = 36;
+inline vnum_t OBJ_VNUM_MONEY_ONE = 2;
+inline vnum_t OBJ_VNUM_MONEY_SOME = 3;
+inline vnum_t OBJ_VNUM_DROID_CORPSE = 9;
+inline vnum_t OBJ_VNUM_CORPSE_NPC = 10;
+inline vnum_t OBJ_VNUM_CORPSE_PC = 11;
+inline vnum_t OBJ_VNUM_BLOODSTAIN = 18;
+inline vnum_t OBJ_VNUM_SCRAPS = 19;
+inline vnum_t OBJ_VNUM_LIGHT_BALL = 21;
+inline vnum_t OBJ_VNUM_SKIN = 23;
+inline vnum_t OBJ_VNUM_SHOPPING_BAG = 25;
+inline vnum_t OBJ_VNUM_FIRE = 30;
+inline vnum_t OBJ_VNUM_TRAP = 31;
+inline vnum_t OBJ_VNUM_BLACK_POWDER = 33;
+inline vnum_t OBJ_VNUM_NOTE = 36;
 
 /* Academy eq */
-constexpr vnum_t OBJ_VNUM_SCHOOL_BLADE = 10312;
-constexpr vnum_t OBJ_VNUM_SCHOOL_LIGHTSABER = 10323;
-constexpr vnum_t OBJ_VNUM_SCHOOL_GLOWROD = 10311;
-constexpr vnum_t OBJ_VNUM_SCHOOL_DIPLOMA = 10321;
-constexpr vnum_t OBJ_VNUM_SCHOOL_COMLINK = 10424;
-constexpr vnum_t OBJ_VNUM_BLASTECH_E11 = 50;
+inline vnum_t OBJ_VNUM_SCHOOL_BLADE = 10312;
+inline vnum_t OBJ_VNUM_SCHOOL_LIGHTSABER = 10323;
+inline vnum_t OBJ_VNUM_SCHOOL_GLOWROD = 10311;
+inline vnum_t OBJ_VNUM_SCHOOL_DIPLOMA = 10321;
+inline vnum_t OBJ_VNUM_SCHOOL_COMLINK = 10424;
+inline vnum_t OBJ_VNUM_BLASTECH_E11 = 50;
 
 /* Crafting prototypes */
-constexpr vnum_t OBJ_VNUM_CRAFTING_BLASTER = 10420;
-constexpr vnum_t OBJ_VNUM_CRAFTING_LIGHTSABER = 10421;
-constexpr vnum_t OBJ_VNUM_CRAFTING_BLADE = 10422;
-constexpr vnum_t OBJ_VNUM_CRAFTING_GRENADE = 10425;
-constexpr vnum_t OBJ_VNUM_CRAFTING_LANDMINE = 10427;
-constexpr vnum_t OBJ_VNUM_CRAFTING_GLOWROD = 10428;
-constexpr vnum_t OBJ_VNUM_CRAFTING_SHIELD = 10429;
-constexpr vnum_t OBJ_VNUM_CRAFTING_COMLINK = 10430;
-constexpr vnum_t OBJ_VNUM_CRAFTING_BOWCASTER = 10431;
-constexpr vnum_t OBJ_VNUM_CRAFTING_CONTAINER = 10432;
-constexpr vnum_t OBJ_VNUM_CRAFTING_ARMOR = 10433;
-constexpr vnum_t OBJ_VNUM_CRAFTING_DISGUISE = 10434;
-constexpr vnum_t OBJ_VNUM_CRAFTING_SPICE = 10435;
+inline vnum_t OBJ_VNUM_CRAFTING_BLASTER = 10420;
+inline vnum_t OBJ_VNUM_CRAFTING_LIGHTSABER = 10421;
+inline vnum_t OBJ_VNUM_CRAFTING_BLADE = 10422;
+inline vnum_t OBJ_VNUM_CRAFTING_GRENADE = 10425;
+inline vnum_t OBJ_VNUM_CRAFTING_LANDMINE = 10427;
+inline vnum_t OBJ_VNUM_CRAFTING_GLOWROD = 10428;
+inline vnum_t OBJ_VNUM_CRAFTING_SHIELD = 10429;
+inline vnum_t OBJ_VNUM_CRAFTING_COMLINK = 10430;
+inline vnum_t OBJ_VNUM_CRAFTING_BOWCASTER = 10431;
+inline vnum_t OBJ_VNUM_CRAFTING_CONTAINER = 10432;
+inline vnum_t OBJ_VNUM_CRAFTING_ARMOR = 10433;
+inline vnum_t OBJ_VNUM_CRAFTING_DISGUISE = 10434;
+inline vnum_t OBJ_VNUM_CRAFTING_SPICE = 10435;
 
 constexpr auto NEW_CHARACTER_START_CREDITS = 5000;
 
@@ -1561,23 +1546,19 @@ constexpr auto CONT_LOCKED = 8;
  * Well known room virtual numbers.
  * Defined in #ROOMS.
  */
-constexpr vnum_t ROOM_VNUM_LIMBO = 2;
-constexpr vnum_t ROOM_VNUM_POLY = 3;
-constexpr vnum_t ROOM_VNUM_SPAWNLOCATION = 4;
-constexpr vnum_t ROOM_VNUM_HELL = 6;
-constexpr vnum_t ROOM_VNUM_CHAT = 32144;
-constexpr vnum_t ROOM_VNUM_TEMPLE = 32144;
-constexpr vnum_t ROOM_VNUM_ALTAR = 32144;
-constexpr vnum_t ROOM_VNUM_SCHOOL = 10300;
-constexpr vnum_t ROOM_AUTH_START = 10300;
-constexpr vnum_t ROOM_START_PLAYER = 31604;
-constexpr vnum_t ROOM_START_IMMORTAL = 100;
-constexpr vnum_t ROOM_LIMBO_SHIPYARD = 45;
-constexpr vnum_t ROOM_PLUOGUS_QUIT = 32148;
-constexpr vnum_t ROOM_VNUM_PLACE_BOUNTY = 6604;
-constexpr vnum_t ROOM_VNUM_CLONING_CYLINDER = 10000;
-constexpr vnum_t ROOM_VNUM_CLONING_PAY_COUNTER = 10001;
-constexpr vnum_t ROOM_VNUM_CLONING_CLINIC = 10002;
+inline vnum_t ROOM_VNUM_LIMBO = 2;
+inline vnum_t ROOM_VNUM_POLY = 3;
+inline vnum_t ROOM_VNUM_SPAWNLOCATION = 4;
+inline vnum_t ROOM_VNUM_HELL = 6;
+inline vnum_t ROOM_VNUM_SCHOOL = 10300;
+inline vnum_t ROOM_START_PLAYER = 31604;
+inline vnum_t ROOM_START_IMMORTAL = 100;
+inline vnum_t ROOM_LIMBO_SHIPYARD = 45;
+inline vnum_t ROOM_PLUOGUS_QUIT = 32148;
+inline vnum_t ROOM_VNUM_PLACE_BOUNTY = 6604;
+inline vnum_t ROOM_VNUM_CLONING_CYLINDER = 10000;
+inline vnum_t ROOM_VNUM_CLONING_PAY_COUNTER = 10001;
+inline vnum_t ROOM_VNUM_CLONING_CLINIC = 10002;
 
 /*
  * Directions.

@@ -226,4 +226,7 @@ void AssignSpecFuns(const EntityT &mob,
     }
 }
 
+void LuaPushVnumConstants();
+void LuaLoadVnumConstants();
+
 #endif

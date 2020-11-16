@@ -37,7 +37,7 @@ private:
     std::unique_ptr<Impl> pImpl;
 };
 
-extern std::shared_ptr<AreaRepository> Areas;
+inline std::shared_ptr<AreaRepository> Areas;
 std::shared_ptr<AreaRepository> NewAreaRepository();
 
 #endif

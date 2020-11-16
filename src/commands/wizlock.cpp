@@ -3,7 +3,6 @@
 
 void do_wizlock( std::shared_ptr<Character> ch, std::string argument )
 {
-  extern bool wizlock;
   wizlock = !wizlock;
 
   if ( wizlock )

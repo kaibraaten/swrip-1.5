@@ -15,7 +15,7 @@ public:
   virtual void DeleteFromStorage( std::shared_ptr<Shuttle> shuttle ) = 0;
 };
 
-extern std::shared_ptr<ShuttleRepository> Shuttles;
+inline std::shared_ptr<ShuttleRepository> Shuttles;
 std::shared_ptr<ShuttleRepository> NewShuttleRepository();
 std::string GetShuttleFilename( std::shared_ptr<Shuttle> shuttle );
 

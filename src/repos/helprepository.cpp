@@ -4,8 +4,6 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-std::shared_ptr<HelpFileRepository> HelpFiles;
-
 static int L_HelpEntry(lua_State *L);
 static void PushHelps(lua_State *L);
 static void PushHelpFile(lua_State *L, const std::shared_ptr<HelpFile> &);

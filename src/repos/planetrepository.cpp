@@ -9,8 +9,6 @@
 
 #define PLANET_DIR      DATA_DIR "planets/"
 
-std::shared_ptr<PlanetRepository> Planets;
-
 class LuaPlanetRepository : public PlanetRepository
 {
 public:

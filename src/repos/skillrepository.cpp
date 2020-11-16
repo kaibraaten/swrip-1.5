@@ -1,8 +1,6 @@
 #include "skillrepository.hpp"
 #include "skill.hpp"
 
-SkillRepository* Skills = nullptr;
-
 class TransitionarySkillRepository : public SkillRepository
 {
 public:
@@ -20,7 +18,7 @@ int TransitionarySkillRepository::LookupSkill(const std::string& name)
     return ::LookupSkill(name);
 }
 
-SkillRepository* NewSkillRepository()
+std::shared_ptr<SkillRepository> NewSkillRepository()
 {
-    return new TransitionarySkillRepository();
+    return std::make_shared<TransitionarySkillRepository>();
 }

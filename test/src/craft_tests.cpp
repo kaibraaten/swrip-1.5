@@ -138,8 +138,8 @@ protected:
     void SetUp() override
     {
         Log = std::make_shared<FakeLogger>();
-        Objects = new FakeObjectRepository();
-        Skills = new FakeSkillRepository();
+        Objects = std::make_shared<FakeObjectRepository>();
+        Skills = std::make_shared<FakeSkillRepository>();
         Homes = std::make_shared<FakeHomeRepository>();
 
         SetRandomGenerator(new NotRandomGenerator());
@@ -168,12 +168,6 @@ protected:
         _location = nullptr;
 
         _area = nullptr;
-
-        delete Skills;
-        Skills = nullptr;
-
-        delete Objects;
-        Objects = nullptr;
 
         Log = nullptr;
     }

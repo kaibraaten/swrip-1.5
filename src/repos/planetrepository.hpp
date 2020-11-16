@@ -16,7 +16,7 @@ public:
   virtual std::shared_ptr<Planet> FindByName(const std::string &name) const = 0;
 };
 
-extern std::shared_ptr<PlanetRepository> Planets;
+inline std::shared_ptr<PlanetRepository> Planets;
 std::shared_ptr<PlanetRepository> NewPlanetRepository();
 std::string GetPlanetFilename( std::shared_ptr<Planet> planet );
 

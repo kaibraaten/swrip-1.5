@@ -18,8 +18,6 @@ static const char * const month_name[] =
 
 void do_time( std::shared_ptr<Character> ch, std::string argument )
 {
-  extern std::string str_boot_time;
-  extern std::string reboot_time;
   const char *suf = nullptr;
   int day = time_info.Day + 1;
 

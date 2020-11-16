@@ -2,8 +2,6 @@
 #include "arearepository.hpp"
 #include "area.hpp"
 
-std::shared_ptr<AreaRepository> Areas;
-
 struct AreaRepository::Impl
 {
     std::list<std::shared_ptr<Area>> AreasInProgress;

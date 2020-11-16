@@ -10,8 +10,6 @@
 
 #define SHIP_DIR DATA_DIR "ships/"
 
-std::shared_ptr<ShipRepository> Ships;
-
 static void ExecuteShipFile(const std::string &filePath);
 static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship);
 static void PushShip(lua_State *L, const void *userData);

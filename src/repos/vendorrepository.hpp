@@ -16,7 +16,7 @@ public:
     virtual bool HasVendor(std::shared_ptr<Character> pc) const = 0;
 };
 
-extern std::shared_ptr<VendorRepository> Vendors;
+inline std::shared_ptr<VendorRepository> Vendors;
 
 std::shared_ptr<VendorRepository> NewVendorRepository();
 

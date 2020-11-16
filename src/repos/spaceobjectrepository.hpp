@@ -14,7 +14,7 @@ public:
   virtual void Save(std::shared_ptr<Spaceobject> spaceobject) const = 0;
 };
 
-extern std::shared_ptr<SpaceobjectRepository> Spaceobjects;
+inline std::shared_ptr<SpaceobjectRepository> Spaceobjects;
 std::shared_ptr<SpaceobjectRepository> NewSpaceobjectRepository();
 std::string GetSpaceobjectFilename(std::shared_ptr<Spaceobject> spaceobject);
 

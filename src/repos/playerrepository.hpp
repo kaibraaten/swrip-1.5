@@ -26,7 +26,7 @@ protected:
     virtual void OnRemoved(const std::shared_ptr<Character> &entity) = 0;
 };
 
-extern std::shared_ptr<PlayerRepository> PlayerCharacters;
+inline std::shared_ptr<PlayerRepository> PlayerCharacters;
 std::shared_ptr<PlayerRepository> NewPlayerRepository();
 
 std::string GetPlayerFilename(std::shared_ptr<Character> pc);

@@ -16,7 +16,7 @@ protected:
   SkillRepository() = default;
 };
 
-extern SkillRepository *Skills;
-SkillRepository *NewSkillRepository();
+inline std::shared_ptr<SkillRepository> Skills;
+std::shared_ptr<SkillRepository> NewSkillRepository();
 
 #endif

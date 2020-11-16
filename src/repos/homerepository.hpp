@@ -22,7 +22,7 @@ public:
     virtual bool IsResidentOf(const std::string &name, vnum_t room) const = 0;
 };
 
-extern std::shared_ptr<HomeRepository> Homes;
+inline std::shared_ptr<HomeRepository> Homes;
 
 std::shared_ptr<HomeRepository> NewHomeRepository();
 

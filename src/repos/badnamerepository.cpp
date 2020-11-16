@@ -2,8 +2,6 @@
 #include "badname.hpp"
 #include "luascript.hpp"
 
-std::shared_ptr<BadNameRepository> BadNames;
-
 #define BADNAME_FILE DATA_DIR "badnames.lua"
 
 class LuaBadNameRepository : public BadNameRepository

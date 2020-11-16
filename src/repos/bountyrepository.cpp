@@ -4,8 +4,6 @@
 
 #define BOUNTY_LIST DATA_DIR "bounties.lua"
 
-std::shared_ptr<BountyRepository> Bounties;
-
 /////////////////////////////////////////////////////
 class LuaBountyRepository : public BountyRepository
 {

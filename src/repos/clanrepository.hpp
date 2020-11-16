@@ -13,7 +13,7 @@ public:
   virtual void Save(const std::shared_ptr<Clan>&) const = 0;
 };
 
-extern std::shared_ptr<ClanRepository> Clans;
+inline std::shared_ptr<ClanRepository> Clans;
 std::shared_ptr<ClanRepository> NewClanRepository();
 std::string GetClanFilename(const std::shared_ptr<Clan> &clan);
 

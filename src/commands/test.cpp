@@ -23,6 +23,7 @@
 #include "protoobject.hpp"
 #include "protoobject.hpp"
 #include "log.hpp"
+#include "luascript.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/banrepository.hpp"
@@ -341,6 +342,16 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     else if(StrCmp(argument, "wipescope") == 0)
     {
         ch->RuntimeData(std::make_shared<Imp::RuntimeScope>());
+        ch->Echo("Ok.\r\n");
+    }
+    else if(StrCmp(argument, "savevnumconstants") == 0)
+    {
+        LuaPushVnumConstants();
+        ch->Echo("Ok.\r\n");
+    }
+    else if(StrCmp(argument, "loadvnumconstants") == 0)
+    {
+        LuaLoadVnumConstants();
         ch->Echo("Ok.\r\n");
     }
     else

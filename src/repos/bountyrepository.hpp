@@ -12,7 +12,7 @@ public:
   virtual void Save() const = 0;
 };
 
-extern std::shared_ptr<BountyRepository> Bounties;
+inline std::shared_ptr<BountyRepository> Bounties;
 std::shared_ptr<BountyRepository> NewBountyRepository();
 
 #endif

@@ -135,7 +135,7 @@ public:
     short Force = 0;
 };
 
-extern bool mud_down;
+inline bool mud_down = false;
 extern bool fBootDb;
 
 /*
@@ -242,10 +242,13 @@ public:
  * Global constants.
  */
 extern time_t last_restore_all_time;
-extern time_t boot_time;  /* this should be moved down */
-extern HourMinSec *set_boot_time;
-extern tm *new_boot_time;
-extern time_t new_boot_time_t;
+inline time_t boot_time = 0;
+inline HourMinSec *set_boot_time = nullptr;
+inline tm *new_boot_time = nullptr;
+inline std::string str_boot_time;
+inline time_t new_boot_time_t;
+inline std::string reboot_time;
+inline tm new_boot_struct;
 
 extern const std::array<const StrengthBonusType, MAX_STAT + 1> StrengthBonus;
 extern const std::array<const IntelligenceBonusType, MAX_STAT + 1> IntelligenceBonus;
@@ -306,7 +309,8 @@ extern bool bootup;
 extern int numobjsloaded;
 extern int nummobsloaded;
 extern int physicalobjects;
-extern int num_descriptors;
+inline int num_descriptors = 0;
+inline bool wizlock = false;
 extern int top_vroom;
 extern int top_affect;
 extern int top_ed;
@@ -334,7 +338,7 @@ extern std::list<std::shared_ptr<TeleportData>> Teleports;
 extern std::weak_ptr<Character> quitting_char;
 extern std::weak_ptr<Character> loading_char;
 extern std::weak_ptr<Character> saving_char;
-extern time_t           current_time;
+inline time_t current_time = 0;
 extern bool             fLogAll;
 extern TimeInfo   time_info;
 extern Weather     weather_info;

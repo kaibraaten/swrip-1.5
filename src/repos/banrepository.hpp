@@ -16,7 +16,7 @@ public:
   virtual void Save() const = 0;
 };
 
-extern std::shared_ptr<BanRepository> Bans;
+inline std::shared_ptr<BanRepository> Bans;
 
 std::shared_ptr<BanRepository> NewBanRepository();
 

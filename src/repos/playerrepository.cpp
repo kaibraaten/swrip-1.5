@@ -25,8 +25,6 @@
 
 namespace fs = std::filesystem;
 
-std::shared_ptr<PlayerRepository> PlayerCharacters;
-
 static std::string GetPlayerBackupFilename(const std::string &name);
 static std::string GetPlayerFilename(const std::string &name);
 static std::string GetCloneFilename(const std::string &name);

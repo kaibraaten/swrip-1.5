@@ -13,7 +13,7 @@ public:
     virtual void Save(std::shared_ptr<Room> storeroom) = 0;
 };
 
-extern std::shared_ptr<StoreroomRepository> Storerooms;
+inline std::shared_ptr<StoreroomRepository> Storerooms;
 std::shared_ptr<StoreroomRepository> NewStoreroomRepository();
 
 #endif

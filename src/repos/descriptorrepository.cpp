@@ -1,13 +1,11 @@
 #include "descriptorrepository.hpp"
 
-DescriptorRepository *Descriptors = nullptr;
-
 class InMemoryDescriptorRepository : public DescriptorRepository
 {
 
 };
 
-DescriptorRepository *NewDescriptorRepository()
+std::shared_ptr<DescriptorRepository> NewDescriptorRepository()
 {
-  return new InMemoryDescriptorRepository();
+    return std::make_shared<InMemoryDescriptorRepository>();
 }

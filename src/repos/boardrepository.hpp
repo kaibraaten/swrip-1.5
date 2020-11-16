@@ -16,6 +16,6 @@ public:
 
 std::shared_ptr<BoardRepository> NewBoardRepository();
 std::string GetBoardFilename(const std::shared_ptr<Board> &board);
-extern std::shared_ptr<BoardRepository> Boards;
+inline std::shared_ptr<BoardRepository> Boards;
 
 #endif

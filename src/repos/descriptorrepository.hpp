@@ -13,8 +13,8 @@ protected:
   DescriptorRepository() { }
 };
 
-extern DescriptorRepository *Descriptors;
+inline std::shared_ptr<DescriptorRepository> Descriptors;
 
-DescriptorRepository *NewDescriptorRepository();
+std::shared_ptr<DescriptorRepository> NewDescriptorRepository();
 
 #endif

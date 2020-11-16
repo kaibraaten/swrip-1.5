@@ -6,8 +6,6 @@
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
-std::shared_ptr<SocialRepository> Socials;
-
 bool CompareSocial::operator()(std::shared_ptr<Social> lhs, std::shared_ptr<Social> rhs) const
 {
     return StrCmp(lhs->Name, rhs->Name) < 0;

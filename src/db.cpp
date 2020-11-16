@@ -312,6 +312,9 @@ void BootDatabase(bool fCopyOver)
     Log->Boot("Allocating repositories");
     AllocateRepositories();
 
+    Log->Boot("Loading vnum constants");
+    LuaLoadVnumConstants();
+    
     Log->Boot("Loading SysData configuration");
 
     SysData.Load();

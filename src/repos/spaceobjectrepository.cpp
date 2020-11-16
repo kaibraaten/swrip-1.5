@@ -8,8 +8,6 @@
 
 #define SPACE_DIR       DATA_DIR "space/"
 
-std::shared_ptr<SpaceobjectRepository> Spaceobjects;
-
 class LuaSpaceobjectRepository : public SpaceobjectRepository
 {
 public:

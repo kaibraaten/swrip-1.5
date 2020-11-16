@@ -656,7 +656,6 @@ src/repos/shuttlerepository.cpp
 src/repos/skillrepository.cpp
 src/repos/socialrepository.cpp
 src/repos/spaceobjectrepository.cpp
-src/repos/storeroomrepository.cpp
 src/special/auth.cpp
 src/special/clanguard.cpp
 src/special/customsalcohol.cpp

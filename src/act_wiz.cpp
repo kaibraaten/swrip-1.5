@@ -31,12 +31,6 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
- /*
-  * Global variables.
-  */
-std::string reboot_time;
-time_t new_boot_time_t;
-
 void EchoToAll(short AT_COLOR, const std::string &argument, short tar)
 {
     if(argument.empty())

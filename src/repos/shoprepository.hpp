@@ -34,8 +34,8 @@ protected:
     RepairShopRepository() = default;
 };
 
-extern std::shared_ptr<ShopRepository> Shops;
-extern std::shared_ptr<RepairShopRepository> RepairShops;
+inline std::shared_ptr<ShopRepository> Shops;
+inline std::shared_ptr<RepairShopRepository> RepairShops;
 
 std::shared_ptr<ShopRepository> NewShopRepository();
 std::shared_ptr<RepairShopRepository> NewRepairShopRepository();

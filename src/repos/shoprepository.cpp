@@ -1,9 +1,6 @@
 #include "shoprepository.hpp"
 #include "shop.hpp"
 
-std::shared_ptr<ShopRepository> Shops;
-std::shared_ptr<RepairShopRepository> RepairShops;
-
 class InMemoryShopRepository : public ShopRepository
 {
 
