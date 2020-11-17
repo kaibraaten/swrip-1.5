@@ -14,8 +14,6 @@
 extern FILE *fpArea;
 extern std::string strArea;
 
-std::shared_ptr<Logger> Log;
-
 class FileSystemLogger : public Logger
 {
 public:

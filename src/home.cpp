@@ -19,7 +19,7 @@ struct Home::Impl
         
     }
     
-    vnum_t Room;
+    vnum_t Room = INVALID_VNUM;
     std::unordered_set<std::shared_ptr<Resident>> Residents;
     std::string RoomName;
     std::string Description;

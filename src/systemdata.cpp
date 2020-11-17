@@ -3,8 +3,6 @@
 #include "luascript.hpp"
 #define SYSTEMDATA_FILE DATA_DIR "sysdata.lua"
 
-SystemData SysData;
-
 static void PushSystemData(lua_State *L)
 {
     lua_newtable(L);

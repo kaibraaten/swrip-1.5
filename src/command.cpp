@@ -9,8 +9,6 @@ static int L_CommandEntry(lua_State *L);
 static void PushCommandTable(lua_State *L);
 static void PushCommand(void *command, void *L);
 
-OldRepository *CommandRepository = NULL;
-
 static bool _ExactMatch(void *cmd, const void *n)
 {
     const Command *command = static_cast<const Command *>(cmd);

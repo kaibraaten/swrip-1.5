@@ -44,15 +44,6 @@
 #include "timer.hpp"
 #include "triggers.hpp"
 
-std::shared_ptr<Character> cur_char;
-bool cur_char_died = false;
-ch_ret global_retcode = rNONE;
-
-int cur_obj = 0;
-int cur_obj_serial = 0;
-bool cur_obj_extracted = false;
-obj_ret global_objcode = rNONE;
-
 static std::list<std::shared_ptr<Object>> ExtractedObjectQueue;
 
 class ExtractedCharacter

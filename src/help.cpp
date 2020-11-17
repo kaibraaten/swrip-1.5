@@ -25,8 +25,6 @@
 #include "log.hpp"
 #include "repos/helprepository.hpp"
 
-std::string HelpGreeting;
-
 std::shared_ptr<HelpFile> GetHelpFile(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string argall;

@@ -34,8 +34,8 @@ public:
     int Award = 0;
 };
 
-extern Arena arena;
-extern std::list<HallOfFameElement*> FameList;
+inline Arena arena;
+inline std::list<HallOfFameElement*> FameList;
 
 void StartArena();
 void LoadHallOfFame();

@@ -60,8 +60,8 @@ public:
     std::string comlist;
 };
 
-extern bool MOBtrigger;
-extern std::shared_ptr<Character> supermob;
+inline bool MOBtrigger;
+inline std::shared_ptr<Character> supermob;
 
 void MobActUpdate();
 void RoomActUpdate();

@@ -42,8 +42,6 @@
  /*
   * Log-all switch.
   */
-bool fLogAll = false;
-
 static std::string ParseTarget(std::shared_ptr<Character> ch, std::string oldstring);
 static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string argument);
 

@@ -71,6 +71,6 @@ public:
     unsigned char *MCCP_Buffer = nullptr;
 };
 
-extern SystemData SysData;
+inline SystemData SysData;
 
 #endif

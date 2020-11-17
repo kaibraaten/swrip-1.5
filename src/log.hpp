@@ -3,7 +3,7 @@
 
 #include "logger.hpp"
 
-extern std::shared_ptr<Logger> Log;
+inline std::shared_ptr<Logger> Log;
 
 std::shared_ptr<Logger> NewLogger();
 

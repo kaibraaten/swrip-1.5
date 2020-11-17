@@ -92,10 +92,6 @@ static int GetMaxLeadershipLevel(std::shared_ptr<Character> ch);
 static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch);
 static int GetMaxForceLevel(std::shared_ptr<Character> ch);
 
-/*
- * Global Variables
- */
-
 static const char *const corpse_descs[] =
 {
     "The corpse of %s will soon be gone.",

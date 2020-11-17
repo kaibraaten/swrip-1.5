@@ -16,8 +16,6 @@
 #include "repos/objectrepository.hpp"
 #include "impscript/imp.hpp"
 
-lua_State *LuaMasterState = nullptr;
-
 static void SetLuaPath(lua_State *);
 static void LuaPushOneSmaugAffect(lua_State *L, std::shared_ptr<SmaugAffect> affect, int idx);
 

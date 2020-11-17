@@ -17,12 +17,6 @@
 #include "act.hpp"
 #include "systemdata.hpp"
 
-int TopSN = 0;
-int TopHerb = 0;
-
-std::array<std::shared_ptr<Skill>, MAX_SKILL> SkillTable;
-std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
-
 extern std::string spell_target_name;       /* from magic.c */
 
 static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk2);

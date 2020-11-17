@@ -7,7 +7,7 @@
 
 #include "types.hpp"
 
-extern std::list<std::shared_ptr<Missile>> Missiles;
+inline std::list<std::shared_ptr<Missile>> Missiles;
 
 class Missile
 {

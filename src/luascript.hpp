@@ -24,8 +24,6 @@ extern "C" {
 #include "constants.hpp"
 #include "types.hpp"
 
-extern lua_State *LuaMasterState;
-
 lua_State *CreateLuaState();
 lua_State *CreateChildThread(lua_State *master);
 void LuaSetfieldString(lua_State *L, const std::string &key, const std::string &value);

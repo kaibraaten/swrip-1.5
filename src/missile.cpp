@@ -27,8 +27,6 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-std::list<std::shared_ptr<Missile>> Missiles;
-
 void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
                 const std::string &firedBy, MissileType missiletype)
 {

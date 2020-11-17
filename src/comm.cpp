@@ -89,7 +89,7 @@ static void InitializeTime()
     /*
      * Init time.
      */
-    gettimeofday(&now_time, NULL);
+    gettimeofday(&now_time, nullptr);
     current_time = (time_t)now_time.tv_sec;
 
     boot_time = time(0);
@@ -108,8 +108,10 @@ static void InitializeTime()
     new_boot_struct = *new_boot_time;
     new_boot_time = &new_boot_struct;
     new_boot_time->tm_mday += 1;
+
     if(new_boot_time->tm_hour > 12)
         new_boot_time->tm_mday += 1;
+
     new_boot_time->tm_sec = 0;
     new_boot_time->tm_min = 0;
     new_boot_time->tm_hour = 6;
@@ -523,7 +525,7 @@ static void HandleSocketOutput()
 static void Sleep(timeval &last_time)
 {
     timeval now_time;
-    gettimeofday(&now_time, NULL);
+    gettimeofday(&now_time, nullptr);
     long usecDelta = ((int)last_time.tv_usec) - ((int)now_time.tv_usec)
         + 1000000 / PULSE_PER_SECOND;
     long secDelta = ((int)last_time.tv_sec) - ((int)now_time.tv_sec);
@@ -553,9 +555,9 @@ static void Sleep(timeval &last_time)
         stall_time.tv_sec = secDelta;
 
 #if defined(_WIN32)
-        result = select(0, NULL, NULL, &dummy_set, &stall_time);
+        result = select(0, nullptr, nullptr, &dummy_set, &stall_time);
 #else
-        result = select(0, NULL, NULL, NULL, &stall_time);
+        result = select(0, nullptr, nullptr, nullptr, &stall_time);
 #endif
         if(result == SOCKET_ERROR)
         {
@@ -564,7 +566,7 @@ static void Sleep(timeval &last_time)
         }
     }
 
-    gettimeofday(&last_time, NULL);
+    gettimeofday(&last_time, nullptr);
     current_time = (time_t)last_time.tv_sec;
 }
 
@@ -647,7 +649,7 @@ static void NewDescriptor(socket_t new_desc)
 
     if(pban != nullptr)
     {
-        WriteToDescriptor(dnew.get(), "Your site has been banned from this Mud.\r\n", 0);
+        WriteToDescriptor(dnew.get(), "Your site has been banned from this Mud.\r\n");
         FreeDescriptor(dnew);
         SetAlarm(0);
         return;
@@ -808,7 +810,7 @@ static void StopIdling(std::shared_ptr<Character> ch)
     ch->IdleTimer = 0;
     CharacterFromRoom(ch);
     CharacterToRoom(ch, ch->WasInRoom);
-    ch->WasInRoom = NULL;
+    ch->WasInRoom = nullptr;
     Act(AT_ACTION, "$n has returned from the void.", ch, nullptr, nullptr, ActTarget::Room);
 }
 

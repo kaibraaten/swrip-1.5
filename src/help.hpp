@@ -34,7 +34,7 @@ public:
     std::string Text;
 };
 
-extern std::string HelpGreeting;
+inline std::string HelpGreeting;
 
 std::shared_ptr<HelpFile> GetHelpFile(std::shared_ptr<Character> ch, std::string argument);
 std::shared_ptr<HelpFile> AllocateHelpFile(const std::string &keyword, short level);

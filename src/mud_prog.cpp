@@ -101,12 +101,6 @@ public:
     std::shared_ptr<Room> room;
 };
 
-bool MOBtrigger = false;
-
-/*
- *  Mudprogram additions
- */
-std::shared_ptr<Character> supermob;
 static std::list<std::shared_ptr<act_prog_data>> room_act_list;
 static std::list<std::shared_ptr<act_prog_data>> obj_act_list;
 static std::list<std::shared_ptr<act_prog_data>> mob_act_list;

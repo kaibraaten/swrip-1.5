@@ -20,7 +20,7 @@ public:
     std::shared_ptr<timerset> UseRec;
 };
 
-extern OldRepository *CommandRepository;
+inline OldRepository *CommandRepository = nullptr;
 
 Command *AllocateCommand();
 void FreeCommand(Command *command);

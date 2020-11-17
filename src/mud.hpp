@@ -241,7 +241,7 @@ public:
 /*
  * Global constants.
  */
-extern time_t last_restore_all_time;
+inline time_t last_restore_all_time;
 inline time_t boot_time = 0;
 inline HourMinSec *set_boot_time = nullptr;
 inline tm *new_boot_time = nullptr;
@@ -273,38 +273,38 @@ extern int nummobsloaded;
 extern int physicalobjects;
 inline int num_descriptors = 0;
 inline bool wizlock = false;
-extern int top_vroom;
-extern int top_affect;
-extern int top_ed;
-extern int top_exit;
-extern int top_reset;
-extern int top_room;
+inline int top_vroom;
+inline int top_affect;
+inline int top_ed;
+inline int top_exit;
+inline int top_reset;
+inline int top_room;
 extern int cur_qobjs;
 extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern std::shared_ptr<Character> cur_char;
-extern bool             cur_char_died;
-extern ch_ret           global_retcode;
+inline std::shared_ptr<Character> cur_char;
+inline bool             cur_char_died;
+inline ch_ret           global_retcode;
 
-extern int              cur_obj;
-extern int              cur_obj_serial;
-extern bool             cur_obj_extracted;
-extern obj_ret          global_objcode;
+inline int              cur_obj;
+inline int              cur_obj_serial;
+inline bool             cur_obj_extracted;
+inline obj_ret          global_objcode;
 
-extern std::shared_ptr<Character> FirstCharacter;
-extern std::shared_ptr<Character> LastCharacter;
+inline std::shared_ptr<Character> FirstCharacter;
+inline std::shared_ptr<Character> LastCharacter;
 
-extern std::list<std::shared_ptr<TeleportData>> Teleports;
+inline std::list<std::shared_ptr<TeleportData>> Teleports;
 extern std::weak_ptr<Character> quitting_char;
 extern std::weak_ptr<Character> loading_char;
 extern std::weak_ptr<Character> saving_char;
 inline time_t current_time = 0;
-extern bool             fLogAll;
-extern TimeInfo   time_info;
-extern Weather     weather_info;
-extern std::unique_ptr<Auction> OngoingAuction;
+inline bool fLogAll;
+inline TimeInfo time_info;
+inline Weather weather_info;
+inline std::unique_ptr<Auction> OngoingAuction;
 inline std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
 inline std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 inline std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];

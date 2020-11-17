@@ -42,9 +42,6 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-Arena arena;
-std::list<HallOfFameElement *> FameList;
-
 #define ARENA_FIRST_ROOM 29
 #define ARENA_LAST_ROOM  43
 #define ARENA_END        41   /* vnum of last real arena room*/
