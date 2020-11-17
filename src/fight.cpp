@@ -54,8 +54,6 @@
 #include "timer.hpp"
 #include "triggers.hpp"
 
-extern std::shared_ptr<Character> gch_prev;
-
 class Fight
 {
 public:

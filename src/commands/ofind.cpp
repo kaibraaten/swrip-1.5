@@ -19,10 +19,8 @@ void do_ofind(std::shared_ptr<Character> ch, std::string arg)
     SetCharacterColor(AT_PLAIN, ch);
     fAll = !StrCmp(arg, "all");
 
-    for(const auto &i : ProtoObjects)
+    for(const auto & [_, pObjIndex] : ProtoObjects)
     {
-        auto pObjIndex = i.second;
-
         if (fAll || NiftyIsName(arg, pObjIndex->Name))
         {
             nMatch++;

@@ -44,8 +44,6 @@
 #include "timer.hpp"
 #include "triggers.hpp"
 
-extern std::shared_ptr<Character> gch_prev;
-
 std::shared_ptr<Character> cur_char;
 bool cur_char_died = false;
 ch_ret global_retcode = rNONE;

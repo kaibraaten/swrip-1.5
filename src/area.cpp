@@ -189,10 +189,8 @@ static void EraseProtoMobs(const std::shared_ptr<Area> &pArea)
 {
     auto protoMobs = ProtoMobs;
 
-    for(const auto &i : protoMobs)
+    for(const auto & [_, mid] : protoMobs)
     {
-        auto mid = i.second;
-
         if(mid->Vnum < pArea->VnumRanges.Mob.First
            || mid->Vnum > pArea->VnumRanges.Mob.Last)
         {
@@ -224,10 +222,8 @@ static void EraseProtoObjects(const std::shared_ptr<Area> &pArea)
 {
     auto protoObjects = ProtoObjects;
 
-    for(const auto &i : protoObjects)
+    for(const auto & [_, oid] : protoObjects)
     {
-        auto oid = i.second;
-
         if(oid->Vnum < pArea->VnumRanges.Object.First
            || oid->Vnum > pArea->VnumRanges.Object.Last)
         {

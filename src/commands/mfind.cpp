@@ -18,10 +18,8 @@ void do_mfind(std::shared_ptr<Character> ch, std::string argument)
     bool fAll = !StrCmp(arg, "all");
     SetCharacterColor(AT_PLAIN, ch);
 
-    for(const auto &i : ProtoMobs)
+    for(const auto & [_, pMobIndex] : ProtoMobs)
     {
-        auto pMobIndex = i.second;
-        
         if (fAll || NiftyIsName(arg, pMobIndex->Name))
         {
             nMatch++;

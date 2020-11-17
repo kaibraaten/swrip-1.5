@@ -52,6 +52,7 @@ static bool WillCollideWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Space
 static void EvadeCollisionWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun);
 static bool ShipHasState(std::shared_ptr<Ship> ship, ShipState state);
 static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
+static void EnterOrbit(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobj);
 
 static bool WillCollideWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun)
 {
@@ -106,11 +107,234 @@ static void EvadeCollisionWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Sp
         ship->State = SHIP_BUSY;
     }
 }
+static void HandleTractorBeam(std::shared_ptr<Ship> ship)
+{
+    if(ship->TractoredBy != nullptr)
+    {
+        /* Tractoring ship is smaller and therefore moves towards target */
+        if(ship->TractoredBy->Class <= ship->Class)
+        {
+            ship->TractoredBy->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
+            SetShipCourseTowardsShip(ship->TractoredBy, ship);
+
+            if(GetShipDistanceToShip(ship, ship->TractoredBy) < 10)
+            {
+                CopyVector(ship->TractoredBy->Position, ship->Position);
+            }
+        }
+
+        /* Target is smaller and therefore pulled to target */
+        if(ship->TractoredBy->Class > ship->Class)
+        {
+            ship->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
+            SetShipCourseTowardsShip(ship, ship->TractoredBy);
+
+            if(GetShipDistanceToShip(ship, ship->TractoredBy) < 10)
+            {
+                CopyVector(ship->Position, ship->TractoredBy->Position);
+            }
+        }
+    }
+}
+
+static void HandleProximityToSpaceobject(std::shared_ptr<Ship> ship)
+{
+    for(auto spaceobj : Spaceobjects)
+    {
+        if(spaceobj->Type == SPACE_SUN
+           && WillCollideWithSun(ship, spaceobj))
+        {
+            EvadeCollisionWithSun(ship, spaceobj);
+        }
+
+        if(ship->Thrusters.Speed.Current > 0)
+        {
+            if(spaceobj->Type >= SPACE_PLANET
+               && GetShipDistanceToSpaceobject(ship, spaceobj) < 10)
+            {
+                EnterOrbit(ship, spaceobj);
+            }
+        }
+    }
+}
+
+static void UpdateHyperspace(std::shared_ptr<Ship> ship)
+{
+    if(IsShipInHyperspace(ship))
+    {
+        std::shared_ptr<Vector3> tmp = std::make_shared<Vector3>();
+        float dist = 0;
+        float origdist = 0;
+
+        ship->Hyperdistance -= ship->Hyperdrive.Speed;
+
+        dist = (float)ship->Hyperdistance;
+        origdist = (float)ship->OriginalHyperdistance;
+
+        if(dist == 0)
+            dist = -1;
+
+        SetVector(tmp,
+                  ship->Position->x - ship->Jump->x,
+                  ship->Position->y - ship->Jump->y,
+                  ship->Position->z - ship->Jump->z);
+        SetVector(ship->HyperPosition,
+                  ship->Position->x - (tmp->x * (dist / origdist)),
+                  ship->Position->y - (tmp->y * (dist / origdist)),
+                  ship->Position->z - (tmp->z * (dist / origdist)));
+
+        ship->Count++;
+
+        for(auto spaceobj : Spaceobjects)
+        {
+            if(CaughtInGravity(ship, spaceobj))
+            {
+                int dmg = 0;
+
+                EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat),
+                           "Hyperjump complete.");
+                EchoToShip(AT_YELLOW, ship,
+                           "The ship slams to a halt as it comes out of hyperspace.");
+                auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                                        ship->Name.c_str(), ship->Position->x,
+                                        ship->Position->y, ship->Position->z);
+                dmg = 15 * GetRandomNumberFromRange(1, 4);
+                ship->Defenses.Hull.Current -= dmg;
+                EchoToShip(AT_YELLOW, ship,
+                           "The hull cracks from the pressure.");
+                CopyVector(ship->Position, ship->HyperPosition);
+                ShipToSpaceobject(ship, ship->CurrentJump);
+                ship->CurrentJump = NULL;
+                EchoToNearbyShips(AT_YELLOW, ship, buf);
+                ship->State = SHIP_READY;
+                ship->Home = ship->Spaceobject->Name;
+            }
+        }
+
+        if(IsShipInHyperspace(ship)
+           && ship->Hyperdistance <= 0
+           && !ship->Tracking)
+        {
+            ship->Count = 0;
+            ShipToSpaceobject(ship, ship->CurrentJump);
+
+            if(ship->Spaceobject == NULL)
+            {
+                EchoToCockpit(AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
+            }
+            else
+            {
+                EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
+                EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
+                auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                                        ship->Name.c_str(), ship->Position->x,
+                                        ship->Position->y, ship->Position->z);
+                CopyVector(ship->HyperPosition, ship->Position);
+                ShipToSpaceobject(ship, ship->CurrentJump);
+                ship->CurrentJump = NULL;
+                EchoToNearbyShips(AT_YELLOW, ship, buf);
+                ship->State = SHIP_READY;
+                ship->Home = ship->Spaceobject->Name;
+            }
+        }
+        else if((ship->Count >= (ship->tcount ? ship->tcount : 10))
+                && IsShipInHyperspace(ship)
+                && ship->Tracking == true)
+        {
+            ShipToSpaceobject(ship, ship->CurrentJump);
+
+            if(ship->Spaceobject == NULL)
+            {
+                EchoToCockpit(AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
+            }
+            else
+            {
+                EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
+                EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
+                auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                                        ship->Name.c_str(), ship->Position->x,
+                                        ship->Position->y, ship->Position->z);
+                CopyVector(ship->Position, ship->HyperPosition);
+                ShipToSpaceobject(ship, ship->CurrentJump);
+                ship->CurrentJump = NULL;
+                EchoToNearbyShips(AT_YELLOW, ship, buf);
+                ship->State = SHIP_READY;
+                ship->Home = ship->Spaceobject->Name;
+
+                SetVector(ship->Jump,
+                          ship->Position->x + ship->TrackVector->x,
+                          ship->Position->y + ship->TrackVector->y,
+                          ship->Position->z + ship->TrackVector->z);
+
+                bool found = false;
+
+                for(auto spaceobj : Spaceobjects)
+                {
+                    if(IsSpaceobjectInRange(ship, spaceobj))
+                    {
+                        ship->CurrentJump = spaceobj;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(!found)
+                {
+                    ship->CurrentJump = ship->Spaceobject;
+                }
+
+                ship->Hyperdistance = GetDistanceBetweenVectors(ship->Position, ship->Jump) / 50;
+                ship->OriginalHyperdistance = ship->Hyperdistance;
+                ship->Count = 0;
+                do_radar(ship->Ch, "");
+            }
+        }
+        else if(ship->Count >= 10 && IsShipInHyperspace(ship))
+        {
+            ship->Count = 0;
+            auto buf = FormatString("%d", ship->Hyperdistance);
+            EchoToRoomNoNewline(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Remaining jump distance: ");
+            EchoToRoom(AT_WHITE, GetRoom(ship->Rooms.Pilotseat), buf);
+        }
+
+        if(IsShipInHyperspace(ship))
+        {
+            if(ship->Count % 2
+               && ship->Hyperdistance < 10 * ship->Hyperdrive.Speed
+               && ship->Hyperdistance > 0)
+            {
+                auto buf = FormatString("An alarm sounds. Your hyperjump is ending: %d",
+                                        ship->Hyperdistance);
+                EchoToShip(AT_RED, ship, buf);
+            }
+        }
+    }
+}
+
+static void UpdateDockedShip(std::shared_ptr<Ship> ship)
+{
+    if(ship->Docked)
+    {
+        std::shared_ptr<Ship> docked = ship->Docked;
+        CopyVector(ship->Position, docked->Position);
+        CopyVector(ship->HyperPosition, docked->HyperPosition);
+        CopyVector(ship->OriginPosition, docked->OriginPosition);
+        CopyVector(ship->Jump, docked->Jump);
+        CopyVector(ship->Heading, docked->Heading);
+
+        ship->State = ship->Docked->State;
+        ship->Hyperdistance = ship->Docked->Hyperdistance;
+        ship->Thrusters.Speed.Current = ship->Docked->Thrusters.Speed.Current;
+        ship->OriginalHyperdistance = ship->Docked->OriginalHyperdistance;
+        ship->Location = ship->Docked->Location;
+        ship->LandingDestination = ship->Docked->LandingDestination;
+        ship->Spaceobject = ship->Docked->Spaceobject;
+        ship->CurrentJump = ship->Docked->CurrentJump;
+    }
+}
 
 void UpdateShipMovement()
 {
-    char buf[MAX_STRING_LENGTH];
-
     for(auto ship : Ships)
     {
         if(ship->Spaceobject == nullptr)
@@ -128,233 +352,20 @@ void UpdateShipMovement()
             MoveShip(ship);
         }
 
-        /*
-         * Tractor beam handling
-         */
-        if(ship->TractoredBy != nullptr)
-        {
-            /* Tractoring ship is smaller and therefore moves towards target */
-            if(ship->TractoredBy->Class <= ship->Class)
-            {
-                ship->TractoredBy->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
-                SetShipCourseTowardsShip(ship->TractoredBy, ship);
-
-                if(GetShipDistanceToShip(ship, ship->TractoredBy) < 10)
-                {
-                    CopyVector(ship->TractoredBy->Position, ship->Position);
-                }
-            }
-
-            /* Target is smaller and therefore pulled to target */
-            if(ship->TractoredBy->Class > ship->Class)
-            {
-                ship->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
-                SetShipCourseTowardsShip(ship, ship->TractoredBy);
-
-                if(GetShipDistanceToShip(ship, ship->TractoredBy) < 10)
-                {
-                    CopyVector(ship->Position, ship->TractoredBy->Position);
-                }
-            }
-        }
+        HandleTractorBeam(ship);
 
         if(IsShipAutoflying(ship))
         {
             continue;
         }
 
-        for(auto spaceobj : Spaceobjects)
-        {
-            if(spaceobj->Type == SPACE_SUN
-               && WillCollideWithSun(ship, spaceobj))
-            {
-                EvadeCollisionWithSun(ship, spaceobj);
-            }
-
-            if(ship->Thrusters.Speed.Current > 0)
-            {
-                if(spaceobj->Type >= SPACE_PLANET
-                   && GetShipDistanceToSpaceobject(ship, spaceobj) < 10)
-                {
-                    sprintf(buf, "You begin orbitting %s.", spaceobj->Name.c_str());
-                    EchoToCockpit(AT_YELLOW, ship, buf);
-                    sprintf(buf, "%s begins orbiting %s.",
-                            ship->Name.c_str(), spaceobj->Name.c_str());
-                    EchoToNearbyShips(AT_ORANGE, ship, buf);
-                    ship->InOrbitOf = spaceobj;
-                    ship->Thrusters.Speed.Current = 0;
-                }
-            }
-        }
+        HandleProximityToSpaceobject(ship);
     }
 
     for(auto ship : Ships)
     {
-        if(IsShipInHyperspace(ship))
-        {
-            std::shared_ptr<Vector3> tmp = std::make_shared<Vector3>();
-            float dist = 0;
-            float origdist = 0;
-
-            ship->Hyperdistance -= ship->Hyperdrive.Speed;
-
-            dist = (float)ship->Hyperdistance;
-            origdist = (float)ship->OriginalHyperdistance;
-
-            if(dist == 0)
-                dist = -1;
-
-            SetVector(tmp,
-                      ship->Position->x - ship->Jump->x,
-                      ship->Position->y - ship->Jump->y,
-                      ship->Position->z - ship->Jump->z);
-            SetVector(ship->HyperPosition,
-                      ship->Position->x - (tmp->x * (dist / origdist)),
-                      ship->Position->y - (tmp->y * (dist / origdist)),
-                      ship->Position->z - (tmp->z * (dist / origdist)));
-
-            ship->Count++;
-
-            for(auto spaceobj : Spaceobjects)
-            {
-                if(CaughtInGravity(ship, spaceobj))
-                {
-                    int dmg = 0;
-
-                    EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat),
-                               "Hyperjump complete.");
-                    EchoToShip(AT_YELLOW, ship,
-                               "The ship slams to a halt as it comes out of hyperspace.");
-                    sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-                            ship->Name.c_str(), ship->Position->x, ship->Position->y, ship->Position->z);
-                    dmg = 15 * GetRandomNumberFromRange(1, 4);
-                    ship->Defenses.Hull.Current -= dmg;
-                    EchoToShip(AT_YELLOW, ship,
-                               "The hull cracks from the pressure.");
-                    CopyVector(ship->Position, ship->HyperPosition);
-                    ShipToSpaceobject(ship, ship->CurrentJump);
-                    ship->CurrentJump = NULL;
-                    EchoToNearbyShips(AT_YELLOW, ship, buf);
-                    ship->State = SHIP_READY;
-                    ship->Home = ship->Spaceobject->Name;
-                }
-            }
-
-            if(IsShipInHyperspace(ship)
-               && ship->Hyperdistance <= 0
-               && !ship->Tracking)
-            {
-                ship->Count = 0;
-                ShipToSpaceobject(ship, ship->CurrentJump);
-
-                if(ship->Spaceobject == NULL)
-                {
-                    EchoToCockpit(AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
-                }
-                else
-                {
-                    EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
-                    EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-                    sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-                            ship->Name.c_str(), ship->Position->x, ship->Position->y, ship->Position->z);
-                    CopyVector(ship->HyperPosition, ship->Position);
-                    ShipToSpaceobject(ship, ship->CurrentJump);
-                    ship->CurrentJump = NULL;
-                    EchoToNearbyShips(AT_YELLOW, ship, buf);
-                    ship->State = SHIP_READY;
-                    ship->Home = ship->Spaceobject->Name;
-                }
-            }
-            else if((ship->Count >= (ship->tcount ? ship->tcount : 10))
-                    && IsShipInHyperspace(ship)
-                    && ship->Tracking == true)
-            {
-                ShipToSpaceobject(ship, ship->CurrentJump);
-
-                if(ship->Spaceobject == NULL)
-                {
-                    EchoToCockpit(AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
-                }
-                else
-                {
-                    EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
-                    EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-                    sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-                            ship->Name.c_str(), ship->Position->x, ship->Position->y, ship->Position->z);
-                    CopyVector(ship->Position, ship->HyperPosition);
-                    ShipToSpaceobject(ship, ship->CurrentJump);
-                    ship->CurrentJump = NULL;
-                    EchoToNearbyShips(AT_YELLOW, ship, buf);
-                    ship->State = SHIP_READY;
-                    ship->Home = ship->Spaceobject->Name;
-
-                    SetVector(ship->Jump,
-                              ship->Position->x + ship->TrackVector->x,
-                              ship->Position->y + ship->TrackVector->y,
-                              ship->Position->z + ship->TrackVector->z);
-
-                    bool found = false;
-
-                    for(auto spaceobj : Spaceobjects)
-                    {
-                        if(IsSpaceobjectInRange(ship, spaceobj))
-                        {
-                            ship->CurrentJump = spaceobj;
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if(!found)
-                    {
-                        ship->CurrentJump = ship->Spaceobject;
-                    }
-
-                    ship->Hyperdistance = GetDistanceBetweenVectors(ship->Position, ship->Jump) / 50;
-                    ship->OriginalHyperdistance = ship->Hyperdistance;
-                    ship->Count = 0;
-                    do_radar(ship->Ch, "");
-                }
-            }
-            else if(ship->Count >= 10 && IsShipInHyperspace(ship))
-            {
-                ship->Count = 0;
-                sprintf(buf, "%d", ship->Hyperdistance);
-                EchoToRoomNoNewline(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Remaining jump distance: ");
-                EchoToRoom(AT_WHITE, GetRoom(ship->Rooms.Pilotseat), buf);
-            }
-
-            if(IsShipInHyperspace(ship))
-            {
-                if(ship->Count % 2
-                   && ship->Hyperdistance < 10 * ship->Hyperdrive.Speed
-                   && ship->Hyperdistance > 0)
-                {
-                    sprintf(buf, "An alarm sounds. Your hyperjump is ending: %d",
-                            ship->Hyperdistance);
-                    EchoToShip(AT_RED, ship, buf);
-                }
-            }
-        }
-
-        if(ship->Docked)
-        {
-            std::shared_ptr<Ship> docked = ship->Docked;
-            CopyVector(ship->Position, docked->Position);
-            CopyVector(ship->HyperPosition, docked->HyperPosition);
-            CopyVector(ship->OriginPosition, docked->OriginPosition);
-            CopyVector(ship->Jump, docked->Jump);
-            CopyVector(ship->Heading, docked->Heading);
-
-            ship->State = ship->Docked->State;
-            ship->Hyperdistance = ship->Docked->Hyperdistance;
-            ship->Thrusters.Speed.Current = ship->Docked->Thrusters.Speed.Current;
-            ship->OriginalHyperdistance = ship->Docked->OriginalHyperdistance;
-            ship->Location = ship->Docked->Location;
-            ship->LandingDestination = ship->Docked->LandingDestination;
-            ship->Spaceobject = ship->Docked->Spaceobject;
-            ship->CurrentJump = ship->Docked->CurrentJump;
-        }
+        UpdateHyperspace(ship);
+        UpdateDockedShip(ship);
 
         if(ship->Position->x > MAX_COORD)
             ship->Position->x = -MAX_COORD_S;
@@ -376,12 +387,22 @@ void UpdateShipMovement()
     }
 }
 
+static void EnterOrbit(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobj)
+{
+    auto buf = FormatString("You begin orbitting %s.", spaceobj->Name.c_str());
+    EchoToCockpit(AT_YELLOW, ship, buf);
+    buf = FormatString("%s begins orbiting %s.",
+                       ship->Name.c_str(), spaceobj->Name.c_str());
+    EchoToNearbyShips(AT_ORANGE, ship, buf);
+    ship->InOrbitOf = spaceobj;
+    ship->Thrusters.Speed.Current = 0;
+}
+
 static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
 {
     std::shared_ptr<Ship> target;
     char buf[MAX_STRING_LENGTH] = { '\0' };
     vnum_t destination = INVALID_VNUM;
-    std::shared_ptr<Character> ch = NULL;
     const LandingSite *site = GetLandingSiteFromLocationName(ship->Spaceobject, arg);
 
     if(site)
@@ -389,7 +410,7 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
         destination = site->Dock;
     }
 
-    if(target != ship && target != NULL && target->BayOpen
+    if(target != ship && target != nullptr && target->BayOpen
        && (ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP))
     {
         destination = target->Rooms.Hangar;
@@ -415,16 +436,15 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
 
     if(ship->Ch && ship->Ch->Desc)
     {
-        long xp = 0;
         auto ability = AbilityClass::Piloting;
-        ch = ship->Ch;
-        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)));
+        auto ch = ship->Ch;
+        long xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)));
         xp = umin(GetShipValue(ship), xp);
         GainXP(ch, ability, xp);
         ch->Echo("&WYou gain %ld points of %s experience!\r\n",
                  umin(GetShipValue(ship), xp),
                  AbilityName[(int)ability]);
-        ship->Ch = NULL;
+        ship->Ch = nullptr;
     }
 
     ship->Location = destination;
@@ -441,10 +461,10 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
     {
         if(ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship)
         {
-            ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
+            ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = nullptr;
         }
 
-        ship->WeaponSystems.TractorBeam.Tractoring = NULL;
+        ship->WeaponSystems.TractorBeam.Tractoring = nullptr;
     }
 
     sprintf(buf, "%s lands on the platform.", ship->Name.c_str());
@@ -479,7 +499,6 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
 static void ApproachLandingSite(std::shared_ptr<Ship> ship, const std::string &arg)
 {
     std::shared_ptr<Spaceobject> spaceobj;
-    char buf[MAX_STRING_LENGTH];
     std::string landingSiteName;
     bool found = false;
     std::shared_ptr<Ship> target;
@@ -522,9 +541,9 @@ static void ApproachLandingSite(std::shared_ptr<Ship> ship, const std::string &a
         return;
     }
 
-    sprintf(buf, "Approaching %s.", landingSiteName.c_str());
+    auto buf = FormatString("Approaching %s.", landingSiteName.c_str());
     EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), buf);
-    sprintf(buf, "%s begins its approach to %s.", ship->Name.c_str(), landingSiteName.c_str());
+    buf = FormatString("%s begins its approach to %s.", ship->Name.c_str(), landingSiteName.c_str());
     EchoToNearbyShips(AT_YELLOW, ship, buf);
 }
 
@@ -538,7 +557,6 @@ static void CopyPositionToDockedShips(std::shared_ptr<Ship> ship, std::shared_pt
 
 static void LaunchShip(std::shared_ptr<Ship> ship)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
     std::shared_ptr<Spaceobject> spaceobject = GetSpaceobjectFromDockVnum(ship->Location);
     int plusminus = 0;
 
@@ -548,7 +566,7 @@ static void LaunchShip(std::shared_ptr<Ship> ship)
     {
         EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Launch path blocked... Launch aborted.");
         EchoToShip(AT_YELLOW, ship, "The ship slowly sets back back down on the landing pad.");
-        sprintf(buf, "%s slowly sets back down.", ship->Name.c_str());
+        auto buf = FormatString("%s slowly sets back down.", ship->Name.c_str());
         EchoToRoom(AT_YELLOW, GetRoom(ship->Location), buf);
         ship->State = SHIP_LANDED;
         return;
@@ -617,10 +635,11 @@ static void LaunchShip(std::shared_ptr<Ship> ship)
 
     EchoToCockpit(AT_GREEN, ship, "Launch complete.");
     EchoToShip(AT_YELLOW, ship, "The ship leaves the platform far behind as it flies into space.");
-    sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-            ship->Name.c_str(), ship->Position->x, ship->Position->y, ship->Position->z);
+    auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                            ship->Name.c_str(), ship->Position->x,
+                            ship->Position->y, ship->Position->z);
     EchoToNearbyShips(AT_YELLOW, ship, buf);
-    sprintf(buf, "%s lifts off into space.", ship->Name.c_str());
+    buf = FormatString("%s lifts off into space.", ship->Name.c_str());
     EchoToRoom(AT_YELLOW, GetRoom(ship->LastDock), buf);
 }
 
@@ -2818,7 +2837,7 @@ void DestroyShip(std::shared_ptr<Ship> ship, std::shared_ptr<Character> killer)
     {
         ResetShip(ship);
         return;
-    }
+}
 
     MakeDebris(ship);
 

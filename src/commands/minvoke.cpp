@@ -23,10 +23,8 @@ void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
         int count = NumberArgument(arg, arg2);
         int cnt = 0;
         
-        for(const auto &i : ProtoMobs)
+        for(const auto & [_, pMobIndex] : ProtoMobs)
         {
-            auto pMobIndex = i.second;
-            
             if(NiftyIsName(arg2, pMobIndex->Name)
                && ++cnt == count)
             {

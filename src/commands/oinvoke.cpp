@@ -50,10 +50,8 @@ void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
         int count = NumberArgument(arg1, arg);
         int cnt = 0;
         
-        for(const auto &i : ProtoObjects)
+        for(const auto & [_, pObjIndex] : ProtoObjects)
         {
-            auto pObjIndex = i.second;
-
             if(NiftyIsName(arg, pObjIndex->Name)
                && ++cnt == count)
             {

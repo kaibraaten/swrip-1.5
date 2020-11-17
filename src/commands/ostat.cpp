@@ -23,7 +23,7 @@ void do_ostat(std::shared_ptr<Character> ch, std::string arg)
     }
 
     auto obj = GetObjectAnywhere(ch, arg);
-    
+
     if(obj == nullptr)
     {
         ch->Echo("Nothing like that in hell, earth, or heaven.\r\n");
@@ -34,7 +34,7 @@ void do_ostat(std::shared_ptr<Character> ch, std::string arg)
 
     ShowGeneralStats(obj, arg, outbuf);
     ShowItemTypeReport(obj, outbuf);
-    
+
     ch->Echo(outbuf.str());
 }
 
@@ -60,19 +60,19 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
         outbuf << "&C" << pdesc << "&d";
 
     outbuf << "&cVnum: &C" << obj->Prototype->Vnum
-           << " (" << GetAreaOf(obj->Prototype)->Filename << ")"
-           << "  &cType: &C" << GetItemTypeName(obj)
-           << "  &cCount: &C" << obj->Prototype->Count
-           << "  &cGroupcount: &C" << obj->Count
-           << "&d\r\n";
+        << " (" << GetAreaOf(obj->Prototype)->Filename << ")"
+        << "  &cType: &C" << GetItemTypeName(obj)
+        << "  &cCount: &C" << obj->Prototype->Count
+        << "  &cGroupcount: &C" << obj->Count
+        << "&d\r\n";
 
     outbuf << "&cSerial#: &C" << obj->Serial
-           << "  &cTopIdxSerial#: &C" << obj->Prototype->Serial
-           << "  &cTopSerial#: &C" << cur_obj_serial
-           << "&d\r\n";
+        << "  &cTopIdxSerial#: &C" << obj->Prototype->Serial
+        << "  &cTopSerial#: &C" << cur_obj_serial
+        << "&d\r\n";
 
     outbuf << "&cShort description: &C" << obj->ShortDescr << "&d\r\n";
-    
+
     outbuf << "&cLong description: &C" << obj->Description << "&d\r\n";
 
     if(!obj->ActionDescription.empty())
@@ -83,38 +83,38 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
     outbuf << "&cExtra flags: &C" << FlagString(obj->Flags, ObjectFlags) << "&d\r\n";
 
     outbuf << "&cNumber: &C" << 1 << "&c/&C" << GetObjectCount(obj)
-           << "  &cWeight: &C" << obj->Weight << "&c/&C" <<  GetObjectWeight(obj)
-           << "  &cLayers: &C" << obj->Prototype->Layers
-           << "&d\r\n";
+        << "  &cWeight: &C" << obj->Weight << "&c/&C" << GetObjectWeight(obj)
+        << "  &cLayers: &C" << obj->Prototype->Layers
+        << "&d\r\n";
 
     outbuf << "&cCost: &C" << obj->Cost
-           << "  &cTimer: &C" << obj->Timer
-           << "  &cLevel: &C" << obj->Level
-           << "&d\r\n";
+        << "  &cTimer: &C" << obj->Timer
+        << "  &cLevel: &C" << obj->Level
+        << "&d\r\n";
 
     outbuf << "&cIn room: &C" << (obj->InRoom == nullptr ? 0 : obj->InRoom->Vnum)
-           << "  &cIn object: &C" << (obj->InObject == nullptr ? "(none)" : obj->InObject->ShortDescr)
-           << "  &cCarried by: &C" << (obj->CarriedBy == nullptr ? "(none)" : obj->CarriedBy->Name)
-           << "  &cWear_loc: &C" << obj->WearLoc
-           << "&d\r\n";
+        << "  &cIn object: &C" << (obj->InObject == nullptr ? "(none)" : obj->InObject->ShortDescr)
+        << "  &cCarried by: &C" << (obj->CarriedBy == nullptr ? "(none)" : obj->CarriedBy->Name)
+        << "  &cWear_loc: &C" << obj->WearLoc
+        << "&d\r\n";
 
     outbuf << "&cIndex Values : &C"
-           << obj->Prototype->Value[0] << " "
-           << obj->Prototype->Value[1] << " "
-           << obj->Prototype->Value[2] << " "
-           << obj->Prototype->Value[3] << " "
-           << obj->Prototype->Value[4] << " "
-           << obj->Prototype->Value[5] << " "
-           << "&d\r\n";
+        << obj->Prototype->Value[0] << " "
+        << obj->Prototype->Value[1] << " "
+        << obj->Prototype->Value[2] << " "
+        << obj->Prototype->Value[3] << " "
+        << obj->Prototype->Value[4] << " "
+        << obj->Prototype->Value[5] << " "
+        << "&d\r\n";
 
     outbuf << "&cObject Values: &C"
-           << obj->Value[0] << " "
-           << obj->Value[1] << " "
-           << obj->Value[2] << " "
-           << obj->Value[3] << " "
-           << obj->Value[4] << " "
-           << obj->Value[5] << " "
-           << "&d\r\n";
+        << obj->Value[0] << " "
+        << obj->Value[1] << " "
+        << obj->Value[2] << " "
+        << obj->Value[3] << " "
+        << obj->Value[4] << " "
+        << obj->Value[5] << " "
+        << "&d\r\n";
 
     if(!obj->Prototype->ExtraDescriptions().empty())
     {
@@ -144,11 +144,11 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
 
     for(auto paf : obj->Affects())
         outbuf << "&cAffects &C" << GetAffectLocationName(paf->Location)
-               << " &cby &C" << paf->Modifier << " &c(extra)&d\r\n";
+        << " &cby &C" << paf->Modifier << " &c(extra)&d\r\n";
 
     for(auto paf : obj->Prototype->Affects())
         outbuf << "&cAffects &C" << GetAffectLocationName(paf->Location)
-               << " &cby &C" << paf->Modifier << "&d\r\n";
+        << " &cby &C" << paf->Modifier << "&d\r\n";
 }
 
 static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
@@ -162,7 +162,7 @@ static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf
     const int about = strength * 2;
     const int waist = strength * 1;
     const int over = strength * 0;
-    
+
     buf << "&cFabric strength: &C" << strength << "&d\r\n";
     buf << "&cResulting AC when used for crafting armor:\r\n"
         << "  &cHead:  &C" << head << "&d\r\n"
@@ -176,19 +176,16 @@ static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf
         << "  &cTOTAL: &C" << head + body + legs + feet + arms + about + waist + over << "&d\r\n";
 
     bool isBest = true;
-    
-    ForEach(ProtoObjects,
-            [&isBest, obj](const auto &tuple)
-            {
-                auto objToCheck = tuple.second;
-                
-                if(objToCheck->ItemType == obj->ItemType
-                   && objToCheck->Value[OVAL_FABRIC_STRENGTH] >= obj->Value[OVAL_FABRIC_STRENGTH]
-                   && objToCheck->Vnum != obj->Prototype->Vnum)
-                {
-                    isBest = false;
-                }
-            });
+
+    for(const auto & [_, objToCheck] : ProtoObjects)
+    {
+        if(objToCheck->ItemType == obj->ItemType
+           && objToCheck->Value[OVAL_FABRIC_STRENGTH] >= obj->Value[OVAL_FABRIC_STRENGTH]
+           && objToCheck->Vnum != obj->Prototype->Vnum)
+        {
+            isBest = false;
+        }
+    }
 
     if(isBest)
     {
@@ -201,7 +198,7 @@ static void ShowWeaponStats(std::shared_ptr<Object> obj, std::ostringstream &buf
     int minDam = obj->Prototype->Value[OVAL_WEAPON_NUM_DAM_DIE];
     int maxDam = obj->Prototype->Value[OVAL_WEAPON_SIZE_DAM_DIE];
 
-    if (minDam > 0 && maxDam > 0)
+    if(minDam > 0 && maxDam > 0)
     {
         maxDam *= minDam;
     }
@@ -215,7 +212,7 @@ static void ShowWeaponStats(std::shared_ptr<Object> obj, std::ostringstream &buf
     {
         minDam = maxDam / 3;
     }
-    
+
     buf << "&cWeapon type: &C" << Capitalize(GetWeaponTypeName(obj->Prototype->Value[OVAL_WEAPON_TYPE])) << "&d\r\n";
     buf << "&cDamage:      &C" << minDam << " - " << maxDam
         << " (avg " << ((minDam + maxDam) / 2) << ")&d\r\n";
@@ -225,14 +222,14 @@ static void ShowWeaponStats(std::shared_ptr<Object> obj, std::ostringstream &buf
 static void ShowBookStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
 {
     bool teachesSkills = false;
-    
+
     for(int i = OVAL_BOOK_SKILL1; i <= OVAL_BOOK_SKILL3; ++i)
     {
         if(obj->Prototype->Value[i] >= 0)
         {
             int sn = obj->Prototype->Value[i];
             buf << "&cSkill " << i << ": &C";
-            
+
             if(sn >= 0 && sn < MAX_SKILL && SkillTable[sn] != nullptr)
             {
                 const auto &skill = SkillTable[sn];
@@ -266,7 +263,7 @@ static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &
         << "&C=================================================&d\r\n"
         << "&cReport for item type &C" << ObjectTypes[obj->ItemType] << "&d\r\n"
         << "&C-------------------------------------------------&d\r\n";
-    
+
     switch(obj->ItemType)
     {
     case ITEM_FABRIC:
@@ -281,7 +278,7 @@ static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &
     case ITEM_SCROLL:
         ShowBookStats(obj, tmp);
         break;
-        
+
     default:
         tmp.str("");
         break;

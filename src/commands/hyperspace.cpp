@@ -19,7 +19,6 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
     std::shared_ptr<Ship> ship;
     std::shared_ptr<Spaceobject> spaceobject;
     std::shared_ptr<Vector3> tmp = std::make_shared<Vector3>();
-    char buf[MAX_STRING_LENGTH] = { '\0' };
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
     {
@@ -139,8 +138,9 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
 
             EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
             EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-            sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-                    ship->Name.c_str(), ship->Position->x, ship->Position->y, ship->Position->z);
+            auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                                    ship->Name.c_str(), ship->Position->x,
+                                    ship->Position->y, ship->Position->z);
             EchoToNearbyShips(AT_YELLOW, ship, buf);
             ship->State = SHIP_READY;
             ship->Home = ship->Spaceobject->Name;
@@ -210,7 +210,7 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    sprintf(buf, "%s enters hyperspace.", ship->Name.c_str());
+    auto buf = FormatString("%s enters hyperspace.", ship->Name.c_str());
     EchoToNearbyShips(AT_YELLOW, ship, buf);
 
     ship->LastSystem = ship->Spaceobject;
@@ -246,14 +246,13 @@ static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, std::share
 {
     if(dockedShip->Docked == ship)
     {
-        char buf[MAX_STRING_LENGTH] = { '\0' };
         EchoToRoom(AT_YELLOW, GetRoom(dockedShip->Rooms.Pilotseat),
                    "Hyperjump complete.");
         EchoToShip(AT_YELLOW, dockedShip,
                    "The ship lurches slightly as it comes out of hyperspace.");
-        sprintf(buf, "%s enters the starsystem at %.0f %.0f %.0f",
-                dockedShip->Name.c_str(), dockedShip->Position->x,
-                dockedShip->Position->y, dockedShip->Position->z);
+        auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
+                                dockedShip->Name.c_str(), dockedShip->Position->x,
+                                dockedShip->Position->y, dockedShip->Position->z);
         EchoToNearbyShips(AT_YELLOW, dockedShip, buf);
         dockedShip->Home = ship->Home;
 

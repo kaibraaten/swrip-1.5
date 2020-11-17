@@ -24,10 +24,8 @@ void do_showlayers(std::shared_ptr<Character> ch, std::string arg)
     int displayLimit = ToLong(arg);
     ch->Echo("      Vnum      Wear Layer   Description \r\n");
 
-    for(const auto &i : ProtoObjects)
+    for(const auto & [_, pObj] : ProtoObjects)
     {
-        const auto &pObj = i.second;
-        
         if (pObj->Layers > 0)
         {
             if (++cou <= displayLimit)

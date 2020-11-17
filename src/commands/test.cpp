@@ -46,83 +46,83 @@ static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 void do_test(std::shared_ptr<Character> ch, std::string argument)
 {
 #ifdef HAVE_UNAME
-    if( !StrCmp( argument, "uname" ) )
+    if(!StrCmp(argument, "uname"))
     {
         struct utsname buf;
 
-        if( uname(&buf) == 0 )
+        if(uname(&buf) == 0)
         {
-            ch->Echo("&Y%s-%s %s\r\n", buf.sysname, buf.machine, buf.release );
-            ch->Echo("&Ysysname  %s\r\n", buf.sysname );
-            ch->Echo("&Ynodename %s\r\n", buf.nodename );
-            ch->Echo("&Yrelease  %s\r\n", buf.release );
-            ch->Echo("&Yversion  %s\r\n", buf.version );
-            ch->Echo("&Ymachine  %s\r\n", buf.machine );
+            ch->Echo("&Y%s-%s %s\r\n", buf.sysname, buf.machine, buf.release);
+            ch->Echo("&Ysysname  %s\r\n", buf.sysname);
+            ch->Echo("&Ynodename %s\r\n", buf.nodename);
+            ch->Echo("&Yrelease  %s\r\n", buf.release);
+            ch->Echo("&Yversion  %s\r\n", buf.version);
+            ch->Echo("&Ymachine  %s\r\n", buf.machine);
         }
         else
         {
-            ch->Echo("&RSomething didn't go right.&w\r\n" );
+            ch->Echo("&RSomething didn't go right.&w\r\n");
         }
 
         return;
     }
 #endif
 
-    if( !StrCmp( argument, "saveareas" ) )
+    if(!StrCmp(argument, "saveareas"))
     {
-        ch->Echo("Saving areas...\r\n" );
+        ch->Echo("Saving areas...\r\n");
         Areas->Save();
     }
-    else if( !StrCmp( argument, "saveclans" ) )
+    else if(!StrCmp(argument, "saveclans"))
     {
-        ch->Echo("Saving clans...\r\n" );
+        ch->Echo("Saving clans...\r\n");
         Clans->Save();
     }
-    else if( !StrCmp( argument, "savespace" ) )
+    else if(!StrCmp(argument, "savespace"))
     {
-        ch->Echo("Saving spaceobjects...\r\n" );
+        ch->Echo("Saving spaceobjects...\r\n");
         Spaceobjects->Save();
     }
-    else if( !StrCmp( argument, "saveplanets" ) )
+    else if(!StrCmp(argument, "saveplanets"))
     {
-        ch->Echo("Saving planets...\r\n" );
+        ch->Echo("Saving planets...\r\n");
         Planets->Save();
     }
-    else if( !StrCmp( argument, "saveboards" ) )
+    else if(!StrCmp(argument, "saveboards"))
     {
-        ch->Echo("Saving boards...\r\n" );
+        ch->Echo("Saving boards...\r\n");
         Boards->Save();
     }
-    else if( !StrCmp( argument, "saveshuttles" ) )
+    else if(!StrCmp(argument, "saveshuttles"))
     {
-        ch->Echo("Saving shuttles...\r\n" );
+        ch->Echo("Saving shuttles...\r\n");
         Shuttles->Save();
     }
-    else if( !StrCmp( argument, "saveships" ) )
+    else if(!StrCmp(argument, "saveships"))
     {
-        ch->Echo("Saving ships...\r\n" );
+        ch->Echo("Saving ships...\r\n");
         Ships->Save();
     }
-    else if( !StrCmp( argument, "savebadnames" ) )
+    else if(!StrCmp(argument, "savebadnames"))
     {
-        ch->Echo("Saving bad names...\r\n" );
+        ch->Echo("Saving bad names...\r\n");
         BadNames->Save();
     }
-    else if( !StrCmp( argument, "savebans" ) )
+    else if(!StrCmp(argument, "savebans"))
     {
-        ch->Echo("Saving bans...\r\n" );
+        ch->Echo("Saving bans...\r\n");
         Bans->Save();
     }
-    else if( !StrCmp( argument, "savehalloffame" ) )
+    else if(!StrCmp(argument, "savehalloffame"))
     {
-        ch->Echo("Saving Hall of Fame...\r\n" );
+        ch->Echo("Saving Hall of Fame...\r\n");
         SaveHallOfFame();
     }
     else if(StrCmp(argument, "resethomes") == 0)
     {
         int homeCount = 0;
 
-        for (auto room : Rooms)
+        for(auto room : Rooms)
         {
             if(room->Flags.test(Flag::Room::PlayerHome))
             {
@@ -162,10 +162,8 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     }
     else if(StrCmp(argument, "fabrics") == 0)
     {
-        for(const auto &i : ProtoObjects)
+        for(const auto &[_, obj] : ProtoObjects)
         {
-            auto obj = i.second;
-
             if(obj->ItemType == ITEM_FABRIC)
             {
                 auto area = GetAreaFromObjVnum(obj->Vnum);
@@ -192,16 +190,16 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
                 Flag::Mob::_28,
                 Flag::Mob::_29,
                 Flag::Mob::_31
-                };
+        };
         std::map<size_t, int> stats;
 
-        for(auto mob : ProtoMobs)
+        for(const auto &[_, mob] : ProtoMobs)
         {
             for(auto flag : oldFlags)
             {
-                if(mob.second->Flags.test(flag))
+                if(mob->Flags.test(flag))
                 {
-                    mob.second->Flags.reset(flag);
+                    mob->Flags.reset(flag);
                     stats[flag] += 1;
                 }
             }
@@ -227,16 +225,16 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
                 Flag::Obj::_22,
                 Flag::Obj::_23,
                 Flag::Obj::_24
-                };
+        };
         std::map<size_t, int> stats;
 
-        for(const auto &tuple : ProtoObjects)
+        for(const auto & [_, obj] : ProtoObjects)
         {
             for(auto flag : oldFlags)
             {
-                if(tuple.second->Flags.test(flag))
+                if(obj->Flags.test(flag))
                 {
-                    tuple.second->Flags.reset(flag);
+                    obj->Flags.reset(flag);
                     stats[flag] += 1;
                 }
             }
@@ -257,7 +255,7 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
                 Flag::Room::_14,
                 Flag::Room::_21,
                 Flag::Room::_27
-                };
+        };
         std::map<size_t, int> stats;
 
         for(auto room : Rooms)
@@ -282,39 +280,39 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     else if(StrCmp(argument, "imp") == 0)
     {
         std::list<std::string> code =
-            {
-                "from test import *"
-            };
+        {
+            "from test import *"
+        };
 
         auto globalScope = MakeImpScope();
         auto prog = ParseImpProgram("<test.cpp>", code);
         auto doAfterEval = [ch](std::shared_ptr<Imp::Program> program, std::shared_ptr<Imp::RuntimeScope> scope)
-                           {
-                               auto func = scope->Find("on_test", program.get());
+        {
+            auto func = scope->Find("on_test", program.get());
 
-                               if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                               {
-                                   auto on_test = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                                   std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                       {
-                                           std::make_shared<ImpRoom>(ch->InRoom),
-                                           std::make_shared<ImpCharacter>(ch)
-                                       };
-                                   on_test->EvalFuncCall(params, program.get());
-/*
-                                   auto environment = scope->Serialize();
+            if(dynamic_cast<Imp::FunctionValue *>(func.get()) != nullptr)
+            {
+                auto on_test = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                {
+                    std::make_shared<ImpRoom>(ch->InRoom),
+                    std::make_shared<ImpCharacter>(ch)
+                };
+                on_test->EvalFuncCall(params, program.get());
+                /*
+                                                   auto environment = scope->Serialize();
 
-                                   for(auto item : environment)
-                                   {
-                                       Log->Info("%s", item.c_str());
-                                   }
-*/
-                               }
-                               else
-                               {
-                                   Imp::RuntimeValue::RuntimeError("on_test isn't a function!", program.get());
-                               }
-                           };
+                                                   for(auto item : environment)
+                                                   {
+                                                       Log->Info("%s", item.c_str());
+                                                   }
+                */
+            }
+            else
+            {
+                Imp::RuntimeValue::RuntimeError("on_test isn't a function!", program.get());
+            }
+        };
         auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
         Schedule(scriptRunner);
     }
@@ -326,7 +324,7 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
             {
                 ch->Echo("%s.", script.Package.c_str());
             }
-            
+
             ch->Echo("%s\t%s\r\n", script.Module.c_str(), script.Body.front().c_str());
         }
     }

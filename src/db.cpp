@@ -261,9 +261,6 @@ short gsn_TopSN = 0;
 /*
  * Locals.
  */
-std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
-std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
-std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 int top_affect = 0;
 int top_ed = 0;
@@ -1396,8 +1393,6 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<Room> room)
 ////////////////////////////////////////////
 
 #include <stdexcept>
-
-RoomRepository Rooms;
 
 RoomRepository::iterator::iterator()
 {

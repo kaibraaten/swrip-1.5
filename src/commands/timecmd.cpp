@@ -3,10 +3,9 @@
 
 void do_timecmd(std::shared_ptr<Character> ch, std::string argument)
 {
-    struct timeval start_time;
-    struct timeval etime;
+    timeval start_time;
+    timeval etime;
     static bool timing;
-    extern std::weak_ptr<Character> timechar;
     std::string arg;
 
     ch->Echo("Timing\r\n");

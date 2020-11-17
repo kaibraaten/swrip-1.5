@@ -96,10 +96,7 @@ static int GetMaxForceLevel(std::shared_ptr<Character> ch);
  * Global Variables
  */
 
-std::shared_ptr<Character> gch_prev;
-std::weak_ptr<Character> timechar;
-
-const char *const corpse_descs[] =
+static const char *const corpse_descs[] =
 {
     "The corpse of %s will soon be gone.",
     "The corpse of %s lies here.",
@@ -108,7 +105,7 @@ const char *const corpse_descs[] =
     "The corpse of %s lies here."
 };
 
-const char *const d_corpse_descs[] =
+static const char *const d_corpse_descs[] =
 {
     "The shattered remains %s will soon be gone.",
     "The shattered remains %s are here.",

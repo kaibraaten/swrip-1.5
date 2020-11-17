@@ -1893,4 +1893,44 @@ constexpr auto LEAVE_PROG = BV29;
 constexpr auto SCRIPT_PROG = BV30;
 constexpr auto USE_PROG = BV31;
 
+extern const std::array<const char *const, (int)AbilityClass::Max> AbilityName;
+extern const std::array<const char *const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
+extern const std::array<const char *const, MAX_WEAR> WhereName;
+extern const std::array<int, MAX_DIR + 1> TrapDoor;
+extern const std::array<const char *const, Flag::MAX> RoomFlags;
+extern const std::array<const char *const, Flag::MAX> WearFlags;
+extern const std::array<const char *const, Flag::MAX> ObjectFlags;
+extern const std::array<const char *const, Flag::MAX> MobFlags;
+extern const std::array<const char *const, Flag::MAX> AffectFlags;
+extern const std::array<const char *const, Flag::MAX> WantedFlags;
+extern const std::array<const char *const, Flag::MAX> PlanetFlags;
+extern const std::array<const char *const, Flag::MAX> PlayerFlags;
+extern const std::array<const char *const, Flag::MAX> TrapFlags;
+extern const std::array<const char *const, Flag::MAX> RisFlags;
+extern const std::array<const char *const, Flag::MAX> TriggerFlags;
+extern const std::array<const char *const, Flag::MAX> DefenseFlags;
+extern const std::array<const char *const, Flag::MAX> AttackFlags;
+extern const std::array<const char *const, Flag::MAX> AreaFlags;
+extern const std::array<const char *const, Flag::MAX> ExitFlags;
+extern const std::array<const char *const, Flag::MAX> mprog_flags;
+extern const std::array<const char *const, Flag::MAX> SaveFlags;
+extern const std::array<const char *const, Flag::MAX> ShipFlags;
+extern const std::array<const char *const, Flag::MAX> ResidentFlags;
+extern const std::array<const char *const, Flag::MAX> HomeFlags;
+
+extern const std::array<const char *const, MAX_ITEM_TYPE + 1> ObjectTypes;
+extern const std::array<const char *const, MAX_APPLY_TYPE> AffectTypes;
+extern const std::array<const char *const, MAX_NPC_RACE> NpcRace;
+extern const std::array<const char *const, MAX_WEAR - 1> WearLocations;
+extern const std::array<int, LANG_MAX + 1> LanguageArray;
+extern const std::array<const char *const, LANG_MAX + 1> LanguageNames;
+
+extern const std::array<const char *const, MAX_POSITION> PositionName;
+extern const std::array<const char *const, (unsigned long)LogType::Max> CmdLogName;
+extern const std::array<const char *const, MAX_SHIP_TYPE> ShipTypes;
+extern const std::array<const char *const, MAX_SHIP_CLASS> ShipClasses;
+extern const std::array<const char *const, Flag::MAX> ChannelNames;
+extern const std::array<const char *const, MAX_CONDS> ConditionNames;
+extern const std::array<const char *const, MAX_SEX> SexNames;
+
 #endif
