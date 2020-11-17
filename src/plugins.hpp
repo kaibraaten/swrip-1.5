@@ -7,8 +7,9 @@
 class Plugin
 {
 public:
-    Plugin();
+    Plugin(const std::string &id);
     ~Plugin();
+    std::string Id() const;
     std::string Name() const;
     void Name(const std::string &name);
     std::string Description() const;
@@ -23,5 +24,7 @@ inline std::list<std::shared_ptr<Plugin>> Plugins;
 
 void LoadPlugins();
 void SavePlugin(std::shared_ptr<Plugin> plugin);
+std::shared_ptr<Plugin> FindPlugin(const std::string &id);
+std::shared_ptr<Plugin> CreatePlugin(const std::string &id);
 
 #endif

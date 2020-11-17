@@ -81,7 +81,8 @@ public:
     struct
     {
         std::shared_ptr<class Area> Area;
-
+        std::shared_ptr<class Plugin> Plugin;
+        
         struct
         {
             struct
