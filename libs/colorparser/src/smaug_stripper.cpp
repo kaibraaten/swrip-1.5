@@ -11,22 +11,21 @@ std::string ColorParser::SmaugStripper::Parse(const std::string &original)
 {
     std::ostringstream outbuf;
 
-    for(std::string::const_iterator i = original.begin();
-        i != original.end(); ++i)
+    for(std::string::const_iterator i = original.cbegin();
+        i != original.cend(); ++i)
     {
-        char current = *i;
+        const char current = *i;
 
         if((current == '&' || current == '^')
-           && i + 1 != original.end())
+           && i + 1 != original.cend())
         {
             // Get the correct foreground/background map
-            std::map< char, AnsiMap >::iterator masterIter
-                = _MasterMap.find(current);
+            std::map<char, AnsiMap>::const_iterator masterIter = _MasterMap.find(current);
 
-            if(masterIter != _MasterMap.end())
+            if(masterIter != _MasterMap.cend())
             {
                 const AnsiMap &m = masterIter->second;
-                char nextChar = *(i + 1);
+                const char nextChar = *(i + 1);
 
                 // Check if colour code is to be escaped.
                 if(nextChar == '&' || nextChar == '^')
@@ -40,7 +39,7 @@ std::string ColorParser::SmaugStripper::Parse(const std::string &original)
                     // Find the correct ANSI sequence.
                     AnsiMap::const_iterator ansiIter = m.find(nextChar);
 
-                    if(ansiIter != m.end())
+                    if(ansiIter != m.cend())
                     {
                         ++i;
                         continue;
@@ -57,18 +56,17 @@ std::string ColorParser::SmaugStripper::Parse(const std::string &original)
 
 ColorParser::SmaugStripper::SmaugStripper()
 {
-    FillMap(_Foreground, SmaugForegroundTokens, SmaugForegroundTokensSize());
-    FillMap(_Foreground, SmaugSpecialTokens, SmaugSpecialTokensSize());
-    FillMap(_Background, SmaugBackgroundTokens, SmaugBackgroundTokensSize());
+    FillMap(_Foreground, SmaugForegroundTokens);
+    FillMap(_Foreground, SmaugSpecialTokens);
+    FillMap(_Background, SmaugBackgroundTokens);
     _MasterMap['&'] = _Foreground;
     _MasterMap['^'] = _Background;
 }
 
-void ColorParser::SmaugStripper::FillMap(std::map< char, std::string > &m,
-                                         const char mudArray[],
-                                         size_t arraySize)
+void ColorParser::SmaugStripper::FillMap(std::map<char, std::string> &m,
+                                         const std::vector<char> &mudArray)
 {
-    for(size_t n = 0; n < arraySize; ++n)
+    for(size_t n = 0; n < mudArray.size(); ++n)
     {
         m[mudArray[n]] = "";
     }

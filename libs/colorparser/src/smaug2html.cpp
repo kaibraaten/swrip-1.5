@@ -1,7 +1,7 @@
 #include <sstream>
 #include "smaug2html.hpp"
 
-static const char *const HtmlSpecialTokens[] = {
+static const std::vector<const char*> HtmlSpecialTokens = {
   "",
   "",
   "",
@@ -16,7 +16,7 @@ static const char *const HtmlSpecialTokens[] = {
   ""
 };
 
-static const char *const HtmlForegroundTokens[] = {
+static const std::vector<const char*> HtmlForegroundTokens = {
   "black",
   "darkgoldenrod",
   "darkcyan",
@@ -35,7 +35,7 @@ static const char *const HtmlForegroundTokens[] = {
   "white",
 };
 
-static const char *const HtmlBackgroundTokens[] = {
+static const std::vector<const char*> HtmlBackgroundTokens = {
   "black",
   "darkcyan",
   "green",
@@ -62,20 +62,20 @@ std::string ColorParser::Smaug2Html::Parse(const std::string &original)
     int numFontTags = 0;
     int numCloseTags = 0;
 
-    for(std::string::const_iterator i = original.begin();
-        i != original.end(); ++i)
+    for(std::string::const_iterator i = original.cbegin();
+        i != original.cend(); ++i)
     {
-        char current = *i;
+        const char current = *i;
 
-        if((current == '&' || current == '^') && i + 1 != original.end())
+        if((current == '&' || current == '^') && i + 1 != original.cend())
         {
             // Get the correct foreground/background map
-            std::map< char, HtmlMap >::const_iterator masterIter = _MasterMap.find(current);
+            std::map<char, HtmlMap>::const_iterator masterIter = _MasterMap.find(current);
 
             if(masterIter != _MasterMap.end())
             {
                 const HtmlMap &m = masterIter->second;
-                char nextChar = *(i + 1);
+                const char nextChar = *(i + 1);
 
                 // Check if colour code is to be escaped.
                 if(nextChar == '&' || nextChar == '^')
@@ -89,7 +89,7 @@ std::string ColorParser::Smaug2Html::Parse(const std::string &original)
                     // Find the correct HTML tag.
                     HtmlMap::const_iterator htmlIter = m.find(nextChar);
 
-                    if(htmlIter != m.end())
+                    if(htmlIter != m.cend())
                     {
                         if(isOpen)
                         {
@@ -139,22 +139,18 @@ std::string ColorParser::Smaug2Html::Parse(const std::string &original)
 
 ColorParser::Smaug2Html::Smaug2Html()
 {
-    FillMap(_Foreground, SmaugForegroundTokens, HtmlForegroundTokens,
-            SmaugForegroundTokensSize());
-    FillMap(_Foreground, SmaugSpecialTokens, HtmlSpecialTokens,
-            SmaugSpecialTokensSize());
-    FillMap(_Background, SmaugBackgroundTokens, HtmlBackgroundTokens,
-            SmaugBackgroundTokensSize());
+    FillMap(_Foreground, SmaugForegroundTokens, HtmlForegroundTokens);
+    FillMap(_Foreground, SmaugSpecialTokens, HtmlSpecialTokens);
+    FillMap(_Background, SmaugBackgroundTokens, HtmlBackgroundTokens);
     _MasterMap['&'] = _Foreground;
     _MasterMap['^'] = _Background;
 }
 
-void ColorParser::Smaug2Html::FillMap(std::map< char, std::string > &m,
-                                      const char mudArray[],
-                                      const char *const htmlArray[],
-                                      size_t arraySize)
+void ColorParser::Smaug2Html::FillMap(std::map<char, std::string> &m,
+                                      const std::vector<char> &mudArray,
+                                      const std::vector<const char*> &htmlArray)
 {
-    for(size_t n = 0; n < arraySize; ++n)
+    for(size_t n = 0; n < mudArray.size(); ++n)
     {
         m[mudArray[n]] = htmlArray[n];
     }

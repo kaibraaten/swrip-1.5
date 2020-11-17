@@ -10,7 +10,7 @@
 
 namespace ColorParser {
     // &
-    const char SmaugSpecialTokens[] = {
+    const std::vector<char> SmaugSpecialTokens = {
       'i', // ANSI_ITALIC
       'I', // ANSI_ITALIC
       'v', // ANSI_REVERSE
@@ -25,12 +25,7 @@ namespace ColorParser {
       'D'  // ANSI_RESET
     };
 
-    size_t SmaugSpecialTokensSize()
-    {
-        return sizeof(SmaugSpecialTokens) / sizeof(*SmaugSpecialTokens);
-    }
-
-    const char * const AnsiSpecialTokens[] = {
+    const std::vector<const char*> AnsiSpecialTokens = {
       "\033[3m", // ANSI_ITALIC
       "\033[3m", // ANSI_ITALIC
       "\033[7m", // ANSI_REVERSE
@@ -45,13 +40,8 @@ namespace ColorParser {
       "\033[0m"  // ANSI_RESET
     };
 
-    size_t AnsiSpecialTokensSize()
-    {
-        return sizeof(AnsiSpecialTokens) / sizeof(*AnsiSpecialTokens);
-    }
-
-    // &
-    const char SmaugForegroundTokens[] = {
+     // &
+    const std::vector<char> SmaugForegroundTokens = {
       'x', // ANSI_BLACK
       'O', // ANSI_ORANGE
       'c', // ANSI_CYAN
@@ -70,12 +60,7 @@ namespace ColorParser {
       'W'  // ANSI_WHITE
     };
 
-    size_t SmaugForegroundTokensSize()
-    {
-        return sizeof(SmaugForegroundTokens) / sizeof(*SmaugForegroundTokens);
-    }
-
-    const char * const AnsiForegroundTokens[] = {
+    const std::vector<const char*> AnsiForegroundTokens = {
       "\033[0;30m", // ANSI_BLACK
       "\033[0;33m", // ANSI_ORANGE
       "\033[0;36m", // ANSI_CYAN
@@ -94,13 +79,8 @@ namespace ColorParser {
       "\033[1;37m"  // ANSI_WHITE
     };
 
-    size_t AnsiForegroundTokensSize()
-    {
-        return sizeof(AnsiForegroundTokens) / sizeof(*AnsiForegroundTokens);
-    }
-
     // ^
-    const char SmaugBackgroundTokens[] = {
+    const std::vector<char> SmaugBackgroundTokens = {
       'x', // BACK_BLACK
       'c', // BACK_CYAN
       'g', // BACK_DGREEN
@@ -111,12 +91,7 @@ namespace ColorParser {
       'O'  // BACK_ORANGE
     };
 
-    size_t SmaugBackgroundTokensSize()
-    {
-        return sizeof(SmaugBackgroundTokens) / sizeof(*SmaugBackgroundTokens);
-    }
-
-    const char * const AnsiBackgroundTokens[] = {
+    const std::vector<const char*> AnsiBackgroundTokens = {
       "\033[40m", // BACK_BLACK
       "\033[46m", // BACK_CYAN
       "\033[42m", // BACK_DGREEN
@@ -126,11 +101,6 @@ namespace ColorParser {
       "\033[45m", // BACK_PURPLE
       "\033[43m"  // BACK_ORANGE
     };
-
-    size_t AnsiBackgroundTokensSize()
-    {
-        return sizeof(AnsiBackgroundTokens) / sizeof(*AnsiBackgroundTokens);
-    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Exported interface below here
@@ -154,5 +124,4 @@ namespace ColorParser {
     {
         return Passthrough::Instance()->Parse(text);
     }
-
 }

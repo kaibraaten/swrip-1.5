@@ -8,26 +8,26 @@
 #include <random>
 
 template<typename Container, typename UnaryPredicate>
-auto Filter(const Container &original, UnaryPredicate pred)
+auto Filter(const Container &container, UnaryPredicate pred)
 {
     Container filteredElements;
-    std::ranges::copy_if(original,
+    std::ranges::copy_if(container,
                          std::back_inserter(filteredElements),
                          pred);
     return filteredElements;
 }
 
 template<typename Container>
-auto Reverse(const Container &original)
+auto Reverse(const Container &container)
 {
-    Container reversed(std::rbegin(original), std::rend(original));
+    Container reversed(std::rbegin(container), std::rend(container));
     return reversed;
 }
 
 template<typename Container>
-auto RandomizeOrder(const Container &original)
+auto RandomizeOrder(const Container &container)
 {
-    std::vector<typename Container::value_type> vec(std::begin(original), std::end(original));
+    std::vector<typename Container::value_type> vec(std::begin(container), std::end(container));
     std::random_device rng;
     std::mt19937 urng(rng());
     std::shuffle(std::begin(vec), std::end(vec), urng);
@@ -35,29 +35,34 @@ auto RandomizeOrder(const Container &original)
     return randomized;
 }
 
-auto Find(const auto &original, auto pred)
+template<typename Container, typename UnaryPredicate>
+auto Find(const Container &container, UnaryPredicate pred)
 {
-    auto i = std::ranges::find_if(original, pred);
-    return i != std::end(original) ? *i : nullptr;
+    auto i = std::ranges::find_if(container, pred);
+    return i != std::end(container) ? *i : nullptr;
 }
 
-bool Contains(const auto &sequence, auto element)
+template<typename Container, typename T>
+bool Contains(const Container &container, T element)
 {
-    auto i = std::ranges::find(sequence, element);
-    return i != std::end(sequence);
+    auto i = std::ranges::find(container, element);
+    return i != std::end(container);
 }
 
-size_t Count(const auto &container, auto pred)
+template<typename Container, typename UnaryPredicate>
+size_t Count(const Container &container, UnaryPredicate pred)
 {
     return std::ranges::count_if(container, pred);
 }
 
-void ForEach(const auto &container, auto func)
+template<typename Container, typename UnaryFunction>
+void ForEach(const Container &container, UnaryFunction func)
 {
     std::ranges::for_each(container, func);
 }
 
-auto MergeSequences(const auto &a, const auto &b)
+template<typename T>
+auto MergeSequences(const T &a, const T &b)
 {
     auto output = a;
 

@@ -8,7 +8,7 @@
 static std::string ErrorText;
 static std::map<int, std::string> ArrayData;
 
-constexpr char *SCRIPT =
+static const char * const SCRIPT =
     "AreaEntry\n"
     "{\n"
     "   SpecFuns =\n"

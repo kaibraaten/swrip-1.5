@@ -116,18 +116,18 @@ char *StripColorCodes(char *text)
 {
     int i = 0, j = 0;
 
-    if(!text || text[0] == '\0')
+    if(text == nullptr || text[0] == '\0')
     {
-        return NULL;
+        return nullptr;
     }
     else
     {
-        char *buf;
+        char *buf = nullptr;
         static char done[MAX_INPUT_LENGTH * 2];
 
         done[0] = '\0';
 
-        if((buf = (char *)malloc(strlen(text) * sizeof(text))) == NULL)
+        if((buf = (char *)malloc(strlen(text) * sizeof(text))) == nullptr)
             return text;
 
         /* Loop through until you've hit your terminating 0 */

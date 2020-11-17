@@ -61,11 +61,11 @@ using sockbuf_t = char;
 
 struct timezone
 {
-    int tz_minuteswest; /* minutes W of Greenwich */
-    int tz_dsttime;     /* type of dst correction */
+    int tz_minuteswest = 0; /* minutes W of Greenwich */
+    int tz_dsttime = 0;     /* type of dst correction */
 };
 
-int gettimeofday(struct timeval *, struct timezone *);
+int gettimeofday(timeval *, timezone *);
 
 #endif
 #endif /* include guard */

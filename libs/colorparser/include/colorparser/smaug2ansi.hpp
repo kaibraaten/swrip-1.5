@@ -14,14 +14,13 @@ namespace ColorParser
 
     private:
         Smaug2Ansi();
-        void FillMap(std::map<char, std::string> &, const char[],
-                     const char * const[], size_t);
+        void FillMap(std::map<char, std::string> &, const std::vector<char>&,
+                     const std::vector<const char*>&);
 
-        std::map< char, AnsiMap > _MasterMap;
+        std::map<char, AnsiMap> _MasterMap;
         AnsiMap _Foreground;
         AnsiMap _Background;
     };
-
 }
 
 #endif // include guard

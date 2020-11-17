@@ -13,10 +13,10 @@ namespace ColorParser
 
     private:
         Smaug2Html();
-        void FillMap(std::map< char, std::string > &, const char[],
-                     const char *const [], size_t);
+        void FillMap(std::map<char, std::string> &, const std::vector<char>&,
+                     const std::vector<const char*>&);
         std::string MakeColourTag() const;
-        std::map< char, HtmlMap > _MasterMap;
+        std::map<char, HtmlMap> _MasterMap;
         HtmlMap _Foreground;
         HtmlMap _Background;
         std::string _CurrentFg;

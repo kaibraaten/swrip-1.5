@@ -472,8 +472,7 @@ std::string StripCarriageReturn(const std::string &arg)
  */
 std::string SmushTilde(std::string &str)
 {
-#if 1
-    size_t positionOfLastCharacter = str.empty() ? 0 : str.size() - 1;
+    const size_t positionOfLastCharacter = str.empty() ? 0 : str.size() - 1;
 
     for(size_t i = 0; i < str.size(); ++i)
     {
@@ -484,25 +483,6 @@ std::string SmushTilde(std::string &str)
     }
 
     return str;
-#else
-    std::vector<char> v_str = StringToVector(orig_str);
-    char *str = &v_str[0];
-    char *strptr = str;
-    size_t len = strlen(str);
-    char last = len != 0 ? strptr[len - 1] : '\0';
-
-    for(; *str != '\0'; str++)
-    {
-        if(*str == '~')
-            *str = '-';
-    }
-
-    if(len)
-        strptr[len - 1] = last;
-
-    orig_str = str;
-    return orig_str;
-#endif
 }
 
 std::string EncodeString(const std::string &str)
@@ -515,7 +495,7 @@ std::string EncodeString(const std::string &str)
  */
 char *CopyString(const std::string &str)
 {
-    static char *ret = NULL;
+    static char *ret = nullptr;
     AllocateMemory(ret, char, strlen(str.c_str()) + 1);
     strcpy(ret, str.c_str());
     return ret;
@@ -626,11 +606,11 @@ static std::string GetNextChunk(std::string &str, const char c)
     return line;
 }
 
-std::vector< char > CreateFmtBuffer(const char *fmt, va_list va)
+std::vector<char> CreateFmtBuffer(const char *fmt, va_list va)
 {
     va_list va_tmp;
     va_copy(va_tmp, va);
-    std::vector< char > buf(vsnprintf(0, 0, fmt, va_tmp) + 1);
+    std::vector<char> buf(vsnprintf(0, 0, fmt, va_tmp) + 1);
     va_end(va_tmp);
 
     vsnprintf(&buf[0], buf.size(), fmt, va);
@@ -642,7 +622,7 @@ std::string FormatString(const char *fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    std::vector< char > buf = CreateFmtBuffer(fmt, va);
+    std::vector<char> buf = CreateFmtBuffer(fmt, va);
     va_end(va);
 
     return &buf[0];

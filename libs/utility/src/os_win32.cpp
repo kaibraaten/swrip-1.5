@@ -28,39 +28,7 @@
 #include <ctime>
 #include "os.hpp"
 
- /*
- static const char *get_next_filename( const char *directory )
- {
-   static char buf[256];
-   int high_num = 1000;
-   WIN32_FIND_DATA info;
-   HANDLE h;
-
-   snprintf( buf, 256, "%s*.*", directory );
-   h = FindFirstFile( buf, &info );
-
-   if( h != INVALID_HANDLE_VALUE )
-   {
-     do
-     {
-       if( info.cFileName[0] != '.' )
-       {
-     int curr = strtol( info.cFileName, 0, 10 );
-     high_num = curr > high_num ? curr : high_num;
-       }
-     }
-     while( FindNextFile( h, &info ) );
-
-     FindClose( h );
-   }
-
-   ++high_num;
-   snprintf( buf, 256, "%s%d.log", directory, high_num );
-   return buf;
- }
- */
-
-void OsSetup(void)
+void OsSetup()
 {
     WSADATA wsaData;
 
@@ -72,7 +40,7 @@ void OsSetup(void)
     }
 }
 
-void OsCleanup(void)
+void OsCleanup()
 {
     WSACleanup();
 }
@@ -85,13 +53,13 @@ void OsCleanup(void)
 #define DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
 #endif
 
-int gettimeofday(struct timeval *tv, struct timezone *tz)
+int gettimeofday(timeval *tv, timezone *tz)
 {
     FILETIME ft;
     unsigned __int64 tmpres = 0;
     static int tzflag = 0;
 
-    if(NULL != tv)
+    if(nullptr != tv)
     {
         GetSystemTimeAsFileTime(&ft);
 
@@ -106,7 +74,7 @@ int gettimeofday(struct timeval *tv, struct timezone *tz)
         tv->tv_usec = (long)(tmpres % 1000000UL);
     }
 
-    if(NULL != tz)
+    if(nullptr != tz)
     {
         if(!tzflag)
         {

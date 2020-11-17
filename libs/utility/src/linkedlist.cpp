@@ -5,62 +5,62 @@
 
 struct jsw_node
 {
-    void *data;
-    struct jsw_node *next;
-    struct jsw_node *prev;
+    void *data = nullptr;
+    jsw_node *next = nullptr;
+    jsw_node *prev = nullptr;
 };
 
 struct jsw_list
 {
-    struct jsw_node *head;
-    struct jsw_node *tail;
-    int has_dummy_head;
-    int has_dummy_tail;
-    size_t size;
+    jsw_node *head = nullptr;
+    jsw_node *tail = nullptr;
+    int has_dummy_head = 0;
+    int has_dummy_tail = 0;
+    size_t size = 0;
 };
 
 struct List
 {
-    struct jsw_list *implementation;
+    jsw_list *implementation = nullptr;
 };
 
 struct ListIterator
 {
-    const List *linklist;
-    struct jsw_node *cursor;
-    bool isReverse;
+    const List *linklist = nullptr;
+    jsw_node *cursor = nullptr;
+    bool isReverse = false;
 };
 
-static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail);
-static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_node *next);
-static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos, void *data);
-static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *pos, void *data);
-static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Comparator compare);
-static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos);
-static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(void *));
-static void destroy_list(struct jsw_list *list, void (destroy_data)(void *));
+static jsw_list *new_list(int has_dummy_head, int has_dummy_tail);
+static jsw_node *new_node(void *data, jsw_node *prev, jsw_node *next);
+static jsw_node *insert_after(jsw_list *list, jsw_node *pos, void *data);
+static jsw_node *insert_before(jsw_list *list, jsw_node *pos, void *data);
+static jsw_node *insert_sorted(jsw_list *list, void *data, Comparator compare);
+static jsw_node *remove_node(jsw_list *list, jsw_node *pos);
+static jsw_node *destroy_node(jsw_node *node, void (destroy_data)(void *));
+static void destroy_list(jsw_list *list, void (destroy_data)(void *));
 
 /*
     Create a new list with an optional dummy head and tail
     Returns a pointer to the new list, or NULL on error
 */
-static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
+static jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
 {
-    struct jsw_list *rv = (struct jsw_list *)calloc(1, sizeof * rv);
+    jsw_list *rv = (jsw_list*)calloc(1, sizeof *rv);
 
-    if(rv != NULL)
+    if(rv != nullptr)
     {
-        struct jsw_node *tail = has_dummy_tail ? new_node(NULL, NULL, NULL) : NULL;
+        jsw_node *tail = has_dummy_tail ? new_node(nullptr, nullptr, nullptr) : nullptr;
 
-        if(has_dummy_tail && tail == NULL)
+        if(has_dummy_tail && tail == nullptr)
         {
             /* Release the list if a dummy couldn't be allocated */
             free(rv);
-            rv = NULL;
+            rv = nullptr;
         }
         else
         {
-            rv->head = has_dummy_head ? new_node(NULL, NULL, tail) : NULL;
+            rv->head = has_dummy_head ? new_node(nullptr, nullptr, tail) : nullptr;
 
             /* Finish linking the tail to the head */
             rv->tail = tail;
@@ -71,11 +71,11 @@ static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
 
             rv->size = 0;
 
-            if(has_dummy_head && rv->head == NULL)
+            if(has_dummy_head && rv->head == nullptr)
             {
                 /* Release the list if a dummy couldn't be allocated */
                 free(rv);
-                rv = NULL;
+                rv = nullptr;
             }
         }
     }
@@ -88,11 +88,11 @@ static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
     Optionally destroy the data contained in the node
     Returns the next node specified by the link
 */
-static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(void *))
+static jsw_node *destroy_node(jsw_node *node, void (destroy_data)(void *))
 {
-    struct jsw_node *rv = NULL;
+    jsw_node *rv = nullptr;
 
-    if(node != NULL)
+    if(node != nullptr)
     {
         /*
           Save a reference to the next node
@@ -100,7 +100,7 @@ static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(
         */
         rv = node->next;
 
-        if(destroy_data != NULL)
+        if(destroy_data != nullptr)
         {
             destroy_data(node->data);
         }
@@ -115,9 +115,9 @@ static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(
     Destroy all nodes in a given list
     Optionally destroy all data in each node
 */
-static void destroy_list(struct jsw_list *list, void (destroy_data)(void *))
+static void destroy_list(jsw_list *list, void (destroy_data)(void *))
 {
-    while(list->head != NULL)
+    while(list->head != nullptr)
     {
         list->head = destroy_node(list->head, destroy_data);
     }
@@ -127,20 +127,20 @@ static void destroy_list(struct jsw_list *list, void (destroy_data)(void *))
     Insert a new node after the given node
     Returns a pointer to the new node or NULL on failure
 */
-static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos, void *data)
+static jsw_node *insert_after(jsw_list *list, jsw_node *pos, void *data)
 {
-    struct jsw_node *rv = NULL;
+    jsw_node *rv = nullptr;
 
-    if(list != NULL && pos != NULL)
+    if(list != nullptr && pos != nullptr)
     {
         if(pos != list->tail)
         {
             /* Create a new node and set the next link */
             rv = new_node(data, pos, pos->next);
 
-            if(rv != NULL)
+            if(rv != nullptr)
             {
-                if(pos->next != NULL)
+                if(pos->next != nullptr)
                 {
                     pos->next->prev = rv;
                 }
@@ -162,20 +162,20 @@ static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos
     Insert a new node before the given node
     Returns a pointer to the new node or NULL on failure
 */
-static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *pos, void *data)
+static jsw_node *insert_before(jsw_list *list, jsw_node *pos, void *data)
 {
-    struct jsw_node *rv = NULL;
+    jsw_node *rv = nullptr;
 
-    if(list != NULL && pos != NULL)
+    if(list != nullptr && pos != nullptr)
     {
         if(pos != list->head)
         {
             /* Create a new node and set the next link */
             rv = new_node(data, pos->prev, pos);
 
-            if(rv != NULL)
+            if(rv != nullptr)
             {
-                if(pos->prev != NULL)
+                if(pos->prev != nullptr)
                 {
                     pos->prev->next = rv;
                 }
@@ -197,11 +197,11 @@ static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *po
     Remove the selected node
     Returns the removed node or NULL on failure
 */
-static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
+static jsw_node *remove_node(jsw_list *list, jsw_node *pos)
 {
-    struct jsw_node *rv = NULL;
+    jsw_node *rv = nullptr;
 
-    if(list != NULL && pos != NULL)
+    if(list != nullptr && pos != nullptr)
     {
         /* Shift off of the dummies */
         if(pos == list->head)
@@ -220,18 +220,18 @@ static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
             rv = pos;
 
             /* Reset the list links if necessary */
-            if(rv->prev != NULL)
+            if(rv->prev != nullptr)
             {
                 rv->prev->next = rv->next;
             }
 
-            if(rv->next != NULL)
+            if(rv->next != nullptr)
             {
                 rv->next->prev = rv->prev;
             }
 
             /* Clean up the old node */
-            rv->prev = rv->next = NULL;
+            rv->prev = rv->next = nullptr;
             --list->size;
         }
     }
@@ -243,16 +243,16 @@ static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
     Insert a new node in sorted order
     Returns a pointer to the new node or NULL on failure
 */
-static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Comparator compare)
+static jsw_node *insert_sorted(jsw_list *list, void *data, Comparator compare)
 {
-    struct jsw_node *rv = NULL;
+    jsw_node *rv = nullptr;
 
-    if(list != NULL)
+    if(list != nullptr)
     {
         /* Find the sorted position of the new node */
-        struct jsw_node *it = list->head;
+        jsw_node *it = list->head;
 
-        while(it->next != NULL && compare(it->next->data, data) < 0)
+        while(it->next != nullptr && compare(it->next->data, data) < 0)
         {
             it = it->next;
         }
@@ -268,11 +268,11 @@ static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Compara
     Create a new node with the given data and links
     Returns a pointer to the new node, or NULL on error
 */
-static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_node *next)
+static jsw_node *new_node(void *data, jsw_node *prev, jsw_node *next)
 {
-    struct jsw_node *rv = (struct jsw_node *)calloc(1, sizeof * rv);
+    jsw_node *rv = (jsw_node *)calloc(1, sizeof * rv);
 
-    if(rv != NULL)
+    if(rv != nullptr)
     {
         rv->data = data;
         rv->prev = prev;
@@ -282,7 +282,7 @@ static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_n
     return rv;
 }
 
-List *AllocateList(void)
+List *AllocateList()
 {
     List *newList = (List *)calloc(1, sizeof(List));
     newList->implementation = new_list(true, true);
@@ -292,7 +292,7 @@ List *AllocateList(void)
 
 void FreeList(List *list)
 {
-    destroy_list(list->implementation, NULL);
+    destroy_list(list->implementation, nullptr);
     free(list);
 }
 
@@ -356,11 +356,11 @@ ListIterator *AllocateListReverseIterator(const List *list)
 
 void RemoveFromListByIterator(ListIterator *iterator)
 {
-    assert(iterator->cursor != NULL);
+    assert(iterator->cursor != nullptr);
     jsw_node *node = remove_node(iterator->linklist->implementation, iterator->cursor);
-    assert(node != NULL);
-    destroy_node(node, NULL);
-    iterator->cursor = NULL;
+    assert(node != nullptr);
+    destroy_node(node, nullptr);
+    iterator->cursor = nullptr;
 }
 
 void FreeListIterator(ListIterator *iterator)
@@ -415,7 +415,7 @@ size_t ListSize(const List *list)
 void *FindIfInList(const List *list, Predicate predicate, const void *userData)
 {
     ListIterator *iterator = AllocateListIterator(list);
-    void *result = NULL;
+    void *result = nullptr;
 
     while(ListHasMoreElements(iterator))
     {

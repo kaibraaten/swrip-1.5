@@ -13,8 +13,8 @@ namespace ColorParser
 
     private:
         SmaugStripper();
-        void FillMap(std::map< char, std::string > &, const char[], size_t);
-        std::map< char, AnsiMap > _MasterMap;
+        void FillMap(std::map<char, std::string> &, const std::vector<char>&);
+        std::map<char, AnsiMap> _MasterMap;
         AnsiMap _Foreground;
         AnsiMap _Background;
     };

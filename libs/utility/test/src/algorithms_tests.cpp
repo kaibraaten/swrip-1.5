@@ -49,7 +49,8 @@ protected:
 
 struct EveryOther
 {
-    bool operator()(const auto &unused) const
+    template<typename T>
+    bool operator()(const T &unused) const
     {
         return ++_counter % 2 == 0;
     }
