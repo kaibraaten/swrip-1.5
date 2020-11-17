@@ -220,6 +220,7 @@ src/commands/drop.cpp
 src/commands/east.cpp
 src/commands/eat.cpp
 src/commands/echo.cpp
+src/commands/editplugin.cpp
 src/commands/eliteguard.cpp
 src/commands/emote.cpp
 src/commands/empower.cpp
@@ -380,12 +381,14 @@ src/commands/outcast.cpp
 src/commands/override.cpp
 src/commands/owhere.cpp
 src/commands/pardon.cpp
+src/commands/passign.cpp
 src/commands/password.cpp
 src/commands/peace.cpp
 src/commands/pick.cpp
 src/commands/pickshiplock.cpp
 src/commands/placevendor.cpp
 src/commands/planets.cpp
+src/commands/plugins.cpp
 src/commands/pluogus.cpp
 src/commands/poisonweapon.cpp
 src/commands/postguard.cpp
