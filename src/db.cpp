@@ -40,6 +40,7 @@ namespace fs = std::filesystem;
 #include "area.hpp"
 #include "log.hpp"
 #include "pcdata.hpp"
+#include "plugins.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
@@ -433,6 +434,9 @@ void BootDatabase(bool fCopyOver)
     Log->Boot("Loading player home meta data");
     Homes->Load();
 
+    Log->Boot("Loading plugins");
+    LoadPlugins();
+    
     Log->Boot("Resetting areas");
     AreaUpdate();
 

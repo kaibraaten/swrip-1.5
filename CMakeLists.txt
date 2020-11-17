@@ -67,6 +67,7 @@ src/nanny.cpp
 src/object.cpp
 src/pcdata.cpp
 src/planet.cpp
+src/plugins.cpp
 src/protomob.cpp
 src/protoobject.cpp
 src/reset.cpp
