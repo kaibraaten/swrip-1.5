@@ -646,28 +646,19 @@ void InMemoryPlayerRepository::LoadAddictions(lua_State *L, std::shared_ptr<Char
 
 void InMemoryPlayerRepository::LoadAliases(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Aliases");
+    LuaLoadArray(L, "Aliases",
+                 [L](lua_State*, size_t idx, std::shared_ptr<Character> character)
+                 {
+                     auto alias = std::make_shared<Alias>();
+                     LuaGetfieldString(L, "Name", &alias->Name);
+                     LuaGetfieldString(L, "Value", &alias->Command);
 
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            Alias alias;
-            LuaGetfieldString(L, "Name", &alias.Name);
-            LuaGetfieldString(L, "Value", &alias.Command);
-            lua_pop(L, 1);
-
-            if (!alias.Name.empty() && !alias.Command.empty())
-            {
-                ch->PCData->Add(std::make_shared<Alias>(alias));
-            }
-        }
-    }
-
-    lua_pop(L, 1);
+                     if(!alias->Name.empty() && !alias->Command.empty())
+                     {
+                         character->PCData->Add(alias);
+                     }
+                 },
+                 ch);
 }
 
 int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
@@ -792,16 +783,17 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
 
 void InMemoryPlayerRepository::PushAliases(lua_State *L, std::shared_ptr<Character> pc)
 {
-    lua_pushstring(L, "Aliases");
-    lua_newtable(L);
-
-    for (auto alias : pc->PCData->Aliases())
-    {
-        LuaSetfieldString(L, "Name", alias->Name);
-        LuaSetfieldString(L, "Value", alias->Command);
-    }
-
-    lua_settable(L, -3);
+    LuaPushCollection(L, pc->PCData->Aliases(), "Aliases",
+                      [L](lua_State*, size_t idx, const auto &alias)
+                      {
+                          lua_pushinteger(L, idx);
+                          lua_newtable(L);
+                          
+                          LuaSetfieldString(L, "Name", alias->Name);
+                          LuaSetfieldString(L, "Value", alias->Command);
+                          
+                          lua_settable(L, -3);
+                      });
 }
 
 void InMemoryPlayerRepository::PushAddictions(lua_State *L, std::shared_ptr<Character> pc)
