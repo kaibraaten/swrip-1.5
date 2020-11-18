@@ -103,7 +103,11 @@ public:
 
     std::string Tag() const;
     void Tag(const std::string &tag);
+
+    std::shared_ptr<class Plugin> Plugin;
     
+    std::shared_ptr<Reset> FirstReset;
+    std::shared_ptr<Reset> LastReset;
     std::shared_ptr<Room> Next;
     std::shared_ptr<Room> NextSort;
     std::shared_ptr<class Area> Area;

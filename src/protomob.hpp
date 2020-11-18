@@ -25,6 +25,7 @@ public:
     std::string LongDescr;
     std::string Description;
     vnum_t Vnum = INVALID_VNUM;
+    std::shared_ptr<class Plugin> Plugin;
     int Count = 0;
     int Killed = 0;
     SexType Sex = 0;
