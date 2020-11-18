@@ -2,6 +2,7 @@
 #include <utility/utility.hpp>
 #include "mud.hpp"
 #include "plugins.hpp"
+#include "log.hpp"
 
 #define PLUGIN_DIR DATA_DIR "plugins/"
 
@@ -65,7 +66,7 @@ void LoadPlugins()
 
 void SavePlugin(std::shared_ptr<Plugin> plugin)
 {
-
+    Log->Info("Saving plugin %s (%s)", plugin->Name().c_str(), plugin->Id().c_str());
 }
 
 std::shared_ptr<Plugin> FindPlugin(const std::string &id)
