@@ -1,10 +1,15 @@
 -- The Jedi Academy
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 19-Nov-2020 14:31:09
 
 AreaEntry
 {
    VnumRanges = 
    {
+      Mob = 
+      {
+         First = 6100, 
+         Last = 6199, 
+      }, 
       Object = 
       {
          First = 6100, 
@@ -15,1262 +20,27 @@ AreaEntry
          First = 6099, 
          Last = 6199, 
       }, 
-      Mob = 
-      {
-         First = 6100, 
-         Last = 6199, 
-      }, 
    }, 
-   FileFormatVersion = 1, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6102, 
-         Arg2 = 1, 
-         Arg1 = 32259, 
-         Command = "O", 
-      }, 
-      [2] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6110, 
-         Arg2 = 6, 
-         Arg1 = 6101, 
-         Command = "M", 
-      }, 
-      [3] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6112, 
-         Arg2 = 6, 
-         Arg1 = 6101, 
-         Command = "M", 
-      }, 
-      [4] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6111, 
-         Arg2 = 3, 
-         Arg1 = 6102, 
-         Command = "M", 
-      }, 
-      [5] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6113, 
-         Arg2 = 3, 
-         Arg1 = 6103, 
-         Command = "M", 
-      }, 
-      [6] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6113, 
-         Arg2 = 3, 
-         Arg1 = 6103, 
-         Command = "M", 
-      }, 
-      [7] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6113, 
-         Arg2 = 3, 
-         Arg1 = 6103, 
-         Command = "M", 
-      }, 
-      [8] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6111, 
-         Arg2 = 3, 
-         Arg1 = 6102, 
-         Command = "M", 
-      }, 
-      [9] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6111, 
-         Arg2 = 3, 
-         Arg1 = 6102, 
-         Command = "M", 
-      }, 
-      [10] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6110, 
-         Arg2 = 6, 
-         Arg1 = 6101, 
-         Command = "M", 
-      }, 
-      [11] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6112, 
-         Arg2 = 6, 
-         Arg1 = 6101, 
-         Command = "M", 
-      }, 
-      [12] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6101, 
-         Arg2 = 1, 
-         Arg1 = 6100, 
-         Command = "O", 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6166, 
-         Arg2 = 1, 
-         Arg1 = 6100, 
-         Command = "M", 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6166, 
-         Arg2 = 1, 
-         Arg1 = 32201, 
-         Command = "O", 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6167, 
-         Arg2 = 1, 
-         Arg1 = 6199, 
-         Command = "M", 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6167, 
-         Arg2 = 1, 
-         Arg1 = 6199, 
-         Command = "O", 
-      }, 
-      [17] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6177, 
-         Arg2 = 1, 
-         Arg1 = 6104, 
-         Command = "M", 
-      }, 
-      [18] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6177, 
-         Arg2 = 20, 
-         Arg1 = 6104, 
-         Command = "M", 
-      }, 
-      [19] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6180, 
-         Arg2 = 10, 
-         Arg1 = 6105, 
-         Command = "M", 
-      }, 
-      [20] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6105, 
-         Arg2 = 10, 
-         Arg1 = 6106, 
-         Command = "M", 
-      }, 
-      [21] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6197, 
-         Arg2 = 5, 
-         Arg1 = 6107, 
-         Command = "M", 
-      }, 
-      [22] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6196, 
-         Arg2 = 2, 
-         Arg1 = 6108, 
-         Command = "M", 
-      }, 
-      [23] = 
-      {
-         MiscData = 0, 
-         Arg3 = 6181, 
-         Arg2 = 2, 
-         Arg1 = 6108, 
-         Command = "M", 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6188, 
-         Arg2 = 1, 
-         Arg1 = 6110, 
-         Command = "M", 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6190, 
-         Arg2 = 1, 
-         Arg1 = 6101, 
-         Command = "O", 
-      }, 
-   }, 
-   Mobiles = 
-   {
-      [6199] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [9] = "Train", 
-            [10] = "Practice", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "a wise old jedimaster", 
-         Name = "wise old jedimaster", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Sullustan", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A wise old jedimaster contemplates the duality of the Force.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 6199, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [6100] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [9] = "Train", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "a librarian", 
-         Name = "librarian", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Verpine", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A librarian places some books on the shelves.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 6100, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [6101] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 5, 
-         Flags = 
-         {
-            [24] = "NoAssist", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-            [27] = "NoCorpse", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 37, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Darth Vader", 
-         Name = "darth vader hologram", 
-         HitChance = 
-         {
-            HitPlus = 250, 
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 5, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "The image of Darth Vader casts a dark shadow still long after his death.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-            [6] = "_06", 
-            [7] = "_07", 
-         }, 
-         Credits = 0, 
-         Vnum = 6101, 
-         Level = 25, 
-         Alignment = 0, 
-      }, 
-      [6102] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 10, 
-         Flags = 
-         {
-            [24] = "NoAssist", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-            [27] = "NoCorpse", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -25, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Emperor Palpatine", 
-         Name = "Emperor Palpatine Hologram", 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 10, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [10] = "backstab", 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "The former Emperor Palpatine fills you with a sense of dread.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [27] = "_27", 
-         }, 
-         Credits = 0, 
-         Vnum = 6102, 
-         Level = 50, 
-         Alignment = 0, 
-      }, 
-      [6103] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 15, 
-         Flags = 
-         {
-            [24] = "NoAssist", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-            [27] = "NoCorpse", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -87, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Exar Kuhn", 
-         Name = "exar kun hologram", 
-         HitChance = 
-         {
-            HitPlus = 750, 
-            HitNoDice = 15, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 15, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-            [10] = "backstab", 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 7, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "The original dark lord of the sith send shivers down your spine.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [26] = "_26", 
-         }, 
-         Credits = 0, 
-         Vnum = 6103, 
-         Level = 75, 
-         Alignment = 0, 
-      }, 
-      [6104] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [7] = "Wimpy", 
-         }, 
-         DefaultPosition = "standing", 
-         Alignment = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -200, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "a bird", 
-         Name = "bird", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         AffectedBy = 
-         {
-            [19] = "Flying", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A bird sits in a tree chirping loudly.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [1] = "claws", 
-         }, 
-         Credits = 0, 
-         Vnum = 6104, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "80", 
-               ScriptType = "MProg", 
-               Code = "A bird whistles.\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "50", 
-               ScriptType = "MProg", 
-               Code = "mpecho A bird chirps noisily.\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-      }, 
-      [6105] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [7] = "Wimpy", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 85, 
-         ShortDescr = "a large rodent", 
-         Name = "rodent", 
-         HitChance = 
-         {
-            HitPlus = 60, 
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 1, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A large rodent scrounges for food.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-         }, 
-         Credits = 0, 
-         Vnum = 6105, 
-         Level = 6, 
-         Alignment = 0, 
-      }, 
-      [6106] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [24] = "NoAssist", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -300, 
-         Alignment = 0, 
-         ShortDescr = "a large buzzing insect", 
-         Name = "insect", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-         }, 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A large insect buzzes around your head\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [3] = "sting", 
-         }, 
-         Credits = 0, 
-         Vnum = 6106, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "20", 
-               ScriptType = "MProg", 
-               Code = "mpecho BZZzzzzZZZzzzzZZZZZZZZZzzzzzzzzzzzzzzzZZZzzzzzzzzzzzzz\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-      }, 
-      [6107] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 7, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [24] = "NoAssist", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 12, 
-         ShortDescr = "a catlike creature", 
-         Name = "catlike creature", 
-         HitChance = 
-         {
-            HitPlus = 350, 
-            HitNoDice = 7, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 7, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [15] = "togorian", 
-            }, 
-            Speaking = 
-            {
-               [15] = "togorian", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 3, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A large catlike creature slowly and carefuly roams the jungle.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-         }, 
-         Credits = 0, 
-         Vnum = 6107, 
-         Level = 35, 
-         Alignment = 0, 
-      }, 
-      [6108] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 12, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -50, 
-         ShortDescr = "a bearlike creature", 
-         Name = "bearlike creature", 
-         HitChance = 
-         {
-            HitPlus = 600, 
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 12, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A large bearlike creature looks at you suspeciously.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [1] = "claws", 
-         }, 
-         Credits = 0, 
-         Vnum = 6108, 
-         Level = 60, 
-         Alignment = 0, 
-      }, 
-      [6109] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "a frog", 
-         Name = "frog", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A large frog hops through the muck\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 6109, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "30", 
-               ScriptType = "MProg", 
-               Code = "mpecho A frog sings, \"ggggRRRRRRRRRRRRRRRooooooooAAAAAAAAaTTT\"\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-      }, 
-      [6110] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 21, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -162, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [15] = "togorian", 
-            }, 
-            Speaking = 
-            {
-               [15] = "togorian", 
-            }, 
-         }, 
-         ShortDescr = "the night beast", 
-         Name = "night beast", 
-         HitChance = 
-         {
-            HitPlus = 10000, 
-            HitNoDice = 21, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 21, 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 20, 
-            DamNoDice = 10, 
-            DamPlus = 200, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 10, 
-         Description = "", 
-         LongDescr = "The night beast lunges at you with bloody fangs.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-         }, 
-         Credits = 0, 
-         Vnum = 6110, 
-         Level = 105, 
-         Alignment = 0, 
-      }, 
-      [6111] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -162, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [18] = "_clan", 
-               [15] = "togorian", 
-            }, 
-            Speaking = 
-            {
-               [15] = "togorian", 
-            }, 
-         }, 
-         ShortDescr = "the night beast", 
-         Name = "night beast", 
-         HitChance = 
-         {
-            HitPlus = 5000, 
-            HitNoDice = 21, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 0, 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-            [3] = "DetectInvis", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 20, 
-            DamNoDice = 10, 
-            DamPlus = 100, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 10, 
-         Description = "", 
-         LongDescr = "The night beast lunges at you from the shadows.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-         }, 
-         Credits = 0, 
-         Vnum = 6111, 
-         Level = 105, 
-         Alignment = 0, 
-      }, 
-   }, 
-   Author = "Trevor", 
-   HighEconomy = 0, 
-   ResetMessage = "", 
    Objects = 
    {
       [6100] = 
       {
-         Layers = 0, 
-         ItemType = "trash", 
-         Vnum = 6100, 
-         Description = "A small stone lies on the path.", 
          ExtraDescriptions = 
          {
+         }, 
+         Vnum = 6100, 
+         Cost = 0, 
+         ShortDescr = "a small stone", 
+         Weight = 2, 
+         Layers = 0, 
+         Name = "stone", 
+         Description = "A small stone lies on the path.", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -1281,30 +51,30 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Weight = 2, 
-         ActionDescription = "", 
-         Cost = 0, 
-         ShortDescr = "a small stone", 
-         Name = "stone", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [6101] = 
       {
-         Layers = 0, 
-         ItemType = "crystal", 
-         Vnum = 6101, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [25] = "Hidden", 
             [13] = "Inventory", 
          }, 
+         Vnum = 6101, 
+         Cost = 0, 
+         ShortDescr = "an illum crystal", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "illum crystal", 
          Description = "A beautiful crystal was foolishly left here", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "crystal", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -1315,34 +85,24 @@ AreaEntry
             [5] = 0, 
             [0] = 6, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 0, 
-         ShortDescr = "an illum crystal", 
-         Name = "illum crystal", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [6199] = 
       {
-         Layers = 0, 
-         ItemType = "furniture", 
-         Vnum = 6199, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Description = "The jedi information terminal has been installed here.", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Weight = 1, 
-         ActionDescription = "", 
+         Vnum = 6199, 
          Cost = 0, 
          ShortDescr = "the jedi information terminal", 
+         Layers = 0, 
+         Weight = 1, 
+         Description = "The jedi information terminal has been installed here.", 
+         ActionDescription = "", 
+         ItemType = "furniture", 
          Name = "Jedi information terminal", 
          ObjectValues = 
          {
@@ -1355,147 +115,176 @@ AreaEntry
          }, 
       }, 
    }, 
-   ResetFrequency = 0, 
+   HighEconomy = 0, 
    Rooms = 
    {
       [6144] = 
       {
-         Vnum = 6144, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6144, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6127, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6145] = 
       {
-         Vnum = 6145, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6145, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6128, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6146] = 
       {
-         Vnum = 6146, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6146, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6128, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6147] = 
       {
-         Vnum = 6147, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6147, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6128, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6148] = 
       {
-         Vnum = 6148, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 6148, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Academy Cafeteria", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6149, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in a large cafeteria, many students are sitting around eating\
@@ -1506,42 +295,55 @@ dining hall, you see a droid dispensing rations and other goods to the\
 students, and another door to the back with smoke  coming out of it, is\
 undoubtedly the kitchen where such tasty treats are cooked up.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6149] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6149, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Kitchen", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6149, 
-               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6150, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6151, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Academy Cafeteria", 
-         Tag = "", 
-      }, 
-      [6149] = 
-      {
-         Vnum = 6149, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6148, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You enter the kitchen and your nostrils are attacked by a million various\
@@ -1553,56 +355,59 @@ and bustle about you can't help hear your stomach growling, maybe if you\
 ask one of the droids nicely you can get a free samele of what the Master\
 eats for dinner. . .\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6150] = 
+      {
          ExtraDescriptions = 
          {
+         }, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6150, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Freezer", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "entry_prog", 
+               Code = "close south\
+mpecho *CLICK*\
+", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho You shiver as you slowly freeze to death.\
+mpdamage $n 50\
+", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
+            }, 
          }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6150, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 6151, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
                Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6148, 
+               DestinationVnum = 6149, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "door", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Kitchen", 
-         Tag = "", 
-      }, 
-      [6150] = 
-      {
-         Vnum = 6150, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "You wander into the freezer and your head snaps around as you hear the huge\
@@ -1611,59 +416,34 @@ yourself in the meat freezer and you're not properly dressed for it. As\
 you stand there shivering, you hope someone comes along to let you out, and\
 soon!\
 ", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "door", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6149, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Freezer", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "100", 
-               ScriptType = "MProg", 
-               Code = "mpecho You shiver as you slowly freeze to death.\
-mpdamage $n 50\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "100", 
-               ScriptType = "MProg", 
-               Code = "close south\
-mpecho *CLICK*\
-", 
-               MudProgType = "entry_prog", 
-            }, 
-         }, 
       }, 
       [6151] = 
       {
-         Vnum = 6151, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6151, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Pantry", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6149, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in a giant pantry, food and various bottles of imported wines\
@@ -1672,33 +452,42 @@ reach up and grab something, but though the Master is a forgiving man you\
 know stealing is wrong and decide it's best to leave all the food where it\
 is.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6152] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 6152, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Infirmary", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6149, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6153, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Pantry", 
-         Tag = "", 
-      }, 
-      [6152] = 
-      {
-         Vnum = 6152, 
-         Flags = 
-         {
-            [2] = "NoMob", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in a brightly lit hallway, which is about the only thing\
@@ -1708,42 +497,60 @@ on the walls, the place looks very well kept, there are various doors\
 around you and too the far east you see a room that says \"Bacta Tanks\"\
 Over the doorway, maybe that's what you need right now, a nice bacta bath\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6153] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6153, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "bright hallway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6153, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6154, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6156, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Infirmary", 
-         Tag = "", 
-      }, 
-      [6153] = 
-      {
-         Vnum = 6153, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6155, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6152, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The center of the hall is very busy, people rush back and forth between\
@@ -1752,61 +559,34 @@ Medical droids whiz past you in a hurry, and you wonder what's going on,\
 then notice upon further inspection you're standing in the intersection of\
 two operating rooms, perhaps you best move along.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6154, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6156, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6155, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6152, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "bright hallway", 
-         Tag = "", 
       }, 
       [6154] = 
       {
-         Vnum = 6154, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6154, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "An Operating Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6153, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing in a crowded operating room, admists medical droids and\
@@ -1817,34 +597,34 @@ ancient saying in your head. . \"Anger, hatred, these are tools of the\
 darkside\"  and shake your head clear, and decide to leave this disturbing\
 scene\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6153, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "An Operating Room", 
-         Tag = "", 
       }, 
       [6155] = 
       {
-         Vnum = 6155, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6155, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "An Operating Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6153, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Not much is in this room, there are medical droids wandering in and out as\
@@ -1853,86 +633,131 @@ things but you know at least these things happen in acts of bravery\
 protecting the light side of the force. You may some day find yourself in\
 this room, but you'd rather not think of that now.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6153, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "An Operating Room", 
-         Tag = "", 
       }, 
       [6156] = 
       {
-         Vnum = 6156, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6156, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "End of the Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6099, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6153, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is the end of the hall, to the north you see students sleeping and\
 reading in the recovery room, before you is the door to the bacta tanks\
 and west is back to the rest of the hallway.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6099, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6153, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "End of the Hallway", 
-         Tag = "", 
       }, 
       [6157] = 
       {
-         Vnum = 6157, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6157, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Bacta Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6159, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6160, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6161, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6156, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [5] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 6162, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [6] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 6163, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in the bacta room, water runs down the walls and the only noise\
@@ -1941,321 +766,302 @@ casting shadows all around not quite as comfortable as you'd have imagined\
 it, but then again why complain as long as the tanks work there's nothing\
 to worry about.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6159, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6160, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6161, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6156, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6162, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [6] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6163, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Bacta Room", 
-         Tag = "", 
       }, 
       [6158] = 
       {
-         Vnum = 6158, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         Vnum = 6158, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Recovery room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6156, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "This room is for patients to rest and catch up on sleep, you may safely\
 save and quit from this room.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6156, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Recovery room", 
-         Tag = "", 
       }, 
       [6159] = 
       {
-         Vnum = 6159, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "These tanks are for younger students who aren't strong enough in the force\
-to heal themselves yet, mostly.\
-", 
+         Vnum = 6159, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Bacta Tank", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "These tanks are for younger students who aren't strong enough in the force\
+to heal themselves yet, mostly.\
+", 
       }, 
       [6160] = 
       {
-         Vnum = 6160, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "These tanks are for younger students who aren't strong enough in the force\
-to heal themselves yet, mostly.\
-", 
+         Vnum = 6160, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Bacta Tank", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "These tanks are for younger students who aren't strong enough in the force\
+to heal themselves yet, mostly.\
+", 
       }, 
       [6161] = 
       {
-         Vnum = 6161, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 6161, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Bacta Tank", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "These tanks are for younger students who aren't strong enough in the force\
 to heal themselves yet, mostly.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Bacta Tank", 
-         Tag = "", 
       }, 
       [6162] = 
       {
-         Vnum = 6162, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "These tanks are for younger students who aren't strong enough in the force\
-to heal themselves yet, mostly.\
-", 
+         Vnum = 6162, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Bacta Tank", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "These tanks are for younger students who aren't strong enough in the force\
+to heal themselves yet, mostly.\
+", 
       }, 
       [6163] = 
       {
-         Vnum = 6163, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "These tanks are for younger students who aren't strong enough in the force\
-to heal themselves yet, mostly.\
-", 
+         Vnum = 6163, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6157, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Bacta Tank", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 6157, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "These tanks are for younger students who aren't strong enough in the force\
+to heal themselves yet, mostly.\
+", 
       }, 
       [6164] = 
       {
-         Vnum = 6164, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6164, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Information Level", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6166, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6165, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is one of the emptier levels, the hallway is as long as the others but\
@@ -2266,60 +1072,38 @@ uncomfortable to be here alone, the door to the east looks rather small\
 and common place while the one to the west is very large and decorated, I\
 wonder what could be in there. .\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6166, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6165, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Information Level", 
-         Tag = "", 
       }, 
       [6165] = 
       {
-         Vnum = 6165, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6165, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Meeting Hall", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6164, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is by far the largest room in the temple yet, whenever a matter of\
@@ -2331,38 +1115,43 @@ behind it that overlooks the entire jungle, the rest of the room is\
 dectorated with portraits of famous Jedi Masters and various other Jedi\
 Artifacts, a wonderous room indeed.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6164, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Meeting Hall", 
-         Tag = "", 
       }, 
       [6166] = 
       {
-         Vnum = 6166, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6166, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Library", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6164, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 6167, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This room is very different from what you could have seen from the hallway,\
@@ -2375,43 +1164,34 @@ through books and other periodicals a Message Terminal is here as well to\
 catch up on the latest galactic news and to the back another room looks\
 like it has something of importance in it. . \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6164, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6167, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Library", 
-         Tag = "", 
       }, 
       [6167] = 
       {
-         Vnum = 6167, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6167, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Jedi Information Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 6166, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This room is relatively smaller from the room you just came from, there\
@@ -2420,33 +1200,51 @@ the other students can read this room is rather cold and you can guess\
 this is merely a converted storage room. You wonder what's been posted\
 lately.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6168] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6168, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Masters Quarters", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6166, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6170, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Jedi Information Room", 
-         Tag = "", 
-      }, 
-      [6168] = 
-      {
-         Vnum = 6168, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6169, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You look around in Awe as you enter the Masters private quarters. They are\
@@ -2462,51 +1260,51 @@ kitchen area but to the east is the masters sleeping quarters which are\
 very much off limits to all students. I'm sure he won't mind you looking\
 around, just a little bit. .   \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6169] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6169, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Kitchen", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6170, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6173, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6168, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6169, 
-               Distance = 0, 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6172, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Masters Quarters", 
-         Tag = "", 
-      }, 
-      [6169] = 
-      {
-         Vnum = 6169, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "You walk down the few steps and are standing in the kitchen area of the\
@@ -2519,131 +1317,113 @@ you want to just take your shoes off and squish your toes in the soft\
 batha hide rug there are a few doors here which lead to the bathroom and\
 closet. Taking a deep breath you never want to leave this place\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6173, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6168, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6172, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Kitchen", 
-         Tag = "", 
       }, 
       [6170] = 
       {
-         Vnum = 6170, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
+         Vnum = 6170, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6168, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 6171, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6168, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6171, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
       }, 
       [6171] = 
       {
-         Vnum = 6171, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6170, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
+         Vnum = 6171, 
+         TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "Bacta Tank", 
+         Sector = "city", 
+         Description = "", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 6170, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Bacta Tank", 
       }, 
       [6172] = 
       {
-         Vnum = 6172, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 6172, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The Bathroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6169, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You look in shock as even the bathroom is immaculately clean! Though you\
@@ -2651,33 +1431,33 @@ realize you should leave before someone wanders in and sees you drooling\
 over a bathroom, besides not like there's anything in here anyways, well\
 nothing of interest to you.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6173] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6173, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A broomcloset", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
                Key = -1, 
-               Direction = "north", 
                DestinationVnum = 6169, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Bathroom", 
-         Tag = "", 
-      }, 
-      [6173] = 
-      {
-         Vnum = 6173, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is a very cramped area, you reach up to turn on the light and a iron\
@@ -2685,33 +1465,50 @@ falls and hits you on the head. OUCH! That hurt, you realize unless you\
 want to look like an idiot who died in a broom closet you should leave,\
 you've no buisness wandering around here anyway.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6174] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [10] = "Safe", 
+         }, 
+         Vnum = 6174, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A Grand Hall", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6169, 
-               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6175, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A broomcloset", 
-         Tag = "", 
-      }, 
-      [6174] = 
-      {
-         Vnum = 6174, 
-         Flags = 
-         {
-            [10] = "Safe", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This room is one large room, there are no other doors you can see except\
@@ -2724,16 +1521,27 @@ symbols carved into them. Your final deduction is that this magnificant,\
 yet simply decorated room is where new Jedi's are inducted or promoted\
 within the order.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6175] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6175, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A small room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -2742,74 +1550,55 @@ within the order.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6175, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 6106, 
+               Key = -1, 
+               DestinationVnum = 6174, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A Grand Hall", 
-         Tag = "", 
-      }, 
-      [6175] = 
-      {
-         Vnum = 6175, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This room is very small and unimpressive, probably where the Master\
 prepares for events you figure you really have no place here being as you\
 don't know what any of this stuff is for and you best leave.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6176] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 6176, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "Before the Jungle.", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6174, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6104, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A small room", 
-         Tag = "", 
-      }, 
-      [6176] = 
-      {
-         Vnum = 6176, 
-         Flags = 
-         {
-            [2] = "NoMob", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6177, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Your standing on the dense jungle floor, vines and shrubs cover your feet\
@@ -2818,359 +1607,363 @@ like you never have before. Even during the day the jungle looks very very\
 dark, as you continue to look you think you hear a nightbeast growl and\
 wonder if you should head back to the academy.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6104, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6177, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Before the Jungle.", 
-         Tag = "", 
       }, 
       [6177] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6177, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand in the dense jungle, there's still hope of turning back if you\
 want otherwise the jungle stretches out in all directions, noises and the\
 smells of the jungle surround you, be careful.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Flags = 
                {
                   [11] = "Hidden", 
                }, 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6176, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6179, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6180, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6178, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "In the thick", 
-         Tag = "", 
       }, 
       [6178] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6178, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The jungle is like a hot, sticky maze you don't want to be in. You bat away\
 spider webs from your face and don't know how you manage to drag yourself\
 any further \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6177, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6183, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "The Jungle", 
-         Tag = "", 
       }, 
       [6179] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6179, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You look around as you're surrounded by trees, to the e it seems to be a\
 dead end,  while to the south you see another thorny area\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6197, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6182, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6177, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "The Jungle", 
-         Tag = "", 
       }, 
       [6180] = 
       {
-         Vnum = 6180, 
-         Tunnel = 0, 
-         Description = "You continue to through the trecherous jungle.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         Vnum = 6180, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You continue to through the trecherous jungle.\
+", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6177, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6181, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6198, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Still in the jungle", 
-         Tag = "", 
       }, 
       [6181] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6181, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "Ick! You seem to have stumbled into a marsh. You look around waist deep in\
 sludge and wonder what creature is going to come along and pick you up for\
 dinner. After a few more minutes you decide you don't wanna find out and\
 best get outta here\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6180, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6193, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "A swampy marsh", 
-         Tag = "", 
       }, 
       [6182] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6182, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "After stumbling through the jungle you find yourself in a thorny patch full\
 of various brambles and vines.  Your legs twist and turn in the weeds and\
 you try to keep yourself from falling over as you grab onto the nearest\
 branch you hang on for dear life as the jungle floor seems to move and\
 grow around your feet, almost as if it had a life of it's own. . .\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6179, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6199, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6196, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Thorny brush", 
-         Tag = "", 
       }, 
       [6183] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6183, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You've been wandering what seems to be hours, as you look back you can\
 barely make out the temple between the mist and fern around you. The\
 ground around you is wet and mossy and you feel tired. The jungle goes on\
 forever it seems and there is no way out except the way you came, or else\
 you may get lost in this dark, dark place.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6178, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6195, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "In the Jungle", 
-         Tag = "", 
       }, 
       [6184] = 
       {
-         Vnum = 6184, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
+         }, 
+         Vnum = 6184, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A small clearing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6181, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 6185, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You come out into a small clearing, all the grass here has been flattened\
@@ -3181,46 +1974,42 @@ is probably where night beasts fight, and bring their prey to eat. You\
 suddenly get the feeling you really don't want to be here, but can't seem\
 to find the path back from which you came. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6185] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6185, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "The Night Beast lair", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6181, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6186, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6185, 
-               Distance = 0, 
                Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 6184, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A small clearing", 
-         Tag = "", 
-      }, 
-      [6185] = 
-      {
-         Vnum = 6185, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "You seem to have fallen into a dark dank pit of sorts. The walls are a\
@@ -3230,42 +2019,51 @@ came, and a narrow passage leading foward towards who knows what. You hear\
 a loud grunt and realize you might not be strong enough in the force to\
 continue on. . .  \
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6186] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6186, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "Deep within the caves", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6186, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6187, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6184, 
-               Distance = 0, 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6191, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The Night Beast lair", 
-         Tag = "", 
-      }, 
-      [6186] = 
-      {
-         Vnum = 6186, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6185, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You decide to venture further in and find yourself deeper in the cave then\
@@ -3274,51 +2072,42 @@ beast to guard the temples, but your gut tells you there are more. Farther\
 down you see a light while to your sides the cave seems to branch off a\
 bit. \
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6187] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6187, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "behind a large rock", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6187, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6188, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6191, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 6185, 
+               Key = -1, 
+               DestinationVnum = 6186, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Deep within the caves", 
-         Tag = "", 
-      }, 
-      [6187] = 
-      {
-         Vnum = 6187, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "You're standing behind a large rock, before you is a large open area in the\
@@ -3329,42 +2118,46 @@ don't get a good feeling about, you reconsider continuing further, and\
 hope whatever is in there doesn't hear your heart beating through your\
 chest!\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6188] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6188, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "In the Night Beasts den", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6188, 
-               Distance = 0, 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6187, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6186, 
-               Distance = 0, 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
                Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 6189, 
+               Distance = 0, 
+               Keyword = "tunnel", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "behind a large rock", 
-         Tag = "", 
-      }, 
-      [6188] = 
-      {
-         Vnum = 6188, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "Mustering all your courage you venture forward into the vile beasts lair.\
@@ -3372,46 +2165,47 @@ You look in horror among the piles of carcasses laying about and your eyes\
 grow  wide as you follow the trail up to A huge night beast hulking over a\
 forest TaunTaun. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6189] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6189, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "A Small Tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6187, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "tunnel", 
                Flags = 
                {
                   [19] = "Auto", 
+                  [11] = "Hidden", 
                }, 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6189, 
-               Distance = 0, 
                Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 6190, 
+               Distance = 0, 
+               Keyword = "crack", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "In the Night Beasts den", 
-         Tag = "", 
-      }, 
-      [6189] = 
-      {
-         Vnum = 6189, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 6188, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "&z You're standing in another small pathway in the caves, room enough for\
@@ -3419,47 +2213,33 @@ one large night beast and possibly two regular people There isn't anything\
 in this small area except a &wcrack&z to the left which you think you can\
 just squeeze into if you try hard enough.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6190] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6190, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "A large room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "crack", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6190, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 6189, 
+               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6188, 
-               Distance = 0, 
-               Description = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A Small Tunnel", 
-         Tag = "", 
-      }, 
-      [6190] = 
-      {
-         Vnum = 6190, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is a very large and magnificant room, a small stream runs through it\
@@ -3468,83 +2248,83 @@ thing is the crystals hanging from the  ceilings and lining the walls, it\
 truely is unlike anything you've ever seen. Perhaps if you search around a\
 bit you can find a loose crystal which might come in handy.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6191] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6191, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "Another tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6189, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6186, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A large room", 
-         Tag = "", 
-      }, 
-      [6191] = 
-      {
-         Vnum = 6191, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6192, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6194, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing in a cutoff in the cave there's a few exits this way but\
 otherwise it's pretty nondescript\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6192] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6192, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "The sleeping nest", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6186, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
+               Direction = "west", 
                Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6192, 
+               DestinationVnum = 6191, 
                Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6194, 
-               Distance = 0, 
-               Description = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Another tunnel", 
-         Tag = "", 
-      }, 
-      [6192] = 
-      {
-         Vnum = 6192, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "Uh-Oh you stumbled into the sleeping nest of the Beast it seems, aside from\
@@ -3555,34 +2335,34 @@ night beast takes form. As the sweat runs down your face you guess there\
 was more then one beast after all. You stand still as the large beast\
 stares at you hidden in the darkness.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6191, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The sleeping nest", 
-         Tag = "", 
       }, 
       [6193] = 
       {
-         Vnum = 6193, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [24] = "NoFloor", 
+         }, 
+         Vnum = 6193, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "A small clearing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 6185, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You come out into a small clearing, all the grass here has been flattened\
@@ -3593,33 +2373,33 @@ is probably where night beasts fight, and bring their prey to eat. You\
 suddenly get the feeling you really don't want to be here, but can't seem\
 to find the path back from which you came.  \
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6194] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6194, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "A small Altar", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6185, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6191, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A small clearing", 
-         Tag = "", 
-      }, 
-      [6194] = 
-      {
-         Vnum = 6194, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is another rather empty room. There's a small altar here with a dead\
@@ -3627,189 +2407,171 @@ carcass laying on it. As you look around you shrug to yourself, you don't\
 think the Night Beast care too much about home decore. Though it looks\
 like there's a fresh kill laying in the corner, if you're THAT hungry.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6191, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A small Altar", 
-         Tag = "", 
       }, 
       [6195] = 
       {
-         Vnum = 6195, 
-         Tunnel = 0, 
-         Description = "The jungle is hard to traverse and seems to go on forever, you hope to find\
-something interesting soon. \
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         Vnum = 6195, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "The jungle is hard to traverse and seems to go on forever, you hope to find\
+something interesting soon. \
+", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6183, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "The Jungle", 
-         Tag = "", 
       }, 
       [6196] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6196, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You find yourself still travelling though the thick of the jungle, the hot\
 steam  making you sweat profusely. As you trudge along you ask yourself\
 \"is being a Jedi all worth this?\" \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6182, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Wandering through the wild", 
-         Tag = "", 
       }, 
       [6197] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6197, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You come to a dead end in the jungle, a huge impassable rock blocks your\
 way, might as well turn around.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6179, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "A dead end", 
-         Tag = "", 
       }, 
       [6198] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6198, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You're walking over an old collapsed log, small animals run in and out and\
 nip at your toes as you cross.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6180, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6199, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Over a log", 
-         Tag = "", 
       }, 
       [6199] = 
       {
-         Vnum = 6199, 
-         Tunnel = 0, 
-         Description = "You scream in frustration, the jungle isn't ending and you know this now.\
-There's nothing to do but wander until someone finds you, hopefully.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
+         Vnum = 6199, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You scream in frustration, the jungle isn't ending and you know this now.\
+There's nothing to do but wander until someone finds you, hopefully.\
+", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6198, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6105, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "endless jungle", 
-         Tag = "", 
       }, 
       [6099] = 
       {
-         Vnum = 6099, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -3817,38 +2579,56 @@ There's nothing to do but wander until someone finds you, hopefully.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This room is for patients to rest and catch up on sleep, you may safely\
-save and quit from this room.\
-", 
+         Vnum = 6099, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Recovery Room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6156, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Recovery Room", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This room is for patients to rest and catch up on sleep, you may safely\
+save and quit from this room.\
+", 
       }, 
       [6100] = 
       {
-         Vnum = 6100, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [4] = "CanLand", 
             [10] = "Safe", 
+         }, 
+         Vnum = 6100, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "Small Landing Pad", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6101, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing on a small landing pad elevated above the hot, steaming\
@@ -3856,33 +2636,42 @@ jungle. There are a few people here repairing and washing their ships.The\
 Lucious forest of Yavin IV surrounds you on all  sides, though a stone\
 pathway has been cleared to the east leading to an enormous temple.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [6101] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [10] = "Safe", 
+         }, 
+         Vnum = 6101, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "On a small stone pathway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6101, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6102, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Small Landing Pad", 
-         Tag = "", 
-      }, 
-      [6101] = 
-      {
-         Vnum = 6101, 
-         Flags = 
-         {
-            [10] = "Safe", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6100, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing on the small stone pathway, you can still hear the sound of\
@@ -3892,42 +2681,51 @@ temple before you, the smell of the forest assails your nostrils and you\
 can't  help but feel safe in the aura of the force which seems to be\
 eminating from the temple itself.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6102] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [10] = "Safe", 
+         }, 
+         Vnum = 6102, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Before the Jedi Academy", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6102, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6103, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6100, 
-               Distance = 0, 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6104, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "On a small stone pathway", 
-         Tag = "", 
-      }, 
-      [6102] = 
-      {
-         Vnum = 6102, 
-         Flags = 
-         {
-            [10] = "Safe", 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6101, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand before the Jedi acadamy and gaze up in awe, the gigantic\
@@ -3937,52 +2735,43 @@ possibly imagined, students stand around practicing their skills and\
 talking as they wait for  their classes to start, you can feel the force\
 summoning you inside. . \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6103, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6104, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6101, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Before the Jedi Academy", 
-         Tag = "", 
       }, 
       [6103] = 
       {
-         Vnum = 6103, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6103, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Inside the Jedi Academy", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6102, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in a large room which is all too familiar from the holo-movies\
@@ -3993,40 +2782,17 @@ studying and hanging out  in the now converted lounge you get a comforting\
 feeling as if you could feel the essence of a young  Luke Skywalker\
 himself in the room preparing his X-wing to take a flight into destiny.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6102, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Inside the Jedi Academy", 
-         Tag = "", 
       }, 
       [6104] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 6104, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand on the temple steps, the great structure looming before you, as\
 you look up you can barely  make out the top of the temple as it is\
 covered in a thick layer of mist, you imagine there is a  spectacular view\
@@ -4035,204 +2801,245 @@ leads off into  the jungle, where students sometimes go on retreats to\
 become stronger in their skills, though being   careful not to wander to\
 far, for fear of running into night beasts.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6102, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6176, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "On the steps of the Temple", 
-         Tag = "", 
       }, 
       [6105] = 
       {
-         Vnum = 6105, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "The sun beats down on you mercilessly as you drag yourself along the jungle\
-", 
+         Vnum = 6105, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "The steaming jungle", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6199, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "The steaming jungle", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "The sun beats down on you mercilessly as you drag yourself along the jungle\
+", 
       }, 
       [6106] = 
       {
-         Vnum = 6106, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6106, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A Turbolift", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6103, 
+               Distance = 0, 
+               Keyword = "1 Main", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6107, 
+               Distance = 0, 
+               Keyword = "2 Training", 
+            }, 
+            [3] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6120, 
+               Distance = 0, 
+               Keyword = "3 Dormatory", 
+            }, 
+            [4] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6148, 
+               Distance = 0, 
+               Keyword = "4 Cafeteria", 
+            }, 
+            [5] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6152, 
+               Distance = 0, 
+               Keyword = "5 Infirmary", 
+            }, 
+            [6] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6164, 
+               Distance = 0, 
+               Keyword = "6 Information", 
+            }, 
+            [7] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6174, 
+               Distance = 0, 
+               Keyword = "7 Hall", 
+            }, 
+            [8] = 
+            {
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 6168, 
+               Distance = 0, 
+               Keyword = "8 Masters", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing in the only turbolift in the school, it's all class with\
 black dura-steel holding it together. Looking at the panel you can chose\
 which floor you wish to get off at.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "1 Main", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6103, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "2 Training", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6107, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "3 Dormatory", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6120, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "4 Cafeteria", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6148, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [5] = 
-            {
-               Keyword = "5 Infirmary", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6152, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [6] = 
-            {
-               Keyword = "6 Information", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6164, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [7] = 
-            {
-               Keyword = "7 Hall", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6174, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [8] = 
-            {
-               Keyword = "8 Masters", 
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 6168, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A Turbolift", 
-         Tag = "", 
       }, 
       [6107] = 
       {
-         Vnum = 6107, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6107, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "A long hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6110, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6108, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6111, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're standing in a long hallway lined with doors on each side The faint\
@@ -4242,62 +3049,62 @@ making the academy a decorated palace. Just the basics were put into this\
 place. You shrug to yourself as you look at the class names on each door\
 and decide you should check one out.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6110, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6108, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6111, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "A long hallway", 
-         Tag = "", 
       }, 
       [6108] = 
       {
-         Vnum = 6108, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6108, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "The middle of the hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6118, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6109, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6119, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6107, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You stand in the center of the hall way, to your sides are two huge metal\
@@ -4307,102 +3114,84 @@ collect all the  neccasary pieces, they go to these roooms to finishing\
 their sabers in peace. Some day you too will be coming from one of those\
 rooms you think happily to yourself.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6118, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6109, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6119, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6107, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "The middle of the hallway", 
-         Tag = "", 
       }, 
       [6109] = 
       {
-         Vnum = 6109, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "You're at the end of the hallway, the classes here are for students who\
-wish to brush up on their force using abilities.\
-", 
+         Vnum = 6109, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "The end of the long hallway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6114, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6108, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "The end of the long hallway", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "You're at the end of the hallway, the classes here are for students who\
+wish to brush up on their force using abilities.\
+", 
       }, 
       [6110] = 
       {
-         Vnum = 6110, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 6110, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Lightsaber Training Class", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6112, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6107, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Once students have build their sabers they may come here to hone their\
@@ -4412,42 +3201,42 @@ most infamous Dark Lord of the Sith. He may not look like much, but he\
 does pack a small punch, perhaps this is a good place to practice curing\
 light wounds also. .  \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6111] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6111, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Advanced Lightsaber Training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6112, 
-               Distance = 0, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6107, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6107, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6113, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Lightsaber Training Class", 
-         Tag = "", 
-      }, 
-      [6111] = 
-      {
-         Vnum = 6111, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is another room in the class, though now there are holograms of\
@@ -4456,249 +3245,240 @@ the other holograms, these are aggressive and attack you right away, in\
 order to teach jedis to be alert at all time. This is a good room to\
 practice your dodge and parry skills, also.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6112] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6112, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Lightsaber Training class", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6107, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
+               Direction = "west", 
                Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6113, 
+               DestinationVnum = 6110, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Advanced Lightsaber Training", 
-         Tag = "", 
-      }, 
-      [6112] = 
-      {
-         Vnum = 6112, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is another room in the class, in the event that the first room is in\
 use, or the holograms that haven't reloaded, you can usually find more\
 holograms here.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6113] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6113, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Advanced Lightsaber training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6110, 
-               Distance = 0, 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6111, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Lightsaber Training class", 
-         Tag = "", 
-      }, 
-      [6113] = 
-      {
-         Vnum = 6113, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This is another room in the class, in the event that the first room is in\
 use, or the holograms that haven't reloaded, you can usually find more\
 holograms here. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6114] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6114, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Force Training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6111, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6115, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Advanced Lightsaber training", 
-         Tag = "", 
-      }, 
-      [6114] = 
-      {
-         Vnum = 6114, 
-         Flags = 
-         {
-            [3] = "Indoors", 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6109, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is the first room in the force training class. There are verious\
 objects to manipulate and play force games with. Each geared for a\
 different level of force development.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6115] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6115, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Force Training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6115, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
+               Direction = "west", 
                Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6109, 
+               DestinationVnum = 6114, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Force Training", 
-         Tag = "", 
-      }, 
-      [6115] = 
-      {
-         Vnum = 6115, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This room is an extra room added in case the first room is full, it has all\
 the same things as the first.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6116] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6116, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Advanced Force Training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6114, 
-               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6117, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Force Training", 
-         Tag = "", 
-      }, 
-      [6116] = 
-      {
-         Vnum = 6116, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This room is for more advanced spells such as Dispel dark and affect mind,\
 there is another room off of this one in case this room is full.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [6117] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 6117, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Advanced Force Training", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6117, 
-               Distance = 0, 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6116, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Advanced Force Training", 
-         Tag = "", 
-      }, 
-      [6117] = 
-      {
-         Vnum = 6117, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "This room is here in case the other room is full, it contains all the\
 things to practice such spells as dispel dark, affect mind and other\
 advanced spells\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6116, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Advanced Force Training", 
-         Tag = "", 
       }, 
       [6118] = 
       {
-         Vnum = 6118, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [16] = "Silence", 
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6118, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Lightsaber Crafting Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6108, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is where students come to craft lightsabers, a small bench and table\
@@ -4708,35 +3488,35 @@ allowing you to speak in this room. If you have all you need perhaps you\
 should get to work, otherwise allow someone else a chance to build their\
 lightsaber. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6108, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Lightsaber Crafting Room", 
-         Tag = "", 
       }, 
       [6119] = 
       {
-         Vnum = 6119, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [16] = "Silence", 
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6119, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Lightsaber Crafting Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6108, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is where students come to craft lightsabers, a small bench and table\
@@ -4745,34 +3525,61 @@ to yourself but your words are forced back down, as if the force were not\
 allowing you to speak in this room. If you have all you need perhaps you\
 should get to work, otherwise allow someone else a chance to build\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6108, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Lightsaber Crafting Room", 
-         Tag = "", 
       }, 
       [6120] = 
       {
-         Vnum = 6120, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6120, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Dormatory Level", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6121, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6123, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6122, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6106, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You're looking down another long stone corridor. Doors line the halls up\
@@ -4782,252 +3589,252 @@ stay. They are given one adequately sized room for 100,000 credits per\
 room, which is a bit pricey but worth it. At least you think. Maybe you\
 should consider taking out a loan. . .  \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6121, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6123, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6122, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6106, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Dormatory Level", 
-         Tag = "", 
       }, 
       [6121] = 
       {
-         Vnum = 6121, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6121, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6120, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6122] = 
       {
-         Vnum = 6122, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6122, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6120, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6123] = 
       {
-         Vnum = 6123, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6123, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Hallway in the Dorms", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6124, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6126, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6125, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6120, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You continue down the long hallway and see an intersection coming up\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6124, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6126, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6125, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6120, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Hallway in the Dorms", 
-         Tag = "", 
       }, 
       [6124] = 
       {
-         Vnum = 6124, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6124, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6123, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6125] = 
       {
-         Vnum = 6125, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6125, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6123, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6126] = 
       {
-         Vnum = 6126, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6126, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Intersection in the Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6127, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6131, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6129, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6123, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You come to an intersection, there are rooms in all directions, Master\
@@ -5036,789 +3843,1982 @@ so provided an adequate amount of rooms though, not enough, maybe someday\
 soon you can get a roommate but for now, there are plenty of empty rooms\
 as far as you can see.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6127, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6131, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6129, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6123, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Intersection in the Hallway", 
-         Tag = "", 
       }, 
       [6127] = 
       {
-         Vnum = 6127, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6127, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Dormatory Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6128, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6144, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6126, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6143, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You continue down the long hallway and see an intersection coming up\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6128, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6144, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6126, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6143, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Dormatory Hallway", 
-         Tag = "", 
       }, 
       [6128] = 
       {
-         Vnum = 6128, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6128, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "End of the Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6145, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6147, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6127, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6146, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You come to the end of the hall way, with doors all around you, and the\
 long hallway behind you. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6145, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6147, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6127, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6146, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "End of the Hallway", 
-         Tag = "", 
       }, 
       [6129] = 
       {
-         Vnum = 6129, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "You continue down the long hallway and see an intersection coming up\
-", 
+         Vnum = 6129, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Dormatory Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6126, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6142, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6130, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6141, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Dormatory Hallway", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "You continue down the long hallway and see an intersection coming up\
+", 
       }, 
       [6130] = 
       {
-         Vnum = 6130, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6130, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "End of the Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6129, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6140, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6138, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6139, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You come to the end of the hall way, with doors all around you, and the\
 long hallway behind you.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6129, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6140, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6138, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6139, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "End of the Hallway", 
-         Tag = "", 
       }, 
       [6131] = 
       {
-         Vnum = 6131, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 6131, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Dormatory Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6136, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6132, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6137, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6126, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "You continue down the long hallway and see an intersection coming up\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6136, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6132, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6137, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6126, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Dormatory Hallway", 
-         Tag = "", 
       }, 
       [6132] = 
       {
-         Vnum = 6132, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
+         Vnum = 6132, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "End of the Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 6134, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 6133, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 6135, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 6131, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "You come to the end of the hall way, with doors all around you, and the\
 long hallway behind you.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6134, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6133, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6135, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6131, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "End of the Hallway", 
-         Tag = "", 
       }, 
       [6133] = 
       {
-         Vnum = 6133, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6133, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6132, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6134] = 
       {
-         Vnum = 6134, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6134, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6132, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6135] = 
       {
-         Vnum = 6135, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6135, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6132, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6136] = 
       {
-         Vnum = 6136, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6136, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 6131, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6137] = 
       {
-         Vnum = 6137, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6137, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6131, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6138] = 
       {
-         Vnum = 6138, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6138, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 6130, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6139] = 
       {
-         Vnum = 6139, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6139, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6130, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6140] = 
       {
-         Vnum = 6140, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6140, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6130, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6141] = 
       {
-         Vnum = 6141, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6141, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6129, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6142] = 
       {
-         Vnum = 6142, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6142, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 6129, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
       [6143] = 
       {
-         Vnum = 6143, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Vnum = 6143, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 6127, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   LowEconomy = 129555500, 
+   Resets = 
+   {
+      [1] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32259, 
+         Command = "O", 
+         Arg3 = 6102, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6101, 
+         Command = "M", 
+         Arg3 = 6110, 
+         Arg2 = 6, 
+      }, 
+      [3] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6101, 
+         Command = "M", 
+         Arg3 = 6112, 
+         Arg2 = 6, 
+      }, 
+      [4] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6102, 
+         Command = "M", 
+         Arg3 = 6111, 
+         Arg2 = 3, 
+      }, 
+      [5] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6103, 
+         Command = "M", 
+         Arg3 = 6113, 
+         Arg2 = 3, 
+      }, 
+      [6] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6103, 
+         Command = "M", 
+         Arg3 = 6113, 
+         Arg2 = 3, 
+      }, 
+      [7] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6103, 
+         Command = "M", 
+         Arg3 = 6113, 
+         Arg2 = 3, 
+      }, 
+      [8] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6102, 
+         Command = "M", 
+         Arg3 = 6111, 
+         Arg2 = 3, 
+      }, 
+      [9] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6102, 
+         Command = "M", 
+         Arg3 = 6111, 
+         Arg2 = 3, 
+      }, 
+      [10] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6101, 
+         Command = "M", 
+         Arg3 = 6110, 
+         Arg2 = 6, 
+      }, 
+      [11] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6101, 
+         Command = "M", 
+         Arg3 = 6112, 
+         Arg2 = 6, 
+      }, 
+      [12] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6100, 
+         Command = "O", 
+         Arg3 = 6101, 
+         Arg2 = 1, 
+      }, 
+      [13] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6100, 
+         Command = "M", 
+         Arg3 = 6166, 
+         Arg2 = 1, 
+      }, 
+      [14] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32201, 
+         Command = "O", 
+         Arg3 = 6166, 
+         Arg2 = 1, 
+      }, 
+      [15] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6199, 
+         Command = "M", 
+         Arg3 = 6167, 
+         Arg2 = 1, 
+      }, 
+      [16] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6199, 
+         Command = "O", 
+         Arg3 = 6167, 
+         Arg2 = 1, 
+      }, 
+      [17] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6104, 
+         Command = "M", 
+         Arg3 = 6177, 
+         Arg2 = 1, 
+      }, 
+      [18] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6104, 
+         Command = "M", 
+         Arg3 = 6177, 
+         Arg2 = 20, 
+      }, 
+      [19] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6105, 
+         Command = "M", 
+         Arg3 = 6180, 
+         Arg2 = 10, 
+      }, 
+      [20] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6106, 
+         Command = "M", 
+         Arg3 = 6105, 
+         Arg2 = 10, 
+      }, 
+      [21] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6107, 
+         Command = "M", 
+         Arg3 = 6197, 
+         Arg2 = 5, 
+      }, 
+      [22] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6108, 
+         Command = "M", 
+         Arg3 = 6196, 
+         Arg2 = 2, 
+      }, 
+      [23] = 
+      {
+         MiscData = 0, 
+         Arg1 = 6108, 
+         Command = "M", 
+         Arg3 = 6181, 
+         Arg2 = 2, 
+      }, 
+      [24] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6110, 
+         Command = "M", 
+         Arg3 = 6188, 
+         Arg2 = 1, 
+      }, 
+      [25] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6101, 
+         Command = "O", 
+         Arg3 = 6190, 
+         Arg2 = 1, 
+      }, 
+   }, 
+   ResetMessage = "", 
+   Author = "Trevor", 
+   Name = "The Jedi Academy", 
+   ResetFrequency = 0, 
    LevelRanges = 
    {
       Soft = 
       {
-         Low = 0, 
          High = 105, 
+         Low = 0, 
       }, 
       Hard = 
       {
-         Low = 0, 
          High = 105, 
+         Low = 0, 
       }, 
    }, 
-   LowEconomy = 129555500, 
-   Name = "The Jedi Academy", 
    Filename = "yavin.lua", 
+   Mobiles = 
+   {
+      [6199] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a wise old jedimaster", 
+         Race = "Sullustan", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Vnum = 6199, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [9] = "Train", 
+            [10] = "Practice", 
+            [30] = "Prototype", 
+         }, 
+         Name = "wise old jedimaster", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A wise old jedimaster contemplates the duality of the Force.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [6100] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a librarian", 
+         Race = "Verpine", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Vnum = 6100, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [9] = "Train", 
+         }, 
+         Name = "librarian", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A librarian places some books on the shelves.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [6101] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         ShortDescr = "Darth Vader", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 5, 
+         Vnum = 6101, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+            [6] = "_06", 
+            [7] = "_07", 
+         }, 
+         Credits = 0, 
+         DamRoll = 5, 
+         Level = 25, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [24] = "NoAssist", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+            [27] = "NoCorpse", 
+         }, 
+         Name = "darth vader hologram", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         LongDescr = "The image of Darth Vader casts a dark shadow still long after his death.\
+", 
+         ArmorClass = 37, 
+      }, 
+      [6102] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         ShortDescr = "Emperor Palpatine", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 10, 
+         Vnum = 6102, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         AttackFlags = 
+         {
+            [27] = "_27", 
+         }, 
+         Credits = 0, 
+         DamRoll = 10, 
+         Level = 50, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [24] = "NoAssist", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+            [27] = "NoCorpse", 
+         }, 
+         Name = "Emperor Palpatine Hologram", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [10] = "backstab", 
+         }, 
+         LongDescr = "The former Emperor Palpatine fills you with a sense of dread.\
+", 
+         ArmorClass = -25, 
+      }, 
+      [6103] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 750, 
+            HitSizeDice = 10, 
+            HitNoDice = 15, 
+         }, 
+         ShortDescr = "Exar Kuhn", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 15, 
+         Vnum = 6103, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         AttackFlags = 
+         {
+            [26] = "_26", 
+         }, 
+         Credits = 0, 
+         DamRoll = 15, 
+         Level = 75, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [24] = "NoAssist", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+            [27] = "NoCorpse", 
+         }, 
+         Name = "exar kun hologram", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+            [10] = "backstab", 
+         }, 
+         LongDescr = "The original dark lord of the sith send shivers down your spine.\
+", 
+         ArmorClass = -87, 
+      }, 
+      [6104] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a bird", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 6104, 
+         Height = 0, 
+         AttackFlags = 
+         {
+            [1] = "claws", 
+         }, 
+         DamRoll = 0, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho A bird chirps noisily.\
+", 
+               Arguments = "50", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "A bird whistles.\
+", 
+               Arguments = "80", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         AffectedBy = 
+         {
+            [19] = "Flying", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [7] = "Wimpy", 
+         }, 
+         Name = "bird", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A bird sits in a tree chirping loudly.\
+", 
+         ArmorClass = -200, 
+      }, 
+      [6105] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 60, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         ShortDescr = "a large rodent", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 1, 
+         Vnum = 6105, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+         }, 
+         Credits = 0, 
+         DamRoll = 1, 
+         Level = 6, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [7] = "Wimpy", 
+         }, 
+         Name = "rodent", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A large rodent scrounges for food.\
+", 
+         ArmorClass = 85, 
+      }, 
+      [6106] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 1, 
+            HitNoDice = 1, 
+         }, 
+         ShortDescr = "a large buzzing insect", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 6106, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         AttackFlags = 
+         {
+            [3] = "sting", 
+         }, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho BZZzzzzZZZzzzzZZZZZZZZZzzzzzzzzzzzzzzzZZZzzzzzzzzzzzzz\
+", 
+               Arguments = "20", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [24] = "NoAssist", 
+         }, 
+         Name = "insect", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A large insect buzzes around your head\
+", 
+         ArmorClass = -300, 
+      }, 
+      [6107] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitSizeDice = 10, 
+            HitNoDice = 7, 
+         }, 
+         ShortDescr = "a catlike creature", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [15] = "togorian", 
+            }, 
+            Speaking = 
+            {
+               [15] = "togorian", 
+            }, 
+         }, 
+         HitRoll = 7, 
+         Vnum = 6107, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+         }, 
+         Credits = 0, 
+         DamRoll = 7, 
+         Level = 35, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [24] = "NoAssist", 
+         }, 
+         Name = "catlike creature", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A large catlike creature slowly and carefuly roams the jungle.\
+", 
+         ArmorClass = 12, 
+      }, 
+      [6108] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 6, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 600, 
+            HitSizeDice = 10, 
+            HitNoDice = 12, 
+         }, 
+         ShortDescr = "a bearlike creature", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 12, 
+         Vnum = 6108, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         AttackFlags = 
+         {
+            [1] = "claws", 
+         }, 
+         Credits = 0, 
+         DamRoll = 12, 
+         Level = 60, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         Name = "bearlike creature", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A large bearlike creature looks at you suspeciously.\
+", 
+         ArmorClass = -50, 
+      }, 
+      [6109] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a frog", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Vnum = 6109, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho A frog sings, \"ggggRRRRRRRRRRRRRRRooooooooAAAAAAAAaTTT\"\
+", 
+               Arguments = "30", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         Name = "frog", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A large frog hops through the muck\
+", 
+         ArmorClass = 0, 
+      }, 
+      [6110] = 
+      {
+         Damage = 
+         {
+            DamPlus = 200, 
+            DamSizeDice = 20, 
+            DamNoDice = 10, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 10000, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         ShortDescr = "the night beast", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [15] = "togorian", 
+            }, 
+            Speaking = 
+            {
+               [15] = "togorian", 
+            }, 
+         }, 
+         NumberOfAttacks = 10, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         HitRoll = 21, 
+         Vnum = 6110, 
+         Height = 0, 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+         }, 
+         DamRoll = 21, 
+         Credits = 0, 
+         Sex = "undistinguished", 
+         Level = 105, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+         }, 
+         Name = "night beast", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "The night beast lunges at you with bloody fangs.\
+", 
+         ArmorClass = -162, 
+      }, 
+      [6111] = 
+      {
+         Damage = 
+         {
+            DamPlus = 100, 
+            DamSizeDice = 20, 
+            DamNoDice = 10, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 5000, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         ShortDescr = "the night beast", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [18] = "_clan", 
+               [15] = "togorian", 
+            }, 
+            Speaking = 
+            {
+               [15] = "togorian", 
+            }, 
+         }, 
+         NumberOfAttacks = 10, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 6111, 
+         Height = 0, 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+         }, 
+         DamRoll = 0, 
+         Credits = 0, 
+         Sex = "undistinguished", 
+         Level = 105, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+            [3] = "DetectInvis", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+         }, 
+         Name = "night beast", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "The night beast lunges at you from the shadows.\
+", 
+         ArmorClass = -162, 
+      }, 
+   }, 
 }

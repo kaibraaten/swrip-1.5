@@ -1,10 +1,15 @@
 -- Space Mall
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 19-Nov-2020 14:31:09
 
 AreaEntry
 {
    VnumRanges = 
    {
+      Mob = 
+      {
+         First = 7300, 
+         Last = 7316, 
+      }, 
       Object = 
       {
          First = 7300, 
@@ -15,2309 +20,37 @@ AreaEntry
          First = 7300, 
          Last = 7399, 
       }, 
-      Mob = 
-      {
-         First = 7300, 
-         Last = 7316, 
-      }, 
    }, 
-   FileFormatVersion = 1, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7313, 
-         Arg2 = 1, 
-         Arg1 = 7300, 
-         Command = "M", 
-      }, 
-      [2] = 
-      {
-         Arg2 = 10, 
-         Arg1 = 7302, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [3] = 
-      {
-         Arg2 = 10, 
-         Arg1 = 7301, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [4] = 
-      {
-         Arg2 = 10, 
-         Arg1 = 7300, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [5] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7314, 
-         Arg2 = 1, 
-         Arg1 = 7301, 
-         Command = "M", 
-      }, 
-      [6] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7315, 
-         Arg2 = 1, 
-         Arg1 = 7302, 
-         Command = "M", 
-      }, 
-      [7] = 
-      {
-         Arg2 = 3, 
-         Arg1 = 55, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [8] = 
-      {
-         Arg2 = 3, 
-         Arg1 = 52, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [9] = 
-      {
-         Arg2 = 3, 
-         Arg1 = 51, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [10] = 
-      {
-         Arg2 = 3, 
-         Arg1 = 50, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [11] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7343, 
-         Arg2 = 1, 
-         Arg1 = 7305, 
-         Command = "M", 
-      }, 
-      [12] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7306, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7349, 
-         Arg2 = 1, 
-         Arg1 = 7303, 
-         Command = "M", 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Arg1 = 6608, 
-         Command = "E", 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10, 
-         Arg2 = 1, 
-         Arg1 = 335, 
-         Command = "E", 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg3 = 5, 
-         Arg2 = 1, 
-         Arg1 = 338, 
-         Command = "E", 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Arg3 = 8, 
-         Arg2 = 1, 
-         Arg1 = 337, 
-         Command = "E", 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Arg3 = 13, 
-         Arg2 = 1, 
-         Arg1 = 336, 
-         Command = "E", 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6, 
-         Arg2 = 1, 
-         Arg1 = 333, 
-         Command = "E", 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Arg3 = 18, 
-         Arg2 = 1, 
-         Arg1 = 6608, 
-         Command = "E", 
-      }, 
-      [21] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7301, 
-         Arg2 = 1, 
-         Arg1 = 7306, 
-         Command = "M", 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7, 
-         Arg2 = 1, 
-         Arg1 = 320, 
-         Command = "E", 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Arg3 = 5, 
-         Arg2 = 1, 
-         Arg1 = 319, 
-         Command = "E", 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg3 = 14, 
-         Arg2 = 1, 
-         Arg1 = 6400, 
-         Command = "E", 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Arg1 = 60, 
-         Command = "E", 
-      }, 
-      [26] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7304, 
-         Arg2 = 1, 
-         Arg1 = 7308, 
-         Command = "M", 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7325, 
-         Arg2 = 2, 
-         Arg1 = 7308, 
-         Command = "M", 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7333, 
-         Arg2 = 3, 
-         Arg1 = 7308, 
-         Command = "M", 
-      }, 
-      [29] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7312, 
-         Arg2 = 1, 
-         Arg1 = 7311, 
-         Command = "M", 
-      }, 
-      [30] = 
-      {
-         MiscData = 0, 
-         Arg3 = 7399, 
-         Arg2 = 1, 
-         Arg1 = 100, 
-         Command = "O", 
-      }, 
-      [31] = 
-      {
-         MiscData = 0, 
-         Arg3 = 1, 
-         Arg2 = 0, 
-         Arg1 = 7389, 
-         Command = "D", 
-      }, 
-      [32] = 
-      {
-         MiscData = 0, 
-         Arg3 = 1, 
-         Arg2 = 2, 
-         Arg1 = 7390, 
-         Command = "D", 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7398, 
-         Arg2 = 1, 
-         Arg1 = 7313, 
-         Command = "M", 
-      }, 
-      [34] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7313, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [35] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7398, 
-         Arg2 = 1, 
-         Arg1 = 7312, 
-         Command = "O", 
-      }, 
-      [36] = 
-      {
-         MiscData = 0, 
-         Arg3 = 2, 
-         Arg2 = 2, 
-         Arg1 = 7398, 
-         Command = "D", 
-      }, 
-      [37] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7347, 
-         Arg2 = 1, 
-         Arg1 = 7307, 
-         Command = "M", 
-      }, 
-      [38] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7353, 
-         Arg2 = 1, 
-         Arg1 = 7315, 
-         Command = "O", 
-      }, 
-      [39] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7352, 
-         Arg2 = 1, 
-         Arg1 = 7312, 
-         Command = "M", 
-      }, 
-      [40] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7315, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [41] = 
-      {
-         MiscData = 0, 
-         Arg3 = 1, 
-         Arg2 = 1, 
-         Arg1 = 7352, 
-         Command = "D", 
-      }, 
-      [42] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7319, 
-         Arg2 = 1, 
-         Arg1 = 7309, 
-         Command = "M", 
-      }, 
-      [43] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 32280, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [44] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 32210, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [45] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 32281, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7300, 
-         Arg2 = 48, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [47] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7300, 
-         Arg2 = 48, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [48] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7300, 
-         Arg2 = 1, 
-         Arg1 = 7303, 
-         Command = "O", 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7351, 
-         Arg2 = 1, 
-         Arg1 = 7310, 
-         Command = "M", 
-      }, 
-      [50] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7308, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [51] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7307, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [52] = 
-      {
-         MiscData = 1, 
-         Arg3 = 7344, 
-         Arg2 = 1, 
-         Arg1 = 7304, 
-         Command = "M", 
-      }, 
-      [53] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 6607, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [54] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7304, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [55] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 7305, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [56] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 54, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [57] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 6401, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-   }, 
-   Mobiles = 
-   {
-      [7300] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A pimply clerk", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "A pimply clerk", 
-         Name = "Pimply Clerk", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Hello sir/madam may i take your order\
-would you like our Mexi-fries with that\
-would you like the universe sized\
-", 
-         LongDescr = "A pimply clerk in a goofy uniform is here to take yer order.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7300, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [7301] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A sexy Hutt", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         Alignment = 0, 
-         ShortDescr = "A sexy Hutt", 
-         Name = "Sexy Hutt", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Dressed in nothing but a skimpy pink outfit your simply amased how any one\
-but durga could find this even remotly sexy. but to each his own they say.\
-", 
-         LongDescr = "A hutt in a flimsy pink neglige.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 10000, 
-         Vnum = 7301, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "100", 
-               ScriptType = "MProg", 
-               Code = "say Why thank you Little one\
-kiss $n \
-mptransfer $n 7351\
-", 
-               MudProgType = "bribe_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "babydoll", 
-               ScriptType = "MProg", 
-               Code = "say oooo my favotite nighty, thanx you.\
-kiss $n \
-lick $n\
-mpwithdraw 100\
-give 100 credit $n\
-mppurge babydoll\
-", 
-               MudProgType = "give_prog", 
-            }, 
-         }, 
-      }, 
-      [7302] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "Slimy Clerk", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         Alignment = 0, 
-         ShortDescr = "Slimy Clerk", 
-         Name = "Slimy Clerk", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Dressed in old army fatigues and sprting 3 days of patch grow, this human\
-looks as if he hasn't showerd in days.  But seen as how his shop sells \
-all kinds of weapons it's always busy. You notice every so oftem the clerk\
-will let someone into the backroom with a big grin.\
-", 
-         LongDescr = "A greasy haired clerk is here to help you.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7302, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "backroom", 
-               ScriptType = "MProg", 
-               Code = "if level ($n) < 80\
-say Sorry bub go toughen up a little.\
-smile\
-else\
-say Sure the Heavy equipment room, go on in.\
-mpechoat $n Your let into the backroom.\
-mptransfer $n 7349\
-endif\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "2 ", 
-               ScriptType = "MProg", 
-               Code = "say Got some better stuff in the back room \
-grin\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-      }, 
-      [7303] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 20, 
-         SpecFuns = 
-         {
-            [0] = "spec_dark_jedi", 
-         }, 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [14] = "gamorrese", 
-            }, 
-            Speaking = 
-            {
-               [14] = "gamorrese", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -155, 
-         Resistant = 
-         {
-            [1] = "cold", 
-            [2] = "electricity", 
-            [3] = "energy", 
-            [0] = "fire", 
-         }, 
-         ShortDescr = "A Gamorrean Bouncer", 
-         Name = "gamorrean bouncer", 
-         HitChance = 
-         {
-            HitPlus = 3000, 
-            HitNoDice = 50, 
-            HitSizeDice = 20, 
-         }, 
-         DamRoll = 20, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-            [19] = "disarm", 
-         }, 
-         Race = "Gamorrean", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 150, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 5, 
-         Description = "This has got to be the Biggest gamorrean ever, he is simply giant.  Muscles\
-bulk where the shouldn't even exist. He snarls at you and adjusts the\
-settings on his blaster. \
-", 
-         LongDescr = "The biggest gamorrean you have ever seen.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [8] = "_08", 
-            [10] = "_10", 
-         }, 
-         Credits = 0, 
-         Vnum = 7303, 
-         Level = 102, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "yes", 
-               ScriptType = "MProg", 
-               Code = "say hope ya brought enough credits to get passed me\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "shop", 
-               ScriptType = "MProg", 
-               Code = "say Ya the Contraband shop in back here.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "credit", 
-               ScriptType = "MProg", 
-               Code = "say Ya not cheap you know 500k to get in to see the shops\
-evil\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [4] = 
-            {
-               Arguments = "90", 
-               ScriptType = "MProg", 
-               Code = "mpechoat $n With the bouncers death you are allowd passed.\
-mptransfer $n 7348\
-", 
-               MudProgType = "death_prog", 
-            }, 
-            [5] = 
-            {
-               Arguments = "credits", 
-               ScriptType = "MProg", 
-               Code = "say ya 100k to get in \
-evil\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [6] = 
-            {
-               Arguments = "kill", 
-               ScriptType = "MProg", 
-               Code = "cackle\
-say bring it on little one.\
-muh\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [7] = 
-            {
-               Arguments = "5000", 
-               ScriptType = "MProg", 
-               Code = "mpechoat $n The gamorrean takes your credits and lets you passed.\
-mpechoaround $n $n is allowed passed the bouncer.\
-mptransfer $n 7348\
- \
-", 
-               MudProgType = "bribe_prog", 
-            }, 
-            [8] = 
-            {
-               Arguments = "20", 
-               ScriptType = "MProg", 
-               Code = "say So ya want into the shop eh?\
-say got my credit then?\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-      }, 
-      [7304] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "Weapons dealer", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "Weapons dealer", 
-         Name = "Weapons dealer", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "So ya made it passed the guard aye, well i git some stuff fer ya to see II\
-carry only the finest in weapons , if i dont have it let me know waht yer\
-looking for and i'll find it  \
-", 
-         LongDescr = "A shading looking rodain is here selling illegal arms.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7304, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [7305] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "Armor Dealer", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "Armor Dealer", 
-         Name = "Armor dealer", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Heh , looking for good armor eh , well i'm your man , nothing but the\
-finest in illegal armor here,   most of it's been modified to look like\
-everyday clothes , but it'll still turn even the stongest blaster.\
-", 
-         LongDescr = "A small man is making some armor back here.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7305, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [7306] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 19, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         DefaultPosition = "standing", 
-         SpecFuns = 
-         {
-            [1] = "spec_police_fine", 
-            [0] = "spec_customs_weapons", 
-         }, 
-         Alignment = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -147, 
-         Race = "Human", 
-         ShortDescr = "a bored security guard", 
-         Name = "Bored Security Guard", 
-         HitChance = 
-         {
-            HitPlus = 4000, 
-            HitNoDice = 19, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 19, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 9, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A guard in a dumb uniform is here collecting parking fees.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7306, 
-         Level = 99, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "5", 
-               ScriptType = "MProg", 
-               Code = "smile\
-mptransfer $n 7302\
-", 
-               MudProgType = "bribe_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "99", 
-               ScriptType = "MProg", 
-               Code = "say Greeting's and welcome to the spaceport mall.\
-say  A 5 credits tax is due to enter the mall.\
-smile\
-", 
-               MudProgType = "all_greet_prog", 
-            }, 
-         }, 
-      }, 
-      [7307] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 20, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-            [11] = "Immortal", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -150, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Crazy Mike", 
-         Name = "Crazy mike", 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 20, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Dressed in what is possibly the ugliest suit you have ever seen this human\
-is trying to seel you any ship on his lot as your dream ship.\
-", 
-         LongDescr = "Crazy Mike is here to take your cash\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-         }, 
-         Credits = 0, 
-         Vnum = 7307, 
-         Level = 100, 
-         Alignment = 0, 
-      }, 
-      [7308] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 6, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 25, 
-         ShortDescr = "A pickpocket.", 
-         Name = "child pickpocket", 
-         HitChance = 
-         {
-            HitPlus = 300, 
-            HitNoDice = 6, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 6, 
-         Race = "Defel", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 3, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "This young child is wandering around bumping into people looking for his\
-mother or so it seems.\
-", 
-         LongDescr = "A young child is looking for his mother.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [21] = "defel", 
-            }, 
-            Speaking = 
-            {
-               [21] = "defel", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7308, 
-         Level = 30, 
-         Alignment = 0, 
-      }, 
-      [7309] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "Hardware Salseman", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "Hardware Salseman", 
-         Name = "Hardware Salesman", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "A chubby salesman stands here\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7309, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [7310] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [10] = "Practice", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A small man", 
-            ProfitSell = 90, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         Alignment = 0, 
-         ShortDescr = "A small man", 
-         Name = "jedi salesman", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "An oldwer faile jedi is here selling off his slightly used equipment at\
-very resonable rates.\
-", 
-         LongDescr = "A small man is here selling some equipment.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7310, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "trade ", 
-               ScriptType = "MProg", 
-               Code = "' hmm a trade for my crystal \
-ponder\
-' i did lose a rare coin my father gave me on my way to work \
-' if you could find that i would give you my crystal.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "coin", 
-               ScriptType = "MProg", 
-               Code = "nod $n \
-' i think i lost it on the MC-90 on my trip here\
-smile\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "gives", 
-               ScriptType = "MProg", 
-               Code = "if ovnuminv(7311)\
-smile $n\
-' My fathers Coin .\
-thank $n\
-' sorry but due to inflation i must now charge for the gem\
-' i'll give yoiu a good deal though.\
-mpoload 7310\
-mppurge coin\
-endif\
-", 
-               MudProgType = "act_prog", 
-            }, 
-            [4] = 
-            {
-               Arguments = "corusca", 
-               ScriptType = "MProg", 
-               Code = "frown\
-say I have on of the rarest crystals around but i'm not willing to sell it\
-sorry.\
-say i'm planing on using it for my own lightsaber some day.\
-' however i might be willing to trade for it.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-         }, 
-      }, 
-      [7311] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "Repairman", 
-         Name = "Repairman", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         RepairShop = 
-         {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            KeeperShortDescr = "Repairman", 
-            ShopType = 1, 
-            ProfitFix = 150, 
-            FixTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [0] = "none", 
-            }, 
-         }, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "This guy looks vagely like that 20th century toolmans helper Al Borlan.\
-hopefully he is half as proficient at repairing items .\
-", 
-         LongDescr = "A human dreesed in coveralls and a checkerd shirt stands here.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7311, 
-         Level = 1, 
-         Alignment = 0, 
-      }, 
-      [7312] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "UPS Clerk", 
-         Name = "Ups Clerk", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Dressed in the same uniform they wore in the 20th century these delivery\
-people truely look like freaks. Thank all your gods that you don't need to\
-where a uniform for contract work. \
-", 
-         LongDescr = "A tall skiny human in a funny brown uniform.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7312, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "work", 
-               ScriptType = "MProg", 
-               Code = "smile $n \
-' yeah we need some packages delievd Pronto.\
-' Well pay you the delivery fee , which you collect from the reciever.\
-smile $n \
-'Right now i have a few jobs that need to be done.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "jobs", 
-               ScriptType = "MProg", 
-               Code = "grin\
-' right now we have the following jobs\
-, gets a datapad off his desk.\
-, looks at pad.\
-' hmm a delivery to a Hutt on Coruscant. \
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "hutt", 
-               ScriptType = "MProg", 
-               Code = "smile $n\
-' Says here he's in the Undercity. \
-say the package is marked fragile so payment is good.\
-smile $n \
-' just don't lose it .\
-open closet\
-say Its in the back room.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [4] = 
-            {
-               Arguments = "40 ", 
-               ScriptType = "MProg", 
-               Code = "' hey you looking for some work kid , we need some extra hands if ya are.\
-", 
-               MudProgType = "all_greet_prog", 
-            }, 
-         }, 
-      }, 
-      [7313] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "Galactic Secratary", 
-         Name = "Galactic Secratary", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "Looking up from doin her nails the secratary asks if you have an\
-appointment with one  of the managers or were just comming buy to use the\
-board.\
-", 
-         LongDescr = "A woman dressed in a micro-mini skirt and high heels\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7313, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "80", 
-               ScriptType = "MProg", 
-               Code = "smile $n\
-' Greetings and welcome to the Galactic Improvement Offices.\
-' How may we serve you today?\
-eye $n\
-", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "appointment", 
-               ScriptType = "MProg", 
-               Code = "nod $n\
-' i see you have an appointment today.\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "yes", 
-               ScriptType = "MProg", 
-               Code = "' Ok then, Office doors have the pesons name on them\
-unlock south \
-open south\
-mpforce $n south\
-close south\
-lock south\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-         }, 
-      }, 
-      [7314] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [21] = "Secretive", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = 0, 
-         ShortDescr = "a newly created peon", 
-         Name = "peon", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
-         LongDescr = "Some god abandoned a newly created peon here.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7314, 
-         Level = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "", 
-               ScriptType = "MProg", 
-               Code = "' test\
-if name (visiting)\
-kill visiting\
-endif\
-", 
-               MudProgType = "all_greet_prog", 
-            }, 
-         }, 
-      }, 
-      [7315] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 11, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-            [30] = "Prototype", 
-            [11] = "Immortal", 
-         }, 
-         DefaultPosition = "standing", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -37, 
-         Alignment = 0, 
-         ShortDescr = "A short fat Man", 
-         Name = "visiting senator", 
-         HitChance = 
-         {
-            HitPlus = 550, 
-            HitNoDice = 11, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 11, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "This man is a visiting senator from an Imperial planet , rumor has it he is\
-wanted by the coruscant police for war crimes and he is in need of escort\
-to the government buildings  are you up to the job\
-", 
-         LongDescr = "A short fat man in senators robes\
-", 
-         Height = 0, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Credits = 0, 
-         Vnum = 7315, 
-         Level = 55, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "hello hi", 
-               ScriptType = "MProg", 
-               Code = "' Greeting's , are you here to escort me to the Government Center?\
-smile $n\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "sure yes", 
-               ScriptType = "MProg", 
-               Code = "' Excellent, i'm wanted by the police so we may run into some problems \
-evil \
-' i hope you are capable of protecting me\
-' if your not simply tell me no thanks to the job.\
-follow $n\
-mpforce $n group visiting\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "thanks", 
-               ScriptType = "MProg", 
-               Code = "' ahhh i see\
-frown\
-' well i hope one day you will be\
-pat $n\
-follow visiting\
-", 
-               MudProgType = "speech_prog", 
-            }, 
-         }, 
-      }, 
-      [7316] = 
-      {
-         Sex = "undistinguished", 
-         HitRoll = 14, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         DefaultPosition = "standing", 
-         Alignment = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         ArmorClass = -75, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Dirty old man ", 
-         Name = "dirty old man", 
-         HitChance = 
-         {
-            HitPlus = 3000, 
-            HitNoDice = 14, 
-            HitSizeDice = 10, 
-         }, 
-         DamRoll = 14, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            Wand = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [19] = "disarm", 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 7, 
-            DamPlus = 2, 
-         }, 
-         Position = "standing", 
-         NumberOfAttacks = 3, 
-         Description = "This guy looks alot like bleeds.\
-", 
-         LongDescr = "A man dressed in an old overcoat.\
-", 
-         Height = 0, 
-         Weight = 0, 
-         AttackFlags = 
-         {
-            [9] = "_09", 
-         }, 
-         Credits = 0, 
-         Vnum = 7316, 
-         Level = 70, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "100", 
-               ScriptType = "MProg", 
-               Code = "scream\
-gasp\
-' ya got me\
-mpoload 7316\
-", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
-      }, 
-   }, 
-   Author = "Bleeds", 
-   HighEconomy = 0, 
-   ResetMessage = "Janitor droids come by cleaning up the mess.", 
    Objects = 
    {
       [7300] = 
       {
-         Layers = 0, 
-         ItemType = "food", 
-         Vnum = 7300, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         Description = "A nice big juicy Taco.", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "Taco", 
                Description = "What are you looking at a taco for are you Loco?\
 \13", 
+               Keyword = "Taco", 
             }, 
+         }, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
+         Vnum = 7300, 
+         Cost = 5, 
+         ShortDescr = "Taco", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Taco", 
+         Description = "A nice big juicy Taco.", 
+         ActionDescription = "", 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2328,40 +61,30 @@ mpoload 7316\
             [5] = 0, 
             [0] = 15, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 5, 
-         ShortDescr = "Taco", 
-         Name = "Taco", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [7301] = 
       {
-         Layers = 0, 
-         ItemType = "food", 
-         Vnum = 7301, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         Description = "Someone droped an order of Mexi-fries.", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "Mexi-Fries", 
                Description = "A nice steaming order of Mexi-fries waiting to be eaten\
 \13", 
+               Keyword = "Mexi-Fries", 
             }, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
+         Vnum = 7301, 
          Cost = 5, 
          ShortDescr = "Mexi-fries", 
+         Layers = 0, 
+         Weight = 1, 
+         Description = "Someone droped an order of Mexi-fries.", 
+         ActionDescription = "", 
+         ItemType = "food", 
          Name = "Mexi-Fries", 
          ObjectValues = 
          {
@@ -2375,24 +98,34 @@ mpoload 7316\
       }, 
       [7302] = 
       {
-         Layers = 0, 
-         ItemType = "drink_container", 
-         Vnum = 7302, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "This is the Favorite drink of Zax , hence you shall love it and pass the\
+\13sacred word of jolt to all.\
+\13", 
+               Keyword = "Jolt Cola", 
+            }, 
+         }, 
          Flags = 
          {
             [1] = "Hum", 
             [13] = "Inventory", 
          }, 
+         Vnum = 7302, 
+         Cost = 10, 
+         ShortDescr = "Jolt Cola", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Jolt Cola", 
          Description = "A bottle filled with ice cold god juice sits here.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "drink_container", 
+         WearFlags = 
          {
-            [1] = 
-            {
-               Keyword = "Jolt Cola", 
-               Description = "This is the Favorite drink of Zax , hence you shall love it and pass the\
-\13sacred word of jolt to all.\
-\13", 
-            }, 
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2403,37 +136,37 @@ mpoload 7316\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 10, 
-         ShortDescr = "Jolt Cola", 
-         Name = "Jolt Cola", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [7303] = 
       {
-         Layers = 0, 
-         ItemType = "trash", 
-         Vnum = 7303, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         Description = "A giant pile of silk.", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "Babydoll Armor", 
                Description = "This has to be the largest babydoll you have ever seen, designed for a hutt\
 \13or some otherlarge race. Chances are the owner would be happy to get this\
 \13back.\
 \13", 
+               Keyword = "Babydoll Armor", 
             }, 
+         }, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
+         Vnum = 7303, 
+         Cost = 2, 
+         ShortDescr = "A babydoll", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Babydoll Armor", 
+         Description = "A giant pile of silk.", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2444,46 +177,46 @@ mpoload 7316\
             [5] = 0, 
             [0] = 2, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 2, 
-         ShortDescr = "A babydoll", 
-         Name = "Babydoll Armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [7304] = 
       {
-         Layers = 0, 
-         Affects = 
+         ExtraDescriptions = 
          {
             [1] = 
             {
-               Location = 18, 
-               Modifier = 2, 
+               Description = "A miricle of Modren technology is what this gun is, somehow one of the\
+\13weapons manufacturers has come up with a hand flamer that runs of blaster\
+\13ammo cells. What will they think of next. \
+\13", 
+               Keyword = "Hand Flamer", 
             }, 
          }, 
-         ItemType = "weapon", 
-         Vnum = 7304, 
          Flags = 
          {
             [4] = "Contraband", 
             [13] = "Inventory", 
          }, 
-         Description = "A small hand held flamer is sitting here", 
-         ExtraDescriptions = 
+         Vnum = 7304, 
+         Cost = 6000, 
+         ShortDescr = "A hand held flamer", 
+         Affects = 
          {
             [1] = 
             {
-               Keyword = "Hand Flamer", 
-               Description = "A miricle of Modren technology is what this gun is, somehow one of the\
-\13weapons manufacturers has come up with a hand flamer that runs of blaster\
-\13ammo cells. What will they think of next. \
-\13", 
+               Modifier = 2, 
+               Location = 18, 
             }, 
+         }, 
+         Weight = 6, 
+         Layers = 0, 
+         Name = "Hand Flamer", 
+         Description = "A small hand held flamer is sitting here", 
+         ActionDescription = "", 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
          }, 
          ObjectValues = 
          {
@@ -2494,37 +227,37 @@ mpoload 7316\
             [5] = 2000, 
             [0] = 0, 
          }, 
-         Weight = 6, 
-         ActionDescription = "", 
-         Cost = 6000, 
-         ShortDescr = "A hand held flamer", 
-         Name = "Hand Flamer", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
       }, 
       [7305] = 
       {
-         Layers = 0, 
-         Affects = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Location = 18, 
-               Modifier = 3, 
-            }, 
          }, 
-         ItemType = "weapon", 
-         Vnum = 7305, 
          Flags = 
          {
             [4] = "Contraband", 
          }, 
-         Description = "A large deadly looking blaster is lying here", 
-         ExtraDescriptions = 
+         Vnum = 7305, 
+         Cost = 8000, 
+         ShortDescr = "Heavy Repeating Blaster", 
+         Affects = 
          {
+            [1] = 
+            {
+               Modifier = 3, 
+               Location = 18, 
+            }, 
+         }, 
+         Weight = 16, 
+         Layers = 0, 
+         Name = "Heavy repeating Blaster", 
+         Description = "A large deadly looking blaster is lying here", 
+         ActionDescription = "", 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
          }, 
          ObjectValues = 
          {
@@ -2535,33 +268,33 @@ mpoload 7316\
             [5] = 500, 
             [0] = 10, 
          }, 
-         Weight = 16, 
-         ActionDescription = "", 
-         Cost = 8000, 
-         ShortDescr = "Heavy Repeating Blaster", 
-         Name = "Heavy repeating Blaster", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
       }, 
       [7306] = 
       {
-         Layers = 56, 
-         ItemType = "armor", 
-         Vnum = 7306, 
-         Description = "A sturdy looking vest is lying here", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "Mitary Blaster Vest", 
                Description = "This vest is made from the finest materials anyones military can buy ,\
 \13unfortuanatly there order was delayed and thats probally how you came to\
 \13be n posestion of this wondorus vest. \
 \13", 
+               Keyword = "Mitary Blaster Vest", 
             }, 
+         }, 
+         Vnum = 7306, 
+         Cost = 6000, 
+         ShortDescr = "Military Grade vest", 
+         Weight = 5, 
+         Layers = 56, 
+         Name = "Mitary Blaster Vest", 
+         Description = "A sturdy looking vest is lying here", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
          }, 
          ObjectValues = 
          {
@@ -2572,33 +305,33 @@ mpoload 7316\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Weight = 5, 
-         ActionDescription = "", 
-         Cost = 6000, 
-         ShortDescr = "Military Grade vest", 
-         Name = "Mitary Blaster Vest", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
       }, 
       [7307] = 
       {
-         Layers = 56, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 7307, 
+         Cost = 500, 
+         ShortDescr = "Jedi Gloves", 
          Affects = 
          {
             [1] = 
             {
-               Location = 48, 
                Modifier = 10, 
+               Location = 48, 
             }, 
          }, 
-         ItemType = "armor", 
-         Vnum = 7307, 
+         Weight = 2, 
+         Layers = 56, 
+         Name = "Jedi Gloves", 
          Description = "A fine pair of leather gloves", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [7] = "Hands", 
          }, 
          ObjectValues = 
          {
@@ -2609,33 +342,33 @@ mpoload 7316\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Weight = 2, 
-         ActionDescription = "", 
-         Cost = 500, 
-         ShortDescr = "Jedi Gloves", 
-         Name = "Jedi Gloves", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [7] = "Hands", 
-         }, 
       }, 
       [7308] = 
       {
-         Layers = 128, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 7308, 
+         Cost = 300, 
+         ShortDescr = "Jedi Cape", 
          Affects = 
          {
             [1] = 
             {
-               Location = 36, 
                Modifier = 5, 
+               Location = 36, 
             }, 
          }, 
-         ItemType = "armor", 
-         Vnum = 7308, 
+         Weight = 1, 
+         Layers = 128, 
+         Name = "jedi cape", 
          Description = "A bundle of finly woven cloth lies here.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [3] = "Body", 
          }, 
          ObjectValues = 
          {
@@ -2646,34 +379,24 @@ mpoload 7316\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 300, 
-         ShortDescr = "Jedi Cape", 
-         Name = "jedi cape", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
       }, 
       [7309] = 
       {
-         Layers = 0, 
-         ItemType = "government", 
-         Vnum = 7309, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Description = "A small black card lies here. ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Weight = 1, 
-         ActionDescription = "", 
+         Vnum = 7309, 
          Cost = 0, 
          ShortDescr = "Mall Credit Card", 
+         Layers = 0, 
+         Weight = 1, 
+         Description = "A small black card lies here. ", 
+         ActionDescription = "", 
+         ItemType = "government", 
          Name = "mall credit card", 
          ObjectValues = 
          {
@@ -2687,16 +410,26 @@ mpoload 7316\
       }, 
       [7310] = 
       {
-         Layers = 0, 
-         ItemType = "crystal", 
-         Vnum = 7310, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
+         Vnum = 7310, 
+         Cost = 100000, 
+         ShortDescr = "rare gem", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "lost crystal", 
          Description = "A very rare crystal lies here.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "crystal", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2707,29 +440,29 @@ mpoload 7316\
             [5] = 0, 
             [0] = 5, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 100000, 
-         ShortDescr = "rare gem", 
-         Name = "lost crystal", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [7311] = 
       {
-         Layers = 0, 
-         ItemType = "treasure", 
-         Vnum = 7311, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
+         Vnum = 7311, 
+         Cost = 100000, 
+         ShortDescr = "a Rare Coin", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "A Rare Coin", 
          Description = "A lost coin from ages ago is here.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "treasure", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2740,34 +473,24 @@ mpoload 7316\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 100000, 
-         ShortDescr = "a Rare Coin", 
-         Name = "A Rare Coin", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
       [7312] = 
       {
-         Layers = 0, 
-         ItemType = "furniture", 
-         Vnum = 7312, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Description = "&R Galactic Improvenemt Idea Board &W", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Weight = 6000, 
-         ActionDescription = "", 
+         Vnum = 7312, 
          Cost = 0, 
          ShortDescr = "&R Galactic Improvenemt Idea Board &W", 
+         Layers = 0, 
+         Weight = 6000, 
+         Description = "&R Galactic Improvenemt Idea Board &W", 
+         ActionDescription = "", 
+         ItemType = "furniture", 
          Name = "Idea Board", 
          ObjectValues = 
          {
@@ -2781,21 +504,21 @@ mpoload 7316\
       }, 
       [7313] = 
       {
-         Layers = 0, 
-         ItemType = "key", 
-         Vnum = 7313, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Description = "A Nail file is here.", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Weight = 1, 
-         ActionDescription = "", 
+         Vnum = 7313, 
          Cost = 0, 
          ShortDescr = "a Nail file", 
+         Layers = 0, 
+         Weight = 1, 
+         Description = "A Nail file is here.", 
+         ActionDescription = "", 
+         ItemType = "key", 
          Name = "Nail file", 
          ObjectValues = 
          {
@@ -2809,16 +532,25 @@ mpoload 7316\
       }, 
       [7314] = 
       {
-         Layers = 0, 
-         ItemType = "trash", 
-         Vnum = 7314, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         Vnum = 7314, 
+         Cost = 0, 
+         ShortDescr = "a generic key", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "generic key", 
          Description = "A generic key is here.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
          {
+            [0] = "Take", 
          }, 
          ObjectValues = 
          {
@@ -2828,29 +560,30 @@ mpoload 7316\
             [4] = 0, 
             [5] = 0, 
             [0] = 0, 
-         }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 0, 
-         ShortDescr = "a generic key", 
-         Name = "generic key", 
-         WearFlags = 
-         {
-            [0] = "Take", 
          }, 
       }, 
       [7315] = 
       {
-         Layers = 0, 
-         ItemType = "weapon", 
-         Vnum = 7315, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [4] = "Contraband", 
          }, 
+         Vnum = 7315, 
+         Cost = 10000, 
+         ShortDescr = "A small package.", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "package", 
          Description = "This is a UPS Package addressed to a hut on Coruscant.", 
-         ExtraDescriptions = 
+         ActionDescription = "", 
+         ItemType = "weapon", 
+         WearFlags = 
          {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2860,32 +593,32 @@ mpoload 7316\
             [4] = 0, 
             [5] = 0, 
             [0] = 0, 
-         }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 10000, 
-         ShortDescr = "A small package.", 
-         Name = "package", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
          }, 
       }, 
       [7316] = 
       {
-         Layers = 0, 
-         ItemType = "trash", 
-         Vnum = 7316, 
-         Description = "A private organ is lying in a pool of blood here.", 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "privates", 
                Description = "Your one sick individual.\
 \13", 
+               Keyword = "privates", 
             }, 
+         }, 
+         Vnum = 7316, 
+         Cost = 0, 
+         ShortDescr = "Privates of a dirty old man", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "privates", 
+         Description = "A private organ is lying in a pool of blood here.", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
          }, 
          ObjectValues = 
          {
@@ -2896,24 +629,16 @@ mpoload 7316\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Weight = 1, 
-         ActionDescription = "", 
-         Cost = 0, 
-         ShortDescr = "Privates of a dirty old man", 
-         Name = "privates", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
       }, 
    }, 
-   ResetFrequency = 0, 
+   HighEconomy = 0, 
    Rooms = 
    {
       [7300] = 
       {
-         Vnum = 7300, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -2921,144 +646,171 @@ mpoload 7316\
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
+         Vnum = 7300, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "Mall Parking lot", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7301, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [17] = "CanEnter", 
+                  [11] = "Hidden", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
+               DestinationVnum = 7350, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "As you pull into this giant space port you see ships of all sizes and\
 shapes around. All races are represented here and as such it is a weapon\
 free zone, &C Please Stow all weapons safely &g before continuing into the\
 mall\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
+      }, 
+      [7301] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 7301, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Toll Booth", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7301, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [17] = "CanEnter", 
-                  [11] = "Hidden", 
-               }, 
+               Direction = "south", 
                Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 7350, 
+               DestinationVnum = 7300, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Mall Parking lot", 
-         Tag = "", 
-      }, 
-      [7301] = 
-      {
-         Vnum = 7301, 
-         Flags = 
-         {
-            [2] = "NoMob", 
          }, 
          Tunnel = 0, 
          Description = "Parking is not free at the mall. A bored security guard is here collecting\
 5 credits for parking from everone , wether you were flying or not. After\
 all the Spaceport must make some money.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7300, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Toll Booth", 
-         Tag = "", 
       }, 
       [7302] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 7302, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "All around you speakers blare stupid elevator music, slow mellow stuff,\
 that would drive even the deaf nuts. However the mall is well lit and\
 quite busy due to the fact it stocks just about everything imaginable. A\
 small  path leads away to the north and under a giant neon sign that shows\
 a decrepted old ship on it and flashes Crazy Mikes.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7345, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7303, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7397, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7301, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Walkway", 
-         Tag = "", 
       }, 
       [7303] = 
       {
-         Vnum = 7303, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7303, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Enterance to the Mall", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7304, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7302, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The mall is simply huge, races of all kinds wander around window shopping\
@@ -3066,468 +818,459 @@ and trying there best to look interested , after all the did pay to get in\
 here. Most stores in the mall are one of a kind so if that certain thing\
 your looking for isn't somewhere else it's probally here.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7304, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7302, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Enterance to the Mall", 
-         Tag = "", 
       }, 
       [7304] = 
       {
-         Vnum = 7304, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
-race shuffle, push, budge and weave their way through the crowds looking\
-for that special shop that hold all they need.\
-", 
+         Vnum = 7304, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Ground Floor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7305, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7311, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7303, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7313, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
+race shuffle, push, budge and weave their way through the crowds looking\
+for that special shop that hold all they need.\
+", 
       }, 
       [7305] = 
       {
-         Vnum = 7305, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7305, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7306, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7304, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7306, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7304, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7306] = 
       {
-         Vnum = 7306, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7306, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7312, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7307, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7305, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7312, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7307, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7305, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7307] = 
       {
-         Vnum = 7307, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7307, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7308, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7306, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7308, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7306, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7308] = 
       {
-         Vnum = 7308, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7308, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7307, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7314, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7309, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7307, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7314, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7309, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7309] = 
       {
-         Vnum = 7309, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7309, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7308, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7310, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7308, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7310, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7310] = 
       {
-         Vnum = 7310, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7310, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7309, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7352, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7311, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7309, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7352, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7311, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7311] = 
       {
-         Vnum = 7311, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [8] = "Bank", 
             [3] = "Indoors", 
          }, 
+         Vnum = 7311, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ground Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7339, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7310, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7304, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "The ground floor of the mall is crowded, very crowded.  Members of each\
 race shuffle, push, budge and weave their way through the crowds looking\
 for that special shop that hold all they need.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7339, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7310, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7304, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Ground Floor", 
-         Tag = "", 
       }, 
       [7312] = 
       {
-         Vnum = 7312, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7312, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Repair-it", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7306, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Having recentally opend the repair shops is fairly small , and not very\
 busy. Because  of this and the malls high rent prices in the shop are\
 slightly inflated, but well worth it. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7306, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Repair-it", 
-         Tag = "", 
       }, 
       [7313] = 
       {
-         Vnum = 7313, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7313, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Taco Bar", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7304, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Welcome to the Taco Bar , Due to strict zoning regulations enforce around\
@@ -3536,34 +1279,34 @@ had something to do with that whole race being wiped out due to food\
 poisoning , But they area however not de-regulated from space, so they\
 opend up there on and only store here at the space mall\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7304, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Taco Bar", 
-         Tag = "", 
       }, 
       [7314] = 
       {
-         Vnum = 7314, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7314, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Pleasure Clothing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7308, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "What would anymall be with out a fine lingerie shop.  Pleasure clothing is\
@@ -3571,633 +1314,642 @@ known throughout the galaxy for it's high quality clothing and its ability\
 to fit that fine clothing to almost any species. So stop here and get\
 something sexy for someone special\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7308, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Pleasure Clothing", 
-         Tag = "", 
       }, 
       [7315] = 
       {
-         Vnum = 7315, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7315, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Cheap Weapons", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7334, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Welcome to Cheap weapons , Almost every cheap blaster you can imagine is\
 for sale here problem is 90% of them also don't work and fail regularly\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7334, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Cheap Weapons", 
-         Tag = "", 
       }, 
       [7316] = 
       {
-         Vnum = 7316, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7316, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Baggage", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7321, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Baggage", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7317] = 
       {
-         Vnum = 7317, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7317, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Comm-Store", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7323, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Comm-Store", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7318] = 
       {
-         Vnum = 7318, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7318, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Heavy weapons", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7321, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Heavy weapons", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7319] = 
       {
-         Vnum = 7319, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7319, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Hardware Store", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7325, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Hardware Store", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7320] = 
       {
-         Vnum = 7320, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7320, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7321, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7327, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7321, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7327, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7321] = 
       {
-         Vnum = 7321, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7321, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7322, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7320, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7318, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7322, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7320, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7318, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7322] = 
       {
-         Vnum = 7322, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7322, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7323, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7321, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7323, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7321, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7323] = 
       {
-         Vnum = 7323, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7323, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7317, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7324, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7322, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7317, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7324, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7322, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7324] = 
       {
-         Vnum = 7324, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7324, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7323, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7325, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7323, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7325, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7325] = 
       {
-         Vnum = 7325, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "The second floor of the mall is slightly less busy than the first. The\
-shops up here are mostly,  multi-purpose carrying a varity of stuff for\
-the consumer, some which is quite useless.\
-", 
+         Vnum = 7325, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Second Floor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7324, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7319, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7326, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
-      }, 
-      [7326] = 
-      {
-         Vnum = 7326, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [7326] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 7326, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7325, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7327, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "The second floor of the mall is slightly less busy than the first. The\
+shops up here are mostly,  multi-purpose carrying a varity of stuff for\
+the consumer, some which is quite useless.\
+", 
       }, 
       [7327] = 
       {
-         Vnum = 7327, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7327, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Second Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7340, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7326, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7341, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7320, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The second floor of the mall is slightly less busy than the first. The\
 shops up here are mostly,  multi-purpose carrying a varity of stuff for\
 the consumer, some which is quite useless. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7340, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7326, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7341, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7320, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Second Floor", 
-         Tag = "", 
       }, 
       [7328] = 
       {
-         Vnum = 7328, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7328, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Store", 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
-         Name = "Store", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7329] = 
       {
-         Vnum = 7329, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7329, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Store", 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
-         Name = "Store", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7330] = 
       {
-         Vnum = 7330, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7330, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Store", 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
-         Name = "Store", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7331] = 
       {
-         Vnum = 7331, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7331, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7332, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7338, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4205,42 +1957,42 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7332, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7338, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
       }, 
       [7332] = 
       {
-         Vnum = 7332, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7332, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7333, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7331, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4248,42 +2000,42 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7333, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7331, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
       }, 
       [7333] = 
       {
-         Vnum = 7333, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7333, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7334, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7332, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4291,94 +2043,51 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7334, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7332, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
       }, 
       [7334] = 
       {
-         Vnum = 7334, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
-specialized equipment, so few people come up here except to get what they\
-need, and the kids who come up to spit over the side of the walkway on\
-those down below.\
-", 
+         Vnum = 7334, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Third Floor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7315, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7335, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7333, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
-      }, 
-      [7335] = 
-      {
-         Vnum = 7335, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4386,42 +2095,85 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [7335] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 7335, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7334, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7336, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
+specialized equipment, so few people come up here except to get what they\
+need, and the kids who come up to spit over the side of the walkway on\
+those down below.\
+", 
       }, 
       [7336] = 
       {
-         Vnum = 7336, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7336, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7335, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7337, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4429,42 +2181,42 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7335, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7337, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
       }, 
       [7337] = 
       {
-         Vnum = 7337, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7337, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7336, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7338, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4472,42 +2224,51 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7336, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7338, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
       }, 
       [7338] = 
       {
-         Vnum = 7338, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
+         }, 
+         Vnum = 7338, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Third Floor", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7337, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7342, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7331, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The top floor of the mall is almost deserted. All the shops up here deal in\
@@ -4515,539 +2276,536 @@ specialized equipment, so few people come up here except to get what they\
 need, and the kids who come up to spit over the side of the walkway on\
 those down below.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [7339] = 
+      {
          ExtraDescriptions = 
          {
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 7339, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Up Escalator", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpechoat $n You ride up the escalator.\
+mptransfer $n 7327\
+", 
+               Arguments = "90", 
+               ScriptType = "MProg", 
+            }, 
          }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7337, 
-               Distance = 0, 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 7342, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
                Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7331, 
+               DestinationVnum = 7311, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Third Floor", 
-         Tag = "", 
-      }, 
-      [7339] = 
-      {
-         Vnum = 7339, 
-         Flags = 
-         {
-            [3] = "Indoors", 
          }, 
          Tunnel = 0, 
          Description = "The up Escaltors are all very crowded in the mall , and seem to be very\
 slow. A long line of people are acctually waiting to get on each escalator\
 to see the next floor up. \
 ", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
+      }, 
+      [7340] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         Exits = 
+         Flags = 
          {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7311, 
-               Distance = 0, 
-               Description = "", 
-            }, 
+            [3] = "Indoors", 
          }, 
+         Vnum = 7340, 
+         TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Up Escalator", 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
+               Code = "mpechoat $n You ride up the escalator.\
+mptransfer $n 7338\
+", 
                Arguments = "90", 
                ScriptType = "MProg", 
-               Code = "mpechoat $n You ride up the escalator.\
-mptransfer $n 7327\
-", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-      }, 
-      [7340] = 
-      {
-         Vnum = 7340, 
-         Flags = 
+         Exits = 
          {
-            [3] = "Indoors", 
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7327, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The up Escaltors are all very crowded in the mall , and seem to be very\
 slow. A long line of people are acctually waiting to get on each escalator\
 to see the next floor up.  \
 ", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7327, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Up Escalator", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "90", 
-               ScriptType = "MProg", 
-               Code = "mpechoat $n You ride up the escalator.\
-mptransfer $n 7338\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
       }, 
       [7341] = 
       {
-         Vnum = 7341, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "Even thoughthey are somewhat faster than there upward counterpart, the down\
-escaltors are still slow. Plent of time to stand around and look.\
-", 
+         Vnum = 7341, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7327, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Down Escalator", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "90", 
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n You ride down the escalator.\
 mptransfer $n 7311\
 ", 
-               MudProgType = "rand_prog", 
+               Arguments = "90", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7327, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "Even thoughthey are somewhat faster than there upward counterpart, the down\
+escaltors are still slow. Plent of time to stand around and look.\
+", 
       }, 
       [7342] = 
       {
-         Vnum = 7342, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7342, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Down Escalator", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpechoat $n You ride down the escalator.\
+mptransfer $n 7327\
+", 
+               Arguments = "90", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Exits = 
+         {
          }, 
          Tunnel = 0, 
          Description = "Even thoughthey are somewhat faster than there upward counterpart, the down\
 escaltors are still slow. Plent of time to stand around and\
 look.\
 ", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Name = "Down Escalator", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "90", 
-               ScriptType = "MProg", 
-               Code = "mpechoat $n You ride down the escalator.\
-mptransfer $n 7327\
-", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
       }, 
       [7343] = 
       {
-         Vnum = 7343, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7343, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Contraband Armor", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7348, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Contraband Armor", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7344] = 
       {
-         Vnum = 7344, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7344, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Contraband Weapons", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7348, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Open crates are all over this room , some older some newer but all most\
 likely here illegally. If there a new prototype weapon on the market it's\
 almost sure to be found here. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7348, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Contraband Weapons", 
-         Tag = "", 
       }, 
       [7345] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 7345, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "Thankfully the buzz of the giant neon sign over your head almost drowns out\
 the annoying music from the mall.   just ahead you see all different kinds\
 of ships , in good shape right don to almost scrap metal parked on a giant\
 landing pad.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7346, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7302, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Crazy Mike's Used Ships", 
-         Tag = "", 
       }, 
       [7346] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 7346, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "Passing through the ships you can see salesmen talking to various beings\
 all over the pad  each trying his best to sell the ship of there dreams to\
 the person thir talking to ,  every once in a while a saleman will take\
 someone over to Crazy mikes office to finalize a deal\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7347, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7345, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Crazy Mike's Used Ships", 
-         Tag = "", 
       }, 
       [7347] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 7347, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "Welcome to Crazy Mikes Office , If a ships for sale and it can't be found\
 here it aint worh buying is our motto.  about a dozen salesmen are here\
 talking to people and sceaming them out of there credits, but a fine\
 person such as yourself warrents Crazy Mikes personal attention.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7346, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Crazy Mike's Office", 
-         Tag = "", 
       }, 
       [7348] = 
       {
-         Vnum = 7348, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7348, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Backroom of Cheap Weapons", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7343, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7349, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7344, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Backroom of Cheap Weapons", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7349] = 
       {
-         Vnum = 7349, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7349, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Backroom of Cheap Weapons", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7315, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Backroom of Cheap Weapons", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7350] = 
       {
-         Vnum = 7350, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7350, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "MALL COMMAND ROOM", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
                DestinationVnum = 7300, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "MALL COMMAND ROOM", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7351] = 
       {
-         Vnum = 7351, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7351, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Jedi Clothing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 7314, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is a small dark backroom behind the infamous pleasure clothing. A\
 small man stands here selling some unique equipment that only thoose that\
 are force capable may use.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 7314, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Jedi Clothing", 
-         Tag = "", 
       }, 
       [7352] = 
       {
-         Vnum = 7352, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
             [2] = "NoMob", 
             [3] = "Indoors", 
+         }, 
+         Vnum = 7352, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "UPS", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [3] = "Secret", 
+               }, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7353, 
+               Distance = 0, 
+               Keyword = "closet", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7310, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "Welcome to the home office of Universal Package Service, known for there\
@@ -5055,79 +2813,76 @@ motto , if its fragile it might get there undamaged. This company has been\
 around for forever it seems , chances are you can get an odd job here\
 delivering a package to somewhere obscure.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "closet", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [3] = "Secret", 
-               }, 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7353, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7310, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "UPS", 
-         Tag = "", 
       }, 
       [7353] = 
       {
-         Vnum = 7353, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7353, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "The Back Room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7352, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "The Back Room", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
       [7388] = 
       {
-         Vnum = 7388, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
+         }, 
+         Vnum = 7388, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Complaint Office", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "act_prog", 
+               Code = "mpat 112 mpecho Someone just posted a complaint. \
+mpat 122 mpecho Someone just posted a complaint. \
+", 
+               Arguments = "p uploads a message.", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7397, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The office is stark, bearing only the bare necessities. Installed against\
@@ -5135,156 +2890,72 @@ the far wall, you can see the complaint terminal. Use this board to post\
 complaints about roleplay conditions, problems you have with immortals, or\
 anything else you feel the need to vent on. Please post responsibly.\
 ", 
-         TeleDelay = 0, 
-         Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7397, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Complaint Office", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "p uploads a message.", 
-               ScriptType = "MProg", 
-               Code = "mpat 112 mpecho Someone just posted a complaint. \
-mpat 122 mpecho Someone just posted a complaint. \
-", 
-               MudProgType = "act_prog", 
-            }, 
-         }, 
       }, 
       [7389] = 
       {
-         Vnum = 7389, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
+         Vnum = 7389, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7390, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7390, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "An Empty Home", 
-         Tag = "", 
       }, 
       [7390] = 
       {
-         Vnum = 7390, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "&R Office of Bleeds Cygar &W\
+\13", 
+               Keyword = "door ", 
+            }, 
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Tunnel = 0, 
-         Description = "The offices off the builders and creators of the realms are along this\
-hallway each door has a nameplate attached to it.  Although we wouldn't\
-siggest bothering them without an appointment.\
-", 
+         Vnum = 7390, 
          TeleDelay = 0, 
          Tag = "", 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "door ", 
-               Description = "&R Office of Bleeds Cygar &W\
-\13", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7397, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7391, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Key = 7314, 
-               Direction = "south", 
-               DestinationVnum = 7389, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7394, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Sector = "city", 
          Name = "Office Hallway", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "knocks", 
-               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
                Code = "mpmload 7314 \
 mpoload 7314 \
 mpforce peon get key\
@@ -5295,250 +2966,354 @@ mpforce peon close south\
 mpforce peon clock south\
 mppurge peon\
 ", 
-               MudProgType = "act_prog", 
+               Arguments = "knocks", 
+               ScriptType = "MProg", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7397, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7391, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Description = "", 
+               Direction = "south", 
+               Key = 7314, 
+               DestinationVnum = 7389, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7394, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Description = "The offices off the builders and creators of the realms are along this\
+hallway each door has a nameplate attached to it.  Although we wouldn't\
+siggest bothering them without an appointment.\
+", 
       }, 
       [7391] = 
       {
-         Vnum = 7391, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7391, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Office Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7392, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7390, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The offices off the builders and creators of the realms are along this\
 hallway each door has a nameplate attached to it.  Although we wouldn't\
 siggest bothering them without an appointment.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7392, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7390, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
       }, 
       [7392] = 
       {
-         Vnum = 7392, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7392, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Office Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7393, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7391, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The offices off the builders and creators of the realms are along this\
 hallway each door has a nameplate attached to it.  Although we wouldn't\
 siggest bothering them without an appointment.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7393, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7391, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
       }, 
       [7393] = 
       {
-         Vnum = 7393, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7393, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Office Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7392, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The offices off the builders and creators of the realms are along this\
 hallway each door has a nameplate attached to it.  Although we wouldn't\
 siggest bothering them without an appointment.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7392, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
       }, 
       [7394] = 
       {
-         Vnum = 7394, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7394, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Office Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 7390, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7395, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "The offices off the builders and creators of the realms are along this\
 hallway each door has a nameplate attached to it.  Although we wouldn't\
 siggest bothering them without an appointment.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 7390, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7395, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
       }, 
       [7395] = 
       {
-         Vnum = 7395, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Tunnel = 0, 
-         Description = "The offices off the builders and creators of the realms are along this\
-hallway each door has a nameplate attached to it.  Although we wouldn't\
-siggest bothering them without an appointment.\
-", 
+         Vnum = 7395, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Office Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7394, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
                DestinationVnum = 7396, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
-      }, 
-      [7396] = 
-      {
-         Vnum = 7396, 
-         Flags = 
-         {
-            [30] = "Prototype", 
          }, 
          Tunnel = 0, 
          Description = "The offices off the builders and creators of the realms are along this\
 hallway each door has a nameplate attached to it.  Although we wouldn't\
 siggest bothering them without an appointment.\
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [7396] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Vnum = 7396, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Office Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
                DestinationVnum = 7395, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Office Hallway", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "The offices off the builders and creators of the realms are along this\
+hallway each door has a nameplate attached to it.  Although we wouldn't\
+siggest bothering them without an appointment.\
+", 
       }, 
       [7397] = 
       {
-         Vnum = 7397, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "&C  ALL WEAPONS MUST BE STOWD SAFELY WHILE IN THE BUILDING \
+\13ROAMING SECURITY WILL TAKE THEM AWAY &W\
+\13", 
+               Keyword = "small", 
+            }, 
+            [2] = 
+            {
+               Description = "&R ALL WEAPONS MUST BE STOWD SAFELY WHILE IN THE BUILDING ROAMING SECURITY\
+\13WILL TAKE THEM AWAY &W\
+\13", 
+               Keyword = "sign", 
+            }, 
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
+         }, 
+         Vnum = 7397, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Large Office Enterance", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 7302, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 7398, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 7388, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
          Tunnel = 0, 
          Description = "This is the enterance to a largee office building, rumor has it that alot\
@@ -5546,93 +3321,37 @@ of the galactic administration works out of here. So tred lightly and try\
 not to bloody the carpets.\
  A small sign is off the side of the path. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "sign", 
-               Description = "&R ALL WEAPONS MUST BE STOWD SAFELY WHILE IN THE BUILDING ROAMING SECURITY\
-\13WILL TAKE THEM AWAY &W\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "small", 
-               Description = "&C  ALL WEAPONS MUST BE STOWD SAFELY WHILE IN THE BUILDING \
-\13ROAMING SECURITY WILL TAKE THEM AWAY &W\
-\13", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 7302, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 7398, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 7388, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Name = "Large Office Enterance", 
-         Tag = "", 
       }, 
       [7398] = 
       {
-         Vnum = 7398, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
             [10] = "Safe", 
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Description = "Welcome to the galactic improvement office, the walls are white and\
-spotless and comfortable chairs line the area a comely secratary sits\
-behind a desk keeping the appointment schedule going. Off in one corner is\
-a small booth with a message terminal\
-", 
+         Vnum = 7398, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Galactic Improvement Office", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
                DestinationVnum = 7397, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -5640,20 +3359,26 @@ a small booth with a message terminal\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Key = 7313, 
+               Description = "", 
                Direction = "south", 
+               Key = 7313, 
                DestinationVnum = 7390, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Galactic Improvement Office", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "Welcome to the galactic improvement office, the walls are white and\
+spotless and comfortable chairs line the area a comely secratary sits\
+behind a desk keeping the appointment schedule going. Off in one corner is\
+a small booth with a message terminal\
+", 
       }, 
       [7399] = 
       {
-         Vnum = 7399, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
@@ -5661,44 +3386,2319 @@ a small booth with a message terminal\
             [2] = "NoMob", 
             [10] = "Safe", 
          }, 
-         Tunnel = 0, 
-         Description = "", 
+         Vnum = 7399, 
          TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Bleeds's Terminal room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
+               Description = "", 
                Direction = "up", 
+               Key = -1, 
                DestinationVnum = 6618, 
                Distance = 0, 
-               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Name = "Bleeds's Terminal room", 
-         Tag = "", 
+         Tunnel = 0, 
+         Description = "", 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   LowEconomy = 3414628, 
+   Resets = 
+   {
+      [1] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7300, 
+         Command = "M", 
+         Arg3 = 7313, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg1 = 7302, 
+         Command = "G", 
+      }, 
+      [3] = 
+      {
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg1 = 7301, 
+         Command = "G", 
+      }, 
+      [4] = 
+      {
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg1 = 7300, 
+         Command = "G", 
+      }, 
+      [5] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7301, 
+         Command = "M", 
+         Arg3 = 7314, 
+         Arg2 = 1, 
+      }, 
+      [6] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7302, 
+         Command = "M", 
+         Arg3 = 7315, 
+         Arg2 = 1, 
+      }, 
+      [7] = 
+      {
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 55, 
+         Command = "G", 
+      }, 
+      [8] = 
+      {
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 52, 
+         Command = "G", 
+      }, 
+      [9] = 
+      {
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 51, 
+         Command = "G", 
+      }, 
+      [10] = 
+      {
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 50, 
+         Command = "G", 
+      }, 
+      [11] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7305, 
+         Command = "M", 
+         Arg3 = 7343, 
+         Arg2 = 1, 
+      }, 
+      [12] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7306, 
+         Command = "G", 
+      }, 
+      [13] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7303, 
+         Command = "M", 
+         Arg3 = 7349, 
+         Arg2 = 1, 
+      }, 
+      [14] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6608, 
+         Command = "E", 
+         Arg3 = 16, 
+         Arg2 = 1, 
+      }, 
+      [15] = 
+      {
+         MiscData = 1, 
+         Arg1 = 335, 
+         Command = "E", 
+         Arg3 = 10, 
+         Arg2 = 1, 
+      }, 
+      [16] = 
+      {
+         MiscData = 1, 
+         Arg1 = 338, 
+         Command = "E", 
+         Arg3 = 5, 
+         Arg2 = 1, 
+      }, 
+      [17] = 
+      {
+         MiscData = 1, 
+         Arg1 = 337, 
+         Command = "E", 
+         Arg3 = 8, 
+         Arg2 = 1, 
+      }, 
+      [18] = 
+      {
+         MiscData = 1, 
+         Arg1 = 336, 
+         Command = "E", 
+         Arg3 = 13, 
+         Arg2 = 1, 
+      }, 
+      [19] = 
+      {
+         MiscData = 1, 
+         Arg1 = 333, 
+         Command = "E", 
+         Arg3 = 6, 
+         Arg2 = 1, 
+      }, 
+      [20] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6608, 
+         Command = "E", 
+         Arg3 = 18, 
+         Arg2 = 1, 
+      }, 
+      [21] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7306, 
+         Command = "M", 
+         Arg3 = 7301, 
+         Arg2 = 1, 
+      }, 
+      [22] = 
+      {
+         MiscData = 1, 
+         Arg1 = 320, 
+         Command = "E", 
+         Arg3 = 7, 
+         Arg2 = 1, 
+      }, 
+      [23] = 
+      {
+         MiscData = 1, 
+         Arg1 = 319, 
+         Command = "E", 
+         Arg3 = 5, 
+         Arg2 = 1, 
+      }, 
+      [24] = 
+      {
+         MiscData = 1, 
+         Arg1 = 6400, 
+         Command = "E", 
+         Arg3 = 14, 
+         Arg2 = 1, 
+      }, 
+      [25] = 
+      {
+         MiscData = 1, 
+         Arg1 = 60, 
+         Command = "E", 
+         Arg3 = 16, 
+         Arg2 = 1, 
+      }, 
+      [26] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7308, 
+         Command = "M", 
+         Arg3 = 7304, 
+         Arg2 = 1, 
+      }, 
+      [27] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7308, 
+         Command = "M", 
+         Arg3 = 7325, 
+         Arg2 = 2, 
+      }, 
+      [28] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7308, 
+         Command = "M", 
+         Arg3 = 7333, 
+         Arg2 = 3, 
+      }, 
+      [29] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7311, 
+         Command = "M", 
+         Arg3 = 7312, 
+         Arg2 = 1, 
+      }, 
+      [30] = 
+      {
+         MiscData = 0, 
+         Arg1 = 100, 
+         Command = "O", 
+         Arg3 = 7399, 
+         Arg2 = 1, 
+      }, 
+      [31] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7389, 
+         Command = "D", 
+         Arg3 = 1, 
+         Arg2 = 0, 
+      }, 
+      [32] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7390, 
+         Command = "D", 
+         Arg3 = 1, 
+         Arg2 = 2, 
+      }, 
+      [33] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7313, 
+         Command = "M", 
+         Arg3 = 7398, 
+         Arg2 = 1, 
+      }, 
+      [34] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7313, 
+         Command = "G", 
+      }, 
+      [35] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7312, 
+         Command = "O", 
+         Arg3 = 7398, 
+         Arg2 = 1, 
+      }, 
+      [36] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7398, 
+         Command = "D", 
+         Arg3 = 2, 
+         Arg2 = 2, 
+      }, 
+      [37] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7307, 
+         Command = "M", 
+         Arg3 = 7347, 
+         Arg2 = 1, 
+      }, 
+      [38] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7315, 
+         Command = "O", 
+         Arg3 = 7353, 
+         Arg2 = 1, 
+      }, 
+      [39] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7312, 
+         Command = "M", 
+         Arg3 = 7352, 
+         Arg2 = 1, 
+      }, 
+      [40] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7315, 
+         Command = "G", 
+      }, 
+      [41] = 
+      {
+         MiscData = 0, 
+         Arg1 = 7352, 
+         Command = "D", 
+         Arg3 = 1, 
+         Arg2 = 1, 
+      }, 
+      [42] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7309, 
+         Command = "M", 
+         Arg3 = 7319, 
+         Arg2 = 1, 
+      }, 
+      [43] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32280, 
+         Command = "G", 
+      }, 
+      [44] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32210, 
+         Command = "G", 
+      }, 
+      [45] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32281, 
+         Command = "G", 
+      }, 
+      [46] = 
+      {
+         MiscData = 1, 
+         Arg1 = 204, 
+         Command = "M", 
+         Arg3 = 7300, 
+         Arg2 = 48, 
+      }, 
+      [47] = 
+      {
+         MiscData = 1, 
+         Arg1 = 204, 
+         Command = "M", 
+         Arg3 = 7300, 
+         Arg2 = 48, 
+      }, 
+      [48] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7303, 
+         Command = "O", 
+         Arg3 = 7300, 
+         Arg2 = 1, 
+      }, 
+      [49] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7310, 
+         Command = "M", 
+         Arg3 = 7351, 
+         Arg2 = 1, 
+      }, 
+      [50] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7308, 
+         Command = "G", 
+      }, 
+      [51] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7307, 
+         Command = "G", 
+      }, 
+      [52] = 
+      {
+         MiscData = 1, 
+         Arg1 = 7304, 
+         Command = "M", 
+         Arg3 = 7344, 
+         Arg2 = 1, 
+      }, 
+      [53] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 6607, 
+         Command = "G", 
+      }, 
+      [54] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7304, 
+         Command = "G", 
+      }, 
+      [55] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 7305, 
+         Command = "G", 
+      }, 
+      [56] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 54, 
+         Command = "G", 
+      }, 
+      [57] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 6401, 
+         Command = "G", 
+      }, 
+   }, 
+   ResetMessage = "Janitor droids come by cleaning up the mess.", 
+   Author = "Bleeds", 
+   Name = "Space Mall", 
+   ResetFrequency = 0, 
    LevelRanges = 
    {
       Soft = 
       {
-         Low = 0, 
          High = 105, 
+         Low = 0, 
       }, 
       Hard = 
       {
-         Low = 0, 
          High = 105, 
+         Low = 0, 
       }, 
    }, 
-   LowEconomy = 3415028, 
-   Name = "Space Mall", 
    Filename = "mall.lua", 
+   Mobiles = 
+   {
+      [7300] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "A pimply clerk", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Hello sir/madam may i take your order\
+would you like our Mexi-fries with that\
+would you like the universe sized\
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A pimply clerk", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7300, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         Name = "Pimply Clerk", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A pimply clerk in a goofy uniform is here to take yer order.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7301] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "A sexy Hutt", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Dressed in nothing but a skimpy pink outfit your simply amased how any one\
+but durga could find this even remotly sexy. but to each his own they say.\
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A sexy Hutt", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7301, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 10000, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "give_prog", 
+               Code = "say oooo my favotite nighty, thanx you.\
+kiss $n \
+lick $n\
+mpwithdraw 100\
+give 100 credit $n\
+mppurge babydoll\
+", 
+               Arguments = "babydoll", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "bribe_prog", 
+               Code = "say Why thank you Little one\
+kiss $n \
+mptransfer $n 7351\
+", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         Name = "Sexy Hutt", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A hutt in a flimsy pink neglige.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7302] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Slimy Clerk", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Dressed in old army fatigues and sprting 3 days of patch grow, this human\
+looks as if he hasn't showerd in days.  But seen as how his shop sells \
+all kinds of weapons it's always busy. You notice every so oftem the clerk\
+will let someone into the backroom with a big grin.\
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "Slimy Clerk", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7302, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "say Got some better stuff in the back room \
+grin\
+", 
+               Arguments = "2 ", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "if level ($n) < 80\
+say Sorry bub go toughen up a little.\
+smile\
+else\
+say Sure the Heavy equipment room, go on in.\
+mpechoat $n Your let into the backroom.\
+mptransfer $n 7349\
+endif\
+", 
+               Arguments = "backroom", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         Name = "Slimy Clerk", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A greasy haired clerk is here to help you.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7303] = 
+      {
+         Damage = 
+         {
+            DamPlus = 150, 
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 3000, 
+            HitSizeDice = 20, 
+            HitNoDice = 50, 
+         }, 
+         SpecFuns = 
+         {
+            [0] = "spec_dark_jedi", 
+         }, 
+         Sex = "undistinguished", 
+         ShortDescr = "A Gamorrean Bouncer", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [14] = "gamorrese", 
+            }, 
+            Speaking = 
+            {
+               [14] = "gamorrese", 
+            }, 
+         }, 
+         Race = "Gamorrean", 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "This has got to be the Biggest gamorrean ever, he is simply giant.  Muscles\
+bulk where the shouldn't even exist. He snarls at you and adjusts the\
+settings on his blaster. \
+", 
+         Alignment = 0, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         Resistant = 
+         {
+            [1] = "cold", 
+            [2] = "electricity", 
+            [3] = "energy", 
+            [0] = "fire", 
+         }, 
+         NumberOfAttacks = 5, 
+         DefaultPosition = "standing", 
+         HitRoll = 20, 
+         Vnum = 7303, 
+         Height = 0, 
+         AttackFlags = 
+         {
+            [8] = "_08", 
+            [10] = "_10", 
+         }, 
+         DamRoll = 20, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "say So ya want into the shop eh?\
+say got my credit then?\
+", 
+               Arguments = "20", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "say hope ya brought enough credits to get passed me\
+", 
+               Arguments = "yes", 
+               ScriptType = "MProg", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "say Ya the Contraband shop in back here.\
+", 
+               Arguments = "shop", 
+               ScriptType = "MProg", 
+            }, 
+            [4] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "say Ya not cheap you know 500k to get in to see the shops\
+evil\
+", 
+               Arguments = "credit", 
+               ScriptType = "MProg", 
+            }, 
+            [5] = 
+            {
+               MudProgType = "death_prog", 
+               Code = "mpechoat $n With the bouncers death you are allowd passed.\
+mptransfer $n 7348\
+", 
+               Arguments = "90", 
+               ScriptType = "MProg", 
+            }, 
+            [6] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "say ya 100k to get in \
+evil\
+", 
+               Arguments = "credits", 
+               ScriptType = "MProg", 
+            }, 
+            [7] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "cackle\
+say bring it on little one.\
+muh\
+", 
+               Arguments = "kill", 
+               ScriptType = "MProg", 
+            }, 
+            [8] = 
+            {
+               MudProgType = "bribe_prog", 
+               Code = "mpechoat $n The gamorrean takes your credits and lets you passed.\
+mpechoaround $n $n is allowed passed the bouncer.\
+mptransfer $n 7348\
+ \
+", 
+               Arguments = "5000", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 102, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Name = "gamorrean bouncer", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+            [19] = "disarm", 
+         }, 
+         LongDescr = "The biggest gamorrean you have ever seen.\
+", 
+         ArmorClass = -155, 
+      }, 
+      [7304] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Weapons dealer", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "So ya made it passed the guard aye, well i git some stuff fer ya to see II\
+carry only the finest in weapons , if i dont have it let me know waht yer\
+looking for and i'll find it  \
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "Weapons dealer", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7304, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         Name = "Weapons dealer", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A shading looking rodain is here selling illegal arms.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7305] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Armor Dealer", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Heh , looking for good armor eh , well i'm your man , nothing but the\
+finest in illegal armor here,   most of it's been modified to look like\
+everyday clothes , but it'll still turn even the stongest blaster.\
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "Armor Dealer", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7305, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         Name = "Armor dealer", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A small man is making some armor back here.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7306] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 9, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 4000, 
+            HitSizeDice = 10, 
+            HitNoDice = 19, 
+         }, 
+         ShortDescr = "a bored security guard", 
+         Race = "Human", 
+         SpecFuns = 
+         {
+            [1] = "spec_police_fine", 
+            [0] = "spec_customs_weapons", 
+         }, 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         HitRoll = 19, 
+         Vnum = 7306, 
+         Height = 0, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         DamRoll = 19, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "say Greeting's and welcome to the spaceport mall.\
+say  A 5 credits tax is due to enter the mall.\
+smile\
+", 
+               Arguments = "99", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "bribe_prog", 
+               Code = "smile\
+mptransfer $n 7302\
+", 
+               Arguments = "5", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 99, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Name = "Bored Security Guard", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A guard in a dumb uniform is here collecting parking fees.\
+", 
+         ArmorClass = -147, 
+      }, 
+      [7307] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         ShortDescr = "Crazy Mike", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Dressed in what is possibly the ugliest suit you have ever seen this human\
+is trying to seel you any ship on his lot as your dream ship.\
+", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 20, 
+         Vnum = 7307, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+         }, 
+         Credits = 0, 
+         DamRoll = 20, 
+         Level = 100, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+            [11] = "Immortal", 
+         }, 
+         Name = "Crazy mike", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         LongDescr = "Crazy Mike is here to take your cash\
+", 
+         ArmorClass = -150, 
+      }, 
+      [7308] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 300, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         ShortDescr = "A pickpocket.", 
+         Race = "Defel", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "This young child is wandering around bumping into people looking for his\
+mother or so it seems.\
+", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 6, 
+         Vnum = 7308, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [21] = "defel", 
+            }, 
+            Speaking = 
+            {
+               [21] = "defel", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DamRoll = 6, 
+         Level = 30, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Name = "child pickpocket", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A young child is looking for his mother.\
+", 
+         ArmorClass = 25, 
+      }, 
+      [7309] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Hardware Salseman", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "Hardware Salseman", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7309, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         Name = "Hardware Salesman", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A chubby salesman stands here\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7310] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "A small man", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "An oldwer faile jedi is here selling off his slightly used equipment at\
+very resonable rates.\
+", 
+         Alignment = 0, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A small man", 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Vnum = 7310, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "frown\
+say I have on of the rarest crystals around but i'm not willing to sell it\
+sorry.\
+say i'm planing on using it for my own lightsaber some day.\
+' however i might be willing to trade for it.\
+", 
+               Arguments = "corusca", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "' hmm a trade for my crystal \
+ponder\
+' i did lose a rare coin my father gave me on my way to work \
+' if you could find that i would give you my crystal.\
+", 
+               Arguments = "trade ", 
+               ScriptType = "MProg", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "nod $n \
+' i think i lost it on the MC-90 on my trip here\
+smile\
+", 
+               Arguments = "coin", 
+               ScriptType = "MProg", 
+            }, 
+            [4] = 
+            {
+               MudProgType = "act_prog", 
+               Code = "if ovnuminv(7311)\
+smile $n\
+' My fathers Coin .\
+thank $n\
+' sorry but due to inflation i must now charge for the gem\
+' i'll give yoiu a good deal though.\
+mpoload 7310\
+mppurge coin\
+endif\
+", 
+               Arguments = "gives", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [10] = "Practice", 
+            [30] = "Prototype", 
+         }, 
+         Name = "jedi salesman", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A small man is here selling some equipment.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7311] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Repairman", 
+         RepairShop = 
+         {
+            ShopType = 1, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            ProfitFix = 150, 
+            KeeperShortDescr = "Repairman", 
+            FixTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "This guy looks vagely like that 20th century toolmans helper Al Borlan.\
+hopefully he is half as proficient at repairing items .\
+", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Vnum = 7311, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Name = "Repairman", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A human dreesed in coveralls and a checkerd shirt stands here.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7312] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "UPS Clerk", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Dressed in the same uniform they wore in the 20th century these delivery\
+people truely look like freaks. Thank all your gods that you don't need to\
+where a uniform for contract work. \
+", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Vnum = 7312, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "' hey you looking for some work kid , we need some extra hands if ya are.\
+", 
+               Arguments = "40 ", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "smile $n \
+' yeah we need some packages delievd Pronto.\
+' Well pay you the delivery fee , which you collect from the reciever.\
+smile $n \
+'Right now i have a few jobs that need to be done.\
+", 
+               Arguments = "work", 
+               ScriptType = "MProg", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "grin\
+' right now we have the following jobs\
+, gets a datapad off his desk.\
+, looks at pad.\
+' hmm a delivery to a Hutt on Coruscant. \
+", 
+               Arguments = "jobs", 
+               ScriptType = "MProg", 
+            }, 
+            [4] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "smile $n\
+' Says here he's in the Undercity. \
+say the package is marked fragile so payment is good.\
+smile $n \
+' just don't lose it .\
+open closet\
+say Its in the back room.\
+", 
+               Arguments = "hutt", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Name = "Ups Clerk", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A tall skiny human in a funny brown uniform.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7313] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "Galactic Secratary", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Looking up from doin her nails the secratary asks if you have an\
+appointment with one  of the managers or were just comming buy to use the\
+board.\
+", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Vnum = 7313, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "smile $n\
+' Greetings and welcome to the Galactic Improvement Offices.\
+' How may we serve you today?\
+eye $n\
+", 
+               Arguments = "80", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "nod $n\
+' i see you have an appointment today.\
+", 
+               Arguments = "appointment", 
+               ScriptType = "MProg", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "' Ok then, Office doors have the pesons name on them\
+unlock south \
+open south\
+mpforce $n south\
+close south\
+lock south\
+", 
+               Arguments = "yes", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Name = "Galactic Secratary", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A woman dressed in a micro-mini skirt and high heels\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7314] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a newly created peon", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Vnum = 7314, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "' test\
+if name (visiting)\
+kill visiting\
+endif\
+", 
+               Arguments = "", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [21] = "Secretive", 
+            [30] = "Prototype", 
+         }, 
+         Name = "peon", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "Some god abandoned a newly created peon here.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [7315] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 550, 
+            HitSizeDice = 10, 
+            HitNoDice = 11, 
+         }, 
+         ShortDescr = "A short fat Man", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "This man is a visiting senator from an Imperial planet , rumor has it he is\
+wanted by the coruscant police for war crimes and he is in need of escort\
+to the government buildings  are you up to the job\
+", 
+         Alignment = 0, 
+         DamRoll = 11, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 11, 
+         Vnum = 7315, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "' Greeting's , are you here to escort me to the Government Center?\
+smile $n\
+", 
+               Arguments = "hello hi", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "' Excellent, i'm wanted by the police so we may run into some problems \
+evil \
+' i hope you are capable of protecting me\
+' if your not simply tell me no thanks to the job.\
+follow $n\
+mpforce $n group visiting\
+", 
+               Arguments = "sure yes", 
+               ScriptType = "MProg", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "' ahhh i see\
+frown\
+' well i hope one day you will be\
+pat $n\
+follow visiting\
+", 
+               Arguments = "thanks", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 55, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+            [30] = "Prototype", 
+            [11] = "Immortal", 
+         }, 
+         Name = "visiting senator", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A short fat man in senators robes\
+", 
+         ArmorClass = -37, 
+      }, 
+      [7316] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 3000, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
+         ShortDescr = "Dirty old man ", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "This guy looks alot like bleeds.\
+", 
+         Alignment = 0, 
+         DamRoll = 14, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 3, 
+         Sex = "undistinguished", 
+         HitRoll = 14, 
+         Vnum = 7316, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         AttackFlags = 
+         {
+            [9] = "_09", 
+         }, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "death_prog", 
+               Code = "scream\
+gasp\
+' ya got me\
+mpoload 7316\
+", 
+               Arguments = "100", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 70, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Name = "dirty old man", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [19] = "disarm", 
+         }, 
+         LongDescr = "A man dressed in an old overcoat.\
+", 
+         ArmorClass = -75, 
+      }, 
+   }, 
 }

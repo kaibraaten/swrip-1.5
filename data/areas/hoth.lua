@@ -1,286 +1,362 @@
 -- The ice world Hoth
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 19-Nov-2020 14:31:09
 
 AreaEntry
 {
-   ResetFrequency = 10, 
    VnumRanges = 
    {
-      Room = 
+      Mob = 
       {
-         Last = 11249, 
-         First = 11206, 
+         First = 11101, 
+         Last = 11112, 
       }, 
       Object = 
       {
+         First = 11101, 
          Last = 11111, 
-         First = 11101, 
       }, 
-      Mob = 
+      Room = 
       {
-         Last = 11112, 
-         First = 11101, 
+         First = 11206, 
+         Last = 11249, 
       }, 
    }, 
-   Resets = 
+   Objects = 
    {
-      [1] = 
+      [11111] = 
       {
-         MiscData = 1, 
-         Arg3 = 11206, 
-         Arg2 = 2, 
-         Arg1 = 11101, 
-         Command = "M", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11111, 
+         Cost = 0, 
+         ShortDescr = "outlaw tech idea board", 
+         Layers = 0, 
+         Weight = 1, 
+         Name = "Outlaw tech idea board", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         Description = "The Outlaw Tech Idea Board", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
-      [2] = 
+      [11110] = 
       {
-         MiscData = 1, 
-         Arg3 = 11220, 
-         Arg2 = 2, 
-         Arg1 = 11101, 
-         Command = "M", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11110, 
+         Cost = 0, 
+         ShortDescr = "outlaw tech baord", 
+         Layers = 0, 
+         Weight = 1, 
+         Name = "outlaw.board", 
+         ActionDescription = "", 
+         ItemType = "government", 
+         Description = "The Outlaw Tech Board", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
-      [3] = 
+      [11109] = 
       {
-         MiscData = 1, 
-         Arg3 = 11233, 
-         Arg2 = 5, 
-         Arg1 = 11103, 
-         Command = "M", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "The Mountain Defense School has merged with the Gamaak Fitness Center.  You\
+\13can find us there.\
+\13", 
+               Keyword = "Sign", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Vnum = 11109, 
+         Cost = 0, 
+         ShortDescr = "a sign", 
+         Layers = 0, 
+         Weight = 1, 
+         Description = "A sign is tacked to the wall here", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         Name = "Sign", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
-      [4] = 
+      [11101] = 
       {
-         MiscData = 1, 
-         Arg3 = 11235, 
-         Arg2 = 5, 
-         Arg1 = 11103, 
-         Command = "M", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11101, 
+         Cost = 0, 
+         ShortDescr = "a package addressed receptionist", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "receptionist package", 
+         Description = "A package addressed to the Hunter's Guild's Receptionist", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
-      [5] = 
+      [11102] = 
       {
-         MiscData = 1, 
-         Arg3 = 11236, 
-         Arg2 = 1, 
-         Arg1 = 11104, 
-         Command = "M", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11102, 
+         Cost = 0, 
+         ShortDescr = "cargo", 
+         Weight = 100, 
+         Layers = 0, 
+         Name = "cargo", 
+         Description = "Some cargo has been left here.", 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
-      [6] = 
+      [11103] = 
       {
-         MiscData = 1, 
-         Arg3 = 11236, 
-         Arg2 = 5, 
-         Arg1 = 11103, 
-         Command = "M", 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Arg3 = 11236, 
-         Arg2 = 5, 
-         Arg1 = 11103, 
-         Command = "M", 
-      }, 
-      [8] = 
-      {
-         MiscData = 1, 
-         Arg3 = 11237, 
-         Arg2 = 5, 
-         Arg1 = 11103, 
-         Command = "M", 
-      }, 
-      [9] = 
-      {
-         MiscData = 1, 
-         Arg3 = 11209, 
-         Arg2 = 1, 
-         Arg1 = 90, 
-         Command = "O", 
-      }, 
-      [10] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Arg1 = 52, 
-         Command = "E", 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Arg3 = 18, 
-         Arg2 = 1, 
-         Arg1 = 52, 
-         Command = "E", 
-      }, 
-      [12] = 
-      {
-         MiscData = 1, 
-         Arg3 = 11210, 
-         Arg2 = 1, 
-         Arg1 = 10493, 
-         Command = "O", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11103, 
+         Cost = 0, 
+         ShortDescr = "duraplast tubing", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "duraplast tubing", 
+         Description = "Some duraplast during has been left lying around here.", 
+         ActionDescription = "", 
+         ItemType = "duraplast", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
       }, 
    }, 
+   HighEconomy = 0, 
    Rooms = 
    {
       [11206] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11207, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11246, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11206, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "city", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11206, 
-      }, 
-      [11207] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               Direction = "north", 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11207, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11208, 
-               Key = -1, 
             }, 
             [2] = 
             {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Description = "", 
-               DestinationVnum = 11211, 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
                Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11246, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11206, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Outside the 'hidden' shield doors", 
          Tunnel = 0, 
+         Name = "A snowfield", 
+      }, 
+      [11207] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11207, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
          Description = "You are outside the formerly hidden shield doors that once sealed off the\
 abandoned Echo Base.   The opening to the ice cave that was the Base, is\
 flanked by rocks, even though most of the base was chewed into\
 centuries-old packed snow and ice.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11207, 
-      }, 
-      [11208] = 
-      {
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11208, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11209, 
-               Key = -1, 
             }, 
             [2] = 
             {
-               Direction = "south", 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11211, 
                Distance = 0, 
                Keyword = "", 
+            }, 
+            [3] = 
+            {
                Description = "", 
-               DestinationVnum = 11207, 
+               Direction = "west", 
                Key = -1, 
+               DestinationVnum = 11206, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "Outside the 'hidden' shield doors", 
+      }, 
+      [11208] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Inside Echo Base", 
-         Tunnel = 0, 
-         Description = "The hangar of Echo Base is now filled with scrap equipment, discarded\
-uniforms, and other miscellaneous junk. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
          Vnum = 11208, 
-      }, 
-      [11209] = 
-      {
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Name = "Inside Echo Base", 
          Exits = 
          {
             [1] = 
             {
-               Direction = "south", 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11209, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11208, 
-               Key = -1, 
             }, 
             [2] = 
             {
-               Direction = "west", 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11207, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11210, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "The hangar of Echo Base is now filled with scrap equipment, discarded\
+uniforms, and other miscellaneous junk. \
+", 
+      }, 
+      [11209] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [23] = "Hotel", 
          }, 
+         Vnum = 11209, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
          Name = "Hallway", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11208, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11210, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "This hallway, carved from ice has started to collapse and at its end is\
 closed off by a previous cave-in.\
@@ -290,1477 +366,1582 @@ There is a bed shoved in a corner.  Perhaps you can rest here.\
  \
 It is safe to quit here.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11209, 
       }, 
       [11210] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11209, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11210, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "Storeroom", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This storeroom seems to have been ransacked.  All the bags and boxes have\
 been destroyed, the remains of wrappers strewn everywhere. \
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11209, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11210, 
+         Tunnel = 0, 
+         Name = "Storeroom", 
       }, 
       [11211] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11212, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11207, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11211, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11212, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11207, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11211, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11212] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11212, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "This large field is covered with snow.  The only break from the sheet of\
+flat white, is the hills that make up the abandoned Rebel Base.  You see\
+footprints that appear to be left by large animals, all around.\
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11215, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11215, 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11213, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11213, 
-               Key = -1, 
             }, 
             [3] = 
             {
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11211, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11211, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "A snowfield", 
          Tunnel = 0, 
-         Description = "This large field is covered with snow.  The only break from the sheet of\
-flat white, is the hills that make up the abandoned Rebel Base.  You see\
-footprints that appear to be left by large animals, all around.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11212, 
+         Name = "A snowfield", 
       }, 
       [11213] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11212, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11214, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11213, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11213, 
-      }, 
-      [11214] = 
-      {
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11212, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11213, 
-               Key = -1, 
             }, 
             [2] = 
             {
-               Direction = "down", 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11214, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11247, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "A snowfield", 
          Tunnel = 0, 
+         Name = "A snowfield", 
+      }, 
+      [11214] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11214, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around. \
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11213, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 11247, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11214, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11215] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11216, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11212, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11215, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11216, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11212, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11215, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11216] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11217, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11220, 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11215, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11216, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11217, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11220, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11215, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11216, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11217] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11218, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11216, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11217, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11218, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11216, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11217, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11218] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11219, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11217, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11218, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11219, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11217, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11218, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11219] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11218, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11219, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11218, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11219, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11220] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11221, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11216, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11220, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11221, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11216, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11220, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11221] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11222, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11220, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11221, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11222, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11220, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11221, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11222] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11221, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11225, 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11223, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11222, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11221, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11225, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11223, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11222, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11223] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11222, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11224, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11223, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11222, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11224, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11223, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11224] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11223, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11224, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11223, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11224, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11225] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11226, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11222, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11225, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11226, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11222, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11225, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11226] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11226, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "This large field is covered with snow.  The only break from the sheet of\
+flat white, is the hills that make up the abandoned Rebel Base.  You see\
+footprints that appear to be left by large animals, all around.\
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11229, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11229, 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11227, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11227, 
-               Key = -1, 
             }, 
             [3] = 
             {
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11225, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11225, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "A snowfield", 
          Tunnel = 0, 
-         Description = "This large field is covered with snow.  The only break from the sheet of\
-flat white, is the hills that make up the abandoned Rebel Base.  You see\
-footprints that appear to be left by large animals, all around.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11226, 
+         Name = "A snowfield", 
       }, 
       [11227] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11226, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11228, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11227, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11226, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11228, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11227, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11228] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11227, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11228, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11227, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11228, 
+         Tunnel = 0, 
+         Name = "A snowfield", 
       }, 
       [11229] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11226, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11230, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11229, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "A snowfield", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "This large field is covered with snow.  The only break from the sheet of\
 flat white, is the hills that make up the abandoned Rebel Base.  You see\
 footprints that appear to be left by large animals, all around.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11229, 
-      }, 
-      [11230] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               Direction = "east", 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11226, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11231, 
-               Key = -1, 
             }, 
             [2] = 
             {
-               Direction = "up", 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 11230, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11229, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Wampa Kingdom", 
          Tunnel = 0, 
+         Name = "A snowfield", 
+      }, 
+      [11230] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11230, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
          Description = "The entrance to the Wampa Kingdom is a small hole in the ground.  You can\
 not see it from more than 6 feet away, and in heavy weather, one can\
 easily fall in. \
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11231, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 11229, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11230, 
+         Tunnel = 0, 
+         Name = "Wampa Kingdom", 
       }, 
       [11231] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11232, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11230, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11231, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "Wampa Kingdom", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "The Wampa kingdom is made up of many ice caves, each filled with boned and\
 leavings from the many Wampas. \
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11232, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11230, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11231, 
+         Tunnel = 0, 
+         Name = "Wampa Kingdom", 
       }, 
       [11232] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11232, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
+leavings from the many Wampas. \
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11233, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11233, 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11237, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11237, 
-               Key = -1, 
             }, 
             [3] = 
             {
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11234, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11234, 
-               Key = -1, 
             }, 
             [4] = 
             {
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11231, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11231, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Wampa Kingdom", 
          Tunnel = 0, 
-         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
-leavings from the many Wampas. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11232, 
+         Name = "Wampa Kingdom", 
       }, 
       [11233] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11233, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
+leavings from the many Wampas. \
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11232, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11232, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Wampa Den", 
          Tunnel = 0, 
-         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
-leavings from the many Wampas. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11233, 
+         Name = "Wampa Den", 
       }, 
       [11234] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11234, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
+leavings from the many Wampas. \
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11232, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11232, 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Description = "", 
                Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11235, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11235, 
-               Key = -1, 
             }, 
             [3] = 
             {
+               Description = "", 
                Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11236, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11236, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Wampa Kingdom", 
          Tunnel = 0, 
-         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
-leavings from the many Wampas. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11234, 
+         Name = "Wampa Kingdom", 
       }, 
       [11235] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11235, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
+leavings from the many Wampas. \
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11234, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11234, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Wampa Den", 
          Tunnel = 0, 
-         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
-leavings from the many Wampas. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11235, 
+         Name = "Wampa Den", 
       }, 
       [11236] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 11236, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
+leavings from the many Wampas. \
+", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11234, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11234, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Leader's Den", 
          Tunnel = 0, 
-         Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
-leavings from the many Wampas. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11236, 
+         Name = "Leader's Den", 
       }, 
       [11237] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11232, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11237, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "Wampa Den", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "The Wampa kingdom is made up of many ice caves, each filled with bones and\
 leavings from the many Wampas. \
 ", 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 11232, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
-         Sector = "field", 
-         Vnum = 11237, 
+         Tunnel = 0, 
+         Name = "Wampa Den", 
       }, 
       [11238] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11239, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
+         Vnum = 11238, 
          TeleDelay = 0, 
+         Tag = "", 
          TeleVnum = 0, 
-         Name = "Cave-in", 
-         Tunnel = 0, 
+         Sector = "field", 
          Description = "It looks like a cavein blocked the passage way here.  You can go no\
 further.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11238, 
-      }, 
-      [11239] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               Direction = "south", 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 11239, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11238, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Name = "Echo Base Hangar", 
          Tunnel = 0, 
-         Description = "One of the large hangars that were part of Echo base, the room is filled\
-with wrecked speeders and fighters.\
-", 
+         Name = "Cave-in", 
+      }, 
+      [11239] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         Sector = "field", 
          Vnum = 11239, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Description = "One of the large hangars that were part of Echo base, the room is filled\
+with wrecked speeders and fighters.\
+", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 11238, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Echo Base Hangar", 
       }, 
       [11240] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [29] = "Spacecraft", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Name = "BlackStar", 
-         Tunnel = 0, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
          Vnum = 11240, 
-      }, 
-      [11241] = 
-      {
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Name = "BlackStar", 
          Exits = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+      }, 
+      [11241] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         Vnum = 11241, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Lightning Bomber 11241", 
+         Exits = 
+         {
+         }, 
          Tunnel = 0, 
          Description = "The new fighter designed by the Outlaw Techs, the Lightning Bomber looks\
 similar to an old headhunter.  However, sleaker, faster, heavily shielded,\
 with 4 laser cannons and enough firepower to take down a corvette at long\
 range.\
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11241, 
       }, 
       [11242] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         Vnum = 11242, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Lightning Bomber 11242", 
+         Exits = 
+         {
+         }, 
          Tunnel = 0, 
          Description = "The new fighter designed by the Outlaw Techs, the Lightning Bomber looks\
 similar to an old headhunter.  However, sleaker, faster, heavily shielded,\
 with 4 laser cannons and enough firepower to take down a corvette at long\
 range. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11242, 
       }, 
       [11243] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         Vnum = 11243, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Lightning Bomber 11243", 
+         Exits = 
+         {
+         }, 
          Tunnel = 0, 
          Description = "The new fighter designed by the Outlaw Techs, the Lightning Bomber looks\
 similar to an old headhunter.  However, sleaker, faster, heavily shielded,\
 with 4 laser cannons and enough firepower to take down a corvette at long\
 range. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11243, 
       }, 
       [11244] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         Vnum = 11244, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Lightning Bomber 11244", 
+         Exits = 
+         {
+         }, 
          Tunnel = 0, 
          Description = "The new fighter designed by the Outlaw Techs, the Lightning Bomber looks\
 similar to an old headhunter.  However, sleaker, faster, heavily shielded,\
 with 4 laser cannons and enough firepower to take down a corvette at long\
 range. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11244, 
       }, 
       [11245] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         Vnum = 11245, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Lightning Bomber 11245", 
+         Exits = 
+         {
+         }, 
          Tunnel = 0, 
          Description = "The new fighter designed by the Outlaw Techs, the Lightning Bomber looks\
 similar to an old headhunter.  However, sleaker, faster, heavily shielded,\
 with 4 laser cannons and enough firepower to take down a corvette at long\
 range. \
 ", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11245, 
       }, 
       [11246] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11206, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
+         Vnum = 11246, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "A snowfield", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 11206, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11246, 
       }, 
       [11247] = 
       {
-         Exits = 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11214, 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11248, 
-               Key = -1, 
-            }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         Vnum = 11247, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Name = "Floating in a void", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 11214, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 11248, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
          Tunnel = 0, 
          Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11247, 
       }, 
       [11248] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Vnum = 11248, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ice Worm's Cave", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 11247, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11247, 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Description = "", 
                Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 11249, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11249, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+      }, 
+      [11249] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Name = "Ice Worm's Cave", 
-         Tunnel = 0, 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Vnum = 11248, 
-      }, 
-      [11249] = 
-      {
+         Vnum = 11249, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "field", 
+         Name = "A Hidden Cavern", 
          Exits = 
          {
             [1] = 
             {
+               Description = "", 
                Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 11248, 
                Distance = 0, 
                Keyword = "", 
-               Description = "", 
-               DestinationVnum = 11248, 
-               Key = -1, 
             }, 
          }, 
-         Tag = "", 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Name = "A Hidden Cavern", 
          Tunnel = 0, 
          Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Vnum = 11249, 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   LowEconomy = 2675770, 
+   Resets = 
+   {
+      [1] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11101, 
+         Command = "M", 
+         Arg3 = 11206, 
+         Arg2 = 2, 
+      }, 
+      [2] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11101, 
+         Command = "M", 
+         Arg3 = 11220, 
+         Arg2 = 2, 
+      }, 
+      [3] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11103, 
+         Command = "M", 
+         Arg3 = 11233, 
+         Arg2 = 5, 
+      }, 
+      [4] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11103, 
+         Command = "M", 
+         Arg3 = 11235, 
+         Arg2 = 5, 
+      }, 
+      [5] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11104, 
+         Command = "M", 
+         Arg3 = 11236, 
+         Arg2 = 1, 
+      }, 
+      [6] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11103, 
+         Command = "M", 
+         Arg3 = 11236, 
+         Arg2 = 5, 
+      }, 
+      [7] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11103, 
+         Command = "M", 
+         Arg3 = 11236, 
+         Arg2 = 5, 
+      }, 
+      [8] = 
+      {
+         MiscData = 1, 
+         Arg1 = 11103, 
+         Command = "M", 
+         Arg3 = 11237, 
+         Arg2 = 5, 
+      }, 
+      [9] = 
+      {
+         MiscData = 1, 
+         Arg1 = 90, 
+         Command = "O", 
+         Arg3 = 11209, 
+         Arg2 = 1, 
+      }, 
+      [10] = 
+      {
+         MiscData = 1, 
+         Arg1 = 52, 
+         Command = "E", 
+         Arg3 = 16, 
+         Arg2 = 1, 
+      }, 
+      [11] = 
+      {
+         MiscData = 1, 
+         Arg1 = 52, 
+         Command = "E", 
+         Arg3 = 18, 
+         Arg2 = 1, 
+      }, 
+      [12] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10493, 
+         Command = "O", 
+         Arg3 = 11210, 
+         Arg2 = 1, 
+      }, 
+   }, 
+   ResetMessage = "The wind howls over the snow.", 
+   Author = "Darrik", 
+   Name = "The ice world Hoth", 
+   ResetFrequency = 10, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
+   Filename = "hoth.lua", 
    Mobiles = 
    {
       [11104] = 
       {
-         Weight = 0, 
-         Level = 80, 
-         LongDescr = "A one-armed Wampa Leader looks like trouble\
-", 
-         VipFlags = 
-         {
-            [18] = "_18", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitPlus = 800, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 10000, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Name = "one-armed wampa", 
-         ShortDescr = "a one-armed wampa", 
-         ArmorClass = -100, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         DamRoll = 16, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 8, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
+         ShortDescr = "a one-armed wampa", 
          Race = "Human", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [18] = "_18", 
+         }, 
+         NumberOfAttacks = 0, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         HitRoll = 16, 
+         Vnum = 11104, 
+         Height = 0, 
+         DefaultPosition = "standing", 
          AttackFlags = 
          {
             [1] = "claws", 
@@ -1768,7 +1949,17 @@ range. \
             [0] = "bite", 
             [5] = "kick", 
          }, 
-         Height = 0, 
+         Credits = 10000, 
+         DamRoll = 16, 
+         Level = 80, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1776,26 +1967,48 @@ range. \
             [5] = "Aggressive", 
             [18] = "Mountable", 
          }, 
-         NumberOfAttacks = 0, 
-         DefaultPosition = "standing", 
-         Immune = 
+         Name = "one-armed wampa", 
+         Weight = 0, 
+         DefenseFlags = 
          {
-            [11] = "charm", 
+            [1] = "dodge", 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 16, 
-         Vnum = 11104, 
+         LongDescr = "A one-armed Wampa Leader looks like trouble\
+", 
+         ArmorClass = -100, 
       }, 
       [11105] = 
       {
-         Weight = 0, 
-         Level = 50, 
-         LongDescr = "A tech shopkeeper sells items here.\
-", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         ShortDescr = "a tech shopkeeper", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -1804,76 +2017,58 @@ range. \
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
             KeeperShortDescr = "a tech shopkeeper", 
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
          }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 0, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Name = "A tech shopkeeper", 
-         ShortDescr = "a tech shopkeeper", 
-         ArmorClass = -25, 
+         DamRoll = 10, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         HitRoll = 10, 
+         Vnum = 11105, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
+               MudProgType = "greet_prog", 
                Code = "say Welcome, would you like something?\
 ", 
+               Arguments = "100", 
                ScriptType = "MProg", 
-               MudProgType = "greet_prog", 
             }, 
          }, 
-         Position = "standing", 
-         DamRoll = 10, 
-         Stats = 
+         Level = 50, 
+         SaveVs = 
          {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Sex = "undistinguished", 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1881,200 +2076,211 @@ range. \
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "A tech shopkeeper", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 10, 
-         Vnum = 11105, 
+         LongDescr = "A tech shopkeeper sells items here.\
+", 
+         ArmorClass = -25, 
       }, 
       [11106] = 
       {
-         Weight = 0, 
-         Level = 50, 
-         LongDescr = "Captain Jusclik stands here giving orders.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Name = "Captain Jusclik", 
-         ShortDescr = "captain jusclik", 
-         ArmorClass = -25, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Position = "standing", 
-         DamRoll = 10, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 5, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         ShortDescr = "captain jusclik", 
          Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 10, 
+         Vnum = 11106, 
+         Height = 0, 
+         DefaultPosition = "standing", 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         Height = 0, 
+         Credits = 0, 
+         DamRoll = 10, 
+         Level = 50, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         NumberOfAttacks = 0, 
-         DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 10, 
-         Vnum = 11106, 
+         Name = "Captain Jusclik", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         LongDescr = "Captain Jusclik stands here giving orders.\
+", 
+         ArmorClass = -25, 
       }, 
       [11107] = 
       {
-         Weight = 0, 
-         Level = 30, 
-         LongDescr = "A tech customs oficer watches for carried weapons.\
-", 
-         SpecFuns = 
-         {
-            [0] = "spec_customs_weapons", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 6, 
-            HitPlus = 300, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 0, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Name = "Tech customs officer", 
-         ShortDescr = "a tech customs officer", 
-         ArmorClass = 25, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "5", 
-               Code = "mpat 11274 drop all\
-", 
-               ScriptType = "MProg", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Position = "standing", 
-         DamRoll = 6, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 3, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 300, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         ShortDescr = "a tech customs officer", 
          Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_customs_weapons", 
+         }, 
+         DamRoll = 6, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 6, 
+         Vnum = 11107, 
+         Height = 0, 
+         Sex = "undistinguished", 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         Height = 0, 
+         Credits = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpat 11274 drop all\
+", 
+               Arguments = "5", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Level = 30, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "Tech customs officer", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 6, 
-         Vnum = 11107, 
+         LongDescr = "A tech customs oficer watches for carried weapons.\
+", 
+         ArmorClass = 25, 
       }, 
       [11108] = 
       {
-         Weight = 0, 
-         Level = 50, 
-         LongDescr = "A tech chef makes food here.\
-", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 10, 
             HitPlus = 500, 
             HitSizeDice = 10, 
+            HitNoDice = 10, 
          }, 
-         Credits = 0, 
+         ShortDescr = "tech chef", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -2083,160 +2289,165 @@ range. \
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
             KeeperShortDescr = "tech chef", 
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
          }, 
-         Name = "tech chef", 
-         ShortDescr = "tech chef", 
-         ArmorClass = -25, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         HitRoll = 10, 
+         Vnum = 11108, 
+         Height = 0, 
+         Sex = "male", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 10, 
+         Level = 50, 
          SaveVs = 
          {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
             SpellStaff = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Position = "standing", 
-         DamRoll = 10, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Sex = "male", 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "tech chef", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 10, 
-         Vnum = 11108, 
+         LongDescr = "A tech chef makes food here.\
+", 
+         ArmorClass = -25, 
       }, 
       [11109] = 
       {
-         Weight = 0, 
-         Level = 9, 
-         LongDescr = "Mr Kooos is looking for assitance\
-", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 1, 
             HitPlus = 90, 
             HitSizeDice = 10, 
+            HitNoDice = 1, 
          }, 
-         Credits = 0, 
-         Name = "Mr Kooos", 
          ShortDescr = "Mr Kooos", 
-         ArmorClass = 77, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         Vnum = 11109, 
+         Height = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "add hello hi", 
+               MudProgType = "speech_prog", 
                Code = "say Hello, could you please take me to the swimming pool?\
 ", 
+               Arguments = "add hello hi", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [2] = 
             {
-               Arguments = "add yes sure", 
+               MudProgType = "speech_prog", 
                Code = "say Are you talking to me?\
 say My name is Mr Kooos\
 ", 
+               Arguments = "add yes sure", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [3] = 
             {
-               Arguments = "add kooos kooos", 
+               MudProgType = "speech_prog", 
                Code = "say You will take me to the Pool?\
 say Thanks $n, I really appreciate this.\
 follow $n\
 ", 
+               Arguments = "add kooos kooos", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [4] = 
             {
-               Arguments = "turnstile", 
+               MudProgType = "act_prog", 
                Code = "mpwithdraw 5\
 give 5 credits droid\
 ", 
+               Arguments = "turnstile", 
                ScriptType = "MProg", 
-               MudProgType = "act_prog", 
             }, 
             [5] = 
             {
-               Arguments = "turbocar", 
+               MudProgType = "act_prog", 
                Code = "board turbocar\
 ", 
+               Arguments = "turbocar", 
                ScriptType = "MProg", 
-               MudProgType = "act_prog", 
             }, 
             [6] = 
             {
-               Arguments = "exits", 
+               MudProgType = "act_prog", 
                Code = "leave\
 ", 
+               Arguments = "exits", 
                ScriptType = "MProg", 
-               MudProgType = "act_prog", 
             }, 
             [7] = 
             {
-               Arguments = "100", 
+               MudProgType = "entry_prog", 
                Code = "if ovnumhere(10206) >= 1\
 Say Thank you $r. I really apreciate your help.\
 mpwithdraw 200\
@@ -2247,110 +2458,106 @@ mpecho Mr Looos dives into the swimming pool.\
 mpgoto 10240\
 endif\
 ", 
+               Arguments = "100", 
                ScriptType = "MProg", 
-               MudProgType = "entry_prog", 
             }, 
          }, 
-         Position = "standing", 
-         DamRoll = 1, 
+         Level = 9, 
          SaveVs = 
          {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
             SpellStaff = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "Mr Kooos", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 1, 
-         Vnum = 11109, 
+         LongDescr = "Mr Kooos is looking for assitance\
+", 
+         ArmorClass = 77, 
       }, 
       [11110] = 
       {
-         Weight = 0, 
-         Level = 50, 
-         LongDescr = "A Freelance Tech will buy hand-crafted weapons here.\
-", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 10, 
             HitPlus = 500, 
             HitSizeDice = 10, 
+            HitNoDice = 10, 
          }, 
-         Credits = 0, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Name = "Freelance Tech", 
          ShortDescr = "a freelance tech", 
-         ArmorClass = -25, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         DamRoll = 10, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         HitRoll = 10, 
+         Vnum = 11110, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "hello job", 
+               MudProgType = "speech_prog", 
                Code = "say I am looking for hand-crafted vibroblades and blasters.\
 ", 
+               Arguments = "hello job", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [2] = 
             {
-               Arguments = "money sure okay ok yes", 
+               MudProgType = "speech_prog", 
                Code = "say I will pay good money.\
 say 500 for each vibroblade and 1500 for each blaster.\
 ", 
+               Arguments = "money sure okay ok yes", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [3] = 
             {
-               Arguments = "gives", 
+               MudProgType = "act_prog", 
                Code = "if ovnuminv(10420) >= 1\
 Say Great Work\
 mpwithdraw 5000\
@@ -2367,90 +2574,94 @@ mpat 11283 drop all\
 mpecho The tech quickly delivers the vibroblade.\
 endif\
 ", 
+               Arguments = "gives", 
                ScriptType = "MProg", 
-               MudProgType = "act_prog", 
             }, 
          }, 
-         Position = "standing", 
-         DamRoll = 10, 
-         Stats = 
+         Level = 50, 
+         SaveVs = 
          {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Sex = "undistinguished", 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "Freelance Tech", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 10, 
-         Vnum = 11110, 
+         LongDescr = "A Freelance Tech will buy hand-crafted weapons here.\
+", 
+         ArmorClass = -25, 
       }, 
       [11111] = 
       {
-         Weight = 0, 
-         Level = 25, 
-         LongDescr = "Riiice waits here for his agents.\
-", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 5, 
             HitPlus = 250, 
             HitSizeDice = 10, 
+            HitNoDice = 5, 
          }, 
-         Credits = 0, 
-         Name = "Riiice", 
          ShortDescr = "Riiice", 
-         ArmorClass = 37, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 5, 
+         HitRoll = 5, 
+         Vnum = 11111, 
+         Height = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "hello job", 
+               MudProgType = "speech_prog", 
                Code = "mpechoat $n Riiice whispers to you: I need some\
 mpechoat $n film developed.  It's good money.\
 ", 
+               Arguments = "hello job", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [2] = 
             {
-               Arguments = "sure okay ok yes", 
+               MudProgType = "speech_prog", 
                Code = "if ovnumcarry(10217) >= 1\
 give film $n\
 drop film\
@@ -2463,12 +2674,12 @@ mpechoat $n Riiice says: Im afraid the film has\
 mpechoat $n already been delivered.  Sorry.\
 endif\
 ", 
+               Arguments = "sure okay ok yes", 
                ScriptType = "MProg", 
-               MudProgType = "speech_prog", 
             }, 
             [3] = 
             {
-               Arguments = "gives", 
+               MudProgType = "act_prog", 
                Code = "if ovnuminv(10218) >= 1\
 mpechoat $n Riiice hisses, \"Incredible. You returned\"\
 mpwithdraw 2000\
@@ -2490,69 +2701,67 @@ mpat 10299 drop all\
 mpat 10299 mppurge\
 endif\
 ", 
+               Arguments = "gives", 
                ScriptType = "MProg", 
-               MudProgType = "act_prog", 
             }, 
          }, 
-         Position = "standing", 
-         DamRoll = 5, 
+         Level = 25, 
          SaveVs = 
          {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
             SpellStaff = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "Riiice", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 5, 
-         Vnum = 11111, 
+         LongDescr = "Riiice waits here for his agents.\
+", 
+         ArmorClass = 37, 
       }, 
       [11112] = 
       {
-         Weight = 0, 
-         Level = 1, 
-         LongDescr = "A freelance salesman sells engineering supplies\
-", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 0, 
             HitPlus = 0, 
             HitSizeDice = 0, 
+            HitNoDice = 0, 
          }, 
-         Credits = 0, 
+         ShortDescr = "salesman", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "As fast as new products become available to Bounty Hunters, this salesman\
+somehow gets them. Of course they can be a little pricy. But that what you\
+pay to get the best i guess. \
+", 
+         Alignment = 0, 
          Shop = 
          {
-            ProfitSell = 90, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -2561,491 +2770,282 @@ endif\
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
             KeeperShortDescr = "salesman", 
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
          }, 
-         Name = "A salesman", 
-         ShortDescr = "salesman", 
-         ArmorClass = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         HitRoll = 0, 
+         Vnum = 11112, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
          SaveVs = 
          {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
             SpellStaff = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
-         Position = "standing", 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Sex = "undistinguished", 
-         Race = "Human", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "A salesman", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Description = "As fast as new products become available to Bounty Hunters, this salesman\
-somehow gets them. Of course they can be a little pricy. But that what you\
-pay to get the best i guess. \
+         LongDescr = "A freelance salesman sells engineering supplies\
 ", 
-         Alignment = 0, 
-         HitRoll = 0, 
-         Vnum = 11112, 
+         ArmorClass = 0, 
       }, 
       [11101] = 
       {
-         Weight = 0, 
-         Level = 1, 
-         LongDescr = "A blaster-cannon turret is installed here.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitPlus = 10, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 0, 
-         Name = "A disabled blaster-cannon turret", 
-         ShortDescr = "a turret", 
-         ArmorClass = 97, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Position = "standing", 
-         DamRoll = 0, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Race = "Human", 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 0, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 10, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "a turret", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "Although it looks like a formitable defense, looking closely you see that\
+the power cables have been severed. \
+", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Vnum = 11101, 
          Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "A disabled blaster-cannon turret", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "Although it looks like a formitable defense, looking closely you see that\
-the power cables have been severed. \
+         LongDescr = "A blaster-cannon turret is installed here.\
 ", 
-         Alignment = 0, 
-         HitRoll = 0, 
-         Vnum = 11101, 
+         ArmorClass = 97, 
       }, 
       [11102] = 
       {
-         Weight = 0, 
-         Level = 20, 
-         LongDescr = "A Wampa tears through bags looking for food.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitPlus = 200, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 0, 
-         Name = "A Wampa", 
-         ShortDescr = "A wampa", 
-         ArmorClass = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Position = "standing", 
-         DamRoll = 4, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Race = "Human", 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 2, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         ShortDescr = "A wampa", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitRoll = 4, 
+         Vnum = 11102, 
          Height = 0, 
+         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         DamRoll = 4, 
+         Level = 20, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [5] = "Aggressive", 
          }, 
-         NumberOfAttacks = 0, 
-         DefaultPosition = "standing", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Alignment = 0, 
-         HitRoll = 4, 
-         Vnum = 11102, 
+         Name = "A Wampa", 
+         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         LongDescr = "A Wampa tears through bags looking for food.\
+", 
+         ArmorClass = 50, 
       }, 
       [11103] = 
       {
-         Weight = 0, 
-         Level = 40, 
-         LongDescr = "A Wampa looks comfortable nawing on a bone.\
-", 
-         VipFlags = 
-         {
-            [18] = "_18", 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 8, 
-            HitPlus = 400, 
-            HitSizeDice = 10, 
-         }, 
-         Credits = 500, 
-         Name = "Wampa", 
-         ShortDescr = "a wampa", 
-         ArmorClass = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         Position = "standing", 
-         DamRoll = 8, 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-         }, 
-         Sex = "undistinguished", 
-         Race = "Human", 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 4, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 400, 
+            HitSizeDice = 10, 
+            HitNoDice = 8, 
+         }, 
+         ShortDescr = "a wampa", 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
+         Description = "", 
+         Alignment = -1000, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitRoll = 8, 
+         Vnum = 11103, 
          Height = 0, 
+         VipFlags = 
+         {
+            [18] = "_18", 
+         }, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         Credits = 500, 
+         DamRoll = 8, 
+         Level = 40, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [5] = "Aggressive", 
          }, 
-         NumberOfAttacks = 0, 
+         Name = "Wampa", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Description = "", 
-         Alignment = -1000, 
-         HitRoll = 8, 
-         Vnum = 11103, 
+         LongDescr = "A Wampa looks comfortable nawing on a bone.\
+", 
+         ArmorClass = 0, 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   Objects = 
-   {
-      [11111] = 
-      {
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "Outlaw tech idea board", 
-         ShortDescr = "outlaw tech idea board", 
-         Description = "The Outlaw Tech Idea Board", 
-         Vnum = 11111, 
-      }, 
-      [11110] = 
-      {
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "government", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "outlaw.board", 
-         ShortDescr = "outlaw tech baord", 
-         Description = "The Outlaw Tech Board", 
-         Vnum = 11110, 
-      }, 
-      [11109] = 
-      {
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         Layers = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Sign", 
-               Description = "The Mountain Defense School has merged with the Gamaak Fitness Center.  You\
-\13can find us there.\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "Sign", 
-         ShortDescr = "a sign", 
-         Description = "A sign is tacked to the wall here", 
-         Vnum = 11109, 
-      }, 
-      [11101] = 
-      {
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ActionDescription = "", 
-         Name = "receptionist package", 
-         ShortDescr = "a package addressed receptionist", 
-         Description = "A package addressed to the Hunter's Guild's Receptionist", 
-         Vnum = 11101, 
-      }, 
-      [11102] = 
-      {
-         Weight = 100, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "trash", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ActionDescription = "", 
-         Name = "cargo", 
-         ShortDescr = "cargo", 
-         Description = "Some cargo has been left here.", 
-         Vnum = 11102, 
-      }, 
-      [11103] = 
-      {
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ItemType = "duraplast", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ActionDescription = "", 
-         Name = "duraplast tubing", 
-         ShortDescr = "duraplast tubing", 
-         Description = "Some duraplast during has been left lying around here.", 
-         Vnum = 11103, 
-      }, 
-   }, 
-   LowEconomy = 2688270, 
-   Author = "Darrik", 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
-   Name = "The ice world Hoth", 
-   ResetMessage = "The wind howls over the snow.", 
-   HighEconomy = 0, 
-   Filename = "hoth.lua", 
 }

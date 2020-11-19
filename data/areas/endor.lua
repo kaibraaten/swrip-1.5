@@ -1,116 +1,422 @@
 -- Endor
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 19-Nov-2020 14:31:09
 
 AreaEntry
 {
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         First = 3000, 
+         Last = 3005, 
+      }, 
+      Object = 
+      {
+         First = 3000, 
+         Last = 3008, 
+      }, 
+      Room = 
+      {
+         First = 3000, 
+         Last = 3099, 
+      }, 
+   }, 
+   Objects = 
+   {
+      [3008] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 3008, 
+         Cost = 10, 
+         ShortDescr = "a small canteen", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "small canteen", 
+         Description = "A belt sized canteen was dropped here.", 
+         ActionDescription = "", 
+         ItemType = "drink_container", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 10, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+      }, 
+      [3000] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3000, 
+         Cost = 0, 
+         ShortDescr = "a leather hood", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "leather hood", 
+         Description = "A small hood has been dropped here.", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
+         }, 
+      }, 
+      [3001] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3001, 
+         Cost = 0, 
+         ShortDescr = "a spear", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "spear", 
+         Description = "A spear lies here in the dirt.", 
+         ActionDescription = "", 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 1, 
+            [2] = 4, 
+            [3] = 11, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 12, 
+         }, 
+      }, 
+      [3002] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3002, 
+         Cost = 0, 
+         ShortDescr = "feathered head dress", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "feathered head dress", 
+         Description = "A feathered head dress lies here.", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+      }, 
+      [3003] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3003, 
+         Cost = 0, 
+         ShortDescr = "leather wrist guard", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "leather wrist guards", 
+         Description = "A feathered head dress lies here.", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+      }, 
+      [3004] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3004, 
+         Cost = 0, 
+         ShortDescr = "a bone necklace", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "bone necklace", 
+         Description = "A small pile of bones lie here.", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+      }, 
+      [3005] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         Vnum = 3005, 
+         Cost = 0, 
+         ShortDescr = "a wooden shield", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "a wooden shield", 
+         Description = "A wooden shield is collecting dust", 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [9] = "Shield", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
+         }, 
+      }, 
+      [3006] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 3006, 
+         Cost = 8, 
+         ShortDescr = "some dried fruit", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "fruit", 
+         Description = "Some dried fruit should last for a long time without going bad.", 
+         ActionDescription = "", 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+      }, 
+      [3007] = 
+      {
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 3007, 
+         Cost = 9, 
+         ShortDescr = "fresh vegitables", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "fresh vegitables", 
+         Description = "Some vegitables are attracting flies here.", 
+         ActionDescription = "", 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+      }, 
+   }, 
+   HighEconomy = 0, 
    Rooms = 
    {
       [3072] = 
       {
-         Vnum = 3072, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3073, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3071, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3072, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3073, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3071, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3073] = 
       {
-         Vnum = 3073, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3072, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3074, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3073, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3072, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3074, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3074] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [16] = "Silence", 
          }, 
+         Vnum = 3074, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Historical Funeral Pyre", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3073, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3073, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Historical Funeral Pyre", 
          Description = "You stand before a very historical spot. The vegetation has not grown back\
 and you can feel a cold creeping darkness running through you veins\
 sending shivers up and down your spine. This is the place where Luke\
@@ -121,1073 +427,1073 @@ does not seem to be able to penetrate the dark aura the funeral pyre\
 radiates. The place also seems to cause interference with your comlink,\
 strange.\
 ", 
-         Vnum = 3074, 
-         Tag = "", 
       }, 
       [3075] = 
       {
-         Vnum = 3075, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3070, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3076, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3075, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3070, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3076, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3076] = 
       {
-         Vnum = 3076, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3077, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3075, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3076, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3077, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3075, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3077] = 
       {
-         Vnum = 3077, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3078, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3076, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3077, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3078, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3076, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3078] = 
       {
-         Vnum = 3078, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3077, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3079, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3078, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3077, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3079, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3079] = 
       {
-         Vnum = 3079, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3080, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3078, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3079, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3080, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3078, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3080] = 
       {
-         Vnum = 3080, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3079, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3081, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3080, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3079, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3081, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3081] = 
       {
-         Vnum = 3081, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3082, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3080, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3081, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3082, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3080, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3082] = 
       {
-         Vnum = 3082, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3081, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3083, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3082, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3081, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3083, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3083] = 
       {
-         Vnum = 3083, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3084, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3082, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3083, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner. \
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3084, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3082, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3084] = 
       {
-         Vnum = 3084, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3083, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3085, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3084, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3083, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3085, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3085] = 
       {
-         Vnum = 3085, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3084, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3086, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3085, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3084, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3086, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3086] = 
       {
-         Vnum = 3086, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3087, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3085, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3086, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3087, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3085, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3087] = 
       {
-         Vnum = 3087, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3086, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3088, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3087, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
-      }, 
-      [3088] = 
-      {
-         Vnum = 3088, 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3089, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3086, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3087, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3088, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
+      }, 
+      [3088] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3088, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner. \
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3089, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3087, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3089] = 
       {
-         Vnum = 3089, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3088, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3090, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3089, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3088, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3090, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3090] = 
       {
-         Vnum = 3090, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3091, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3089, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3090, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3091, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3089, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3091] = 
       {
-         Vnum = 3091, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3092, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3090, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3091, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3092, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3090, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3092] = 
       {
-         Vnum = 3092, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3091, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3093, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3092, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3091, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3093, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3093] = 
       {
-         Vnum = 3093, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3092, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3094, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3093, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3092, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3094, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3094] = 
       {
-         Vnum = 3094, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3095, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3093, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3094, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3095, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3093, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3095] = 
       {
-         Vnum = 3095, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3024, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3096, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3095, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3024, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3096, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3096] = 
       {
-         Vnum = 3096, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3097, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3095, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3096, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3097, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3095, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3097] = 
       {
-         Vnum = 3097, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3098, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3096, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3097, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3098, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3096, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3098] = 
       {
-         Vnum = 3098, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3097, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3099, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3098, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3097, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3099, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3099] = 
       {
-         Vnum = 3099, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3098, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3070, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3099, 
          TeleDelay = 0, 
-         Name = "Jungle Path", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3098, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3070, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Path", 
       }, 
       [3000] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3008, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3006, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3004, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 3002, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
+         Vnum = 3000, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
          Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Tunnel = 0, 
+         Name = "Ewok Nursery House", 
          MudProgs = 
          {
             [1] = 
             {
-               ScriptType = "MProg", 
+               MudProgType = "rand_prog", 
                Code = "mpecho The children scream with excitement.\
 ", 
                Arguments = "40", 
-               MudProgType = "rand_prog", 
+               ScriptType = "MProg", 
             }, 
          }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewok Nursery House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3008, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3006, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3004, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3002, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Description = "You stand in the middle of a room filled with little ewok children they\
 range  in size from very tiny and crawling on fur blankets to the near\
 adolecents playing with toy bows arrows and spears. The room is littered\
@@ -1196,40 +1502,17 @@ rather room for ewok standards and has been put to use from what you can\
 guess to be a very very long time. There are few females here tending to\
 the young as well as the cries of the new born infants.\
 ", 
-         Vnum = 3000, 
-         Tag = "", 
       }, 
       [3001] = 
       {
-         Vnum = 3001, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3008, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3002, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3001, 
          TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1241,49 +1524,40 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3008, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3002, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway Around the Nursery", 
       }, 
       [3002] = 
       {
-         Vnum = 3002, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3001, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3000, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3003, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3002, 
          TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 get visitors to their village, so quite naturaly they are a little \
@@ -1294,40 +1568,49 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3001, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3000, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3003, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway Around the Nursery", 
       }, 
       [3003] = 
       {
-         Vnum = 3003, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3002, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3004, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3003, 
          TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1339,49 +1622,40 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3002, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3004, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway Around the Nursery", 
       }, 
       [3004] = 
       {
-         Vnum = 3004, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3000, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3003, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3005, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3004, 
          TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1393,53 +1667,85 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3000, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3003, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3005, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway Around the Nursery", 
       }, 
       [3005] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3005, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Walkway Around the Nursery", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3006, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3006, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3004, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3004, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               DestinationVnum = 3009, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3009, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1451,53 +1757,53 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Vnum = 3005, 
-         Tag = "", 
       }, 
       [3006] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3006, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Walkway Around the Nursery", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3007, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3007, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3005, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3005, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               DestinationVnum = 3000, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3000, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1509,44 +1815,44 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Vnum = 3006, 
-         Tag = "", 
       }, 
       [3007] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3007, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Walkway Around the Nursery", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3006, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3006, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3008, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3008, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1557,49 +1863,17 @@ The walkways are very high up from the ground, this is due to the\
 carnivors that inhabit the planet with the ewok people. The most feared\
 village being so high off the ground.\
 ", 
-         Vnum = 3007, 
-         Tag = "", 
       }, 
       [3008] = 
       {
-         Vnum = 3008, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3007, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3000, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3001, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3008, 
          TeleDelay = 0, 
-         Name = "Walkway Around the Nursery", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from some very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of the pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1611,40 +1885,49 @@ carnivors that inhabit the planet with the ewok people. The most feared\
 beast is the humanoid behemoth Gorax, who are the main reason for the \
 village being so high off the ground.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3007, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3000, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3001, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway Around the Nursery", 
       }, 
       [3009] = 
       {
-         Vnum = 3009, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3005, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3010, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3009, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -1652,40 +1935,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3005, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3010, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3010] = 
       {
-         Vnum = 3010, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3009, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3011, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3010, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -1693,40 +1976,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3009, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3011, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3011] = 
       {
-         Vnum = 3011, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3010, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3012, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3011, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -1734,49 +2017,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3010, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3012, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3012] = 
       {
-         Vnum = 3012, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3013, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3019, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3011, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3012, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1787,49 +2061,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3013, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3019, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3011, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3013] = 
       {
-         Vnum = 3013, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3014, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3044, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3012, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3013, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1840,40 +2114,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3014, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3044, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3012, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3014] = 
       {
-         Vnum = 3014, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3015, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3013, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3014, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1884,49 +2167,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3015, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3013, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3015] = 
       {
-         Vnum = 3015, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3014, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3016, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3045, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3015, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1937,40 +2211,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3014, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3016, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3045, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3016] = 
       {
-         Vnum = 3016, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3015, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3017, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3016, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -1981,58 +2264,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3015, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3017, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3017] = 
       {
-         Vnum = 3017, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3047, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3016, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3020, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 3018, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3017, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2043,40 +2308,58 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3047, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3016, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3020, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3018, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3018] = 
       {
-         Vnum = 3018, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3019, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3017, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3018, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2087,49 +2370,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3019, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3017, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3019] = 
       {
-         Vnum = 3019, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3012, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3046, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3018, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3019, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2140,40 +2414,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3012, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3046, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3018, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3020] = 
       {
-         Vnum = 3020, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3017, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3022, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3020, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2181,40 +2464,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3017, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3022, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3021] = 
       {
-         Vnum = 3021, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3022, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3024, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3021, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2225,111 +2508,102 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3022, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3024, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3022] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 3022, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "The walkway is made from very sturdy planks of wood that seem to\
+be able to withstand alot of weight as well as alot of pressure\
+the forest elements have (and can) throw at it. The ewoks very rarely\
+get visitors to their villages, so quite naturaly they are a little\
+cautious when it comes to new people here, but they do eventually\
+accept your presence and let you in on the village celebrations.\
+The walkways are very high up from the ground, this is due to the\
+beast is the humanoid behemoth Gorax, who are the main reson for the \
+village being so high up in the Endor Trees.\
+", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3020, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3020, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3023, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3023, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               DestinationVnum = 3048, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3048, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               DestinationVnum = 3021, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3021, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Name = "Walkway", 
-         Description = "The walkway is made from very sturdy planks of wood that seem to\
-be able to withstand alot of weight as well as alot of pressure\
-the forest elements have (and can) throw at it. The ewoks very rarely\
-get visitors to their villages, so quite naturaly they are a little\
-cautious when it comes to new people here, but they do eventually\
-accept your presence and let you in on the village celebrations.\
-The walkways are very high up from the ground, this is due to the\
-beast is the humanoid behemoth Gorax, who are the main reson for the \
-village being so high up in the Endor Trees.\
-", 
-         Tag = "", 
-         Sector = "city", 
       }, 
       [3023] = 
       {
-         Vnum = 3023, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3028, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3022, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3029, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3023, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2340,49 +2614,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3028, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3022, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3029, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3024] = 
       {
-         Vnum = 3024, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3021, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3059, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3025, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3024, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2393,40 +2667,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3021, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3059, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3025, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3025] = 
       {
-         Vnum = 3025, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3024, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3026, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3025, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2437,49 +2720,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3024, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3026, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3026] = 
       {
-         Vnum = 3026, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3050, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3027, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3025, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3026, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2490,40 +2764,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3050, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3027, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3025, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3027] = 
       {
-         Vnum = 3027, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3028, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3026, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3027, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2534,49 +2817,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3028, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3026, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3028] = 
       {
-         Vnum = 3028, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3023, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3027, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3049, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3028, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 the forest elements have (and can) throw at it. The ewoks very rarely\
 get visitors to their villages, so quite naturaly they are a little\
@@ -2586,40 +2860,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3023, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3027, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3049, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3029] = 
       {
-         Vnum = 3029, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3030, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3023, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3029, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2627,40 +2910,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3030, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3023, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3030] = 
       {
-         Vnum = 3030, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3031, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3029, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3030, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2668,40 +2951,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3031, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3029, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3031] = 
       {
-         Vnum = 3031, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3032, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3030, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3031, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2709,49 +2992,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3032, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3030, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3032] = 
       {
-         Vnum = 3032, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3060, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3033, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3031, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3032, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2759,40 +3033,49 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3060, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3033, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3031, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3033] = 
       {
-         Vnum = 3033, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3032, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3034, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3033, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2800,40 +3083,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3032, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3034, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3034] = 
       {
-         Vnum = 3034, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3035, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3033, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3034, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2841,40 +3124,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3035, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3033, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3035] = 
       {
-         Vnum = 3035, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3036, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3034, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3035, 
          TeleDelay = 0, 
-         Name = "Rope Bridge", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The bridge is suppported buy a very sturdy rope that has large \
 wooden planks for easy walking and balance. Strangly enough the\
 bridge seems to be rather ridged and barely sways under a stronge \
@@ -2882,49 +3165,40 @@ gust of wind. The native ewoks don't even seem to notice any swaying\
 at all as some run past you and others just walk past paying no \
 attention to your presence.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3036, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3034, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Rope Bridge", 
       }, 
       [3036] = 
       {
-         Vnum = 3036, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3037, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3043, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3035, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3036, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2935,49 +3209,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3037, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3043, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3035, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3037] = 
       {
-         Vnum = 3037, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3038, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3055, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3036, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3037, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -2988,40 +3262,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3038, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3055, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3036, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3038] = 
       {
-         Vnum = 3038, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3039, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3037, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3038, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3032,49 +3315,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3039, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3037, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3039] = 
       {
-         Vnum = 3039, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3040, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3052, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3038, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3039, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3085,40 +3359,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3040, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3052, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3038, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3040] = 
       {
-         Vnum = 3040, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3041, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3039, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3040, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3129,49 +3412,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3041, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3039, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3041] = 
       {
-         Vnum = 3041, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3040, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3042, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3053, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3041, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3182,40 +3456,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3040, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3042, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3053, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3042] = 
       {
-         Vnum = 3042, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3041, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3043, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3042, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3226,49 +3509,40 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3041, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3043, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3043] = 
       {
-         Vnum = 3043, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3054, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3042, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3036, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3043, 
          TeleDelay = 0, 
-         Name = "Walkway", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The walkway is made from very sturdy planks of wood that seem to\
 be able to withstand alot of weight as well as alot of pressure\
 the forest elements have (and can) throw at it. The ewoks very rarely\
@@ -3279,31 +3553,49 @@ The walkways are very high up from the ground, this is due to the\
 beast is the humanoid behemoth Gorax, who are the main reson for the \
 village being so high up in the Endor Trees.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3054, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3042, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3036, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Walkway", 
       }, 
       [3044] = 
       {
-         Vnum = 3044, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3013, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3044, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3315,31 +3607,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3013, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3045] = 
       {
-         Vnum = 3045, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3015, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3045, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3351,31 +3643,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3015, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3046] = 
       {
-         Vnum = 3046, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3019, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3046, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3387,31 +3679,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3019, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3047] = 
       {
-         Vnum = 3047, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3017, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3047, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3423,31 +3715,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3017, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3048] = 
       {
-         Vnum = 3048, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3022, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3048, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3459,35 +3751,49 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3022, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3049] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [23] = "Hotel", 
          }, 
+         Vnum = 3049, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ewoks Guest House", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3028, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3028, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewoks Guest House", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3499,31 +3805,17 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Vnum = 3049, 
-         Tag = "", 
       }, 
       [3050] = 
       {
-         Vnum = 3050, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3026, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3050, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3535,31 +3827,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3026, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3051] = 
       {
-         Vnum = 3051, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3024, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3051, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3571,31 +3863,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3024, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3052] = 
       {
-         Vnum = 3052, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3039, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3052, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3607,31 +3899,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3039, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3053] = 
       {
-         Vnum = 3053, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3041, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3053, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3643,31 +3935,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3041, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3054] = 
       {
-         Vnum = 3054, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3043, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3054, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3679,31 +3971,31 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3043, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3055] = 
       {
-         Vnum = 3055, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3037, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3055, 
          TeleDelay = 0, 
-         Name = "Ewok House Hold", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3715,26 +4007,40 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3037, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Ewok House Hold", 
       }, 
       [3056] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3056, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ewok House Hold", 
          Exits = 
          {
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewok House Hold", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3746,26 +4052,26 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Vnum = 3056, 
-         Tag = "", 
       }, 
       [3057] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3057, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ewok House Hold", 
          Exits = 
          {
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewok House Hold", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3777,26 +4083,26 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Vnum = 3057, 
-         Tag = "", 
       }, 
       [3058] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3058, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ewok House Hold", 
          Exits = 
          {
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewok House Hold", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3808,35 +4114,35 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Vnum = 3058, 
-         Tag = "", 
       }, 
       [3059] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3059, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Ewok Food Supplies", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3024, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3024, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Ewok Food Supplies", 
          Description = "The houses of the ewoks are littered with feathers pieces of leather\
 spear and arrow heads as well as shatfs for the weapons. You also \
 see the odd insect scurrying around picking up crumbs from the \
@@ -3848,45 +4154,45 @@ on the other hand sound as though they are planning for the morning\
 hunt as well as their everyday chores the do to make their living \
 area more sutable for themselves and their young.\
 ", 
-         Vnum = 3059, 
-         Tag = "", 
       }, 
       [3060] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [4] = "CanLand", 
          }, 
+         Vnum = 3060, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Landing Area", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3032, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3032, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3061, 
-               Key = -1, 
-               Direction = "southeast", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+               DestinationVnum = 3061, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Landing Area", 
          Description = "Strangly enough, even though the ewok people do not get many \
 visitors they seemed to have keep the now very old landing area built\
 by intergalactic traders in days past, and have kept it in very good \
@@ -3895,213 +4201,181 @@ to make the place look pretty but covering some fairly important \
 instruments vital to safe landings and such. Other then those few flaws\
 the places appears to be in good condition.\
 ", 
-         Vnum = 3060, 
-         Tag = "", 
       }, 
       [3061] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3061, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Jungle Trail", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3062, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
                Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3062, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3060, 
-               Key = -1, 
-               Direction = "northwest", 
-               Keyword = "", 
                Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+               DestinationVnum = 3060, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Jungle Trail", 
          Description = "The path is over grown with vegitation and looks as though it hasn't\
 been used in avery long time. The Ewoks it seems have developed a new form\
 of hunting the doesn't really need them to venture into the jungle to far\
 as well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Vnum = 3061, 
-         Tag = "", 
       }, 
       [3062] = 
       {
-         Vnum = 3062, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3061, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3063, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3062, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't\
 been used in avery long time. The Ewoks it seems have developed a new form\
 of hunting the doesn't really need them to venture into the jungle to far\
 as well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3061, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3063, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3063] = 
       {
-         Vnum = 3063, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3064, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3062, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3063, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't\
 been used in avery long time. The Ewoks it seems have developed a new form\
 of hunting the doesn't really need them to venture into the jungle to far\
 as well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3064, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3062, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3064] = 
       {
-         Vnum = 3064, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3065, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3063, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3064, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't\
 been used in avery long time. The Ewoks it seems have developed a new form\
 of hunting the doesn't really need them to venture into the jungle to far\
 as well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
-      }, 
-      [3065] = 
-      {
-         Vnum = 3065, 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3064, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3065, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3066, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 3067, 
+               Direction = "up", 
                Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
+               DestinationVnum = 3063, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
+      }, 
+      [3065] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3065, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
@@ -4109,338 +4383,496 @@ well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner. You can also make\
 out what looks to be an imperial base to the west.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3064, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3066, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3067, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3066] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Vnum = 3066, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Name = "Imperial Shield Generator", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3065, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3065, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-         Name = "Imperial Shield Generator", 
          Description = "The base is the main shield generator for the second Death Star orbitting\
 the forest moon. Access is blocked by massive blast doors to keep out\
 non-authorized personnel.\
 ", 
-         Vnum = 3066, 
-         Tag = "", 
       }, 
       [3067] = 
       {
-         Vnum = 3067, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3068, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3065, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3067, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3068, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3065, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3068] = 
       {
-         Vnum = 3068, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3067, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3069, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3068, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+               DestinationVnum = 3067, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+               DestinationVnum = 3069, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3069] = 
       {
-         Vnum = 3069, 
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 3068, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 3070, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3069, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+               DestinationVnum = 3068, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3070, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
       }, 
       [3070] = 
       {
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 3070, 
+         TeleDelay = 0, 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "The path is over grown with vegitation and looks as though it hasn't been\
+used in avery long time. The Ewoks it seems have developed a new form of\
+hunting the doesn't really need them to venture into the jungle to far as\
+well as the fear of the ravinous jnugle preditors the roam around here\
+looking for stray ewoks or anything else in that manner.\
+", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3075, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
+               DestinationVnum = 3075, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3071, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+               DestinationVnum = 3071, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               DestinationVnum = 3069, 
-               Key = -1, 
-               Direction = "northeast", 
-               Keyword = "", 
                Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+               DestinationVnum = 3069, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               DestinationVnum = 3099, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3099, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "Jungle Trail", 
+      }, 
+      [3071] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
+         Vnum = 3071, 
          TeleDelay = 0, 
-         Name = "Jungle Trail", 
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The path is over grown with vegitation and looks as though it hasn't been\
 used in avery long time. The Ewoks it seems have developed a new form of\
 hunting the doesn't really need them to venture into the jungle to far as\
 well as the fear of the ravinous jnugle preditors the roam around here\
 looking for stray ewoks or anything else in that manner.\
 ", 
-         Tag = "", 
-         Sector = "city", 
-      }, 
-      [3071] = 
-      {
-         Vnum = 3071, 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 3070, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               Key = -1, 
+               DestinationVnum = 3070, 
                Distance = 0, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               DestinationVnum = 3072, 
-               Key = -1, 
-               Direction = "southwest", 
-               Keyword = "", 
                Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+               DestinationVnum = 3072, 
                Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
          Name = "Jungle Trail", 
-         Description = "The path is over grown with vegitation and looks as though it hasn't been\
-used in avery long time. The Ewoks it seems have developed a new form of\
-hunting the doesn't really need them to venture into the jungle to far as\
-well as the fear of the ravinous jnugle preditors the roam around here\
-looking for stray ewoks or anything else in that manner.\
-", 
-         Tag = "", 
-         Sector = "city", 
       }, 
    }, 
-   ResetFrequency = 0, 
-   Author = "Thrawn", 
-   VnumRanges = 
+   FileFormatVersion = 1, 
+   LowEconomy = 31250251, 
+   Resets = 
    {
-      Room = 
+      [1] = 
       {
-         Last = 3099, 
-         First = 3000, 
+         MiscData = 1, 
+         Arg1 = 3001, 
+         Command = "M", 
+         Arg3 = 3068, 
+         Arg2 = 1, 
       }, 
-      Mob = 
+      [2] = 
       {
-         Last = 3005, 
-         First = 3000, 
+         MiscData = 1, 
+         Arg1 = 3000, 
+         Command = "M", 
+         Arg3 = 3000, 
+         Arg2 = 1, 
       }, 
-      Object = 
+      [3] = 
       {
-         Last = 3008, 
-         First = 3000, 
+         MiscData = 1, 
+         Arg1 = 3000, 
+         Command = "M", 
+         Arg3 = 3000, 
+         Arg2 = 1, 
+      }, 
+      [4] = 
+      {
+         MiscData = 0, 
+         Arg1 = 3002, 
+         Command = "M", 
+         Arg3 = 3013, 
+         Arg2 = 20, 
+      }, 
+      [5] = 
+      {
+         MiscData = 0, 
+         Arg1 = 3000, 
+         Command = "M", 
+         Arg3 = 3013, 
+         Arg2 = 20, 
+      }, 
+      [6] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3001, 
+         Command = "M", 
+         Arg3 = 3080, 
+         Arg2 = 2, 
+      }, 
+      [7] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3001, 
+         Command = "M", 
+         Arg3 = 3072, 
+         Arg2 = 3, 
+      }, 
+      [8] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3005, 
+         Command = "M", 
+         Arg3 = 3059, 
+         Arg2 = 1, 
+      }, 
+      [9] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 3006, 
+         Command = "G", 
+      }, 
+      [10] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 3007, 
+         Command = "G", 
+      }, 
+      [11] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 3008, 
+         Command = "G", 
+      }, 
+      [12] = 
+      {
+         MiscData = 0, 
+         Arg1 = 3003, 
+         Command = "M", 
+         Arg3 = 3000, 
+         Arg2 = 15, 
+      }, 
+      [13] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3004, 
+         Command = "M", 
+         Arg3 = 3055, 
+         Arg2 = 0, 
+      }, 
+      [14] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3000, 
+         Command = "E", 
+         Arg3 = 6, 
+         Arg2 = 1, 
+      }, 
+      [15] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3001, 
+         Command = "E", 
+         Arg3 = 16, 
+         Arg2 = 1, 
+      }, 
+      [16] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3004, 
+         Command = "E", 
+         Arg3 = 3, 
+         Arg2 = 1, 
+      }, 
+      [17] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3005, 
+         Command = "E", 
+         Arg3 = 11, 
+         Arg2 = 1, 
+      }, 
+      [18] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3003, 
+         Command = "E", 
+         Arg3 = 14, 
+         Arg2 = 1, 
+      }, 
+      [19] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3003, 
+         Command = "E", 
+         Arg3 = 15, 
+         Arg2 = 1, 
       }, 
    }, 
+   ResetMessage = "You hear the calls of the forest birds being carried through the Forest air.", 
+   Author = "Thrawn", 
+   Name = "Endor", 
+   ResetFrequency = 0, 
    LevelRanges = 
    {
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
       Soft = 
       {
          High = 105, 
          Low = 0, 
       }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
    }, 
-   ResetMessage = "You hear the calls of the forest birds being carried through the Forest air.", 
-   HighEconomy = 0, 
+   Filename = "endor.lua", 
    Mobiles = 
    {
       [3000] = 
       {
-         ArmorClass = 100, 
-         Vnum = 3000, 
-         ShortDescr = "An ewok female", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 2, 
+            DamNoDice = 1, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 1, 
             HitPlus = 10, 
             HitSizeDice = 4, 
+            HitNoDice = 1, 
          }, 
-         Weight = 0, 
-         Level = 3, 
+         ShortDescr = "An ewok female", 
          Race = "Ewok", 
-         Name = "ewok female", 
-         Description = "", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Sex = "female", 
          Stats = 
          {
-            Constitution = 10, 
-            Force = 0, 
             Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
             Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
             Intelligence = 10, 
          }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -4452,66 +4884,71 @@ looking for stray ewoks or anything else in that manner.\
                [7] = "ewokese", 
             }, 
          }, 
+         HitRoll = 0, 
+         Vnum = 3000, 
          Height = 0, 
-         NumberOfAttacks = 0, 
+         Sex = "female", 
          VipFlags = 
          {
             [11] = "Endor", 
          }, 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 2, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Alignment = 0, 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 0, 
-         LongDescr = "An Ewok female is tending to the young here.\
-", 
-      }, 
-      [3001] = 
-      {
-         ArmorClass = -120, 
-         Vnum = 3001, 
-         ShortDescr = "a gorax", 
-         HitChance = 
+         DamRoll = 0, 
+         Level = 3, 
+         SaveVs = 
          {
-            HitNoDice = 11, 
-            HitPlus = 1500, 
-            HitSizeDice = 20, 
-         }, 
-         Weight = 0, 
-         Level = 101, 
-         Race = "Human", 
-         Name = "gorax ", 
-         Description = "", 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamPlus = 0, 
-            DamNoDice = 7, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
          }, 
          Flags = 
          {
             [0] = "Npc", 
-            [5] = "Aggressive", 
          }, 
-         Sex = "undistinguished", 
+         Name = "ewok female", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "An Ewok female is tending to the young here.\
+", 
+         ArmorClass = 100, 
+      }, 
+      [3001] = 
+      {
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 10, 
+            DamNoDice = 7, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 1500, 
+            HitSizeDice = 20, 
+            HitNoDice = 11, 
+         }, 
+         ShortDescr = "a gorax", 
+         Race = "Human", 
          Stats = 
          {
-            Constitution = 10, 
-            Force = 0, 
             Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
             Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
             Intelligence = 10, 
          }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         DamRoll = 20, 
+         HitRoll = 25, 
+         Vnum = 3001, 
+         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -4523,22 +4960,13 @@ looking for stray ewoks or anything else in that manner.\
                [7] = "ewokese", 
             }, 
          }, 
-         Height = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         DamRoll = 20, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               ScriptType = "MProg", 
+               MudProgType = "greet_prog", 
                Code = "if race($n) == ewok\
 smile\
 cack\
@@ -4548,57 +4976,61 @@ mpkill $n\
 endif\
 ", 
                Arguments = "100", 
-               MudProgType = "greet_prog", 
+               ScriptType = "MProg", 
             }, 
          }, 
-         Alignment = 0, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 25, 
-         LongDescr = "A Giant Gorax is thundering through the trees.\
-", 
-      }, 
-      [3002] = 
-      {
-         ArmorClass = 92, 
-         Vnum = 3002, 
-         ShortDescr = "an ewok male", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitPlus = 30, 
-            HitSizeDice = 10, 
-         }, 
-         Weight = 0, 
-         Level = 3, 
-         Race = "Ewok", 
-         Name = "male ewok", 
-         Description = "", 
+         Level = 101, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
             SpellStaff = 0, 
-            Wand = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
             ParaPetri = 0, 
          }, 
          Flags = 
          {
             [0] = "Npc", 
+            [5] = "Aggressive", 
          }, 
-         Sex = "male", 
+         Name = "gorax ", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "A Giant Gorax is thundering through the trees.\
+", 
+         ArmorClass = -120, 
+      }, 
+      [3002] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 30, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         ShortDescr = "an ewok male", 
+         Race = "Ewok", 
          Stats = 
          {
-            Constitution = 10, 
-            Force = 0, 
             Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
             Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
             Intelligence = 10, 
          }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -4610,60 +5042,139 @@ endif\
                [7] = "ewokese", 
             }, 
          }, 
+         HitRoll = 0, 
+         Vnum = 3002, 
          Height = 0, 
-         NumberOfAttacks = 0, 
+         Sex = "male", 
          VipFlags = 
          {
             [11] = "Endor", 
          }, 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Alignment = 0, 
          Credits = 0, 
+         DamRoll = 0, 
+         Level = 3, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Name = "male ewok", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 0, 
          LongDescr = "A male Ewok is going about his business.\
 ", 
+         ArmorClass = 92, 
       }, 
       [3003] = 
       {
-         ArmorClass = 0, 
-         Vnum = 3003, 
-         ShortDescr = "an ewok child", 
+         Damage = 
+         {
+            DamPlus = 3, 
+            DamSizeDice = 3, 
+            DamNoDice = 1, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 1, 
             HitPlus = 30, 
             HitSizeDice = 1, 
+            HitNoDice = 1, 
          }, 
-         Weight = 0, 
-         Level = 1, 
+         ShortDescr = "an ewok child", 
          Race = "Gamorrean", 
-         Name = "ewok child", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
          Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 1, 
+         HitRoll = 0, 
+         Vnum = 3003, 
+         Height = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [7] = "ewokese", 
+            }, 
+            Speaking = 
+            {
+               [7] = "ewokese", 
+            }, 
+         }, 
+         Sex = "male", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [7] = "Wimpy", 
          }, 
-         Sex = "male", 
+         Name = "ewok child", 
+         Weight = 0, 
+         DefaultPosition = "standing", 
+         LongDescr = "An ewok child is playing here.\
+", 
+         ArmorClass = 0, 
+      }, 
+      [3004] = 
+      {
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         ShortDescr = "Wicket", 
+         Race = "Wookiee", 
          Stats = 
          {
-            Constitution = 10, 
-            Force = 0, 
             Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
             Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
             Intelligence = 10, 
          }, 
+         Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 3, 
+         Vnum = 3004, 
+         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -4675,116 +5186,61 @@ endif\
                [7] = "ewokese", 
             }, 
          }, 
-         Height = 0, 
-         NumberOfAttacks = 1, 
+         Sex = "male", 
+         Credits = 20, 
+         DamRoll = 5, 
+         Level = 12, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
             SpellStaff = 0, 
-            Wand = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
             ParaPetri = 0, 
          }, 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 3, 
-            DamPlus = 3, 
-            DamNoDice = 1, 
-         }, 
-         Alignment = 0, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 0, 
-         LongDescr = "An ewok child is playing here.\
-", 
-      }, 
-      [3004] = 
-      {
-         ArmorClass = 70, 
-         Vnum = 3004, 
-         ShortDescr = "Wicket", 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitPlus = 120, 
-            HitSizeDice = 10, 
-         }, 
-         Weight = 0, 
-         Level = 12, 
-         Race = "Wookiee", 
-         Name = "Wicket", 
-         Description = "", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Sex = "male", 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [7] = "ewokese", 
-            }, 
-            Speaking = 
-            {
-               [7] = "ewokese", 
-            }, 
-         }, 
-         Height = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         DamRoll = 5, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Alignment = 0, 
-         Credits = 20, 
+         Name = "Wicket", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 3, 
          LongDescr = "Wicket Leader of the Ewok people stands here spear in hand.\
 ", 
+         ArmorClass = 70, 
       }, 
       [3005] = 
       {
-         ArmorClass = 100, 
-         Vnum = 3005, 
-         ShortDescr = "ewok supply keeper", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 2, 
+            DamNoDice = 1, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitNoDice = 1, 
             HitPlus = 10, 
             HitSizeDice = 4, 
+            HitNoDice = 1, 
          }, 
-         Weight = 0, 
-         Level = 3, 
+         ShortDescr = "ewok supply keeper", 
          Race = "Ewok", 
-         Name = "supply keeper", 
+         Stats = 
+         {
+            Strength = 10, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+         }, 
          Description = "", 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
          Shop = 
          {
             BuyTypes = 
@@ -4795,6 +5251,7 @@ endif\
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
             ProfitSell = 90, 
             KeeperShortDescr = "ewok supply keeper", 
             BusinessHours = 
@@ -4802,25 +5259,10 @@ endif\
                Close = 23, 
                Open = 0, 
             }, 
-            ProfitBuy = 120, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Sex = "female", 
-         Stats = 
-         {
-            Constitution = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Intelligence = 10, 
-         }, 
+         HitRoll = 0, 
+         Vnum = 3005, 
+         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -4832,471 +5274,29 @@ endif\
                [7] = "ewokese", 
             }, 
          }, 
-         Height = 0, 
-         NumberOfAttacks = 0, 
+         Sex = "female", 
+         Credits = 0, 
+         DamRoll = 0, 
+         Level = 3, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
             SpellStaff = 0, 
-            Wand = 0, 
             Breath = 0, 
+            PoisonDeath = 0, 
+            Wand = 0, 
             ParaPetri = 0, 
          }, 
-         DamRoll = 0, 
-         Damage = 
+         Flags = 
          {
-            DamSizeDice = 2, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         Alignment = 0, 
-         Credits = 0, 
+         Name = "supply keeper", 
+         Weight = 0, 
          DefaultPosition = "standing", 
-         Position = "standing", 
-         HitRoll = 0, 
          LongDescr = "An ewok is here, keeping watch over the supplies.\
 ", 
+         ArmorClass = 100, 
       }, 
    }, 
-   Filename = "endor.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Command = "M", 
-         Arg3 = 3068, 
-         Arg1 = 3001, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [2] = 
-      {
-         Command = "M", 
-         Arg3 = 3000, 
-         Arg1 = 3000, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [3] = 
-      {
-         Command = "M", 
-         Arg3 = 3000, 
-         Arg1 = 3000, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [4] = 
-      {
-         Command = "M", 
-         Arg3 = 3013, 
-         Arg1 = 3002, 
-         Arg2 = 20, 
-         MiscData = 0, 
-      }, 
-      [5] = 
-      {
-         Command = "M", 
-         Arg3 = 3013, 
-         Arg1 = 3000, 
-         Arg2 = 20, 
-         MiscData = 0, 
-      }, 
-      [6] = 
-      {
-         Command = "M", 
-         Arg3 = 3080, 
-         Arg1 = 3001, 
-         Arg2 = 2, 
-         MiscData = 1, 
-      }, 
-      [7] = 
-      {
-         Command = "M", 
-         Arg3 = 3072, 
-         Arg1 = 3001, 
-         Arg2 = 3, 
-         MiscData = 1, 
-      }, 
-      [8] = 
-      {
-         Command = "M", 
-         Arg3 = 3059, 
-         Arg1 = 3005, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [9] = 
-      {
-         Arg1 = 3006, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [10] = 
-      {
-         Arg1 = 3007, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [11] = 
-      {
-         Arg1 = 3008, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [12] = 
-      {
-         Command = "M", 
-         Arg3 = 3000, 
-         Arg1 = 3003, 
-         Arg2 = 15, 
-         MiscData = 0, 
-      }, 
-      [13] = 
-      {
-         Command = "M", 
-         Arg3 = 3055, 
-         Arg1 = 3004, 
-         Arg2 = 0, 
-         MiscData = 1, 
-      }, 
-      [14] = 
-      {
-         Command = "E", 
-         Arg3 = 6, 
-         Arg1 = 3000, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [15] = 
-      {
-         Command = "E", 
-         Arg3 = 16, 
-         Arg1 = 3001, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [16] = 
-      {
-         Command = "E", 
-         Arg3 = 3, 
-         Arg1 = 3004, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [17] = 
-      {
-         Command = "E", 
-         Arg3 = 11, 
-         Arg1 = 3005, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [18] = 
-      {
-         Command = "E", 
-         Arg3 = 14, 
-         Arg1 = 3003, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-      [19] = 
-      {
-         Command = "E", 
-         Arg3 = 15, 
-         Arg1 = 3003, 
-         Arg2 = 1, 
-         MiscData = 1, 
-      }, 
-   }, 
-   Name = "Endor", 
-   Objects = 
-   {
-      [3008] = 
-      {
-         Vnum = 3008, 
-         ShortDescr = "a small canteen", 
-         ItemType = "drink_container", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 10, 
-         Layers = 0, 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Name = "small canteen", 
-         Description = "A belt sized canteen was dropped here.", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-      }, 
-      [3000] = 
-      {
-         Vnum = 3000, 
-         ShortDescr = "a leather hood", 
-         ItemType = "armor", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "leather hood", 
-         Description = "A small hood has been dropped here.", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
-      }, 
-      [3001] = 
-      {
-         Vnum = 3001, 
-         ShortDescr = "a spear", 
-         ItemType = "weapon", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 1, 
-            [2] = 4, 
-            [3] = 11, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 12, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "spear", 
-         Description = "A spear lies here in the dirt.", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-      }, 
-      [3002] = 
-      {
-         Vnum = 3002, 
-         ShortDescr = "feathered head dress", 
-         ItemType = "armor", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "feathered head dress", 
-         Description = "A feathered head dress lies here.", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
-      }, 
-      [3003] = 
-      {
-         Vnum = 3003, 
-         ShortDescr = "leather wrist guard", 
-         ItemType = "armor", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "leather wrist guards", 
-         Description = "A feathered head dress lies here.", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [12] = "Wrist", 
-         }, 
-      }, 
-      [3004] = 
-      {
-         Vnum = 3004, 
-         ShortDescr = "a bone necklace", 
-         ItemType = "armor", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "bone necklace", 
-         Description = "A small pile of bones lie here.", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-      }, 
-      [3005] = 
-      {
-         Vnum = 3005, 
-         ShortDescr = "a wooden shield", 
-         ItemType = "armor", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
-         }, 
-         ActionDescription = "", 
-         Layers = 0, 
-         Name = "a wooden shield", 
-         Description = "A wooden shield is collecting dust", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [9] = "Shield", 
-         }, 
-      }, 
-      [3006] = 
-      {
-         Vnum = 3006, 
-         ShortDescr = "some dried fruit", 
-         ItemType = "food", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 8, 
-         Layers = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Name = "fruit", 
-         Description = "Some dried fruit should last for a long time without going bad.", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-      }, 
-      [3007] = 
-      {
-         Vnum = 3007, 
-         ShortDescr = "fresh vegitables", 
-         ItemType = "food", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 9, 
-         Layers = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Name = "fresh vegitables", 
-         Description = "Some vegitables are attracting flies here.", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   LowEconomy = 31250251, 
 }

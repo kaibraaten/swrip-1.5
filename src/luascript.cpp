@@ -1635,15 +1635,19 @@ std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::st
             vnum_t vnum = INVALID_VNUM;
             LuaGetfieldLong(L, "Vnum", &vnum);
             auto proto = GetProtoMobile(vnum);
-            auto mob = CreateMobile(proto);
-            LuaLoadCharacter(L, mob, LoadMobileData);
 
-            if(mob != nullptr)
+            if(proto != nullptr)
             {
-                mobs.push_back(mob);
-                CharacterToRoom(mob, mob->InRoom);
-            }
+                auto mob = CreateMobile(proto);
+                LuaLoadCharacter(L, mob, LoadMobileData);
 
+                if(mob != nullptr)
+                {
+                    mobs.push_back(mob);
+                    CharacterToRoom(mob, mob->InRoom);
+                }
+            }
+            
             lua_pop(L, 1);
         }
     }

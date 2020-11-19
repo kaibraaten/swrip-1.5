@@ -2822,10 +2822,10 @@ const std::array<const char * const, Flag::MAX> AttackFlags =
 
 const std::array<const char * const, Flag::MAX> AreaFlags =
 {
-    "NoPkill",
-    "_01",
-    "Changed",
+    "PluginZone",
     "Prototype",
+    "_02",
+    "_03",
     "_04",
     "_05",
     "_06",

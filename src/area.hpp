@@ -13,9 +13,7 @@ namespace Flag
     {
         enum : size_t
         {
-            NoPkill,
-            _01,
-            Changed,
+            PluginZone,
             Prototype
         };
     }

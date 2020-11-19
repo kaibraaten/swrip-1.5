@@ -352,6 +352,14 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
         LuaLoadVnumConstants();
         ch->Echo("Ok.\r\n");
     }
+    else if(StrCmp(argument, "areaflags") == 0)
+    {
+        for(auto area : Areas)
+        {
+            ch->Echo("%s: %s\r\n", area->Filename.c_str(),
+                     FlagString(area->Flags, AreaFlags).c_str());
+        }
+    }
     else
     {
         ch->Echo("Unknown argument.\r\n");
