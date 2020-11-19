@@ -3,6 +3,9 @@
 
 #include <memory>
 #include <string>
+#include <list>
+#include <tuple>
+#include "types.hpp"
 
 class Plugin
 {
@@ -14,6 +17,16 @@ public:
     void Name(const std::string &name);
     std::string Description() const;
     void Description(const std::string &description);
+
+    void Add(std::shared_ptr<Room> room);
+    void Add(std::shared_ptr<ProtoObject> obj);
+    void Add(std::shared_ptr<ProtoMobile> mob);
+
+    std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Rooms() const;
+    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Objects() const;
+    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;
+
+    std::shared_ptr<Area> GetArea() const;
     
 private:
     struct Impl;
@@ -26,5 +39,6 @@ void LoadPlugins();
 void SavePlugin(std::shared_ptr<Plugin> plugin);
 std::shared_ptr<Plugin> FindPlugin(const std::string &id);
 std::shared_ptr<Plugin> CreatePlugin(const std::string &id);
+std::string GetPluginPath(const Plugin *plugin);
 
 #endif

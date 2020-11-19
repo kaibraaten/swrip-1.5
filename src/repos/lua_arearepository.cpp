@@ -18,6 +18,7 @@
 #include "character.hpp"
 #include "exit.hpp"
 #include "shop.hpp"
+#include "plugins.hpp"
 
 #define AREA_DIR        DATA_DIR "areas/"
 #define BUILD_DIR       DATA_DIR "building/"
@@ -449,7 +450,6 @@ void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &are
         if(vnum != INVALID_VNUM)
         {
             auto room = GetRoom(vnum);
-
 
             if(room != nullptr)
             {
@@ -1282,14 +1282,21 @@ std::shared_ptr<AreaRepository> NewLuaAreaRepository()
 
 std::string LuaAreaRepository::GetAreaFilename(std::shared_ptr<Area> area) const
 {
-    std::string filename = area->Filename;
-
-    if(StringEndsWith(filename, ".are"))
+    if(area->Plugin)
     {
-        // Chop off legacy file extension.
-        filename = filename.substr(0, filename.size() - 4);
+        return GetPluginPath(area->Plugin) + "/area.lua";
     }
+    else
+    {
+        std::string filename = area->Filename;
 
-    const char *directory = area->Flags.test(Flag::Area::Prototype) ? BUILD_DIR : AREA_DIR;
-    return FormatString("%s%s", directory, ConvertToLuaFilename(filename).c_str());
+        if(StringEndsWith(filename, ".are"))
+        {
+            // Chop off legacy file extension.
+            filename = filename.substr(0, filename.size() - 4);
+        }
+
+        const char *directory = area->Flags.test(Flag::Area::Prototype) ? BUILD_DIR : AREA_DIR;
+        return FormatString("%s%s", directory, ConvertToLuaFilename(filename).c_str());
+    }
 }

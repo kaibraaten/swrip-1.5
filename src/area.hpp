@@ -33,7 +33,8 @@ public:
     short Age = 0;
     short NumberOfPlayers = 0;
     short ResetFrequency = 0;
-
+    const class Plugin *Plugin = nullptr;
+    
     struct
     {
         struct

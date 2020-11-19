@@ -1,8 +1,13 @@
+#include <map>
 #include <utility/algorithms.hpp>
 #include <utility/utility.hpp>
 #include "mud.hpp"
 #include "plugins.hpp"
 #include "log.hpp"
+#include "room.hpp"
+#include "protomob.hpp"
+#include "protoobject.hpp"
+#include "area.hpp"
 
 #define PLUGIN_DIR DATA_DIR "plugins/"
 
@@ -18,6 +23,47 @@ struct Plugin::Impl
     std::string Id;
     std::string Name;
     std::string Description;
+
+    // Local vnum -> real vnum
+    std::map<vnum_t, std::weak_ptr<Room>> RoomMapping;
+    std::map<vnum_t, std::weak_ptr<ProtoObject>> ObjectMapping;
+    std::map<vnum_t, std::weak_ptr<ProtoMobile>> MobileMapping;
+
+    vnum_t GetNextRoomVnum() const
+    {
+        if(RoomMapping.empty())
+        {
+            return 1;
+        }
+        else
+        {
+            return RoomMapping.crbegin()->first + 1;
+        }
+    }
+    
+    vnum_t GetNextObjectVnum() const
+    {
+        if(ObjectMapping.empty())
+        {
+            return 1;
+        }
+        else
+        {
+            return ObjectMapping.crbegin()->first + 1;
+        }
+    }
+
+    vnum_t GetNextMobVnum() const
+    {
+        if(MobileMapping.empty())
+        {
+            return 1;
+        }
+        else
+        {
+            return MobileMapping.crbegin()->first + 1;
+        }
+    }
 };
 
 Plugin::Plugin(const std::string &id)
@@ -56,6 +102,78 @@ void Plugin::Description(const std::string &description)
     pImpl->Description = description;
 }
 
+void Plugin::Add(std::shared_ptr<Room> room)
+{
+    vnum_t localVnum = pImpl->GetNextRoomVnum();
+    pImpl->RoomMapping.insert({ localVnum, room });
+}
+
+void Plugin::Add(std::shared_ptr<ProtoObject> obj)
+{
+    vnum_t localVnum = pImpl->GetNextObjectVnum();
+    pImpl->ObjectMapping.insert({ localVnum, obj });
+}
+
+void Plugin::Add(std::shared_ptr<ProtoMobile> mob)
+{
+    vnum_t localVnum = pImpl->GetNextMobVnum();
+    pImpl->MobileMapping.insert({ localVnum, mob });
+}
+
+std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
+{
+    std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> rooms;
+
+    for(const auto &p : pImpl->RoomMapping)
+    {
+        if(!p.second.expired())
+        {
+            rooms.push_back({ p.first, p.second.lock() });
+        }
+    }
+    
+    return rooms;
+}
+
+std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() const
+{
+    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> objects;
+
+    for(const auto &p : pImpl->ObjectMapping)
+    {
+        if(!p.second.expired())
+        {
+            objects.push_back({ p.first, p.second.lock() });
+        }
+    }
+    
+    return objects;
+}
+
+std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() const
+{
+    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> mobiles;
+
+    for(const auto &p : pImpl->MobileMapping)
+    {
+        if(!p.second.expired())
+        {
+            mobiles.push_back({ p.first, p.second.lock() });
+        }
+    }
+    
+    return mobiles;
+}
+
+std::shared_ptr<Area> Plugin::GetArea() const
+{
+    auto area = std::make_shared<Area>();
+    area->Plugin = this;
+    area->Name = Name();
+    
+    return area;
+}
+
 //////////////////////////////////////////////////////////
 // Free functions
 
@@ -90,4 +208,9 @@ std::shared_ptr<Plugin> CreatePlugin(const std::string &id)
     {
         return nullptr;
     }
+}
+
+std::string GetPluginPath(const Plugin *plugin)
+{
+    return FormatString("%s%s", PLUGIN_DIR, plugin->Id().c_str());
 }
