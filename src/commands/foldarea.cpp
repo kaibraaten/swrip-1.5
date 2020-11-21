@@ -31,10 +31,14 @@ void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
         if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {
             if (!StrCmp(argument, "remproto"))
+            {
                 Areas->Save(tarea, true);
+            }
             else
+            {
                 Areas->Save(tarea, false);
-
+            }
+            
             found = true;
         }
     }

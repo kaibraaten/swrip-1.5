@@ -26,7 +26,7 @@ void do_editplugin(std::shared_ptr<Character> ch, std::string argument)
 
         auto plugin = CreatePlugin(argument);
         SavePlugin(plugin);
-        ch->PCData->Build.Plugin = plugin;
+        do_passign(ch, plugin->Id());
         ch->Echo("&GOk.&d\r\n");
         return;
     }

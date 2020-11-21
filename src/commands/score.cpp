@@ -6,6 +6,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "plugins.hpp"
 
 static const char *TinyGetAffectLocationName(int location);
 
@@ -274,6 +275,13 @@ void do_score(std::shared_ptr<Character> ch, std::string argument)
                      ch->PCData->Build.Area->VnumRanges.Room.First, ch->PCData->Build.Area->VnumRanges.Room.Last,
                      ch->PCData->Build.Area->VnumRanges.Object.First, ch->PCData->Build.Area->VnumRanges.Object.Last,
                      ch->PCData->Build.Area->VnumRanges.Mob.First, ch->PCData->Build.Area->VnumRanges.Mob.Last);
+        }
+
+        if(ch->PCData->Build.Plugin)
+        {
+            auto plugin = ch->PCData->Build.Plugin;
+            ch->Echo("&cPlugin:  &C%s &c(&C%s&c)\r\n",
+                     plugin->Name().c_str(), plugin->Id().c_str());
         }
     }
 

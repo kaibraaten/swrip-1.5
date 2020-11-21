@@ -343,6 +343,7 @@ std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_
 /*
  * Command functions.
  */
+DECLARE_CMD_FUN(do_rcreate);
 DECLARE_CMD_FUN(do_editplugin);
 DECLARE_CMD_FUN(do_passign);
 DECLARE_CMD_FUN(do_plugins);

@@ -1254,10 +1254,15 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     area->LevelRanges.Hard.High = MAX_LEVEL;
 
     LoadMetaData(L, area);
-    LoadMobiles(L, area);
-    LoadObjects(L, area);
-    LoadRooms(L, area);
-    LoadResets(L, area);
+
+    if(!area->Flags.test(Flag::Area::PluginZone))
+    {
+        LoadMobiles(L, area);
+        LoadObjects(L, area);
+        LoadRooms(L, area);
+        LoadResets(L, area);
+    }
+    
     Areas->Add(area);
 
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",

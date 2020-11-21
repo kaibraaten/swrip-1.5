@@ -408,6 +408,7 @@ src/commands/radar.cpp
 src/commands/rank.cpp
 src/commands/rassign.cpp
 src/commands/rat.cpp
+src/commands/rcreate.cpp
 src/commands/rdelete.cpp
 src/commands/reboot.cpp
 src/commands/recall.cpp

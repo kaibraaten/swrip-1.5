@@ -35,45 +35,6 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
         location = GetRoomFromTag(arg.substr(1));
     }
     
-    if(location == nullptr)
-    {
-        vnum = ToLong(arg);
-        
-        if(vnum <= 0 || GetRoom(vnum))
-        {
-            ch->Echo("You cannot find that...\r\n");
-            return;
-        }
-
-        if(IsNpc(ch) || !ch->PCData->Build.Area)
-        {
-            ch->Echo("No such location.\r\n");
-            return;
-        }
-
-        if(GetTrustLevel(ch) < SysData.LevelToModifyProto
-           && !IsName("intergoto", ch->PCData->Bestowments))
-        {
-            if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
-            {
-                ch->Echo("You must have an assigned area to create rooms.\r\n");
-                return;
-            }
-
-            if(vnum < pArea->VnumRanges.Room.First
-               || vnum > pArea->VnumRanges.Room.Last)
-            {
-                ch->Echo("That room is not within your assigned range.\r\n");
-                return;
-            }
-        }
-
-        location = MakeRoom(vnum);
-        location->Area = ch->PCData->Build.Area;
-        SetCharacterColor(AT_WHITE, ch);
-        ch->Echo("Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n");
-    }
-
     if(IsRoomPrivate(ch, location))
     {
         ch->Echo("Overriding private flag!\r\n");

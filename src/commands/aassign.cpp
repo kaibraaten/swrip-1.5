@@ -27,6 +27,7 @@ void do_aassign(std::shared_ptr<Character> ch, std::string argument)
         || !StrCmp("clear", argument))
     {
         ch->PCData->Build.Area = nullptr;
+        ch->PCData->Build.Plugin = nullptr;
         AssignAreaTo(ch);
 
         if (!ch->PCData->Build.Area)
@@ -80,6 +81,19 @@ void do_aassign(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+
+    if(tarea->Flags.test(Flag::Area::PluginZone))
+    {
+        ch->Echo("You can't AASSIGN the plugin zone. Use PASSIGN.\r\n");
+        return;
+    }
+    
     ch->PCData->Build.Area = tarea;
     ch->Echo("Assigning you: %s\r\n", tarea->Name.c_str());
+
+    if(ch->PCData->Build.Plugin != nullptr && !tarea->Flags.test(Flag::Area::PluginZone))
+    {
+        ch->PCData->Build.Plugin = nullptr;
+        ch->Echo("No longer locked to plugin.\r\n");
+    }
 }
