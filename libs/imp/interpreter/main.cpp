@@ -3,10 +3,12 @@
 #include <cstring>
 #include <queue>
 #include <thread>
+#include <stdexcept>
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
 #include <imp/runtime/stringvalue.hpp>
+#include <imp/runtime/listvalue.hpp>
 #include "experimentallibrary.hpp"
 
 static std::list<std::string> LoadScript(const std::string &filename);
@@ -72,7 +74,8 @@ static std::shared_ptr<Imp::RuntimeScope> MakeScope()
     auto lib = std::make_shared<Imp::StandardLibrary>();
     //auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
-    globalScope->Assign("__scriptpath__", std::make_shared<Imp::StringValue>("scripts"));
+    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths{ std::make_shared<Imp::StringValue>("scripts") };
+    globalScope->Assign("__scriptpath__", std::make_shared<Imp::ListValue>(paths));
 
     return globalScope;
 }
@@ -81,6 +84,12 @@ static std::list<std::string> LoadScript(const std::string &filename)
 {
     std::list<std::string> code;
     std::ifstream file(filename);
+
+    if(!file.is_open())
+    {
+        throw std::runtime_error("Couldn't open " + filename);
+    }
+
     std::string line;
 
     while(std::getline(file, line))

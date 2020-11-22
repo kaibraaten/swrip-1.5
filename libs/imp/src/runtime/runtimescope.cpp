@@ -2,7 +2,7 @@
 #include "imp/runtime/runtimescope.hpp"
 #include "imp/runtime/runtimevalue.hpp"
 #include "imp/runtime/stringvalue.hpp"
-
+#include "imp/runtime/listvalue.hpp"
 namespace Imp
 {
     struct RuntimeScope::Impl
@@ -20,7 +20,8 @@ namespace Imp
     RuntimeScope::RuntimeScope(std::shared_ptr<RuntimeScope> outer)
         : pImpl(std::make_unique<Impl>(outer))
     {
-        Assign("__scriptpath__", std::make_shared<StringValue>(""));
+        std::deque<std::shared_ptr<Imp::RuntimeValue>> paths{ std::make_shared<Imp::StringValue>("") };
+        Assign("__scriptpath__", std::make_shared<Imp::ListValue>(paths));
     }
 
     RuntimeScope::~RuntimeScope()
