@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <utility/algorithms.hpp>
 #include "areasavehelperplugin.hpp"
 #include "area.hpp"
 #include "mud.hpp"
@@ -6,6 +7,7 @@
 #include "room.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "reset.hpp"
 
 struct AreaSaveHelperPlugin::Impl
 {
@@ -111,4 +113,9 @@ vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
     // Vnum must point to somewhere outside the plugin area,
     // so just pass it through.
     return absolute;
+}
+
+bool AreaSaveHelperPlugin::ShouldPushReset(std::shared_ptr<Reset> reset) const
+{
+    return reset->Plugin == pImpl->Plugin;
 }

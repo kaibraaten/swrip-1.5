@@ -46,5 +46,5 @@ void do_reset(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    EditReset(ch, argument, pArea, NULL);
+    EditReset(ch, argument, pArea, nullptr, ch->PCData->Build.Plugin.get());
 }

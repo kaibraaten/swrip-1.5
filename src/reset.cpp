@@ -51,7 +51,7 @@
 #include "triggers.hpp"
 
 static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
-static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3);
+static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3, const Plugin *plugin);
 static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pReset);
 static std::shared_ptr<Reset> FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int num);
 static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
@@ -476,7 +476,7 @@ static std::shared_ptr<Reset> FindMobileReset(std::shared_ptr<Character> ch, std
     return reset;
 }
 
-static void EditResetShowSyntax(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetShowSyntax(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     const char *nm = aRoom ? "rreset " : "reset ";
     const char *rn = aRoom ? "" : " [room#]";
@@ -503,7 +503,7 @@ static void EditResetShowSyntax(std::shared_ptr<Character> ch, std::string argum
     }
 }
 
-static void EditResetArea(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetArea(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     if(!pArea->FirstReset)
     {
@@ -518,7 +518,7 @@ static void EditResetArea(std::shared_ptr<Character> ch, std::string argument, s
     ch->Echo("Done.\r\n");
 }
 
-static void EditResetList(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetList(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     int start = 0, end = 0;
     std::string arg;
@@ -531,7 +531,7 @@ static void EditResetList(std::shared_ptr<Character> ch, std::string argument, s
     ListResets(ch, pArea, aRoom, start, end);
 }
 
-static void EditResetEdit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetEdit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -582,7 +582,7 @@ static void EditResetEdit(std::shared_ptr<Character> ch, std::string argument, s
     ch->Echo("Done.\r\n");
 }
 
-static void EditResetAdd(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetAdd(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     auto pReset = ParseReset(pArea, argument, ch);
 
@@ -593,11 +593,11 @@ static void EditResetAdd(std::shared_ptr<Character> ch, std::string argument, st
     }
 
     AddReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
-             pReset->Arg2, pReset->Arg3);
+             pReset->Arg2, pReset->Arg3, plugin);
     ch->Echo("Done.\r\n");
 }
 
-static void EditResetPlace(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetPlace(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     auto pReset = ParseReset(pArea, argument, ch);
 
@@ -608,11 +608,11 @@ static void EditResetPlace(std::shared_ptr<Character> ch, std::string argument, 
     }
 
     PlaceReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
-               pReset->Arg2, pReset->Arg3);
+               pReset->Arg2, pReset->Arg3, plugin);
     ch->Echo("Done.\r\n");
 }
 
-static void EditResetInsert(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetInsert(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -644,7 +644,7 @@ static void EditResetInsert(std::shared_ptr<Character> ch, std::string argument,
     ch->Echo("Done.\r\n");
 }
 
-static void EditResetDelete(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetDelete(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     if(argument.empty())
     {
@@ -699,7 +699,7 @@ static void EditResetDelete(std::shared_ptr<Character> ch, std::string argument,
     }
 }
 
-static void EditResetRemove(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetRemove(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -732,7 +732,9 @@ static void EditResetRemove(std::shared_ptr<Character> ch, std::string argument,
     ch->Echo("Reset deleted.\r\n");
 }
 
-static void EditResetMobile(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetMobile(std::shared_ptr<Character> ch, std::string argument,
+                            std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom,
+                            const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -775,12 +777,13 @@ static void EditResetMobile(std::shared_ptr<Character> ch, std::string argument,
         return;
     }
 
-    auto pReset = MakeReset('M', 0, pMob->Vnum, num, pRoom->Vnum);
+    auto pReset = MakeReset('M', 0, pMob->Vnum, num, pRoom->Vnum, plugin);
     LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
     ch->Echo("Mobile reset added.\r\n");
 }
 
-static void EditResetObject(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetObject(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                            std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -830,7 +833,7 @@ static void EditResetObject(std::shared_ptr<Character> ch, std::string argument,
             vnum = 1;
         }
 
-        auto pReset = MakeReset('P', reset->MiscData + 1, pObj->Vnum, vnum, 0);
+        auto pReset = MakeReset('P', reset->MiscData + 1, pObj->Vnum, vnum, 0, plugin);
         /* Grumble.. insert puts pReset before reset, and we need it after,
            so we make a hackup and reverse all the list params.. :P.. */
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
@@ -859,7 +862,7 @@ static void EditResetObject(std::shared_ptr<Character> ch, std::string argument,
             vnum = 1;
         }
 
-        auto pReset = MakeReset('G', 1, pObj->Vnum, vnum, 0);
+        auto pReset = MakeReset('G', 1, pObj->Vnum, vnum, 0, plugin);
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
         ch->Echo("Object reset to mobile created.\r\n");
     }
@@ -908,7 +911,7 @@ static void EditResetObject(std::shared_ptr<Character> ch, std::string argument,
             vnum = 1;
         }
 
-        auto pReset = MakeReset('E', 1, pObj->Vnum, vnum, num);
+        auto pReset = MakeReset('E', 1, pObj->Vnum, vnum, num, plugin);
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
         ch->Echo("Object reset equipped by mobile created.\r\n");
     }
@@ -939,7 +942,7 @@ static void EditResetObject(std::shared_ptr<Character> ch, std::string argument,
             vnum = 1;
         }
 
-        auto pReset = MakeReset('O', 0, pObj->Vnum, vnum, pRoom->Vnum);
+        auto pReset = MakeReset('O', 0, pObj->Vnum, vnum, pRoom->Vnum, plugin);
         LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
         ch->Echo("Object reset added.\r\n");
     }
@@ -949,7 +952,8 @@ static void EditResetObject(std::shared_ptr<Character> ch, std::string argument,
     }
 }
 
-static void EditResetRandom(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetRandom(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                            std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -975,12 +979,13 @@ static void EditResetRandom(std::shared_ptr<Character> ch, std::string argument,
         return;
     }
 
-    auto pReset = MakeReset('R', 0, pRoom->Vnum, direction, 0);
+    auto pReset = MakeReset('R', 0, pRoom->Vnum, direction, 0, plugin);
     LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
     ch->Echo("Reset random doors created.\r\n");
 }
 
-static void EditResetTrap(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetTrap(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                          std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string oname;
     std::string arg;
@@ -1056,17 +1061,22 @@ static void EditResetTrap(std::shared_ptr<Character> ch, std::string argument, s
         SetBit(extra, 1 << value);
     }
 
-    auto pReset = MakeReset('T', extra, num, chrg, vnum);
+    auto pReset = MakeReset('T', extra, num, chrg, vnum, plugin);
 
     if(reset)
+    {
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+    }
     else
+    {
         LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-
+    }
+    
     ch->Echo("Trap created.\r\n");
 }
 
-static void EditResetBit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetBit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                         std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::function<int(const std::string &)> getFlag;
     int flags = 0;
@@ -1213,17 +1223,22 @@ static void EditResetBit(std::shared_ptr<Character> ch, std::string argument, st
         return;
     }
 
-    auto pReset = MakeReset('B', 1, vnum, num, flags);
+    auto pReset = MakeReset('B', 1, vnum, num, flags, plugin);
 
     if(reset)
+    {
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+    }
     else
+    {
         LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-
+    }
+    
     ch->Echo("Bitvector reset created.\r\n");
 }
 
-static void EditResetHide(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetHide(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                          std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
@@ -1234,83 +1249,84 @@ static void EditResetHide(std::shared_ptr<Character> ch, std::string argument, s
         return;
     }
 
-    auto pReset = MakeReset('H', 1, 0, 0, 0);
+    auto pReset = MakeReset('H', 1, 0, 0, 0, plugin);
     INSERT(pReset, reset, pArea->LastReset, Previous, Next);
     ch->Echo("Object hide reset created.\r\n");
 }
 
-void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+               std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
     argument = OneArgument(argument, arg);
 
     if(arg.empty() || !StrCmp(arg, "?"))
     {
-        EditResetShowSyntax(ch, argument, pArea, aRoom);
+        EditResetShowSyntax(ch, argument, pArea, aRoom, plugin);
     }
     else if(!aRoom && !StrCmp(arg, "area"))
     {
-        EditResetArea(ch, argument, pArea, aRoom);
+        EditResetArea(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "list"))
     {
-        EditResetList(ch, argument, pArea, aRoom);
+        EditResetList(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "edit"))
     {
-        EditResetEdit(ch, argument, pArea, aRoom);
+        EditResetEdit(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "add"))
     {
-        EditResetAdd(ch, argument, pArea, aRoom);
+        EditResetAdd(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "place"))
     {
-        EditResetPlace(ch, argument, pArea, aRoom);
+        EditResetPlace(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "insert"))
     {
-        EditResetInsert(ch, argument, pArea, aRoom);
+        EditResetInsert(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "delete"))
     {
-        EditResetDelete(ch, argument, pArea, aRoom);
+        EditResetDelete(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "remove"))
     {
-        EditResetRemove(ch, argument, pArea, aRoom);
+        EditResetRemove(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StringPrefix(arg, "mobile"))
     {
-        EditResetMobile(ch, argument, pArea, aRoom);
+        EditResetMobile(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StringPrefix(arg, "object"))
     {
-        EditResetObject(ch, argument, pArea, aRoom);
+        EditResetObject(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "random"))
     {
-        EditResetRandom(ch, argument, pArea, aRoom);
+        EditResetRandom(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "trap"))
     {
-        EditResetTrap(ch, argument, pArea, aRoom);
+        EditResetTrap(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "bit"))
     {
-        EditResetBit(ch, argument, pArea, aRoom);
+        EditResetBit(ch, argument, pArea, aRoom, plugin);
     }
     else if(!StrCmp(arg, "hide"))
     {
-        EditResetHide(ch, argument, pArea, aRoom);
+        EditResetHide(ch, argument, pArea, aRoom, plugin);
     }
     else
     {
-        EditReset(ch, "", pArea, aRoom);
+        EditReset(ch, "", pArea, aRoom, plugin);
     }
 }
 
-static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3)
+static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3, const Plugin *plugin)
 {
     static int iNest;
 
@@ -1318,14 +1334,14 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
     {
         if(cm == 'O')
         {
-            AddReset(pArea, 'T', obj->Value[OVAL_TRAP_FLAGS], obj->Value[OVAL_TRAP_TYPE], obj->Value[OVAL_TRAP_CHARGE], v3);
+            AddReset(pArea, 'T', obj->Value[OVAL_TRAP_FLAGS], obj->Value[OVAL_TRAP_TYPE], obj->Value[OVAL_TRAP_CHARGE], v3, plugin);
         }
 
         return;
     }
 
     AddReset(pArea, cm, (cm == 'P' ? iNest : 1), obj->Prototype->Vnum,
-             v2, v3);
+             v2, v3, plugin);
 
     /* Only add hide for in-room objects that are hidden and cant be moved, as
        hide is an update reset, not a load-only reset. */
@@ -1333,14 +1349,14 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
        && obj->Flags.test(Flag::Obj::Hidden)
        && !obj->WearFlags.test(Flag::Wear::Take))
     {
-        AddReset(pArea, 'H', 1, 0, 0, 0);
+        AddReset(pArea, 'H', 1, 0, 0, 0, plugin);
     }
 
     for(auto inobj : obj->Objects())
     {
         if(inobj->Prototype->Vnum == OBJ_VNUM_TRAP)
         {
-            AddObjectReset(pArea, 'O', inobj, 0, 0);
+            AddObjectReset(pArea, 'O', inobj, 0, 0, plugin);
         }
     }
 
@@ -1351,7 +1367,7 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
 
     for(auto inobj : obj->Objects())
     {
-        AddObjectReset(pArea, 'P', inobj, 1, 0);
+        AddObjectReset(pArea, 'P', inobj, 1, 0, plugin);
     }
 
     if(cm == 'P')
@@ -1360,7 +1376,8 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
     }
 }
 
-void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors)
+void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors,
+                 const Plugin *plugin)
 {
     for(std::shared_ptr<Character> rch : pRoom->Characters())
     {
@@ -1370,17 +1387,17 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
         }
 
         AddReset(pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->Count,
-                 pRoom->Vnum);
+                 pRoom->Vnum, plugin);
 
         for(auto obj : rch->Objects())
         {
             if(obj->WearLoc == WEAR_NONE)
             {
-                AddObjectReset(pArea, 'G', obj, 1, 0);
+                AddObjectReset(pArea, 'G', obj, 1, 0, plugin);
             }
             else
             {
-                AddObjectReset(pArea, 'E', obj, 1, obj->WearLoc);
+                AddObjectReset(pArea, 'E', obj, 1, obj->WearLoc, plugin);
             }
         }
     }
@@ -1393,7 +1410,7 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
 
     for(auto obj : objectsToAddResetsTo)
     {
-        AddObjectReset(pArea, 'O', obj, 1, pRoom->Vnum);
+        AddObjectReset(pArea, 'O', obj, 1, pRoom->Vnum, plugin);
     }
 
     if(dodoors)
@@ -1419,7 +1436,7 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
                 }
             }
 
-            AddReset(pArea, 'D', 0, pRoom->Vnum, pexit->Direction, state);
+            AddReset(pArea, 'D', 0, pRoom->Vnum, pexit->Direction, state, plugin);
         }
     }
 }
@@ -2298,8 +2315,7 @@ static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pAre
 
         case 'B':
         {
-            //std::array<const char * const, MAX_BIT> flagarray;
-            const char *const *flagarray;
+            const char *const *flagarray = nullptr;
 
             strcpy(pbuf, "BIT: ");
             pbuf += 5;
@@ -2498,10 +2514,10 @@ void RenumberPutResets(std::shared_ptr<Area> pArea)
 /*
  * Create a new reset (for online building)                     -Thoric
  */
-std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3, const Plugin *plugin)
 {
     auto pReset = std::make_shared<Reset>();
-
+    pReset->Plugin = plugin;
     pReset->Command = letter;
     pReset->MiscData = extra;
     pReset->Arg1 = arg1;
@@ -2515,13 +2531,15 @@ std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int
 /*
  * Add a reset to an area                               -Thoric
  */
-std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea,
+                                char letter, int extra, int arg1, int arg2, int arg3,
+                                const Plugin *plugin)
 {
     assert(tarea != nullptr);
 
     letter = CharToUppercase(letter);
-    auto pReset = MakeReset(letter, extra, arg1, arg2, arg3);
-
+    auto pReset = MakeReset(letter, extra, arg1, arg2, arg3, plugin);
+    
     switch(letter)
     {
     case 'M':
@@ -2557,15 +2575,16 @@ std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int ex
 /*
  * Place a reset into an area, insert sorting it                -Thoric
  */
-std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3,
+                                  const Plugin *plugin)
 {
     assert(tarea != nullptr);
     std::shared_ptr<Reset> tmp;
     std::shared_ptr<Reset> tmp2;
 
     letter = CharToUppercase(letter);
-    std::shared_ptr<Reset> pReset = MakeReset(letter, extra, arg1, arg2, arg3);
-
+    std::shared_ptr<Reset> pReset = MakeReset(letter, extra, arg1, arg2, arg3, plugin);
+    
     if(letter == 'M')
     {
         tarea->LastMobReset = pReset;

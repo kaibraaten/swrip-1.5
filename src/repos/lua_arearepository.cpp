@@ -296,31 +296,100 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
 {
     if(CURRENT_FILEFORMAT_VERSION == 1)
     {
+        Reset relativeReset(*reset);
         bool includeArg3 = false;
 
-        switch(reset->Command) /* extra arg1 arg2 arg3 */
+        switch(reset->Command)
         {
         case 'm':
         case 'M':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeMobileVnum(reset->Arg1);
+            relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+            includeArg3 = true;
+            break;
+            
         case 'o':
         case 'O':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+            includeArg3 = true;
+            break;
+            
         case 'p':
         case 'P':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg3 = helper->AbsoluteToRelativeObjectVnum(reset->Arg3);
+            includeArg3 = true;
+            break;
+            
         case 'e':
         case 'E':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            includeArg3 = true;
+            break;
+            
         case 'd':
         case 'D':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+            includeArg3 = true;
+            break;
+            
         case 't':
         case 'T':
+            if(IsBitSet(reset->MiscData, TRAP_OBJ))
+            {
+                relativeReset.Arg3 = helper->AbsoluteToRelativeObjectVnum(reset->Arg3);
+            }
+            else
+            {
+                relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+            }
+            
             includeArg3 = true;
             break;
 
         case 'g':
         case 'G':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            break;
+            
         case 'r':
         case 'R':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
             break;
 
+        case 'h':
+        case 'H':
+            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            break;
+
+        case 'b':
+        case 'B':
+            switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
+            {
+            case BIT_RESET_DOOR:
+                relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_ROOM:
+                relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_MOBILE:
+                relativeReset.Arg1 = helper->AbsoluteToRelativeMobileVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_OBJECT:
+                relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+                break;
+
+            default:
+                break;
+            }
+            
+            includeArg3 = true;
+            break;
+            
         case '*':
         default:
             return;
@@ -329,14 +398,14 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
         lua_pushnumber(L, idx);
         lua_newtable(L);
 
-        LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(reset->Command)));
-        LuaSetfieldNumber(L, "Arg1", reset->Arg1);
-        LuaSetfieldNumber(L, "Arg2", reset->Arg2);
-        LuaSetfieldNumber(L, "MiscData", reset->MiscData);
+        LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(relativeReset.Command)));
+        LuaSetfieldNumber(L, "Arg1", relativeReset.Arg1);
+        LuaSetfieldNumber(L, "Arg2", relativeReset.Arg2);
+        LuaSetfieldNumber(L, "MiscData", relativeReset.MiscData);
 
         if(includeArg3)
         {
-            LuaSetfieldNumber(L, "Arg3", reset->Arg3);
+            LuaSetfieldNumber(L, "Arg3", relativeReset.Arg3);
         }
 
         lua_settable(L, -3);
@@ -352,7 +421,10 @@ void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> are
 
     for(auto reset = area->FirstReset; reset; reset = reset->Next)
     {
-        PushReset(L, reset, ++idx, helper);
+        if(helper->ShouldPushReset(reset))
+        {
+            PushReset(L, reset, ++idx, helper);
+        }
     }
 
     lua_settable(L, -3);
@@ -1211,10 +1283,8 @@ void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)
     LuaLoadArray(L, "Resets", &LuaAreaRepository::LoadReset, &resets);
 
     // Add to area here
-    for(auto tuple : resets)
+    for(auto [_, reset] : resets)
     {
-        auto reset = tuple.second;
-
         if(reset->Command != '*')
         {
             AddReset(area, reset->Command, reset->MiscData, reset->Arg1, reset->Arg2, reset->Arg3);

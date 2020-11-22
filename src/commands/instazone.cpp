@@ -33,7 +33,7 @@ void do_instazone(std::shared_ptr<Character> ch, std::string argument)
 
         if (pRoom == nullptr || pRoom->Area != pArea)
             continue;
-        InstallRoom(pArea, pRoom, dodoors);
+        InstallRoom(pArea, pRoom, dodoors, pRoom->Plugin.get());
     }
 
     ch->Echo("Area resets installed.\r\n");

@@ -27,6 +27,8 @@ public:
     virtual vnum_t AbsoluteToRelativeRoomVnum(vnum_t absolute) const = 0;
     virtual vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const = 0;
     virtual vnum_t AbsoluteToRelativeMobileVnum(vnum_t absolute) const = 0;
+
+    virtual bool ShouldPushReset(std::shared_ptr<Reset> reset) const = 0;
     
     static std::shared_ptr<AreaSaveHelper> Create(std::shared_ptr<Area> area);
 };

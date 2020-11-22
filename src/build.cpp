@@ -584,9 +584,13 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
     }
 
     if (letter == '*')
+    {
         return nullptr;
+    }
     else
-        return MakeReset(letter, extra, val1, val3, val2);
+    {
+        return MakeReset(letter, extra, val1, val3, val2, ch->PCData->Build.Plugin.get());
+    }
 }
 
 void EditMobProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg,

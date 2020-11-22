@@ -33,7 +33,6 @@ public:
     short Age = 0;
     short NumberOfPlayers = 0;
     short ResetFrequency = 0;
-    const class Plugin *Plugin = nullptr;
     
     struct
     {
@@ -65,6 +64,8 @@ public:
     int IllegalPk = 0;
     int HighEconomy = 0;
     int LowEconomy = 0;
+
+    const Plugin *SavingPlugin = nullptr;
 };
 
 void FixAreaExits(std::shared_ptr<Area> tarea);

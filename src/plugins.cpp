@@ -12,6 +12,7 @@
 #include "repos/arearepository.hpp"
 #include "luascript.hpp"
 #include "areasavehelper.hpp"
+#include "reset.hpp"
 
 namespace fs = std::filesystem;
 
@@ -186,7 +187,7 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
 std::shared_ptr<Area> Plugin::ExportArea() const
 {
     auto area = std::make_shared<Area>();
-    area->Plugin = this;
+    area->SavingPlugin = this;
     area->Name = Name();
     vnum_t lastMob = pImpl->MobileMapping.size();
     vnum_t lastObj = pImpl->ObjectMapping.size();
@@ -209,7 +210,18 @@ std::shared_ptr<Area> Plugin::ExportArea() const
         area->VnumRanges.Room.First = 1;
         area->VnumRanges.Room.Last = lastRoom;
     }
-    
+
+    auto pluginZone = Find(Areas->Entities(),
+                           [](const auto &a)
+                           {
+                               return a->Flags.test(Flag::Area::PluginZone);
+                           });
+
+    area->FirstReset = pluginZone->FirstReset;
+    area->LastReset = pluginZone->LastReset;
+    area->LastMobReset = pluginZone->LastMobReset;
+    area->LastObjectReset = pluginZone->LastObjectReset;
+        
     return area;
 }
 

@@ -45,7 +45,7 @@ void do_instaroom( std::shared_ptr<Character> ch, std::string argument )
   if ( pArea->FirstReset )
     WipeResets(pArea, pRoom);
 
-  InstallRoom(pArea, pRoom, dodoors);
+  InstallRoom(pArea, pRoom, dodoors, ch->PCData->Build.Plugin.get());
   ch->Echo("Room resets installed.\r\n");
 }
 

@@ -16,6 +16,8 @@ public:
     vnum_t AbsoluteToRelativeRoomVnum(vnum_t absolute) const;
     vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const;
     vnum_t AbsoluteToRelativeMobileVnum(vnum_t absolute) const;
+
+    bool ShouldPushReset(std::shared_ptr<Reset> reset) const;
     
 private:
     struct Impl;

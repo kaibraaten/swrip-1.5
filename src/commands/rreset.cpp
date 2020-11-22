@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "pcdata.hpp"
 
 void do_rreset(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -11,5 +12,5 @@ void do_rreset(std::shared_ptr<Character> ch, std::string argument)
     if (!CanModifyRoom(ch, pRoom))
         return;
 
-    EditReset(ch, argument, pRoom->Area, pRoom);
+    EditReset(ch, argument, pRoom->Area, pRoom, ch->PCData->Build.Plugin.get());
 }

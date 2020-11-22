@@ -92,3 +92,8 @@ vnum_t AreaSaveHelperBuiltin::AbsoluteToRelativeMobileVnum(vnum_t absolute) cons
 {
     return absolute;
 }
+
+bool AreaSaveHelperBuiltin::ShouldPushReset(std::shared_ptr<Reset> reset) const
+{
+    return true;
+}

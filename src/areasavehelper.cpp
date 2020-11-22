@@ -5,9 +5,9 @@
 
 std::shared_ptr<AreaSaveHelper> AreaSaveHelper::Create(std::shared_ptr<Area> area)
 {
-    if(area->Plugin != nullptr)
+    if(area->SavingPlugin)
     {
-        return std::make_shared<AreaSaveHelperPlugin>(area->Plugin);
+        return std::make_shared<AreaSaveHelperPlugin>(area->SavingPlugin);
     }
     else
     {
