@@ -15,7 +15,11 @@ std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     auto standardLib = std::make_shared<Imp::StandardLibrary>();
     auto mudLib = std::make_shared<MudLibrary>(standardLib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
-    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths{ std::make_shared<Imp::StringValue>("data/scripts") };
+    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths
+        {
+            std::make_shared<Imp::StringValue>("data/scripts"),
+            std::make_shared<Imp::StringValue>("data/plugins")
+        };
     globalScope->Assign("__scriptpath__", std::make_shared<Imp::ListValue>(paths));
     return globalScope;
 }

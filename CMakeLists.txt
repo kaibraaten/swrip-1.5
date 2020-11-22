@@ -30,6 +30,9 @@ src/act_obj.cpp
 src/act_wiz.cpp
 src/alias.cpp
 src/area.cpp
+src/areasavehelper.cpp
+src/areasavehelperbuiltin.cpp
+src/areasavehelperplugin.cpp
 src/arena.cpp
 src/badname.cpp
 src/board.cpp

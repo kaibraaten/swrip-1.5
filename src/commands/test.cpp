@@ -40,6 +40,7 @@
 #include "impscript/improom.hpp"
 #include "impscript/scriptrunner.hpp"
 #include "impscript/scriptscheduler.hpp"
+#include "areasavehelper.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 
@@ -359,6 +360,34 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("%s: %s\r\n", area->Filename.c_str(),
                      FlagString(area->Flags, AreaFlags).c_str());
         }
+    }
+    else if(StrCmp(argument, "verifyareasavehelper") == 0)
+    {
+        auto limbo = Areas->Find("limbo.lua");
+        auto helper = AreaSaveHelper::Create(limbo);
+        auto classicVnum = limbo->VnumRanges.Room.First;
+        const auto roomVnums = helper->RoomVnums();
+
+        for(auto helperVnum : roomVnums)
+        {
+            while(!GetRoom(classicVnum))
+            {
+                ch->Echo("***** -> %ld\r\n", classicVnum);
+                ++classicVnum;
+            }
+
+            ch->Echo("%ld -> %ld\r\n", helperVnum, classicVnum);
+            
+            if(helperVnum != classicVnum)
+            {
+                ch->Echo("Rooms: helperVnum != classicVnum");
+                break;
+            }
+
+            ++classicVnum;
+        }
+
+        ch->Echo("Done verifying.");
     }
     else
     {

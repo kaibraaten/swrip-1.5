@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "repos/arearepository.hpp"
+#include "areasavehelper.hpp"
 
 void do_savearea(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -44,7 +45,8 @@ void do_savearea(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    Areas->Save(tarea);
+    auto helper = AreaSaveHelper::Create(tarea);
+    Areas->Save(tarea, helper);
     ch->Echo("Done.\r\n");
 }
 

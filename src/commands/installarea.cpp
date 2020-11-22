@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/arearepository.hpp"
+#include "areasavehelper.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
@@ -37,7 +38,8 @@ void do_installarea(std::shared_ptr<Character> ch, std::string argument)
         }
 
         ch->Echo("Installing area...\r\n");
-        Areas->Install(tarea, newfilename);
+        auto helper = AreaSaveHelper::Create(tarea);
+        Areas->Install(tarea, helper, newfilename);
         ch->Echo("Done.\r\n");
 
         /* Fix up author if online */

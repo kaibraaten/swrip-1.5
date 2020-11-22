@@ -11,6 +11,7 @@
 #include "area.hpp"
 #include "repos/arearepository.hpp"
 #include "luascript.hpp"
+#include "areasavehelper.hpp"
 
 namespace fs = std::filesystem;
 
@@ -187,8 +188,27 @@ std::shared_ptr<Area> Plugin::ExportArea() const
     auto area = std::make_shared<Area>();
     area->Plugin = this;
     area->Name = Name();
+    vnum_t lastMob = pImpl->MobileMapping.size();
+    vnum_t lastObj = pImpl->ObjectMapping.size();
+    vnum_t lastRoom = pImpl->RoomMapping.size();
 
-    
+    if(lastMob != INVALID_VNUM)
+    {
+        area->VnumRanges.Mob.First = 1;
+        area->VnumRanges.Mob.Last = lastMob;
+    }
+
+    if(lastObj != INVALID_VNUM)
+    {
+        area->VnumRanges.Object.First = 1;
+        area->VnumRanges.Object.Last = lastObj;
+    }    
+
+    if(lastRoom != INVALID_VNUM)
+    {
+        area->VnumRanges.Room.First = 1;
+        area->VnumRanges.Room.Last = lastRoom;
+    }
     
     return area;
 }
@@ -221,7 +241,9 @@ void SavePlugin(std::shared_ptr<Plugin> plugin)
     Log->Info("Saving plugin %s (%s)", plugin->Name().c_str(), plugin->Id().c_str());
     fs::create_directory(GetPluginPath(plugin.get()));
     SaveInfo(plugin);
-    Areas->Save(plugin->ExportArea());
+    auto area = plugin->ExportArea();
+    auto helper = AreaSaveHelper::Create(area);
+    Areas->Save(area, helper);
 }
 
 std::shared_ptr<Plugin> FindPlugin(const std::string &id)

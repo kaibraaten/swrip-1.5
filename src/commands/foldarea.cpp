@@ -4,6 +4,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "repos/arearepository.hpp"
+#include "areasavehelper.hpp"
 
 void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -30,13 +31,15 @@ void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
     {
         if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {
+            auto helper = AreaSaveHelper::Create(tarea);
+            
             if (!StrCmp(argument, "remproto"))
             {
-                Areas->Save(tarea, true);
+                Areas->Save(tarea, true, helper);
             }
             else
             {
-                Areas->Save(tarea, false);
+                Areas->Save(tarea, false, helper);
             }
             
             found = true;
