@@ -5,6 +5,7 @@
 #include "imp/parser/fromstmt.hpp"
 #include "imp/parser/name.hpp"
 #include "imp/runtime/stringvalue.hpp"
+#include "imp/runtime/listvalue.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/runtime/runtimescope.hpp"
 #include "imp/runtime/runtimevalue.hpp"
@@ -62,17 +63,27 @@ namespace Imp
         auto filename = pImpl->ModuleName + ".py";
         bool fileWasOpened = false;
         auto code = LoadScript(filename, fileWasOpened);
-
+        
         if(!fileWasOpened)
         {
-            auto pathPrefix = curScope->Find("__scriptpath__", this)->GetStringValue("__scriptpath__", this);
+            auto paths = std::dynamic_pointer_cast<ListValue>(curScope->Find("__scriptpath__", this))->Value();
 
-            if(!pathPrefix.empty() && pathPrefix[pathPrefix.size() - 1] != '/')
+            for(auto p : paths)
             {
-                pathPrefix += "/";
-            }
+                auto pathPrefix = p->GetStringValue("__scriptpath__", this);
 
-            code = LoadScript(pathPrefix + filename, fileWasOpened);
+                if(!pathPrefix.empty() && pathPrefix[pathPrefix.size() - 1] != '/')
+                {
+                    pathPrefix += "/";
+                }
+
+                code = LoadScript(pathPrefix + filename, fileWasOpened);
+
+                if(fileWasOpened)
+                {
+                    break;
+                }
+            }
         }
 
         if(fileWasOpened)
@@ -82,9 +93,11 @@ namespace Imp
             prog->Eval(curScope);
             return std::make_shared<NoneValue>();
         }
-
-        RuntimeValue::RuntimeError("Could not open file " + filename, this);
-        return nullptr;
+        else
+        {
+            RuntimeValue::RuntimeError("Could not open file " + filename, this);
+            return nullptr;
+        }
     }
 
     std::shared_ptr<FromStmt> FromStmt::Parse(std::shared_ptr<Scanner> s)
