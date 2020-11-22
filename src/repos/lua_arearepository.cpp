@@ -246,11 +246,15 @@ void LuaAreaRepository::PushArea(lua_State *L, const SaveData *data)
     lua_newtable(L);
 
     repos->PushMetaData(L, area);
-    repos->PushMobiles(L, area, data->Install);
-    repos->PushObjects(L, area, data->Install);
-    repos->PushRooms(L, area, data->Install);
-    repos->PushResets(L, area);
 
+    if(!area->Flags.test(Flag::Area::PluginZone))
+    {
+        repos->PushMobiles(L, area, data->Install);
+        repos->PushObjects(L, area, data->Install);
+        repos->PushRooms(L, area, data->Install);
+        repos->PushResets(L, area);
+    }
+    
     lua_setglobal(L, "area");
 }
 

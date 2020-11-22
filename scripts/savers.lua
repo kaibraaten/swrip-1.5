@@ -121,6 +121,10 @@ function savers.savevnumconstants(vnumconstants, filename)
    singlesave(vnumconstants, filename, "-- \n", "\nVnumConstantsEntry")
 end
 
+function savers.saveplugin(plugin, filename)
+   singlesave(plugin, filename, "-- \n", "\nPluginEntry")
+end
+
 function savers.savefoo(foo, filename)
    singlesave(foo, filename, "-- \n", "\nFooEntry")
 end

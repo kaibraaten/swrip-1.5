@@ -4,8 +4,11 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "act.hpp"
+#include "plugins.hpp"
+#include "protomob.hpp"
 
 static vnum_t GetNextVnum(const std::shared_ptr<Area> &area);
+static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
 
 void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -13,7 +16,8 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     std::shared_ptr<Character> mob;
     vnum_t vnum = INVALID_VNUM, cvnum = INVALID_VNUM;
-
+    auto area = ch->PCData->Build.Area;
+    
     if(IsNpc(ch))
     {
         ch->Echo("Mobiles cannot create.\r\n");
@@ -22,9 +26,9 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 
     argument = OneArgument(argument, arg);
 
-    if(StrCmp(arg, "auto") == 0 && ch->PCData->Build.Area != nullptr)
+    if(StrCmp(arg, "auto") == 0 && area != nullptr)
     {
-        arg = std::to_string(GetNextVnum(ch->PCData->Build.Area));
+        arg = std::to_string(GetNextVnum(area));
     }
 
     vnum = IsNumber(arg) ? ToLong(arg) : INVALID_VNUM;
@@ -39,6 +43,12 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
     if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ch->Echo("Bad number.\r\n");
+        return;
+    }
+
+    if(area != nullptr && !VnumIsInArea(vnum, area))
+    {
+        ch->Echo("Vnum isn't within your area's range.\r\n");
         return;
     }
 
@@ -62,16 +72,13 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 
     if(GetTrustLevel(ch) <= LEVEL_IMMORTAL)
     {
-        std::shared_ptr<Area> pArea;
-
-        if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
+        if(!ch->PCData || area == nullptr)
         {
             ch->Echo("You must have an assigned area to create mobiles.\r\n");
             return;
         }
 
-        if(vnum < pArea->VnumRanges.Mob.First
-           || vnum > pArea->VnumRanges.Mob.Last)
+        if(!VnumIsInArea(vnum, area))
         {
             ch->Echo("That number is not in your allocated range.\r\n");
             return;
@@ -93,6 +100,14 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
         ch, NULL, mob, ActTarget::Room);
     Act(AT_IMMORT, "You wave your arms about, and $N appears at your command!",
         ch, NULL, mob, ActTarget::Char);
+
+    auto plugin = ch->PCData->Build.Plugin;
+
+    if(plugin != nullptr)
+    {
+        plugin->Add(pMobIndex);
+        pMobIndex->Plugin = plugin;
+    }
 }
 
 static vnum_t GetNextVnum(const std::shared_ptr<Area> &area)
@@ -108,4 +123,9 @@ static vnum_t GetNextVnum(const std::shared_ptr<Area> &area)
     }
 
     return INVALID_VNUM;
+}
+
+static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Mob.First && vnum <= area->VnumRanges.Mob.Last;
 }

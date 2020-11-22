@@ -1,4 +1,5 @@
 #include <map>
+#include <filesystem>
 #include <utility/algorithms.hpp>
 #include <utility/utility.hpp>
 #include "mud.hpp"
@@ -8,6 +9,10 @@
 #include "protomob.hpp"
 #include "protoobject.hpp"
 #include "area.hpp"
+#include "repos/arearepository.hpp"
+#include "luascript.hpp"
+
+namespace fs = std::filesystem;
 
 #define PLUGIN_DIR DATA_DIR "plugins/"
 
@@ -132,6 +137,10 @@ std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
         }
     }
     
+    rooms.sort([](const auto &a, const auto &b)
+               {
+                   return std::get<0>(a) < std::get<0>(b);
+               });
     return rooms;
 }
 
@@ -146,7 +155,11 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() co
             objects.push_back({ p.first, p.second.lock() });
         }
     }
-    
+
+    objects.sort([](const auto &a, const auto &b)
+               {
+                   return std::get<0>(a) < std::get<0>(b);
+               });
     return objects;
 }
 
@@ -161,15 +174,21 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
             mobiles.push_back({ p.first, p.second.lock() });
         }
     }
-    
+
+    mobiles.sort([](const auto &a, const auto &b)
+               {
+                   return std::get<0>(a) < std::get<0>(b);
+               });
     return mobiles;
 }
 
-std::shared_ptr<Area> Plugin::GetArea() const
+std::shared_ptr<Area> Plugin::ExportArea() const
 {
     auto area = std::make_shared<Area>();
     area->Plugin = this;
     area->Name = Name();
+
+    
     
     return area;
 }
@@ -182,9 +201,27 @@ void LoadPlugins()
 
 }
 
+static void SaveInfo(std::shared_ptr<Plugin> plugin)
+{
+    auto saveData = [plugin](lua_State *L)
+                    {
+                        lua_newtable(L);
+
+                        LuaSetfieldString(L, "Id", plugin->Id());
+                        LuaSetfieldString(L, "Name", plugin->Name());
+                        LuaSetfieldString(L, "Description", plugin->Description());
+                        
+                        lua_setglobal(L, "plugin");
+                    };
+    LuaSaveDataFile(GetPluginPath(plugin.get()) + "/info.lua", saveData, "plugin");
+}
+
 void SavePlugin(std::shared_ptr<Plugin> plugin)
 {
     Log->Info("Saving plugin %s (%s)", plugin->Name().c_str(), plugin->Id().c_str());
+    fs::create_directory(GetPluginPath(plugin.get()));
+    SaveInfo(plugin);
+    Areas->Save(plugin->ExportArea());
 }
 
 std::shared_ptr<Plugin> FindPlugin(const std::string &id)

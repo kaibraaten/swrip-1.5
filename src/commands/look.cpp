@@ -21,6 +21,7 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "act.hpp"
 #include "triggers.hpp"
+#include "plugins.hpp"
 
 struct UserData
 {
@@ -987,8 +988,14 @@ static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto)
            && ch->PCData->Flags.test(Flag::PCData::ShowRoomFlags))
         {
             SetCharacterColor(AT_PURPLE, ch);
-            ch->Echo("{%ld:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
+            ch->Echo("{%ld:%s", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
 
+            if(ch->InRoom->Plugin != nullptr)
+            {
+                ch->Echo(":%s", ch->InRoom->Plugin->Name().c_str());
+            }
+
+            ch->Echo("}");
             SetCharacterColor(AT_CYAN, ch);
             ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags).c_str());
 

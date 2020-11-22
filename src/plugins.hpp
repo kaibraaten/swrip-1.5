@@ -26,7 +26,7 @@ public:
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Objects() const;
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;
 
-    std::shared_ptr<Area> GetArea() const;
+    std::shared_ptr<Area> ExportArea() const;
     
 private:
     struct Impl;
