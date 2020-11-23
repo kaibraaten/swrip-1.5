@@ -16,6 +16,7 @@ public:
     AreaRepository();
     virtual ~AreaRepository();
     virtual void Load() = 0;
+    virtual void Load(std::shared_ptr<Area>) = 0;
     virtual void Save() const = 0;
     virtual void Save(const std::shared_ptr<Area>&,
                       std::shared_ptr<AreaSaveHelper> helper) const = 0;

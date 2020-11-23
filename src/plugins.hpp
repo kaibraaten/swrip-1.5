@@ -18,10 +18,10 @@ public:
     std::string Description() const;
     void Description(const std::string &description);
 
-    void Add(std::shared_ptr<Room> room);
-    void Add(std::shared_ptr<ProtoObject> obj);
-    void Add(std::shared_ptr<ProtoMobile> mob);
-
+    void Add(std::shared_ptr<Room> room, vnum_t = INVALID_VNUM);
+    void Add(std::shared_ptr<ProtoObject> obj, vnum_t = INVALID_VNUM);
+    void Add(std::shared_ptr<ProtoMobile> mob, vnum_t = INVALID_VNUM);
+    
     std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Rooms() const;
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Objects() const;
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;

@@ -40,6 +40,7 @@ class LuaAreaRepository : public AreaRepository
 {
 public:
     void Load() override;
+    void Load(std::shared_ptr<Area> area) override;
     void Save() const override;
     void Save(const std::shared_ptr<Area> &, std::shared_ptr<AreaSaveHelper> helper) const override;
     void Save(const std::shared_ptr<Area> &, bool install, std::shared_ptr<AreaSaveHelper> helper) const override;
@@ -145,6 +146,12 @@ void LuaAreaRepository::Load()
 {
     ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile);
     ForEachLuaFileInDir(BUILD_DIR, ExecuteAreaFile);
+}
+
+void LuaAreaRepository::Load(std::shared_ptr<Area> area)
+{
+    std::string filename = GetAreaFilename(area);
+    LuaLoadDataFile(filename, L_AreaEntry, "AreaEntry", &area);
 }
 
 void LuaAreaRepository::Save() const
@@ -1058,7 +1065,14 @@ void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shar
         area->VnumRanges.Mob.Last = vnum;
     }
 
-    ProtoMobs.insert(std::make_pair(vnum, mob));
+    if(area->SavingPlugin == nullptr)
+    {
+        ProtoMobs.insert(std::make_pair(vnum, mob));
+    }
+    else
+    {
+        area->SavingPlugin->Add(mob, vnum);
+    }
 }
 
 void LuaAreaRepository::LoadMobiles(lua_State *L, std::shared_ptr<Area> area)
@@ -1091,7 +1105,14 @@ void LuaAreaRepository::LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shar
         area->VnumRanges.Object.Last = vnum;
     }
 
-    ProtoObjects.insert(std::make_pair(vnum, obj));
+    if(area->SavingPlugin == nullptr)
+    {
+        ProtoObjects.insert(std::make_pair(vnum, obj));
+    }
+    else
+    {
+        area->SavingPlugin->Add(obj, vnum);
+    }
 }
 
 void LuaAreaRepository::LoadObjects(lua_State *L, std::shared_ptr<Area> area)
@@ -1198,10 +1219,17 @@ void LuaAreaRepository::LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared
         area->VnumRanges.Room.Last = vnum;
     }
 
-    int iHash = vnum % MAX_KEY_HASH;
-    room->Next = RoomIndexHash[iHash];
-    RoomIndexHash[iHash] = room;
-    top_room++;
+    if(area->SavingPlugin == nullptr)
+    {
+        int iHash = vnum % MAX_KEY_HASH;
+        room->Next = RoomIndexHash[iHash];
+        RoomIndexHash[iHash] = room;
+        top_room++;
+    }
+    else
+    {
+        area->SavingPlugin->Add(room, vnum);
+    }
 }
 
 void LuaAreaRepository::LoadRooms(lua_State *L, std::shared_ptr<Area> area)
@@ -1287,7 +1315,8 @@ void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)
     {
         if(reset->Command != '*')
         {
-            AddReset(area, reset->Command, reset->MiscData, reset->Arg1, reset->Arg2, reset->Arg3);
+            AddReset(area, reset->Command, reset->MiscData, reset->Arg1, reset->Arg2, reset->Arg3,
+                     area->SavingPlugin);
         }
     }
 
@@ -1322,7 +1351,20 @@ void LuaAreaRepository::LoadReset(lua_State *L, int subscript,
 
 int LuaAreaRepository::L_AreaEntry(lua_State *L)
 {
-    auto area = std::make_shared<Area>();
+    std::shared_ptr<Area> area;
+
+    lua_getglobal(L, "UserData");
+
+    if(lua_islightuserdata(L, -1))
+    {
+        area = *static_cast<std::shared_ptr<Area>*>(lua_touserdata(L, -1));
+    }
+    else
+    {
+        area = std::make_shared<Area>();
+    }
+
+    lua_pop(L, 1);
     LuaGetfieldString(L, "Filename", &area->Filename);
     Log->Info("Loading %s", area->Filename.c_str());
     area->Age = 15;
@@ -1338,9 +1380,14 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
         LoadRooms(L, area);
         LoadResets(L, area);
     }
-    
-    Areas->Add(area);
 
+    // Wrap with "if not userdata".
+    // Ie, we don't want to add temporary plugin zones to global list.
+    if(area->SavingPlugin == nullptr)
+    {
+        Areas->Add(area);
+    }
+    
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),
             area->VnumRanges.Room.First, area->VnumRanges.Room.Last,
@@ -1363,9 +1410,9 @@ std::shared_ptr<AreaRepository> NewLuaAreaRepository()
 
 std::string LuaAreaRepository::GetAreaFilename(std::shared_ptr<Area> area) const
 {
-    if(area->Plugin)
+    if(area->SavingPlugin)
     {
-        return GetPluginPath(area->Plugin) + "/area.lua";
+        return GetPluginPath(area->SavingPlugin) + "/area.lua";
     }
     else
     {

@@ -484,3 +484,66 @@ void CleanResets(std::shared_ptr<Area> tarea)
     tarea->FirstReset = nullptr;
     tarea->LastReset = nullptr;
 }
+
+vnum_t GetFreeRoomVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Room.First;
+    vnum_t last = area->VnumRanges.Room.Last;
+    
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetRoom(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+vnum_t GetFreeObjectVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Object.First;
+    vnum_t last = area->VnumRanges.Object.Last;
+
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetProtoObject(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+vnum_t GetFreeMobileVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Mob.First;
+    vnum_t last = area->VnumRanges.Mob.Last;
+
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetProtoMobile(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+bool RoomVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Room.First && vnum <= area->VnumRanges.Room.Last;
+}
+
+bool ObjectVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Object.First && vnum <= area->VnumRanges.Object.Last;
+}
+
+bool MobileVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Mob.First && vnum <= area->VnumRanges.Mob.Last;
+}

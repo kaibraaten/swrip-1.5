@@ -7,9 +7,6 @@
 #include "plugins.hpp"
 #include "protomob.hpp"
 
-static vnum_t GetNextVnum(const std::shared_ptr<Area> &area);
-static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
-
 void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
@@ -28,7 +25,7 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 
     if(StrCmp(arg, "auto") == 0 && area != nullptr)
     {
-        arg = std::to_string(GetNextVnum(area));
+        arg = std::to_string(GetFreeMobileVnum(area));
     }
 
     vnum = IsNumber(arg) ? ToLong(arg) : INVALID_VNUM;
@@ -46,7 +43,7 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(area != nullptr && !VnumIsInArea(vnum, area))
+    if(area != nullptr && !MobileVnumIsInArea(vnum, area))
     {
         ch->Echo("Vnum isn't within your area's range.\r\n");
         return;
@@ -78,7 +75,7 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(!VnumIsInArea(vnum, area))
+        if(!MobileVnumIsInArea(vnum, area))
         {
             ch->Echo("That number is not in your allocated range.\r\n");
             return;
@@ -108,24 +105,4 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
         plugin->Add(pMobIndex);
         pMobIndex->Plugin = plugin;
     }
-}
-
-static vnum_t GetNextVnum(const std::shared_ptr<Area> &area)
-{
-    for(vnum_t vnum = area->VnumRanges.Mob.First;
-        vnum <= area->VnumRanges.Mob.Last;
-        ++vnum)
-    {
-        if(GetProtoMobile(vnum) == nullptr)
-        {
-            return vnum;
-        }
-    }
-
-    return INVALID_VNUM;
-}
-
-static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
-{
-    return vnum >= area->VnumRanges.Mob.First && vnum <= area->VnumRanges.Mob.Last;
 }

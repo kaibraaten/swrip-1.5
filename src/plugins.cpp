@@ -109,21 +109,33 @@ void Plugin::Description(const std::string &description)
     pImpl->Description = description;
 }
 
-void Plugin::Add(std::shared_ptr<Room> room)
+void Plugin::Add(std::shared_ptr<Room> room, vnum_t localVnum)
 {
-    vnum_t localVnum = pImpl->GetNextRoomVnum();
+    if(localVnum == INVALID_VNUM)
+    {
+        localVnum = pImpl->GetNextRoomVnum();
+    }
+    
     pImpl->RoomMapping.insert({ localVnum, room });
 }
 
-void Plugin::Add(std::shared_ptr<ProtoObject> obj)
+void Plugin::Add(std::shared_ptr<ProtoObject> obj, vnum_t localVnum)
 {
-    vnum_t localVnum = pImpl->GetNextObjectVnum();
+    if(localVnum == INVALID_VNUM)
+    {
+        localVnum = pImpl->GetNextObjectVnum();
+    }
+    
     pImpl->ObjectMapping.insert({ localVnum, obj });
 }
 
-void Plugin::Add(std::shared_ptr<ProtoMobile> mob)
+void Plugin::Add(std::shared_ptr<ProtoMobile> mob, vnum_t localVnum)
 {
-    vnum_t localVnum = pImpl->GetNextMobVnum();
+    if(localVnum == INVALID_VNUM)
+    {
+        localVnum = pImpl->GetNextMobVnum();
+    }
+    
     pImpl->MobileMapping.insert({ localVnum, mob });
 }
 
@@ -131,11 +143,11 @@ std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
 {
     std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> rooms;
 
-    for(const auto &p : pImpl->RoomMapping)
+    for(const auto & [vnum, room] : pImpl->RoomMapping)
     {
-        if(!p.second.expired())
+        if(!room.expired())
         {
-            rooms.push_back({ p.first, p.second.lock() });
+            rooms.push_back({ vnum, room.lock() });
         }
     }
     
@@ -150,11 +162,11 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() co
 {
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> objects;
 
-    for(const auto &p : pImpl->ObjectMapping)
+    for(const auto & [vnum, obj] : pImpl->ObjectMapping)
     {
-        if(!p.second.expired())
+        if(!obj.expired())
         {
-            objects.push_back({ p.first, p.second.lock() });
+            objects.push_back({ vnum, obj.lock() });
         }
     }
 
@@ -169,11 +181,11 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
 {
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> mobiles;
 
-    for(const auto &p : pImpl->MobileMapping)
+    for(const auto & [vnum, mob] : pImpl->MobileMapping)
     {
-        if(!p.second.expired())
+        if(!mob.expired())
         {
-            mobiles.push_back({ p.first, p.second.lock() });
+            mobiles.push_back({ vnum, mob.lock() });
         }
     }
 
@@ -187,7 +199,7 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
 std::shared_ptr<Area> Plugin::ExportArea() const
 {
     auto area = std::make_shared<Area>();
-    area->SavingPlugin = this;
+    area->SavingPlugin = const_cast<Plugin*>(this);
     area->Name = Name();
     vnum_t lastMob = pImpl->MobileMapping.size();
     vnum_t lastObj = pImpl->ObjectMapping.size();

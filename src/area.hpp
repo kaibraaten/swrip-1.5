@@ -65,7 +65,7 @@ public:
     int HighEconomy = 0;
     int LowEconomy = 0;
 
-    const Plugin *SavingPlugin = nullptr;
+    Plugin *SavingPlugin = nullptr;
 };
 
 void FixAreaExits(std::shared_ptr<Area> tarea);
@@ -74,5 +74,11 @@ void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);
 void AssignAreaTo(std::shared_ptr<Character> ch);
 void CleanResets(std::shared_ptr<Area> tarea);
+vnum_t GetFreeRoomVnum(std::shared_ptr<Area> area);
+vnum_t GetFreeObjectVnum(std::shared_ptr<Area> area);
+vnum_t GetFreeMobileVnum(std::shared_ptr<Area> area);
+bool RoomVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
+bool ObjectVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
+bool MobileVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
 
 #endif

@@ -2979,11 +2979,11 @@ const char *MobProgTypeToName(int type)
 
 int MobProgNameToType(const std::string &name)
 {
-    for(auto tuple : MudProgTypes)
+    for(const auto & [type, typeName] : MudProgTypes)
     {
-        if(StrCmp(tuple.second, name) == 0)
+        if(StrCmp(typeName, name) == 0)
         {
-            return tuple.first;
+            return type;
         }
     }
 

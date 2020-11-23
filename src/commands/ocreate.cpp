@@ -8,7 +8,6 @@
 #include "plugins.hpp"
 
 static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &arg);
-static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
 
 void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -49,7 +48,7 @@ void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!VnumIsInArea(vnum, area))
+    if(!ObjectVnumIsInArea(vnum, area))
     {
         ch->Echo("That number is not in your allocated range.\r\n");
         return;
@@ -81,7 +80,7 @@ void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(!VnumIsInArea(vnum, area))
+        if(!ObjectVnumIsInArea(vnum, area))
         {
             ch->Echo("That number is not in your allocated range.\r\n");
             return;
@@ -126,16 +125,7 @@ static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &ar
     }
     else if(!StrCmp(arg, "auto"))
     {
-        for(vnum_t iter = area->VnumRanges.Object.First;
-            iter <= area->VnumRanges.Object.Last;
-            ++iter)
-        {
-            if(GetProtoObject(iter) == nullptr)
-            {
-                vnum = iter;
-                break;
-            }
-        }
+        vnum = GetFreeObjectVnum(area);
     }
     else
     {
@@ -143,9 +133,4 @@ static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &ar
     }
 
     return vnum;
-}
-
-static bool VnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
-{
-    return vnum >= area->VnumRanges.Object.First && vnum <= area->VnumRanges.Object.Last;
 }

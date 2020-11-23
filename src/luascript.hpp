@@ -128,7 +128,8 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key,
 bool FieldExists(lua_State *L, const std::string &key);
 void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
-                     const std::string &callbackFunctionName);
+                     const std::string &callbackFunctionName,
+                     void *userData = nullptr);
 void LuaSaveDataFile(lua_State *L, const std::string &filename, const std::string &data);
 
 template<typename CallableT, typename UserDataT>

@@ -148,18 +148,35 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key, double *value)
 
 void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
-                     const std::string &callbackFunctionName)
+                     const std::string &callbackFunctionName,
+                     void *userData)
 {
     lua_State *L = CreateLuaState();
 
     lua_pushcfunction(L, callback);
     lua_setglobal(L, callbackFunctionName.c_str());
 
-    int error = luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0);
+    if(userData != nullptr)
+    {
+        lua_pushlightuserdata(L, userData);
+        lua_setglobal(L, "UserData");
+    }
+    
+    int error = luaL_loadfile(L, filename.c_str());
 
     if(error)
     {
-        Log->Bug("Cannot run file: %s", lua_tostring(L, -1));
+        Log->Bug("Cannot run file %s: %s",
+                 filename.c_str(), lua_tostring(L, -1));
+        return;
+    }
+
+    error = lua_pcall(L, 0, 0, 0);
+
+    if(error)
+    {
+        Log->Bug("Cannot pcall %s in file %s: %s",
+                 callbackFunctionName.c_str(), filename.c_str(), lua_tostring(L, -1));
         return;
     }
 
