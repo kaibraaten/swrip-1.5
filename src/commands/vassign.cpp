@@ -4,7 +4,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
 void do_vassign(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -65,6 +65,6 @@ void do_vassign(std::shared_ptr<Character> ch, std::string argument)
 
     assert(victim->PCData->Build.Area != nullptr);
 
-    auto helper = AreaSaveHelper::Create(victim->PCData->Build.Area);
-    Areas->Save(victim->PCData->Build.Area, helper);
+    auto vnumConverter = VnumConverter::Create(victim->PCData->Build.Area);
+    Areas->Save(victim->PCData->Build.Area, vnumConverter);
 }

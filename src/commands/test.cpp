@@ -40,7 +40,7 @@
 #include "impscript/improom.hpp"
 #include "impscript/scriptrunner.hpp"
 #include "impscript/scriptscheduler.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 #include "plugins.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
@@ -365,9 +365,9 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     else if(StrCmp(argument, "verifyareasavehelper") == 0)
     {
         auto limbo = Areas->Find("limbo.lua");
-        auto helper = AreaSaveHelper::Create(limbo);
+        auto vnumConverter = VnumConverter::Create(limbo);
         auto classicVnum = limbo->VnumRanges.Room.First;
-        const auto roomVnums = helper->RoomVnums();
+        const auto roomVnums = vnumConverter->RoomVnums();
 
         for(auto helperVnum : roomVnums)
         {

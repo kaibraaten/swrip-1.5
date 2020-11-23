@@ -1,8 +1,8 @@
-#include "areasavehelperbuiltin.hpp"
+#include "builtinvnumconverter.hpp"
 #include "area.hpp"
 #include "mud.hpp"
 
-struct AreaSaveHelperBuiltin::Impl
+struct BuiltinVnumConverter::Impl
 {
     Impl(std::shared_ptr<Area> a)
         : area(a)
@@ -13,18 +13,18 @@ struct AreaSaveHelperBuiltin::Impl
     std::shared_ptr<class Area> area;
 };
 
-AreaSaveHelperBuiltin::AreaSaveHelperBuiltin(std::shared_ptr<Area> area)
+BuiltinVnumConverter::BuiltinVnumConverter(std::shared_ptr<Area> area)
     : pImpl(std::make_unique<Impl>(area))
 {
 
 }
 
-AreaSaveHelperBuiltin::~AreaSaveHelperBuiltin()
+BuiltinVnumConverter::~BuiltinVnumConverter()
 {
 
 }
 
-std::list<vnum_t> AreaSaveHelperBuiltin::RoomVnums() const
+std::list<vnum_t> BuiltinVnumConverter::RoomVnums() const
 {
     std::list<vnum_t> roomlist;
     const auto firstVnum = pImpl->area->VnumRanges.Room.First;
@@ -41,7 +41,7 @@ std::list<vnum_t> AreaSaveHelperBuiltin::RoomVnums() const
     return roomlist;
 }
 
-std::list<vnum_t> AreaSaveHelperBuiltin::ObjectVnums() const
+std::list<vnum_t> BuiltinVnumConverter::ObjectVnums() const
 {
     std::list<vnum_t> objlist;
     const auto firstVnum = pImpl->area->VnumRanges.Object.First;
@@ -58,7 +58,7 @@ std::list<vnum_t> AreaSaveHelperBuiltin::ObjectVnums() const
     return objlist;
 }
 
-std::list<vnum_t> AreaSaveHelperBuiltin::MobileVnums() const
+std::list<vnum_t> BuiltinVnumConverter::MobileVnums() const
 {
     std::list<vnum_t> moblist;
     const auto firstVnum = pImpl->area->VnumRanges.Mob.First;
@@ -76,24 +76,24 @@ std::list<vnum_t> AreaSaveHelperBuiltin::MobileVnums() const
 }
 
 // For builtin areas the absolute and relative vnums are the same.
-vnum_t AreaSaveHelperBuiltin::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
+vnum_t BuiltinVnumConverter::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
 {
     return absolute;
 }
 
 // For builtin areas the absolute and relative vnums are the same.
-vnum_t AreaSaveHelperBuiltin::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
+vnum_t BuiltinVnumConverter::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
 {
     return absolute;
 }
 
 // For builtin areas the absolute and relative vnums are the same.
-vnum_t AreaSaveHelperBuiltin::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
+vnum_t BuiltinVnumConverter::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
 {
     return absolute;
 }
 
-bool AreaSaveHelperBuiltin::ShouldPushReset(std::shared_ptr<Reset> reset) const
+bool BuiltinVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const
 {
     return true;
 }

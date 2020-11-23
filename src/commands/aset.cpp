@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "repos/planetrepository.hpp"
 #include "repos/arearepository.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
 void do_aset(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -84,8 +84,8 @@ void do_aset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        auto helper = AreaSaveHelper::Create(tarea);
-        Areas->ChangeFilename(tarea, helper, argument);
+        auto vnumConverter = VnumConverter::Create(tarea);
+        Areas->ChangeFilename(tarea, vnumConverter, argument);
         ch->Echo("Done.\r\n");
         return;
     }

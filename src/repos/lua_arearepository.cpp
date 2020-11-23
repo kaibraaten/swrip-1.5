@@ -20,7 +20,7 @@
 #include "exit.hpp"
 #include "shop.hpp"
 #include "plugins.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
 #define AREA_DIR        DATA_DIR "areas/"
 #define BUILD_DIR       DATA_DIR "building/"
@@ -42,49 +42,49 @@ public:
     void Load() override;
     void Load(std::shared_ptr<Area> area) override;
     void Save() const override;
-    void Save(const std::shared_ptr<Area> &, std::shared_ptr<AreaSaveHelper> helper) const override;
-    void Save(const std::shared_ptr<Area> &, bool install, std::shared_ptr<AreaSaveHelper> helper) const override;
+    void Save(const std::shared_ptr<Area> &, std::shared_ptr<VnumConverter> vnumConverter) const override;
+    void Save(const std::shared_ptr<Area> &, bool install, std::shared_ptr<VnumConverter> vnumConverter) const override;
     std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
-    void Install(std::shared_ptr<Area> area, std::shared_ptr<AreaSaveHelper> helper, const std::string &newfilename) override;
+    void Install(std::shared_ptr<Area> area, std::shared_ptr<VnumConverter> vnumConverter, const std::string &newfilename) override;
     void ChangeFilename(std::shared_ptr<Area> area,
-                        const std::shared_ptr<AreaSaveHelper> helper,
+                        const std::shared_ptr<VnumConverter> vnumConverter,
                         const std::string &newfilename) override;
 
 private:
     void PushMetaData(lua_State *, std::shared_ptr<Area>,
-                      std::shared_ptr<AreaSaveHelper> helper) const;
+                      std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushLevelRanges(lua_State *L, std::shared_ptr<Area>,
-                         std::shared_ptr<AreaSaveHelper> helper) const;
+                         std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushVnumRanges(lua_State *L, std::shared_ptr<Area>,
-                        std::shared_ptr<AreaSaveHelper> helper) const;
+                        std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushExits(lua_State *L, const std::shared_ptr<Room> room,
-                   std::shared_ptr<AreaSaveHelper> helper) const;
+                   std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushExit(lua_State *L, const std::shared_ptr<Exit> xit, size_t idx,
-                  std::shared_ptr<AreaSaveHelper> helper) const;
+                  std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushRooms(lua_State *L, const std::shared_ptr<Area> &area, bool install,
-                   std::shared_ptr<AreaSaveHelper> helper) const;
+                   std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushRoom(lua_State *L, const std::shared_ptr<Room> room, bool install,
-                  std::shared_ptr<AreaSaveHelper> helper) const;
+                  std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushObjects(lua_State *L, const std::shared_ptr<Area> &area, bool install,
-                     std::shared_ptr<AreaSaveHelper> helper) const;
+                     std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install,
-                    std::shared_ptr<AreaSaveHelper> helper) const;
+                    std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install,
-                     std::shared_ptr<AreaSaveHelper> helper) const;
+                     std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install,
-                    std::shared_ptr<AreaSaveHelper> helper) const;
+                    std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper,
-                  std::shared_ptr<AreaSaveHelper> helper) const;
+                  std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushRepairShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper,
-                        std::shared_ptr<AreaSaveHelper> helper) const;
+                        std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob,
-                      std::shared_ptr<AreaSaveHelper> helper) const;
+                      std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj,
-                     std::shared_ptr<AreaSaveHelper> helper) const;
+                     std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushResets(lua_State *L, const std::shared_ptr<Area> area,
-                    std::shared_ptr<AreaSaveHelper> helper) const;
+                    std::shared_ptr<VnumConverter> vnumConverter) const;
     void PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx,
-                   std::shared_ptr<AreaSaveHelper> helper) const;
+                   std::shared_ptr<VnumConverter> vnumConverter) const;
     static void PushArea(lua_State *L, const SaveData *data);
 
     static void LoadMetaData(lua_State *L, std::shared_ptr<Area> area);
@@ -108,7 +108,7 @@ private:
 };
 
 void LuaAreaRepository::Install(std::shared_ptr<Area> area,
-                                std::shared_ptr<AreaSaveHelper> helper,
+                                std::shared_ptr<VnumConverter> vnumConverter,
                                 const std::string &newfilename)
 {
     if(area->Flags.test(Flag::Area::Prototype))
@@ -126,12 +126,12 @@ void LuaAreaRepository::Install(std::shared_ptr<Area> area,
         }
 
         Add(area);
-        Save(area, true, helper);
+        Save(area, true, vnumConverter);
     }
 }
 
 void LuaAreaRepository::ChangeFilename(std::shared_ptr<Area> area,
-                                       std::shared_ptr<AreaSaveHelper> helper,
+                                       std::shared_ptr<VnumConverter> vnumConverter,
                                        const std::string &newfilename)
 {
     auto oldpath = GetAreaFilename(area);
@@ -139,7 +139,7 @@ void LuaAreaRepository::ChangeFilename(std::shared_ptr<Area> area,
     auto newpath = GetAreaFilename(area);
     std::error_code ec;
     fs::rename(oldpath, newpath, ec);
-    Save(area, helper);
+    Save(area, vnumConverter);
 }
 
 void LuaAreaRepository::Load()
@@ -158,30 +158,31 @@ void LuaAreaRepository::Save() const
 {
     for(auto area : Entities())
     {
-        auto helper = AreaSaveHelper::Create(area);
-        Save(area, helper);
+        auto vnumConverter = VnumConverter::Create(area);
+        Save(area, vnumConverter);
     }
 }
 
-void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, std::shared_ptr<AreaSaveHelper> helper) const
+void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, std::shared_ptr<VnumConverter> vnumConverter) const
 {
-    Save(area, false, helper);
+    Save(area, false, vnumConverter);
 }
 
 struct SaveData
 {
-    SaveData(const LuaAreaRepository *r, std::shared_ptr<Area> a, bool i, std::shared_ptr<AreaSaveHelper> h)
-        : Repos(r), area(a), Install(i), Helper(h)
+    SaveData(const LuaAreaRepository *r, std::shared_ptr<Area> a, bool i, std::shared_ptr<VnumConverter> h)
+        : Repos(r), area(a), Install(i), VnumConverter(h)
     {
     }
+    
     const LuaAreaRepository *Repos;
     std::shared_ptr<Area> area;
     bool Install = false;
-    std::shared_ptr<AreaSaveHelper> Helper;
+    std::shared_ptr<class VnumConverter> VnumConverter;
 };
 
 void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install,
-                             std::shared_ptr<AreaSaveHelper> helper) const
+                             std::shared_ptr<VnumConverter> vnumConverter) const
 {
     // Make backup in case something goes wrong while saving.
     try
@@ -195,7 +196,7 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install,
         Log->Bug("LuaAreaRepository::Save: %s", ex.what());
     }
 
-    SaveData data(this, area, install, helper);
+    SaveData data(this, area, install, vnumConverter);
 
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
 }
@@ -224,7 +225,7 @@ static void PushLevelRange(lua_State *L, const std::string &key, const T &range)
 }
 
 void LuaAreaRepository::PushLevelRanges(lua_State *L, std::shared_ptr<Area> area,
-                                        std::shared_ptr<AreaSaveHelper> helper) const
+                                        std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "LevelRanges");
     lua_newtable(L);
@@ -246,7 +247,7 @@ static void PushVnumRange(lua_State *L, const std::string &key, const T &range)
 }
 
 void LuaAreaRepository::PushVnumRanges(lua_State *L, std::shared_ptr<Area> area,
-                                       std::shared_ptr<AreaSaveHelper> helper) const
+                                       std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "VnumRanges");
     lua_newtable(L);
@@ -257,7 +258,7 @@ void LuaAreaRepository::PushVnumRanges(lua_State *L, std::shared_ptr<Area> area,
 }
 
 void LuaAreaRepository::PushMetaData(lua_State *L, std::shared_ptr<Area> area,
-                                     std::shared_ptr<AreaSaveHelper> helper) const
+                                     std::shared_ptr<VnumConverter> vnumConverter) const
 {
     LuaSetfieldString(L, "Name", area->Name);
 
@@ -271,8 +272,8 @@ void LuaAreaRepository::PushMetaData(lua_State *L, std::shared_ptr<Area> area,
     LuaSetfieldNumber(L, "HighEconomy", area->HighEconomy);
     LuaSetfieldNumber(L, "LowEconomy", area->LowEconomy);
     LuaPushFlags(L, area->Flags, AreaFlags, "Flags");
-    PushLevelRanges(L, area, helper);
-    PushVnumRanges(L, area, helper);
+    PushLevelRanges(L, area, vnumConverter);
+    PushVnumRanges(L, area, vnumConverter);
 }
 
 void LuaAreaRepository::PushArea(lua_State *L, const SaveData *data)
@@ -280,26 +281,26 @@ void LuaAreaRepository::PushArea(lua_State *L, const SaveData *data)
     const std::shared_ptr<Area> area = data->area;
     const LuaAreaRepository *repos = data->Repos;
     const bool install = data->Install;
-    const auto helper = data->Helper;
+    const auto vnumConverter = data->VnumConverter;
     
     lua_pushinteger(L, 0);
     lua_newtable(L);
 
-    repos->PushMetaData(L, area, helper);
+    repos->PushMetaData(L, area, vnumConverter);
 
     if(!area->Flags.test(Flag::Area::PluginZone))
     {
-        repos->PushMobiles(L, area, install, helper);
-        repos->PushObjects(L, area, install, helper);
-        repos->PushRooms(L, area, install, helper);
-        repos->PushResets(L, area, helper);
+        repos->PushMobiles(L, area, install, vnumConverter);
+        repos->PushObjects(L, area, install, vnumConverter);
+        repos->PushRooms(L, area, install, vnumConverter);
+        repos->PushResets(L, area, vnumConverter);
     }
     
     lua_setglobal(L, "area");
 }
 
 void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx,
-                                  std::shared_ptr<AreaSaveHelper> helper) const
+                                  std::shared_ptr<VnumConverter> vnumConverter) const
 {
     if(CURRENT_FILEFORMAT_VERSION == 1)
     {
@@ -310,34 +311,34 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
         {
         case 'm':
         case 'M':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeMobileVnum(reset->Arg1);
-            relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeMobileVnum(reset->Arg1);
+            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
             includeArg3 = true;
             break;
             
         case 'o':
         case 'O':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
             includeArg3 = true;
             break;
             
         case 'p':
         case 'P':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            relativeReset.Arg3 = helper->AbsoluteToRelativeObjectVnum(reset->Arg3);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg3);
             includeArg3 = true;
             break;
             
         case 'e':
         case 'E':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
             includeArg3 = true;
             break;
             
         case 'd':
         case 'D':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
             includeArg3 = true;
             break;
             
@@ -345,11 +346,11 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
         case 'T':
             if(IsBitSet(reset->MiscData, TRAP_OBJ))
             {
-                relativeReset.Arg3 = helper->AbsoluteToRelativeObjectVnum(reset->Arg3);
+                relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg3);
             }
             else
             {
-                relativeReset.Arg3 = helper->AbsoluteToRelativeRoomVnum(reset->Arg3);
+                relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
             }
             
             includeArg3 = true;
@@ -357,17 +358,17 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
 
         case 'g':
         case 'G':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
             break;
             
         case 'r':
         case 'R':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
             break;
 
         case 'h':
         case 'H':
-            relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
             break;
 
         case 'b':
@@ -375,19 +376,19 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
             switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
             {
             case BIT_RESET_DOOR:
-                relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
                 break;
 
             case BIT_RESET_ROOM:
-                relativeReset.Arg1 = helper->AbsoluteToRelativeRoomVnum(reset->Arg1);
+                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
                 break;
 
             case BIT_RESET_MOBILE:
-                relativeReset.Arg1 = helper->AbsoluteToRelativeMobileVnum(reset->Arg1);
+                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeMobileVnum(reset->Arg1);
                 break;
 
             case BIT_RESET_OBJECT:
-                relativeReset.Arg1 = helper->AbsoluteToRelativeObjectVnum(reset->Arg1);
+                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
                 break;
 
             default:
@@ -420,7 +421,7 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
 }
 
 void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> area,
-                                   std::shared_ptr<AreaSaveHelper> helper) const
+                                   std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Resets");
     lua_newtable(L);
@@ -428,9 +429,9 @@ void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> are
 
     for(auto reset = area->FirstReset; reset; reset = reset->Next)
     {
-        if(helper->ShouldPushReset(reset))
+        if(vnumConverter->ShouldPushReset(reset))
         {
-            PushReset(L, reset, ++idx, helper);
+            PushReset(L, reset, ++idx, vnumConverter);
         }
     }
 
@@ -438,7 +439,7 @@ void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> are
 }
 
 void LuaAreaRepository::PushExits(lua_State *L, const std::shared_ptr<Room> room,
-                                  std::shared_ptr<AreaSaveHelper> helper) const
+                                  std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Exits");
     lua_newtable(L);
@@ -448,7 +449,7 @@ void LuaAreaRepository::PushExits(lua_State *L, const std::shared_ptr<Room> room
     {
         if(!xit->Flags.test(Flag::Exit::Portal)) /* don't fold portals */
         {
-            PushExit(L, xit, ++idx, helper);
+            PushExit(L, xit, ++idx, vnumConverter);
         }
     }
 
@@ -456,7 +457,7 @@ void LuaAreaRepository::PushExits(lua_State *L, const std::shared_ptr<Room> room
 }
 
 void LuaAreaRepository::PushExit(lua_State *L, const std::shared_ptr<Exit> xit, size_t idx,
-                                 std::shared_ptr<AreaSaveHelper> helper) const
+                                 std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushinteger(L, idx);
     lua_newtable(L);
@@ -465,7 +466,7 @@ void LuaAreaRepository::PushExit(lua_State *L, const std::shared_ptr<Exit> xit, 
     LuaSetfieldString(L, "Description", StripCarriageReturn(xit->Description));
     LuaSetfieldString(L, "Keyword", StripCarriageReturn(xit->Keyword));
     LuaSetfieldNumber(L, "Key", xit->Key);
-    LuaSetfieldNumber(L, "DestinationVnum", helper->AbsoluteToRelativeRoomVnum(xit->Vnum));
+    LuaSetfieldNumber(L, "DestinationVnum", vnumConverter->AbsoluteToRelativeRoomVnum(xit->Vnum));
     LuaSetfieldNumber(L, "Distance", xit->Distance);
 
     auto flags = xit->Flags;
@@ -476,7 +477,7 @@ void LuaAreaRepository::PushExit(lua_State *L, const std::shared_ptr<Exit> xit, 
 }
 
 void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj,
-                                    std::shared_ptr<AreaSaveHelper> helper) const
+                                    std::shared_ptr<VnumConverter> vnumConverter) const
 {
     auto ovalues = obj->Value;
 
@@ -516,7 +517,7 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
 }
 
 void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room, bool install,
-                                 std::shared_ptr<AreaSaveHelper> helper) const
+                                 std::shared_ptr<VnumConverter> vnumConverter) const
 {
     if(install)
     {
@@ -542,19 +543,19 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
         }
     }
 
-    lua_pushinteger(L, helper->AbsoluteToRelativeRoomVnum(room->Vnum));
+    lua_pushinteger(L, vnumConverter->AbsoluteToRelativeRoomVnum(room->Vnum));
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Vnum", helper->AbsoluteToRelativeRoomVnum(room->Vnum));
+    LuaSetfieldNumber(L, "Vnum", vnumConverter->AbsoluteToRelativeRoomVnum(room->Vnum));
     LuaSetfieldString(L, "Name", room->Name);
     LuaSetfieldString(L, "Tag", room->Tag());
     LuaSetfieldString(L, "Description", StripCarriageReturn(room->Description));
     LuaPushFlags(L, room->Flags, RoomFlags, "Flags");
     LuaSetfieldString(L, "Sector", SectorNames[(int)room->Sector][1]);
     LuaSetfieldNumber(L, "TeleDelay", room->TeleDelay);
-    LuaSetfieldNumber(L, "TeleVnum", helper->AbsoluteToRelativeRoomVnum(room->TeleVnum));
+    LuaSetfieldNumber(L, "TeleVnum", vnumConverter->AbsoluteToRelativeRoomVnum(room->TeleVnum));
     LuaSetfieldNumber(L, "Tunnel", room->Tunnel);
-    PushExits(L, room, helper);
+    PushExits(L, room, vnumConverter);
     LuaPushExtraDescriptions(L, room->ExtraDescriptions());
     LuaPushMudProgs(L, &room->mprog);
 
@@ -562,31 +563,31 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
 }
 
 void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &area, bool install,
-                                  std::shared_ptr<AreaSaveHelper> helper) const
+                                  std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Rooms");
     lua_newtable(L);
-    std::ranges::for_each(helper->RoomVnums(),
-                          [this, L, helper, install](const auto vnum)
+    std::ranges::for_each(vnumConverter->RoomVnums(),
+                          [this, L, vnumConverter, install](const auto vnum)
                           {
-                              PushRoom(L, GetRoom(vnum), install, helper);
+                              PushRoom(L, GetRoom(vnum), install, vnumConverter);
                           });
     lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj,
                                    bool install,
-                                   std::shared_ptr<AreaSaveHelper> helper) const
+                                   std::shared_ptr<VnumConverter> vnumConverter) const
 {
     if(install)
     {
         obj->Flags.reset(Flag::Obj::Prototype);
     }
 
-    lua_pushinteger(L, helper->AbsoluteToRelativeObjectVnum(obj->Vnum));
+    lua_pushinteger(L, vnumConverter->AbsoluteToRelativeObjectVnum(obj->Vnum));
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Vnum", helper->AbsoluteToRelativeObjectVnum(obj->Vnum));
+    LuaSetfieldNumber(L, "Vnum", vnumConverter->AbsoluteToRelativeObjectVnum(obj->Vnum));
     LuaSetfieldString(L, "Name", obj->Name);
     LuaSetfieldString(L, "ShortDescr", obj->ShortDescr);
     LuaSetfieldString(L, "Description", obj->Description);
@@ -595,7 +596,7 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
     LuaSetfieldNumber(L, "Layers", obj->Layers);
     LuaPushFlags(L, obj->Flags, ObjectFlags, "Flags");
     LuaPushFlags(L, obj->WearFlags, WearFlags, "WearFlags");
-    PushOvalues(L, obj, helper);
+    PushOvalues(L, obj, vnumConverter);
     LuaSetfieldNumber(L, "Weight", obj->Weight);
     LuaSetfieldNumber(L, "Cost", obj->Cost);
     LuaPushExtraDescriptions(L, obj->ExtraDescriptions());
@@ -607,44 +608,44 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
 
 void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &area,
                                     bool install,
-                                    std::shared_ptr<AreaSaveHelper> helper) const
+                                    std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Objects");
     lua_newtable(L);
-    std::ranges::for_each(helper->ObjectVnums(),
-                          [this, L, helper, install](const auto vnum)
+    std::ranges::for_each(vnumConverter->ObjectVnums(),
+                          [this, L, vnumConverter, install](const auto vnum)
                           {
-                              PushObject(L, GetProtoObject(vnum), install, helper);
+                              PushObject(L, GetProtoObject(vnum), install, vnumConverter);
                           });
     lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install,
-                                    std::shared_ptr<AreaSaveHelper> helper) const
+                                    std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Mobiles");
     lua_newtable(L);
-    std::ranges::for_each(helper->MobileVnums(),
-                          [this, L, helper, install](const auto vnum)
+    std::ranges::for_each(vnumConverter->MobileVnums(),
+                          [this, L, vnumConverter, install](const auto vnum)
                           {
-                              PushMobile(L, GetProtoMobile(vnum), install, helper);
+                              PushMobile(L, GetProtoMobile(vnum), install, vnumConverter);
                           });
     lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install,
-                                   std::shared_ptr<AreaSaveHelper> helper) const
+                                   std::shared_ptr<VnumConverter> vnumConverter) const
 {
     if(install)
     {
         mob->Flags.reset(Flag::Mob::Prototype);
     }
 
-    lua_pushinteger(L, helper->AbsoluteToRelativeMobileVnum(mob->Vnum));
+    lua_pushinteger(L, vnumConverter->AbsoluteToRelativeMobileVnum(mob->Vnum));
     lua_newtable(L);
 
     LuaSetfieldString(L, "Name", mob->Name);
-    LuaSetfieldNumber(L, "Vnum", helper->AbsoluteToRelativeMobileVnum(mob->Vnum));
+    LuaSetfieldNumber(L, "Vnum", vnumConverter->AbsoluteToRelativeMobileVnum(mob->Vnum));
     LuaSetfieldString(L, "ShortDescr", mob->ShortDescr);
     LuaSetfieldString(L, "LongDescr", StripCarriageReturn(mob->LongDescr));
     LuaSetfieldString(L, "Description", StripCarriageReturn(mob->Description));
@@ -698,15 +699,15 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
 
     if(mob->Shop != nullptr)
     {
-        PushShop(L, mob, helper);
+        PushShop(L, mob, vnumConverter);
     }
 
     if(mob->RepairShop != nullptr)
     {
-        PushRepairShop(L, mob, helper);
+        PushRepairShop(L, mob, vnumConverter);
     }
 
-    PushSpecials(L, mob, helper);
+    PushSpecials(L, mob, vnumConverter);
 
     lua_settable(L, -3);
 }
@@ -741,7 +742,7 @@ static void PushBuyTypes(lua_State *L, const std::array<ItemTypes, N> itemTypes,
 }
 
 void LuaAreaRepository::PushShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper,
-                                 std::shared_ptr<AreaSaveHelper> helper) const
+                                 std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "Shop");
     lua_newtable(L);
@@ -758,7 +759,7 @@ void LuaAreaRepository::PushShop(lua_State *L, const std::shared_ptr<ProtoMobile
 }
 
 void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper,
-                                       std::shared_ptr<AreaSaveHelper> helper) const
+                                       std::shared_ptr<VnumConverter> vnumConverter) const
 {
     lua_pushstring(L, "RepairShop");
     lua_newtable(L);
@@ -775,7 +776,7 @@ void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<Proto
 }
 
 void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob,
-                                     std::shared_ptr<AreaSaveHelper> helper) const
+                                     std::shared_ptr<VnumConverter> vnumConverter) const
 {
     std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 

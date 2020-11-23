@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <utility/algorithms.hpp>
-#include "areasavehelperplugin.hpp"
+#include "pluginvnumconverter.hpp"
 #include "area.hpp"
 #include "mud.hpp"
 #include "plugins.hpp"
@@ -9,7 +9,7 @@
 #include "protomob.hpp"
 #include "reset.hpp"
 
-struct AreaSaveHelperPlugin::Impl
+struct PluginVnumConverter::Impl
 {
     Impl(const Plugin *p)
         : Plugin(p)
@@ -20,18 +20,18 @@ struct AreaSaveHelperPlugin::Impl
     const class Plugin *Plugin = nullptr;
 };
 
-AreaSaveHelperPlugin::AreaSaveHelperPlugin(const Plugin *plugin)
+PluginVnumConverter::PluginVnumConverter(const Plugin *plugin)
     : pImpl(std::make_unique<Impl>(plugin))
 {
 
 }
 
-AreaSaveHelperPlugin::~AreaSaveHelperPlugin()
+PluginVnumConverter::~PluginVnumConverter()
 {
 
 }
 
-std::list<vnum_t> AreaSaveHelperPlugin::RoomVnums() const
+std::list<vnum_t> PluginVnumConverter::RoomVnums() const
 {
     std::list<vnum_t> roomlist;
     std::ranges::transform(pImpl->Plugin->Rooms(),
@@ -44,7 +44,7 @@ std::list<vnum_t> AreaSaveHelperPlugin::RoomVnums() const
     return roomlist;
 }
 
-std::list<vnum_t> AreaSaveHelperPlugin::ObjectVnums() const
+std::list<vnum_t> PluginVnumConverter::ObjectVnums() const
 {
     std::list<vnum_t> objlist;
     std::ranges::transform(pImpl->Plugin->Objects(),
@@ -57,7 +57,7 @@ std::list<vnum_t> AreaSaveHelperPlugin::ObjectVnums() const
     return objlist;
 }
 
-std::list<vnum_t> AreaSaveHelperPlugin::MobileVnums() const
+std::list<vnum_t> PluginVnumConverter::MobileVnums() const
 {
     std::list<vnum_t> moblist;
     std::ranges::transform(pImpl->Plugin->Mobiles(),
@@ -70,7 +70,7 @@ std::list<vnum_t> AreaSaveHelperPlugin::MobileVnums() const
     return moblist;
 }
 
-vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
+vnum_t PluginVnumConverter::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
 {
     for(const auto &t : pImpl->Plugin->Rooms())
     {
@@ -85,7 +85,7 @@ vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
     return absolute;
 }
 
-vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
+vnum_t PluginVnumConverter::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
 {
     for(const auto &t : pImpl->Plugin->Objects())
     {
@@ -100,7 +100,7 @@ vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
     return absolute;
 }
 
-vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
+vnum_t PluginVnumConverter::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
 {
     for(const auto &t : pImpl->Plugin->Mobiles())
     {
@@ -115,7 +115,7 @@ vnum_t AreaSaveHelperPlugin::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
     return absolute;
 }
 
-bool AreaSaveHelperPlugin::ShouldPushReset(std::shared_ptr<Reset> reset) const
+bool PluginVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const
 {
     return reset->Plugin == pImpl->Plugin;
 }

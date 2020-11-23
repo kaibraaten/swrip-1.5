@@ -90,7 +90,7 @@ class Home;
 struct Vo;
 class MudProgMacroCode;
 class Plugin;
-class AreaSaveHelper;
+class VnumConverter;
 
 /*
  * Function types.

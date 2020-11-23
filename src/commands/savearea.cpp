@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "repos/arearepository.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
 void do_savearea(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -45,8 +45,8 @@ void do_savearea(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    auto helper = AreaSaveHelper::Create(tarea);
-    Areas->Save(tarea, helper);
+    auto vnumConverter = VnumConverter::Create(tarea);
+    Areas->Save(tarea, vnumConverter);
     ch->Echo("Done.\r\n");
 }
 

@@ -4,7 +4,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "repos/arearepository.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
 void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -31,15 +31,15 @@ void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
     {
         if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {
-            auto helper = AreaSaveHelper::Create(tarea);
+            auto vnumConverter = VnumConverter::Create(tarea);
             
             if (!StrCmp(argument, "remproto"))
             {
-                Areas->Save(tarea, true, helper);
+                Areas->Save(tarea, true, vnumConverter);
             }
             else
             {
-                Areas->Save(tarea, false, helper);
+                Areas->Save(tarea, false, vnumConverter);
             }
             
             found = true;

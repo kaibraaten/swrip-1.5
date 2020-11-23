@@ -1,13 +1,13 @@
-#ifndef _SWRIP_AREA_SAVE_HELPER_HPP_
-#define _SWRIP_AREA_SAVE_HELPER_HPP_
+#ifndef _SWRIP_VNUM_CONVERTER_HPP_
+#define _SWRIP_VNUM_CONVERTER_HPP_
 
 #include <list>
 #include "types.hpp"
 
-class AreaSaveHelper
+class VnumConverter
 {
 public:
-    virtual ~AreaSaveHelper() = default;
+    virtual ~VnumConverter() = default;
 
     // Room vnums of area in ascending order.
     // Only return actual valid vnums, and not the
@@ -30,7 +30,7 @@ public:
 
     virtual bool ShouldPushReset(std::shared_ptr<Reset> reset) const = 0;
     
-    static std::shared_ptr<AreaSaveHelper> Create(std::shared_ptr<Area> area);
+    static std::shared_ptr<VnumConverter> Create(std::shared_ptr<Area> area);
 };
 
 #endif

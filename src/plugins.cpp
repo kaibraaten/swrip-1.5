@@ -11,7 +11,7 @@
 #include "area.hpp"
 #include "repos/arearepository.hpp"
 #include "luascript.hpp"
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 #include "reset.hpp"
 #include "shop.hpp"
 #include "exit.hpp"
@@ -292,15 +292,38 @@ void Plugin::RoomsToWorld()
         top_room++;
     }
 
+    // Link forward exits
+    for(const auto & [_, room] : pImpl->RoomMapping)
+    {
+        if(!room->Exits().empty())
+        {
+            for(auto xit : room->Exits())
+            {
+                xit->ReverseVnum = room->Vnum;
+                xit->Vnum = pImpl->RelativeToAbsoluteRoomVnum(xit->Vnum);
+                
+                if(xit->Vnum <= 0)
+                {
+                    xit->ToRoom = nullptr;
+                }
+                else
+                {
+                    xit->ToRoom = GetRoom(xit->Vnum);
+                }
+            }
+        }
+        else
+        {
+            room->Flags.set(Flag::Room::NoMob);
+        }
+    }
+
+    // Link reverse exits
     for(const auto & [_, room] : pImpl->RoomMapping)
     {
         // Fix exit destination vnums:
         for(auto xit : room->Exits())
         {
-            xit->Vnum = pImpl->RelativeToAbsoluteRoomVnum(xit->Vnum);
-            xit->ReverseVnum = room->Vnum;
-            xit->ToRoom = GetRoom(xit->Vnum);
-
             if(xit->ToRoom != nullptr && xit->ReverseExit == nullptr)
             {
                 auto revExit = GetExitTo(xit->ToRoom, GetReverseDirection(xit->Direction), room->Vnum);
@@ -481,8 +504,8 @@ void SavePlugin(std::shared_ptr<Plugin> plugin)
     fs::create_directory(GetPluginPath(plugin.get()));
     SaveInfo(plugin);
     auto area = plugin->ExportArea();
-    auto helper = AreaSaveHelper::Create(area);
-    Areas->Save(area, helper);
+    auto vnumConverter = VnumConverter::Create(area);
+    Areas->Save(area, vnumConverter);
 }
 
 std::shared_ptr<Plugin> GetPlugin(const std::string &id)

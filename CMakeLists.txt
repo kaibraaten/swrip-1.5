@@ -30,14 +30,12 @@ src/act_obj.cpp
 src/act_wiz.cpp
 src/alias.cpp
 src/area.cpp
-src/areasavehelper.cpp
-src/areasavehelperbuiltin.cpp
-src/areasavehelperplugin.cpp
 src/arena.cpp
 src/badname.cpp
 src/board.cpp
 src/bounty.cpp
 src/build.cpp
+src/builtinvnumconverter.cpp
 src/character.cpp
 src/clan.cpp
 src/command.cpp
@@ -71,6 +69,7 @@ src/object.cpp
 src/pcdata.cpp
 src/planet.cpp
 src/plugins.cpp
+src/pluginvnumconverter.cpp
 src/protomob.cpp
 src/protoobject.cpp
 src/reset.cpp
@@ -91,6 +90,7 @@ src/triggers.cpp
 src/turret.cpp
 src/update.cpp
 src/vector3_aux.cpp
+src/vnumconverter.cpp
 src/commands/aassign.cpp
 src/commands/accelerate.cpp
 src/commands/accept.cpp

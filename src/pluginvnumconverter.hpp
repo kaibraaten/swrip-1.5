@@ -1,18 +1,17 @@
-#ifndef _SWRIP_AREA_SAVE_HELPER_BUILTIN_HPP_
-#define _SWRIP_AREA_SAVE_HELPER_BUILTIN_HPP_
+#ifndef _SWRIP_PLUGIN_VNUM_CONVERTER_HPP_
+#define _SWRIP_PLUGIN_VNUM_CONVERTER_HPP_
 
 #include <memory>
-#include "areasavehelper.hpp"
+#include "vnumconverter.hpp"
 
-class AreaSaveHelperBuiltin : public AreaSaveHelper
+class PluginVnumConverter : public VnumConverter
 {
 public:
-    AreaSaveHelperBuiltin(std::shared_ptr<Area> area);
-    ~AreaSaveHelperBuiltin();
+    PluginVnumConverter(const Plugin *plugin);
+    ~PluginVnumConverter();
     std::list<vnum_t> RoomVnums() const override;
     std::list<vnum_t> ObjectVnums() const override;
     std::list<vnum_t> MobileVnums() const override;
-
     vnum_t AbsoluteToRelativeRoomVnum(vnum_t absolute) const override;
     vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const override;
     vnum_t AbsoluteToRelativeMobileVnum(vnum_t absolute) const override;
