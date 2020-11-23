@@ -93,6 +93,21 @@ vnum_t BuiltinVnumConverter::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
     return absolute;
 }
 
+vnum_t BuiltinVnumConverter::RelativeToAbsoluteRoomVnum(vnum_t relative) const
+{
+    return relative;
+}
+
+vnum_t BuiltinVnumConverter::RelativeToAbsoluteObjectVnum(vnum_t relative) const
+{
+    return relative;
+}
+
+vnum_t BuiltinVnumConverter::RelativeToAbsoluteMobileVnum(vnum_t relative) const
+{
+    return relative;
+}
+
 bool BuiltinVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const
 {
     return true;

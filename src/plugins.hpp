@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 #include <list>
-#include <tuple>
+#include <utility>
 #include "types.hpp"
 
 class Plugin
@@ -22,15 +22,15 @@ public:
     void Add(std::shared_ptr<ProtoObject> obj, vnum_t = INVALID_VNUM);
     void Add(std::shared_ptr<ProtoMobile> mob, vnum_t = INVALID_VNUM);
     
-    std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Rooms() const;
-    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Objects() const;
-    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;
+    std::list<std::pair<vnum_t, std::shared_ptr<Room>>> Rooms() const;
+    std::list<std::pair<vnum_t, std::shared_ptr<ProtoObject>>> Objects() const;
+    std::list<std::pair<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;
 
     std::shared_ptr<Area> ExportArea() const;
     void RoomsToWorld();
     void ObjectsToWorld();
     void MobilesToWorld();
-    void ResetsToWorld();
+    void ResetsToWorld(std::shared_ptr<Reset> resetList);
     
 private:
     struct Impl;

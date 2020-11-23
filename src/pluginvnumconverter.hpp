@@ -16,6 +16,10 @@ public:
     vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const override;
     vnum_t AbsoluteToRelativeMobileVnum(vnum_t absolute) const override;
 
+    vnum_t RelativeToAbsoluteRoomVnum(vnum_t relative) const override;
+    vnum_t RelativeToAbsoluteObjectVnum(vnum_t relative) const override;
+    vnum_t RelativeToAbsoluteMobileVnum(vnum_t relative) const override;
+    
     bool ShouldPushReset(std::shared_ptr<Reset> reset) const override;
     
 private:

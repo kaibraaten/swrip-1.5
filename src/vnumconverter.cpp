@@ -14,3 +14,8 @@ std::shared_ptr<VnumConverter> VnumConverter::Create(std::shared_ptr<Area> area)
         return std::make_shared<BuiltinVnumConverter>(area);
     }
 }
+
+std::shared_ptr<VnumConverter> VnumConverter::Create(const Plugin *plugin)
+{
+    return std::make_shared<PluginVnumConverter>(plugin);
+}

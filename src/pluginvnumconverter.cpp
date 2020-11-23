@@ -36,9 +36,9 @@ std::list<vnum_t> PluginVnumConverter::RoomVnums() const
     std::list<vnum_t> roomlist;
     std::ranges::transform(pImpl->Plugin->Rooms(),
                            std::back_inserter(roomlist),
-                           [](const auto &t)
+                           [](const auto &p)
                            {
-                               return std::get<1>(t)->Vnum;
+                               return p.second->Vnum;
                            });
     roomlist.sort();
     return roomlist;
@@ -49,9 +49,9 @@ std::list<vnum_t> PluginVnumConverter::ObjectVnums() const
     std::list<vnum_t> objlist;
     std::ranges::transform(pImpl->Plugin->Objects(),
                            std::back_inserter(objlist),
-                           [](const auto &t)
+                           [](const auto &p)
                            {
-                               return std::get<1>(t)->Vnum;
+                               return p.second->Vnum;
                            });
     objlist.sort();
     return objlist;
@@ -62,9 +62,9 @@ std::list<vnum_t> PluginVnumConverter::MobileVnums() const
     std::list<vnum_t> moblist;
     std::ranges::transform(pImpl->Plugin->Mobiles(),
                            std::back_inserter(moblist),
-                           [](const auto &t)
+                           [](const auto &p)
                            {
-                               return std::get<1>(t)->Vnum;
+                               return p.second->Vnum;
                            });
     moblist.sort();
     return moblist;
@@ -72,11 +72,11 @@ std::list<vnum_t> PluginVnumConverter::MobileVnums() const
 
 vnum_t PluginVnumConverter::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
 {
-    for(const auto &t : pImpl->Plugin->Rooms())
+    for(const auto & [relative, room] : pImpl->Plugin->Rooms())
     {
-        if(std::get<1>(t)->Vnum == absolute)
+        if(room->Vnum == absolute)
         {
-            return std::get<0>(t);
+            return relative;
         }
     }
 
@@ -87,11 +87,11 @@ vnum_t PluginVnumConverter::AbsoluteToRelativeRoomVnum(vnum_t absolute) const
 
 vnum_t PluginVnumConverter::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
 {
-    for(const auto &t : pImpl->Plugin->Objects())
+    for(const auto & [relative, obj] : pImpl->Plugin->Objects())
     {
-        if(std::get<1>(t)->Vnum == absolute)
+        if(obj->Vnum == absolute)
         {
-            return std::get<0>(t);
+            return relative;
         }
     }
     
@@ -102,17 +102,56 @@ vnum_t PluginVnumConverter::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
 
 vnum_t PluginVnumConverter::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
 {
-    for(const auto &t : pImpl->Plugin->Mobiles())
+    for(const auto & [relative, mob] : pImpl->Plugin->Mobiles())
     {
-        if(std::get<1>(t)->Vnum == absolute)
+        if(mob->Vnum == absolute)
         {
-            return std::get<0>(t);
+            return relative;
         }
     }
     
     // Vnum must point to somewhere outside the plugin area,
     // so just pass it through.
     return absolute;
+}
+
+vnum_t PluginVnumConverter::RelativeToAbsoluteRoomVnum(vnum_t vnum) const
+{
+    for(const auto & [relative, room] : pImpl->Plugin->Rooms())
+    {
+        if(relative == vnum)
+        {
+            return room->Vnum;
+        }
+    }
+    
+    return vnum;
+}
+
+vnum_t PluginVnumConverter::RelativeToAbsoluteObjectVnum(vnum_t vnum) const
+{
+    for(const auto & [relative, obj] : pImpl->Plugin->Objects())
+    {
+        if(relative == vnum)
+        {
+            return obj->Vnum;
+        }
+    }
+
+    return vnum;
+}
+
+vnum_t PluginVnumConverter::RelativeToAbsoluteMobileVnum(vnum_t vnum) const
+{
+    for(const auto & [relative, mob] : pImpl->Plugin->Mobiles())
+    {
+        if(relative == vnum)
+        {
+            return mob->Vnum;
+        }
+    }
+
+    return vnum;
 }
 
 bool PluginVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const

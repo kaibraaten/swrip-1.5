@@ -73,21 +73,6 @@ struct Plugin::Impl
             return MobileMapping.crbegin()->first + 1;
         }
     }
-
-    vnum_t RelativeToAbsoluteRoomVnum(vnum_t vnum) const
-    {
-        for(const auto & [relative, room] : RoomMapping)
-        {
-            if(relative == vnum)
-            {
-                return room->Vnum;
-            }
-        }
-
-        // Vnum must point to somewhere outside the plugin area,
-        // so just pass it through.
-        return vnum;
-    }
 };
 
 Plugin::Plugin(const std::string &id)
@@ -159,9 +144,9 @@ void Plugin::Add(std::shared_ptr<ProtoMobile> mob, vnum_t localVnum)
     pImpl->MobileMapping.insert({ localVnum, mob });
 }
 
-std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
+std::list<std::pair<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
 {
-    std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> rooms;
+    std::list<std::pair<vnum_t, std::shared_ptr<Room>>> rooms;
 
     for(const auto & [vnum, room] : pImpl->RoomMapping)
     {
@@ -170,14 +155,14 @@ std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
 
     rooms.sort([](const auto &a, const auto &b)
                {
-                   return std::get<0>(a) < std::get<0>(b);
+                   return a.first < b.first;
                });
     return rooms;
 }
 
-std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() const
+std::list<std::pair<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() const
 {
-    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> objects;
+    std::list<std::pair<vnum_t, std::shared_ptr<ProtoObject>>> objects;
 
     for(const auto & [vnum, obj] : pImpl->ObjectMapping)
     {
@@ -186,14 +171,14 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() co
 
     objects.sort([](const auto &a, const auto &b)
                  {
-                     return std::get<0>(a) < std::get<0>(b);
+                     return a.first < b.first;
                  });
     return objects;
 }
 
-std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() const
+std::list<std::pair<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() const
 {
-    std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> mobiles;
+    std::list<std::pair<vnum_t, std::shared_ptr<ProtoMobile>>> mobiles;
 
     for(const auto & [vnum, mob] : pImpl->MobileMapping)
     {
@@ -202,7 +187,7 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
 
     mobiles.sort([](const auto &a, const auto &b)
                  {
-                     return std::get<0>(a) < std::get<0>(b);
+                     return a.first < b.first;
                  });
     return mobiles;
 }
@@ -212,6 +197,7 @@ std::shared_ptr<Area> Plugin::ExportArea() const
     auto area = std::make_shared<Area>();
     area->SavingPlugin = const_cast<Plugin*>(this);
     area->Name = Name();
+    area->Filename = "area.lua";
     vnum_t lastMob = pImpl->MobileMapping.size();
     vnum_t lastObj = pImpl->ObjectMapping.size();
     vnum_t lastRoom = pImpl->RoomMapping.size();
@@ -277,6 +263,7 @@ static int L_PluginEntry(lua_State *L)
 
 void Plugin::RoomsToWorld()
 {
+    auto converter = VnumConverter::Create(this);
     auto zone = FindPluginZone();
     
     for(const auto & [_, room] : pImpl->RoomMapping)
@@ -300,7 +287,7 @@ void Plugin::RoomsToWorld()
             for(auto xit : room->Exits())
             {
                 xit->ReverseVnum = room->Vnum;
-                xit->Vnum = pImpl->RelativeToAbsoluteRoomVnum(xit->Vnum);
+                xit->Vnum = converter->RelativeToAbsoluteRoomVnum(xit->Vnum);
                 
                 if(xit->Vnum <= 0)
                 {
@@ -336,7 +323,7 @@ void Plugin::RoomsToWorld()
             }
         }
 
-        room->TeleVnum = pImpl->RelativeToAbsoluteRoomVnum(room->TeleVnum);
+        room->TeleVnum = converter->RelativeToAbsoluteRoomVnum(room->TeleVnum);
     }
 }
 
@@ -378,10 +365,109 @@ void Plugin::MobilesToWorld()
     }
 }
 
-void Plugin::ResetsToWorld()
+void Plugin::ResetsToWorld(std::shared_ptr<Reset> resetList)
 {
+    auto converter = VnumConverter::Create(this);
+    auto zone = FindPluginZone();
+    
+    for(auto reset = resetList; reset; reset = reset->Next)
+    {
+        switch(reset->Command)
+        {
+        case 'm':
+        case 'M':
+            reset->Arg1 = converter->RelativeToAbsoluteMobileVnum(reset->Arg1);
+            reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
+            break;
 
+        case 'o':
+        case 'O':
+            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
+            reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
+            break;
+
+        case 'p':
+        case 'P':
+            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
+            reset->Arg3 = converter->RelativeToAbsoluteObjectVnum(reset->Arg3);
+            break;
+
+        case 'e':
+        case 'E':
+            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
+            break;
+
+        case 'd':
+        case 'D':
+            reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
+            break;
+
+        case 't':
+        case 'T':
+            if(IsBitSet(reset->MiscData, TRAP_OBJ))
+            {
+                reset->Arg3 = converter->RelativeToAbsoluteObjectVnum(reset->Arg3);
+            }
+            else
+            {
+                reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
+            }
+            break;
+
+        case 'g':
+        case 'G':
+            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
+            break;
+
+        case 'r':
+        case 'R':
+            reset->Arg1 = converter->AbsoluteToRelativeRoomVnum(reset->Arg1);
+            break;
+
+        case 'h':
+        case 'H':
+            reset->Arg1 = converter->AbsoluteToRelativeObjectVnum(reset->Arg1);
+            break;
+
+        case 'b':
+        case 'B':
+            switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
+            {
+            case BIT_RESET_DOOR:
+                reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_ROOM:
+                reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_MOBILE:
+                reset->Arg1 = converter->RelativeToAbsoluteMobileVnum(reset->Arg1);
+                break;
+
+            case BIT_RESET_OBJECT:
+                reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
+                break;
+
+            default:
+                break;
+            }
+
+            break;
+
+        case '*':
+        default:
+            continue;
+        }
+
+        AddReset(zone, reset->Command, reset->MiscData,
+                 reset->Arg1, reset->Arg2, reset->Arg3,
+                 this);
+    }
+
+    RenumberPutResets(zone);
 }
+
 static void LoadPluginInfo(const std::string &filename)
 {
     LuaLoadDataFile(filename, L_PluginEntry, "PluginEntry");
@@ -418,8 +504,7 @@ static void LoadPluginArea(std::shared_ptr<Plugin> plugin)
     plugin->MobilesToWorld();
 
     Log->Info("Moving resets to plugin zone.");
-    plugin->ResetsToWorld();
-    
+    plugin->ResetsToWorld(area->FirstReset);
 }
 
 void LoadPlugins()
