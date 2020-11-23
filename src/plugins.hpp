@@ -27,6 +27,10 @@ public:
     std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Mobiles() const;
 
     std::shared_ptr<Area> ExportArea() const;
+    void RoomsToWorld();
+    void ObjectsToWorld();
+    void MobilesToWorld();
+    void ResetsToWorld();
     
 private:
     struct Impl;
@@ -37,8 +41,9 @@ inline std::list<std::shared_ptr<Plugin>> Plugins;
 
 void LoadPlugins();
 void SavePlugin(std::shared_ptr<Plugin> plugin);
-std::shared_ptr<Plugin> FindPlugin(const std::string &id);
+std::shared_ptr<Plugin> GetPlugin(const std::string &id);
 std::shared_ptr<Plugin> CreatePlugin(const std::string &id);
 std::string GetPluginPath(const Plugin *plugin);
+std::shared_ptr<Area> FindPluginZone();
 
 #endif

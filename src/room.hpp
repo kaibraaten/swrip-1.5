@@ -104,7 +104,7 @@ public:
     std::string Tag() const;
     void Tag(const std::string &tag);
 
-    std::shared_ptr<class Plugin> Plugin;
+    class Plugin *Plugin = nullptr;
     
     std::shared_ptr<Reset> FirstReset;
     std::shared_ptr<Reset> LastReset;

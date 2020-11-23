@@ -7,18 +7,9 @@
 #include "repos/arearepository.hpp"
 #include "log.hpp"
 
-static std::shared_ptr<Area> FindPluginZone()
-{
-    return Find(Areas->Entities(),
-                [](const auto &area)
-                {
-                    return area->Flags.test(Flag::Area::PluginZone);
-                });
-}
-
 void do_passign(std::shared_ptr<Character> ch, std::string argument)
 {
-    auto plugin = FindPlugin(argument);
+    auto plugin = GetPlugin(argument);
 
     if(plugin != nullptr)
     {

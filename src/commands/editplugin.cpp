@@ -77,7 +77,7 @@ static void EditPluginCreate(std::shared_ptr<Character> ch, std::string argument
         return;
     }
 
-    if(FindPlugin(argument))
+    if(GetPlugin(argument))
     {
         ch->Echo("&RA plugin with that identifier already exists.&d\r\n");
         return;

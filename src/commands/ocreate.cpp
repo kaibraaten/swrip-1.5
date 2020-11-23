@@ -111,7 +111,6 @@ void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
     if(plugin != nullptr)
     {
         plugin->Add(pObjIndex);
-        pObjIndex->Plugin = plugin;
     }
 }
 

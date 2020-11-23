@@ -45,7 +45,6 @@ void do_rcreate(std::shared_ptr<Character> ch, std::string argument)
     if(plugin != nullptr)
     {
         plugin->Add(newRoom);
-        newRoom->Plugin = plugin;
     }
 
     do_goto(ch, std::to_string(vnum));

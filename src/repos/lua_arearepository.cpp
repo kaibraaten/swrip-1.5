@@ -1067,7 +1067,7 @@ void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shar
 
     if(area->SavingPlugin == nullptr)
     {
-        ProtoMobs.insert(std::make_pair(vnum, mob));
+        ProtoMobs.insert({ vnum, mob });
     }
     else
     {
@@ -1107,7 +1107,7 @@ void LuaAreaRepository::LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shar
 
     if(area->SavingPlugin == nullptr)
     {
-        ProtoObjects.insert(std::make_pair(vnum, obj));
+        ProtoObjects.insert({ vnum, obj });
     }
     else
     {
@@ -1346,7 +1346,7 @@ void LuaAreaRepository::LoadReset(lua_State *L, int subscript,
         }
     }
 
-    resets->insert(std::make_pair(subscript, reset));
+    resets->insert({ subscript, reset });
 }
 
 int LuaAreaRepository::L_AreaEntry(lua_State *L)

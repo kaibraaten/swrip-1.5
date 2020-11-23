@@ -41,6 +41,7 @@
 #include "impscript/scriptrunner.hpp"
 #include "impscript/scriptscheduler.hpp"
 #include "areasavehelper.hpp"
+#include "plugins.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 
@@ -388,6 +389,10 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
         }
 
         ch->Echo("Done verifying.");
+    }
+    else if(StrCmp(argument, "loadplugins") == 0)
+    {
+        LoadPlugins();
     }
     else
     {

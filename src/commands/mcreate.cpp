@@ -103,6 +103,5 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
     if(plugin != nullptr)
     {
         plugin->Add(pMobIndex);
-        pMobIndex->Plugin = plugin;
     }
 }

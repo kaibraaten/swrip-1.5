@@ -435,7 +435,7 @@ void BootDatabase(bool fCopyOver)
     Homes->Load();
 
     Log->Boot("Loading plugins");
-    LoadPlugins();
+    //LoadPlugins();
     
     Log->Boot("Resetting areas");
     AreaUpdate();
@@ -949,7 +949,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
     }
 
     pObjIndex->Flags.set(Flag::Obj::Prototype);
-    ProtoObjects.insert(std::make_pair(vnum, pObjIndex));
+    ProtoObjects.insert({ vnum, pObjIndex });
 
     return pObjIndex;
 }
@@ -1033,7 +1033,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
     }
 
-    ProtoMobs.insert(std::make_pair(vnum, pMobIndex));
+    ProtoMobs.insert({ vnum, pMobIndex });
 
     return pMobIndex;
 }

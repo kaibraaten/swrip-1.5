@@ -13,6 +13,8 @@
 #include "luascript.hpp"
 #include "areasavehelper.hpp"
 #include "reset.hpp"
+#include "shop.hpp"
+#include "exit.hpp"
 
 namespace fs = std::filesystem;
 
@@ -32,9 +34,9 @@ struct Plugin::Impl
     std::string Description;
 
     // Local vnum -> real vnum
-    std::map<vnum_t, std::weak_ptr<Room>> RoomMapping;
-    std::map<vnum_t, std::weak_ptr<ProtoObject>> ObjectMapping;
-    std::map<vnum_t, std::weak_ptr<ProtoMobile>> MobileMapping;
+    std::map<vnum_t, std::shared_ptr<Room>> RoomMapping;
+    std::map<vnum_t, std::shared_ptr<ProtoObject>> ObjectMapping;
+    std::map<vnum_t, std::shared_ptr<ProtoMobile>> MobileMapping;
 
     vnum_t GetNextRoomVnum() const
     {
@@ -47,7 +49,7 @@ struct Plugin::Impl
             return RoomMapping.crbegin()->first + 1;
         }
     }
-    
+
     vnum_t GetNextObjectVnum() const
     {
         if(ObjectMapping.empty())
@@ -70,6 +72,21 @@ struct Plugin::Impl
         {
             return MobileMapping.crbegin()->first + 1;
         }
+    }
+
+    vnum_t RelativeToAbsoluteRoomVnum(vnum_t vnum) const
+    {
+        for(const auto & [relative, room] : RoomMapping)
+        {
+            if(relative == vnum)
+            {
+                return room->Vnum;
+            }
+        }
+
+        // Vnum must point to somewhere outside the plugin area,
+        // so just pass it through.
+        return vnum;
     }
 };
 
@@ -115,7 +132,8 @@ void Plugin::Add(std::shared_ptr<Room> room, vnum_t localVnum)
     {
         localVnum = pImpl->GetNextRoomVnum();
     }
-    
+
+    room->Plugin = this;
     pImpl->RoomMapping.insert({ localVnum, room });
 }
 
@@ -125,7 +143,8 @@ void Plugin::Add(std::shared_ptr<ProtoObject> obj, vnum_t localVnum)
     {
         localVnum = pImpl->GetNextObjectVnum();
     }
-    
+
+    obj->Plugin = this;
     pImpl->ObjectMapping.insert({ localVnum, obj });
 }
 
@@ -135,7 +154,8 @@ void Plugin::Add(std::shared_ptr<ProtoMobile> mob, vnum_t localVnum)
     {
         localVnum = pImpl->GetNextMobVnum();
     }
-    
+
+    mob->Plugin = this;
     pImpl->MobileMapping.insert({ localVnum, mob });
 }
 
@@ -145,12 +165,9 @@ std::list<std::tuple<vnum_t, std::shared_ptr<Room>>> Plugin::Rooms() const
 
     for(const auto & [vnum, room] : pImpl->RoomMapping)
     {
-        if(!room.expired())
-        {
-            rooms.push_back({ vnum, room.lock() });
-        }
+        rooms.push_back({ vnum, room });
     }
-    
+
     rooms.sort([](const auto &a, const auto &b)
                {
                    return std::get<0>(a) < std::get<0>(b);
@@ -164,16 +181,13 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoObject>>> Plugin::Objects() co
 
     for(const auto & [vnum, obj] : pImpl->ObjectMapping)
     {
-        if(!obj.expired())
-        {
-            objects.push_back({ vnum, obj.lock() });
-        }
+        objects.push_back({ vnum, obj });
     }
 
     objects.sort([](const auto &a, const auto &b)
-               {
-                   return std::get<0>(a) < std::get<0>(b);
-               });
+                 {
+                     return std::get<0>(a) < std::get<0>(b);
+                 });
     return objects;
 }
 
@@ -183,16 +197,13 @@ std::list<std::tuple<vnum_t, std::shared_ptr<ProtoMobile>>> Plugin::Mobiles() co
 
     for(const auto & [vnum, mob] : pImpl->MobileMapping)
     {
-        if(!mob.expired())
-        {
-            mobiles.push_back({ vnum, mob.lock() });
-        }
+        mobiles.push_back({ vnum, mob });
     }
 
     mobiles.sort([](const auto &a, const auto &b)
-               {
-                   return std::get<0>(a) < std::get<0>(b);
-               });
+                 {
+                     return std::get<0>(a) < std::get<0>(b);
+                 });
     return mobiles;
 }
 
@@ -215,7 +226,7 @@ std::shared_ptr<Area> Plugin::ExportArea() const
     {
         area->VnumRanges.Object.First = 1;
         area->VnumRanges.Object.Last = lastObj;
-    }    
+    }
 
     if(lastRoom != INVALID_VNUM)
     {
@@ -233,16 +244,220 @@ std::shared_ptr<Area> Plugin::ExportArea() const
     area->LastReset = pluginZone->LastReset;
     area->LastMobReset = pluginZone->LastMobReset;
     area->LastObjectReset = pluginZone->LastObjectReset;
-        
+
     return area;
 }
 
 //////////////////////////////////////////////////////////
 // Free functions
 
-void LoadPlugins()
+static int L_PluginEntry(lua_State *L)
+{
+    std::string id;
+    LuaGetfieldString(L, "Id", &id);
+
+    if(GetPlugin(id))
+    {
+        Log->Bug("Plugin with id %s already exists.", id.c_str());
+        return 0;
+    }
+
+    std::shared_ptr<Plugin> plugin = CreatePlugin(id);
+    LuaGetfieldString(L, "Name", [plugin](const auto &name)
+                                 {
+                                     plugin->Name(name);
+                                 });
+    LuaGetfieldString(L, "Description", [plugin](const auto &desc)
+                                        {
+                                            plugin->Description(desc);
+                                        });
+
+    return 0;
+}
+
+void Plugin::RoomsToWorld()
+{
+    auto zone = FindPluginZone();
+    
+    for(const auto & [_, room] : pImpl->RoomMapping)
+    {
+        vnum_t vnum = GetFreeRoomVnum(zone);
+        room->Vnum = vnum;
+        room->Area = zone;
+        room->Plugin = this;
+        
+        int iHash = vnum % MAX_KEY_HASH;
+        room->Next = RoomIndexHash[iHash];
+        RoomIndexHash[iHash] = room;
+        top_room++;
+    }
+
+    for(const auto & [_, room] : pImpl->RoomMapping)
+    {
+        // Fix exit destination vnums:
+        for(auto xit : room->Exits())
+        {
+            xit->Vnum = pImpl->RelativeToAbsoluteRoomVnum(xit->Vnum);
+            xit->ReverseVnum = room->Vnum;
+            xit->ToRoom = GetRoom(xit->Vnum);
+
+            if(xit->ToRoom != nullptr && xit->ReverseExit == nullptr)
+            {
+                auto revExit = GetExitTo(xit->ToRoom, GetReverseDirection(xit->Direction), room->Vnum);
+
+                if(revExit != nullptr)
+                {
+                    xit->ReverseExit = revExit;
+                    revExit->ReverseExit = xit;
+                }
+            }
+        }
+
+        room->TeleVnum = pImpl->RelativeToAbsoluteRoomVnum(room->TeleVnum);
+    }
+}
+
+void Plugin::ObjectsToWorld()
+{
+    auto zone = FindPluginZone();
+
+    for(const auto & [_, obj] : pImpl->ObjectMapping)
+    {
+        vnum_t vnum = GetFreeObjectVnum(zone);
+        obj->Vnum = vnum;
+        obj->Plugin = this;
+        
+        ProtoObjects.insert({ vnum, obj });
+    }
+}
+
+void Plugin::MobilesToWorld()
+{
+    auto zone = FindPluginZone();
+
+    for(const auto & [_, mob] : pImpl->MobileMapping)
+    {
+        vnum_t vnum = GetFreeMobileVnum(zone);
+        mob->Vnum = vnum;
+        mob->Plugin = this;
+
+        if(mob->Shop != nullptr)
+        {
+            mob->Shop->Keeper = mob->Vnum;
+        }
+
+        if(mob->RepairShop != nullptr)
+        {
+            mob->RepairShop->Keeper = mob->Vnum;
+        }
+        
+        ProtoMobs.insert({ vnum, mob });
+    }
+}
+
+void Plugin::ResetsToWorld()
 {
 
+}
+static void LoadPluginInfo(const std::string &filename)
+{
+    LuaLoadDataFile(filename, L_PluginEntry, "PluginEntry");
+}
+
+static void LoadPluginArea(std::shared_ptr<Plugin> plugin)
+{
+    auto area = plugin->ExportArea();
+    area->FirstReset = nullptr;
+    area->LastReset = nullptr;
+    area->LastMobReset = nullptr;
+    area->LastObjectReset = nullptr;
+    Areas->Load(area);
+
+    Log->Info("Loaded %ld rooms.", plugin->Rooms().size());
+    Log->Info("Loaded %ld objects.", plugin->Objects().size());
+    Log->Info("Loaded %ld mobiles.", plugin->Mobiles().size());
+    int numResets = 0;
+
+    for(auto reset = area->FirstReset; reset; reset = reset->Next)
+    {
+        ++numResets;
+    }
+
+    Log->Info("Loaded %d resets.", numResets);
+
+    Log->Info("Moving rooms to plugin zone.");
+    plugin->RoomsToWorld();
+
+    Log->Info("Moving objects to plugin zone.");
+    plugin->ObjectsToWorld();
+
+    Log->Info("Moving mobiles to plugin zone.");
+    plugin->MobilesToWorld();
+
+    Log->Info("Moving resets to plugin zone.");
+    plugin->ResetsToWorld();
+    
+}
+
+void LoadPlugins()
+{
+    try
+    {
+        for(const auto &iter : fs::directory_iterator(PLUGIN_DIR))
+        {
+            const auto &entry = iter.path().string();
+            auto filename = iter.path().filename().string();
+
+            if(iter.is_directory())
+            {
+                if(filename[0] == '_')
+                {
+                    Log->Info("Ignoring directory: %s", entry.c_str());
+                }
+                else
+                {
+                    Log->Info("Directory: %s", entry.c_str());
+
+                    if(GetPlugin(filename) == nullptr)
+                    {
+                        if(fs::exists(entry + "/info.lua"))
+                        {
+                            Log->Info("Found plugin info file.");
+                            LoadPluginInfo(entry + "/info.lua");
+                        }
+
+                        auto plugin = GetPlugin(filename);
+
+                        if(plugin != nullptr)
+                        {
+                            if(fs::exists(entry + "/area.lua"))
+                            {
+                                Log->Info("Found area file.");
+                                LoadPluginArea(plugin);
+                            }
+                        }
+                        else
+                        {
+                            Log->Bug("Failed to load plugin!");
+                        }
+                    }
+                    else
+                    {
+                        Log->Bug("Plugin with id %s already exists.", filename.c_str());
+                    }
+                }
+            }
+            else if(iter.is_regular_file())
+            {
+                Log->Info("Ignoring regular file: %s", entry.c_str());
+            }
+        }
+    }
+    catch(const fs::filesystem_error &ex)
+    {
+        perror(ex.what());
+        exit(1);
+    }
 }
 
 static void SaveInfo(std::shared_ptr<Plugin> plugin)
@@ -254,7 +469,7 @@ static void SaveInfo(std::shared_ptr<Plugin> plugin)
                         LuaSetfieldString(L, "Id", plugin->Id());
                         LuaSetfieldString(L, "Name", plugin->Name());
                         LuaSetfieldString(L, "Description", plugin->Description());
-                        
+
                         lua_setglobal(L, "plugin");
                     };
     LuaSaveDataFile(GetPluginPath(plugin.get()) + "/info.lua", saveData, "plugin");
@@ -270,7 +485,7 @@ void SavePlugin(std::shared_ptr<Plugin> plugin)
     Areas->Save(area, helper);
 }
 
-std::shared_ptr<Plugin> FindPlugin(const std::string &id)
+std::shared_ptr<Plugin> GetPlugin(const std::string &id)
 {
     auto byId = [id](const auto &p)
                 {
@@ -281,7 +496,7 @@ std::shared_ptr<Plugin> FindPlugin(const std::string &id)
 
 std::shared_ptr<Plugin> CreatePlugin(const std::string &id)
 {
-    if(FindPlugin(id) == nullptr)
+    if(GetPlugin(id) == nullptr)
     {
         auto newPlugin = std::make_shared<Plugin>(id);
         Plugins.push_back(newPlugin);
@@ -296,4 +511,13 @@ std::shared_ptr<Plugin> CreatePlugin(const std::string &id)
 std::string GetPluginPath(const Plugin *plugin)
 {
     return FormatString("%s%s", PLUGIN_DIR, plugin->Id().c_str());
+}
+
+std::shared_ptr<Area> FindPluginZone()
+{
+    return Find(Areas->Entities(),
+                [](const auto &area)
+                {
+                    return area->Flags.test(Flag::Area::PluginZone);
+                });
 }

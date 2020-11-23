@@ -29,7 +29,7 @@ public:
     std::string Description;
     std::string ActionDescription;
     vnum_t Vnum = INVALID_VNUM;
-    std::shared_ptr<class Plugin> Plugin;
+    class Plugin *Plugin = nullptr;
     int Level = 0;
     ItemTypes ItemType = 0;
     std::bitset<Flag::MAX> Flags;
