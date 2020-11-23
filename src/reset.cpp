@@ -49,6 +49,7 @@
 #include "protomob.hpp"
 #include "exit.hpp"
 #include "triggers.hpp"
+#include "pcdata.hpp"
 
 static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
 static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3, const Plugin *plugin);
@@ -1255,8 +1256,9 @@ static void EditResetHide(std::shared_ptr<Character> ch, std::string argument, s
 }
 
 void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
-               std::shared_ptr<Room> aRoom, const Plugin *plugin)
+               std::shared_ptr<Room> aRoom)
 {
+    const Plugin *plugin = ch->PCData->Build.Plugin.get();
     std::string arg;
     argument = OneArgument(argument, arg);
 
@@ -1322,7 +1324,7 @@ void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_
     }
     else
     {
-        EditReset(ch, "", pArea, aRoom, plugin);
+        EditReset(ch, "", pArea, aRoom);
     }
 }
 

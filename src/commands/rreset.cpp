@@ -12,5 +12,5 @@ void do_rreset(std::shared_ptr<Character> ch, std::string argument)
     if (!CanModifyRoom(ch, pRoom))
         return;
 
-    EditReset(ch, argument, pRoom->Area, pRoom, ch->PCData->Build.Plugin.get());
+    EditReset(ch, argument, pRoom->Area, pRoom);
 }
