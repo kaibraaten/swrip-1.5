@@ -1448,10 +1448,11 @@ looking for stray ewoks or anything else in that manner.\
             [1] = 
             {
                MudProgType = "rand_prog", 
-               Code = "mpecho The children scream with excitement.\
+               Code = "def on_rand(room):\
+    echo(room, 'The children scream with excitement.')\
 ", 
                Arguments = "40", 
-               ScriptType = "MProg", 
+               ScriptType = "Imp", 
             }, 
          }, 
          Exits = 

@@ -232,6 +232,7 @@ src/commands/enter.cpp
 src/commands/equipment.cpp
 src/commands/examine.cpp
 src/commands/exits.cpp
+src/commands/finddependencies.cpp
 src/commands/fill.cpp
 src/commands/fire.cpp
 src/commands/firstaid.cpp
