@@ -33,6 +33,8 @@ public:
     virtual vnum_t RelativeToAbsoluteMobileVnum(vnum_t absolute) const = 0;
     
     virtual bool ShouldPushReset(std::shared_ptr<Reset> reset) const = 0;
+    virtual std::shared_ptr<Reset> ResetToAbsolute(std::shared_ptr<Reset> reset) const = 0;
+    virtual std::shared_ptr<Reset> ResetToRelative(std::shared_ptr<Reset> reset) const = 0;
     
     static std::shared_ptr<VnumConverter> Create(std::shared_ptr<Area> area);
     static std::shared_ptr<VnumConverter> Create(const Plugin *plugin);

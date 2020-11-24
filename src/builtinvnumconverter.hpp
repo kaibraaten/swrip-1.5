@@ -22,6 +22,8 @@ public:
     vnum_t RelativeToAbsoluteMobileVnum(vnum_t relative) const override;
     
     bool ShouldPushReset(std::shared_ptr<Reset> reset) const override;
+    std::shared_ptr<Reset> ResetToAbsolute(std::shared_ptr<Reset> reset) const override;
+    std::shared_ptr<Reset> ResetToRelative(std::shared_ptr<Reset> reset) const override;
     
 private:
     struct Impl;

@@ -504,7 +504,9 @@ static void EditResetShowSyntax(std::shared_ptr<Character> ch, std::string argum
     }
 }
 
-static void EditResetArea(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+static void EditResetArea(std::shared_ptr<Character> ch, std::string argument,
+                          std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom,
+                          const Plugin *plugin)
 {
     if(!pArea->FirstReset)
     {

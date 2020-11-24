@@ -372,94 +372,12 @@ void Plugin::ResetsToWorld(std::shared_ptr<Reset> resetList)
     
     for(auto reset = resetList; reset; reset = reset->Next)
     {
-        switch(reset->Command)
+        if(reset->Command == '*')
         {
-        case 'm':
-        case 'M':
-            reset->Arg1 = converter->RelativeToAbsoluteMobileVnum(reset->Arg1);
-            reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
-            break;
-
-        case 'o':
-        case 'O':
-            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
-            reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
-            break;
-
-        case 'p':
-        case 'P':
-            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
-            reset->Arg3 = converter->RelativeToAbsoluteObjectVnum(reset->Arg3);
-            break;
-
-        case 'e':
-        case 'E':
-            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
-            break;
-
-        case 'd':
-        case 'D':
-            reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
-            break;
-
-        case 't':
-        case 'T':
-            if(IsBitSet(reset->MiscData, TRAP_OBJ))
-            {
-                reset->Arg3 = converter->RelativeToAbsoluteObjectVnum(reset->Arg3);
-            }
-            else
-            {
-                reset->Arg3 = converter->RelativeToAbsoluteRoomVnum(reset->Arg3);
-            }
-            break;
-
-        case 'g':
-        case 'G':
-            reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
-            break;
-
-        case 'r':
-        case 'R':
-            reset->Arg1 = converter->AbsoluteToRelativeRoomVnum(reset->Arg1);
-            break;
-
-        case 'h':
-        case 'H':
-            reset->Arg1 = converter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            break;
-
-        case 'b':
-        case 'B':
-            switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
-            {
-            case BIT_RESET_DOOR:
-                reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_ROOM:
-                reset->Arg1 = converter->RelativeToAbsoluteRoomVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_MOBILE:
-                reset->Arg1 = converter->RelativeToAbsoluteMobileVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_OBJECT:
-                reset->Arg1 = converter->RelativeToAbsoluteObjectVnum(reset->Arg1);
-                break;
-
-            default:
-                break;
-            }
-
-            break;
-
-        case '*':
-        default:
             continue;
         }
-
+        
+        converter->ResetToAbsolute(reset);
         AddReset(zone, reset->Command, reset->MiscData,
                  reset->Arg1, reset->Arg2, reset->Arg3,
                  this);
@@ -543,6 +461,11 @@ void LoadPlugins()
                                 Log->Info("Found area file.");
                                 LoadPluginArea(plugin);
                             }
+
+
+                            // Load more stuff here
+
+                            Log->Info("Done loading plugin %s.", plugin->Name().c_str());
                         }
                         else
                         {

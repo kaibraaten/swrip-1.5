@@ -112,3 +112,13 @@ bool BuiltinVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const
 {
     return true;
 }
+
+std::shared_ptr<Reset> BuiltinVnumConverter::ResetToAbsolute(std::shared_ptr<Reset> reset) const
+{
+    return reset;
+}
+
+std::shared_ptr<Reset> BuiltinVnumConverter::ResetToRelative(std::shared_ptr<Reset> reset) const
+{
+    return reset;
+}

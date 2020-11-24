@@ -302,122 +302,18 @@ void LuaAreaRepository::PushArea(lua_State *L, const SaveData *data)
 void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx,
                                   std::shared_ptr<VnumConverter> vnumConverter) const
 {
-    if(CURRENT_FILEFORMAT_VERSION == 1)
-    {
-        Reset relativeReset(*reset);
-        bool includeArg3 = false;
+    auto relativeReset = vnumConverter->ResetToRelative(reset);
 
-        switch(reset->Command)
-        {
-        case 'm':
-        case 'M':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeMobileVnum(reset->Arg1);
-            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
-            includeArg3 = true;
-            break;
-            
-        case 'o':
-        case 'O':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
-            includeArg3 = true;
-            break;
-            
-        case 'p':
-        case 'P':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg3);
-            includeArg3 = true;
-            break;
-            
-        case 'e':
-        case 'E':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            includeArg3 = true;
-            break;
-            
-        case 'd':
-        case 'D':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
-            includeArg3 = true;
-            break;
-            
-        case 't':
-        case 'T':
-            if(IsBitSet(reset->MiscData, TRAP_OBJ))
-            {
-                relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg3);
-            }
-            else
-            {
-                relativeReset.Arg3 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg3);
-            }
-            
-            includeArg3 = true;
-            break;
+    lua_pushnumber(L, idx);
+    lua_newtable(L);
 
-        case 'g':
-        case 'G':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            break;
-            
-        case 'r':
-        case 'R':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
-            break;
-
-        case 'h':
-        case 'H':
-            relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-            break;
-
-        case 'b':
-        case 'B':
-            switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
-            {
-            case BIT_RESET_DOOR:
-                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_ROOM:
-                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeRoomVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_MOBILE:
-                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeMobileVnum(reset->Arg1);
-                break;
-
-            case BIT_RESET_OBJECT:
-                relativeReset.Arg1 = vnumConverter->AbsoluteToRelativeObjectVnum(reset->Arg1);
-                break;
-
-            default:
-                break;
-            }
-            
-            includeArg3 = true;
-            break;
-            
-        case '*':
-        default:
-            return;
-        }
-
-        lua_pushnumber(L, idx);
-        lua_newtable(L);
-
-        LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(relativeReset.Command)));
-        LuaSetfieldNumber(L, "Arg1", relativeReset.Arg1);
-        LuaSetfieldNumber(L, "Arg2", relativeReset.Arg2);
-        LuaSetfieldNumber(L, "MiscData", relativeReset.MiscData);
-
-        if(includeArg3)
-        {
-            LuaSetfieldNumber(L, "Arg3", relativeReset.Arg3);
-        }
-
-        lua_settable(L, -3);
-    }
+    LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(relativeReset->Command)));
+    LuaSetfieldNumber(L, "Arg1", relativeReset->Arg1);
+    LuaSetfieldNumber(L, "Arg2", relativeReset->Arg2);
+    LuaSetfieldNumber(L, "Arg3", relativeReset->Arg3);
+    LuaSetfieldNumber(L, "MiscData", relativeReset->MiscData);
+    
+    lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> area,

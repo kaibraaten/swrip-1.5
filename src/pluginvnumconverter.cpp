@@ -94,7 +94,7 @@ vnum_t PluginVnumConverter::AbsoluteToRelativeObjectVnum(vnum_t absolute) const
             return relative;
         }
     }
-    
+
     // Vnum must point to somewhere outside the plugin area,
     // so just pass it through.
     return absolute;
@@ -109,7 +109,7 @@ vnum_t PluginVnumConverter::AbsoluteToRelativeMobileVnum(vnum_t absolute) const
             return relative;
         }
     }
-    
+
     // Vnum must point to somewhere outside the plugin area,
     // so just pass it through.
     return absolute;
@@ -124,7 +124,7 @@ vnum_t PluginVnumConverter::RelativeToAbsoluteRoomVnum(vnum_t vnum) const
             return room->Vnum;
         }
     }
-    
+
     return vnum;
 }
 
@@ -157,4 +157,193 @@ vnum_t PluginVnumConverter::RelativeToAbsoluteMobileVnum(vnum_t vnum) const
 bool PluginVnumConverter::ShouldPushReset(std::shared_ptr<Reset> reset) const
 {
     return reset->Plugin == pImpl->Plugin;
+}
+
+std::shared_ptr<Reset> PluginVnumConverter::ResetToAbsolute(std::shared_ptr<Reset> reset) const
+{
+    switch(reset->Command)
+    {
+    case 'm':
+    case 'M':
+        reset->Arg1 = RelativeToAbsoluteMobileVnum(reset->Arg1);
+        reset->Arg3 = RelativeToAbsoluteRoomVnum(reset->Arg3);
+        break;
+
+    case 'o':
+    case 'O':
+        reset->Arg1 = RelativeToAbsoluteObjectVnum(reset->Arg1);
+        reset->Arg3 = RelativeToAbsoluteRoomVnum(reset->Arg3);
+        break;
+
+    case 'p':
+    case 'P':
+        reset->Arg1 = RelativeToAbsoluteObjectVnum(reset->Arg1);
+        reset->Arg3 = RelativeToAbsoluteObjectVnum(reset->Arg3);
+        break;
+
+    case 'e':
+    case 'E':
+        reset->Arg1 = RelativeToAbsoluteObjectVnum(reset->Arg1);
+        break;
+
+    case 'd':
+    case 'D':
+        reset->Arg1 = RelativeToAbsoluteRoomVnum(reset->Arg1);
+        break;
+
+    case 't':
+    case 'T':
+        if(IsBitSet(reset->MiscData, TRAP_OBJ))
+        {
+            reset->Arg3 = RelativeToAbsoluteObjectVnum(reset->Arg3);
+        }
+        else
+        {
+            reset->Arg3 = RelativeToAbsoluteRoomVnum(reset->Arg3);
+        }
+        break;
+
+    case 'g':
+    case 'G':
+        reset->Arg1 = RelativeToAbsoluteObjectVnum(reset->Arg1);
+        break;
+
+    case 'r':
+    case 'R':
+        reset->Arg1 = AbsoluteToRelativeRoomVnum(reset->Arg1);
+        break;
+
+    case 'h':
+    case 'H':
+        reset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        break;
+
+    case 'b':
+    case 'B':
+        switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
+        {
+        case BIT_RESET_DOOR:
+            reset->Arg1 = RelativeToAbsoluteRoomVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_ROOM:
+            reset->Arg1 = RelativeToAbsoluteRoomVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_MOBILE:
+            reset->Arg1 = RelativeToAbsoluteMobileVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_OBJECT:
+            reset->Arg1 = RelativeToAbsoluteObjectVnum(reset->Arg1);
+            break;
+
+        default:
+            break;
+        }
+
+        break;
+
+    case '*':
+    default:
+        break;
+    }
+
+    return reset;
+}
+
+std::shared_ptr<Reset> PluginVnumConverter::ResetToRelative(std::shared_ptr<Reset> reset) const
+{
+    std::shared_ptr<Reset> relativeReset = std::make_shared<Reset>(*reset);
+
+    switch(reset->Command)
+    {
+    case 'm':
+    case 'M':
+        relativeReset->Arg1 = AbsoluteToRelativeMobileVnum(reset->Arg1);
+        relativeReset->Arg3 = AbsoluteToRelativeRoomVnum(reset->Arg3);
+        break;
+
+    case 'o':
+    case 'O':
+        relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        relativeReset->Arg3 = AbsoluteToRelativeRoomVnum(reset->Arg3);
+        break;
+
+    case 'p':
+    case 'P':
+        relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        relativeReset->Arg3 = AbsoluteToRelativeObjectVnum(reset->Arg3);
+        break;
+
+    case 'e':
+    case 'E':
+        relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        break;
+
+    case 'd':
+    case 'D':
+        relativeReset->Arg1 = AbsoluteToRelativeRoomVnum(reset->Arg1);
+        break;
+
+    case 't':
+    case 'T':
+        if(IsBitSet(reset->MiscData, TRAP_OBJ))
+        {
+            relativeReset->Arg3 = AbsoluteToRelativeObjectVnum(reset->Arg3);
+        }
+        else
+        {
+            relativeReset->Arg3 = AbsoluteToRelativeRoomVnum(reset->Arg3);
+        }
+
+        break;
+
+    case 'g':
+    case 'G':
+        relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        break;
+
+    case 'r':
+    case 'R':
+        relativeReset->Arg1 = AbsoluteToRelativeRoomVnum(reset->Arg1);
+        break;
+
+    case 'h':
+    case 'H':
+        relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+        break;
+
+    case 'b':
+    case 'B':
+        switch(reset->Arg2 & BIT_RESET_TYPE_MASK)
+        {
+        case BIT_RESET_DOOR:
+            relativeReset->Arg1 = AbsoluteToRelativeRoomVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_ROOM:
+            relativeReset->Arg1 = AbsoluteToRelativeRoomVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_MOBILE:
+            relativeReset->Arg1 = AbsoluteToRelativeMobileVnum(reset->Arg1);
+            break;
+
+        case BIT_RESET_OBJECT:
+            relativeReset->Arg1 = AbsoluteToRelativeObjectVnum(reset->Arg1);
+            break;
+
+        default:
+            break;
+        }
+
+        break;
+
+    case '*':
+    default:
+        break;
+    }
+
+    return relativeReset;
 }
