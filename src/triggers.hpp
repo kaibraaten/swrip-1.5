@@ -10,6 +10,8 @@
 #include <imp/runtime/runtimevalue.hpp>
 
 void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob);
+void ImpScriptSpawnTrigger(std::shared_ptr<Object> obj);
+
 void MobProgActTrigger(const std::string &buf, std::shared_ptr<Character> mob,
                        std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, const Vo &vo);
 void MobProgBribeTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch, int amount);
@@ -70,5 +72,6 @@ std::list<std::string> SplitIntoLines(const std::string &comlist);
 std::string MakeScriptName(std::shared_ptr<Character> mob, int type);
 std::string MakeScriptName(std::shared_ptr<Object> obj, int type);
 std::string MakeScriptName(std::shared_ptr<Room> room, int type);
+void RunRoomSpawnTriggers();
 
 #endif

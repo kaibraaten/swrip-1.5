@@ -1663,7 +1663,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
             EconomizeMobileGold(mob);
             level = urange(0, mob->TopLevel() - 2, LEVEL_AVATAR);
 
-            // Insert spawn trigger here
             ImpScriptSpawnTrigger(mob);
 
             // Check if mob died in spawn trigger (then issue bug log,
@@ -1762,6 +1761,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
             obj->Cost = 0;
             ObjectToRoom(obj, pRoomIndex);
             lastobj = obj;
+            ImpScriptSpawnTrigger(obj);
             break;
 
         case 'P':

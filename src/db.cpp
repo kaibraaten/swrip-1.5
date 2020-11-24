@@ -70,6 +70,7 @@ namespace fs = std::filesystem;
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "triggers.hpp"
 
 int cur_qobjs = 0;
 int cur_qchars = 0;
@@ -442,6 +443,8 @@ void BootDatabase(bool fCopyOver)
 
     MOBtrigger = true;
 
+    RunRoomSpawnTriggers();
+    
     if(fCopyOver)
     {
         Log->Boot("Running RecoverFromCopyover.");

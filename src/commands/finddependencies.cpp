@@ -30,18 +30,18 @@ static std::list<std::shared_ptr<Room>> GetRooms(std::shared_ptr<Area> area)
 static std::list<std::string> ReportOutgoingExits(std::shared_ptr<Room> room)
 {
     std::list<std::string> results;
-    
+
     for(auto xit : room->Exits())
     {
         auto targetRoom = GetRoom(xit->Vnum);
 
         if(targetRoom->Area != room->Area)
         {
-            results.push_back(FormatString("%s room %ld -> %s room %ld",
+            results.push_back(FormatString("%-15.15s: room %ld -> room %ld (%s)",
                                            room->Area->Filename.c_str(),
                                            room->Vnum,
-                                           targetRoom->Area->Filename.c_str(),
-                                           targetRoom->Vnum));
+                                           targetRoom->Vnum,
+                                           targetRoom->Area->Filename.c_str()));
         }
     }
 
@@ -79,7 +79,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
 {
     std::list<std::string> results;
     const char *areaName = area->Filename.c_str();
-    
+
     for(auto reset = area->FirstReset; reset; reset = reset->Next)
     {
         if(toupper(reset->Command == 'M'))
@@ -87,31 +87,31 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             auto mob = GetProtoMobile(reset->Arg1);
             auto room = GetRoom(reset->Arg3);
             auto mobArea = GetArea(mob);
-            
+
             if(mob == nullptr)
             {
-                auto line = FormatString("%s M reset: mob %d does not exist",
+                auto line = FormatString("%-15.15s M reset: mob %d does not exist",
                                          areaName, reset->Arg1);
                 results.push_back(line);
             }
 
             if(room == nullptr)
             {
-                auto line = FormatString("%s M reset: room %d does not exist",
+                auto line = FormatString("%-15.15s M reset: room %d does not exist",
                                          areaName, reset->Arg3);
                 results.push_back(line);
             }
 
             if(mobArea != area && room->Area != area)
             {
-                auto line = FormatString("%-25s M reset: mob %ld (%s) <-> room %ld (%s)",
+                auto line = FormatString("%-15.15s M reset: mob %ld (%s) <-> room %ld (%s)",
                                          areaName, mob->Vnum, mobArea->Filename.c_str(),
                                          room->Vnum, room->Area->Filename.c_str());
                 results.push_back(line);
             }
             else if(mobArea != area)
             {
-                auto line = FormatString("%-25s M reset: room %ld <- mob %ld (%s)",
+                auto line = FormatString("%-15.15s M reset: room %ld <- mob %ld (%s)",
                                          areaName,
                                          room->Vnum,
                                          mob->Vnum, mobArea->Filename.c_str());
@@ -119,7 +119,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             }
             else if(room->Area != area)
             {
-                auto line = FormatString("%-25s M reset: mob %ld -> room %ld (%s)",
+                auto line = FormatString("%-15.15s M reset: mob %ld -> room %ld (%s)",
                                          areaName, mob->Vnum,
                                          room->Vnum, room->Area->Filename.c_str());
                 results.push_back(line);
@@ -133,28 +133,28 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
 
             if(obj == nullptr)
             {
-                auto line = FormatString("%s O reset: object %d does not exist",
+                auto line = FormatString("%-15.15s O reset: object %d does not exist",
                                          areaName, reset->Arg1);
                 results.push_back(line);
             }
 
             if(room == nullptr)
             {
-                auto line = FormatString("%s O reset: room %d does not exist",
+                auto line = FormatString("%-15.15s O reset: room %d does not exist",
                                          areaName, reset->Arg3);
                 results.push_back(line);
             }
 
             if(objArea != area && room->Area != area)
             {
-                auto line = FormatString("%-25s O reset: object %ld (%s) <-> room %ld (%s)",
+                auto line = FormatString("%-15.15s O reset: object %ld (%s) <-> room %ld (%s)",
                                          areaName, obj->Vnum, objArea->Filename.c_str(),
                                          room->Vnum, room->Area->Filename.c_str());
                 results.push_back(line);
             }
             else if(objArea != area)
             {
-                auto line = FormatString("%-25s O reset: room %ld <- object %ld (%s)",
+                auto line = FormatString("%-15.15s O reset: room %ld <- object %ld (%s)",
                                          areaName,
                                          room->Vnum,
                                          obj->Vnum, objArea->Filename.c_str());
@@ -162,10 +162,291 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             }
             else if(room->Area != area)
             {
-                auto line = FormatString("%-25s O reset: object %ld -> room %ld (%s)",
+                auto line = FormatString("%-15.15s O reset: object %ld -> room %ld (%s)",
                                          areaName, obj->Vnum,
                                          room->Vnum, room->Area->Filename.c_str());
                 results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'P'))
+        {
+            auto obj = GetProtoObject(reset->Arg1);
+            auto container = reset->Arg3 > 0 ? GetProtoObject(reset->Arg3) : nullptr;
+            auto objArea = GetArea(obj);
+            auto containerArea = container ? GetArea(container) : nullptr;
+
+            if(obj == nullptr)
+            {
+                auto line = FormatString("%-15.15s P reset: object %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(container == nullptr && objArea != area)
+            {
+                auto line = FormatString("%-15.15s P reset: object %ld (%s)",
+                                         areaName, obj->Vnum,
+                                         objArea->Filename.c_str());
+                results.push_back(line);
+            }
+            else if(container == nullptr)
+            {
+                continue;
+            }
+            else if(objArea != area && containerArea != area)
+            {
+                auto line = FormatString("%-15.15s P reset: object %ld (%s) <-> container %ld (%s)",
+                                         areaName, obj->Vnum, objArea->Filename.c_str(),
+                                         container->Vnum, containerArea->Filename.c_str());
+                results.push_back(line);
+            }
+            else if(objArea != area)
+            {
+                auto line = FormatString("%-15.15s P reset: container %ld <- object %ld (%s)",
+                                         areaName,
+                                         container->Vnum,
+                                         obj->Vnum, objArea->Filename.c_str());
+                results.push_back(line);
+            }
+            else if(containerArea != area)
+            {
+                auto line = FormatString("%-15.15s P reset: object %ld -> container %ld (%s)",
+                                         areaName, obj->Vnum,
+                                         container->Vnum, containerArea->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'E'))
+        {
+            auto obj = GetProtoObject(reset->Arg1);
+            auto objArea = obj ? GetArea(obj) : nullptr;
+
+            if(obj == nullptr)
+            {
+                auto line = FormatString("%-15.15s E reset: object %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(objArea != area)
+            {
+                auto line = FormatString("%-15.15s E reset: object %ld (%s)",
+                                         areaName, obj->Vnum,
+                                         objArea->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'D'))
+        {
+            auto room = GetRoom(reset->Arg1);
+
+            if(room == nullptr)
+            {
+                auto line = FormatString("%-15.15s D reset: room %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(room->Area != area)
+            {
+                auto line = FormatString("%-15.15s D reset: room %ld (%s)",
+                                         areaName, room->Vnum,
+                                         room->Area->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'T'))
+        {
+            if(IsBitSet(reset->MiscData, TRAP_OBJ))
+            {
+                auto obj = GetProtoObject(reset->Arg1);
+                auto objArea = obj ? GetArea(obj) : nullptr;
+
+                if(obj == nullptr)
+                {
+                    auto line = FormatString("%-15.15s T reset: object %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(objArea != area)
+                {
+                    auto line = FormatString("%-15.15s T reset: object %ld (%s)",
+                                             areaName, obj->Vnum,
+                                             objArea->Filename.c_str());
+                    results.push_back(line);
+                }
+            }
+            else
+            {
+                auto room = GetRoom(reset->Arg1);
+
+                if(room == nullptr)
+                {
+                    auto line = FormatString("%-15.15s T reset: room %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(room->Area != area)
+                {
+                    auto line = FormatString("%-15.15s T reset: room %ld (%s)",
+                                             areaName, room->Vnum,
+                                             room->Area->Filename.c_str());
+                    results.push_back(line);
+                }
+            }
+        }
+        else if(toupper(reset->Command == 'G'))
+        {
+            auto obj = GetProtoObject(reset->Arg1);
+            auto objArea = obj ? GetArea(obj) : nullptr;
+
+            if(obj == nullptr)
+            {
+                auto line = FormatString("%-15.15s G reset: object %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(objArea != area)
+            {
+                auto line = FormatString("%-15.15s G reset: object %ld (%s)",
+                                         areaName, obj->Vnum,
+                                         objArea->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'R'))
+        {
+            auto room = GetRoom(reset->Arg1);
+
+            if(room == nullptr)
+            {
+                auto line = FormatString("%-15.15s R reset: room %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(room->Area != area)
+            {
+                auto line = FormatString("%-15.15s R reset: room %ld (%s)",
+                                         areaName, room->Vnum,
+                                         room->Area->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'H'))
+        {
+            auto obj = GetProtoObject(reset->Arg1);
+            auto objArea = obj ? GetArea(obj) : nullptr;
+
+            if(obj == nullptr)
+            {
+                auto line = FormatString("%-15.15s H reset: object %d does not exist",
+                                         areaName, reset->Arg1);
+                results.push_back(line);
+                continue;
+            }
+
+            if(objArea != area)
+            {
+                auto line = FormatString("%-15.15s H reset: object %ld (%s)",
+                                         areaName, obj->Vnum,
+                                         objArea->Filename.c_str());
+                results.push_back(line);
+            }
+        }
+        else if(toupper(reset->Command == 'B'))
+        {
+            if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_DOOR)
+            {
+                auto room = GetRoom(reset->Arg1);
+
+                if(room == nullptr)
+                {
+                    auto line = FormatString("%-15.15s B door reset: room %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(room->Area != area)
+                {
+                    auto line = FormatString("%-15.15s B door reset: room %ld (%s)",
+                                             areaName, room->Vnum,
+                                             room->Area->Filename.c_str());
+                    results.push_back(line);
+                }
+            }
+            else if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_ROOM)
+            {
+                auto room = GetRoom(reset->Arg1);
+
+                if(room == nullptr)
+                {
+                    auto line = FormatString("%-15.15s B room reset: room %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(room->Area != area)
+                {
+                    auto line = FormatString("%-15.15s B room reset: room %ld (%s)",
+                                             areaName, room->Vnum,
+                                             room->Area->Filename.c_str());
+                    results.push_back(line);
+                }
+            }
+            else if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_MOBILE)
+            {
+                auto mob = GetProtoMobile(reset->Arg1);
+                auto mobArea = mob ? GetArea(mob) : nullptr;
+
+                if(mob == nullptr)
+                {
+                    auto line = FormatString("%-15.15s B mobile reset: mob %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(mobArea != area)
+                {
+                    auto line = FormatString("%-15.15s B mobile reset: mob %ld (%s)",
+                                             areaName, mob->Vnum,
+                                             mobArea->Filename.c_str());
+                    results.push_back(line);
+                }
+            }
+            else if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_OBJECT)
+            {
+                auto obj = GetProtoObject(reset->Arg1);
+                auto objArea = obj ? GetArea(obj) : nullptr;
+
+                if(obj == nullptr)
+                {
+                    auto line = FormatString("%-15.15s B object reset: object %d does not exist",
+                                             areaName, reset->Arg1);
+                    results.push_back(line);
+                    continue;
+                }
+
+                if(objArea != area)
+                {
+                    auto line = FormatString("%-15.15s B object reset: object %ld (%s)",
+                                             areaName, obj->Vnum,
+                                             objArea->Filename.c_str());
+                    results.push_back(line);
+                }
             }
         }
     }
@@ -177,11 +458,11 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string option;
     argument = OneArgument(argument, option);
-    
+
     if(StrCmp(option, "exits") == 0)
     {
         std::list<std::string> results;
-        
+
         for(const auto &area : Areas)
         {
             if(!argument.empty()
@@ -189,7 +470,7 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             {
                 continue;
             }
-            
+
             for(const auto &room : GetRooms(area))
             {
                 auto outgoing = ReportOutgoingExits(room);
@@ -198,7 +479,7 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
         }
 
         results.sort();
-        
+
         for(auto line : results)
         {
             ch->Echo("%s\r\n", line.c_str());
