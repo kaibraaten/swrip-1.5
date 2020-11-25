@@ -323,6 +323,7 @@ void Plugin::RoomsToWorld()
             }
         }
 
+        // This has nothing to do with exits, so consider moving it elsewhere.
         room->TeleVnum = converter->RelativeToAbsoluteRoomVnum(room->TeleVnum);
     }
 }

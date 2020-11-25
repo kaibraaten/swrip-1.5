@@ -1166,8 +1166,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoObject> obj)
 {
     for(auto area : Areas)
     {
-        if(obj->Vnum >= area->VnumRanges.Object.First
-           && obj->Vnum <= area->VnumRanges.Object.Last)
+        if(ObjectVnumIsInArea(obj->Vnum, area))
         {
             return area;
         }
@@ -1180,8 +1179,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoMobile> mob)
 {
     for(auto area : Areas)
     {
-        if(mob->Vnum >= area->VnumRanges.Mob.First
-           && mob->Vnum <= area->VnumRanges.Mob.Last)
+        if(MobileVnumIsInArea(mob->Vnum, area))
         {
             return area;
         }
@@ -1194,8 +1192,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<Room> room)
 {
     for(auto area : Areas)
     {
-        if(room->Vnum >= area->VnumRanges.Room.First
-           && room->Vnum <= area->VnumRanges.Room.Last)
+        if(RoomVnumIsInArea(room->Vnum, area))
         {
             return area;
         }

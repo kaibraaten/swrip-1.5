@@ -14,6 +14,8 @@ public:
     ProtoMobile() = delete;
     ProtoMobile(vnum_t vnum);
     virtual ~ProtoMobile();
+    std::string Tag() const;
+    void Tag(const std::string &tag);
 
     std::shared_ptr<ProtoMobile> NextSort;
     std::function<bool(std::shared_ptr<Character>)> spec_fun;
@@ -63,6 +65,12 @@ public:
 
     class Stats Stats;
     SaveVs Saving;
+
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
 };
+
+std::shared_ptr<ProtoMobile> GetMobFromTag(const std::string &tag);
 
 #endif

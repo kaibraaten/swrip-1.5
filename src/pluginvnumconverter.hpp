@@ -25,7 +25,7 @@ public:
     std::shared_ptr<Reset> ResetToRelative(std::shared_ptr<Reset> reset) const override;
     
 private:
-    struct Impl;
+    class Impl;
     std::unique_ptr<Impl> pImpl;
 };
 

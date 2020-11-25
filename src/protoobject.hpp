@@ -23,6 +23,9 @@ public:
     void Add(std::shared_ptr<Affect> affect);
     void Remove(std::shared_ptr<Affect> affect);
 
+    std::string Tag() const;
+    void Tag(const std::string &tag);
+
     std::shared_ptr<ProtoObject> NextSort;
     std::string Name;
     std::string ShortDescr;
@@ -47,5 +50,7 @@ private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;
 };
+
+std::shared_ptr<ProtoObject> GetObjectFromTag(const std::string &tag);
 
 #endif

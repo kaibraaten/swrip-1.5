@@ -10,6 +10,70 @@
 #include "protomob.hpp"
 #include "protoobject.hpp"
 
+static std::list<std::shared_ptr<Room>> GetRooms(std::shared_ptr<Area> area);
+static std::list<std::string> ReportOutgoingExits(std::shared_ptr<Room> room);
+static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area);
+
+void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
+{
+    std::string option;
+    argument = OneArgument(argument, option);
+
+    if(StrCmp(option, "exits") == 0)
+    {
+        std::list<std::string> results;
+
+        for(const auto &area : Areas)
+        {
+            if(!argument.empty()
+               && StringPrefix(argument, area->Filename))
+            {
+                continue;
+            }
+
+            for(const auto &room : GetRooms(area))
+            {
+                auto outgoing = ReportOutgoingExits(room);
+                results.insert(results.end(), outgoing.begin(), outgoing.end());
+            }
+        }
+
+        results.sort();
+
+        for(auto line : results)
+        {
+            ch->Echo("%s\r\n", line.c_str());
+        }
+    }
+    else if(StrCmp(option, "resets") == 0)
+    {
+        std::list<std::string> results;
+
+        for(const auto &area : Areas)
+        {
+            if(!argument.empty()
+               && StringPrefix(argument, area->Filename))
+            {
+                continue;
+            }
+
+            auto externalResets = ReportExternalResets(area);
+            results.insert(results.end(), externalResets.begin(), externalResets.end());
+        }
+
+        results.sort();
+
+        for(auto line : results)
+        {
+            ch->Echo("%s\r\n", line.c_str());
+        }
+    }
+    else
+    {
+        ch->Echo("Unknown option.\r\n");
+    }
+}
+
 static std::list<std::shared_ptr<Room>> GetRooms(std::shared_ptr<Area> area)
 {
     std::list<std::shared_ptr<Room>> rooms;
@@ -48,33 +112,6 @@ static std::list<std::string> ReportOutgoingExits(std::shared_ptr<Room> room)
     return results;
 }
 
-
-static std::shared_ptr<Area> GetArea(std::shared_ptr<ProtoObject> obj)
-{
-    for(auto area : Areas)
-    {
-        if(ObjectVnumIsInArea(obj->Vnum, area))
-        {
-            return area;
-        }
-    }
-
-    return nullptr;
-}
-
-static std::shared_ptr<Area> GetArea(std::shared_ptr<ProtoMobile> mob)
-{
-    for(auto area : Areas)
-    {
-        if(MobileVnumIsInArea(mob->Vnum, area))
-        {
-            return area;
-        }
-    }
-
-    return nullptr;
-}
-
 static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
 {
     std::list<std::string> results;
@@ -86,7 +123,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         {
             auto mob = GetProtoMobile(reset->Arg1);
             auto room = GetRoom(reset->Arg3);
-            auto mobArea = GetArea(mob);
+            auto mobArea = GetAreaOf(mob);
 
             if(mob == nullptr)
             {
@@ -129,7 +166,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         {
             auto obj = GetProtoObject(reset->Arg1);
             auto room = GetRoom(reset->Arg3);
-            auto objArea = GetArea(obj);
+            auto objArea = GetAreaOf(obj);
 
             if(obj == nullptr)
             {
@@ -172,8 +209,8 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         {
             auto obj = GetProtoObject(reset->Arg1);
             auto container = reset->Arg3 > 0 ? GetProtoObject(reset->Arg3) : nullptr;
-            auto objArea = GetArea(obj);
-            auto containerArea = container ? GetArea(container) : nullptr;
+            auto objArea = GetAreaOf(obj);
+            auto containerArea = container ? GetAreaOf(container) : nullptr;
 
             if(obj == nullptr)
             {
@@ -220,7 +257,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         else if(toupper(reset->Command == 'E'))
         {
             auto obj = GetProtoObject(reset->Arg1);
-            auto objArea = obj ? GetArea(obj) : nullptr;
+            auto objArea = obj ? GetAreaOf(obj) : nullptr;
 
             if(obj == nullptr)
             {
@@ -263,7 +300,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             if(IsBitSet(reset->MiscData, TRAP_OBJ))
             {
                 auto obj = GetProtoObject(reset->Arg1);
-                auto objArea = obj ? GetArea(obj) : nullptr;
+                auto objArea = obj ? GetAreaOf(obj) : nullptr;
 
                 if(obj == nullptr)
                 {
@@ -305,7 +342,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         else if(toupper(reset->Command == 'G'))
         {
             auto obj = GetProtoObject(reset->Arg1);
-            auto objArea = obj ? GetArea(obj) : nullptr;
+            auto objArea = obj ? GetAreaOf(obj) : nullptr;
 
             if(obj == nullptr)
             {
@@ -346,7 +383,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
         else if(toupper(reset->Command == 'H'))
         {
             auto obj = GetProtoObject(reset->Arg1);
-            auto objArea = obj ? GetArea(obj) : nullptr;
+            auto objArea = obj ? GetAreaOf(obj) : nullptr;
 
             if(obj == nullptr)
             {
@@ -409,7 +446,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             else if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_MOBILE)
             {
                 auto mob = GetProtoMobile(reset->Arg1);
-                auto mobArea = mob ? GetArea(mob) : nullptr;
+                auto mobArea = mob ? GetAreaOf(mob) : nullptr;
 
                 if(mob == nullptr)
                 {
@@ -430,7 +467,7 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
             else if((reset->Arg2 & BIT_RESET_TYPE_MASK) == BIT_RESET_OBJECT)
             {
                 auto obj = GetProtoObject(reset->Arg1);
-                auto objArea = obj ? GetArea(obj) : nullptr;
+                auto objArea = obj ? GetAreaOf(obj) : nullptr;
 
                 if(obj == nullptr)
                 {
@@ -452,64 +489,4 @@ static std::list<std::string> ReportExternalResets(std::shared_ptr<Area> area)
     }
 
     return results;
-}
-
-void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
-{
-    std::string option;
-    argument = OneArgument(argument, option);
-
-    if(StrCmp(option, "exits") == 0)
-    {
-        std::list<std::string> results;
-
-        for(const auto &area : Areas)
-        {
-            if(!argument.empty()
-               && StringPrefix(argument, area->Filename))
-            {
-                continue;
-            }
-
-            for(const auto &room : GetRooms(area))
-            {
-                auto outgoing = ReportOutgoingExits(room);
-                results.insert(results.end(), outgoing.begin(), outgoing.end());
-            }
-        }
-
-        results.sort();
-
-        for(auto line : results)
-        {
-            ch->Echo("%s\r\n", line.c_str());
-        }
-    }
-    else if(StrCmp(option, "resets") == 0)
-    {
-        std::list<std::string> results;
-
-        for(const auto &area : Areas)
-        {
-            if(!argument.empty()
-               && StringPrefix(argument, area->Filename))
-            {
-                continue;
-            }
-
-            auto externalResets = ReportExternalResets(area);
-            results.insert(results.end(), externalResets.begin(), externalResets.end());
-        }
-
-        results.sort();
-
-        for(auto line : results)
-        {
-            ch->Echo("%s\r\n", line.c_str());
-        }
-    }
-    else
-    {
-        ch->Echo("Unknown option.\r\n");
-    }
 }

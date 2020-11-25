@@ -1,9 +1,11 @@
 #include "protoobject.hpp"
+#include "mud.hpp"
 
 struct ProtoObject::Impl
 {
     std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
     std::list<std::shared_ptr<Affect>> Affects;
+    std::string Tag;
 };
 
 ProtoObject::ProtoObject(vnum_t vnum)
@@ -46,4 +48,27 @@ void ProtoObject::Add(std::shared_ptr<Affect> affect)
 void ProtoObject::Remove(std::shared_ptr<Affect> affect)
 {
     pImpl->Affects.remove(affect);
+}
+
+std::string ProtoObject::Tag() const
+{
+    return pImpl->Tag;
+}
+
+void ProtoObject::Tag(const std::string &tag)
+{
+    pImpl->Tag = tag;
+}
+
+std::shared_ptr<ProtoObject> GetObjectFromTag(const std::string &tag)
+{
+    for(const auto &[_, obj] : ProtoObjects)
+    {
+        if(StrCmp(obj->Tag(), tag) == 0)
+        {
+            return obj;
+        }
+    }
+
+    return nullptr;
 }

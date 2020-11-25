@@ -175,7 +175,7 @@ struct SaveData
     {
     }
     
-    const LuaAreaRepository *Repos;
+    const LuaAreaRepository *Repos = nullptr;
     std::shared_ptr<Area> area;
     bool Install = false;
     std::shared_ptr<class VnumConverter> VnumConverter;
@@ -484,6 +484,7 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
     lua_newtable(L);
 
     LuaSetfieldNumber(L, "Vnum", vnumConverter->AbsoluteToRelativeObjectVnum(obj->Vnum));
+    LuaSetfieldString(L, "Tag", obj->Tag());
     LuaSetfieldString(L, "Name", obj->Name);
     LuaSetfieldString(L, "ShortDescr", obj->ShortDescr);
     LuaSetfieldString(L, "Description", obj->Description);
@@ -542,6 +543,7 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
 
     LuaSetfieldString(L, "Name", mob->Name);
     LuaSetfieldNumber(L, "Vnum", vnumConverter->AbsoluteToRelativeMobileVnum(mob->Vnum));
+    LuaSetfieldString(L, "Tag", mob->Tag());
     LuaSetfieldString(L, "ShortDescr", mob->ShortDescr);
     LuaSetfieldString(L, "LongDescr", StripCarriageReturn(mob->LongDescr));
     LuaSetfieldString(L, "Description", StripCarriageReturn(mob->Description));
@@ -871,6 +873,11 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaGetfieldInt(L, "Level", &mob->Level);
     LuaGetfieldInt(L, "ArmorClass", &mob->ArmorClass);
     LuaGetfieldInt(L, "Credits", &mob->Gold);
+    LuaGetfieldString(L, "Tag",
+                      [mob](const auto &tag)
+                      {
+                          mob->Tag(tag);
+                      });
     LuaGetfieldString(L, "Position",
                       [mob](auto positionName)
                       {
@@ -1072,6 +1079,11 @@ void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> ob
     LuaGetfieldString(L, "Description", &obj->Description);
     obj->Description[0] = CharToUppercase(obj->Description[0]);
     LuaGetfieldString(L, "ActionDescription", &obj->ActionDescription);
+    LuaGetfieldString(L, "Tag",
+                      [obj](const auto &tag)
+                      {
+                          obj->Tag(tag);
+                      });
     LuaGetfieldString(L, "ItemType",
                       [obj](const auto &itemType)
                       {
