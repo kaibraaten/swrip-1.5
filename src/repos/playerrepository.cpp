@@ -18,6 +18,7 @@
 #include "skill.hpp"
 #include "area.hpp"
 #include "timer.hpp"
+#include "protomob.hpp"
 
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
@@ -333,7 +334,22 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Char
     LuaGetfieldInt(L, "Played", &ch->PCData->Played);
     LuaGetfieldLong(L, "Bank", &ch->PCData->Bank);
     LuaGetfieldInt(L, "Clones", &ch->PCData->Clones);
-    LuaGetfieldLong(L, "JailVnum", &ch->PCData->JailVnum);
+    LuaGetfieldString(L, "JailVnum",
+                      [ch](const auto &vnumOrTag)
+                      {
+                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
+                             || vnumOrTag.empty())
+                          {
+                              return;
+                          }
+                          
+                          auto room = GetRoom(vnumOrTag);
+
+                          if(room != nullptr)
+                          {
+                              ch->PCData->JailVnum = room->Vnum;
+                          }
+                      });
     LuaGetfieldLong(L, "RestoreTime", &ch->PCData->RestoreTime);
     LuaGetfieldString(L, "Password", &ch->PCData->Password);
     LuaGetfieldString(L, "BamfIn", &ch->PCData->BamfIn);
@@ -452,11 +468,25 @@ void InMemoryPlayerRepository::LoadKilledData(lua_State *L, std::shared_ptr<Char
         {
             if (ch->PCData->Killed.size() < GetKillTrackCount(ch))
             {
-                long vnum = 0;
+                std::string vnumOrTag = "0";
                 int count = 0;
-                LuaGetfieldLong(L, "Vnum", &vnum);
-                LuaGetfieldInt(L, "Count", &count);
-                ch->PCData->Killed.push_front({ vnum, static_cast<char>(count) });
+                LuaGetfieldString(L, "Vnum", &vnumOrTag);
+
+                if((IsNumber(vnumOrTag) && ToLong(vnumOrTag))
+                   || vnumOrTag.empty())
+                {
+                    ;
+                }
+                else
+                {
+                    auto mob = GetProtoMobile(vnumOrTag);
+
+                    if(mob != nullptr)
+                    {
+                        LuaGetfieldInt(L, "Count", &count);
+                        ch->PCData->Killed.push_front({ mob->Vnum, static_cast<char>(count) });
+                    }
+                }
             }
 
             lua_pop(L, 1);
@@ -731,7 +761,17 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     LuaSetfieldNumber(L, "LastPlayed", current_time);
     LuaSetfieldNumber(L, "Bank", pc->PCData->Bank);
     LuaSetfieldNumber(L, "Clones", pc->PCData->Clones);
-    LuaSetfieldNumber(L, "JailVnum", pc->PCData->JailVnum);
+
+    if(pc->PCData->JailVnum != INVALID_VNUM)
+    {
+        auto jail = GetRoom(pc->PCData->JailVnum);
+
+        if(jail != nullptr)
+        {
+            LuaSetfieldString(L, "JailVnum", VnumOrTag(jail));
+        }
+    }
+    
     LuaSetfieldNumber(L, "RestoreTime", pc->PCData->RestoreTime);
     LuaSetfieldString(L, "Password", pc->PCData->Password);
     LuaSetfieldString(L, "BamfIn", pc->PCData->BamfIn);
@@ -922,8 +962,19 @@ void InMemoryPlayerRepository::PushKilledData(lua_State *L, std::shared_ptr<Char
     {
         lua_pushnumber(L, ++idx);
         lua_newtable(L);
+        std::string vnumOrTag = "0";
 
-        LuaSetfieldNumber(L, "Vnum", killed.Vnum);
+        if(killed.Vnum != INVALID_VNUM)
+        {
+            auto mob = GetProtoMobile(killed.Vnum);
+
+            if(mob != nullptr)
+            {
+                vnumOrTag = VnumOrTag(mob);
+            }
+        }
+        
+        LuaSetfieldString(L, "Vnum", vnumOrTag);
         LuaSetfieldNumber(L, "Count", killed.Count);
 
         lua_settable(L, -3);

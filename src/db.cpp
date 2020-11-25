@@ -1318,3 +1318,18 @@ RoomRepository::iterator RoomRepository::end()
     i.currentKey = MAX_KEY_HASH;
     return i;
 }
+
+std::string VnumOrTag(std::shared_ptr<Room> room)
+{
+    return room->Tag().empty() ? std::to_string(room->Vnum) : room->Tag();
+}
+
+std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob)
+{
+    return mob->Tag().empty() ? std::to_string(mob->Vnum) : mob->Tag();
+}
+
+std::string VnumOrTag(std::shared_ptr<ProtoObject> obj)
+{
+    return obj->Tag().empty() ? std::to_string(obj->Vnum) : obj->Tag();
+}

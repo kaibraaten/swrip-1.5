@@ -24,6 +24,7 @@
 #include "turret.hpp"
 #include "constants.hpp"
 #include "ship.hpp"
+#include "room.hpp"
 
 class Turret
 {
@@ -151,10 +152,18 @@ int GetTurretEnergyDraw(const Turret *turret)
 
 void PushTurret(lua_State *L, const Turret *turret, const int idx)
 {
+    std::string vnumOrTag = "0";
+    auto room = turret->RoomVnum != INVALID_VNUM ? GetRoom(turret->RoomVnum) : nullptr;
+
+    if(room != nullptr)
+    {
+        vnumOrTag = VnumOrTag(room);
+    }
+
     lua_pushinteger(L, idx);
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "RoomVnum", turret->RoomVnum);
+    LuaSetfieldString(L, "RoomVnum", vnumOrTag);
     LuaSetfieldNumber(L, "State", turret->WeaponState);
 
     lua_settable(L, -3);
@@ -162,11 +171,21 @@ void PushTurret(lua_State *L, const Turret *turret, const int idx)
 
 void LoadTurret(lua_State *L, Turret *turret)
 {
-    LuaGetfieldLong(L, "RoomVnum",
-        [turret](const vnum_t vnum)
-    {
-        SetTurretRoom(turret, vnum);
-    });
+    LuaGetfieldString(L, "RoomVnum",
+                      [turret](const auto &vnumOrTag)
+                      {
+                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
+                             || vnumOrTag.empty())
+                          {
+                              return;
+                          }
+
+                          auto room = GetRoom(vnumOrTag);
+
+                          if(room != nullptr)
+                          {
+                              SetTurretRoom(turret, room->Vnum);
+                          }
+                      });
     LuaGetfieldInt(L, "State", &turret->WeaponState);
 }
-

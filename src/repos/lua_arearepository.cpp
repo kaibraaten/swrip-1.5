@@ -197,7 +197,6 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install,
     }
 
     SaveData data(this, area, install, vnumConverter);
-
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
 }
 

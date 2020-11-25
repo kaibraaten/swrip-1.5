@@ -2,15 +2,14 @@
 #include "board.hpp"
 #include "luascript.hpp"
 #include "constants.hpp"
+#include "mud.hpp"
+#include "protoobject.hpp"
 
 #define BOARD_DIR DATA_DIR "boards/"
 
 std::string GetBoardFilename(const std::shared_ptr<Board> &board)
 {
-    char fullPath[MAX_STRING_LENGTH];
-    sprintf(fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename(board->Name).c_str());
-
-    return fullPath;
+    return FormatString("%s%s", BOARD_DIR, ConvertToLuaFilename(board->Name).c_str());
 }
 
 ///////////////////////////////////////
@@ -91,7 +90,12 @@ int LuaBoardRepository::L_BoardEntry(lua_State *L)
     std::shared_ptr<Board> board = std::make_shared<Board>();
 
     LuaGetfieldString(L, "Name", &board->Name);
-    LuaGetfieldLong(L, "BoardObjectVnum", &board->BoardObject);
+    LuaGetfieldString(L, "BoardObjectVnum",
+                      [board](const auto &vnumOrTag)
+                      {
+                          auto obj = GetProtoObject(vnumOrTag);
+                          board->BoardObject = obj->Vnum;
+                      });
     LuaGetfieldInt(L, "MinReadLevel", &board->MinReadLevel);
     LuaGetfieldInt(L, "MinPostLevel", &board->MinPostLevel);
     LuaGetfieldInt(L, "MinRemoveLevel", &board->MinRemoveLevel);
@@ -154,7 +158,18 @@ void LuaBoardRepository::PushBoard(lua_State *L, const std::shared_ptr<Board> &b
     lua_newtable(L);
 
     LuaSetfieldString(L, "Name", board->Name);
-    LuaSetfieldNumber(L, "BoardObjectVnum", board->BoardObject);
+
+    auto boardobject = GetProtoObject(board->BoardObject);
+
+    if(boardobject != nullptr)
+    {
+        LuaSetfieldString(L, "BoardObjectVnum", VnumOrTag(boardobject));
+    }
+    else
+    {
+        LuaSetfieldNumber(L, "BoardObjectVnum", board->BoardObject);
+    }
+    
     LuaSetfieldNumber(L, "MinReadLevel", board->MinReadLevel);
     LuaSetfieldNumber(L, "MinPostLevel", board->MinPostLevel);
     LuaSetfieldNumber(L, "MinRemoveLevel", board->MinRemoveLevel);

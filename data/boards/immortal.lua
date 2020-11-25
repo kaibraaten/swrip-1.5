@@ -1,33 +1,33 @@
 -- immortal
--- Last saved Sunday 06-Nov-2016 13:37:13
+-- Last saved Wednesday 25-Nov-2020 22:47:49
 
 BoardEntry
 {
-   PostGroup = "", 
-   Type = "Note", 
-   MinRemoveLevel = 105, 
-   MinPostLevel = 101, 
-   BoardObjectVnum = 100, 
-   ExtraRemovers = "", 
+   ExtraReaders = "", 
    ReadGroup = "", 
-   Name = "immortal", 
+   MinReadLevel = 101, 
+   Type = "Note", 
+   BoardObjectVnum = "monitoring_terminal", 
    Notes = 
    {
       [1] = 
       {
-         Abstentions = "", 
-         Sender = "Kai", 
-         Voting = false, 
-         Date = "Mon Oct 31 19:16:17 2016", 
-         Text = "Welcome to this refactored and improved version of SWRiP 1.0.1!\
-\r", 
          NoVotes = "", 
+         Date = "Mon Oct 31 19:16:17 2016", 
          YesVotes = "", 
          ToList = "All", 
+         Text = "Welcome to this refactored and improved version of SWRiP 1.0.1!\
+\13", 
+         Sender = "Kai", 
          Subject = "Welcome to SWRiP 1.5!", 
+         Voting = false, 
+         Abstentions = "", 
       }, 
    }, 
-   ExtraReaders = "", 
+   ExtraRemovers = "", 
+   PostGroup = "", 
+   MinRemoveLevel = 105, 
+   MinPostLevel = 101, 
+   Name = "immortal", 
    MaxPosts = 1000, 
-   MinReadLevel = 101, 
 }

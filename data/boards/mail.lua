@@ -1,17 +1,17 @@
 -- mail
--- Last saved Sunday 19-Apr-2020 15:52:54
+-- Last saved Wednesday 25-Nov-2020 22:50:03
 
 BoardEntry
 {
+   PostGroup = "", 
    Type = "Mail", 
-   ReadGroup = "", 
-   MinReadLevel = 0, 
+   MinPostLevel = 0, 
    ExtraRemovers = "", 
    MinRemoveLevel = 0, 
-   Name = "mail", 
+   MinReadLevel = 0, 
    MaxPosts = 0, 
+   ReadGroup = "", 
    ExtraReaders = "", 
-   MinPostLevel = 0, 
-   PostGroup = "", 
-   BoardObjectVnum = 38, 
+   Name = "mail", 
+   BoardObjectVnum = "mail_terminal", 
 }

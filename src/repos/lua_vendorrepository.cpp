@@ -80,16 +80,16 @@ static void ExecuteVendorFile(const std::string &filename)
 
 static int L_VendorEntry(lua_State *L)
 {
-    vnum_t vendorVnum = INVALID_VNUM;
-    LuaGetfieldLong(L, "Vnum", &vendorVnum);
+    std::string vendorVnum;
+    LuaGetfieldString(L, "Vnum", &vendorVnum);
     auto mob = CreateMobile(GetProtoMobile(vendorVnum));
 
     if(mob != nullptr)
     {
-        vnum_t inroom = INVALID_VNUM;
+        std::string inroom;
 
         LuaGetfieldInt(L, "Credits", &mob->Gold);
-        LuaGetfieldLong(L, "Home", &inroom);
+        LuaGetfieldString(L, "Home", &inroom);
         LuaGetfieldString(L, "Owner", &mob->Owner);
         LuaGetfieldString(L, "ShortDescription", &mob->ShortDescr);
         LuaGetfieldString(L, "Position",
@@ -119,9 +119,9 @@ static int L_VendorEntry(lua_State *L)
         char buf[MAX_INPUT_LENGTH];
         char vnum1[MAX_INPUT_LENGTH];
 
-        if(inroom == INVALID_VNUM)
+        if(inroom.empty() || inroom == std::to_string(INVALID_VNUM))
         {
-            inroom = ROOM_VNUM_VENSTOR;
+            inroom = std::to_string(ROOM_VNUM_VENSTOR);
         }
 
         mob->Home = GetRoom(inroom);
@@ -156,7 +156,7 @@ static int L_VendorEntry(lua_State *L)
     }
     else
     {
-        Log->Bug("%s: No index data for vnum %ld", __FUNCTION__, vendorVnum);
+        Log->Bug("%s: No index data for vnum %s", __FUNCTION__, vendorVnum.c_str());
     }
 
     return 0;
@@ -173,7 +173,7 @@ static void PushVendor(lua_State *L, const std::shared_ptr<Character> &vendor)
 
     if(vendor->Home != nullptr)
     {
-        LuaSetfieldNumber(L, "Home", vendor->Home->Vnum);
+        LuaSetfieldString(L, "Home", VnumOrTag(vendor->Home));
     }
 
     if(!vendor->Owner.empty())

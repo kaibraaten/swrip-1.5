@@ -1516,7 +1516,9 @@ std::shared_ptr<Object> GetObjectInListReverse(std::shared_ptr<Character> ch, st
 
     for(auto obj : Reverse(list))
     {
-        if(CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
+        if(CanSeeObject(ch, obj)
+           && (NiftyIsName(arg, obj->Name)
+               || (!obj->Prototype->Tag().empty() && StrCmp(obj->Prototype->Tag(), arg) == 0)))
         {
             if((count += obj->Count) >= number)
             {
@@ -1596,8 +1598,10 @@ std::shared_ptr<Object> GetObjectAnywhere(std::shared_ptr<Character> ch, std::st
     obj = Find(Objects->Entities(),
                [&count, ch, arg, vnum, number](const auto o)
                {
-                   if(CanSeeObject(ch, o) && (NiftyIsName(arg, o->Name)
-                                              || vnum == o->Prototype->Vnum))
+                   if(CanSeeObject(ch, o)
+                      && (NiftyIsName(arg, o->Name)
+                          || vnum == o->Prototype->Vnum
+                          || (!o->Prototype->Tag().empty() && StrCmp(o->Prototype->Tag(), arg) == 0)))
                    {
                        count += o->Count;
 

@@ -1313,6 +1313,10 @@ void RebootCheck(time_t reset);
 void RemovePortal(std::shared_ptr<Object> portal);
 int GetMaxAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability);
 
+std::string VnumOrTag(std::shared_ptr<Room> room);
+std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob);
+std::string VnumOrTag(std::shared_ptr<ProtoObject> obj);
+
 /* newscore.c */
 const char *GetCharacterRace(std::shared_ptr<Character> ch);
 

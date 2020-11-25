@@ -712,7 +712,7 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
     lua_newtable(L);
     std::shared_ptr<ProtoObject> proto = obj->Prototype;
 
-    LuaSetfieldNumber(L, "Vnum", proto->Vnum);
+    LuaSetfieldString(L, "Vnum", VnumOrTag(proto));
 
     if(obj->Count > 1)
     {
@@ -741,7 +741,7 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
 
     if(obj->InRoom != nullptr)
     {
-        LuaSetfieldNumber(L, "InRoom", obj->InRoom->Vnum);
+        LuaSetfieldString(L, "InRoom", VnumOrTag(obj->InRoom));
     }
 
     if(obj->Flags != proto->Flags)
@@ -900,7 +900,7 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     assert(IsNpc(mob));
     auto proto = mob->Prototype;
 
-    LuaSetfieldNumber(L, "Vnum", proto->Vnum);
+    LuaSetfieldString(L, "Vnum", VnumOrTag(proto));
     LuaSetfieldString(L, "CharacterType", "Mobile");
 
     auto mobflags = mob->Flags;
@@ -1096,9 +1096,9 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaSetfieldNumber(L, "Speaking", ch->Speaking);
     LuaSetfieldNumber(L, "Level", ch->TopLevel());
     LuaSetfieldNumber(L, "Trust", ch->Trust);
-    LuaSetfieldNumber(L, "InRoom",
+    LuaSetfieldString(L, "InRoom",
                       ch->InRoom == GetRoom(ROOM_VNUM_LIMBO) && ch->WasInRoom
-                      ? ch->WasInRoom->Vnum : ch->InRoom->Vnum);
+                      ? VnumOrTag(ch->WasInRoom) : VnumOrTag(ch->InRoom));
     PushCurrentAndMax(L, "HitPoints", ch->HitPoints);
     PushCurrentAndMax(L, "ForcePoints", ch->Mana);
     PushCurrentAndMax(L, "Fatigue", ch->Fatigue);
@@ -1483,16 +1483,17 @@ static void LuaLoadObjectSpells(lua_State *L, std::shared_ptr<Object> obj)
 
 static std::shared_ptr<Object> LuaLoadObject(lua_State *L)
 {
-    vnum_t vnum = 0;
+    std::string vnumOrTag;
     int level = 0;
-    LuaGetfieldLong(L, "Vnum", &vnum);
+    
+    LuaGetfieldString(L, "Vnum", &vnumOrTag);
     LuaGetfieldInt(L, "Level", &level);
-    std::shared_ptr<ProtoObject> proto = GetProtoObject(vnum);
+    std::shared_ptr<ProtoObject> proto = GetProtoObject(vnumOrTag);
 
     if(proto == nullptr)
     {
-        Log->Bug("%s:%d %s : Unknown vnum %ld",
-                 __FILE__, __LINE__, __FUNCTION__, vnum);
+        Log->Bug("%s:%d %s : Unknown vnum/tag %s",
+                 __FILE__, __LINE__, __FUNCTION__, vnumOrTag.c_str());
         return nullptr;
     }
 
@@ -1503,10 +1504,10 @@ static std::shared_ptr<Object> LuaLoadObject(lua_State *L)
     LuaGetfieldString(L, "ShortDescription", &obj->ShortDescr);
     LuaGetfieldString(L, "Description", &obj->Description);
     LuaGetfieldString(L, "ActionDescription", &obj->ActionDescription);
-    LuaGetfieldLong(L, "InRoom",
-                    [obj](const long v)
+    LuaGetfieldString(L, "InRoom",
+                    [obj](const auto &vOrT)
                     {
-                        obj->InRoom = GetRoom(v);
+                        obj->InRoom = GetRoom(vOrT);
                     });
     LuaGetfieldString(L, "ItemType",
                       [obj](const std::string &typeName)
@@ -1649,9 +1650,9 @@ std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::st
 
         while(lua_next(L, -2))
         {
-            vnum_t vnum = INVALID_VNUM;
-            LuaGetfieldLong(L, "Vnum", &vnum);
-            auto proto = GetProtoMobile(vnum);
+            std::string vnumOrTag;
+            LuaGetfieldString(L, "Vnum", &vnumOrTag);
+            auto proto = GetProtoMobile(vnumOrTag);
 
             if(proto != nullptr)
             {
@@ -1707,16 +1708,16 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
                        ch->TopLevel(lvl);
                    });
     LuaGetfieldInt(L, "Trust", &ch->Trust);
-    LuaGetfieldInt(L, "InRoom",
-                   [&ch](const int vnum)
-                   {
-                       ch->InRoom = GetRoom(vnum);
+    LuaGetfieldString(L, "InRoom",
+                      [&ch](const auto &vnumOrTag)
+                      {
+                          ch->InRoom = GetRoom(vnumOrTag);
 
-                       if(ch->InRoom == nullptr)
-                       {
-                           ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
-                       }
-                   });
+                          if(ch->InRoom == nullptr)
+                          {
+                              ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
+                          }
+                      });
     LuaGetfieldInt(L, "Credits", &ch->Gold);
     LuaGetfieldString(L, "Position",
                       [ch](const std::string &posName)
