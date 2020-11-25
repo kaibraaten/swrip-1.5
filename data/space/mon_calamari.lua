@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 21100, 
          Name = "Coral City", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

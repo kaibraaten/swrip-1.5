@@ -35,7 +35,7 @@ std::shared_ptr<ProtoMobile> GetMobFromTag(const std::string &tag)
 {
     for(const auto &[_, mob] : ProtoMobs)
     {
-        if(StrCmp(mob->Tag(), tag) == 0)
+        if(!mob->Tag().empty() && StrCmp(mob->Tag(), tag) == 0)
         {
             return mob;
         }

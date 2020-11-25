@@ -22,9 +22,12 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
     if(StrCmp(option, "exits") == 0)
     {
         std::list<std::string> results;
-
+        std::list<std::string> nodeps;
+        
         for(const auto &area : Areas)
         {
+            std::list<std::string> areaResults;
+            
             if(!argument.empty()
                && StringPrefix(argument, area->Filename))
             {
@@ -34,13 +37,28 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             for(const auto &room : GetRooms(area))
             {
                 auto outgoing = ReportOutgoingExits(room);
-                results.insert(results.end(), outgoing.begin(), outgoing.end());
+                areaResults.insert(areaResults.end(), outgoing.begin(), outgoing.end());
+            }
+
+            if(areaResults.empty())
+            {
+                nodeps.push_back(area->Filename + " has no exit dependencies.");
+            }
+            else
+            {
+                results.insert(results.end(), areaResults.begin(), areaResults.end());
             }
         }
 
         results.sort();
-
+        nodeps.sort();
+        
         for(auto line : results)
+        {
+            ch->Echo("%s\r\n", line.c_str());
+        }
+
+        for(auto line : nodeps)
         {
             ch->Echo("%s\r\n", line.c_str());
         }
@@ -48,7 +66,8 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
     else if(StrCmp(option, "resets") == 0)
     {
         std::list<std::string> results;
-
+        std::list<std::string> nodeps;
+        
         for(const auto &area : Areas)
         {
             if(!argument.empty()
@@ -58,12 +77,26 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             }
 
             auto externalResets = ReportExternalResets(area);
-            results.insert(results.end(), externalResets.begin(), externalResets.end());
+
+            if(externalResets.empty())
+            {
+                nodeps.push_back(area->Filename + " has no reset dependencies.");
+            }
+            else
+            {
+                results.insert(results.end(), externalResets.begin(), externalResets.end());
+            }
         }
 
         results.sort();
-
+        nodeps.sort();
+        
         for(auto line : results)
+        {
+            ch->Echo("%s\r\n", line.c_str());
+        }
+
+        for(auto line : nodeps)
         {
             ch->Echo("%s\r\n", line.c_str());
         }

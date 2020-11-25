@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 10605, 
          Name = "Coronet City", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

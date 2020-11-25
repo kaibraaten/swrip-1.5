@@ -1087,9 +1087,14 @@ void AddCharacter(std::shared_ptr<Character> ch);
 std::shared_ptr<Character> CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 std::shared_ptr<Object> CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
+
 std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum);
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);
 std::shared_ptr<Room> GetRoom(vnum_t vnum);
+std::shared_ptr<ProtoMobile> GetProtoMobile(const std::string &vnumOrTag);
+std::shared_ptr<ProtoObject> GetProtoObject(const std::string &vnumOrTag);
+std::shared_ptr<Room> GetRoom(const std::string &vnumOrTag);
+
 std::shared_ptr<Room> MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);

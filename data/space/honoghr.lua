@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 1000, 
          Name = "Nystao Port", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

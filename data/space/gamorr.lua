@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 28038, 
          Name = "Landing Area", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

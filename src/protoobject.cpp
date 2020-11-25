@@ -64,7 +64,7 @@ std::shared_ptr<ProtoObject> GetObjectFromTag(const std::string &tag)
 {
     for(const auto &[_, obj] : ProtoObjects)
     {
-        if(StrCmp(obj->Tag(), tag) == 0)
+        if(!obj->Tag().empty() && StrCmp(obj->Tag(), tag) == 0)
         {
             return obj;
         }

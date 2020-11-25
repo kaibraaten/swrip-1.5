@@ -788,6 +788,42 @@ std::shared_ptr<Room> GetRoom(vnum_t vnum)
     return nullptr;
 }
 
+std::shared_ptr<ProtoMobile> GetProtoMobile(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetProtoMobile(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetMobFromTag(vnumOrTag);
+    }
+}
+
+std::shared_ptr<ProtoObject> GetProtoObject(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetProtoObject(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetObjectFromTag(vnumOrTag);
+    }
+}
+
+std::shared_ptr<Room> GetRoom(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetRoom(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetRoomFromTag(vnumOrTag);
+    }
+}
+
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */

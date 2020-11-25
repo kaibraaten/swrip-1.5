@@ -60,6 +60,11 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
         ch->Echo("Vnum: %ld (%s)  ",
                  victim->Prototype->Vnum,
                  area->Filename.c_str());
+
+        if(!victim->Prototype->Tag().empty())
+        {
+            ch->Echo("Tag: %s", victim->Prototype->Tag().c_str());
+        }
     }
 
     ch->Echo("Sex: %s   Room: %ld   Count: %d  Killed: %d\r\n",

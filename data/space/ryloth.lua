@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 800, 
          Name = "Kala'uun Starport", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

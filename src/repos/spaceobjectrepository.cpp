@@ -57,7 +57,7 @@ void LuaSpaceobjectRepository::PushOneSite(lua_State *L, const LandingSite *site
 
     LuaSetfieldString(L, "Name", site->LocationName);
     LuaSetfieldNumber(L, "DockVnum", site->Dock);
-    LuaSetfieldNumber(L, "IsSecret", site->IsSecret);
+    LuaSetfieldBoolean(L, "IsSecret", site->IsSecret);
 
     lua_settable(L, -3);
 }
