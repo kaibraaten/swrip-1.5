@@ -1,40 +1,25 @@
 -- Coruscant - Monument Plaza
--- Last saved Thursday 19-Nov-2020 14:31:09
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
-   VnumRanges = 
-   {
-      Mob = 
-      {
-         First = 26000, 
-         Last = 26099, 
-      }, 
-      Object = 
-      {
-         First = 26000, 
-         Last = 26099, 
-      }, 
-      Room = 
-      {
-         First = 26000, 
-         Last = 26099, 
-      }, 
-   }, 
+   HighEconomy = 0, 
    Objects = 
    {
       [26020] = 
       {
+         Layers = 2, 
+         Description = "A small t-shirt is getting trampled.", 
+         ShortDescr = "a small t-shirt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         Vnum = 26020, 
          Cost = 20, 
-         ShortDescr = "a small t-shirt", 
          Affects = 
          {
             [1] = 
@@ -43,16 +28,11 @@ AreaEntry
                Location = 2, 
             }, 
          }, 
-         Weight = 1, 
-         Layers = 2, 
-         Name = "small t-shirt", 
-         Description = "A small t-shirt is getting trampled.", 
-         ActionDescription = "", 
          ItemType = "armor", 
-         WearFlags = 
+         Weight = 1, 
+         Flags = 
          {
-            [0] = "Take", 
-            [3] = "Body", 
+            [18] = "SmallSize", 
          }, 
          ObjectValues = 
          {
@@ -63,30 +43,31 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26020, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "small t-shirt", 
       }, 
       [26021] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-            [13] = "Inventory", 
-         }, 
-         Vnum = 26021, 
-         Cost = 20, 
-         ShortDescr = "a medium t-shirt", 
-         Weight = 1, 
          Layers = 2, 
-         Name = "medium t-shirt", 
          Description = "A medium t-shirt is getting trampled.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
+         ShortDescr = "a medium t-shirt", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 20, 
+         ItemType = "armor", 
+         Weight = 1, 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+            [13] = "Inventory", 
          }, 
          ObjectValues = 
          {
@@ -97,19 +78,25 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26021, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "medium t-shirt", 
       }, 
       [26022] = 
       {
+         Layers = 2, 
+         Description = "A large t-shirt is getting trampled.", 
+         ShortDescr = "a large t-shirt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Flags = 
-         {
-            [3] = "HuttSize", 
-         }, 
-         Vnum = 26022, 
          Cost = 20, 
-         ShortDescr = "a large t-shirt", 
          Affects = 
          {
             [1] = 
@@ -118,16 +105,11 @@ AreaEntry
                Location = 2, 
             }, 
          }, 
-         Weight = 1, 
-         Layers = 2, 
-         Name = "large t-shirt", 
-         Description = "A large t-shirt is getting trampled.", 
-         ActionDescription = "", 
          ItemType = "armor", 
-         WearFlags = 
+         Weight = 1, 
+         Flags = 
          {
-            [0] = "Take", 
-            [3] = "Body", 
+            [3] = "HuttSize", 
          }, 
          ObjectValues = 
          {
@@ -138,19 +120,25 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26022, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "large t-shirt", 
       }, 
       [26023] = 
       {
+         Layers = 2, 
+         Description = "A huge t-shirt is getting trampled.", 
+         ShortDescr = "a huge t-shirt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Flags = 
-         {
-            [3] = "HuttSize", 
-         }, 
-         Vnum = 26023, 
          Cost = 20, 
-         ShortDescr = "a huge t-shirt", 
          Affects = 
          {
             [1] = 
@@ -159,16 +147,11 @@ AreaEntry
                Location = 2, 
             }, 
          }, 
-         Weight = 1, 
-         Layers = 2, 
-         Name = "huge t-shirt", 
-         Description = "A huge t-shirt is getting trampled.", 
-         ActionDescription = "", 
          ItemType = "armor", 
-         WearFlags = 
+         Weight = 1, 
+         Flags = 
          {
-            [0] = "Take", 
-            [3] = "Body", 
+            [3] = "HuttSize", 
          }, 
          ObjectValues = 
          {
@@ -179,20 +162,25 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26023, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "huge t-shirt", 
       }, 
       [26024] = 
       {
+         Layers = 32, 
+         Description = "A small sweater is getting stepped on", 
+         ShortDescr = "a small sweater", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-            [13] = "Inventory", 
-         }, 
-         Vnum = 26024, 
          Cost = 50, 
-         ShortDescr = "a small sweater", 
          Affects = 
          {
             [1] = 
@@ -201,16 +189,12 @@ AreaEntry
                Location = 27, 
             }, 
          }, 
-         Weight = 1, 
-         Layers = 32, 
-         Name = "a small sweater", 
-         Description = "A small sweater is getting stepped on", 
-         ActionDescription = "", 
          ItemType = "armor", 
-         WearFlags = 
+         Weight = 1, 
+         Flags = 
          {
-            [0] = "Take", 
-            [3] = "Body", 
+            [18] = "SmallSize", 
+            [13] = "Inventory", 
          }, 
          ObjectValues = 
          {
@@ -221,40 +205,41 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26024, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "a small sweater", 
       }, 
       [26025] = 
       {
+         Layers = 32, 
+         Description = "A medium sweater is getting stepped on", 
+         ShortDescr = "a medium sweater", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 50, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 2, 
+               Location = 27, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
          Flags = 
          {
             [13] = "Inventory", 
             [31] = "HumanSize", 
             [19] = "LargeSize", 
          }, 
-         Vnum = 26025, 
-         Cost = 50, 
-         ShortDescr = "a medium sweater", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 2, 
-               Location = 27, 
-            }, 
-         }, 
-         Weight = 1, 
-         Layers = 32, 
-         Name = "a medium sweater", 
-         Description = "A medium sweater is getting stepped on", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -264,39 +249,40 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26025, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "a medium sweater", 
       }, 
       [26026] = 
       {
+         Layers = 32, 
+         Description = "A large sweater is getting stepped on", 
+         ShortDescr = "a large sweater", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 50, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 2, 
+               Location = 27, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
          Flags = 
          {
             [19] = "LargeSize", 
             [13] = "Inventory", 
          }, 
-         Vnum = 26026, 
-         Cost = 50, 
-         ShortDescr = "a large sweater", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 2, 
-               Location = 27, 
-            }, 
-         }, 
-         Weight = 1, 
-         Layers = 32, 
-         Name = "a large sweater", 
-         Description = "A large sweater is getting stepped on", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -306,38 +292,39 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26026, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "a large sweater", 
       }, 
       [26027] = 
       {
+         Layers = 32, 
+         Description = "A huge sweater is getting stepped on", 
+         ShortDescr = "a huge sweater", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 50, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 2, 
+               Location = 27, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
          Flags = 
          {
             [3] = "HuttSize", 
          }, 
-         Vnum = 26027, 
-         Cost = 50, 
-         ShortDescr = "a huge sweater", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 2, 
-               Location = 27, 
-            }, 
-         }, 
-         Weight = 1, 
-         Layers = 32, 
-         Name = "a huge sweater", 
-         Description = "A huge sweater is getting stepped on", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -347,38 +334,39 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26027, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "a huge sweater", 
       }, 
       [26028] = 
       {
+         Layers = 64, 
+         Description = "A small heavy vest is somewhat blast resistant.", 
+         ShortDescr = "a small heavy vest", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 100, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = -10, 
+               Location = 14, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Vnum = 26028, 
-         Cost = 100, 
-         ShortDescr = "a small heavy vest", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -10, 
-               Location = 14, 
-            }, 
-         }, 
-         Weight = 1, 
-         Layers = 64, 
-         Name = "small heavy vest", 
-         Description = "A small heavy vest is somewhat blast resistant.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
          ObjectValues = 
          {
             [1] = 7, 
@@ -388,38 +376,39 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26028, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "small heavy vest", 
       }, 
       [26029] = 
       {
+         Layers = 64, 
+         Description = "A large heavy vest is somewhat blast resistant.", 
+         ShortDescr = "a large heavy vest", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 100, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = -10, 
+               Location = 14, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Weight = 1, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Vnum = 26029, 
-         Cost = 100, 
-         ShortDescr = "a large heavy vest", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -10, 
-               Location = 14, 
-            }, 
-         }, 
-         Weight = 1, 
-         Layers = 64, 
-         Name = "large heavy vest", 
-         Description = "A large heavy vest is somewhat blast resistant.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
          ObjectValues = 
          {
             [1] = 7, 
@@ -429,21 +418,22 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26029, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "large heavy vest", 
       }, 
       [26099] = 
       {
+         Layers = 0, 
+         Description = "Some god dropped a newly created dud here.", 
+         ShortDescr = "a newly created dud", 
+         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         Vnum = 26099, 
          Cost = 0, 
-         ShortDescr = "a newly created dud", 
-         Layers = 0, 
-         Weight = 1, 
-         Name = "dud", 
-         ActionDescription = "", 
          ItemType = "trash", 
-         Description = "Some god dropped a newly created dud here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -453,13 +443,22 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26099, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "dud", 
       }, 
       [26000] = 
       {
+         Layers = 0, 
+         Description = "A datapad of some sort is blinking on the ground.", 
+         ShortDescr = "a map-pad", 
+         Weight = 1, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "map-pad pad datapad blinking", 
                Description = "O--O\
 \13              |  |\
 \13        O--O  O--O  O--O\
@@ -484,18 +483,10 @@ AreaEntry
 \13              |  |\
 \13              O--O\
 \13", 
-               Keyword = "map-pad pad datapad blinking", 
             }, 
          }, 
-         Vnum = 26000, 
          Cost = 25, 
-         ShortDescr = "a map-pad", 
-         Layers = 0, 
-         Weight = 1, 
-         Name = "map-pad pad datapad blinking", 
-         ActionDescription = "", 
          ItemType = "map", 
-         Description = "A datapad of some sort is blinking on the ground.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -505,34 +496,35 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26000, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "map-pad pad datapad blinking", 
       }, 
       [26001] = 
       {
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "This shirt has the words, \"I saw Monument Plaza!\" pasted on the front in\
-\13bright letters.  Despite its stupidity, you recall having seen several\
-\13sentients wearing in.\
-\13", 
-               Keyword = "t-shirt shirt thin", 
-            }, 
-         }, 
-         Vnum = 26001, 
-         Cost = 25, 
-         ShortDescr = "a t-shirt", 
-         Weight = 1, 
          Layers = 1, 
-         Name = "shirt tee-shirt t-shirt", 
          Description = "A thin, white shirt is being trampled on the ground.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
+         ShortDescr = "a t-shirt", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "t-shirt shirt thin", 
+               Description = "This shirt has the words, \"I saw Monument Plaza!\" pasted on the front in\
+\13bright letters.  Despite its stupidity, you recall having seen several\
+\13sentients wearing in.\
+\13", 
+            }, 
+         }, 
+         Cost = 25, 
+         ItemType = "armor", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -542,22 +534,33 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26001, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "shirt tee-shirt t-shirt", 
       }, 
       [26002] = 
       {
+         Layers = 0, 
+         Description = "A cap has been left here for the scavengers.", 
+         ShortDescr = "an adjustable cap", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "cap adjustable", 
                Description = "There is a picture of several statues on the front of the cap.  The rest\
 \13is brown and shaped like the mountain peak in the center of the plaza.\
 \13", 
-               Keyword = "cap adjustable", 
             }, 
          }, 
-         Vnum = 26002, 
          Cost = 10, 
-         ShortDescr = "an adjustable cap", 
+         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -567,16 +570,6 @@ AreaEntry
             }, 
          }, 
          Weight = 1, 
-         Layers = 0, 
-         Name = "cap hat plastic", 
-         Description = "A cap has been left here for the scavengers.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -586,38 +579,39 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26002, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "cap hat plastic", 
       }, 
       [26003] = 
       {
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Keyword = "jacket plastic ugly shiney", 
-            }, 
-            [2] = 
-            {
-               Description = "This jacket must be the most repulsive peice of clothing you have\
-\13ever layed eyes on.\
-\13", 
-               Keyword = "jacket plastic ugly shiney", 
-            }, 
-         }, 
-         Vnum = 26003, 
-         Cost = 100, 
-         ShortDescr = "a plastic jacket", 
-         Weight = 1, 
          Layers = 20, 
-         Name = "jacket plastic shiney", 
          Description = "A pile of shiney plastic has been discarded here.", 
-         ActionDescription = "", 
-         ItemType = "armor", 
+         ShortDescr = "a plastic jacket", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "jacket plastic ugly shiney", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "jacket plastic ugly shiney", 
+               Description = "This jacket must be the most repulsive peice of clothing you have\
+\13ever layed eyes on.\
+\13", 
+            }, 
+         }, 
+         Cost = 100, 
+         ItemType = "armor", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -627,26 +621,27 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26003, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "jacket plastic shiney", 
       }, 
       [26004] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26004, 
-         Cost = 30, 
-         ShortDescr = "a leg sheath", 
-         Weight = 1, 
          Layers = 128, 
-         Name = "leg sheath", 
          Description = "A leg sheath... big deal.", 
-         ActionDescription = "", 
-         ItemType = "container", 
+         ShortDescr = "a leg sheath", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 30, 
+         ItemType = "container", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -656,25 +651,26 @@ AreaEntry
             [5] = 0, 
             [0] = 15, 
          }, 
+         Vnum = 26004, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "leg sheath", 
       }, 
       [26005] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26005, 
-         Cost = 1000, 
-         ShortDescr = "a superconductor", 
-         Weight = 1, 
          Layers = 0, 
-         Name = "superconductor", 
          Description = "A superconductor is used in high energy devices.", 
-         ActionDescription = "", 
-         ItemType = "superconductor", 
+         ShortDescr = "a superconductor", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 1000, 
+         ItemType = "superconductor", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -684,29 +680,30 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26005, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "superconductor", 
       }, 
       [26006] = 
       {
+         Layers = 0, 
+         Description = "A key is hanging on the wall here.", 
+         ShortDescr = "A key", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 0, 
+         ItemType = "key", 
+         Weight = 1, 
          Flags = 
          {
             [25] = "Hidden", 
          }, 
-         Vnum = 26006, 
-         Cost = 0, 
-         ShortDescr = "A key", 
-         Weight = 1, 
-         Layers = 0, 
-         Name = "key", 
-         Description = "A key is hanging on the wall here.", 
-         ActionDescription = "", 
-         ItemType = "key", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -716,15 +713,25 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26006, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "key", 
       }, 
       [26007] = 
       {
+         Layers = 4, 
+         Description = "Some thin synthafabric would make a nice shirt", 
+         ShortDescr = "some thin synthafabric", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Vnum = 26007, 
          Cost = 40, 
-         ShortDescr = "some thin synthafabric", 
+         ItemType = "fabric", 
          Affects = 
          {
             [1] = 
@@ -739,15 +746,6 @@ AreaEntry
             }, 
          }, 
          Weight = 1, 
-         Layers = 4, 
-         Name = "some thin synthafabric satin fabric", 
-         Description = "Some thin synthafabric would make a nice shirt", 
-         ActionDescription = "", 
-         ItemType = "fabric", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
          ObjectValues = 
          {
             [1] = 1, 
@@ -757,25 +755,26 @@ AreaEntry
             [5] = 0, 
             [0] = 1, 
          }, 
+         Vnum = 26007, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "some thin synthafabric satin fabric", 
       }, 
       [26008] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26008, 
-         Cost = 75, 
-         ShortDescr = "durasteel plating", 
-         Weight = 5, 
          Layers = 32, 
-         Name = "durasteel plating hard leather fabric", 
          Description = "Durasteel plating was left here.", 
-         ActionDescription = "", 
-         ItemType = "fabric", 
+         ShortDescr = "durasteel plating", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 75, 
+         ItemType = "fabric", 
+         Weight = 5, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -785,25 +784,26 @@ AreaEntry
             [5] = 0, 
             [0] = 6, 
          }, 
+         Vnum = 26008, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "durasteel plating hard leather fabric", 
       }, 
       [26009] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26009, 
-         Cost = 35, 
-         ShortDescr = "some toughened bantha hide", 
-         Weight = 5, 
          Layers = 128, 
-         Name = "some toughened bantha hide fabric", 
          Description = "Some toughened bantha hide would make an excellent outermost garment.", 
-         ActionDescription = "", 
-         ItemType = "fabric", 
+         ShortDescr = "some toughened bantha hide", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 35, 
+         ItemType = "fabric", 
+         Weight = 5, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -813,28 +813,29 @@ AreaEntry
             [5] = 0, 
             [0] = 4, 
          }, 
+         Vnum = 26009, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "some toughened bantha hide fabric", 
       }, 
       [26010] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         Vnum = 26010, 
-         Cost = 25, 
-         ShortDescr = "a chemistry set", 
-         Weight = 1, 
          Layers = 0, 
-         Name = "chemistry set", 
          Description = "A chemistry set might produce something useful.", 
-         ActionDescription = "", 
-         ItemType = "chemical", 
+         ShortDescr = "a chemistry set", 
          WearFlags = 
          {
             [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 25, 
+         ItemType = "chemical", 
+         Weight = 1, 
+         Flags = 
+         {
+            [13] = "Inventory", 
          }, 
          ObjectValues = 
          {
@@ -845,28 +846,29 @@ AreaEntry
             [5] = 0, 
             [0] = 500, 
          }, 
+         Vnum = 26010, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "chemistry set", 
       }, 
       [26011] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [25] = "Hidden", 
-         }, 
-         Vnum = 26011, 
-         Cost = 100, 
-         ShortDescr = "a sheet of thin silver", 
-         Weight = 2, 
          Layers = 0, 
-         Name = "sheet thin silver", 
          Description = "A sheet of thin silver is stashed away in a corner.", 
-         ActionDescription = "", 
-         ItemType = "rare_metal", 
+         ShortDescr = "a sheet of thin silver", 
          WearFlags = 
          {
             [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 100, 
+         ItemType = "rare_metal", 
+         Weight = 2, 
+         Flags = 
+         {
+            [25] = "Hidden", 
          }, 
          ObjectValues = 
          {
@@ -877,26 +879,27 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26011, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "sheet thin silver", 
       }, 
       [26012] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26012, 
-         Cost = 0, 
-         ShortDescr = "a keycard", 
-         Weight = 1, 
          Layers = 0, 
-         Name = "keycard", 
          Description = "A keycard was dropped here.", 
-         ActionDescription = "", 
-         ItemType = "trash", 
+         ShortDescr = "a keycard", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -906,29 +909,30 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26012, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "keycard", 
       }, 
       [26098] = 
       {
+         Layers = 0, 
+         Description = "The Deed of the Plaza is yours to capture", 
+         ShortDescr = "the plaza deed", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Cost = 0, 
+         ItemType = "government", 
+         Weight = 1, 
          Flags = 
          {
             [25] = "Hidden", 
          }, 
-         Vnum = 26098, 
-         Cost = 0, 
-         ShortDescr = "the plaza deed", 
-         Weight = 1, 
-         Layers = 0, 
-         Name = "The Plaza Deed", 
-         Description = "The Deed of the Plaza is yours to capture", 
-         ActionDescription = "", 
-         ItemType = "government", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -938,26 +942,27 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26098, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "The Plaza Deed", 
       }, 
       [26097] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26097, 
-         Cost = 0, 
-         ShortDescr = "a keycard", 
-         Weight = 1, 
          Layers = 0, 
-         Name = "a keycard", 
          Description = "A keycard was dropped here.", 
-         ActionDescription = "", 
-         ItemType = "trash", 
+         ShortDescr = "a keycard", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -967,21 +972,22 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 26097, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "a keycard", 
       }, 
       [26064] = 
       {
+         Layers = 0, 
+         Description = "A small table is here.", 
+         ShortDescr = "a small table", 
+         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         Vnum = 26064, 
          Cost = 0, 
-         ShortDescr = "a small table", 
-         Layers = 0, 
-         Weight = 1, 
-         Name = "small table", 
-         ActionDescription = "", 
          ItemType = "furniture", 
-         Description = "A small table is here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -991,4843 +997,12 @@ AreaEntry
             [5] = 0, 
             [0] = 4, 
          }, 
-      }, 
-   }, 
-   HighEconomy = 0, 
-   Rooms = 
-   {
-      [26000] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26000, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The ground pushes upwards at the center of this rectangular plaza, showing\
-the main feature of the plaza - bare rock.   The plaza was built around\
-one of the peaks of the Menari mountain range. Enormous statues are placed\
-in orderly fashion throughout the area, most seem to be made of native\
-rock from the mountain.   Around the perimeter of the plaza are a\
-multitude of small stores and shops.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26001, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26004, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26002, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26003, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Center of Monument Plaza", 
-      }, 
-      [26001] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26001, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "An average sized statue in the plaza, although huge by any normal\
-standards, is of a squat looking alien creature. It is hunched over\
-slightly and stands with a cane. At the foot of the monument an\
-inscription drones on about this creatures deads. Not exactly exciting bed\
-time reading. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26009, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26007, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26000, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26008, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26002] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26002, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The ground pushes upwards at the center of this rectangular plaza, showing\
-the main feature of the plaza - bare rock.   The plaza was built around\
-one of the peaks of the Menari mountain range. Enormous statues are placed\
-in orderly fashion throughout the area, most seem to be made of native\
-rock from the mountain.   Around the perimeter of the plaza are a\
-multitude of small stores and shops.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26000, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26006, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26010, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26005, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Center of Monument Plaza", 
-      }, 
-      [26003] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26003, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The ground pushes in the center of the plaza showing the main feature\
-of the plaza - bare bock. The plaza is built surrounding one of the\
-peaks of one of the Menari Mountain Range. The surface of the\
-mountain is exposed in several places but is most promenant here at\
-the true peak. Throught the rest of the plaza are enormous statues,\
-ost carved out of the rock. Around the perimeter are a multitude of\
-small stores and shops.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26008, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26000, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26005, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26027, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Center of Monument Plaza", 
-      }, 
-      [26004] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26004, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand before an enormous statue. It rises at least 50 stories above the\
-peak of this mountain. The statue is of a human wearing a long stone robe\
-and holding a lightsaber out in front of him. A guards post is to the\
-south of here. A large rock juts out of the ground to the south west.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26007, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26017, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26006, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26000, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "North of the Guard's Post", 
-      }, 
-      [26005] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26005, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The ground pushes in the center of the plaza showing the main feature\
-of the plaza - bare bock. The plaza is built surrounding one of the\
-peaks of one of the Menari Mountain Range. The surface of the\
-mountain is exposed in several places but is most promenant here at\
-the true peak. Throught the rest of the plaza are enormous statues,\
-ost carved out of the rock. Around the perimeter are a multitude of\
-small stores and shops.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26003, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26002, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26013, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26026, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Center of Monument Plaza", 
-      }, 
-      [26006] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26006, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The guards post is a flat platform raised slightly above the the main\
-walkways. To the north is one of the larger statues in the plaza to the\
-west the mountain juts out above the floor forming a high peak. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26004, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26016, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26014, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26002, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "At the Guard's Post", 
-      }, 
-      [26007] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26007, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand just north of one of the largest statues in the plaza. The air\
-high up on the mountain is thin but clean and fresh. Refreshing compared\
-to the heavy stale air found throughout the rest of the coruscant. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26011, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26018, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26004, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26001, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26008] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26008, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in a northern area of monument plaza. All around the plaza is\
-uroounded by shops selling all kinds of overpriced things. Throught the\
-center of the plaza are enourmous monuments erected in the past. The\
-largest monument in the plaza lies directly to the west of you. It appears\
-alot newer than most of the statues here but seems to be poorly kept\
-compared to the rest.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26012, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26001, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26003, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26028, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26009] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26009, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand on the northetn end of monument plaza, the popular mall built\
-high on a peek in the Menari Mountain range in the southern part of\
-Coruscant. To the south are many large monuments depicting heroes (and\
-villians) of the past. In the center of the plaza the peek of the mountain\
-pushes up above the palace floor coming to a high peak. To the north a\
-wide walkway leads to a lookout point on the mountain\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26041, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26011, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26001, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26012, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26010] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26010, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in a southern part of Monument Plaza, one of Coruscants many\
-tourist traps. The center of the squre is just to the north where the peak\
-of a Menari Mountain pushes through the center of the plaza. Around the\
-perimeter of the plaza are dozens of small shops. Scattered throughout the\
-plaza are many enormous statues.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26002, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26014, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26022, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26013, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26011] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26011, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand along the northern edge of monument plaza. To the south of you\
-lie several monuments of astronomical size. To your north and around the\
-perimiter of the plaza are many shops. You stand along the northern edge\
-of monument plaza. To the south of you lie several monuments of\
-astronomical size. To your north and around the perimiter of the plaza are\
-many shops. A large rock extends high out of the center of the paza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26019, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26007, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26009, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26012] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26012, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand on the northetn end of monument plaza, the popular mall built\
-high on a peek in the Menari Mountain range in the southern part of\
-Coruscant. To the south are many large monuments depicting heroes (and\
-villians) of the past. In the center of the plaza the peek of the mountain\
-pushes up above the palace floor coming to a high peak. To the north a\
-wide walkway leads to a lookout point on the mountain \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26040, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26009, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26008, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26029, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26013] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26013, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in a southern part of Monument Plaza, one of Coruscants many\
-tourist traps. The center of the squre is just to the north where the peak\
-of a Menari Mountain pushes through the center of the plaza. Around the\
-perimeter of the plaza are dozens of small shops. Scattered throughout the\
-plaza are many enormous statues.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26005, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26010, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26023, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26025, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26014] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26014, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "A small group of statues is here clustered together. A plaque on the bottom\
-tells the story of the battle of Endor. The people depicted in this\
-monument were responsible for destroying the second death star and ending\
-the reign of the self proclaimed emp \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26006, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26015, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26021, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26010, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26015] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26015, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "Standing here, southeast of the center of the plaza, you can see most\
-of the square.  Far to the northeast is an eatery: the sign is too small\
-to read from here, though.  To your south is a mid-sized statue, and to\
-the west are several more statues.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26016, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26075, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26020, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26014, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southeast Corner of Monument Plaza", 
-      }, 
-      [26016] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26016, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "Here, directly east of the guard post, you stand at the base of one of\
-the smallest statues in the plaza. It is one of an Old Republic Officer,\
-dressed in full ceremonial garb, saluting the center of the square. As\
-usual there is a plaque at the bottom of the statue giving details about\
-why this man deserved a place here.  The plaza continues north and south,\
-and the guard post is to the west.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26017, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26076, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26015, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26006, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "East of the Guard's Post", 
-      }, 
-      [26017] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26017, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You are standing just to the northeast of a guard's post.  Apparently\
-even here, in this great monument there is still a need for officials\
-of the law.  There is a lesser statue to your north and south, and a\
-rather large one to your west.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26018, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26077, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26016, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26004, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northeast of the Guard's Post", 
-      }, 
-      [26018] = 
-      {
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Keyword = "plaque", 
-            }, 
-         }, 
-         Vnum = 26018, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You are standing at the eastern most edge of Monument Plaza, and slightly\
-to the north of its center.  You are directly at the base of one of the\
-lesser statues of the Plaza, but it still dwarfs you in comparison.  A\
-plaque on its side gives details about the person's life and great\
-acheivements, but it must have been written by a mark 2 power droid, because\
-no seems to be able to stave off boredom for more than 3 or 4 lines.\
-The Plaza continues to the north, south, and west.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26019, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26078, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26017, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26007, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northeast Corner of Monument Plaza", 
-      }, 
-      [26019] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26019, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You are standing in the most northerly section of Monument Plaza. A row of\
-shops lie immediatly to your north and lead off westward. Several other\
-citizens are here, admiring the square and the sheer beauty of the area. \
-Compared to much of the rest of Coruscant, this is a virtual paradise.  \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26037, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26079, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26018, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26011, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northeast Corner of Monument Plaza", 
-      }, 
-      [26020] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26020, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You are now standing in the more south easterly corner of Monument\
-Plaza.  A mid-sized statue, meaning 30-40 stories, looms above you in\
-testament to some ancient hero.  This particular statue is non-human,\
-posessing four arms, six legs, and a head protruding from its underbelly.\
-As usual there is a plaque at its base explaining its story.  The plaza\
-extends before you to the north and the west.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26015, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26074, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 336, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26021, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Direction = "southeast", 
-               Key = -1, 
-               DestinationVnum = 447, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southeast Corner of Monument Plaza", 
-      }, 
-      [26021] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26021, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in the southern part of monument plaza close to the easern\
-corner. The plaza hotel is directly to the south of you. To the south east\
-is an entrance to the turbocar system. Shops lie to your west and around\
-the outside walls of the plaza. Many enormous monuments can be found\
-throughout hte plaza to the north. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26014, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26020, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26050, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26022, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26022] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26022, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
-Range on Coruscant. This large mall is built around the tip of one of the\
-peaks in the mountain range. Directly to the south is a row of shops which\
-extends around the plaza. Throughout the plaza are many enormous statues.\
-Most depict Heroes of the Old Republic although there are many newer ones\
-built by the Empire. The turbocar system and and plaza hotel are to the\
-further to the east. The offices are at the western corner.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26010, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26021, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26023, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26023] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26023, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
-Range on Coruscant. This large mall is built around the tip of one of the\
-peaks in the mountain range. Directly to the south is a row of shops which\
-extends around the plaza. Throughout the plaza are many enormous statues.\
-Most depict Heroes of the Old Republic although there are many newer ones\
-built by the Empire. The turbocar system and and plaza hotel are to the\
-further to the east. The offices are at the western corner.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26013, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26022, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26072, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26024, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26024] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26024, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
-Range on Coruscant. This large mall is built around the tip of one of the\
-peaks in the mountain range. Directly to the south is a row of shops which\
-extends around the plaza. Throughout the plaza are many enormous statues.\
-Most depict Heroes of the Old Republic although there are many newer ones\
-built by the Empire. The turbocar system and and plaza hotel are to the\
-further to the east. The offices are at the western corner.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26025, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26023, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26071, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26030, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26025] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26025, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The statue hear is one of the larger statues in the plaza. It is a\
-depiction of one of the greatest architects in the history of coruscant\
-who designed several of the older buildings in the cities core. A few of\
-wich still stand in their original form ( although most of them have been\
-built over top of and are buried beneath several newer structures.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26026, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26013, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26024, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26031, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southern Side of Monument Plaza", 
-      }, 
-      [26026] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26026, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand before an old statue that is one of the smaller ones. It depicts\
-a woman scratching her chin and gazing up at the stars. You stand before\
-an old statue that is one of the smaller ones. It depicts a woman\
-scratching her chin and gazing up at the stars. The plaque tells the story\
-of this womans many technological achievements which included an algorithm\
-that enabled artificial inteligence units to run at almost 100th of their\
-previous size.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26027, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26005, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26025, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26032, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "West Side of Monument Plaza", 
-      }, 
-      [26027] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26027, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This raised platform is used as a second security post during peek tourist\
-seasons. It was built manly in response to the defacing of Palpatines\
-statue although it has had little effect to this end. Most guards simply\
-turn their heads to such acts. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26028, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26003, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26026, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26033, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "West Side of Monument Plaza", 
-      }, 
-      [26028] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26028, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "The enormous statue before towers above all the others in the statue and is\
-a true sign of the hubris the man it depicts once displayed. It is a\
-monument to the late Senator Palpatine, the self proclaimed emporer who\
-died 20 years ago in the battle of Endor. The statue was built during his\
-reign here on Coruscant probably under his direct orders. The inscription\
-is illegible underneath layers of nasty graffitti.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26029, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26008, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26027, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26034, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26029] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26029, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand along the northernmost edge of monument plaza. To the north-west\
-is the entrance to Chat's Fast Food Palace. Beyond that are various shops\
-encircling the remainder of the plaza. Directly to the south of you is one\
-of the largest monuments in the plaza. Others are scattered throughout the\
-south and east of here. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26012, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26028, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26035, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northern Side of Monument Plaza", 
-      }, 
-      [26030] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26030, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in the southeast corner of monument plaza, one of the nicer areas\
-of coruscant located on top of one of the menari mountains. To the west is\
-the entrance to the plaza offices. Far to the east is the plaza hotel and\
-turbocar station. There is a monument here that depicts a verpine shaking\
-hands with a mon calamarian. Throughout the plaza are dozens of other\
-monuments, some towering stories high.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26031, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26024, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26080, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26057, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southwest Corner of Monument Plaza", 
-      }, 
-      [26031] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26031, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand along the western edge of Monument Plaza, the large mall built\
-around the peak of one of the Menari Mountains on Coruscant. Because of\
-its location it is one of the nicer areas of coruscant. A freesh breeze\
-and clean air are a refreshing change to the busy dirty streets. The\
-preimiter of the plaza is line with shops while the center of the plaza is\
-filled with enourmous monuments of old heroes. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26032, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26025, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26030, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26066, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Southwest Corner of Monument Plaza", 
-      }, 
-      [26032] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26032, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand along the western edge of Monument Plaza, the large mall built\
-around the peak of one of the Menari Mountains on Coruscant. Because of\
-its location it is one of the nicer areas of coruscant. A freesh breeze\
-and clean air are a refreshing change to the busy dirty streets. The\
-preimiter of the plaza is line with shops while the center of the plaza is\
-filled with enourmous monuments of old heroes.  \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26033, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26026, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26031, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26067, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "West Side of Monument Plaza", 
-      }, 
-      [26033] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26033, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand along the western edge of Monument Plaza, the large mall built\
-around the peak of one of the Menari Mountains on Coruscant. Because of\
-its location it is one of the nicer areas of coruscant. A freesh breeze\
-and clean air are a refreshing change to the busy dirty streets. The\
-preimiter of the plaza is line with shops while the center of the plaza is\
-filled with enourmous monuments of old heroes.  \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26034, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26027, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26032, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26068, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "West Side of Monument Plaza", 
-      }, 
-      [26034] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26034, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You are walking along the Western end of monument plaza. Directly to your\
-east is an enormous statue of a well known if not well liked hooded\
-figure. Shops are all alogn the four sides of the plaza. To the far south\
-east is the plaza hotel and transit station. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26035, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26028, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26033, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26069, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northwest Corner of Monument Plaza", 
-      }, 
-      [26035] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26035, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand in the northwest corner of Monument Plaza. It sports some of the\
-largest statues in the Galaxy but the bigger attaction for the locals is\
-the fact that its one of the few places in Coruscant you can actually\
-touch bare rock in its natural state. A restaurant is to the north and\
-many shops are to the west and south of here. \
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26047, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26029, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26034, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26070, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Northwest Corner of Monument Plaza", 
-      }, 
-      [26036] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26036, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Inside a Souvenir Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26038, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26037, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "You are standing in front of a rack of cheap clothing and clothing-\
-related merchandise.  Most of the items are inexpensive T-Shirts\
-plastered with ill-thought out slogans and repulsive logos.  A floating\
-droid which seems to be a modified remote shoots around over your head\
-making notes of all your purchases and charging you for them.  To the\
-north is a library of some kind and to the east is an exit.\
-", 
-      }, 
-      [26037] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26037, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "The Checkout Counter", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26039, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26019, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26036, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The checkout counter is little more than a relic now, as people pay\
-as they go nowadays.  Each part of this souvenir shop specializes in\
-a different genre of gift.  To your immediate north are holo-images\
-of the Plaza from different angles, to the northwest are datadisks\
-containing stories about the statues that eternally dwell here.  To\
-the west is a small clothing section, with T-shirts bearing logos\
-such as \"I saw Monument Plaza\" and other equally unimaginative\
-phrases.\
-", 
-      }, 
-      [26038] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26038, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "The Back of a Souvenir Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26039, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26036, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Here, in the small back corner of Heff's Souvenir shop, lies a largly\
-unorganised, but amazingly unique, collection of datatapes.  Each\
-tape , no more than two inches square, contains the sotry of one of the\
-statues in the Plaza.  Few shoppers notice this trove of treasure, and\
-fewer still stop to examine it.  There are tapes here from some of the\
-great authors of all time, spanned the centuries, even the eons in some\
-cases!  Surely the price charged here is but a fraction of the tapes'\
-true value.  To your south is a T-shirt stand and to the east is the\
-visuals section.\
-", 
-      }, 
-      [26039] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26039, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "The Back of a Souvenir Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26037, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26038, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Here, at the back of the shop, there are literally hundreds of images\
-of the Plaza frozen in holocubes.  Every conceivable angle, along with\
-a few utterly unconceivable, has been recorded and put on sale here.\
-A vid-term on the wall flickers through what would seem to be a list of\
-all the images captured here.  To your south is the checkout counter\
-and to the west is a small collection of data tapes.\
-", 
-      }, 
-      [26040] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26040, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This walkway extends north from the plaza between two buildings. It ends at\
-get ammo back ammo railing to the north past which you can see the glow of\
-the city far bellow. To the south many statues tower over the main part of\
-the plaza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26045, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26041, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26012, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Walkway", 
-      }, 
-      [26041] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26041, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This walkway extends north from the plaza between two buildings. It ends at\
-get ammo back ammo railing to the north past which you can see the glow of\
-the city far bellow. To the south many statues tower over the main part of\
-the plaza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26044, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26009, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26040, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Walkway", 
-      }, 
-      [26042] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26042, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This has to be one of the most beautiful spots on Coruscant. The lookout is\
-on the top of one of the Menari mountains. To the north and far bellow the\
-lights of imperial city sretch from the base of the mountain as far as the\
-eye can see. To the east and west many snow covered mounain peaks push up\
-into the haze. The air is clean and fresh and the cool breeze is very\
-refreshing.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26043, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26045, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Lookout", 
-      }, 
-      [26043] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26043, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This has to be one of the most beautiful spots on Coruscant. The lookout is\
-on the top of one of the Menari mountains. To the north and far bellow the\
-lights of imperial city sretch from the base of the mountain as far as the\
-eye can see. To the east and west many snow covered mounain peaks push up\
-into the haze. The air is clean and fresh and the cool breeze is very\
-refreshing.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26044, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26042, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Lookout", 
-      }, 
-      [26044] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26044, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This walkway extends north from the plaza between two buildings. It ends at\
-get ammo back ammo railing to the north past which you can see the glow of\
-the city far bellow. To the south many statues tower over the main part of\
-the plaza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26043, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26041, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26045, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Walkway", 
-      }, 
-      [26045] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26045, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This walkway extends north from the plaza between two buildings. It ends at\
-a railing to the north past which you can see the glow of the city far\
-bellow. To the south many statues tower over the main part of the plaza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26042, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26044, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26040, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Plaza Walkway", 
-      }, 
-      [26046] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26046, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "There are five stools here, in front of bar.  Other patrons wander around,\
-looking out the window from time to time and admiring the great statues of\
-Monument Plaza.  The barkeep looks far more civilized than most you have seen,\
-and serves up drinks with a smile.  A plethora of different drinks line\
-the shelves behind him, suited for all tastes and all races.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26049, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26047, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Bar", 
-      }, 
-      [26047] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26047, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "You stand at the checkout counter to Chat's Fast Food Palace.  Chat\
-himself is manning the credit-chip scanner, smiling and shaking hands all\
-the while.  The line of people move forward as they slip their credit-chip\
-past the scanner and quickly exit.  From their haste, you can guess the\
-meal won't be the most memorable part of their visit here.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26048, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26046, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26035, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "The Checkout Counter", 
-      }, 
-      [26048] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26048, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This portion of the Chat's fast food palace is dominated by a cheap\
-plastic table.  In its center a holo-image of a human female asks for\
-your order.  To the east you can see a similar scene, and to the south\
-lies the checkout counter and Monument Plaza.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26049, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26047, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "At a Plastic Table", 
-      }, 
-      [26049] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 26049, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "A large, cheap-looking plastic table dominates this part of the fast food\
-restaurant. At its center a holo-image of a human waitress in a short skirt\
-asks for your order, and then waits patiently with a smile.  You can see\
-another similar table to west, and the view of Monument Plaza is only slightly\
-spoiled by the dirty window through which you can see it to the south.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26046, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26048, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "At a Plastic Table", 
-      }, 
-      [26050] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26050, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Entrance to Plaza Hotel", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26021, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26051, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "You stand in a wide hallway that stretches from the a set of double doors\
-to the north to the lobby to the south The room is decorated with many\
-paintings in protective casings and a plush green carpet. \
-", 
-      }, 
-      [26051] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26051, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Plaza Hotel Lobby", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26050, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 448, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26052, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The hotel lobby is a large room decorated with a lush green carpet several\
-paintings and a few musch smaller versions of the monuments located\
-outside. There is large hotel desk on the west wall. An exit to west leads\
-to a shop. \
-", 
-      }, 
-      [26052] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26052, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Turbolift Up", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26053, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This small turbolift is nicely decorated with an emorald carpet and\
-panneled walls. It rides quickly and swiftly to the next level and then\
-pauses waiting for you to leave.\
-", 
-      }, 
-      [26053] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26053, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Hotel Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26055, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26054, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The hallway is decorated much like the rest of the hotel with green\
-carpetting and paintings an holographs of the plaza and the monuments.\
-", 
-      }, 
-      [26054] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26054, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Turbolift Down", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26051, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This small turbolift is nicely decorated with an emorald carpet and\
-panneled walls. It rides quickly and swiftly to the next level and then\
-pauses waiting for you to leave. \
-", 
-      }, 
-      [26055] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26055, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Hotel Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26056, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26056, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26053, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26056, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The hallway is decorated much like the rest of the hotel with green\
-carpetting and paintings an holographs of the plaza and the monuments.\
-", 
-      }, 
-      [26056] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26056, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Hotel Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26055, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26057] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26057, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Plaza Reception", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26030, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26058, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26058] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26058, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Stairs to the Offices", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26057, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "up", 
-               Key = -1, 
-               DestinationVnum = 26059, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26059] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26059, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Top of the Stairs", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26060, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "down", 
-               Key = -1, 
-               DestinationVnum = 26058, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26060] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26060, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26065, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26059, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26064, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26061, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26061] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26061, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26062, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26060, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "south", 
-               Key = 26097, 
-               DestinationVnum = 26063, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26062] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26062, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Office", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26061, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26063] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26063, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "File Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26061, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26064] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Vnum = 26064, 
-         TeleDelay = 0, 
+         ActionDescription = "", 
          Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Office", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26060, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26065] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26065, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Office", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 26060, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26066] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26066, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Wine Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26031, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place. \
-", 
-      }, 
-      [26067] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26067, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Adult Only Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26032, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26068] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26068, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Toy Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26033, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26069] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26069, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Crafts Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26034, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26070] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26070, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Pawn Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 26035, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26071] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26071, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Appliance Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26024, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place. \
-", 
-      }, 
-      [26072] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26072, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Computer Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26023, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26073] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26073, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "a Jewelry Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26022, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "south", 
-               Key = 26012, 
-               DestinationVnum = 26083, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26074] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26074, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Clothing Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26020, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26075] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26075, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Fabric Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26015, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place. \
-", 
-      }, 
-      [26076] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26076, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "An Electronics Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "east", 
-               Key = 26006, 
-               DestinationVnum = 26082, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26016, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place. \
-", 
-      }, 
-      [26077] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26077, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Hobby Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26017, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26078] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26078, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Book Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26018, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place. \
-", 
-      }, 
-      [26079] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 26079, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Shoe Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26019, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26080] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26080, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "A Variety Store", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26030, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This shop is like most of the shops here in the plaza: over decorated with\
-tacky tourist stuff and overpriced. As soon as you walk in the door you\
-are hounded by an attendant droid who \"knows just what you need\". The weak\
-willed usually end up leaving with far less money and several things that\
-they didn't want in the first place.\
-", 
-      }, 
-      [26081] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26081, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26082] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26082, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Back Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 26076, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26083] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26083, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "The Back Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 26073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26084] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26084, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26085] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26085, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26086] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26086, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26087] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26087, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26088] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26088, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26089] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26089, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26090] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26090, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26091] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26091, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26092] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26092, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26093] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26093, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26094] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26094, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26095] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26095, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26096] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26096, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26097] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26097, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26098] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26098, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [26099] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 26099, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
+         Name = "small table", 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   LowEconomy = 31287818, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26000, 
-         Command = "M", 
-         Arg3 = 26036, 
-         Arg2 = 1, 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26002, 
-         Command = "G", 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26003, 
-         Command = "G", 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26001, 
-         Command = "G", 
-      }, 
-      [5] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32275, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [6] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26055, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 0, 
-      }, 
-      [7] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26055, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 1, 
-      }, 
-      [8] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26055, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 3, 
-      }, 
-      [9] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26030, 
-         Command = "D", 
-         Arg3 = 1, 
-         Arg2 = 3, 
-      }, 
-      [10] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26061, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 2, 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26098, 
-         Command = "O", 
-         Arg3 = 26063, 
-         Arg2 = 1, 
-      }, 
-      [12] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26063, 
-         Command = "D", 
-         Arg3 = 1, 
-         Arg2 = 0, 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26006, 
-         Command = "O", 
-         Arg3 = 26076, 
-         Arg2 = 1, 
-      }, 
-      [14] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26076, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 1, 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26001, 
-         Command = "M", 
-         Arg3 = 26006, 
-         Arg2 = 2, 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26002, 
-         Command = "M", 
-         Arg3 = 26027, 
-         Arg2 = 2, 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26003, 
-         Command = "M", 
-         Arg3 = 26057, 
-         Arg2 = 2, 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26005, 
-         Command = "M", 
-         Arg3 = 26057, 
-         Arg2 = 1, 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26097, 
-         Command = "E", 
-         Arg3 = 17, 
-         Arg2 = 1, 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26003, 
-         Command = "M", 
-         Arg3 = 26057, 
-         Arg2 = 2, 
-      }, 
-      [21] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26057, 
-         Command = "D", 
-         Arg3 = 0, 
-         Arg2 = 1, 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26007, 
-         Command = "M", 
-         Arg3 = 26065, 
-         Arg2 = 1, 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26008, 
-         Command = "M", 
-         Arg3 = 26065, 
-         Arg2 = 1, 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26009, 
-         Command = "M", 
-         Arg3 = 26058, 
-         Arg2 = 1, 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26011, 
-         Command = "O", 
-         Arg3 = 26083, 
-         Arg2 = 1, 
-      }, 
-      [26] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26083, 
-         Command = "D", 
-         Arg3 = 1, 
-         Arg2 = 0, 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26012, 
-         Command = "M", 
-         Arg3 = 26073, 
-         Arg2 = 1, 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26012, 
-         Command = "G", 
-      }, 
-      [29] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26073, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 2, 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26013, 
-         Command = "M", 
-         Arg3 = 26074, 
-         Arg2 = 1, 
-      }, 
-      [31] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26023, 
-         Command = "G", 
-      }, 
-      [32] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26022, 
-         Command = "G", 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26021, 
-         Command = "G", 
-      }, 
-      [34] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26020, 
-         Command = "G", 
-      }, 
-      [35] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26027, 
-         Command = "G", 
-      }, 
-      [36] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26026, 
-         Command = "G", 
-      }, 
-      [37] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26025, 
-         Command = "G", 
-      }, 
-      [38] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26024, 
-         Command = "G", 
-      }, 
-      [39] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26029, 
-         Command = "G", 
-      }, 
-      [40] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26028, 
-         Command = "G", 
-      }, 
-      [41] = 
-      {
-         MiscData = 1, 
-         Arg1 = 58, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [42] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26006, 
-         Command = "M", 
-         Arg3 = 26077, 
-         Arg2 = 2, 
-      }, 
-      [43] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26010, 
-         Command = "G", 
-      }, 
-      [44] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26004, 
-         Command = "M", 
-         Arg3 = 26075, 
-         Arg2 = 1, 
-      }, 
-      [45] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26007, 
-         Command = "G", 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26008, 
-         Command = "G", 
-      }, 
-      [47] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 32281, 
-         Command = "G", 
-      }, 
-      [48] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 26009, 
-         Command = "G", 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26005, 
-         Command = "O", 
-         Arg3 = 26082, 
-         Arg2 = 1, 
-      }, 
-      [50] = 
-      {
-         MiscData = 0, 
-         Arg1 = 26082, 
-         Command = "D", 
-         Arg3 = 1, 
-         Arg2 = 3, 
-      }, 
-      [51] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26010, 
-         Command = "M", 
-         Arg3 = 26064, 
-         Arg2 = 1, 
-      }, 
-      [52] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26011, 
-         Command = "M", 
-         Arg3 = 26064, 
-         Arg2 = 1, 
-      }, 
-      [53] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26009, 
-         Command = "M", 
-         Arg3 = 26064, 
-         Arg2 = 1, 
-      }, 
-      [54] = 
-      {
-         MiscData = 1, 
-         Arg1 = 26064, 
-         Command = "O", 
-         Arg3 = 26064, 
-         Arg2 = 1, 
-      }, 
-   }, 
-   ResetMessage = "", 
-   Author = "Exar/Durga", 
-   Name = "Coruscant - Monument Plaza", 
-   ResetFrequency = 0, 
    LevelRanges = 
    {
       Soft = 
@@ -5841,140 +1016,5007 @@ they didn't want in the first place.\
          Low = 0, 
       }, 
    }, 
+   VnumRanges = 
+   {
+      Object = 
+      {
+         Last = 26099, 
+         First = 26000, 
+      }, 
+      Mob = 
+      {
+         Last = 26099, 
+         First = 26000, 
+      }, 
+      Room = 
+      {
+         Last = 26099, 
+         First = 26000, 
+      }, 
+   }, 
+   ResetMessage = "", 
+   ResetFrequency = 0, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg3 = 26036, 
+         Arg1 = 26000, 
+         Command = "M", 
+         MiscData = 0, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26002, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [3] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26003, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [4] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26001, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [5] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 32275, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [6] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26055, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+      }, 
+      [7] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26055, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 1, 
+      }, 
+      [8] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26055, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [9] = 
+      {
+         Arg3 = 1, 
+         Arg1 = 26030, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [10] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26061, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+      }, 
+      [11] = 
+      {
+         Arg3 = 26063, 
+         Arg1 = 26098, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [12] = 
+      {
+         Arg3 = 1, 
+         Arg1 = 26063, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+      }, 
+      [13] = 
+      {
+         Arg3 = 26076, 
+         Arg1 = 26006, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [14] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26076, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 1, 
+      }, 
+      [15] = 
+      {
+         Arg3 = 26006, 
+         Arg1 = 26001, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [16] = 
+      {
+         Arg3 = 26027, 
+         Arg1 = 26002, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [17] = 
+      {
+         Arg3 = 26057, 
+         Arg1 = 26003, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [18] = 
+      {
+         Arg3 = 26057, 
+         Arg1 = 26005, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [19] = 
+      {
+         Arg3 = 17, 
+         Arg1 = 26097, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [20] = 
+      {
+         Arg3 = 26057, 
+         Arg1 = 26003, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [21] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26057, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 1, 
+      }, 
+      [22] = 
+      {
+         Arg3 = 26065, 
+         Arg1 = 26007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [23] = 
+      {
+         Arg3 = 26065, 
+         Arg1 = 26008, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [24] = 
+      {
+         Arg3 = 26058, 
+         Arg1 = 26009, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [25] = 
+      {
+         Arg3 = 26083, 
+         Arg1 = 26011, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [26] = 
+      {
+         Arg3 = 1, 
+         Arg1 = 26083, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+      }, 
+      [27] = 
+      {
+         Arg3 = 26073, 
+         Arg1 = 26012, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [28] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26012, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [29] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 26073, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+      }, 
+      [30] = 
+      {
+         Arg3 = 26074, 
+         Arg1 = 26013, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [31] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26023, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [32] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26022, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [33] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26021, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [34] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26020, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [35] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26027, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [36] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26026, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [37] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26025, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [38] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26024, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [39] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26029, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [40] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26028, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [41] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 58, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [42] = 
+      {
+         Arg3 = 26077, 
+         Arg1 = 26006, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [43] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26010, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [44] = 
+      {
+         Arg3 = 26075, 
+         Arg1 = 26004, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [45] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26007, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [46] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26008, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [47] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 32281, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [48] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 26009, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [49] = 
+      {
+         Arg3 = 26082, 
+         Arg1 = 26005, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [50] = 
+      {
+         Arg3 = 1, 
+         Arg1 = 26082, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [51] = 
+      {
+         Arg3 = 26064, 
+         Arg1 = 26010, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [52] = 
+      {
+         Arg3 = 26064, 
+         Arg1 = 26011, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [53] = 
+      {
+         Arg3 = 26064, 
+         Arg1 = 26009, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [54] = 
+      {
+         Arg3 = 26064, 
+         Arg1 = 26064, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+   }, 
+   Author = "Exar/Durga", 
+   Rooms = 
+   {
+      [26000] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26001, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26004, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26002, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26003, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26000, 
+         Description = "The ground pushes upwards at the center of this rectangular plaza, showing\
+the main feature of the plaza - bare rock.   The plaza was built around\
+one of the peaks of the Menari mountain range. Enormous statues are placed\
+in orderly fashion throughout the area, most seem to be made of native\
+rock from the mountain.   Around the perimeter of the plaza are a\
+multitude of small stores and shops.\
+", 
+         Tag = "", 
+         Name = "The Center of Monument Plaza", 
+      }, 
+      [26001] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26009, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26007, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26000, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26008, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26001, 
+         Description = "An average sized statue in the plaza, although huge by any normal\
+standards, is of a squat looking alien creature. It is hunched over\
+slightly and stands with a cane. At the foot of the monument an\
+inscription drones on about this creatures deads. Not exactly exciting bed\
+time reading. \
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26002] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26000, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26006, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26010, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26005, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26002, 
+         Description = "The ground pushes upwards at the center of this rectangular plaza, showing\
+the main feature of the plaza - bare rock.   The plaza was built around\
+one of the peaks of the Menari mountain range. Enormous statues are placed\
+in orderly fashion throughout the area, most seem to be made of native\
+rock from the mountain.   Around the perimeter of the plaza are a\
+multitude of small stores and shops.\
+", 
+         Tag = "", 
+         Name = "The Center of Monument Plaza", 
+      }, 
+      [26003] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26008, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26000, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26005, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26027, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26003, 
+         Description = "The ground pushes in the center of the plaza showing the main feature\
+of the plaza - bare bock. The plaza is built surrounding one of the\
+peaks of one of the Menari Mountain Range. The surface of the\
+mountain is exposed in several places but is most promenant here at\
+the true peak. Throught the rest of the plaza are enormous statues,\
+ost carved out of the rock. Around the perimeter are a multitude of\
+small stores and shops.\
+", 
+         Tag = "", 
+         Name = "The Center of Monument Plaza", 
+      }, 
+      [26004] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26007, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26017, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26006, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26000, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26004, 
+         Description = "You stand before an enormous statue. It rises at least 50 stories above the\
+peak of this mountain. The statue is of a human wearing a long stone robe\
+and holding a lightsaber out in front of him. A guards post is to the\
+south of here. A large rock juts out of the ground to the south west.\
+", 
+         Tag = "", 
+         Name = "North of the Guard's Post", 
+      }, 
+      [26005] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26003, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26002, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26013, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26026, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26005, 
+         Description = "The ground pushes in the center of the plaza showing the main feature\
+of the plaza - bare bock. The plaza is built surrounding one of the\
+peaks of one of the Menari Mountain Range. The surface of the\
+mountain is exposed in several places but is most promenant here at\
+the true peak. Throught the rest of the plaza are enormous statues,\
+ost carved out of the rock. Around the perimeter are a multitude of\
+small stores and shops.\
+", 
+         Tag = "", 
+         Name = "The Center of Monument Plaza", 
+      }, 
+      [26006] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26004, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26016, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26014, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26002, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26006, 
+         Description = "The guards post is a flat platform raised slightly above the the main\
+walkways. To the north is one of the larger statues in the plaza to the\
+west the mountain juts out above the floor forming a high peak. \
+", 
+         Tag = "", 
+         Name = "At the Guard's Post", 
+      }, 
+      [26007] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26011, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26018, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26004, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26001, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26007, 
+         Description = "You stand just north of one of the largest statues in the plaza. The air\
+high up on the mountain is thin but clean and fresh. Refreshing compared\
+to the heavy stale air found throughout the rest of the coruscant. \
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26008] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26012, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26001, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26003, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26028, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26008, 
+         Description = "You stand in a northern area of monument plaza. All around the plaza is\
+uroounded by shops selling all kinds of overpriced things. Throught the\
+center of the plaza are enourmous monuments erected in the past. The\
+largest monument in the plaza lies directly to the west of you. It appears\
+alot newer than most of the statues here but seems to be poorly kept\
+compared to the rest.\
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26009] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26041, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26011, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26001, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26012, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26009, 
+         Description = "You stand on the northetn end of monument plaza, the popular mall built\
+high on a peek in the Menari Mountain range in the southern part of\
+Coruscant. To the south are many large monuments depicting heroes (and\
+villians) of the past. In the center of the plaza the peek of the mountain\
+pushes up above the palace floor coming to a high peak. To the north a\
+wide walkway leads to a lookout point on the mountain\
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26010] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26002, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26014, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26022, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26013, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26010, 
+         Description = "You stand in a southern part of Monument Plaza, one of Coruscants many\
+tourist traps. The center of the squre is just to the north where the peak\
+of a Menari Mountain pushes through the center of the plaza. Around the\
+perimeter of the plaza are dozens of small shops. Scattered throughout the\
+plaza are many enormous statues.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26011] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26019, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26007, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26009, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26011, 
+         Description = "You stand along the northern edge of monument plaza. To the south of you\
+lie several monuments of astronomical size. To your north and around the\
+perimiter of the plaza are many shops. You stand along the northern edge\
+of monument plaza. To the south of you lie several monuments of\
+astronomical size. To your north and around the perimiter of the plaza are\
+many shops. A large rock extends high out of the center of the paza.\
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26012] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26040, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26009, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26008, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26029, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26012, 
+         Description = "You stand on the northetn end of monument plaza, the popular mall built\
+high on a peek in the Menari Mountain range in the southern part of\
+Coruscant. To the south are many large monuments depicting heroes (and\
+villians) of the past. In the center of the plaza the peek of the mountain\
+pushes up above the palace floor coming to a high peak. To the north a\
+wide walkway leads to a lookout point on the mountain \
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26013] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26005, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26010, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26023, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26025, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26013, 
+         Description = "You stand in a southern part of Monument Plaza, one of Coruscants many\
+tourist traps. The center of the squre is just to the north where the peak\
+of a Menari Mountain pushes through the center of the plaza. Around the\
+perimeter of the plaza are dozens of small shops. Scattered throughout the\
+plaza are many enormous statues.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26014] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26006, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26015, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26021, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26010, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26014, 
+         Description = "A small group of statues is here clustered together. A plaque on the bottom\
+tells the story of the battle of Endor. The people depicted in this\
+monument were responsible for destroying the second death star and ending\
+the reign of the self proclaimed emp \
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26015] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26016, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26075, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26020, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26014, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26015, 
+         Description = "Standing here, southeast of the center of the plaza, you can see most\
+of the square.  Far to the northeast is an eatery: the sign is too small\
+to read from here, though.  To your south is a mid-sized statue, and to\
+the west are several more statues.\
+", 
+         Tag = "", 
+         Name = "Southeast Corner of Monument Plaza", 
+      }, 
+      [26016] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26017, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26076, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26015, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26006, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26016, 
+         Description = "Here, directly east of the guard post, you stand at the base of one of\
+the smallest statues in the plaza. It is one of an Old Republic Officer,\
+dressed in full ceremonial garb, saluting the center of the square. As\
+usual there is a plaque at the bottom of the statue giving details about\
+why this man deserved a place here.  The plaza continues north and south,\
+and the guard post is to the west.\
+", 
+         Tag = "", 
+         Name = "East of the Guard's Post", 
+      }, 
+      [26017] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26018, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26077, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26016, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26004, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26017, 
+         Description = "You are standing just to the northeast of a guard's post.  Apparently\
+even here, in this great monument there is still a need for officials\
+of the law.  There is a lesser statue to your north and south, and a\
+rather large one to your west.\
+", 
+         Tag = "", 
+         Name = "Northeast of the Guard's Post", 
+      }, 
+      [26018] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "plaque", 
+               Description = "", 
+            }, 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26019, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26078, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26017, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26007, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26018, 
+         Description = "You are standing at the eastern most edge of Monument Plaza, and slightly\
+to the north of its center.  You are directly at the base of one of the\
+lesser statues of the Plaza, but it still dwarfs you in comparison.  A\
+plaque on its side gives details about the person's life and great\
+acheivements, but it must have been written by a mark 2 power droid, because\
+no seems to be able to stave off boredom for more than 3 or 4 lines.\
+The Plaza continues to the north, south, and west.\
+", 
+         Tag = "", 
+         Name = "Northeast Corner of Monument Plaza", 
+      }, 
+      [26019] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26037, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26079, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26018, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26011, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26019, 
+         Description = "You are standing in the most northerly section of Monument Plaza. A row of\
+shops lie immediatly to your north and lead off westward. Several other\
+citizens are here, admiring the square and the sheer beauty of the area. \
+Compared to much of the rest of Coruscant, this is a virtual paradise.  \
+", 
+         Tag = "", 
+         Name = "Northeast Corner of Monument Plaza", 
+      }, 
+      [26020] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26015, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26074, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 336, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26021, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [5] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 447, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26020, 
+         Description = "You are now standing in the more south easterly corner of Monument\
+Plaza.  A mid-sized statue, meaning 30-40 stories, looms above you in\
+testament to some ancient hero.  This particular statue is non-human,\
+posessing four arms, six legs, and a head protruding from its underbelly.\
+As usual there is a plaque at its base explaining its story.  The plaza\
+extends before you to the north and the west.\
+", 
+         Tag = "", 
+         Name = "Southeast Corner of Monument Plaza", 
+      }, 
+      [26021] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26014, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26020, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26050, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26022, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26021, 
+         Description = "You stand in the southern part of monument plaza close to the easern\
+corner. The plaza hotel is directly to the south of you. To the south east\
+is an entrance to the turbocar system. Shops lie to your west and around\
+the outside walls of the plaza. Many enormous monuments can be found\
+throughout hte plaza to the north. \
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26022] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26010, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26021, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26023, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26022, 
+         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
+Range on Coruscant. This large mall is built around the tip of one of the\
+peaks in the mountain range. Directly to the south is a row of shops which\
+extends around the plaza. Throughout the plaza are many enormous statues.\
+Most depict Heroes of the Old Republic although there are many newer ones\
+built by the Empire. The turbocar system and and plaza hotel are to the\
+further to the east. The offices are at the western corner.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26023] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26013, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26022, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26072, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26024, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26023, 
+         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
+Range on Coruscant. This large mall is built around the tip of one of the\
+peaks in the mountain range. Directly to the south is a row of shops which\
+extends around the plaza. Throughout the plaza are many enormous statues.\
+Most depict Heroes of the Old Republic although there are many newer ones\
+built by the Empire. The turbocar system and and plaza hotel are to the\
+further to the east. The offices are at the western corner.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26024] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26025, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26023, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26071, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26030, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26024, 
+         Description = "You stand upon the southern side of Monument Plaza in the Menari Mountain\
+Range on Coruscant. This large mall is built around the tip of one of the\
+peaks in the mountain range. Directly to the south is a row of shops which\
+extends around the plaza. Throughout the plaza are many enormous statues.\
+Most depict Heroes of the Old Republic although there are many newer ones\
+built by the Empire. The turbocar system and and plaza hotel are to the\
+further to the east. The offices are at the western corner.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26025] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26026, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26013, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26024, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26031, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26025, 
+         Description = "The statue hear is one of the larger statues in the plaza. It is a\
+depiction of one of the greatest architects in the history of coruscant\
+who designed several of the older buildings in the cities core. A few of\
+wich still stand in their original form ( although most of them have been\
+built over top of and are buried beneath several newer structures.\
+", 
+         Tag = "", 
+         Name = "Southern Side of Monument Plaza", 
+      }, 
+      [26026] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26027, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26005, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26025, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26032, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26026, 
+         Description = "You stand before an old statue that is one of the smaller ones. It depicts\
+a woman scratching her chin and gazing up at the stars. You stand before\
+an old statue that is one of the smaller ones. It depicts a woman\
+scratching her chin and gazing up at the stars. The plaque tells the story\
+of this womans many technological achievements which included an algorithm\
+that enabled artificial inteligence units to run at almost 100th of their\
+previous size.\
+", 
+         Tag = "", 
+         Name = "West Side of Monument Plaza", 
+      }, 
+      [26027] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26028, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26003, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26026, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26033, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26027, 
+         Description = "This raised platform is used as a second security post during peek tourist\
+seasons. It was built manly in response to the defacing of Palpatines\
+statue although it has had little effect to this end. Most guards simply\
+turn their heads to such acts. \
+", 
+         Tag = "", 
+         Name = "West Side of Monument Plaza", 
+      }, 
+      [26028] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26029, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26008, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26027, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26034, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26028, 
+         Description = "The enormous statue before towers above all the others in the statue and is\
+a true sign of the hubris the man it depicts once displayed. It is a\
+monument to the late Senator Palpatine, the self proclaimed emporer who\
+died 20 years ago in the battle of Endor. The statue was built during his\
+reign here on Coruscant probably under his direct orders. The inscription\
+is illegible underneath layers of nasty graffitti.\
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26029] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26012, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26028, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26035, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26029, 
+         Description = "You stand along the northernmost edge of monument plaza. To the north-west\
+is the entrance to Chat's Fast Food Palace. Beyond that are various shops\
+encircling the remainder of the plaza. Directly to the south of you is one\
+of the largest monuments in the plaza. Others are scattered throughout the\
+south and east of here. \
+", 
+         Tag = "", 
+         Name = "Northern Side of Monument Plaza", 
+      }, 
+      [26030] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26031, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26024, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26080, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26057, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26030, 
+         Description = "You stand in the southeast corner of monument plaza, one of the nicer areas\
+of coruscant located on top of one of the menari mountains. To the west is\
+the entrance to the plaza offices. Far to the east is the plaza hotel and\
+turbocar station. There is a monument here that depicts a verpine shaking\
+hands with a mon calamarian. Throughout the plaza are dozens of other\
+monuments, some towering stories high.\
+", 
+         Tag = "", 
+         Name = "Southwest Corner of Monument Plaza", 
+      }, 
+      [26031] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26032, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26025, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26030, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26066, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26031, 
+         Description = "You stand along the western edge of Monument Plaza, the large mall built\
+around the peak of one of the Menari Mountains on Coruscant. Because of\
+its location it is one of the nicer areas of coruscant. A freesh breeze\
+and clean air are a refreshing change to the busy dirty streets. The\
+preimiter of the plaza is line with shops while the center of the plaza is\
+filled with enourmous monuments of old heroes. \
+", 
+         Tag = "", 
+         Name = "Southwest Corner of Monument Plaza", 
+      }, 
+      [26032] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26033, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26026, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26031, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26067, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26032, 
+         Description = "You stand along the western edge of Monument Plaza, the large mall built\
+around the peak of one of the Menari Mountains on Coruscant. Because of\
+its location it is one of the nicer areas of coruscant. A freesh breeze\
+and clean air are a refreshing change to the busy dirty streets. The\
+preimiter of the plaza is line with shops while the center of the plaza is\
+filled with enourmous monuments of old heroes.  \
+", 
+         Tag = "", 
+         Name = "West Side of Monument Plaza", 
+      }, 
+      [26033] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26034, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26027, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26032, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26068, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26033, 
+         Description = "You stand along the western edge of Monument Plaza, the large mall built\
+around the peak of one of the Menari Mountains on Coruscant. Because of\
+its location it is one of the nicer areas of coruscant. A freesh breeze\
+and clean air are a refreshing change to the busy dirty streets. The\
+preimiter of the plaza is line with shops while the center of the plaza is\
+filled with enourmous monuments of old heroes.  \
+", 
+         Tag = "", 
+         Name = "West Side of Monument Plaza", 
+      }, 
+      [26034] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26035, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26028, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26033, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26069, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26034, 
+         Description = "You are walking along the Western end of monument plaza. Directly to your\
+east is an enormous statue of a well known if not well liked hooded\
+figure. Shops are all alogn the four sides of the plaza. To the far south\
+east is the plaza hotel and transit station. \
+", 
+         Tag = "", 
+         Name = "Northwest Corner of Monument Plaza", 
+      }, 
+      [26035] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26047, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26029, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26034, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26070, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26035, 
+         Description = "You stand in the northwest corner of Monument Plaza. It sports some of the\
+largest statues in the Galaxy but the bigger attaction for the locals is\
+the fact that its one of the few places in Coruscant you can actually\
+touch bare rock in its natural state. A restaurant is to the north and\
+many shops are to the west and south of here. \
+", 
+         Tag = "", 
+         Name = "Northwest Corner of Monument Plaza", 
+      }, 
+      [26036] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26038, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26037, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26036, 
+         Description = "You are standing in front of a rack of cheap clothing and clothing-\
+related merchandise.  Most of the items are inexpensive T-Shirts\
+plastered with ill-thought out slogans and repulsive logos.  A floating\
+droid which seems to be a modified remote shoots around over your head\
+making notes of all your purchases and charging you for them.  To the\
+north is a library of some kind and to the east is an exit.\
+", 
+         Tag = "", 
+         Name = "Inside a Souvenir Shop", 
+      }, 
+      [26037] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26039, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26019, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26036, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26037, 
+         Description = "The checkout counter is little more than a relic now, as people pay\
+as they go nowadays.  Each part of this souvenir shop specializes in\
+a different genre of gift.  To your immediate north are holo-images\
+of the Plaza from different angles, to the northwest are datadisks\
+containing stories about the statues that eternally dwell here.  To\
+the west is a small clothing section, with T-shirts bearing logos\
+such as \"I saw Monument Plaza\" and other equally unimaginative\
+phrases.\
+", 
+         Tag = "", 
+         Name = "The Checkout Counter", 
+      }, 
+      [26038] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26039, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26036, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26038, 
+         Description = "Here, in the small back corner of Heff's Souvenir shop, lies a largly\
+unorganised, but amazingly unique, collection of datatapes.  Each\
+tape , no more than two inches square, contains the sotry of one of the\
+statues in the Plaza.  Few shoppers notice this trove of treasure, and\
+fewer still stop to examine it.  There are tapes here from some of the\
+great authors of all time, spanned the centuries, even the eons in some\
+cases!  Surely the price charged here is but a fraction of the tapes'\
+true value.  To your south is a T-shirt stand and to the east is the\
+visuals section.\
+", 
+         Tag = "", 
+         Name = "The Back of a Souvenir Shop", 
+      }, 
+      [26039] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26037, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26038, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26039, 
+         Description = "Here, at the back of the shop, there are literally hundreds of images\
+of the Plaza frozen in holocubes.  Every conceivable angle, along with\
+a few utterly unconceivable, has been recorded and put on sale here.\
+A vid-term on the wall flickers through what would seem to be a list of\
+all the images captured here.  To your south is the checkout counter\
+and to the west is a small collection of data tapes.\
+", 
+         Tag = "", 
+         Name = "The Back of a Souvenir Shop", 
+      }, 
+      [26040] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26045, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26041, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26012, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26040, 
+         Description = "This walkway extends north from the plaza between two buildings. It ends at\
+get ammo back ammo railing to the north past which you can see the glow of\
+the city far bellow. To the south many statues tower over the main part of\
+the plaza.\
+", 
+         Tag = "", 
+         Name = "Plaza Walkway", 
+      }, 
+      [26041] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26044, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26009, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26040, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26041, 
+         Description = "This walkway extends north from the plaza between two buildings. It ends at\
+get ammo back ammo railing to the north past which you can see the glow of\
+the city far bellow. To the south many statues tower over the main part of\
+the plaza.\
+", 
+         Tag = "", 
+         Name = "Plaza Walkway", 
+      }, 
+      [26042] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26043, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26045, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26042, 
+         Description = "This has to be one of the most beautiful spots on Coruscant. The lookout is\
+on the top of one of the Menari mountains. To the north and far bellow the\
+lights of imperial city sretch from the base of the mountain as far as the\
+eye can see. To the east and west many snow covered mounain peaks push up\
+into the haze. The air is clean and fresh and the cool breeze is very\
+refreshing.\
+", 
+         Tag = "", 
+         Name = "Plaza Lookout", 
+      }, 
+      [26043] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26044, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26042, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26043, 
+         Description = "This has to be one of the most beautiful spots on Coruscant. The lookout is\
+on the top of one of the Menari mountains. To the north and far bellow the\
+lights of imperial city sretch from the base of the mountain as far as the\
+eye can see. To the east and west many snow covered mounain peaks push up\
+into the haze. The air is clean and fresh and the cool breeze is very\
+refreshing.\
+", 
+         Tag = "", 
+         Name = "Plaza Lookout", 
+      }, 
+      [26044] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26043, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26041, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26045, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26044, 
+         Description = "This walkway extends north from the plaza between two buildings. It ends at\
+get ammo back ammo railing to the north past which you can see the glow of\
+the city far bellow. To the south many statues tower over the main part of\
+the plaza.\
+", 
+         Tag = "", 
+         Name = "Plaza Walkway", 
+      }, 
+      [26045] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26042, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26044, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26040, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26045, 
+         Description = "This walkway extends north from the plaza between two buildings. It ends at\
+a railing to the north past which you can see the glow of the city far\
+bellow. To the south many statues tower over the main part of the plaza.\
+", 
+         Tag = "", 
+         Name = "Plaza Walkway", 
+      }, 
+      [26046] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26049, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26047, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26046, 
+         Description = "There are five stools here, in front of bar.  Other patrons wander around,\
+looking out the window from time to time and admiring the great statues of\
+Monument Plaza.  The barkeep looks far more civilized than most you have seen,\
+and serves up drinks with a smile.  A plethora of different drinks line\
+the shelves behind him, suited for all tastes and all races.\
+", 
+         Tag = "", 
+         Name = "The Bar", 
+      }, 
+      [26047] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26048, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26046, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26035, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26047, 
+         Description = "You stand at the checkout counter to Chat's Fast Food Palace.  Chat\
+himself is manning the credit-chip scanner, smiling and shaking hands all\
+the while.  The line of people move forward as they slip their credit-chip\
+past the scanner and quickly exit.  From their haste, you can guess the\
+meal won't be the most memorable part of their visit here.\
+", 
+         Tag = "", 
+         Name = "The Checkout Counter", 
+      }, 
+      [26048] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26049, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26047, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26048, 
+         Description = "This portion of the Chat's fast food palace is dominated by a cheap\
+plastic table.  In its center a holo-image of a human female asks for\
+your order.  To the east you can see a similar scene, and to the south\
+lies the checkout counter and Monument Plaza.\
+", 
+         Tag = "", 
+         Name = "At a Plastic Table", 
+      }, 
+      [26049] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26046, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26048, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26049, 
+         Description = "A large, cheap-looking plastic table dominates this part of the fast food\
+restaurant. At its center a holo-image of a human waitress in a short skirt\
+asks for your order, and then waits patiently with a smile.  You can see\
+another similar table to west, and the view of Monument Plaza is only slightly\
+spoiled by the dirty window through which you can see it to the south.\
+", 
+         Tag = "", 
+         Name = "At a Plastic Table", 
+      }, 
+      [26050] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26021, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26051, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26050, 
+         Description = "You stand in a wide hallway that stretches from the a set of double doors\
+to the north to the lobby to the south The room is decorated with many\
+paintings in protective casings and a plush green carpet. \
+", 
+         Tag = "", 
+         Name = "Entrance to Plaza Hotel", 
+      }, 
+      [26051] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26050, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 448, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26052, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26051, 
+         Description = "The hotel lobby is a large room decorated with a lush green carpet several\
+paintings and a few musch smaller versions of the monuments located\
+outside. There is large hotel desk on the west wall. An exit to west leads\
+to a shop. \
+", 
+         Tag = "", 
+         Name = "Plaza Hotel Lobby", 
+      }, 
+      [26052] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26053, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26052, 
+         Description = "This small turbolift is nicely decorated with an emorald carpet and\
+panneled walls. It rides quickly and swiftly to the next level and then\
+pauses waiting for you to leave.\
+", 
+         Tag = "", 
+         Name = "Turbolift Up", 
+      }, 
+      [26053] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26055, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26054, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26053, 
+         Description = "The hallway is decorated much like the rest of the hotel with green\
+carpetting and paintings an holographs of the plaza and the monuments.\
+", 
+         Tag = "", 
+         Name = "Hotel Hallway", 
+      }, 
+      [26054] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26051, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26054, 
+         Description = "This small turbolift is nicely decorated with an emorald carpet and\
+panneled walls. It rides quickly and swiftly to the next level and then\
+pauses waiting for you to leave. \
+", 
+         Tag = "", 
+         Name = "Turbolift Down", 
+      }, 
+      [26055] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26056, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26056, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26053, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26056, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26055, 
+         Description = "The hallway is decorated much like the rest of the hotel with green\
+carpetting and paintings an holographs of the plaza and the monuments.\
+", 
+         Tag = "", 
+         Name = "Hotel Hallway", 
+      }, 
+      [26056] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26055, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26056, 
+         Description = "", 
+         Tag = "", 
+         Name = "A Hotel Room", 
+      }, 
+      [26057] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26030, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26058, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26057, 
+         Description = "", 
+         Tag = "", 
+         Name = "Plaza Reception", 
+      }, 
+      [26058] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26057, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "up", 
+               DestinationVnum = 26059, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26058, 
+         Description = "", 
+         Tag = "", 
+         Name = "Stairs to the Offices", 
+      }, 
+      [26059] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26060, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "down", 
+               DestinationVnum = 26058, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26059, 
+         Description = "", 
+         Tag = "", 
+         Name = "Top of the Stairs", 
+      }, 
+      [26060] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26065, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26059, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26064, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26061, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26060, 
+         Description = "", 
+         Tag = "", 
+         Name = "A Hallway", 
+      }, 
+      [26061] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26062, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26060, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Key = 26097, 
+               Direction = "south", 
+               DestinationVnum = 26063, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26061, 
+         Description = "", 
+         Tag = "", 
+         Name = "A Hallway", 
+      }, 
+      [26062] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26061, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26062, 
+         Description = "", 
+         Tag = "", 
+         Name = "An Office", 
+      }, 
+      [26063] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26061, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26063, 
+         Description = "", 
+         Tag = "", 
+         Name = "File Room", 
+      }, 
+      [26064] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26060, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26064, 
+         Description = "", 
+         Tag = "", 
+         Name = "An Office", 
+      }, 
+      [26065] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 26060, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26065, 
+         Description = "", 
+         Tag = "", 
+         Name = "An Office", 
+      }, 
+      [26066] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26031, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26066, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place. \
+", 
+         Tag = "", 
+         Name = "A Wine Shop", 
+      }, 
+      [26067] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26032, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26067, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "An Adult Only Store", 
+      }, 
+      [26068] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26033, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26068, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Toy Store", 
+      }, 
+      [26069] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26034, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26069, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Crafts Store", 
+      }, 
+      [26070] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 26035, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26070, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Pawn Shop", 
+      }, 
+      [26071] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26024, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26071, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place. \
+", 
+         Tag = "", 
+         Name = "An Appliance Store", 
+      }, 
+      [26072] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26023, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26072, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Computer Store", 
+      }, 
+      [26073] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26022, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = 26012, 
+               Direction = "south", 
+               DestinationVnum = 26083, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26073, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "a Jewelry Store", 
+      }, 
+      [26074] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26020, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26074, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Clothing Store", 
+      }, 
+      [26075] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26015, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26075, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place. \
+", 
+         Tag = "", 
+         Name = "A Fabric Shop", 
+      }, 
+      [26076] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = 26006, 
+               Direction = "east", 
+               DestinationVnum = 26082, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26016, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26076, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place. \
+", 
+         Tag = "", 
+         Name = "An Electronics Shop", 
+      }, 
+      [26077] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26017, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26077, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Hobby Shop", 
+      }, 
+      [26078] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26018, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26078, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place. \
+", 
+         Tag = "", 
+         Name = "A Book Store", 
+      }, 
+      [26079] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26019, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26079, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Shoe Store", 
+      }, 
+      [26080] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26030, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26080, 
+         Description = "This shop is like most of the shops here in the plaza: over decorated with\
+tacky tourist stuff and overpriced. As soon as you walk in the door you\
+are hounded by an attendant droid who \"knows just what you need\". The weak\
+willed usually end up leaving with far less money and several things that\
+they didn't want in the first place.\
+", 
+         Tag = "", 
+         Name = "A Variety Store", 
+      }, 
+      [26081] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26081, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26082] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 26076, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26082, 
+         Description = "", 
+         Tag = "", 
+         Name = "Back Room", 
+      }, 
+      [26083] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 26073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 26083, 
+         Description = "", 
+         Tag = "", 
+         Name = "The Back Room", 
+      }, 
+      [26084] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26084, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26085] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26085, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26086] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26086, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26087] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26087, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26088] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26088, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26089] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26089, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26090] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26090, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26091] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26091, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26092] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26092, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26093] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26093, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26094] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26094, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26095] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26095, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26096] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26096, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26097] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26097, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26098] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26098, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [26099] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 26099, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+   }, 
+   FileFormatVersion = 1, 
    Filename = "monument_plaza.lua", 
    Mobiles = 
    {
       [26000] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         ShortDescr = "a modified remote", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         NumberOfAttacks = 0, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            KeeperShortDescr = "a modified remote", 
+            ProfitBuy = 9, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 0, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
          }, 
          Description = "This is an older model remote that has been modified to act as a shop-\
 keeper in this clothing store.  From time to time it *piffs* around the\
 room, but it always keeps its central scanner on you.\
 ", 
-         Alignment = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitBuy = 9, 
-            ProfitSell = 0, 
-            KeeperShortDescr = "a modified remote", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitRoll = 0, 
-         Vnum = 26000, 
-         Height = 0, 
-         Sex = "undistinguished", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Credits = 0, 
-         DamRoll = 0, 
-         Level = 1, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         Name = "droid remote small floating", 
+         ShortDescr = "a modified remote", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
          LongDescr = "A droid is floating around here, monitoring you.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 26000, 
          ArmorClass = 0, 
+         Tag = "", 
+         Name = "droid remote small floating", 
       }, 
       [26001] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-         }, 
-         ShortDescr = "a plaza guard", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 10, 
-         Vnum = 26001, 
+         Position = "standing", 
          Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -5986,134 +6028,65 @@ room, but it always keeps its central scanner on you.\
                [0] = "basic", 
             }, 
          }, 
-         Sex = "female", 
-         Credits = 0, 
          DamRoll = 10, 
-         Level = 50, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "plaza guard", 
+         Description = "", 
+         ShortDescr = "a plaza guard", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 10, 
+         Sex = "female", 
          LongDescr = "A plaza guard stands at her post.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26001, 
          ArmorClass = -25, 
+         Tag = "", 
+         Name = "plaza guard", 
       }, 
       [26002] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-         }, 
-         ShortDescr = "a plaza guard", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 0, 
-         Vnum = 26002, 
+         Position = "standing", 
          Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "male", 
-         Credits = 0, 
-         DamRoll = 0, 
-         Level = 50, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Name = "plaza guard", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A plaza guard stands at his post.\
-", 
-         ArmorClass = -25, 
-      }, 
-      [26003] = 
-      {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 4, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 400, 
-            HitSizeDice = 10, 
-            HitNoDice = 8, 
-         }, 
-         ShortDescr = "a plaza guard", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          NumberOfAttacks = 0, 
-         DamRoll = 8, 
-         HitRoll = 8, 
-         Vnum = 26003, 
-         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -6125,73 +6098,169 @@ room, but it always keeps its central scanner on you.\
                [0] = "basic", 
             }, 
          }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a plaza guard", 
+         Weight = 0, 
+         HitRoll = 0, 
          Sex = "male", 
+         LongDescr = "A plaza guard stands at his post.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+         }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26002, 
+         ArmorClass = -25, 
+         Tag = "", 
+         Name = "plaza guard", 
+      }, 
+      [26003] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          MudProgs = 
          {
             [1] = 
             {
                MudProgType = "entry_prog", 
+               Arguments = "obliki", 
                Code = "say Hey! What are YOU doing here Mr Obliki?!?\
 kill obliki\
 ", 
-               Arguments = "obliki", 
                ScriptType = "MProg", 
             }, 
          }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 8, 
+         Description = "", 
+         ShortDescr = "a plaza guard", 
+         Weight = 0, 
+         HitRoll = 8, 
+         Sex = "male", 
+         LongDescr = "A plaza guard stands at his post.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 8, 
+            HitSizeDice = 10, 
+            HitPlus = 400, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
          Level = 40, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26003, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "plaza guard", 
+      }, 
+      [26004] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Quarren", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
+            [25] = "NoKill", 
          }, 
-         Name = "plaza guard", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A plaza guard stands at his post.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [26004] = 
-      {
-         Damage = 
+         NumberOfAttacks = 0, 
+         DamRoll = 4, 
+         Languages = 
          {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
+            Speaks = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
          }, 
-         Position = "standing", 
-         HitChance = 
+         Immune = 
          {
-            HitPlus = 200, 
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
+            [20] = "magic", 
+            [11] = "charm", 
          }, 
-         ShortDescr = "quarren store clerk", 
-         Race = "Quarren", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          Shop = 
          {
+            KeeperShortDescr = "quarren store clerk", 
+            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -6200,90 +6269,70 @@ kill obliki\
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitBuy = 120, 
             ProfitSell = 90, 
-            KeeperShortDescr = "quarren store clerk", 
             BusinessHours = 
             {
                Close = 23, 
                Open = 0, 
             }, 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
+         Description = "", 
+         ShortDescr = "quarren store clerk", 
+         Weight = 0, 
          HitRoll = 4, 
-         Vnum = 26004, 
-         Height = 0, 
          Sex = "undistinguished", 
-         Immune = 
+         LongDescr = "A quarren store clerk organizes her shop.\
+", 
+         HitChance = 
          {
-            [20] = "magic", 
-            [11] = "charm", 
+            HitNoDice = 4, 
+            HitSizeDice = 10, 
+            HitPlus = 200, 
          }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
-         DamRoll = 4, 
          Level = 20, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26004, 
+         ArmorClass = 50, 
+         Tag = "", 
+         Name = "quarren store clerk", 
+      }, 
+      [26005] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
-            [25] = "NoKill", 
          }, 
-         Name = "quarren store clerk", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A quarren store clerk organizes her shop.\
-", 
-         ArmorClass = 50, 
-      }, 
-      [26005] = 
-      {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-         }, 
-         ShortDescr = "a receptionist", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          NumberOfAttacks = 0, 
          Languages = 
          {
@@ -6296,90 +6345,73 @@ kill obliki\
                [0] = "basic", 
             }, 
          }, 
-         HitRoll = 10, 
-         Vnum = 26005, 
-         Height = 0, 
-         Sex = "female", 
          Immune = 
          {
             [10] = "sleep", 
             [11] = "charm", 
          }, 
-         Credits = 0, 
          DamRoll = 10, 
-         Level = 50, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "receptionist", 
+         Description = "", 
+         ShortDescr = "a receptionist", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 10, 
+         Sex = "female", 
          LongDescr = "A receptionist sits at her desk.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26005, 
          ArmorClass = -25, 
+         Tag = "", 
+         Name = "receptionist", 
       }, 
       [26006] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         ShortDescr = "a shopkeeper droid", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
-worn out and makes a slight hissing sound when it speaks.\
-", 
-         Alignment = 0, 
-         Shop = 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
          {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "a shopkeeper droid", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [26] = "Droid", 
          }, 
          NumberOfAttacks = 0, 
+         DamRoll = 0, 
          Languages = 
          {
             Speaks = 
@@ -6391,74 +6423,90 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
-         HitRoll = 0, 
-         Vnum = 26006, 
-         Height = 0, 
-         Sex = "undistinguished", 
          Immune = 
          {
             [20] = "magic", 
             [11] = "charm", 
          }, 
-         Credits = 0, 
-         DamRoll = 0, 
-         Level = 50, 
-         SaveVs = 
+         Shop = 
          {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
+            KeeperShortDescr = "a shopkeeper droid", 
+            ProfitBuy = 120, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [26] = "Droid", 
-         }, 
-         Name = "shopkeeper droid", 
+         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
+worn out and makes a slight hissing sound when it speaks.\
+", 
+         ShortDescr = "a shopkeeper droid", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
          LongDescr = "A droid is here scanning your purchaces.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 26006, 
          ArmorClass = -25, 
+         Tag = "", 
+         Name = "shopkeeper droid", 
       }, 
       [26007] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-         }, 
-         ShortDescr = "a Hutt", 
-         Race = "Hutt", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 10, 
-         Vnum = 26007, 
+         Position = "standing", 
          Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Hutt", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -6471,64 +6519,65 @@ worn out and makes a slight hissing sound when it speaks.\
                [4] = "huttese", 
             }, 
          }, 
-         Sex = "undistinguished", 
-         Credits = 400, 
          DamRoll = 10, 
-         Level = 50, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "Hutt", 
+         Description = "", 
+         ShortDescr = "a Hutt", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 10, 
+         Sex = "undistinguished", 
          LongDescr = "A Hutt is here discussing business.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 400, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26007, 
          ArmorClass = -25, 
+         Tag = "", 
+         Name = "Hutt", 
       }, 
       [26008] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 3, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 300, 
-            HitSizeDice = 10, 
-            HitNoDice = 6, 
-         }, 
-         ShortDescr = "an adarian businessman", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 6, 
-         Vnum = 26008, 
+         Position = "standing", 
          Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -6540,64 +6589,65 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
-         Sex = "male", 
-         Credits = 200, 
          DamRoll = 6, 
-         Level = 30, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "adarian businessman", 
+         Description = "", 
+         ShortDescr = "an adarian businessman", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 6, 
+         Sex = "male", 
          LongDescr = "An adarian businessman is here.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 6, 
+            HitSizeDice = 10, 
+            HitPlus = 300, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 200, 
+         Level = 30, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26008, 
          ArmorClass = 25, 
+         Tag = "", 
+         Name = "adarian businessman", 
       }, 
       [26009] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 6, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 600, 
-            HitSizeDice = 10, 
-            HitNoDice = 12, 
-         }, 
-         ShortDescr = "a Hutt", 
-         Race = "Adarian", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 12, 
-         Vnum = 26009, 
+         Position = "standing", 
          Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Adarian", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -6610,64 +6660,65 @@ worn out and makes a slight hissing sound when it speaks.\
                [19] = "adarese", 
             }, 
          }, 
-         Sex = "undistinguished", 
-         Credits = 0, 
          DamRoll = 12, 
-         Level = 60, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "Hutt", 
+         Description = "", 
+         ShortDescr = "a Hutt", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 12, 
+         Sex = "undistinguished", 
          LongDescr = "A Hutt is checking out plaza operations.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 12, 
+            HitSizeDice = 10, 
+            HitPlus = 600, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 60, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 6, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26009, 
          ArmorClass = -50, 
+         Tag = "", 
+         Name = "Hutt", 
       }, 
       [26010] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 200, 
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
-         }, 
-         ShortDescr = "an executive", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 4, 
-         Vnum = 26010, 
+         Position = "standing", 
          Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -6679,133 +6730,65 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
-         Sex = "undistinguished", 
-         Credits = 0, 
          DamRoll = 4, 
-         Level = 20, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "executive", 
+         Description = "", 
+         ShortDescr = "an executive", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 4, 
+         Sex = "undistinguished", 
          LongDescr = "An executive is conducting business.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 4, 
+            HitSizeDice = 10, 
+            HitPlus = 200, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 20, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26010, 
          ArmorClass = 50, 
+         Tag = "", 
+         Name = "executive", 
       }, 
       [26011] = 
       {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 6, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 600, 
-            HitSizeDice = 10, 
-            HitNoDice = 12, 
-         }, 
-         ShortDescr = "a bounty hunter", 
-         Race = "Human", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "", 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 12, 
-         Vnum = 26011, 
+         Position = "standing", 
          Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "male", 
-         Credits = 0, 
-         DamRoll = 12, 
-         Level = 60, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Name = "bounty hunter twi'lek", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A Twi'lek is dressed in battle armor.\
-", 
-         ArmorClass = -50, 
-      }, 
-      [26012] = 
-      {
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 9, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 900, 
-            HitSizeDice = 10, 
-            HitNoDice = 18, 
-         }, 
-         ShortDescr = "a plaza guard", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          NumberOfAttacks = 0, 
-         HitRoll = 18, 
-         Vnum = 26012, 
-         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -6817,82 +6800,65 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
+         DamRoll = 12, 
+         Description = "", 
+         ShortDescr = "a bounty hunter", 
+         Weight = 0, 
+         HitRoll = 12, 
          Sex = "male", 
+         LongDescr = "A Twi'lek is dressed in battle armor.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 12, 
+            HitSizeDice = 10, 
+            HitPlus = 600, 
+         }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
-         DamRoll = 18, 
-         Level = 90, 
+         Level = 60, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 6, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26011, 
+         ArmorClass = -50, 
+         Tag = "", 
+         Name = "bounty hunter twi'lek", 
+      }, 
+      [26012] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Name = "plaza guard", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A plaza guard stands at his post.\
-", 
-         ArmorClass = -125, 
-      }, 
-      [26013] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         ShortDescr = "a shopkeeper droid", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
-worn out and makes a slight hissing sound when it speaks.\
-", 
-         Alignment = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "a shopkeeper droid", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
          NumberOfAttacks = 0, 
          Languages = 
          {
@@ -6905,26 +6871,59 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
-         HitRoll = 0, 
-         Vnum = 26013, 
-         Height = 0, 
-         Sex = "undistinguished", 
-         Immune = 
+         DamRoll = 18, 
+         Description = "", 
+         ShortDescr = "a plaza guard", 
+         Weight = 0, 
+         HitRoll = 18, 
+         Sex = "male", 
+         LongDescr = "A plaza guard stands at his post.\
+", 
+         HitChance = 
          {
-            [20] = "magic", 
-            [11] = "charm", 
+            HitNoDice = 18, 
+            HitSizeDice = 10, 
+            HitPlus = 900, 
          }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
-         DamRoll = 0, 
-         Level = 50, 
+         Level = 90, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 9, 
+            DamPlus = 2, 
+         }, 
+         Vnum = 26012, 
+         ArmorClass = -125, 
+         Tag = "", 
+         Name = "plaza guard", 
+      }, 
+      [26013] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -6933,47 +6932,8 @@ worn out and makes a slight hissing sound when it speaks.\
             [26] = "Droid", 
             [30] = "Prototype", 
          }, 
-         Name = "shopkeeper droid", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A droid is here scanning your purchaces.\
-", 
-         ArmorClass = -25, 
-      }, 
-      [26099] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         ShortDescr = "a newly created dummy", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          NumberOfAttacks = 0, 
-         HitRoll = 0, 
-         Vnum = 26099, 
-         Height = 0, 
+         DamRoll = 0, 
          Languages = 
          {
             Speaks = 
@@ -6985,28 +6945,129 @@ worn out and makes a slight hissing sound when it speaks.\
                [0] = "basic", 
             }, 
          }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            KeeperShortDescr = "a shopkeeper droid", 
+            ProfitBuy = 120, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+         }, 
+         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
+worn out and makes a slight hissing sound when it speaks.\
+", 
+         ShortDescr = "a shopkeeper droid", 
+         Weight = 0, 
+         HitRoll = 0, 
          Sex = "undistinguished", 
+         LongDescr = "A droid is here scanning your purchaces.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
-         DamRoll = 0, 
-         Level = 1, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 26013, 
+         ArmorClass = -25, 
+         Tag = "", 
+         Name = "shopkeeper droid", 
+      }, 
+      [26099] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Human", 
+         Alignment = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "dummy", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a newly created dummy", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
          LongDescr = "Some god abandoned a newly created dummy here.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 26099, 
          ArmorClass = 0, 
+         Tag = "", 
+         Name = "dummy", 
       }, 
    }, 
+   LowEconomy = 31286618, 
+   Name = "Coruscant - Monument Plaza", 
 }

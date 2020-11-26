@@ -1,52 +1,32 @@
 -- Adari - Baituh City
--- Last saved Thursday 19-Nov-2020 14:31:09
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
-   VnumRanges = 
-   {
-      Mob = 
-      {
-         First = 29060, 
-         Last = 29070, 
-      }, 
-      Object = 
-      {
-         First = 29060, 
-         Last = 29065, 
-      }, 
-      Room = 
-      {
-         First = 29060, 
-         Last = 29158, 
-      }, 
-   }, 
+   HighEconomy = 0, 
    Objects = 
    {
       [29060] = 
       {
+         Layers = 0, 
+         Description = "A Large sign has been posted here.", 
+         ShortDescr = "a sign", 
+         Weight = 5000, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "sign welcome", 
                Description = "-  Welcome to Baituh City  -\
 \13Please follow our laws:\
 \0131. No Weapons Permitted\
 \0132. No Drugs Permitted\
 \0133. No \"Adult Entertainment\"\
 \13", 
-               Keyword = "sign welcome", 
             }, 
          }, 
-         Vnum = 29060, 
          Cost = 1, 
-         ShortDescr = "a sign", 
-         Layers = 0, 
-         Weight = 5000, 
-         Name = "sign welcome", 
-         ActionDescription = "", 
          ItemType = "trash", 
-         Description = "A Large sign has been posted here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -56,64 +36,65 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 29060, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "sign welcome", 
       }, 
       [29061] = 
       {
+         Layers = 0, 
+         Description = "A Bail Box has been built into the wall.", 
+         ShortDescr = "a Bail Box", 
+         Weight = 5000, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "bail box", 
                Description = "To be released from jail you must apologize for your crimes.  Hint,\
 \13say 'sorry' to be released. \
 \13", 
-               Keyword = "bail box", 
             }, 
             [2] = 
             {
-               Description = "", 
                Keyword = "bail box", 
+               Description = "", 
+            }, 
+         }, 
+         Cost = 0, 
+         ItemType = "container", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Arguments = "sorry", 
+               Code = "mpgoto 29103\
+mptransfer $n\
+mpechoat $n The doors opens and you are released.\
+mpecho $n exits the jail.\
+mpgoto 29108\
+", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "bribe_prog", 
+               Arguments = "30", 
+               Code = "mpgoto 29103\
+mptransfer $n\
+mpechoat $n The doors opens and you are released.\
+mpecho $n exits the jail.\
+mpgoto 29108\
+", 
+               ScriptType = "MProg", 
             }, 
          }, 
          Flags = 
          {
             [0] = "Glow", 
          }, 
-         Vnum = 29061, 
-         Cost = 0, 
-         ShortDescr = "a Bail Box", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "mpgoto 29103\
-mptransfer $n\
-mpechoat $n The doors opens and you are released.\
-mpecho $n exits the jail.\
-mpgoto 29108\
-", 
-               Arguments = "sorry", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "bribe_prog", 
-               Code = "mpgoto 29103\
-mptransfer $n\
-mpechoat $n The doors opens and you are released.\
-mpecho $n exits the jail.\
-mpgoto 29108\
-", 
-               Arguments = "30", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Layers = 0, 
-         Weight = 5000, 
-         Description = "A Bail Box has been built into the wall.", 
-         ActionDescription = "", 
-         ItemType = "container", 
-         Name = "bail box", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -123,35 +104,36 @@ mpgoto 29108\
             [5] = 0, 
             [0] = 500, 
          }, 
+         Vnum = 29061, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "bail box", 
       }, 
       [29065] = 
       {
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "Be careful! You might go blind looking at such filth!\
-\13", 
-               Keyword = "playhutt trashy magazine", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [4] = "Contraband", 
-         }, 
-         Vnum = 29065, 
-         Cost = 50, 
-         ShortDescr = "a copy of PlayHutt magazine", 
-         Weight = 2, 
          Layers = 0, 
-         Name = "playhutt trashy magazine", 
          Description = "A copy of PlayHutt magazine has been left here.", 
-         ActionDescription = "", 
-         ItemType = "smut", 
+         ShortDescr = "a copy of PlayHutt magazine", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "playhutt trashy magazine", 
+               Description = "Be careful! You might go blind looking at such filth!\
+\13", 
+            }, 
+         }, 
+         Cost = 50, 
+         ItemType = "smut", 
+         Weight = 2, 
+         Flags = 
+         {
+            [4] = "Contraband", 
          }, 
          ObjectValues = 
          {
@@ -162,5660 +144,12 @@ mpgoto 29108\
             [5] = 0, 
             [0] = 0, 
          }, 
-      }, 
-   }, 
-   HighEconomy = 0, 
-   Rooms = 
-   {
-      [29060] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Vnum = 29060, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-      }, 
-      [29061] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [7] = "NoMagic", 
-         }, 
-         Vnum = 29061, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29112, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29062, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This is the northern most entrance and exit of Baituh City.  Jagged\
-rocks prevent your travel in most directions.  The air is thick and\
-full of dirt and soil.  You can continue to either the north or the\
-south from here.\
-", 
-      }, 
-      [29062] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29062, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29061, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29064, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29063, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-north, east or west from here.\
-", 
-      }, 
-      [29063] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29063, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29062, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29066, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue east or south from\
-here.\
-", 
-      }, 
-      [29064] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29064, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29067, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29062, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue west or south from\
-here.\
-", 
-      }, 
-      [29065] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [4] = "CanLand", 
-            [2] = "NoMob", 
-            [18] = "NoDrop", 
-         }, 
          Vnum = 29065, 
-         TeleDelay = 0, 
+         ActionDescription = "", 
          Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Landing Strip", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29066, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This barren little area is used for private space vessels to come\
-and go.  This is not a nice or well kept facility, but it does serve\
-a very useful purpose for the cities inhabitants.  This is not a bus\
-stop. Commercial transportation does not and cannot dock here.  You\
-can continue east from here.\
-", 
-      }, 
-      [29066] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29066, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29063, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29069, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29065, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or west from here.\
-", 
-      }, 
-      [29067] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29067, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29064, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29068, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29071, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or east from here.\
-", 
-      }, 
-      [29068] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 29068, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Cafeteria", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29067, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "You are just inside a cave.  The room is very well lit and well\
-kept. Whoever runs the shop is very clean and meticulous.  The floor\
-is made up of smoothed marble like rock and has very little dirt on\
-it. You can exit to the west.\
-", 
-      }, 
-      [29069] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29069, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29066, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29070, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or east from here.\
-", 
-      }, 
-      [29070] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29070, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29071, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29072, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29069, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-south, east or west from here.\
-", 
-      }, 
-      [29071] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29071, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29067, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29070, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or west from here.\
-", 
-      }, 
-      [29072] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29072, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29070, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
-and very clingy.  Ash floats through the air and attaches its self to\
-your clothing and other belonings. You can continue north or south\
-from here.\
-", 
-      }, 
-      [29073] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29073, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29072, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29086, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29098, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29074, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This is the main intersection for Baituh City.  There are city\
-blocks in all directions from here.  Each direction leads to\
-something completely different than the other three.  Feel free to\
-look around.\
-", 
-      }, 
-      [29074] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29074, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29075, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
-and very clingy.  Ash floats through the air and attaches its self to\
-your clothing and other belonings. You can continue east or west from\
-here.\
-", 
-      }, 
-      [29075] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29075, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29076, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29074, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29082, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or east from here.\
-", 
-      }, 
-      [29076] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29076, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29075, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29077, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue west or south from\
-here.\
-", 
-      }, 
-      [29077] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [7] = "NoMagic", 
-         }, 
-         Vnum = 29077, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29083, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29076, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29078, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-north, east or west from here.\
-", 
-      }, 
-      [29078] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29078, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29077, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29079, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue east or south from\
-here.\
-", 
-      }, 
-      [29079] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29079, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29078, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29080, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29084, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or west from here.\
-", 
-      }, 
-      [29080] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29080, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29079, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29081, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or east from here.\
-", 
-      }, 
-      [29081] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29081, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29082, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29085, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29080, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh City\
-is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-south, east or west from here. To the south is a 'bar'.\
-", 
-      }, 
-      [29082] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29082, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29075, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29081, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or west from here.\
-", 
-      }, 
-      [29083] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Vnum = 29083, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Academia", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29077, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "At one time Baituh City produced the best and brightest Adarians in\
-their state of the art academy.  Since the planet and town have hit\
-hard times, things have changed.  Now students must travel to Alfuh\
-to work on their fighting skills. Most of the faculty from the old\
-school have also left.  This lone room now acts as a tutoring\
-facility for the one remaining faculty member.\
-", 
-      }, 
-      [29084] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [15] = "NoDropAll", 
-            [13] = "Arena", 
-            [10] = "Safe", 
-            [7] = "NoMagic", 
-         }, 
-         Vnum = 29084, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Inn", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29079, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29110, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Welcome to the Baituh City Inn.  Those who need to rest and such\
-can do so here.  But, you have to purchase a room of course.  This is\
-not the largest hotel on the planet by any means.  But if you need to\
-rest, this place is as good as any other.  You can exit to the east.\
-", 
-      }, 
-      [29085] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 29085, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Bar", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29081, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This dank fouls smelling hole in the ground is one of the few\
-businesses able to survive these times of hardship.  It is a bar. \
-Beings come here to forget about how miserable their lives are.  Feel\
-free to join them.  But watch your step.  You can exit to the north.\
-", 
-      }, 
-      [29086] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29086, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29087, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
-and very clingy.  Ash floats through the air and attaches its self to\
-your clothing and other belonings. You can continue east or west from\
-here.\
-", 
-      }, 
-      [29087] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29087, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29088, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29094, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29086, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or west from here.\
-", 
-      }, 
-      [29088] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29088, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29089, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29087, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue east or south from\
-here.\
-", 
-      }, 
-      [29089] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29089, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29095, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29090, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29088, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-north, east or west from here.\
-", 
-      }, 
-      [29090] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29090, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29091, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29089, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue west or south from\
-here.\
-", 
-      }, 
-      [29091] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29091, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29090, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29096, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29092, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or east from here.\
-", 
-      }, 
-      [29092] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29092, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29091, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29093, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or west from here.\
-", 
-      }, 
-      [29093] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29093, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29092, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29097, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29094, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-south, east or west from here.\
-", 
-      }, 
-      [29094] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29094, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29087, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29093, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or east from here.\
-", 
-      }, 
-      [29095] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 29095, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Governmental Offices", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29089, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This is not quite as elegant as one would expect of a government.\
- It would seem the government has been struggling a lot too during\
-this time of hardship for the planet.  The room is well lit.  The\
-walls are covered in dirt and filth, the floor is even worse.  You\
-can escape to the south.\
-", 
-      }, 
-      [29096] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29096, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Post Office", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29091, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is still capable of communicating with other cities and\
-planets. This was once a thriving postal service serving Baituh City\
-and its the suburbs. Today, no one oversees the post office.  It is\
-all done electronically.  You can exit to the west.\
-", 
-      }, 
-      [29097] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [13] = "Arena", 
-         }, 
-         Vnum = 29097, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Lava Resevoir", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29093, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "If you go south, you will surely die!\
-", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29111, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It is extremely warm here.  There is a large pool of lava\
-directly south of here.  To continue south would almost certainly be\
-instant death.  It would be best to get as far away from here as\
-possible.  This is not a safe area.  Go north if you cherish life.\
-", 
-      }, 
-      [29098] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29098, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29073, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29099, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
-and very clingy.  Ash floats through the air and attaches its self to\
-your clothing and other belonings. You can continue north or south\
-from here.\
-", 
-      }, 
-      [29099] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29099, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29098, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29101, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29100, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-north, east or west from here.\
-", 
-      }, 
-      [29100] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29100, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29099, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29102, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue east or south from\
-here.\
-", 
-      }, 
-      [29101] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29101, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29103, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29099, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is fairly wide here.  The black soil is soft and moist\
-beneath you.  Baituh City seems pretty desolate and devoid of\
-intelligent life.  This once thriving city fell on hard times shortly\
-after the fall of the Empire. It has been a struggle to keep most\
-cities on this planet alive.  You can continue west or south from\
-here.\
-", 
-      }, 
-      [29102] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29102, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29100, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29104, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29107, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or west from here.\
-", 
-      }, 
-      [29103] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29103, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29101, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [26] = "CanLook", 
-                  [10] = "NoPassdoor", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29108, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29106, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The path is very wide here.  It would be possible for small vehicles\
-to easily pass one another here.  Baituh City is now largely\
-inhabited by vermin and rodents.  The intelligent beings who reside\
-here are scoundrels and thugs primarily.  You can continue north,\
-south, or east from here.\
-", 
-      }, 
-      [29104] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29104, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29102, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29105, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or east from here.\
-", 
-      }, 
-      [29105] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29105, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29106, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29109, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29104, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "Baituh City is known all over Adari for its city design.  Baituh\
-City is completely unique in its city structure.  When the city was\
-founded, they did not have proper equipment to remove some of the\
-thicker rock.  As a result, Large pieces of mountain and volcano\
-still stand in the center of each city block.  You can continue\
-south, east or west from here.\
-", 
-      }, 
-      [29106] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29106, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29103, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29105, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
-ash seems to stick to everything and gets onto all of your clothes. \
-Be careful not to breathe in too much of this ash saturated  air. \
-You can continue north or west from here.\
-", 
-      }, 
-      [29107] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Vnum = 29107, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "This is the Baituh City Police Station.  A large marble desk sits in\
-the corner of the room.  The floor is covered in dirt and volcanic\
-ash. Several communication terminals have been built into the walls\
-around you.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29102, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Name = "Baituh City Police Station", 
-      }, 
-      [29108] = 
-      {
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "This is a bail box.  To bereleased from jail, you must give 30 credits\
-\13worth of bail to the box.  You will promptly be freed if you pay the\
-\01330credit fine. \
-\13", 
-               Keyword = "bail box", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [15] = "NoDropAll", 
-            [13] = "Arena", 
-            [6] = "NoDrive", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 29108, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Jail", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [26] = "CanLook", 
-                  [10] = "NoPassdoor", 
-                  [23] = "BashProof", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29103, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a dank foul smelling armpit of a cell.  To be locked in this\
-room means you must have broken the law.  Thick rocks make up the\
-walls and ceiling. \
-", 
-      }, 
-      [29109] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-         }, 
-         Vnum = 29109, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Road", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29105, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This road is very wide and seems to be in fairly decent condition. \
-However, a large rock-like boulder blocks you from continuing any\
-further south. \
-", 
-      }, 
-      [29110] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [13] = "Arena", 
-         }, 
-         Vnum = 29110, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Baituh City Hotel", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29084, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "This is where you can safely sleep and exit the game.  When you\
-reenter the game, this is the room you will start in.  Be sure to\
-thank the hotel staff for putting up with you.  Enjoy your stay.  You\
-can exit to the east. \
-", 
-      }, 
-      [29111] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [1] = "_Reserved", 
-            [2] = "NoMob", 
-            [16] = "Silence", 
-            [13] = "Arena", 
-         }, 
-         Vnum = 29111, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Lava Lake", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29097, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It is unbelievably hot here.  You are in a lake of lava.  To be\
-here is  almost certainly suicide.  If you can still escape to the\
-north, do so! \
-", 
-      }, 
-      [29112] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29112, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29158, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29061, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29113, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.  To the south is Baituh\
-City.\
-", 
-      }, 
-      [29113] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29113, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29112, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29114, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29114] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29114, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29115, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29113, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29115] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29115, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29116, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29114, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29116] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29116, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29117, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29115, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29117] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29117, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29118, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29116, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29118] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29118, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29119, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29117, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29119] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29119, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29120, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29118, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29120] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29120, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29121, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29119, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29121] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29121, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29122, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29120, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29122] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29122, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29123, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29121, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29123] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29123, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29124, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29125, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29122, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29124] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29124, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Outskirts of Alfuh City", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29049, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29123, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29125] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29125, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29126, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29123, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here. \
-", 
-      }, 
-      [29126] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29126, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29127, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29125, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29127] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29127, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29130, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29128, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29126, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29128] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29128, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29127, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29129, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29129] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29129, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29128, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29130, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29130] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29130, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29129, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29131, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29131] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29131, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29130, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29132, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29138, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29132] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29132, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29131, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29133, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29128, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29133] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29133, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29134, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29132, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29134] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29134, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29140, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29135, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29128, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29133, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29135] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29135, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29136, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29134, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29136] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29136, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29143, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29131, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29137, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29135, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29137] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29137, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29136, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29132, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29138, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29138] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29138, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29137, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29139, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29139] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29139, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29138, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29140, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29140] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29140, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29139, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29136, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29141, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29141] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29141, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29140, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29142, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29142] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29142, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29141, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29143, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29136, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29143] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29143, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29142, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29139, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29144, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29144] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29144, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29143, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29145, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29145] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29145, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29146, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29144, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29146] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29146, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29147, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29145, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29147] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29147, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29148, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29146, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29148] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29148, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29151, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29149, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29147, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29149] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29149, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29139, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29150, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29148, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29150] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29150, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29149, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29151, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29151] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29151, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29152, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29150, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29152] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29152, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29151, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29147, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29153, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29153] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29153, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29152, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29154, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29154] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29154, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29155, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29153, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29155] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29155, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29154, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29156, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29156] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29156, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29155, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "south", 
-               Key = -1, 
-               DestinationVnum = 29157, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
-      }, 
-      [29157] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29157, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "north", 
-               Key = -1, 
-               DestinationVnum = 29156, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29147, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29158, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "The road is covered in thick ash.  You are surrounded by mountains\
-and jagged rocks.  It is difficult to know exactly where you are.  It\
-would be pretty easy to get lost out here.\
-", 
-      }, 
-      [29158] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [13] = "Arena", 
-            [18] = "NoDrop", 
-         }, 
-         Vnum = 29158, 
-         TeleDelay = 0, 
-         Tag = "", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         Name = "Enclosed Dirt Path", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Direction = "east", 
-               Key = -1, 
-               DestinationVnum = 29157, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Direction = "west", 
-               Key = -1, 
-               DestinationVnum = 29112, 
-               Distance = 0, 
-               Keyword = "", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Description = "It would be pretty easy to get lost out here on this ash  covered\
-pathway.  You are surrounded by mountains  and jagged rocks.  It is\
-difficult to know exactly where you are.   \
-", 
+         Name = "playhutt trashy magazine", 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   LowEconomy = 4999036, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29061, 
-         Command = "M", 
-         Arg3 = 29068, 
-         Arg2 = 1, 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 29002, 
-         Command = "G", 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10313, 
-         Command = "G", 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10314, 
-         Command = "G", 
-      }, 
-      [5] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10317, 
-         Command = "G", 
-      }, 
-      [6] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29062, 
-         Command = "M", 
-         Arg3 = 29083, 
-         Arg2 = 1, 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29063, 
-         Command = "M", 
-         Arg3 = 29084, 
-         Arg2 = 1, 
-      }, 
-      [8] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29084, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 3, 
-      }, 
-      [9] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29065, 
-         Command = "M", 
-         Arg3 = 29081, 
-         Arg2 = 1, 
-      }, 
-      [10] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29081, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 2, 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29066, 
-         Command = "M", 
-         Arg3 = 29108, 
-         Arg2 = 1, 
-      }, 
-      [12] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29108, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 3, 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg1 = 38, 
-         Command = "O", 
-         Arg3 = 29096, 
-         Arg2 = 1, 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29067, 
-         Command = "M", 
-         Arg3 = 29066, 
-         Arg2 = 1, 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29069, 
-         Arg2 = 1, 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [21] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29078, 
-         Arg2 = 2, 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [26] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [29] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29090, 
-         Arg2 = 3, 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [31] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [32] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [34] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29100, 
-         Arg2 = 4, 
-      }, 
-      [35] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [36] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [37] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [38] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [39] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29106, 
-         Arg2 = 5, 
-      }, 
-      [40] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [41] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [42] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [43] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [44] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29107, 
-         Arg2 = 6, 
-      }, 
-      [45] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [47] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [48] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29060, 
-         Command = "M", 
-         Arg3 = 29065, 
-         Arg2 = 1, 
-      }, 
-      [50] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [51] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [52] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [53] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [54] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29060, 
-         Command = "O", 
-         Arg3 = 29065, 
-         Arg2 = 1, 
-      }, 
-      [55] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29062, 
-         Arg2 = 1, 
-      }, 
-      [56] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [57] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29071, 
-         Arg2 = 2, 
-      }, 
-      [58] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [59] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29080, 
-         Arg2 = 3, 
-      }, 
-      [60] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [61] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29073, 
-         Arg2 = 4, 
-      }, 
-      [62] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [63] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29092, 
-         Arg2 = 5, 
-      }, 
-      [64] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [65] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29104, 
-         Arg2 = 6, 
-      }, 
-      [66] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [67] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29127, 
-         Arg2 = 1, 
-      }, 
-      [68] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29129, 
-         Arg2 = 2, 
-      }, 
-      [69] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29131, 
-         Arg2 = 3, 
-      }, 
-      [70] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29133, 
-         Arg2 = 4, 
-      }, 
-      [71] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29135, 
-         Arg2 = 5, 
-      }, 
-      [72] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29137, 
-         Arg2 = 6, 
-      }, 
-      [73] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29139, 
-         Arg2 = 7, 
-      }, 
-      [74] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29141, 
-         Arg2 = 8, 
-      }, 
-      [75] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29143, 
-         Arg2 = 9, 
-      }, 
-      [76] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29145, 
-         Arg2 = 10, 
-      }, 
-      [77] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29147, 
-         Arg2 = 11, 
-      }, 
-      [78] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29149, 
-         Arg2 = 12, 
-      }, 
-      [79] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29151, 
-         Arg2 = 13, 
-      }, 
-      [80] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29153, 
-         Arg2 = 14, 
-      }, 
-      [81] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29155, 
-         Arg2 = 15, 
-      }, 
-      [82] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29157, 
-         Arg2 = 16, 
-      }, 
-      [83] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29115, 
-         Arg2 = 17, 
-      }, 
-      [84] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29070, 
-         Command = "M", 
-         Arg3 = 29119, 
-         Arg2 = 18, 
-      }, 
-      [85] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29027, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 3, 
-      }, 
-      [86] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29027, 
-         Arg2 = 7, 
-      }, 
-      [87] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [88] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [89] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [90] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [91] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29027, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 3, 
-      }, 
-      [92] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29068, 
-         Command = "M", 
-         Arg3 = 29015, 
-         Arg2 = 8, 
-      }, 
-      [93] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29008, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [94] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [95] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29006, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [96] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29009, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [97] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29015, 
-         Arg2 = 7, 
-      }, 
-      [98] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [99] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "M", 
-         Arg3 = 29021, 
-         Arg2 = 9, 
-      }, 
-      [100] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29021, 
-         Arg2 = 8, 
-      }, 
-      [101] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [102] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29033, 
-         Arg2 = 9, 
-      }, 
-      [103] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [104] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29037, 
-         Arg2 = 10, 
-      }, 
-      [105] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [106] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29042, 
-         Arg2 = 11, 
-      }, 
-      [107] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [108] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29041, 
-         Arg2 = 12, 
-      }, 
-      [109] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [110] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29069, 
-         Command = "M", 
-         Arg3 = 29050, 
-         Arg2 = 13, 
-      }, 
-      [111] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29004, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg2 = 1, 
-      }, 
-      [112] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "M", 
-         Arg3 = 29064, 
-         Arg2 = 10, 
-      }, 
-      [113] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "M", 
-         Arg3 = 29088, 
-         Arg2 = 11, 
-      }, 
-      [114] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "M", 
-         Arg3 = 29082, 
-         Arg2 = 12, 
-      }, 
-      [115] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29007, 
-         Command = "M", 
-         Arg3 = 29101, 
-         Arg2 = 13, 
-      }, 
-      [116] = 
-      {
-         MiscData = 1, 
-         Arg1 = 29064, 
-         Command = "M", 
-         Arg3 = 29085, 
-         Arg2 = 1, 
-      }, 
-      [117] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 21009, 
-         Command = "G", 
-      }, 
-      [118] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 21008, 
-         Command = "G", 
-      }, 
-      [119] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 21010, 
-         Command = "G", 
-      }, 
-      [120] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 32230, 
-         Command = "G", 
-      }, 
-      [121] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10487, 
-         Command = "G", 
-      }, 
-      [122] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 29065, 
-         Command = "G", 
-      }, 
-      [123] = 
-      {
-         MiscData = 1, 
-         Arg1 = 7316, 
-         Command = "M", 
-         Arg3 = 29085, 
-         Arg2 = 1, 
-      }, 
-      [124] = 
-      {
-         MiscData = 1, 
-         Arg1 = 28200, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg2 = 1, 
-      }, 
-      [125] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32217, 
-         Command = "E", 
-         Arg3 = 6, 
-         Arg2 = 1, 
-      }, 
-      [126] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32215, 
-         Command = "E", 
-         Arg3 = 5, 
-         Arg2 = 1, 
-      }, 
-      [127] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32216, 
-         Command = "E", 
-         Arg3 = 7, 
-         Arg2 = 1, 
-      }, 
-      [128] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32204, 
-         Command = "E", 
-         Arg3 = 13, 
-         Arg2 = 1, 
-      }, 
-      [129] = 
-      {
-         MiscData = 1, 
-         Arg1 = 32205, 
-         Command = "E", 
-         Arg3 = 8, 
-         Arg2 = 1, 
-      }, 
-      [130] = 
-      {
-         MiscData = 0, 
-         Arg1 = 29085, 
-         Command = "D", 
-         Arg3 = 0, 
-         Arg2 = 0, 
-      }, 
-   }, 
-   ResetMessage = "", 
-   Author = "Merth", 
-   Name = "Adari - Baituh City", 
-   ResetFrequency = 0, 
    LevelRanges = 
    {
       Soft = 
@@ -5829,48 +163,5738 @@ difficult to know exactly where you are.   \
          Low = 0, 
       }, 
    }, 
+   VnumRanges = 
+   {
+      Object = 
+      {
+         Last = 29065, 
+         First = 29060, 
+      }, 
+      Mob = 
+      {
+         Last = 29070, 
+         First = 29060, 
+      }, 
+      Room = 
+      {
+         Last = 29158, 
+         First = 29060, 
+      }, 
+   }, 
+   ResetMessage = "", 
+   ResetFrequency = 0, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg3 = 29068, 
+         Arg1 = 29061, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 29002, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [3] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 10313, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [4] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 10314, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [5] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 10317, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [6] = 
+      {
+         Arg3 = 29083, 
+         Arg1 = 29062, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [7] = 
+      {
+         Arg3 = 29084, 
+         Arg1 = 29063, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [8] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 29084, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [9] = 
+      {
+         Arg3 = 29081, 
+         Arg1 = 29065, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [10] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 29081, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+      }, 
+      [11] = 
+      {
+         Arg3 = 29108, 
+         Arg1 = 29066, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [12] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 29108, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [13] = 
+      {
+         Arg3 = 29096, 
+         Arg1 = 38, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [14] = 
+      {
+         Arg3 = 29066, 
+         Arg1 = 29067, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [15] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [16] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [17] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [18] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [19] = 
+      {
+         Arg3 = 29069, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [20] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [21] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [22] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [23] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [24] = 
+      {
+         Arg3 = 29078, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [25] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [26] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [27] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [28] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [29] = 
+      {
+         Arg3 = 29090, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+      }, 
+      [30] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [31] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [32] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [33] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [34] = 
+      {
+         Arg3 = 29100, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+      }, 
+      [35] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [36] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [37] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [38] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [39] = 
+      {
+         Arg3 = 29106, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+      }, 
+      [40] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [41] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [42] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [43] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [44] = 
+      {
+         Arg3 = 29107, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 6, 
+      }, 
+      [45] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [46] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [47] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [48] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [49] = 
+      {
+         Arg3 = 29065, 
+         Arg1 = 29060, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [50] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [51] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [52] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [53] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [54] = 
+      {
+         Arg3 = 29065, 
+         Arg1 = 29060, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [55] = 
+      {
+         Arg3 = 29062, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [56] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [57] = 
+      {
+         Arg3 = 29071, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [58] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [59] = 
+      {
+         Arg3 = 29080, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+      }, 
+      [60] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [61] = 
+      {
+         Arg3 = 29073, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+      }, 
+      [62] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [63] = 
+      {
+         Arg3 = 29092, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+      }, 
+      [64] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [65] = 
+      {
+         Arg3 = 29104, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 6, 
+      }, 
+      [66] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [67] = 
+      {
+         Arg3 = 29127, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [68] = 
+      {
+         Arg3 = 29129, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+      }, 
+      [69] = 
+      {
+         Arg3 = 29131, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+      }, 
+      [70] = 
+      {
+         Arg3 = 29133, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+      }, 
+      [71] = 
+      {
+         Arg3 = 29135, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+      }, 
+      [72] = 
+      {
+         Arg3 = 29137, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 6, 
+      }, 
+      [73] = 
+      {
+         Arg3 = 29139, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+      }, 
+      [74] = 
+      {
+         Arg3 = 29141, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+      }, 
+      [75] = 
+      {
+         Arg3 = 29143, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 9, 
+      }, 
+      [76] = 
+      {
+         Arg3 = 29145, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+      }, 
+      [77] = 
+      {
+         Arg3 = 29147, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+      }, 
+      [78] = 
+      {
+         Arg3 = 29149, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+      }, 
+      [79] = 
+      {
+         Arg3 = 29151, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 13, 
+      }, 
+      [80] = 
+      {
+         Arg3 = 29153, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 14, 
+      }, 
+      [81] = 
+      {
+         Arg3 = 29155, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 15, 
+      }, 
+      [82] = 
+      {
+         Arg3 = 29157, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 16, 
+      }, 
+      [83] = 
+      {
+         Arg3 = 29115, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 17, 
+      }, 
+      [84] = 
+      {
+         Arg3 = 29119, 
+         Arg1 = 29070, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+      }, 
+      [85] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 29027, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [86] = 
+      {
+         Arg3 = 29027, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+      }, 
+      [87] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [88] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [89] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [90] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [91] = 
+      {
+         Arg3 = 2, 
+         Arg1 = 29027, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+      }, 
+      [92] = 
+      {
+         Arg3 = 29015, 
+         Arg1 = 29068, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+      }, 
+      [93] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 29008, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [94] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 29007, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [95] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 29006, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [96] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 29009, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [97] = 
+      {
+         Arg3 = 29015, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+      }, 
+      [98] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [99] = 
+      {
+         Arg3 = 29021, 
+         Arg1 = 29007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 9, 
+      }, 
+      [100] = 
+      {
+         Arg3 = 29021, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+      }, 
+      [101] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [102] = 
+      {
+         Arg3 = 29033, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 9, 
+      }, 
+      [103] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [104] = 
+      {
+         Arg3 = 29037, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+      }, 
+      [105] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [106] = 
+      {
+         Arg3 = 29042, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+      }, 
+      [107] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [108] = 
+      {
+         Arg3 = 29041, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+      }, 
+      [109] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [110] = 
+      {
+         Arg3 = 29050, 
+         Arg1 = 29069, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 13, 
+      }, 
+      [111] = 
+      {
+         Arg3 = 12, 
+         Arg1 = 29004, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [112] = 
+      {
+         Arg3 = 29064, 
+         Arg1 = 29007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+      }, 
+      [113] = 
+      {
+         Arg3 = 29088, 
+         Arg1 = 29007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+      }, 
+      [114] = 
+      {
+         Arg3 = 29082, 
+         Arg1 = 29007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+      }, 
+      [115] = 
+      {
+         Arg3 = 29101, 
+         Arg1 = 29007, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 13, 
+      }, 
+      [116] = 
+      {
+         Arg3 = 29085, 
+         Arg1 = 29064, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [117] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 21009, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [118] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 21008, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [119] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 21010, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [120] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 32230, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [121] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 10487, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [122] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 29065, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [123] = 
+      {
+         Arg3 = 29085, 
+         Arg1 = 7316, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [124] = 
+      {
+         Arg3 = 16, 
+         Arg1 = 28200, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [125] = 
+      {
+         Arg3 = 6, 
+         Arg1 = 32217, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [126] = 
+      {
+         Arg3 = 5, 
+         Arg1 = 32215, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [127] = 
+      {
+         Arg3 = 7, 
+         Arg1 = 32216, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [128] = 
+      {
+         Arg3 = 13, 
+         Arg1 = 32204, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [129] = 
+      {
+         Arg3 = 8, 
+         Arg1 = 32205, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [130] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 29085, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+      }, 
+   }, 
+   Author = "Merth", 
+   Rooms = 
+   {
+      [29060] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Exits = 
+         {
+         }, 
+         Vnum = 29060, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
+      }, 
+      [29061] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [7] = "NoMagic", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29112, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29062, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29061, 
+         Description = "This is the northern most entrance and exit of Baituh City.  Jagged\
+rocks prevent your travel in most directions.  The air is thick and\
+full of dirt and soil.  You can continue to either the north or the\
+south from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29062] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29061, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29064, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29063, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29062, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+north, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29063] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29062, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29066, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29063, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue east or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29064] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29067, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29062, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29064, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue west or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29065] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [4] = "CanLand", 
+            [2] = "NoMob", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29066, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29065, 
+         Description = "This barren little area is used for private space vessels to come\
+and go.  This is not a nice or well kept facility, but it does serve\
+a very useful purpose for the cities inhabitants.  This is not a bus\
+stop. Commercial transportation does not and cannot dock here.  You\
+can continue east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Landing Strip", 
+      }, 
+      [29066] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29063, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29069, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29065, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29066, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29067] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29064, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29068, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29071, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29067, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29068] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29067, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29068, 
+         Description = "You are just inside a cave.  The room is very well lit and well\
+kept. Whoever runs the shop is very clean and meticulous.  The floor\
+is made up of smoothed marble like rock and has very little dirt on\
+it. You can exit to the west.\
+", 
+         Tag = "", 
+         Name = "Baituh City Cafeteria", 
+      }, 
+      [29069] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29066, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29070, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29069, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29070] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29071, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29072, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29069, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29070, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+south, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29071] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29067, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29070, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29071, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29072] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29070, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29072, 
+         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
+and very clingy.  Ash floats through the air and attaches its self to\
+your clothing and other belonings. You can continue north or south\
+from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29073] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29072, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29086, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29098, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29074, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29073, 
+         Description = "This is the main intersection for Baituh City.  There are city\
+blocks in all directions from here.  Each direction leads to\
+something completely different than the other three.  Feel free to\
+look around.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29074] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29075, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29074, 
+         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
+and very clingy.  Ash floats through the air and attaches its self to\
+your clothing and other belonings. You can continue east or west from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29075] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29076, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29074, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29082, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29075, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29076] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29075, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29077, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29076, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue west or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29077] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [7] = "NoMagic", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29083, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29076, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29078, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29077, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+north, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29078] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29077, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29079, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29078, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue east or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29079] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29078, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29080, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29084, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29079, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29080] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29079, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29081, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29080, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29081] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29082, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29085, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29080, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29081, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh City\
+is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+south, east or west from here. To the south is a 'bar'.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29082] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29075, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29081, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29082, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29083] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29077, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29083, 
+         Description = "At one time Baituh City produced the best and brightest Adarians in\
+their state of the art academy.  Since the planet and town have hit\
+hard times, things have changed.  Now students must travel to Alfuh\
+to work on their fighting skills. Most of the faculty from the old\
+school have also left.  This lone room now acts as a tutoring\
+facility for the one remaining faculty member.\
+", 
+         Tag = "", 
+         Name = "Baituh City Academia", 
+      }, 
+      [29084] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [15] = "NoDropAll", 
+            [13] = "Arena", 
+            [10] = "Safe", 
+            [7] = "NoMagic", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29079, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [23] = "BashProof", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29110, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29084, 
+         Description = "Welcome to the Baituh City Inn.  Those who need to rest and such\
+can do so here.  But, you have to purchase a room of course.  This is\
+not the largest hotel on the planet by any means.  But if you need to\
+rest, this place is as good as any other.  You can exit to the east.\
+", 
+         Tag = "", 
+         Name = "Baituh City Inn", 
+      }, 
+      [29085] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29081, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29085, 
+         Description = "This dank fouls smelling hole in the ground is one of the few\
+businesses able to survive these times of hardship.  It is a bar. \
+Beings come here to forget about how miserable their lives are.  Feel\
+free to join them.  But watch your step.  You can exit to the north.\
+", 
+         Tag = "", 
+         Name = "Baituh City Bar", 
+      }, 
+      [29086] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29087, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29086, 
+         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
+and very clingy.  Ash floats through the air and attaches its self to\
+your clothing and other belonings. You can continue east or west from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29087] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29088, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29094, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29086, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29087, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29088] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29089, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29087, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29088, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue east or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29089] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29095, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29090, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29088, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29089, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+north, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29090] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29091, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29089, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29090, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue west or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29091] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29090, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29096, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29092, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29091, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29092] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29091, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29093, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29092, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29093] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29092, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29097, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29094, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29093, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+south, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29094] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29087, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29093, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29094, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29095] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29089, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29095, 
+         Description = "This is not quite as elegant as one would expect of a government.\
+ It would seem the government has been struggling a lot too during\
+this time of hardship for the planet.  The room is well lit.  The\
+walls are covered in dirt and filth, the floor is even worse.  You\
+can escape to the south.\
+", 
+         Tag = "", 
+         Name = "Baituh City Governmental Offices", 
+      }, 
+      [29096] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29091, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29096, 
+         Description = "Baituh City is still capable of communicating with other cities and\
+planets. This was once a thriving postal service serving Baituh City\
+and its the suburbs. Today, no one oversees the post office.  It is\
+all done electronically.  You can exit to the west.\
+", 
+         Tag = "", 
+         Name = "Baituh City Post Office", 
+      }, 
+      [29097] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29093, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "If you go south, you will surely die!\
+", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29111, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29097, 
+         Description = "It is extremely warm here.  There is a large pool of lava\
+directly south of here.  To continue south would almost certainly be\
+instant death.  It would be best to get as far away from here as\
+possible.  This is not a safe area.  Go north if you cherish life.\
+", 
+         Tag = "", 
+         Name = "Lava Resevoir", 
+      }, 
+      [29098] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29073, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29099, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29098, 
+         Description = "This road is covered in thick black volcanic ash.  The ash is heavy\
+and very clingy.  Ash floats through the air and attaches its self to\
+your clothing and other belonings. You can continue north or south\
+from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29099] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29098, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29101, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29100, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29099, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+north, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29100] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29099, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29102, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29100, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue east or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29101] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29103, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29099, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29101, 
+         Description = "The path is fairly wide here.  The black soil is soft and moist\
+beneath you.  Baituh City seems pretty desolate and devoid of\
+intelligent life.  This once thriving city fell on hard times shortly\
+after the fall of the Empire. It has been a struggle to keep most\
+cities on this planet alive.  You can continue west or south from\
+here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29102] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29100, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29104, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29107, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29102, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29103] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29101, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [26] = "CanLook", 
+                  [10] = "NoPassdoor", 
+                  [23] = "BashProof", 
+               }, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29108, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29106, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29103, 
+         Description = "The path is very wide here.  It would be possible for small vehicles\
+to easily pass one another here.  Baituh City is now largely\
+inhabited by vermin and rodents.  The intelligent beings who reside\
+here are scoundrels and thugs primarily.  You can continue north,\
+south, or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29104] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29102, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29105, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29104, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or east from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29105] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29106, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29109, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29104, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29105, 
+         Description = "Baituh City is known all over Adari for its city design.  Baituh\
+City is completely unique in its city structure.  When the city was\
+founded, they did not have proper equipment to remove some of the\
+thicker rock.  As a result, Large pieces of mountain and volcano\
+still stand in the center of each city block.  You can continue\
+south, east or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29106] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29103, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29105, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29106, 
+         Description = "There is thick volcanic ash beneath you.  It black and grainy.  The\
+ash seems to stick to everything and gets onto all of your clothes. \
+Be careful not to breathe in too much of this ash saturated  air. \
+You can continue north or west from here.\
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29107] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29102, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29107, 
+         Description = "This is the Baituh City Police Station.  A large marble desk sits in\
+the corner of the room.  The floor is covered in dirt and volcanic\
+ash. Several communication terminals have been built into the walls\
+around you.\
+", 
+         Tag = "", 
+         Name = "Baituh City Police Station", 
+      }, 
+      [29108] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "bail box", 
+               Description = "This is a bail box.  To bereleased from jail, you must give 30 credits\
+\13worth of bail to the box.  You will promptly be freed if you pay the\
+\01330credit fine. \
+\13", 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [15] = "NoDropAll", 
+            [13] = "Arena", 
+            [6] = "NoDrive", 
+            [3] = "Indoors", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [26] = "CanLook", 
+                  [10] = "NoPassdoor", 
+                  [23] = "BashProof", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29103, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29108, 
+         Description = "This is a dank foul smelling armpit of a cell.  To be locked in this\
+room means you must have broken the law.  Thick rocks make up the\
+walls and ceiling. \
+", 
+         Tag = "", 
+         Name = "Baituh City Jail", 
+      }, 
+      [29109] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29105, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29109, 
+         Description = "This road is very wide and seems to be in fairly decent condition. \
+However, a large rock-like boulder blocks you from continuing any\
+further south. \
+", 
+         Tag = "", 
+         Name = "Baituh City Road", 
+      }, 
+      [29110] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29084, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29110, 
+         Description = "This is where you can safely sleep and exit the game.  When you\
+reenter the game, this is the room you will start in.  Be sure to\
+thank the hotel staff for putting up with you.  Enjoy your stay.  You\
+can exit to the east. \
+", 
+         Tag = "", 
+         Name = "Baituh City Hotel", 
+      }, 
+      [29111] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [1] = "_Reserved", 
+            [2] = "NoMob", 
+            [16] = "Silence", 
+            [13] = "Arena", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29097, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29111, 
+         Description = "It is unbelievably hot here.  You are in a lake of lava.  To be\
+here is  almost certainly suicide.  If you can still escape to the\
+north, do so! \
+", 
+         Tag = "", 
+         Name = "Lava Lake", 
+      }, 
+      [29112] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29158, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29061, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29113, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29112, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.  To the south is Baituh\
+City.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29113] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29112, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29114, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29113, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29114] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29115, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29113, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29114, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29115] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29116, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29114, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29115, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29116] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29117, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29115, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29116, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29117] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29118, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29116, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29117, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29118] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29119, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29117, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29118, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29119] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29120, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29118, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29119, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29120] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29121, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29119, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29120, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29121] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29122, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29120, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29121, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29122] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29123, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29121, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29122, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29123] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29124, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29125, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29122, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29123, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29124] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29049, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29123, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29124, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Outskirts of Alfuh City", 
+      }, 
+      [29125] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29126, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29123, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29125, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here. \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29126] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29127, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29125, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29126, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29127] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29130, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29128, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29126, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29127, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29128] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29127, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29129, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29128, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29129] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29128, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29130, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29129, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29130] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29129, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29131, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29130, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29131] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29130, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29132, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29138, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29131, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29132] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29131, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29133, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29128, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29132, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29133] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29134, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29132, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29133, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29134] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29140, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29135, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29128, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29133, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29134, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29135] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29136, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29134, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29135, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29136] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29143, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29131, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29137, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29135, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29136, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29137] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29136, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29132, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29138, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29137, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29138] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29137, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29139, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29138, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29139] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29138, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29140, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29139, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29140] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29139, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29136, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29141, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29140, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29141] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29140, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29142, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29141, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29142] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29141, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29143, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29136, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29142, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29143] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29142, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29139, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29144, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29143, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29144] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29143, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29145, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29144, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29145] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29146, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29144, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29145, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29146] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29147, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29145, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29146, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29147] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29148, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29146, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29147, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29148] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29151, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29149, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29147, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29148, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29149] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29139, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29150, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29148, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29149, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29150] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29149, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29151, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29150, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29151] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29152, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29150, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29151, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29152] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29151, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29147, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29153, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29152, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29153] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29152, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29154, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29153, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29154] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29155, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29153, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29154, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29155] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29154, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29156, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29155, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29156] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29155, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 29157, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29156, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29157] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29156, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29147, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29158, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29157, 
+         Description = "The road is covered in thick ash.  You are surrounded by mountains\
+and jagged rocks.  It is difficult to know exactly where you are.  It\
+would be pretty easy to get lost out here.\
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+      [29158] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [13] = "Arena", 
+            [18] = "NoDrop", 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 29157, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 29112, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 29158, 
+         Description = "It would be pretty easy to get lost out here on this ash  covered\
+pathway.  You are surrounded by mountains  and jagged rocks.  It is\
+difficult to know exactly where you are.   \
+", 
+         Tag = "", 
+         Name = "Enclosed Dirt Path", 
+      }, 
+   }, 
+   FileFormatVersion = 1, 
    Filename = "adari01.lua", 
    Mobiles = 
    {
       [29060] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 20, 
-            DamNoDice = 4, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 40, 
-            HitNoDice = 4, 
-         }, 
-         ShortDescr = "Smotsuk", 
-         Race = "Adarian", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "He is a big burly Adarian.  His only intention is to keep weapons\
-from being imported or exported from Adari.\
-", 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Adarian", 
          Alignment = 350, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         NumberOfAttacks = 0, 
          SpecFuns = 
          {
             [1] = "spec_customs_spice", 
             [0] = "spec_police_jail", 
          }, 
-         DamRoll = 8, 
-         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "time_prog", 
+               Arguments = "12", 
+               Code = "mpecho A deputy leaves in a rush.\
+mpgoto 29030\
+drop all\
+mpgoto 29065\
+mpecho A deputy has arrived.\
+", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
          Languages = 
          {
             Speaks = 
@@ -5883,85 +5907,93 @@ from being imported or exported from Adari.\
                [19] = "adarese", 
             }, 
          }, 
-         HitRoll = 8, 
-         Vnum = 29060, 
-         Height = 0, 
-         Sex = "male", 
          VipFlags = 
          {
             [9] = "Adari", 
          }, 
-         Credits = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "time_prog", 
-               Code = "mpecho A deputy leaves in a rush.\
-mpgoto 29030\
-drop all\
-mpgoto 29065\
-mpecho A deputy has arrived.\
+         DamRoll = 8, 
+         Description = "He is a big burly Adarian.  His only intention is to keep weapons\
+from being imported or exported from Adari.\
 ", 
-               Arguments = "12", 
-               ScriptType = "MProg", 
-            }, 
+         ShortDescr = "Smotsuk", 
+         Weight = 0, 
+         HitRoll = 8, 
+         Sex = "male", 
+         LongDescr = "Smotsuk, a customs officer is here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 4, 
+            HitSizeDice = 40, 
+            HitPlus = 0, 
          }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
          Level = 40, 
+         Damage = 
+         {
+            DamSizeDice = 20, 
+            DamNoDice = 4, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29060, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "officer customs smotsuk", 
+      }, 
+      [29061] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = -400, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [6] = "StayArea", 
+            [24] = "NoAssist", 
          }, 
-         Name = "officer customs smotsuk", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "Smotsuk, a customs officer is here.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [29061] = 
-      {
-         Damage = 
+         NumberOfAttacks = 0, 
+         DamRoll = 4, 
+         Languages = 
          {
-            DamPlus = 0, 
-            DamSizeDice = 10, 
-            DamNoDice = 2, 
+            Speaks = 
+            {
+               [19] = "adarese", 
+            }, 
+            Speaking = 
+            {
+               [19] = "adarese", 
+            }, 
          }, 
-         Position = "standing", 
-         HitChance = 
+         VipFlags = 
          {
-            HitPlus = 0, 
-            HitSizeDice = 20, 
-            HitNoDice = 2, 
+            [9] = "Adari", 
          }, 
-         ShortDescr = "Baszturd", 
-         Race = "Adarian", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "He is an elderly Adarian shop keeper. \
-", 
-         Alignment = -400, 
          Shop = 
          {
+            KeeperShortDescr = "Baszturd", 
+            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -5970,137 +6002,66 @@ mpecho A deputy has arrived.\
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitBuy = 120, 
             ProfitSell = 90, 
-            KeeperShortDescr = "Baszturd", 
             BusinessHours = 
             {
                Close = 23, 
                Open = 0, 
             }, 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [19] = "adarese", 
-            }, 
-            Speaking = 
-            {
-               [19] = "adarese", 
-            }, 
-         }, 
-         HitRoll = 4, 
-         Vnum = 29061, 
-         Height = 0, 
-         Sex = "male", 
-         VipFlags = 
-         {
-            [9] = "Adari", 
-         }, 
-         Credits = 0, 
-         DamRoll = 4, 
-         Level = 20, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-            [24] = "NoAssist", 
-         }, 
-         Name = "shop keeper shopkeeper baszturd", 
+         Description = "He is an elderly Adarian shop keeper. \
+", 
+         ShortDescr = "Baszturd", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 4, 
+         Sex = "male", 
          LongDescr = "A shop keeper works here.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 20, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 20, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 2, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29061, 
          ArmorClass = 0, 
+         Tag = "", 
+         Name = "shop keeper shopkeeper baszturd", 
       }, 
       [29062] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 10, 
-            DamNoDice = 2, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 20, 
-            HitNoDice = 2, 
-         }, 
-         ShortDescr = "Professor Sumaretie", 
-         Race = "Adarian", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "This old Adarian may not know a great deal about fighting, but he\
-knows many languages and other academic fields.  He might be able to\
-help you learn another language. \
-", 
-         Alignment = 450, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [9] = "antarian", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [6] = "shistavanen", 
-               [14] = "gamorrese", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [0] = "basic", 
-               [9] = "antarian", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [14] = "gamorrese", 
-               [6] = "shistavanen", 
-            }, 
-         }, 
-         HitRoll = 4, 
-         Vnum = 29062, 
+         Position = "standing", 
          Height = 0, 
-         Sex = "male", 
-         VipFlags = 
-         {
-            [9] = "Adari", 
-         }, 
-         Credits = 0, 
-         DamRoll = 4, 
-         Level = 20, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = 450, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -6109,48 +6070,122 @@ help you learn another language. \
             [6] = "StayArea", 
             [20] = "Scholar", 
          }, 
-         Name = "scholar old saavy professor sumaretie", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [9] = "antarian", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [6] = "shistavanen", 
+               [14] = "gamorrese", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [0] = "basic", 
+               [9] = "antarian", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [14] = "gamorrese", 
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         VipFlags = 
+         {
+            [9] = "Adari", 
+         }, 
+         DamRoll = 4, 
+         Description = "This old Adarian may not know a great deal about fighting, but he\
+knows many languages and other academic fields.  He might be able to\
+help you learn another language. \
+", 
+         ShortDescr = "Professor Sumaretie", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 4, 
+         Sex = "male", 
          LongDescr = "A saavy, old scholar studies here.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 20, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 20, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 2, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29062, 
          ArmorClass = 60, 
+         Tag = "", 
+         Name = "scholar old saavy professor sumaretie", 
       }, 
       [29063] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 15, 
-            DamNoDice = 3, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 30, 
-            HitNoDice = 3, 
-         }, 
-         ShortDescr = "An Innkeeper Droid", 
-         Race = "Adarian", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "A red astromech R2 unit idles here waiting to help you.  If you would\
-like  to rent a room for the evening, give 50 credits to this R2\
-unit. \
-", 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Adarian", 
          Alignment = -400, 
-         DamRoll = 6, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+            [6] = "StayArea", 
+            [24] = "NoAssist", 
+         }, 
          NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Arguments = "75", 
+               Code = "mpecho A little red R2 Unit whistles happily towards you.\
+", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "bribe_prog", 
+               Arguments = "18", 
+               Code = "mpgoto 29110\
+mptransfer $n\
+mpechoat $n The R2 Unit escorts you to a room.\
+east\
+", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
          Languages = 
          {
             Speaks = 
@@ -6162,114 +6197,74 @@ unit. \
                [19] = "adarese", 
             }, 
          }, 
-         HitRoll = 6, 
-         Vnum = 29063, 
-         Height = 0, 
-         Sex = "undistinguished", 
          VipFlags = 
          {
             [9] = "Adari", 
          }, 
-         Credits = 0, 
-         MudProgs = 
+         DamRoll = 6, 
+         Description = "A red astromech R2 unit idles here waiting to help you.  If you would\
+like  to rent a room for the evening, give 50 credits to this R2\
+unit. \
+", 
+         ShortDescr = "An Innkeeper Droid", 
+         Weight = 0, 
+         HitRoll = 6, 
+         Sex = "undistinguished", 
+         LongDescr = "An Innkeeper Droid idles here.\
+", 
+         HitChance = 
          {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "mpecho A little red R2 Unit whistles happily towards you.\
-", 
-               Arguments = "75", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "bribe_prog", 
-               Code = "mpgoto 29110\
-mptransfer $n\
-mpechoat $n The R2 Unit escorts you to a room.\
-east\
-", 
-               Arguments = "18", 
-               ScriptType = "MProg", 
-            }, 
+            HitNoDice = 3, 
+            HitSizeDice = 30, 
+            HitPlus = 0, 
          }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
          Level = 30, 
+         Damage = 
+         {
+            DamSizeDice = 15, 
+            DamNoDice = 3, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29063, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "droid innkeeper keeper r2 unit", 
+      }, 
+      [29064] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Hutt", 
+         Alignment = -500, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
-            [26] = "Droid", 
-            [6] = "StayArea", 
-            [24] = "NoAssist", 
+            [25] = "NoKill", 
          }, 
-         Name = "droid innkeeper keeper r2 unit", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "An Innkeeper Droid idles here.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [29064] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 25, 
-            DamNoDice = 5, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 50, 
-            HitNoDice = 5, 
-         }, 
-         ShortDescr = "Puttzu", 
-         Race = "Hutt", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = -500, 
          NumberOfAttacks = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "Puttzu", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-         }, 
-         HitRoll = 10, 
-         Vnum = 29064, 
-         Height = 0, 
+         DamRoll = 10, 
          Languages = 
          {
             Speaks = 
@@ -6283,107 +6278,77 @@ east\
                [19] = "adarese", 
             }, 
          }, 
-         Sex = "male", 
-         Credits = 0, 
-         DamRoll = 10, 
-         Level = 50, 
-         SaveVs = 
+         Shop = 
          {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
+            KeeperShortDescr = "Puttzu", 
+            ProfitBuy = 120, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         Name = "bartender hutt puttzu", 
+         Description = "", 
+         ShortDescr = "Puttzu", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 10, 
+         Sex = "male", 
          LongDescr = "A Hutt Bartender works here.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 5, 
+            HitSizeDice = 50, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 50, 
+         Damage = 
+         {
+            DamSizeDice = 25, 
+            DamNoDice = 5, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29064, 
          ArmorClass = 0, 
+         Tag = "", 
+         Name = "bartender hutt puttzu", 
       }, 
       [29065] = 
       {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 37, 
-            DamNoDice = 6, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 65, 
-            HitNoDice = 7, 
-         }, 
-         ShortDescr = "An Astromech Droid", 
-         Race = "Adarian", 
          Stats = 
          {
             Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
+            Wisdom = 10, 
             Luck = 10, 
             Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
             Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
          }, 
-         Description = "This Astromech Droid is acting as a bouncer to the bar south of here.\
-Only 'adults' can enter.  If you would like to enter the bar, tell\
-the droid 'hutts rule!'. \
-", 
-         Alignment = -500, 
-         NumberOfAttacks = 0, 
-         DamRoll = 13, 
-         HitRoll = 13, 
-         Vnum = 29065, 
+         Position = "standing", 
          Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [19] = "adarese", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "undistinguished", 
-         Credits = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "mpgoto puttzu\
-mptransfer $n\
-mpechoat $n The Droid ushers you into the bar.\
-mpecho $n is ushered into the bar.\
-mpgoto 29081\
-", 
-               Arguments = "p hutts rule!", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Level = 65, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = -500, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -6391,66 +6356,101 @@ mpgoto 29081\
             [6] = "StayArea", 
             [26] = "Droid", 
          }, 
-         Name = "droid astromech bouncer", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "An Astromech Droid acts as a bouncer here.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [29066] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-         ShortDescr = "a bail box", 
-         Race = "Human", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          NumberOfAttacks = 0, 
-         DamRoll = 10, 
-         HitRoll = 10, 
-         Vnum = 29066, 
-         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Arguments = "p hutts rule!", 
+               Code = "mpgoto puttzu\
+mptransfer $n\
+mpechoat $n The Droid ushers you into the bar.\
+mpecho $n is ushered into the bar.\
+mpgoto 29081\
+", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
          Languages = 
          {
             Speaks = 
             {
                [0] = "basic", 
+               [19] = "adarese", 
             }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
          }, 
+         DamRoll = 13, 
+         Description = "This Astromech Droid is acting as a bouncer to the bar south of here.\
+Only 'adults' can enter.  If you would like to enter the bar, tell\
+the droid 'hutts rule!'. \
+", 
+         ShortDescr = "An Astromech Droid", 
+         Weight = 0, 
+         HitRoll = 13, 
          Sex = "undistinguished", 
+         LongDescr = "An Astromech Droid acts as a bouncer here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 7, 
+            HitSizeDice = 65, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
+         Level = 65, 
+         Damage = 
+         {
+            DamSizeDice = 37, 
+            DamNoDice = 6, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29065, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "droid astromech bouncer", 
+      }, 
+      [29066] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
          MudProgs = 
          {
             [1] = 
             {
                MudProgType = "bribe_prog", 
+               Arguments = "30", 
                Code = "mpechoaround $n $n exits the jail.\
 mpgoto 29103\
 mptransfer $n\
@@ -6458,168 +6458,104 @@ mpechoat $n The doors opens and you are released.\
 mpechoaround $n $n exits the jail.\
 mpgoto 29108\
 ", 
-               Arguments = "30", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Level = 50, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            ParaPetri = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Name = "bailjfk boxjfk", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A Bail Box has been installed in the wall here.\
-", 
-         ArmorClass = -100, 
-      }, 
-      [29067] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 15, 
-            DamNoDice = 3, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 30, 
-            HitNoDice = 3, 
-         }, 
-         ShortDescr = "Deputy Snopaew", 
-         Race = "Adarian", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "Deputy Snopaew is a tall and gangly looking Adarian.  It is his job to\
-keep weapons out of the city.\
-", 
-         Alignment = 300, 
-         SpecFuns = 
-         {
-            [1] = "spec_customs_weapons", 
-            [0] = "spec_police_jail", 
-         }, 
-         DamRoll = 6, 
-         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
             {
-               [19] = "adarese", 
+               [0] = "basic", 
             }, 
             Speaking = 
             {
-               [19] = "adarese", 
+               [0] = "basic", 
             }, 
          }, 
-         HitRoll = 6, 
-         Vnum = 29067, 
-         Height = 0, 
-         Sex = "male", 
-         VipFlags = 
+         DamRoll = 10, 
+         Description = "", 
+         ShortDescr = "a bail box", 
+         Weight = 0, 
+         HitRoll = 10, 
+         Sex = "undistinguished", 
+         LongDescr = "A Bail Box has been installed in the wall here.\
+", 
+         HitChance = 
          {
-            [9] = "Adari", 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
          }, 
+         DefaultPosition = "standing", 
          Credits = 0, 
-         MudProgs = 
+         Level = 50, 
+         Damage = 
          {
-            [1] = 
-            {
-               MudProgType = "entry_prog", 
-               Code = "mpecho Deputy Snopaew surveys the area.\
-", 
-               Arguments = "50", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "glare $n\
-", 
-               Arguments = "75", 
-               ScriptType = "MProg", 
-            }, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
          }, 
-         Level = 30, 
+         Vnum = 29066, 
+         ArmorClass = -100, 
+         Tag = "", 
+         Name = "bailjfk boxjfk", 
+      }, 
+      [29067] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = 300, 
          Flags = 
          {
             [0] = "Npc", 
             [25] = "NoKill", 
             [6] = "StayArea", 
          }, 
-         Name = "deputy snopaew", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A deputy partols the area.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [29068] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 8, 
-            DamNoDice = 1, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 15, 
-            HitNoDice = 2, 
-         }, 
-         ShortDescr = "a young deputy", 
-         Race = "Adarian", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "A young Adarian deputy.  You can see it is his dream to enforce\
-laws.  He is a decent and moral being.\
-", 
-         Alignment = 300, 
+         NumberOfAttacks = 0, 
          SpecFuns = 
          {
-            [1] = "spec_customs_alcohol", 
-            [0] = "spec_police_attack", 
+            [1] = "spec_customs_weapons", 
+            [0] = "spec_police_jail", 
          }, 
-         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "entry_prog", 
+               Arguments = "50", 
+               Code = "mpecho Deputy Snopaew surveys the area.\
+", 
+               ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Arguments = "75", 
+               Code = "glare $n\
+", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
          Languages = 
          {
             Speaks = 
@@ -6631,70 +6567,76 @@ laws.  He is a decent and moral being.\
                [19] = "adarese", 
             }, 
          }, 
-         HitRoll = 3, 
-         Vnum = 29068, 
-         Height = 0, 
-         Sex = "male", 
          VipFlags = 
          {
             [9] = "Adari", 
          }, 
-         Credits = 15, 
-         DamRoll = 3, 
-         Level = 15, 
+         DamRoll = 6, 
+         Description = "Deputy Snopaew is a tall and gangly looking Adarian.  It is his job to\
+keep weapons out of the city.\
+", 
+         ShortDescr = "Deputy Snopaew", 
+         Weight = 0, 
+         HitRoll = 6, 
+         Sex = "male", 
+         LongDescr = "A deputy partols the area.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 3, 
+            HitSizeDice = 30, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 30, 
+         Damage = 
+         {
+            DamSizeDice = 15, 
+            DamNoDice = 3, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29067, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "deputy snopaew", 
+      }, 
+      [29068] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = 300, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "deputy young", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "A deputy patrols the area.\
-", 
-         ArmorClass = 0, 
-      }, 
-      [29069] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 5, 
-            DamNoDice = 1, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 10, 
-            HitNoDice = 1, 
-         }, 
-         ShortDescr = "a Townie", 
-         Race = "Adarian", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "Not the brightest nor most beautiful Adarian.  This is one of the\
-citizens of the town.  She lives day to day.\
-", 
-         Alignment = -100, 
          NumberOfAttacks = 0, 
+         SpecFuns = 
+         {
+            [1] = "spec_customs_alcohol", 
+            [0] = "spec_police_attack", 
+         }, 
          Languages = 
          {
             Speaks = 
@@ -6706,75 +6648,72 @@ citizens of the town.  She lives day to day.\
                [19] = "adarese", 
             }, 
          }, 
-         HitRoll = 2, 
-         Vnum = 29069, 
-         Height = 0, 
-         Sex = "female", 
          VipFlags = 
          {
             [9] = "Adari", 
          }, 
-         Credits = 0, 
-         DamRoll = 2, 
+         DamRoll = 3, 
+         Description = "A young Adarian deputy.  You can see it is his dream to enforce\
+laws.  He is a decent and moral being.\
+", 
+         ShortDescr = "a young deputy", 
+         Weight = 0, 
+         HitRoll = 3, 
+         Sex = "male", 
+         LongDescr = "A deputy patrols the area.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 15, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 15, 
          Level = 15, 
+         Damage = 
+         {
+            DamSizeDice = 8, 
+            DamNoDice = 1, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29068, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "deputy young", 
+      }, 
+      [29069] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = -100, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
             [24] = "NoAssist", 
          }, 
-         Name = "adarian townie", 
-         Weight = 0, 
-         DefaultPosition = "standing", 
-         LongDescr = "An Adarian Townie wanders about here.\
-", 
-         ArmorClass = 75, 
-      }, 
-      [29070] = 
-      {
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 12, 
-            DamNoDice = 2, 
-         }, 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 22, 
-            HitNoDice = 2, 
-         }, 
-         ShortDescr = "a Draagax", 
-         Race = "Adarian", 
-         Stats = 
-         {
-            Strength = 10, 
-            Dexterity = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-         }, 
-         Description = "Ears similar to a rabbit, eyes of a fly, teeth of a lion, body of an\
-ape. This can be a very frightening beast to stumble upon.\
-", 
-         Alignment = -100, 
          NumberOfAttacks = 0, 
-         DamRoll = 4, 
-         HitRoll = 4, 
-         Vnum = 29070, 
-         Height = 0, 
          Languages = 
          {
             Speaks = 
@@ -6786,34 +6725,65 @@ ape. This can be a very frightening beast to stumble upon.\
                [19] = "adarese", 
             }, 
          }, 
-         Sex = "undistinguished", 
-         Credits = 0, 
-         MudProgs = 
+         VipFlags = 
          {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "if ispc($n) \
-if level($n) >= 15 \
-mpkill $n \
-endif \
-else \
-mpecho A Draagax snorts loudly.\
-endif\
-", 
-               Arguments = "75", 
-               ScriptType = "MProg", 
-            }, 
+            [9] = "Adari", 
          }, 
-         Level = 22, 
+         DamRoll = 2, 
+         Description = "Not the brightest nor most beautiful Adarian.  This is one of the\
+citizens of the town.  She lives day to day.\
+", 
+         ShortDescr = "a Townie", 
+         Weight = 0, 
+         HitRoll = 2, 
+         Sex = "female", 
+         LongDescr = "An Adarian Townie wanders about here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitSizeDice = 10, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 15, 
+         Damage = 
+         {
+            DamSizeDice = 5, 
+            DamNoDice = 1, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29069, 
+         ArmorClass = 75, 
+         Tag = "", 
+         Name = "adarian townie", 
+      }, 
+      [29070] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
          SaveVs = 
          {
             SpellStaff = 0, 
-            Breath = 0, 
             PoisonDeath = 0, 
-            Wand = 0, 
+            Breath = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
          }, 
+         Race = "Adarian", 
+         Alignment = -100, 
          Flags = 
          {
             [0] = "Npc", 
@@ -6822,12 +6792,66 @@ endif\
             [6] = "StayArea", 
             [18] = "Mountable", 
          }, 
-         Name = "draagax crazed omnivore", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Arguments = "75", 
+               Code = "if ispc($n) \
+if level($n) >= 15 \
+mpkill $n \
+endif \
+else \
+mpecho A Draagax snorts loudly.\
+endif\
+", 
+               ScriptType = "MProg", 
+            }, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [19] = "adarese", 
+            }, 
+            Speaking = 
+            {
+               [19] = "adarese", 
+            }, 
+         }, 
+         DamRoll = 4, 
+         Description = "Ears similar to a rabbit, eyes of a fly, teeth of a lion, body of an\
+ape. This can be a very frightening beast to stumble upon.\
+", 
+         ShortDescr = "a Draagax", 
          Weight = 0, 
-         DefaultPosition = "standing", 
+         HitRoll = 4, 
+         Sex = "undistinguished", 
          LongDescr = "A crazed omnivore sniffs about.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 22, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 22, 
+         Damage = 
+         {
+            DamSizeDice = 12, 
+            DamNoDice = 2, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 29070, 
          ArmorClass = 65, 
+         Tag = "", 
+         Name = "draagax crazed omnivore", 
       }, 
    }, 
+   LowEconomy = 4998856, 
+   Name = "Adari - Baituh City", 
 }

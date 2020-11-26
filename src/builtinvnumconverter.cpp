@@ -32,7 +32,7 @@ std::list<vnum_t> BuiltinVnumConverter::RoomVnums() const
     
     for(vnum_t vnum = firstVnum; vnum <= lastVnum; vnum++)
     {
-        if(GetRoom(vnum))
+        if(vnum != INVALID_VNUM && GetRoom(vnum))
         {
             roomlist.push_back(vnum);
         }
@@ -49,7 +49,7 @@ std::list<vnum_t> BuiltinVnumConverter::ObjectVnums() const
 
     for(vnum_t vnum = firstVnum; vnum <= lastVnum; vnum++)
     {
-        if(GetProtoObject(vnum))
+        if(vnum != INVALID_VNUM && GetProtoObject(vnum))
         {
             objlist.push_back(vnum);
         }
@@ -66,7 +66,7 @@ std::list<vnum_t> BuiltinVnumConverter::MobileVnums() const
 
     for(vnum_t vnum = firstVnum; vnum <= lastVnum; vnum++)
     {
-        if(GetProtoMobile(vnum))
+        if(vnum != INVALID_VNUM && GetProtoMobile(vnum))
         {
             moblist.push_back(vnum);
         }

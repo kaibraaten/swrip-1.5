@@ -1,23 +1,37 @@
 -- Zone used by plugins.
--- Last saved Thursday 19-Nov-2020 14:34:41
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
-   FileFormatVersion = 1, 
+   LowEconomy = 6250000, 
    ResetMessage = "", 
-   Rooms = 
+   FileFormatVersion = 1, 
+   Flags = 
    {
+      [0] = "PluginZone", 
    }, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         First = 12000, 
+         Last = 14999, 
+      }, 
+      Object = 
+      {
+         First = 12000, 
+         Last = 14999, 
+      }, 
+      Room = 
+      {
+         First = 12000, 
+         Last = 14999, 
+      }, 
+   }, 
+   Filename = "plugins.lua", 
+   Name = "Zone used by plugins.", 
    Author = "Kai", 
-   Resets = 
-   {
-   }, 
-   Objects = 
-   {
-   }, 
-   Mobiles = 
-   {
-   }, 
+   HighEconomy = 0, 
    LevelRanges = 
    {
       Hard = 
@@ -31,31 +45,5 @@ AreaEntry
          Low = 0, 
       }, 
    }, 
-   HighEconomy = 0, 
-   Name = "Zone used by plugins.", 
-   Filename = "plugins.lua", 
    ResetFrequency = 0, 
-   VnumRanges = 
-   {
-      Room = 
-      {
-         First = 12000, 
-         Last = 14999, 
-      }, 
-      Object = 
-      {
-         First = 12000, 
-         Last = 14999, 
-      }, 
-      Mob = 
-      {
-         First = 12000, 
-         Last = 14999, 
-      }, 
-   }, 
-   Flags = 
-   {
-      [0] = "PluginZone", 
-   }, 
-   LowEconomy = 6250000, 
 }

@@ -1,5 +1,5 @@
 -- Ryloth
--- Last saved Tuesday 25-Oct-2016 19:07:52
+-- Last saved Thursday 26-Nov-2020 14:39:26
 
 SpaceobjectEntry
 {
@@ -7,18 +7,18 @@ SpaceobjectEntry
    {
       [0] = 
       {
-         DockVnum = 800, 
-         Name = "Kala'uun Starport", 
          IsSecret = false, 
+         DockVnum = "kalauun_spaceport", 
+         Name = "Kala'uun Starport", 
       }, 
    }, 
+   Gravity = 100, 
    Type = "planet", 
-   Name = "Ryloth", 
    Position = 
    {
-      Y = -4500000, 
       X = 5000000, 
+      Y = -4500000, 
       Z = 0, 
    }, 
-   Gravity = 100, 
+   Name = "Ryloth", 
 }
