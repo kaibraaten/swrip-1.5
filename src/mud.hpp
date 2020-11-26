@@ -1317,6 +1317,9 @@ std::string VnumOrTag(std::shared_ptr<Room> room);
 std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob);
 std::string VnumOrTag(std::shared_ptr<ProtoObject> obj);
 bool IsValidVnumOrTag(const std::string &vnumOrTag);
+std::string VnumOrTagForRoom(vnum_t vnum);
+std::string VnumOrTagForMobile(vnum_t vnum);
+std::string VnumOrTagForObject(vnum_t vnum);
 
 /* newscore.c */
 const char *GetCharacterRace(std::shared_ptr<Character> ch);

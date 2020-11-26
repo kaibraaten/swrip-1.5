@@ -194,9 +194,9 @@ static void PushShip(lua_State *L, const void *userData)
     LuaSetfieldString(L, "Pilot", ship->Pilot);
     LuaSetfieldString(L, "CoPilot", ship->CoPilot);
     LuaSetfieldString(L, "Class", ShipClasses[ship->Class]);
-    LuaSetfieldNumber(L, "Shipyard", ship->Shipyard);
-    LuaSetfieldNumber(L, "Location", ship->Location);
-    LuaSetfieldNumber(L, "LastDock", ship->LastDock);
+    LuaSetfieldString(L, "Shipyard", VnumOrTagForRoom(ship->Shipyard));
+    LuaSetfieldString(L, "Location", VnumOrTagForRoom(ship->Location));
+    LuaSetfieldString(L, "LastDock", VnumOrTagForRoom(ship->LastDock));
     LuaSetfieldString(L, "Type", ShipTypes[ship->Type]);
     LuaSetfieldNumber(L, "State", ship->State);
     LuaSetfieldBoolean(L, "Alarm", ship->Alarm);
@@ -393,6 +393,22 @@ static void LoadRooms(lua_State *L, std::shared_ptr<Ship> ship)
     lua_pop(L, 1);
 }
 
+static void LuaGetfieldVnumOrTag(lua_State *L, const std::string &key, vnum_t *vnum)
+{
+    std::string vnumOrTag;
+    LuaGetfieldString(L, key, &vnumOrTag);
+
+    if(IsValidVnumOrTag(vnumOrTag))
+    {
+        auto room = GetRoom(vnumOrTag);
+
+        if(room != nullptr)
+        {
+            *vnum = room->Vnum;
+        }
+    }
+}
+
 static int L_ShipEntry(lua_State *L)
 {
     std::shared_ptr<Ship> ship = std::make_shared<Ship>();
@@ -408,9 +424,9 @@ static int L_ShipEntry(lua_State *L)
     {
         ship->Class = GetShipClass(className);
     });
-    LuaGetfieldLong(L, "Shipyard", &ship->Shipyard);
-    LuaGetfieldLong(L, "Location", &ship->Location);
-    LuaGetfieldLong(L, "LastDock", &ship->LastDock);
+    LuaGetfieldVnumOrTag(L, "Shipyard", &ship->Shipyard);
+    LuaGetfieldVnumOrTag(L, "Location", &ship->Location);
+    LuaGetfieldVnumOrTag(L, "LastDock", &ship->LastDock);
     LuaGetfieldString(L, "Type",
         [ship](const std::string typeName)
     {

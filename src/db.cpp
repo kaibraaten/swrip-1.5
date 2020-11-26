@@ -1345,3 +1345,60 @@ bool IsValidVnumOrTag(const std::string &vnumOrTag)
         return !vnumOrTag.empty();
     }
 }
+
+std::string VnumOrTagForRoom(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto room = GetRoom(vnum);
+
+    if(room != nullptr)
+    {
+        return VnumOrTag(room);
+    }
+    else
+    {
+        return "0";
+    }
+}
+
+std::string VnumOrTagForMobile(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto mob = GetProtoMobile(vnum);
+
+    if(mob != nullptr)
+    {
+        return VnumOrTag(mob);
+    }
+    else
+    {
+        return "0";
+    }
+}
+
+std::string VnumOrTagForObject(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto obj = GetProtoObject(vnum);
+
+    if(obj != nullptr)
+    {
+        return VnumOrTag(obj);
+    }
+    else
+    {
+        return "0";
+    }
+}

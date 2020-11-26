@@ -105,57 +105,13 @@ void LuaClanRepository::PushClan(lua_State *L, const std::shared_ptr<Clan> &clan
     LuaSetfieldNumber(L, "MobDeaths", clan->MobDeaths);
     LuaSetfieldNumber(L, "Type", (int)clan->Type);
 
-    if (clan->Board != INVALID_VNUM)
-    {
-        auto obj = GetProtoObject(clan->Board);
-
-        if(obj != nullptr)
-        {
-            LuaSetfieldString(L, "BoardVnum", VnumOrTag(obj));
-        }
-    }
-
-    if (clan->Storeroom != INVALID_VNUM)
-    {
-        auto room = GetRoom(clan->Storeroom);
-
-        if(room != nullptr)
-        {
-            LuaSetfieldString(L, "StoreroomVnum", VnumOrTag(room));
-        }
-    }
+    LuaSetfieldString(L, "BoardVnum", VnumOrTagForObject(clan->Board));
+    LuaSetfieldString(L, "StoreroomVnum", VnumOrTagForRoom(clan->Storeroom));
 
     LuaSetfieldNumber(L, "Funds", clan->Funds);
-
-    if (clan->Jail != INVALID_VNUM)
-    {
-        auto room = GetRoom(clan->Jail);
-
-        if(room != nullptr)
-        {
-            LuaSetfieldString(L, "JailVnum", VnumOrTag(room));
-        }
-    }
-
-    if (clan->EnlistRoom1 != INVALID_VNUM)
-    {
-        auto room = GetRoom(clan->EnlistRoom1);
-
-        if(room != nullptr)
-        {
-            LuaSetfieldString(L, "EnlistRoom1Vnum", VnumOrTag(room));
-        }
-    }
-
-    if (clan->EnlistRoom2 != INVALID_VNUM)
-    {
-        auto room = GetRoom(clan->EnlistRoom2);
-
-        if(room != nullptr)
-        {
-            LuaSetfieldString(L, "EnlistRoom2Vnum", VnumOrTag(room));
-        }
-    }
+    LuaSetfieldString(L, "JailVnum", VnumOrTagForRoom(clan->Jail));
+    LuaSetfieldString(L, "EnlistRoom1Vnum", VnumOrTagForRoom(clan->EnlistRoom1));
+    LuaSetfieldString(L, "EnlistRoom2Vnum", VnumOrTagForRoom(clan->EnlistRoom2));
 
     LuaSetfieldString(L, "Leader", clan->Leadership.Leader);
     LuaSetfieldString(L, "Number1", clan->Leadership.Number1);

@@ -753,17 +753,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     LuaSetfieldNumber(L, "LastPlayed", current_time);
     LuaSetfieldNumber(L, "Bank", pc->PCData->Bank);
     LuaSetfieldNumber(L, "Clones", pc->PCData->Clones);
-
-    if(pc->PCData->JailVnum != INVALID_VNUM)
-    {
-        auto jail = GetRoom(pc->PCData->JailVnum);
-
-        if(jail != nullptr)
-        {
-            LuaSetfieldString(L, "JailVnum", VnumOrTag(jail));
-        }
-    }
-    
+    LuaSetfieldString(L, "JailVnum", VnumOrTagForRoom(pc->PCData->JailVnum));
     LuaSetfieldNumber(L, "RestoreTime", pc->PCData->RestoreTime);
     LuaSetfieldString(L, "Password", pc->PCData->Password);
     LuaSetfieldString(L, "BamfIn", pc->PCData->BamfIn);
