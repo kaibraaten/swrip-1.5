@@ -337,17 +337,14 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Char
     LuaGetfieldString(L, "JailVnum",
                       [ch](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
-                          }
-                          
-                          auto room = GetRoom(vnumOrTag);
+                              auto room = GetRoom(vnumOrTag);
 
-                          if(room != nullptr)
-                          {
-                              ch->PCData->JailVnum = room->Vnum;
+                              if(room != nullptr)
+                              {
+                                  ch->PCData->JailVnum = room->Vnum;
+                              }
                           }
                       });
     LuaGetfieldLong(L, "RestoreTime", &ch->PCData->RestoreTime);
@@ -472,12 +469,7 @@ void InMemoryPlayerRepository::LoadKilledData(lua_State *L, std::shared_ptr<Char
                 int count = 0;
                 LuaGetfieldString(L, "Vnum", &vnumOrTag);
 
-                if((IsNumber(vnumOrTag) && ToLong(vnumOrTag))
-                   || vnumOrTag.empty())
-                {
-                    ;
-                }
-                else
+                if(IsValidVnumOrTag(vnumOrTag))
                 {
                     auto mob = GetProtoMobile(vnumOrTag);
 

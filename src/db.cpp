@@ -1333,3 +1333,15 @@ std::string VnumOrTag(std::shared_ptr<ProtoObject> obj)
 {
     return obj->Tag().empty() ? std::to_string(obj->Vnum) : obj->Tag();
 }
+
+bool IsValidVnumOrTag(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return ToLong(vnumOrTag) != INVALID_VNUM;
+    }
+    else
+    {
+        return !vnumOrTag.empty();
+    }
+}

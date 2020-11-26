@@ -244,88 +244,68 @@ int LuaClanRepository::L_ClanEntry(lua_State *L)
     LuaGetfieldString(L, "BoardVnum",
                       [clan](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
+                              auto obj = GetProtoObject(vnumOrTag);
+
+                              if(obj != nullptr)
+                              {
+                                  clan->Board = obj->Vnum;
+                              }
                           }
-
-                          auto obj = GetProtoObject(vnumOrTag);
-
-                          if(obj != nullptr)
-                          {
-                              clan->Board = obj->Vnum;
-                          }
-
                       });
     LuaGetfieldString(L, "StoreroomVnum",
                       [clan](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->Storeroom = room->Vnum;
+                              }
                           }
-
-                          auto room = GetRoom(vnumOrTag);
-
-                          if(room != nullptr)
-                          {
-                              clan->Storeroom = room->Vnum;
-                          }
-
                       });
     LuaGetfieldLong(L, "Funds", &clan->Funds);
     LuaGetfieldString(L, "JailVnum",
                       [clan](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->Jail = room->Vnum;
+                              }
                           }
-
-                          auto room = GetRoom(vnumOrTag);
-
-                          if(room != nullptr)
-                          {
-                              clan->Jail = room->Vnum;
-                          }
-
                       });
     LuaGetfieldString(L, "EnlistRoom1Vnum",
                       [clan](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
+                              auto room = GetRoom(vnumOrTag);
+                              
+                              if(room != nullptr)
+                              {
+                                  clan->EnlistRoom1 = room->Vnum;
+                              }
                           }
-
-                          auto room = GetRoom(vnumOrTag);
-
-                          if(room != nullptr)
-                          {
-                              clan->EnlistRoom1 = room->Vnum;
-                          }
-
                       });
     LuaGetfieldString(L, "EnlistRoom2Vnum",
                       [clan](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->EnlistRoom2 = room->Vnum;
+                              }
                           }
-
-                          auto room = GetRoom(vnumOrTag);
-
-                          if(room != nullptr)
-                          {
-                              clan->EnlistRoom2 = room->Vnum;
-                          }
-
                       });
     LuaGetfieldString(L, "Leader", &clan->Leadership.Leader);
     LuaGetfieldString(L, "Number1", &clan->Leadership.Number1);

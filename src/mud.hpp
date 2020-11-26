@@ -1316,6 +1316,7 @@ int GetMaxAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability);
 std::string VnumOrTag(std::shared_ptr<Room> room);
 std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob);
 std::string VnumOrTag(std::shared_ptr<ProtoObject> obj);
+bool IsValidVnumOrTag(const std::string &vnumOrTag);
 
 /* newscore.c */
 const char *GetCharacterRace(std::shared_ptr<Character> ch);

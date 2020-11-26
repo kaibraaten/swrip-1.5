@@ -174,17 +174,14 @@ void LoadTurret(lua_State *L, Turret *turret)
     LuaGetfieldString(L, "RoomVnum",
                       [turret](const auto &vnumOrTag)
                       {
-                          if((IsNumber(vnumOrTag) && ToLong(vnumOrTag) == INVALID_VNUM)
-                             || vnumOrTag.empty())
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              return;
-                          }
+                              auto room = GetRoom(vnumOrTag);
 
-                          auto room = GetRoom(vnumOrTag);
-
-                          if(room != nullptr)
-                          {
-                              SetTurretRoom(turret, room->Vnum);
+                              if(room != nullptr)
+                              {
+                                  SetTurretRoom(turret, room->Vnum);
+                              }
                           }
                       });
     LuaGetfieldInt(L, "State", &turret->WeaponState);
