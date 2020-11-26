@@ -5,6 +5,7 @@
 #include "repos/planetrepository.hpp"
 #include "mud.hpp"
 #include "planet.hpp"
+#include "room.hpp"
 
 #define SPACE_DIR       DATA_DIR "space/"
 
@@ -56,7 +57,7 @@ void LuaSpaceobjectRepository::PushOneSite(lua_State *L, const LandingSite *site
     lua_newtable(L);
 
     LuaSetfieldString(L, "Name", site->LocationName);
-    LuaSetfieldNumber(L, "DockVnum", site->Dock);
+    LuaSetfieldString(L, "DockVnum", VnumOrTagForRoom(site->Dock));
     LuaSetfieldBoolean(L, "IsSecret", site->IsSecret);
 
     lua_settable(L, -3);
@@ -122,7 +123,19 @@ void LuaSpaceobjectRepository::PushSpaceobject(lua_State *L, const std::shared_p
 void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, LandingSite *site)
 {
     LuaGetfieldString(L, "Name", &site->LocationName);
-    LuaGetfieldLong(L, "DockVnum", &site->Dock);
+    LuaGetfieldString(L, "DockVnum",
+                      [site](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  site->Dock = room->Vnum;
+                              }
+                          }
+                      });
     LuaGetfieldBool(L, "IsSecret", &site->IsSecret);
 }
 
