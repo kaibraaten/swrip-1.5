@@ -33,7 +33,7 @@ ShuttleEntry
       }, 
       [6] = 
       {
-         RoomVnum = "kalauun_spaceport", 
+         RoomVnum = "ryloth_kalauun_spaceport_landing", 
          Name = "Ryloth", 
       }, 
       [7] = 

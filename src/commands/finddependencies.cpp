@@ -1,5 +1,6 @@
 #include <map>
 #include <list>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "area.hpp"
 #include "room.hpp"
@@ -28,12 +29,6 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
         {
             std::list<std::string> areaResults;
             
-            if(!argument.empty()
-               && StringPrefix(argument, area->Filename))
-            {
-                continue;
-            }
-
             for(const auto &room : GetRooms(area))
             {
                 auto outgoing = ReportOutgoingExits(room);
@@ -50,6 +45,16 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             }
         }
 
+        if(!argument.empty())
+        {
+            results = Filter(results,
+                             [argument](const auto &line)
+                             {
+                                 return line.find(argument) != std::string::npos;
+                             });
+            nodeps.clear();
+        }
+        
         results.sort();
         nodeps.sort();
         
@@ -70,12 +75,6 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
         
         for(const auto &area : Areas)
         {
-            if(!argument.empty()
-               && StringPrefix(argument, area->Filename))
-            {
-                continue;
-            }
-
             auto externalResets = ReportExternalResets(area);
 
             if(externalResets.empty())
@@ -88,6 +87,16 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             }
         }
 
+        if(!argument.empty())
+        {
+            results = Filter(results,
+                             [argument](const auto &line)
+                             {
+                                 return line.find(argument) != std::string::npos;
+                             });
+            nodeps.clear();
+        }
+        
         results.sort();
         nodeps.sort();
         

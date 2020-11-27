@@ -8,7 +8,7 @@ SpaceobjectEntry
       [0] = 
       {
          IsSecret = false, 
-         DockVnum = "kalauun_spaceport", 
+         DockVnum = "ryloth_kalauun_spaceport_landing", 
          Name = "Kala'uun Starport", 
       }, 
    }, 

@@ -1383,7 +1383,7 @@ const std::array<const char * const, MAX_NPC_RACE> NpcRace =
     "Bith", "Ortolan", "Snit", "Cerean", "Ugnaught", "Taun Taun", "Bantha",
     "Tusken", "Gherkin", "Zabrak", "Dewback", "Rancor", "Ronto", "Noghri",
     "Creature", "Rodent", "Mammal", "Reptile", "_64", "_65", "_66",
-    "_67", "_68", "_69", "_70", "_71", "_72", "_73", "_74",
+    "Insect", "_68", "_69", "_70", "_71", "_72", "_73", "_74",
     "_75", "_76", "_77", "_78", "_79", "_80", "_81", "_82",
     "_83", "_84", "_85", "_86", "_87", "_88",
     "_89", "_90"

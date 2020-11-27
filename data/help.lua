@@ -8538,7 +8538,7 @@ Creatures\
 ---\
 Creature      Mammal         Rodent      Reptile\
 Sarlacc       Taun Taun      Bantha      Dewback\
-Rancor        Ronto\
+Rancor        Ronto          Insect\
  \
 See also: ACTFLAGS, SPECFUNCS, SAVINGTHROWS, RIS, \
           ATTACKS, LANGUAGES, DEFENSES, MSTAT, MCREATE.\

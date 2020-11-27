@@ -4168,14 +4168,6 @@ AreaEntry
          Arg3 = 10577, 
          MiscData = 1, 
       }, 
-      [521] = 
-      {
-         Command = "O", 
-         Arg1 = 881, 
-         Arg2 = 1, 
-         Arg3 = 10242, 
-         MiscData = 1, 
-      }, 
       [522] = 
       {
          Command = "M", 
