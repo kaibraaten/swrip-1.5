@@ -78,8 +78,7 @@ public:
     void RuntimeData(std::shared_ptr<Imp::RuntimeScope> scope);
     
     // Player AND mob
-    std::function<bool(std::shared_ptr<Character>)> spec_fun;
-    std::function<bool(std::shared_ptr<Character>)> spec_2;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> SpecFuns = { nullptr, nullptr };
     std::shared_ptr<ProtoMobile> Prototype;
     std::shared_ptr<Descriptor> Desc;
     std::unique_ptr<class PCData> PCData;

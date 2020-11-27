@@ -930,24 +930,13 @@ std::shared_ptr<Room> MakeRoom(vnum_t vnum)
  */
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
 {
-    std::shared_ptr<ProtoObject> cObjIndex;
-    char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<ProtoObject> pObjIndex;
 
-    if(cvnum > 0)
+    if(cvnum == INVALID_VNUM)
     {
-        cObjIndex = GetProtoObject(cvnum);
-    }
-
-    std::shared_ptr<ProtoObject> pObjIndex = std::make_shared<ProtoObject>(vnum);
-
-    pObjIndex->Name = name;
-
-    if(!cObjIndex)
-    {
-        sprintf(buf, "A %s", name.c_str());
-        pObjIndex->ShortDescr = buf;
-        sprintf(buf, "A %s is here.", name.c_str());
-        pObjIndex->Description = buf;
+        pObjIndex = std::make_shared<ProtoObject>(vnum);
+        pObjIndex->ShortDescr = FormatString("a %s", name.c_str());;
+        pObjIndex->Description = FormatString("A %s is here.", name.c_str());
         pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
         pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
         pObjIndex->ItemType = ITEM_TRASH;
@@ -955,38 +944,19 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
     }
     else
     {
-        pObjIndex->ShortDescr = cObjIndex->ShortDescr;
-        pObjIndex->Description = cObjIndex->Description;
-        pObjIndex->ActionDescription = cObjIndex->ActionDescription;
-        pObjIndex->ItemType = cObjIndex->ItemType;
-        pObjIndex->Flags = cObjIndex->Flags;
-        pObjIndex->WearFlags = cObjIndex->WearFlags;
+        auto cObjIndex = GetProtoObject(cvnum);
 
-        pObjIndex->Weight = cObjIndex->Weight;
-        pObjIndex->Cost = cObjIndex->Cost;
-
-        for(auto ced : cObjIndex->ExtraDescriptions())
+        if(cObjIndex == nullptr)
         {
-            auto ed = std::make_shared<ExtraDescription>();
-            ed->Keyword = ced->Keyword;
-            ed->Description = ced->Description;
-            pObjIndex->Add(ed);
-            top_ed++;
+            Log->Bug("%s: Unknown cvnum %ld.", __FUNCTION__, cvnum);
+            return nullptr;
         }
 
-        for(auto cpaf : cObjIndex->Affects())
-        {
-            std::shared_ptr<Affect> paf = std::make_shared<Affect>();
-            paf->Type = cpaf->Type;
-            paf->Duration = cpaf->Duration;
-            paf->Location = cpaf->Location;
-            paf->Modifier = cpaf->Modifier;
-            paf->AffectedBy = cpaf->AffectedBy;
-            pObjIndex->Add(paf);
-            top_affect++;
-        }
+        pObjIndex = std::make_shared<ProtoObject>(*cObjIndex);
+        pObjIndex->Vnum = vnum;
     }
-
+    
+    pObjIndex->Name = name;
     pObjIndex->Flags.set(Flag::Obj::Prototype);
     ProtoObjects.insert({ vnum, pObjIndex });
 
@@ -999,23 +969,13 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
  */
 std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
 {
-    std::shared_ptr<ProtoMobile> cMobIndex;
-    char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<ProtoMobile> pMobIndex;
 
-    if(cvnum > 0)
+    if(cvnum == INVALID_VNUM)
     {
-        cMobIndex = GetProtoMobile(cvnum);
-    }
-
-    std::shared_ptr<ProtoMobile> pMobIndex = std::make_shared<ProtoMobile>(vnum);
-    pMobIndex->Name = name;
-
-    if(!cMobIndex)
-    {
-        sprintf(buf, "A newly created %s", name.c_str());
-        pMobIndex->ShortDescr = buf;
-        sprintf(buf, "Some god abandoned a newly created %s here.\r\n", name.c_str());
-        pMobIndex->LongDescr = buf;
+        pMobIndex = std::make_shared<ProtoMobile>(vnum);
+        pMobIndex->ShortDescr = FormatString("a %s", name.c_str());
+        pMobIndex->LongDescr = FormatString("A %s is here.\r\n", name.c_str());
         pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
         pMobIndex->LongDescr[0] = CharToUppercase(pMobIndex->LongDescr[0]);
         pMobIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Mob::Npc, Flag::Mob::Prototype });
@@ -1023,55 +983,24 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->Position = DEFAULT_POSITION;
         pMobIndex->DefaultPosition = DEFAULT_POSITION;
         pMobIndex->Sex = SEX_NEUTRAL;
-        pMobIndex->Stats.Str = 10;
-        pMobIndex->Stats.Dex = 10;
-        pMobIndex->Stats.Int = 10;
-        pMobIndex->Stats.Wis = 10;
-        pMobIndex->Stats.Cha = 10;
-        pMobIndex->Stats.Con = 10;
-        pMobIndex->Stats.Lck = 10;
+        pMobIndex->Stats = Stats(10);
         pMobIndex->Race = RACE_HUMAN;
     }
     else
     {
-        pMobIndex->ShortDescr = cMobIndex->ShortDescr;
-        pMobIndex->LongDescr = cMobIndex->LongDescr;
-        pMobIndex->Description = cMobIndex->Description;
-        pMobIndex->Flags = cMobIndex->Flags;
+        auto cMobIndex = GetProtoMobile(cvnum);
+
+        if(cMobIndex == nullptr)
+        {
+            Log->Bug("%s: Unknown cvnum %ld.", __FUNCTION__, cvnum);
+            return nullptr;
+        }
+        
+        pMobIndex = std::make_shared<ProtoMobile>(*cMobIndex);
         pMobIndex->Flags.set(Flag::Mob::Prototype);
-        pMobIndex->AffectedBy = cMobIndex->AffectedBy;
-        pMobIndex->spec_fun = cMobIndex->spec_fun;
-        pMobIndex->spec_2 = cMobIndex->spec_2;
-        pMobIndex->Alignment = cMobIndex->Alignment;
-        pMobIndex->Level = cMobIndex->Level;
-        pMobIndex->ArmorClass = cMobIndex->ArmorClass;
-        pMobIndex->HitNoDice = cMobIndex->HitNoDice;
-        pMobIndex->HitSizeDice = cMobIndex->HitSizeDice;
-        pMobIndex->HitPlus = cMobIndex->HitPlus;
-        pMobIndex->DamNoDice = cMobIndex->DamNoDice;
-        pMobIndex->DamSizeDice = cMobIndex->DamSizeDice;
-        pMobIndex->DamPlus = cMobIndex->DamPlus;
-        pMobIndex->Gold = cMobIndex->Gold;
-        pMobIndex->exp = cMobIndex->exp;
-        pMobIndex->Position = cMobIndex->Position;
-        pMobIndex->DefaultPosition = cMobIndex->DefaultPosition;
-        pMobIndex->Sex = cMobIndex->Sex;
-        pMobIndex->Stats.Str = cMobIndex->Stats.Str;
-        pMobIndex->Stats.Dex = cMobIndex->Stats.Dex;
-        pMobIndex->Stats.Int = cMobIndex->Stats.Int;
-        pMobIndex->Stats.Wis = cMobIndex->Stats.Wis;
-        pMobIndex->Stats.Cha = cMobIndex->Stats.Cha;
-        pMobIndex->Stats.Con = cMobIndex->Stats.Con;
-        pMobIndex->Stats.Lck = cMobIndex->Stats.Lck;
-        pMobIndex->Race = cMobIndex->Race;
-        pMobIndex->Resistant = cMobIndex->Resistant;
-        pMobIndex->Immune = cMobIndex->Immune;
-        pMobIndex->Susceptible = cMobIndex->Susceptible;
-        pMobIndex->NumberOfAttacks = cMobIndex->NumberOfAttacks;
-        pMobIndex->AttackFlags = cMobIndex->AttackFlags;
-        pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
     }
 
+    pMobIndex->Name = name;
     ProtoMobs.insert({ vnum, pMobIndex });
 
     return pMobIndex;

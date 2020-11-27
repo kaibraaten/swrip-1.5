@@ -14,6 +14,7 @@ class MProg
 {
 public:
     MProg();
+    MProg(const MProg &rhv);
     ~MProg();
     const std::list<std::shared_ptr<MPROG_ACT_LIST>> &ActLists() const;
     void Add(std::shared_ptr<MPROG_ACT_LIST> mal);
@@ -55,7 +56,6 @@ public:
     ScriptType SType = ScriptType::Imp;
     int type = 0;
     bool triggered = false;
-    int resetdelay = 0;
     std::string arglist;
     std::string comlist;
 };

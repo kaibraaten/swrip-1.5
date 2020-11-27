@@ -13,6 +13,8 @@ class ProtoObject
 public:
     ProtoObject() = delete;
     ProtoObject(vnum_t vnum);
+    ProtoObject(const ProtoObject &rhv);
+    
     virtual ~ProtoObject();
 
     const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
@@ -26,7 +28,6 @@ public:
     std::string Tag() const;
     void Tag(const std::string &tag);
 
-    std::shared_ptr<ProtoObject> NextSort;
     std::string Name;
     std::string ShortDescr;
     std::string Description;

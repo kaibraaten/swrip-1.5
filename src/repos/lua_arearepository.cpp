@@ -677,14 +677,14 @@ void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMo
 {
     std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 
-    if(mob->spec_fun != nullptr)
+    if(mob->SpecFuns[0] != nullptr)
     {
-        specfuns.push_back(mob->spec_fun);
+        specfuns.push_back(mob->SpecFuns[0]);
     }
 
-    if(mob->spec_2 != nullptr)
+    if(mob->SpecFuns[1] != nullptr)
     {
-        specfuns.push_back(mob->spec_2);
+        specfuns.push_back(mob->SpecFuns[1]);
     }
 
     LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);

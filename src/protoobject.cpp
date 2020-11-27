@@ -15,6 +15,37 @@ ProtoObject::ProtoObject(vnum_t vnum)
     Value.fill(0);
 }
 
+ProtoObject::ProtoObject(const ProtoObject &orig)
+    : Name(orig.Name),
+      ShortDescr(orig.ShortDescr),
+      Description(orig.Description),
+      ActionDescription(orig.ActionDescription),
+      Level(orig.Level),
+      ItemType(orig.ItemType),
+      Flags(orig.Flags),
+      WearFlags(orig.WearFlags),
+      Weight(orig.Weight),
+      Cost(orig.Cost),
+      Value(orig.Value),
+      Layers(orig.Layers),
+      mprog(orig.mprog),
+      pImpl(std::make_unique<Impl>())
+{
+    for(auto ced : orig.ExtraDescriptions())
+    {
+        auto ed = std::make_shared<ExtraDescription>(*ced);
+        Add(ed);
+        top_ed++;
+    }
+
+    for(auto cpaf : orig.Affects())
+    {
+        std::shared_ptr<Affect> paf = std::make_shared<Affect>(*cpaf);
+        Add(paf);
+        top_affect++;
+    }
+}
+
 ProtoObject::~ProtoObject()
 {
 

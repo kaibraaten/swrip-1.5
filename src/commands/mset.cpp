@@ -812,29 +812,34 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg3, "none"))
         {
-            victim->spec_fun = NULL;
+            victim->SpecFuns[0] = nullptr;
             ch->Echo("Special function removed.\r\n");
+            
             if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-                victim->Prototype->spec_fun = victim->spec_fun;
+                victim->Prototype->SpecFuns[0] = victim->SpecFuns[0];
+            
             return;
         }
 
-        victim->spec_fun = SpecialLookup(arg3);
-        const auto specptr = victim->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+        victim->SpecFuns[0] = SpecialLookup(arg3);
+        const auto specptr = victim->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
         
         if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;
         }
+
         if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-            victim->Prototype->spec_fun = victim->spec_fun;
+            victim->Prototype->SpecFuns[0] = victim->SpecFuns[0];
+
         return;
     }
     else if(!StrCmp(arg2, "spec2"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
+        
         if(!IsNpc(victim))
         {
             ch->Echo("Not on PC's.\r\n");
@@ -843,23 +848,27 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg3, "none"))
         {
-            victim->spec_2 = NULL;
+            victim->SpecFuns[1] = nullptr;
             ch->Echo("Special function removed.\r\n");
+            
             if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-                victim->Prototype->spec_2 = victim->spec_2;
+                victim->Prototype->SpecFuns[1] = victim->SpecFuns[1];
+            
             return;
         }
 
-        victim->spec_2 = SpecialLookup(arg3);
-        const auto specptr = victim->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+        victim->SpecFuns[1] = SpecialLookup(arg3);
+        const auto specptr = victim->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
         
         if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;
         }
+        
         if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-            victim->Prototype->spec_2 = victim->spec_2;
+            victim->Prototype->SpecFuns[1] = victim->SpecFuns[1];
+
         return;
     }
     else if(!StrCmp(arg2, "whoCloak"))

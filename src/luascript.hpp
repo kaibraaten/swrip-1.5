@@ -216,11 +216,11 @@ void AssignSpecFuns(const EntityT &mob,
 {
     if(!specfuns.empty())
     {
-        mob->spec_fun = specfuns[0];
+        mob->SpecFuns[0] = specfuns[0];
 
         if(specfuns.size() > 1)
         {
-            mob->spec_2 = specfuns[1];
+            mob->SpecFuns[1] = specfuns[1];
         }
     }
 }

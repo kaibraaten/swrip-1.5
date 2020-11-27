@@ -206,11 +206,11 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
              victim->ShortDescr.c_str(),
              !victim->LongDescr.empty() ? victim->LongDescr.c_str() : "(none)\r\n");
 
-    if(IsNpc(victim) && (victim->spec_fun || victim->spec_2))
+    if(IsNpc(victim) && (victim->SpecFuns[0] || victim->SpecFuns[1]))
     {
         ch->Echo("Mobile has spec fun: %s %s\r\n",
-                 LookupSpecial(victim->spec_fun).c_str(),
-                 victim->spec_2 ? LookupSpecial(victim->spec_2).c_str() : "");
+                 LookupSpecial(victim->SpecFuns[0]).c_str(),
+                 victim->SpecFuns[1] ? LookupSpecial(victim->SpecFuns[1]).c_str() : "");
     }
 
     ch->Echo("Resistant  : %s\r\n",

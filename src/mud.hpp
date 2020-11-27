@@ -1206,8 +1206,6 @@ void ObjectFromObject(std::shared_ptr<Object> obj);
 void ExtractObject(std::shared_ptr<Object> obj);
 void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit);
 void CleanRoom(std::shared_ptr<Room> room);
-void CleanObject(std::shared_ptr<ProtoObject> obj);
-void CleanMobile(std::shared_ptr<ProtoMobile> mob);
 void ExtractCharacter(std::shared_ptr<Character> ch, bool fPull);
 std::shared_ptr<Character> GetCharacterInRoom(std::shared_ptr<Character> ch, std::string argument);
 std::shared_ptr<Character> GetCharacterAnywhere(std::shared_ptr<Character> ch, std::string argument);

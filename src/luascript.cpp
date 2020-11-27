@@ -919,24 +919,24 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
 
     std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 
-    const auto mobspec1ptr = mob->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
-    const auto protospec1ptr = proto->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto mobspec1ptr = mob->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec1ptr = proto->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
     
     if(mobspec1ptr != nullptr
        && protospec1ptr != nullptr
        && *mobspec1ptr != *protospec1ptr)
     {
-        specfuns.push_back(mob->spec_fun);
+        specfuns.push_back(mob->SpecFuns[0]);
     }
 
-    const auto mobspec2ptr = mob->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
-    const auto protospec2ptr = proto->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto mobspec2ptr = mob->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec2ptr = proto->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
 
     if(mobspec2ptr != nullptr
        && protospec2ptr != nullptr
        && *mobspec2ptr != *protospec2ptr)
     {
-        specfuns.push_back(mob->spec_2);
+        specfuns.push_back(mob->SpecFuns[1]);
     }
     
     LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);

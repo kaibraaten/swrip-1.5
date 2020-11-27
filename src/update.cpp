@@ -973,28 +973,28 @@ static bool IsReadyToPerformSpecFun(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
-        && ch->spec_fun != nullptr;
+        && ch->SpecFuns[0] != nullptr;
 }
 
 static bool TryPerformSpecFun(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun(ch));
 
-    return ch->spec_fun(ch);
+    return ch->SpecFuns[0](ch);
 }
 
 static bool IsReadyToPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
-        && ch->spec_2 != nullptr;
+        && ch->SpecFuns[1] != nullptr;
 }
 
 static bool TryPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun2(ch));
 
-    return ch->spec_2(ch);
+    return ch->SpecFuns[1](ch);
 }
 
 static bool MobHasScriptTrigger(std::shared_ptr<Character> ch)
@@ -2394,9 +2394,9 @@ static void CharacterCheck()
                     continue;
                 }
 
-                if(ch->spec_fun)
+                if(ch->SpecFuns[0])
                 {
-                    if(ch->spec_fun(ch))
+                    if(ch->SpecFuns[0](ch))
                     {
                         continue;
                     }
@@ -2407,9 +2407,9 @@ static void CharacterCheck()
                     }
                 }
 
-                if(ch->spec_2)
+                if(ch->SpecFuns[1])
                 {
-                    if(ch->spec_2(ch))
+                    if(ch->SpecFuns[1](ch))
                     {
                         continue;
                     }
