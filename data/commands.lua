@@ -1453,24 +1453,6 @@ CommandEntry
 CommandEntry
 {
    Log = "normal", 
-   Function = "do_mpapply", 
-   Position = "dead", 
-   Name = "mpapply", 
-   Level = 0, 
-}
-
-CommandEntry
-{
-   Log = "normal", 
-   Function = "do_mpapplyb", 
-   Position = "dead", 
-   Name = "mpapplyb", 
-   Level = 0, 
-}
-
-CommandEntry
-{
-   Log = "normal", 
    Function = "do_mp_close_passage", 
    Position = "dead", 
    Name = "mpclosepassage", 

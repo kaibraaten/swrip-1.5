@@ -613,8 +613,6 @@ src/impscript/funcs/transfer_func.cpp
 src/impscript/funcs/type_func.cpp
 src/impscript/funcs/vnum_func.cpp
 src/impscript/funcs/wait_func.cpp
-src/mpcommands/mpapplyb.cpp
-src/mpcommands/mpapply.cpp
 src/mpcommands/mpasound.cpp
 src/mpcommands/mpat.cpp
 src/mpcommands/mpclosepassage.cpp

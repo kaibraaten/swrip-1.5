@@ -858,8 +858,6 @@ DECLARE_CMD_FUN(do_mpstat);
 DECLARE_CMD_FUN(do_opstat);
 DECLARE_CMD_FUN(do_rpstat);
 DECLARE_CMD_FUN(do_mptransfer);
-DECLARE_CMD_FUN(do_mpapply);
-DECLARE_CMD_FUN(do_mpapplyb);
 DECLARE_CMD_FUN(do_mpgain);
 
 /*

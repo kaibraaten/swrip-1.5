@@ -7600,22 +7600,6 @@ Advances the level of a player (not functional in prototype programs).\
 
 HelpEntry
 {
-   Text = "Syntax:  mpapply <victim>\
-Syntax:  mpapplyb <victim>\
- \
-These commands are used in the pre-auth area to signal a new character's\
-authorization status.  When a character first enters the game, it will\
-be targeted by an 'mpapply <victim>' which will inform the immortals that\
-the character is waiting for authorization.  Once the character is\
-authorized, a mob will attempt to 'mapplyb <victim>' the character, and\
-the character will be sent into the actual game.\
-", 
-   Level = 101, 
-   Keyword = "MPAPPLY MPAPPLYB", 
-}
-
-HelpEntry
-{
    Text = "Syntax: MPASOUND <phrase>\
 \
 Displays a phrase to all surrounding rooms.\
