@@ -87,12 +87,15 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
             }
         }
 
-        if(!argument.empty())
+        while(!argument.empty())
         {
+            std::string pattern;
+            argument = OneArgument(argument, pattern);
+            
             results = Filter(results,
-                             [argument](const auto &line)
+                             [pattern](const auto &line)
                              {
-                                 return line.find(argument) != std::string::npos;
+                                 return line.find(pattern) != std::string::npos;
                              });
             nodeps.clear();
         }
