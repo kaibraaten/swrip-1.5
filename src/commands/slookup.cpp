@@ -125,8 +125,17 @@ void do_slookup(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("Dice: %s\r\n", skill->Dice.c_str());
 
         if(!skill->Teachers.empty())
-            ch->Echo("Teachers: %s\r\n", skill->Teachers.c_str());
+        {
+            std::string teachers;
 
+            for(auto t : skill->Teachers)
+            {
+                teachers += t + " ";
+            }
+            
+            ch->Echo("Teachers: %s\r\n", teachers.c_str());
+        }
+        
         if(skill->Participants != 0)
             ch->Echo("Participants: %d\r\n", (int)skill->Participants);
 

@@ -53,7 +53,7 @@ public:
     int Saves = 0;                  // What saving spell applies
     int Difficulty = 0;             // Difficulty of casting/learning
     std::list<std::shared_ptr<SmaugAffect>> Affects;      // Spell affects, if any
-    std::string Teachers;               // Skill requires a special teacher
+    std::list<std::string> Teachers;               // Skill requires a special teacher
     int Participants = 0;           // # of required participants
     std::shared_ptr<timerset> UseRec;
     int Alignment = 0;              // for jedi powers

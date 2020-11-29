@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
@@ -159,22 +160,19 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "participants"))
+        else if(!StrCmp(arg2, "participants"))
         {
             skill->Participants = ToLong(argument);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "alignment"))
+        else if(!StrCmp(arg2, "alignment"))
         {
             skill->Alignment = ToLong(argument);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "damtype"))
+        else if(!StrCmp(arg2, "damtype"))
         {
             int x = GetSpellDamage(argument);
 
@@ -188,8 +186,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
 
             return;
         }
-
-        if(!StrCmp(arg2, "acttype"))
+        else if(!StrCmp(arg2, "acttype"))
         {
             int x = GetSpellAction(argument);
 
@@ -202,8 +199,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "classtype"))
+        else if(!StrCmp(arg2, "classtype"))
         {
             int x = GetSpellClass(argument);
 
@@ -216,8 +212,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "powertype"))
+        else if(!StrCmp(arg2, "powertype"))
         {
             int x = GetSpellPower(argument);
 
@@ -230,8 +225,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "flag"))
+        else if(!StrCmp(arg2, "flag"))
         {
             int x = GetSpellFlag(argument);
 
@@ -244,8 +238,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "saves"))
+        else if(!StrCmp(arg2, "saves"))
         {
             int x = GetSpellSave(argument);
 
@@ -258,8 +251,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "code"))
+        else if(!StrCmp(arg2, "code"))
         {
             std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)> spellfun = GetSpellFunction(argument);
             std::function<void(std::shared_ptr<Character>, std::string)> dofun = GetSkillFunction(argument);
@@ -287,8 +279,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "target"))
+        else if(!StrCmp(arg2, "target"))
         {
             SkillTargetType x = GetSpellTarget(argument);
 
@@ -301,43 +292,37 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-
-        if(!StrCmp(arg2, "minpos"))
+        else if(!StrCmp(arg2, "minpos"))
         {
             skill->Position = (PositionType)urange(POS_DEAD, ToLong(argument), POS_DRAG);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "minlevel"))
+        else if(!StrCmp(arg2, "minlevel"))
         {
             skill->Level = urange(1, ToLong(argument), MAX_ABILITY_LEVEL);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "slot"))
+        else if(!StrCmp(arg2, "slot"))
         {
             skill->Slot = urange(0, ToLong(argument), SHRT_MAX);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "mana"))
+        else if(!StrCmp(arg2, "mana"))
         {
             skill->Mana = urange(0, ToLong(argument), 2000);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "beats"))
+        else if(!StrCmp(arg2, "beats"))
         {
             skill->Beats = urange(0, ToLong(argument), 120);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "guild"))
+        else if(!StrCmp(arg2, "guild"))
         {
             AbilityClass ability;
             
@@ -362,22 +347,19 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "value"))
+        else if(!StrCmp(arg2, "value"))
         {
             skill->Value = ToLong(argument);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "type"))
+        else if(!StrCmp(arg2, "type"))
         {
             skill->Type = GetSkillType(argument);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "rmaffect"))
+        else if(!StrCmp(arg2, "rmaffect"))
         {
             int num = ToLong(argument);
             int cnt = 1;
@@ -401,11 +383,10 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Not found.\r\n");
             return;
         }
-
         /*
          * affect <location> <modifier> <duration> <bitvector>
          */
-        if(!StrCmp(arg2, "affect"))
+        else if(!StrCmp(arg2, "affect"))
         {
             std::string location;
             std::string modifier;
@@ -457,22 +438,19 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "level"))
+        else if(!StrCmp(arg2, "level"))
         {
             skill->Level = urange(1, ToLong(argument), MAX_ABILITY_LEVEL);
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "name"))
+        else if(!StrCmp(arg2, "name"))
         {
             skill->Name = argument;
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "dammsg"))
+        else if(!StrCmp(arg2, "dammsg"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.NounDamage.erase();
@@ -482,8 +460,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "wearoff"))
+        else if(!StrCmp(arg2, "wearoff"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.WearOff.erase();
@@ -493,8 +470,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "hitchar"))
+        else if(!StrCmp(arg2, "hitchar"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Success.ToCaster.erase();
@@ -504,8 +480,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "hitvict"))
+        else if(!StrCmp(arg2, "hitvict"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Success.ToVictim.erase();
@@ -515,8 +490,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "hitroom"))
+        else if(!StrCmp(arg2, "hitroom"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Success.ToRoom.erase();
@@ -526,8 +500,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "misschar"))
+        else if(!StrCmp(arg2, "misschar"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Failure.ToCaster.erase();
@@ -537,8 +510,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "missvict"))
+        else if(!StrCmp(arg2, "missvict"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Failure.ToVictim.erase();
@@ -548,8 +520,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "missroom"))
+        else if(!StrCmp(arg2, "missroom"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.Failure.ToRoom.erase();
@@ -559,8 +530,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "diechar"))
+        else if(!StrCmp(arg2, "diechar"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimDeath.ToCaster.erase();
@@ -570,8 +540,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "dievict"))
+        else if(!StrCmp(arg2, "dievict"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimDeath.ToVictim.erase();
@@ -581,8 +550,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "dieroom"))
+        else if(!StrCmp(arg2, "dieroom"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimDeath.ToRoom.erase();
@@ -592,8 +560,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "immchar"))
+        else if(!StrCmp(arg2, "immchar"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimImmune.ToCaster.erase();
@@ -603,8 +570,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "immvict"))
+        else if(!StrCmp(arg2, "immvict"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimImmune.ToVictim.erase();
@@ -614,8 +580,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "immroom"))
+        else if(!StrCmp(arg2, "immroom"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Messages.VictimImmune.ToRoom.erase();
@@ -625,8 +590,7 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "dice"))
+        else if(!StrCmp(arg2, "dice"))
         {
             if(!StrCmp(argument, "clear"))
                 skill->Dice.erase();
@@ -636,19 +600,50 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Ok.\r\n");
             return;
         }
-
-        if(!StrCmp(arg2, "teachers"))
+        else if(!StrCmp(arg2, "teachers"))
         {
-            if(!StrCmp(argument, "clear"))
-                skill->Teachers.erase();
+            if(StrCmp(argument, "clear") == 0 || StrCmp(argument, "none") == 0)
+            {
+                skill->Teachers.clear();
+            }
+            else if(argument[0] == '+')
+            {
+                std::string teacher = argument.substr(1);
+                auto mob = GetProtoMobile(teacher);
+
+                if(mob != nullptr)
+                {
+                    if(!Contains(skill->Teachers, teacher))
+                    {
+                        skill->Teachers.push_back(teacher);
+                        ch->Echo("Ok.\r\n");
+                    }
+                    else
+                    {
+                        ch->Echo("That mobile is already teacher is this skill.\r\n");
+                    }
+                }
+                else
+                {
+                    ch->Echo("No such mobile: %s\r\n", teacher.c_str());
+                }
+            }
+            else if(argument[0] == '-')
+            {
+                std::string teacher = argument.substr(1);
+                skill->Teachers.remove(teacher);
+                ch->Echo("Ok.\r\n");
+            }
             else
-                skill->Teachers = argument;
-
-            ch->Echo("Ok.\r\n");
-            return;
+            {
+                ch->Echo("Use +<vnum/tag> or -<vnum/tag> or none.\r\n");
+            }
         }
-
-        do_sset(ch, "");
+        else
+        {
+            do_sset(ch, "");
+        }
+        
         return;
     }
 

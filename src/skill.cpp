@@ -681,23 +681,16 @@ static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
     if(!skill->Teachers.empty())
     {
-        std::string teacherList = skill->Teachers;
-
         lua_pushstring(L, "Teachers");
         lua_newtable(L);
 
-        while(!teacherList.empty())
+        for(auto teacher : skill->Teachers)
         {
-            std::string teacher;
-            vnum_t vnum = INVALID_VNUM;
-
-            teacherList = OneArgument(teacherList, teacher);
-            vnum = strtol(teacher.c_str(), nullptr, 10);
-            auto mobile = GetProtoMobile(vnum);
+            auto mobile = GetProtoMobile(teacher);
 
             if(mobile)
             {
-                lua_pushinteger(L, vnum);
+                lua_pushstring(L, teacher.c_str());
                 lua_pushstring(L, mobile->Name.c_str());
                 lua_settable(L, -3);
             }
@@ -861,30 +854,14 @@ static void LoadSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 
     if(!lua_isnil(L, ++idx))
     {
-        bool first = true;
-        char buf[MAX_STRING_LENGTH] = { '\0' };
-
         lua_pushnil(L);
 
         while(lua_next(L, -2))
         {
-            vnum_t vnum = lua_tointeger(L, -2);
-
-            if(!first)
-            {
-                strcat(buf, " ");
-            }
-            else
-            {
-                first = false;
-            }
-
-            strcat(buf, std::to_string(vnum).c_str());
-
+            std::string vnumOrTag = lua_tostring(L, -2);
+            skill->Teachers.push_back(vnumOrTag);
             lua_pop(L, 1);
         }
-
-        skill->Teachers = buf;
     }
 
     lua_pop(L, 1);

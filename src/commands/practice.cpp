@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -161,7 +162,8 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
         {
             sprintf(buf, "%ld", mob->Prototype->Vnum);
 
-            if(!IsName(buf, skill->Teachers))
+            if(!Contains(skill->Teachers, std::to_string(mob->Prototype->Vnum))
+               && !Contains(skill->Teachers, mob->Prototype->Tag()))
             {
                 Act(AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                     mob, NULL, ch, ActTarget::Vict);
