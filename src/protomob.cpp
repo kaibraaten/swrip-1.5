@@ -50,7 +50,8 @@ ProtoMobile::ProtoMobile(const ProtoMobile &orig)
       DamRoll(orig.DamRoll),
       mprog(orig.mprog),
       Stats(orig.Stats),
-      Saving(orig.Saving)
+      Saving(orig.Saving),
+      pImpl(std::make_unique<Impl>())
 {
 
 }

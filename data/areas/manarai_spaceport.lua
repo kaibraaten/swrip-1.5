@@ -51,7 +51,7 @@ AreaEntry
       [6] = 
       {
          Command = "G", 
-         Arg1 = 305, 
+         Arg1 = 8, 
          Arg2 = 1, 
          Arg3 = 0, 
          MiscData = 1, 
@@ -59,7 +59,7 @@ AreaEntry
       [7] = 
       {
          Command = "G", 
-         Arg1 = 304, 
+         Arg1 = 65, 
          Arg2 = 1, 
          Arg3 = 0, 
          MiscData = 1, 
@@ -171,7 +171,7 @@ AreaEntry
       [21] = 
       {
          Command = "E", 
-         Arg1 = 332, 
+         Arg1 = 64, 
          Arg2 = 1, 
          Arg3 = 5, 
          MiscData = 1, 
@@ -203,7 +203,7 @@ AreaEntry
       [25] = 
       {
          Command = "E", 
-         Arg1 = 332, 
+         Arg1 = 64, 
          Arg2 = 1, 
          Arg3 = 5, 
          MiscData = 1, 
@@ -267,7 +267,7 @@ AreaEntry
       [33] = 
       {
          Command = "G", 
-         Arg1 = 329, 
+         Arg1 = 40, 
          Arg2 = 1, 
          Arg3 = 0, 
          MiscData = 1, 

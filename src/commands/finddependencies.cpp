@@ -91,12 +91,25 @@ void do_finddependencies(std::shared_ptr<Character> ch, std::string argument)
         {
             std::string pattern;
             argument = OneArgument(argument, pattern);
+
+            if(pattern[0] == '-')
+            {
+                pattern = pattern.substr(1);
+                results = Filter(results,
+                                 [pattern](const auto &line)
+                                 {
+                                     return line.find(pattern) == std::string::npos;
+                                 });
+            }
+            else
+            {
+                results = Filter(results,
+                                 [pattern](const auto &line)
+                                 {
+                                     return line.find(pattern) != std::string::npos;
+                                 });
+            }
             
-            results = Filter(results,
-                             [pattern](const auto &line)
-                             {
-                                 return line.find(pattern) != std::string::npos;
-                             });
             nodeps.clear();
         }
         

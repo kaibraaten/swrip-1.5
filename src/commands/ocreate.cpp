@@ -103,7 +103,9 @@ void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
     ObjectToCharacter(obj, ch);
     Act(AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
         ch, obj, NULL, ActTarget::Room);
-    Act(AT_IMMORT, "You make some ancient arcane gestures, and open your hands to reveal $p!",
+    Act(AT_IMMORT,
+        FormatString("You make some ancient arcane gestures, and open your hands to reveal $p (vnum %ld)!",
+                     pObjIndex->Vnum),
         ch, obj, NULL, ActTarget::Char);
 
     auto plugin = ch->PCData->Build.Plugin;

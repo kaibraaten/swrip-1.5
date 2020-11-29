@@ -1,3005 +1,3307 @@
 -- Quarren Mine City
--- Last saved Thursday 26-Nov-2020 15:24:24
+-- Last saved Sunday 29-Nov-2020 17:45:48
 
 AreaEntry
 {
-   HighEconomy = -1, 
-   Objects = 
+   LowEconomy = 999519344, 
+   Author = "Ackbar", 
+   Mobiles = 
    {
-      [6850] = 
-      {
-         Layers = 0, 
-         Description = "A creidts is here.", 
-         ShortDescr = "a creidts", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6850, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "credits", 
-      }, 
-      [6851] = 
-      {
-         Layers = 0, 
-         Description = "A remote is here.", 
-         ShortDescr = "a remote", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6851, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "remote", 
-      }, 
-      [6852] = 
-      {
-         Layers = 0, 
-         Description = "&b A Hot-Tub sits in the middle of the room.", 
-         ShortDescr = "&b A Hot-Tub", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         Weight = 300, 
-         ObjectValues = 
-         {
-            [1] = 1, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 500, 
-         }, 
-         Vnum = 6852, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "hot tub bath", 
-      }, 
       [6800] = 
       {
-         Layers = 0, 
-         Description = "A Comlink Blaster is here.", 
-         ShortDescr = "a Comlink Blaster", 
-         WearFlags = 
+         DefaultPosition = "standing", 
+         Name = "krakanas", 
+         Credits = 0, 
+         Flags = 
          {
-            [12] = "Wrist", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
          }, 
-         ExtraDescriptions = 
+         DamRoll = 4, 
+         Alignment = -1, 
+         HitRoll = 4, 
+         Languages = 
          {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6800, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "Comlink Blaster", 
+         Weight = 0, 
+         LongDescr = "A Krakanas, sharklike animal with twin pincer tentacles swims near.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 2, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 50, 
+         Position = "standing", 
+         ShortDescr = "sharklike krakanas", 
+         Level = 20, 
+         Sex = "male", 
+         Description = "This legandary and scary sea creature is the most feared aquatic member to\
+Mon Calamari.\
+", 
+         Race = "Human", 
+         Vnum = 6800, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 200, 
+            HitNoDice = 4, 
+         }, 
       }, 
       [6801] = 
       {
-         Layers = 0, 
-         Description = "&P A large shimering clam shell rests between the smaller browish clams.", 
-         ShortDescr = "&P A large clam shell", 
-         Weight = 2000, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "container", 
+         DefaultPosition = "standing", 
+         Name = "clear fish", 
+         Credits = 0, 
          Flags = 
          {
-            [0] = "Glow", 
-            [12] = "NoRemove", 
+            [0] = "Npc", 
+            [7] = "Wimpy", 
          }, 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Vnum = 6801, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "&P large clam shell", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mppurge corpse\
+mpoload 6822\
+", 
+               MudProgType = "death_prog", 
+               Arguments = "100", 
+            }, 
+         }, 
+         LongDescr = "&Y A translucent, self-illuminated fish swims here.&x\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "Clear bottom fish", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6801, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
       }, 
       [6802] = 
       {
-         Layers = 0, 
-         Description = "A large wooden desk lies prominently in the center of the room.", 
-         ShortDescr = "A large wooden desk", 
-         Weight = 150, 
-         ExtraDescriptions = 
+         DefaultPosition = "standing", 
+         Name = "&Y Yellow Starfish &x", 
+         Credits = 0, 
+         Flags = 
          {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Vnum = 6802, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "Large Wooden Desk", 
+         Weight = 0, 
+         LongDescr = "&O An eightlegged yellow starfish crawls around here. &x\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "An eightlegged starfish", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6802, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
       }, 
       [6803] = 
       {
-         Layers = 0, 
-         Description = "A wooden crate used to bring in tools sits here.", 
-         ShortDescr = "A wooden crate.", 
-         Weight = 200, 
-         ExtraDescriptions = 
+         DefaultPosition = "standing", 
+         Name = "Sweegill", 
+         Credits = 0, 
+         Flags = 
          {
+            [0] = "Npc", 
          }, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 1, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 500, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Vnum = 6803, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "crate", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mppurge corpse\
+mpoload 6822\
+", 
+               MudProgType = "death_prog", 
+               Arguments = "100", 
+            }, 
+         }, 
+         LongDescr = "&c A rainbowed &R colored &Y Sweegill &G fish &P swims &B here. &x\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "a Sweegill fish", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "A rainbowed fish native to Mon waters. Considered a could meal to\
+outsiders, although Mon Calamarians prefer a non seafood diet. \
+HMmmmmmm...strange. \
+", 
+         Race = "Human", 
+         Vnum = 6803, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
       }, 
       [6804] = 
       {
-         Layers = 0, 
-         Description = "Chair", 
-         ShortDescr = "Chair", 
-         Weight = 1, 
-         ExtraDescriptions = 
+         DefaultPosition = "standing", 
+         Name = "Shela kitchen cook", 
+         Credits = 0, 
+         Flags = 
          {
-            [1] = 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
             {
-               Keyword = "Chair", 
-               Description = "What you've never seen a chair before??\
-\13", 
+               Close = 20, 
+               Open = 8, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 100, 
+            KeeperShortDescr = "&R Shela the  kitchen cook. &x", 
+            ProfitBuy = 120, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
             }, 
          }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         ObjectValues = 
+         LongDescr = "&R Shela the  kitchen cook prepares quick meals for the miners. &x\
+", 
+         SaveVs = 
          {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
          }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 5, 
+            DamPlus = 10, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "&R Shela the  kitchen cook. &x", 
+         Level = 20, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
          Vnum = 6804, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "", 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 1, 
+            HitPlus = 12998, 
+            HitNoDice = 1, 
+         }, 
       }, 
       [6805] = 
       {
-         Layers = 0, 
-         Description = "A wooden chair sits here.", 
-         ShortDescr = "A wooden chair", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Chair", 
-               Description = "What you've never seen a chair before??\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 2, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         Vnum = 6805, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "wooden chair", 
-      }, 
-      [6806] = 
-      {
-         Layers = 0, 
-         Description = "&B A X-56ty7 Ore Carrier sits here waiting for use.&x", 
-         ShortDescr = "A Ore Carrier", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "spacecraft", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6806, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Ore Carrier", 
-      }, 
-      [6808] = 
-      {
-         Layers = 0, 
-         Description = "A Hatch door is here.", 
-         ShortDescr = "a Hatch door", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "trash", 
+         DefaultPosition = "standing", 
+         Name = "mine foreman Krauota", 
+         Credits = 0, 
          Flags = 
          {
-            [1] = "Hum", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
          }, 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
          }, 
-         Vnum = 6808, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "Hatch door", 
-      }, 
-      [6810] = 
-      {
-         Layers = 0, 
-         Description = "A Security Voice Box is attached to the wall.", 
-         ShortDescr = "A Security Voice Box", 
-         Weight = 200, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "circuit", 
+         Weight = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "fuck asshole quarran mon ackbar ghett fish ", 
-               Code = "mpecho &R That is the wrong password..Please be advised Security Has been\
-mpecho Called!  Please stand back from the door!\
-", 
                ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "krebbex", 
-               Code = "Say Welcome Miner step this way...\
-mptransfer all 6840\
+               Code = "say &R What you need now! Can't you see I'm busy!!!!!!!\
 ", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6810, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Voice box", 
-      }, 
-      [6811] = 
-      {
-         Layers = 0, 
-         Description = "&w A automated Shovel rests here waiting for use.", 
-         ShortDescr = "a automated shoval", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Automated Shovel", 
-               Description = "&W The automated shoval was designed to speed up the mining process. This\
-\13unit is voice activated. To work it just say \"shovel on\" then type dig\
-\13floor. \
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "shoval ", 
-               Description = "&W The automated shoval was designed to speed up the mining process. This\
-\13unit is voice activated. To work it just say \"shovel on\" then type dig\
-\13floor. \
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "off", 
-               Code = "mpecho You hear a slow HMMMMmmmmmmmmm as th shoval comes to a complete\
-mpecho stop!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "on", 
-               Code = "mpecho You hear a loud click as the shoval vibrates back and forth, ready\
-for\
-use.\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         ItemType = "shovel", 
-         Weight = 1, 
-         Flags = 
-         {
-            [1] = "Hum", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6811, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "shoval ", 
-      }, 
-      [6812] = 
-      {
-         Layers = 0, 
-         Description = "A hack pick of some age sits here.", 
-         ShortDescr = "A hack pick", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Automated Shovel", 
-               Description = "&W The automated shoval was designed to speed up the mining process. This\
-\13unit is voice activated. To work it just say \"shovel on\" then type dig\
-\13floor. \
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "shoval ", 
-               Description = "&W The automated shoval was designed to speed up the mining process. This\
-\13unit is voice activated. To work it just say \"shovel on\" then type dig\
-\13floor. \
-\13", 
-            }, 
-            [3] = 
-            {
-               Keyword = "Hack pick", 
-               Description = "Elderly pick tool used for mining.\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         ItemType = "shovel", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6812, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Hack pick", 
-      }, 
-      [6813] = 
-      {
-         Layers = 0, 
-         Description = "A coil of very strong rope is here.", 
-         ShortDescr = "A coil of Seaweed Rope", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 60, 
-         ItemType = "rope", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 30, 
-               Location = 52, 
-            }, 
-         }, 
-         Weight = 3, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6813, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "rope", 
-      }, 
-      [6814] = 
-      {
-         Layers = 0, 
-         Description = "&G  A Kelp salad lies here ready to be eaten.", 
-         ShortDescr = "&G  A Kelp salad", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "&G Kelp salad", 
-               Description = "&G the salad is comprised of kelp and seaweed. A tasty treat for Quarren.\
-\13", 
-            }, 
-         }, 
-         Cost = 18, 
-         ItemType = "food", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Vnum = 6814, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "&G Kelp salad", 
-      }, 
-      [6815] = 
-      {
-         Layers = 0, 
-         Description = "&B A glass of salt water looks mighty tasty.", 
-         ShortDescr = "&B A glass of salt water.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 2, 
-         ItemType = "drink_container", 
-         Weight = 1, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         Vnum = 6815, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "&B glass salt water", 
-      }, 
-      [6816] = 
-      {
-         Layers = 0, 
-         Description = "A chunk of Katasik metal lies here.", 
-         ShortDescr = "A chunk of Katasik metal.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [17] = "Eyes", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "Katasik metal", 
-               Description = "The katasik metal is used in most weapons, as it is highly durable and easy\
-\13to minipulate.\
-\13", 
-            }, 
-         }, 
-         Cost = 40, 
-         ItemType = "rare_metal", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 3, 
-            [3] = 3, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Vnum = 6816, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "katasik metal", 
-      }, 
-      [6817] = 
-      {
-         Layers = 0, 
-         Description = "&W A lump of coal rock is laying here..", 
-         ShortDescr = "&W A lump of coal rock", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 30, 
-         ItemType = "treasure", 
-         Weight = 1, 
-         Flags = 
-         {
-            [29] = "Burried", 
-            [25] = "Hidden", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6817, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "coal rock", 
-      }, 
-      [6818] = 
-      {
-         Layers = 0, 
-         Description = "A chunck of Platiciki metal lies here.", 
-         ShortDescr = "A chunck of Platiciki metal ", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 50, 
-         ItemType = "treasure", 
-         Weight = 1, 
-         Flags = 
-         {
-            [29] = "Burried", 
-            [25] = "Hidden", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6818, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Platiciki Metel", 
-      }, 
-      [6819] = 
-      {
-         Layers = 0, 
-         Description = "A Security BioScan button is attached here.", 
-         ShortDescr = "A bio-scan button sits here.", 
-         Weight = 200, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "button", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "push_prog", 
+               MudProgType = "all_greet_prog", 
                Arguments = "100", 
-               Code = "mpechoat $n The lights go out in total darkness.\
-mpecho you see a   Red scanner aray flash through the your body\
-mpechoat $n starting from the bottom up to the top.\
-mptransfer $n 6881\
-mpforce $n pull button\
-mpechoat $n Welcome $n you have passed all security checks!\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6819, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "bio scan bio-scan button", 
-      }, 
-      [6820] = 
-      {
-         Layers = 0, 
-         Description = "A &R Gateway to Heurkea stands here.", 
-         ShortDescr = "&R Gateway to Heurkea", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         Weight = 1, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "greet_prog", 
-               Arguments = "", 
-               Code = "&B ^B Say Please come agian $n!\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6820, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Archway", 
-      }, 
-      [6821] = 
-      {
-         Layers = 0, 
-         Description = "A silver key lays here.", 
-         ShortDescr = "a key", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "key", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6821, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "key", 
-      }, 
-      [6822] = 
-      {
-         Layers = 0, 
-         Description = "&b A fillet of fish lies here.", 
-         ShortDescr = "fillet of fish", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "&G Kelp salad", 
-               Description = "&G the salad is comprised of kelp and seaweed. A tasty treat for Quarren.\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         ItemType = "food", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Vnum = 6822, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "fish fillet", 
-      }, 
-      [6823] = 
-      {
-         Layers = 0, 
-         Description = "&G A bowl of Algee soup rests here.", 
-         ShortDescr = "&G A bowl of Algee soup", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 10, 
-         ItemType = "food", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Vnum = 6823, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "soup", 
-      }, 
-      [6824] = 
-      {
-         Layers = 0, 
-         Description = "&Y A starfish crunch bar rests here.", 
-         ShortDescr = "&Y A starfish crunch bar sits here.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 5, 
-         ItemType = "food", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Vnum = 6824, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "crunch", 
-      }, 
-      [6825] = 
-      {
-         Layers = 0, 
-         Description = "&g A well done lamprey steak warms here.", 
-         ShortDescr = "&g A well done lamprey steak", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 10, 
-         ItemType = "food", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         Vnum = 6825, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "lamprey steaks", 
-      }, 
-      [6826] = 
-      {
-         Layers = 0, 
-         Description = "&w XT-3000 Wrist Com-Blaster was left here.", 
-         ShortDescr = "&w XT-3000 Wrist Com-Blaster ", 
-         WearFlags = 
-         {
-            [12] = "Wrist", 
-            [13] = "Wield", 
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 3000, 
-         ItemType = "weapon", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
-            }, 
-         }, 
-         Weight = 10, 
-         ObjectValues = 
-         {
-            [1] = 8, 
-            [2] = 4, 
-            [3] = 6, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6826, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Wrist Com-blaster", 
-      }, 
-      [6827] = 
-      {
-         Layers = 0, 
-         Description = "A high-tech Coral knife was left here.", 
-         ShortDescr = "A high-tech Coral knife ", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 100, 
-         ItemType = "weapon", 
-         Weight = 1, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6827, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Coral knife", 
-      }, 
-      [6828] = 
-      {
-         Layers = 0, 
-         Description = "&p A automated spear was left here.", 
-         ShortDescr = "&p A automated spear", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 4100, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
             }, 
             [2] = 
             {
-               Modifier = 1, 
-               Location = 19, 
-            }, 
-         }, 
-         ItemType = "weapon", 
-         Weight = 10, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 7, 
-            [3] = 9, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6828, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Automated spear", 
-      }, 
-      [6829] = 
-      {
-         Layers = 0, 
-         Description = "&G A polished spear was left here.", 
-         ShortDescr = "&G A polished spear", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 50, 
-         ItemType = "bolt", 
-         Weight = 1, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 500, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 100, 
-         }, 
-         Vnum = 6829, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "spear", 
-      }, 
-      [6830] = 
-      {
-         Layers = 0, 
-         Description = "&Y A platiki metal earing rests here.", 
-         ShortDescr = "A platiki metal earing", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [16] = "Ears", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 300, 
-         ItemType = "comlink", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 3, 
-            }, 
-            [2] = 
-            {
-               Modifier = -2, 
-               Location = 17, 
+               ScriptType = "MProg", 
+               Code = "say &R $n your about to get your tail whipped with that language.  Infact\
+your fired!\
+mpecho Your work agreement has been revoke, Please leave immediatly!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "fuck dick asshole jerk ", 
             }, 
             [3] = 
             {
-               Modifier = 2, 
-               Location = 17, 
+               ScriptType = "MProg", 
+               Code = "Say  Well $n you want me to hold your hand?\
+ say See you take a shovel out of the shed..\
+say Stay with $n ...this is difficult.\
+laugh\
+say Then you get a ore carier..\
+say then you go down the shaft and DIG!\
+say Tuff huh?  \
+laugh\
+say Make sure you sell your minerals back.\
+say the loading bay keeper will pay you.\
+say Now get out !\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "work job mine ", 
             }, 
             [4] = 
             {
-               Modifier = 0, 
-               Location = 3, 
+               ScriptType = "MProg", 
+               Code = "say Look you here for a reason?\
+say or just hear to iritate me.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hi hello ", 
             }, 
             [5] = 
             {
-               Modifier = 0, 
-               Location = 3, 
+               ScriptType = "MProg", 
+               Code = "say Alright loser...not sure how you got in here...\
+say but I'm calling security\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "iritate.", 
+            }, 
+         }, 
+         LongDescr = "The mine foreman Krauota paces here stressed due to mine demands.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "The mine foreman Krauota", 
+         Level = 60, 
+         Sex = "male", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Quarren", 
+         Vnum = 6805, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 12, 
+         }, 
+      }, 
+      [6806] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "", 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A Quarren is daydreaming about the ocean.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 88, 
+         Position = "standing", 
+         ShortDescr = "a Quarren", 
+         Level = 8, 
+         Sex = "male", 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
+", 
+         Race = "Human", 
+         Vnum = 6806, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6807] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "Quarren miner", 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &R Can't you see I'm working?  Some of us work you know!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hello hi help hey can ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "if ispc ($n)\
+   mpecho The quarren miner stops working to stare at you.\
+    mpecho Then decides to go back to work digging.\
+else\
+ endif\
+endif\
+", 
+               MudProgType = "rand_prog", 
+               Arguments = "15", 
+            }, 
+         }, 
+         LongDescr = "&w A Quarren miner works diligently to strip the mine.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 88, 
+         Position = "standing", 
+         ShortDescr = "A Quarren miner", 
+         Level = 8, 
+         Sex = "male", 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
+", 
+         Race = "Quarren", 
+         Vnum = 6807, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6808] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "mine shop dealer", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 12, 
+               Open = 8, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "The mine ore dealer", 
+            ProfitBuy = 120, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &B Come over miner, if you have some goods. I'll Buy.\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "The mine ore dealer, Ketson stands here ready to give you a bad deal!\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 5, 
+            DamPlus = 10, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "The mine ore dealer", 
+         Level = 20, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6808, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 1, 
+            HitPlus = 12998, 
+            HitNoDice = 1, 
+         }, 
+      }, 
+      [6809] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "quarren krusi clerk", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 2, 
+         Alignment = 0, 
+         HitRoll = 2, 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say &R Ya need something pal?  Look can't you tell I'm busy twidling my\
+say thumbs..\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hi hello ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say talk to ackbar pal ,,I don't hire.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "job", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Oh a crime on this planet..what else is new, here fill out 20 copies of\
+say this form and then talk to the chief.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "report crime", 
+            }, 
+            [4] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &R No chief! when that happen\
+laugh\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "chief", 
+            }, 
+            [5] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say About time $n\
+mpoload 6821\
+give key $n\
+say try not to goto sleep this time....\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "reporting duty", 
             }, 
             [6] = 
             {
-               Modifier = 0, 
-               Location = 3, 
-            }, 
-            [7] = 
-            {
-               Modifier = 1, 
-               Location = 3, 
-            }, 
-            [8] = 
-            {
-               Modifier = 0, 
-               Location = 3, 
-            }, 
-            [9] = 
-            {
-               Modifier = 0, 
-               Location = 3, 
-            }, 
-            [10] = 
-            {
-               Modifier = -1, 
-               Location = 3, 
+               ScriptType = "MProg", 
+               Code = "Say oh you need to see a prisoner ah? well ok ..\
+unlock n\
+open door\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "visit see prisoner", 
             }, 
          }, 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6830, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "platiki earing", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "Krusi, A Quarren Security Clerk stands behind the counter waiting.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 72, 
+         Position = "standing", 
+         ShortDescr = "Krusi, A quarren clerk", 
+         Level = 11, 
+         Sex = "female", 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
+", 
+         Race = "Human", 
+         Vnum = 6809, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 110, 
+            HitNoDice = 2, 
+         }, 
+      }, 
+      [6810] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "cook Borto", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 20, 
+         Alignment = 0, 
+         HitRoll = 20, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 12, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 110, 
+            KeeperShortDescr = "&B Borto the Side order cook.", 
+            ProfitBuy = 120, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&B Borto the Side order cook waits here paitently for a costomer.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -150, 
+         Position = "standing", 
+         ShortDescr = "&B Borto the Side order cook.", 
+         Level = 100, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6810, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 20, 
+         }, 
+      }, 
+      [6811] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "tech torisk", 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "Some god abandoned a newly created tech torisk here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "a newly created tech torisk", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6811, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6812] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "tech torisk inventor", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [2] = "Scavenger", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 10, 
+         Alignment = 0, 
+         HitRoll = 10, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 8, 
+               Open = 22, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "&c Torisk Inventor", 
+            ProfitBuy = 120, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&c Torisk Inventor of high-tech weapons works hard here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "&c Torisk Inventor", 
+         Level = 50, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6812, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
+      }, 
+      [6813] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "cathia tailor", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 10, 
+         Alignment = 0, 
+         HitRoll = 10, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 13, 
+               Open = 5, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "&P Cathia the tailor", 
+            ProfitBuy = 120, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&P Cathia the tailor sews diligently here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "&P Cathia the tailor", 
+         Level = 50, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6813, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
+      }, 
+      [6814] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "jewler joyta", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 7, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "&p Plantik the jewler", 
+            ProfitBuy = 120, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&p Plantik the jewler sits behind the security bars waiting for a customer.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 5, 
+            DamPlus = 10, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "&p Plantik the jewler", 
+         Level = 20, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6814, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 1, 
+            HitPlus = 12998, 
+            HitNoDice = 1, 
+         }, 
+      }, 
+      [6815] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "resale elderly security", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 10, 
+         Alignment = 0, 
+         HitRoll = 10, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "An Elderly Security Weapon resaler", 
+            ProfitBuy = 100, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "An Elderly Security Weapon resaler waits here paintently.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "An Elderly Security Weapon resaler", 
+         Level = 50, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6815, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
+      }, 
+      [6816] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "librarian quarren", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 10, 
+         Alignment = 0, 
+         HitRoll = 10, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &R Hey SHHHHhhhhhhh!   This is a library not your playpen $n!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hello hi mam chick", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &b I can see your IQ matches the letters in those words.\
+say so get out.\
+mpforce $n n\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "bitch fuck shit hoe", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say just look at the computer terminal it will tell you what to do.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "help how ", 
+            }, 
+         }, 
+         LongDescr = "&p A female Quarren librarian retypes a new book.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "A female Quarren librarian", 
+         Level = 50, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6816, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
+      }, 
+      [6817] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "quarren man", 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A Quarren citizen enjoys his day off.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 88, 
+         Position = "standing", 
+         ShortDescr = "&R A Quarren citizen", 
+         Level = 8, 
+         Sex = "male", 
+         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
+due to the shape of their heads. The come from the ocean world of Mon\
+Calamari.\
+", 
+         Race = "Quarren", 
+         Vnum = 6817, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6818] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "mining droid", 
+         Credits = 0, 
+         Flags = 
+         {
+            [24] = "NoAssist", 
+            [2] = "Scavenger", 
+            [26] = "Droid", 
+            [6] = "StayArea", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "&c A LIN-V8K mining droid glides past here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 50, 
+         Position = "standing", 
+         ShortDescr = "&c A LIN-V8K mining droid &x", 
+         Level = 20, 
+         Sex = "undistinguished", 
+         Description = "The binary load lifter is a big droid used mainly for lifting and\
+moving large objects. Its very simple processing unit can only handle\
+very simple commands as there is very little need for an intelligent\
+droid laborer.\
+", 
+         Race = "Human", 
+         Vnum = 6818, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6819] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "boss Hityii", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "", 
+               MudProgType = "speech_prog", 
+               Arguments = "", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mpecho The mine boss stares at you..\
+mpecho The mine boss presses the secretary's call button.\
+say Dang it I don't have time for visitors!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hi", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say &R Oh you want to work ah?\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "job mine work", 
+            }, 
+            [4] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &R Good because we have a job for you.  \
+say &R Here take this..it will help you.\
+mpoload 6834\
+give shield $n\
+say &R good luck and be careful my insurance is high enough.\
+say oh ya tell the security voice box : Krebbex\
+Say if you don't know what that is look it up at the library!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "yes", 
+            }, 
+            [5] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say &R Get out already!\
+mpforce $n w\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "bye goodbye adios", 
+            }, 
+            [6] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Just goto the east entrance then once in water.\
+Say go south until you reach the mine.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "where location find", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&R Mine boss, Krauota paces here due to stress.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "&R Mine boss, Krauota", 
+         Level = 60, 
+         Sex = "male", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Quarren", 
+         Vnum = 6819, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 12, 
+         }, 
+      }, 
+      [6820] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "female sec secretary ", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mpecho The Secretary looks you up and down, then \
+mpecho returns back to doodling.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hi hello ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say &R Ah a job let me see....\
+mpecho you see her barly glance a sheet of paper.\
+Say &R well I'm sorry $n there are some jobs but....\
+say &r most of my friends need a job and I'm not sure .\
+say &R why I should give you the job.\
+wink\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "job work mine ", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say &R i don't think that was what I'm refering to..\
+wink\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "good dick hard hoe bitch slut fuck ass", 
+            }, 
+            [4] = 
+            {
+               ScriptType = "MProg", 
+               Code = "", 
+               MudProgType = "act_prog", 
+               Arguments = "", 
+            }, 
+            [5] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say &R Something wrong with your eye?\
+mpecho You see the Secretary eye your credits.\
+", 
+               MudProgType = "act_prog", 
+               Arguments = "wink", 
+            }, 
+            [6] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Now that's more like it!!!\
+mptransfer $n 6937\
+", 
+               MudProgType = "bribe_prog", 
+               Arguments = "100 100", 
+            }, 
+         }, 
+         LongDescr = "&P A female Quarren Secretary stands here and twidles here thumbs.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "&P A female Quarren Secretary", 
+         Level = 50, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
+         Vnum = 6820, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
+      }, 
+      [6821] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "Mayor", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say ah well here take this ...\
+say it's a map of our great city.\
+mpecho You see the mayor reach in his desk and \
+mpecho pull out a holo map\
+mpoload 6842\
+give map $n\
+Say have a good time.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "yes yep ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say ah well then your familiar with this town. \
+Say in that case what do you need?\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "no", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say sorry I'm the wrong person to be saying that to.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "shit fuck help job dick ass work", 
+            }, 
+            [4] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Hello $n , our Security said you were in town. \
+say Is this your first time here?\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hi hello ", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [24] = "quarrenese", 
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         LongDescr = "&c Mayor of Domed City stands here always ready to talk.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "&c Mayor of Domed City", 
+         Level = 60, 
+         Sex = "male", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Quarren", 
+         Vnum = 6821, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 12, 
+         }, 
+      }, 
+      [6822] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "remote", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 97, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6822, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 10, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6823] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "remote", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 95, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 2, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6823, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 20, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6824] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "remote", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 92, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 3, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6824, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 30, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6825] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "remote", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 90, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 4, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6825, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 40, 
+            HitNoDice = 0, 
+         }, 
+      }, 
+      [6826] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "remote", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 87, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 5, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6826, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 50, 
+            HitNoDice = 1, 
+         }, 
+      }, 
+      [6827] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "hotel clerk", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Hello $n looking for a place to stay?\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hello hi ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say your safe in the lobby, but if you want to goto the hot-tub room\
+say you have to get me 35 credits!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "yes room cost much", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "say Well have fun $n\
+mptransfer $n 6910\
+", 
+               MudProgType = "bribe_prog", 
+               Arguments = "35 100", 
+            }, 
+         }, 
+         LongDescr = "&G A hotel clerk stands here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "&G A hotel clerk ", 
+         Level = 60, 
+         Sex = "male", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Quarren", 
+         Vnum = 6827, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 12, 
+         }, 
+      }, 
+      [6828] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "police cop security", 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_police_attack", 
+         }, 
+         LongDescr = "&y A Quarren Security Officer patrol the streets.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 37, 
+         Position = "standing", 
+         ShortDescr = "&y A Quarren Security Officer", 
+         Level = 25, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Mon Calamari", 
+         Vnum = 6828, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 250, 
+            HitNoDice = 5, 
+         }, 
+      }, 
+      [6829] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "police security", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 15, 
+         Alignment = 0, 
+         HitRoll = 15, 
+         VipFlags = 
+         {
+            [5] = "Mon Calamari", 
+         }, 
+         SpecFuns = 
+         {
+            [0] = "spec_police_attack", 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+               [24] = "quarrenese", 
+            }, 
+         }, 
+         LongDescr = "&y A Quarren Security Officer patrol the streets.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -95, 
+         Position = "standing", 
+         ShortDescr = "&y A Quarren Security Officer", 
+         Level = 78, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Mon Calamari", 
+         Vnum = 6829, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 780, 
+            HitNoDice = 15, 
+         }, 
+      }, 
+      [6830] = 
+      {
+         DefaultPosition = "standing", 
+         Name = "Tired old seaman", 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say hello $n thinking about taking a swim?\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "hello hi sir ", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Well you can always just swim on the top..\
+say but then you can try your luck swimming to..\
+say the Quarren mine city..\
+stare $n\
+say then again you look to weak to try that.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "yes", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Ya well I enjoy just watching the sea to.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "no", 
+            }, 
+         }, 
+         LongDescr = "&BTired old seaman rests here staring into the water.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "&b Tired old seaman", 
+         Level = 60, 
+         Sex = "male", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Quarren", 
+         Vnum = 6830, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 12, 
+         }, 
       }, 
       [6831] = 
       {
-         Layers = 3, 
-         Description = "&g A Kelp shirt was left here.", 
-         ShortDescr = "&g A Kelp shirt", 
-         WearFlags = 
+         DefaultPosition = "standing", 
+         Name = "guard", 
+         Credits = 0, 
+         Flags = 
          {
-            [0] = "Take", 
-            [14] = "Hold", 
-            [10] = "About", 
-            [3] = "Body", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         ExtraDescriptions = 
+         DamRoll = 0, 
+         Alignment = 700, 
+         HitRoll = 0, 
+         Languages = 
          {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Cost = 2500, 
-         Affects = 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
          {
             [1] = 
             {
-               Modifier = 2, 
-               Location = 17, 
+               ScriptType = "MProg", 
+               Code = "if race($n) != mon calamari\
+   say Your not allowed down here!\
+     mpforce $n n\
+ else\
+   say Welcome to our city Calamrian.\
+   mptransfer $n 6943\
+endif\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         ItemType = "armor", 
-         Weight = 2, 
-         Flags = 
+         LongDescr = "Security Guard\
+", 
+         SaveVs = 
          {
-            [8] = "Bless", 
-            [31] = "HumanSize", 
-            [19] = "LargeSize", 
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
          }, 
-         ObjectValues = 
+         Stats = 
          {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
          }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 10, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -50, 
+         Position = "standing", 
+         ShortDescr = "Security Guard", 
+         Level = 60, 
+         Sex = "undistinguished", 
+         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
+bored afterall who would be stupid enough to try to board and attack a\
+capital ship. Maybe you. \
+", 
+         Race = "Human", 
          Vnum = 6831, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "Kelp shirt", 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 600, 
+            HitNoDice = 12, 
+         }, 
       }, 
       [6832] = 
       {
-         Layers = 2, 
-         Description = "&p A lamprey skin belt was left here.", 
-         ShortDescr = "&p A lamprey skin belt", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [11] = "Waist", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "belt leather", 
-               Description = "This belt is made of a fine leather, braided for strength. You can get\
-\13it at the Darkhaven Academy.\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 5, 
-            }, 
-         }, 
-         ItemType = "armor", 
-         Weight = 2, 
+         DefaultPosition = "standing", 
+         Name = "Guard", 
+         Credits = 0, 
          Flags = 
          {
-            [19] = "LargeSize", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Vnum = 6832, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "belt", 
+         Weight = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "if race($n) != quarren\
+  say Your not allowed down here!\
+  mpforce $n w\
+ else\
+  Say Welcome Quarren to your city!\
+    mptransfer $n 6943\
+endif\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "100", 
+            }, 
+         }, 
+         LongDescr = "Quarren Guard stands here.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ArmorClass = 0, 
+         Position = "standing", 
+         ShortDescr = "Quarren Guard", 
+         Level = 1, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
+         Vnum = 6832, 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
+         }, 
       }, 
       [6833] = 
       {
-         Layers = 64, 
-         Description = "&B A Security Officers's vest lays here.", 
-         ShortDescr = "&B A Security Officers's vest ", 
-         WearFlags = 
+         DefaultPosition = "standing", 
+         Name = "clerk bank", 
+         Credits = 0, 
+         Flags = 
          {
-            [0] = "Take", 
-            [3] = "Body", 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
          }, 
-         ExtraDescriptions = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
+            Speaking = 
+            {
+               [24] = "quarrenese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
          }, 
-         Cost = 100, 
-         Affects = 
+         Tag = "", 
+         Weight = 0, 
+         MudProgs = 
          {
             [1] = 
             {
-               Modifier = -10, 
-               Location = 14, 
-            }, 
-            [2] = 
-            {
-               Modifier = 5, 
-               Location = 17, 
-            }, 
-            [3] = 
-            {
-               Modifier = 15, 
-               Location = 17, 
+               ScriptType = "MProg", 
+               Code = "Say &c Hello, welcome to the first bank of Mon , \
+Say Here your money is safe with us.\
+smile\
+mpecho You are reasured of that fact as you feal a red\
+mpecho laser beam scan you for your bio-info.\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         ItemType = "armor", 
-         Weight = 1, 
-         Flags = 
+         LongDescr = "&G A Quarren First Bank of Mon bank clerk stands here counting the intake.\
+", 
+         SaveVs = 
          {
-            [19] = "LargeSize", 
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
          }, 
-         ObjectValues = 
+         Stats = 
          {
-            [1] = 7, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
          }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = -25, 
+         Position = "standing", 
+         ShortDescr = "&G A Quarren First Bank of Mon bank clerk", 
+         Level = 50, 
+         Sex = "female", 
+         Description = "", 
+         Race = "Quarren", 
          Vnum = 6833, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "vest", 
+         Height = 0, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+            HitNoDice = 10, 
+         }, 
       }, 
       [6834] = 
       {
-         Layers = 1, 
-         Description = "&b Quarren miner's Blast Shield rests here.", 
-         ShortDescr = "&b Quarren miner's Blast Shield", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ItemType = "armor", 
-         Weight = 1, 
+         DefaultPosition = "standing", 
+         Name = "wookiee male Tacebeca", 
+         Credits = 200, 
          Flags = 
          {
-            [19] = "LargeSize", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
          }, 
-         ObjectValues = 
+         DamRoll = 6, 
+         Alignment = 0, 
+         HitRoll = 6, 
+         Languages = 
          {
-            [1] = 6, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+            }, 
          }, 
-         Vnum = 6834, 
-         ActionDescription = "", 
          Tag = "", 
-         Name = "shield", 
-      }, 
-      [6835] = 
-      {
-         Layers = 1, 
-         Description = "Quarren miner's pants was left here.", 
-         ShortDescr = "Quarren miner's pants", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [5] = "Legs", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 300, 
-         ItemType = "armor", 
-         Weight = 5, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6835, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "pants", 
-      }, 
-      [6836] = 
-      {
-         Layers = 64, 
-         Description = "Leg blast guards were droped here.", 
-         ShortDescr = "Leg blast guards", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [5] = "Legs", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 450, 
-         Affects = 
+         Weight = 0, 
+         MudProgs = 
          {
             [1] = 
             {
-               Modifier = 4, 
-               Location = 37, 
-            }, 
-            [2] = 
-            {
-               Modifier = -4, 
-               Location = 37, 
-            }, 
-            [3] = 
-            {
-               Modifier = 5, 
-               Location = 40, 
+               ScriptType = "MProg", 
+               Code = "if race($n) != wookiee\
+say I'll Kill you!!\
+mpkill $n \
+else\
+say Please help me back to my planet\
+endif\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         ItemType = "armor", 
-         Weight = 1, 
-         Flags = 
+         LongDescr = "&z Tacebeca, Wookiee repair tech is waiting trial here.\
+", 
+         SaveVs = 
          {
-            [19] = "LargeSize", 
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
          }, 
-         ObjectValues = 
+         Stats = 
          {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
          }, 
-         Vnum = 6836, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "leg guards", 
-      }, 
-      [6837] = 
-      {
-         Layers = 1, 
-         Description = "Miner's protective sleeves were carelessly left here.", 
-         ShortDescr = "Miner's protective sleeves", 
-         WearFlags = 
+         NumberOfAttacks = 6, 
+         Damage = 
          {
-            [0] = "Take", 
-            [8] = "Arms", 
+            DamNoDice = 5, 
+            DamSizeDice = 4, 
+            DamPlus = 0, 
          }, 
-         ExtraDescriptions = 
+         ArmorClass = 20, 
+         Position = "standing", 
+         ShortDescr = "&z Tacebeca, Wookiee repair tech", 
+         Level = 40, 
+         Sex = "male", 
+         Description = "", 
+         Race = "Wookiee", 
+         Vnum = 6834, 
+         Height = 0, 
+         HitChance = 
          {
+            HitSizeDice = 10, 
+            HitPlus = 400, 
+            HitNoDice = 8, 
          }, 
-         Cost = 20, 
-         ItemType = "armor", 
-         Weight = 3, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
-         }, 
-         Vnum = 6837, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "sleeves", 
       }, 
       [6838] = 
       {
-         Layers = 0, 
-         Description = "&B Quarren Miner's boots were left here.", 
-         ShortDescr = "&B Quarren Miner's boots", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [6] = "Feet", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 125, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -20, 
-               Location = 14, 
-            }, 
-         }, 
-         ItemType = "armor", 
-         Weight = 1, 
+         DefaultPosition = "standing", 
+         Name = "", 
+         Credits = 0, 
          Flags = 
          {
-            [19] = "LargeSize", 
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
          }, 
-         ObjectValues = 
+         DamRoll = 0, 
+         Alignment = 0, 
+         HitRoll = 0, 
+         Languages = 
          {
-            [1] = 8, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Tag = "", 
+         Weight = 0, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Luck = 10, 
+            Constitution = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Wisdom = 10, 
+            Charisma = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ArmorClass = 90, 
+         Position = "standing", 
+         ShortDescr = "a remote", 
+         Level = 4, 
+         Sex = "undistinguished", 
+         Description = "", 
+         Race = "Human", 
          Vnum = 6838, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "boots", 
-      }, 
-      [6839] = 
-      {
-         Layers = 0, 
-         Description = "&y A platiki metal earing was left here &x", 
-         ShortDescr = "&y A platiki metal earing", 
-         WearFlags = 
+         Height = 0, 
+         HitChance = 
          {
-            [0] = "Take", 
-            [16] = "Ears", 
+            HitSizeDice = 10, 
+            HitPlus = 40, 
+            HitNoDice = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 299, 
-         ItemType = "armor", 
-         Weight = 5, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6839, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "earings", 
-      }, 
-      [6840] = 
-      {
-         Layers = 0, 
-         Description = "&R Miner's cuffs were left here.", 
-         ShortDescr = "&R Miner's cuffs", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [12] = "Wrist", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "wrist cuffs", 
-               Description = "These metal cuffs are worn by most of the miner's to protect their wrist\
-\13form blast debris , but normal citizens started wearing them as\
-\13fashion.\
-\13", 
-            }, 
-         }, 
-         Cost = 499, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 5, 
-               Location = 17, 
-            }, 
-         }, 
-         ItemType = "armor", 
-         Weight = 1, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 12, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         Vnum = 6840, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "wrist cuffs", 
-      }, 
-      [6841] = 
-      {
-         Layers = 0, 
-         Description = "&P A coral ring was dropped here.", 
-         ShortDescr = "&R&GCoral Ring&R&W", 
-         WearFlags = 
-         {
-            [1] = "Finger", 
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 1000, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
-            }, 
-            [2] = 
-            {
-               Modifier = 1, 
-               Location = 19, 
-            }, 
-            [3] = 
-            {
-               Modifier = 1, 
-               Location = 25, 
-            }, 
-         }, 
-         ItemType = "crystal", 
-         Weight = 1, 
-         Flags = 
-         {
-            [19] = "LargeSize", 
-            [13] = "Inventory", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6841, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "ring", 
-      }, 
-      [6842] = 
-      {
-         Layers = 0, 
-         Description = "A data map of the city was left here.", 
-         ShortDescr = "A data map of the city", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "map", 
-               Description = "Cells -   C|   B|   A |\
-\13            -----------|\
-\13                         |\
-\13                         |  |Mayor\
-\13            Security | --|--|--|Defense\
-\13                         |\
-\13            --|-----|----|----|------|---\
-\13          /  A    J      W    EX      S   \\\
-\13          -----|----|------|-----|------|------\
-\13            \\                               /\
-\13              ------|----|-----|-----|---|-- \
-\13                    B    M     Q     T   L\
-\13 \
-\13Key A- armory    B- Bank     J- jewler    L - Library   M - Mine office\
-\13Q - Quarren training     S- Seabird grill   T-Tavern  W-Weapons\
-\13", 
-            }, 
-         }, 
-         Cost = 0, 
-         ItemType = "trash", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6842, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "map", 
-      }, 
-      [6899] = 
-      {
-         Layers = 0, 
-         Description = "Large water boots", 
-         ShortDescr = "Large water boots", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [6] = "Feet", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 125, 
-         ItemType = "armor", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -20, 
-               Location = 14, 
-            }, 
-            [2] = 
-            {
-               Modifier = 30, 
-               Location = 17, 
-            }, 
-         }, 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 8, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 6899, 
-         ActionDescription = "", 
-         Tag = "", 
-         Name = "boots", 
       }, 
    }, 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
-   VnumRanges = 
-   {
-      Object = 
-      {
-         Last = 6899, 
-         First = 6800, 
-      }, 
-      Mob = 
-      {
-         Last = 6838, 
-         First = 6800, 
-      }, 
-      Room = 
-      {
-         Last = 7200, 
-         First = 6800, 
-      }, 
-   }, 
-   ResetMessage = "", 
-   ResetFrequency = 0, 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg3 = 6806, 
-         Arg1 = 6801, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [2] = 
-      {
-         Arg3 = 6806, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [3] = 
-      {
-         Arg3 = 6807, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [4] = 
-      {
-         Arg3 = 6807, 
-         Arg1 = 6801, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [5] = 
-      {
-         Arg3 = 6808, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [6] = 
-      {
-         Arg3 = 6809, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [7] = 
-      {
-         Arg3 = 6809, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [8] = 
-      {
-         Arg3 = 6809, 
-         Arg1 = 6801, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [9] = 
-      {
-         Arg3 = 6811, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [10] = 
-      {
-         Arg3 = 6812, 
-         Arg1 = 6801, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [11] = 
-      {
-         Arg3 = 6813, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [12] = 
-      {
-         Arg3 = 6817, 
-         Arg1 = 6801, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [13] = 
-      {
-         Arg3 = 6818, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [14] = 
-      {
-         Arg3 = 6818, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [15] = 
-      {
-         Arg3 = 6818, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [16] = 
-      {
-         Arg3 = 6818, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [17] = 
-      {
-         Arg3 = 6818, 
-         Arg1 = 6803, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 12, 
-      }, 
-      [18] = 
-      {
-         Arg3 = 6828, 
-         Arg1 = 6802, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [19] = 
-      {
-         Arg3 = 6829, 
-         Arg1 = 6802, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [20] = 
-      {
-         Arg3 = 6830, 
-         Arg1 = 6800, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [21] = 
-      {
-         Arg3 = 6830, 
-         Arg1 = 6800, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [22] = 
-      {
-         Arg3 = 6830, 
-         Arg1 = 6800, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [23] = 
-      {
-         Arg3 = 6832, 
-         Arg1 = 6802, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [24] = 
-      {
-         Arg3 = 6839, 
-         Arg1 = 6810, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [25] = 
-      {
-         Arg3 = 6842, 
-         Arg1 = 6805, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [26] = 
-      {
-         Arg3 = 6842, 
-         Arg1 = 6802, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [27] = 
-      {
-         Arg3 = 6842, 
-         Arg1 = 6805, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [28] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6811, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [29] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6811, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [30] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6812, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [31] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6812, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [32] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6813, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [33] = 
-      {
-         Arg3 = 6843, 
-         Arg1 = 6813, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [34] = 
-      {
-         Arg3 = 6847, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [35] = 
-      {
-         Arg3 = 6847, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [36] = 
-      {
-         Arg3 = 6866, 
-         Arg1 = 6804, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [37] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 301, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [38] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 10314, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [39] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 31522, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [40] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6814, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [41] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6815, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [42] = 
-      {
-         Arg3 = 6866, 
-         Arg1 = 6803, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [43] = 
-      {
-         Arg3 = 6867, 
-         Arg1 = 6808, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [44] = 
-      {
-         Arg3 = 6838, 
-         Arg1 = 6819, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [45] = 
-      {
-         Arg3 = 6854, 
-         Arg1 = 6818, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [46] = 
-      {
-         Arg3 = 6851, 
-         Arg1 = 6818, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [47] = 
-      {
-         Arg3 = 6862, 
-         Arg1 = 6816, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [48] = 
-      {
-         Arg3 = 6864, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [49] = 
-      {
-         Arg3 = 6864, 
-         Arg1 = 6816, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [50] = 
-      {
-         Arg3 = 6865, 
-         Arg1 = 6816, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [51] = 
-      {
-         Arg3 = 6856, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [52] = 
-      {
-         Arg3 = 6856, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [53] = 
-      {
-         Arg3 = 6856, 
-         Arg1 = 6817, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [54] = 
-      {
-         Arg3 = 6857, 
-         Arg1 = 6807, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [55] = 
-      {
-         Arg3 = 6857, 
-         Arg1 = 6817, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [56] = 
-      {
-         Arg3 = 6917, 
-         Arg1 = 6816, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [57] = 
-      {
-         Arg3 = 6889, 
-         Arg1 = 6812, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [58] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6826, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [59] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6827, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [60] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6828, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [61] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6829, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [62] = 
-      {
-         Arg3 = 6886, 
-         Arg1 = 6810, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [63] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6814, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [64] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6815, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [65] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 301, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [66] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6823, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [67] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6824, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [68] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6825, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [69] = 
-      {
-         Arg3 = 6886, 
-         Arg1 = 6817, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [70] = 
-      {
-         Arg3 = 6898, 
-         Arg1 = 6815, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [71] = 
-      {
-         Arg3 = 6898, 
-         Arg1 = 6817, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 4, 
-      }, 
-      [72] = 
-      {
-         Arg3 = 6896, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [73] = 
-      {
-         Arg3 = 6896, 
-         Arg1 = 6817, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 7, 
-      }, 
-      [74] = 
-      {
-         Arg3 = 6895, 
-         Arg1 = 6814, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [75] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6839, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [76] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6840, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [77] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6841, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [78] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6840, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [79] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6840, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [80] = 
-      {
-         Arg3 = 6895, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 2, 
-      }, 
-      [81] = 
-      {
-         Arg3 = 6885, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 4, 
-      }, 
-      [82] = 
-      {
-         Arg3 = 6881, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 5, 
-      }, 
-      [83] = 
-      {
-         Arg3 = 6881, 
-         Arg1 = 6820, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [84] = 
-      {
-         Arg3 = 6844, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 6, 
-      }, 
-      [85] = 
-      {
-         Arg3 = 6861, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 7, 
-      }, 
-      [86] = 
-      {
-         Arg3 = 6852, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 8, 
-      }, 
-      [87] = 
-      {
-         Arg3 = 6852, 
-         Arg1 = 6818, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [88] = 
-      {
-         Arg3 = 6855, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 9, 
-      }, 
-      [89] = 
-      {
-         Arg3 = 6855, 
-         Arg1 = 6818, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [90] = 
-      {
-         Arg3 = 6859, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 10, 
-      }, 
-      [91] = 
-      {
-         Arg3 = 6859, 
-         Arg1 = 6817, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [92] = 
-      {
-         Arg3 = 6845, 
-         Arg1 = 6806, 
-         Command = "O", 
-         MiscData = 0, 
-         Arg2 = 1, 
-      }, 
-      [93] = 
-      {
-         Arg3 = 6936, 
-         Arg1 = 6820, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [94] = 
-      {
-         Arg3 = 6936, 
-         Arg1 = 6818, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 10, 
-      }, 
-      [95] = 
-      {
-         Arg3 = 6936, 
-         Arg1 = 6802, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [96] = 
-      {
-         Arg3 = 6936, 
-         Arg1 = 6805, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [97] = 
-      {
-         Arg3 = 6937, 
-         Arg1 = 6819, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [98] = 
-      {
-         Arg3 = 6937, 
-         Arg1 = 6802, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [99] = 
-      {
-         Arg3 = 6937, 
-         Arg1 = 6805, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [100] = 
-      {
-         Arg3 = 6926, 
-         Arg1 = 6821, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [101] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6842, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [102] = 
-      {
-         Arg3 = 6926, 
-         Arg1 = 6805, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [103] = 
-      {
-         Arg3 = 6926, 
-         Arg1 = 6802, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [104] = 
-      {
-         Arg3 = 6912, 
-         Arg1 = 6822, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [105] = 
-      {
-         Arg3 = 6913, 
-         Arg1 = 6823, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [106] = 
-      {
-         Arg3 = 6914, 
-         Arg1 = 6824, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [107] = 
-      {
-         Arg3 = 6915, 
-         Arg1 = 6825, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [108] = 
-      {
-         Arg3 = 6946, 
-         Arg1 = 6826, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [109] = 
-      {
-         Arg3 = 6910, 
-         Arg1 = 6852, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [110] = 
-      {
-         Arg3 = 6892, 
-         Arg1 = 6813, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [111] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6831, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [112] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6832, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [113] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6833, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [114] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6835, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [115] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6836, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [116] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6837, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [117] = 
-      {
-         Arg3 = 6892, 
-         Arg1 = 6828, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 2, 
-      }, 
-      [118] = 
-      {
-         Arg3 = 6909, 
-         Arg1 = 6827, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [119] = 
-      {
-         Arg3 = 6909, 
-         Arg1 = 6828, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [120] = 
-      {
-         Arg3 = 6899, 
-         Arg1 = 6828, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 4, 
-      }, 
-      [121] = 
-      {
-         Arg3 = 6897, 
-         Arg1 = 6829, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [122] = 
-      {
-         Arg3 = 6906, 
-         Arg1 = 6830, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [123] = 
-      {
-         Arg3 = 6942, 
-         Arg1 = 6831, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [124] = 
-      {
-         Arg3 = 6947, 
-         Arg1 = 6832, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [125] = 
-      {
-         Arg3 = 6883, 
-         Arg1 = 6829, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 2, 
-      }, 
-      [126] = 
-      {
-         Arg3 = 6894, 
-         Arg1 = 6829, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 3, 
-      }, 
-      [127] = 
-      {
-         Arg3 = 6901, 
-         Arg1 = 6829, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 4, 
-      }, 
-      [128] = 
-      {
-         Arg3 = 6918, 
-         Arg1 = 6833, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [129] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6933, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 0, 
-      }, 
-      [130] = 
-      {
-         Arg3 = 6931, 
-         Arg1 = 21115, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [131] = 
-      {
-         Arg3 = 6931, 
-         Arg1 = 21116, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [132] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6931, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 2, 
-      }, 
-      [133] = 
-      {
-         Arg3 = 6934, 
-         Arg1 = 6828, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 4, 
-      }, 
-      [134] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6934, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 0, 
-      }, 
-      [135] = 
-      {
-         Arg3 = 6932, 
-         Arg1 = 21115, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [136] = 
-      {
-         Arg3 = 6932, 
-         Arg1 = 21116, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [137] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6932, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 2, 
-      }, 
-      [138] = 
-      {
-         Arg3 = 6930, 
-         Arg1 = 6834, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [139] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 10311, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [140] = 
-      {
-         Arg3 = 12, 
-         Arg1 = 32269, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [141] = 
-      {
-         Arg3 = 6930, 
-         Arg1 = 21115, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [142] = 
-      {
-         Arg3 = 6930, 
-         Arg1 = 21116, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [143] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6930, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 2, 
-      }, 
-      [144] = 
-      {
-         Arg3 = 6929, 
-         Arg1 = 6821, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [145] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6929, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 0, 
-      }, 
-      [146] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6929, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 2, 
-      }, 
-      [147] = 
-      {
-         Arg3 = 6928, 
-         Arg1 = 6809, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [148] = 
-      {
-         Arg3 = 0, 
-         Arg1 = 6821, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [149] = 
-      {
-         Arg3 = 2, 
-         Arg1 = 6928, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg2 = 0, 
-      }, 
-   }, 
-   Author = "Ackbar", 
    Rooms = 
    {
       [6912] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [8] = "Bank", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6911, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6913, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6912, 
+         Name = "&G Facility Training  Remote 1", 
          Description = "&R This room is extremly large area that alows you to move around and dodge\
 quite freely. It is mostly empty except for a remote launcher. The floors\
 and walls are made up of carved out black gravel rock are covered in scuff\
@@ -3008,45 +3310,44 @@ There is also a small Security camera used to analiyze your  skills. The\
 Quarren are very cautious about who they train. And are curious why they\
 want to be tougher.\
 ", 
-         Tag = "", 
-         Name = "&G Facility Training  Remote 1", 
-      }, 
-      [6913] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6912, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [8] = "Bank", 
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6912, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6911, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6914, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6913, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6913, 
+         Tag = "", 
+         Flags = 
+         {
+            [8] = "Bank", 
+         }, 
+      }, 
+      [6913] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Facility Training  Remote 2", 
          Description = "&c This room is extremly large area that alows you to move around and dodge\
 quite freely. It is mostly empty except for a remote launcher. The floors\
 and walls are made up of carved out black gravel rock are covered in scuff\
@@ -3055,45 +3356,45 @@ There is also a small Security camera used to analiyze your  skills. The\
 Quarren are very cautious about who they train. And are curious why they\
 want to be tougher.\
 ", 
-         Tag = "", 
-         Name = "&G Facility Training  Remote 2", 
-      }, 
-      [6914] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6913, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6912, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6914, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [8] = "Bank", 
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6915, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6913, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6914, 
+      }, 
+      [6914] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Facility Training  Remote 3", 
          Description = "&Y This room is extremly large area that alows you to move around and dodge\
 quite freely. It is mostly empty except for a remote launcher. The floors\
 and walls are made up of carved out black gravel rock are covered in scuff\
@@ -3102,45 +3403,45 @@ There is also a small Security camera used to analiyze your  skills. The\
 Quarren are very cautious about who they train. And are curious why they\
 want to be tougher.\
 ", 
-         Tag = "", 
-         Name = "&G Facility Training  Remote 3", 
-      }, 
-      [6915] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6914, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6915, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6913, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [8] = "Bank", 
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6946, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6914, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6915, 
+      }, 
+      [6915] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Facility Training  Remote 4", 
          Description = "&P This room is extremly large area that alows you to move around and dodge\
 quite freely. It is mostly empty except for a remote launcher. The floors\
 and walls are made up of carved out black gravel rock are covered in scuff\
@@ -3149,35 +3450,45 @@ There is also a small Security camera used to analiyze your  skills. The\
 Quarren are very cautious about who they train. And are curious why they\
 want to be tougher.\
 ", 
-         Tag = "", 
-         Name = "&G Facility Training  Remote 4", 
-      }, 
-      [6916] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6915, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6911, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6946, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6914, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6916, 
+         Tag = "", 
+         Flags = 
+         {
+            [8] = "Bank", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6916] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Facility Security Training", 
          Description = "&c Entering the main Security Officer's training room you feel a sense of\
 wonder. This individual was known for killing three kraknasas in one\
 sitting. His ability to detect criminals in the town was legendary until\
@@ -3186,14 +3497,45 @@ buttons, and awards. Even the real hero's would feel awe when it comes\
 down to him. The floor is one large spongee material. While the walls are\
 more of a plaster like surface.\
 ", 
-         Tag = "", 
-         Name = "&G Facility Security Training", 
-      }, 
-      [6917] = 
-      {
+         Vnum = 6916, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6911, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6917] = 
+      {
+         TeleDelay = 0, 
+         Name = "Library Interior", 
+         Description = "The interior of the library is covered with hand stiched seaweed rugs\
+inported from the Coral city accross the ocean. In the center of the room\
+is a large Krebbex focilized bone. These large creatures once ran wild on\
+the planet and the ocean. The circular room was once covered with\
+holo-books from old folk lore to how-to's until a fire broke out and all\
+but burned most of the holo-books. The new librarian has the unfortunate\
+task of retyping them. There is a small computer terminal in the center of\
+the room.\
+", 
+         Vnum = 6917, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3339,64 +3681,32 @@ more of a plaster like surface.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "door", 
+               Distance = 0, 
+               DestinationVnum = 6887, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6887, 
-               Keyword = "door", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6917, 
-         Description = "The interior of the library is covered with hand stiched seaweed rugs\
-inported from the Coral city accross the ocean. In the center of the room\
-is a large Krebbex focilized bone. These large creatures once ran wild on\
-the planet and the ocean. The circular room was once covered with\
-holo-books from old folk lore to how-to's until a fire broke out and all\
-but burned most of the holo-books. The new librarian has the unfortunate\
-task of retyping them. There is a small computer terminal in the center of\
-the room.\
-", 
-         Tag = "", 
-         Name = "Library Interior", 
       }, 
       [6918] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [8] = "Bank", 
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6899, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6918, 
+         Name = "&G First of Mon Bank Lobby", 
          Description = "&g  This marble like surfaced bank allows for easy transactions between you\
 and your currerncy. There is a large table in the center of the room to\
 sign your life away along with, a counter towards the back where a very\
@@ -3406,113 +3716,98 @@ security system tracking your everymove. The Quarren first bank of Mon's\
 motto isn't \"your money is safe with us for no reason.\"\
 To make a bank transaction please type bank.\
 ", 
-         Tag = "", 
-         Name = "&G First of Mon Bank Lobby", 
-      }, 
-      [6925] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6918, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6899, 
                Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 6926, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
                Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6927, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6891, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6928, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6925, 
+         Tag = "", 
+         Flags = 
+         {
+            [8] = "Bank", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6925] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Public Lobby", 
          Description = "&Y The main lobby is a incredible site for tourists to visit. The floors\
 are made of polished clam shells. giving off a silvery pink reflextion.\
 The curved walls have pictures of former governors of this great city. The\
 ceiling has a hand carved Quarren emblem made form rare yellow coral. In\
 the middle of the room is a large sign with directions.\
 ", 
-         Tag = "", 
-         Name = "&Y Public Lobby", 
-      }, 
-      [6926] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6925, 
          ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Keyword = "flag", 
-               Description = "&R The multi colored flag shows the Quarren 3 elements. &B Water, &Y Salt\
-\13&c Wind &w\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "water mister", 
-               Description = "&B This top of the line mister costs more then all of your prized\
-\13posessions combined. &w another sign of your hard earned taxes put to good\
-\13work.\
-\13", 
-            }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6925, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6926, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6927, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6891, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6928, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6926, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6926] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Mayor's Office", 
          Description = "You enter the office space of the mayor of this great city. He has a large\
 Quarren flag framed behind his desk. The rest of the walls are left blank\
 and are a smooth polished red The rest of the walls are left blank and are\
@@ -3521,61 +3816,103 @@ while two chairs for visitors sit on the opposite side. On the ceiling you\
 can see a state-of-the-art &Bwater mister &w which was put in place to\
 maintainthe right humidity in the space.\
 ", 
-         Tag = "", 
-         Name = "&Y Mayor's Office", 
-      }, 
-      [6927] = 
-      {
+         Vnum = 6926, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "water mister", 
+               Description = "&B This top of the line mister costs more then all of your prized\
+\13posessions combined. &w another sign of your hard earned taxes put to good\
+\13work.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "flag", 
+               Description = "&R The multi colored flag shows the Quarren 3 elements. &B Water, &Y Salt\
+\13&c Wind &w\
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6925, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6925, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6927, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6927] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Defense Office", 
          Description = "The Quarren military base was stationed here, but do to a very unfortunate\
 accident with a modified blaster he is no longer with us The military are\
 currently looking for a few good men to fill the positon. A sign on the\
 door says contact Ackbar for further details.\
 ", 
-         Tag = "", 
-         Name = "&Y Defense Office", 
-      }, 
-      [6928] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6927, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6925, 
                Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6928] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Security Office", 
+         Description = "&G You enter the main office of the Quarren Security. This room is\
+slightly, less extravegant then the rest, and has more of a rough ocean\
+bottom feel. The walls  are decorated with pictures of wanted men, and the\
+floors are polished rock that imitates a marble look. In front of you is a\
+large counter to which you se alot of people working behind. At the\
+counter is a sign that says step up for assistance.\
+", 
+         Vnum = 6928, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
                Flags = 
                {
                   [1] = "Closed", 
@@ -3584,47 +3921,50 @@ door says contact Ackbar for further details.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Key = 6821, 
-               Direction = "north", 
-               DestinationVnum = 6929, 
                Keyword = "door", 
                Distance = 0, 
+               DestinationVnum = 6929, 
+               Description = "", 
+               Direction = "north", 
+               Key = 6821, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6925, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6925, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6944, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6944, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6928, 
-         Description = "&G You enter the main office of the Quarren Security. This room is\
-slightly, less extravegant then the rest, and has more of a rough ocean\
-bottom feel. The walls  are decorated with pictures of wanted men, and the\
-floors are polished rock that imitates a marble look. In front of you is a\
-large counter to which you se alot of people working behind. At the\
-counter is a sign that says step up for assistance.\
-", 
          Tag = "", 
-         Name = "&Y Security Office", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6929] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "&Y Security Corridor", 
+         Description = "The Security Corridor is well guarded with cameras and wall lasers for\
+automated firing. The dmap hallway is a dark grey with light grey flashes\
+as you pass the cells Very little activity occurs here as most criminals\
+can't escape and with over 20' of rock between them and the corridor you\
+are sure not to hear any of them. There is a small sign placed on the\
+door.\
+", 
+         Vnum = 6929, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3635,98 +3975,60 @@ counter is a sign that says step up for assistance.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Key = 6821, 
-               Direction = "north", 
-               DestinationVnum = 6930, 
                Keyword = "Cell door", 
                Distance = 0, 
+               DestinationVnum = 6930, 
+               Description = "", 
+               Direction = "north", 
+               Key = 6821, 
             }, 
             [2] = 
             {
-               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Key = 6821, 
-               Direction = "south", 
-               DestinationVnum = 6928, 
                Keyword = "block door", 
                Distance = 0, 
+               DestinationVnum = 6928, 
+               Description = "", 
+               Direction = "south", 
+               Key = 6821, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6933, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6933, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6929, 
-         Description = "The Security Corridor is well guarded with cameras and wall lasers for\
-automated firing. The dmap hallway is a dark grey with light grey flashes\
-as you pass the cells Very little activity occurs here as most criminals\
-can't escape and with over 20' of rock between them and the corridor you\
-are sure not to hear any of them. There is a small sign placed on the\
-door.\
-", 
          Tag = "", 
-         Name = "&Y Security Corridor", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6930] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "A cold grey door, over 5 ft thick.\
-", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [23] = "BashProof", 
-               }, 
-               Key = 6821, 
-               Direction = "south", 
-               DestinationVnum = 6929, 
-               Keyword = "Cell door", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6930, 
+         Name = "&Y Security Cell A", 
          Description = "The Quarren cells are small 8' by 8' cubes. The walls consist of solid rock\
 carved roughly to leave jagged edges. It is rumored that the guards like\
 to throw prisoners up against the walls if they get out of hand There is\
@@ -3735,44 +4037,44 @@ prisoner. There is a dmap and musty smell, and cold temperature will make\
 a non-quarren quite uncomfortable. There is no use screaming as the walls\
 are over 20 ft thick.\
 ", 
+         Vnum = 6930, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "Cell door", 
+               Distance = 0, 
+               DestinationVnum = 6929, 
+               Description = "A cold grey door, over 5 ft thick.\
+", 
+               Direction = "south", 
+               Key = 6821, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&Y Security Cell A", 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
       }, 
       [6931] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "A cold grey door, over 5 ft thick.\
-", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [23] = "BashProof", 
-               }, 
-               Key = 6821, 
-               Direction = "south", 
-               DestinationVnum = 6933, 
-               Keyword = "Cell door", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6931, 
+         Name = "&Y Security Cell B", 
          Description = "The Quarren cells are small 8' by 8' cubes. The walls consist of solid rock\
 carved roughly to leave jagged edges. It is rumored that the guards like\
 to throw prisoners up against the walls if they get out of hand There is\
@@ -3781,29 +4083,17 @@ prisoner. There is a dmap and musty smell, and cold temperature will make\
 a non-quarren quite uncomfortable. There is no use screaming as the walls\
 are over 20 ft thick.\
 ", 
-         Tag = "", 
-         Name = "&Y Security Cell B", 
-      }, 
-      [6932] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6931, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "A cold grey door, over 5 ft thick.\
-", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -3811,14 +4101,26 @@ are over 20 ft thick.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Key = 6821, 
-               Direction = "south", 
-               DestinationVnum = 6934, 
-               Keyword = "Cell Door", 
+               Keyword = "Cell door", 
                Distance = 0, 
+               DestinationVnum = 6933, 
+               Description = "A cold grey door, over 5 ft thick.\
+", 
+               Direction = "south", 
+               Key = 6821, 
             }, 
          }, 
-         Vnum = 6932, 
+         Tag = "", 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6932] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Security Cell C", 
          Description = "&w The Quarren cells are small 8' by 8' cubes. The walls consist of solid\
 rock carved roughly to leave jagged edges. It is rumored that the guards\
 like to throw prisoners up against the walls if they get out of hand There\
@@ -3827,27 +4129,17 @@ prisoner. There is a dmap and musty smell, and cold temperature will make\
 a non-quarren quite uncomfortable. There is no use screaming as the walls\
 are over 20 ft thick.\
 ", 
-         Tag = "", 
-         Name = "&Y Security Cell C", 
-      }, 
-      [6933] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6932, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -3855,59 +4147,43 @@ are over 20 ft thick.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Key = 6821, 
-               Direction = "north", 
-               DestinationVnum = 6931, 
-               Keyword = "Cell door", 
+               Keyword = "Cell Door", 
                Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6929, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
                DestinationVnum = 6934, 
-               Keyword = "", 
-               Distance = 0, 
+               Description = "A cold grey door, over 5 ft thick.\
+", 
+               Direction = "south", 
+               Key = 6821, 
             }, 
          }, 
-         Vnum = 6933, 
+         Tag = "", 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6933] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Security Corridor", 
          Description = "The Security Corridor is well guarded with cameras and wall lasers for\
 automated firing. The dmap hallway is a dark grey with light grey flashes\
 as you pass the cells Very little activity occurs here as most criminals\
 can't escape and with over 20' of roc k between them and the corridor you\
 are sure not to hear any of them. \
 ", 
-         Tag = "", 
-         Name = "&Y Security Corridor", 
-      }, 
-      [6934] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6933, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -3915,67 +4191,93 @@ are sure not to hear any of them. \
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               Key = 6821, 
-               Direction = "north", 
-               DestinationVnum = 6932, 
                Keyword = "Cell door", 
                Distance = 0, 
+               DestinationVnum = 6931, 
+               Description = "", 
+               Direction = "north", 
+               Key = 6821, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6933, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6929, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6934, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6934, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6934] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Security Corridor", 
          Description = "The Security Corridor is well guarded with cameras and wall lasers for\
 automated firing. The dmap hallway is a dark grey with light grey flashes\
 as you pass the cells Very little activity occurs here as most criminals\
 can't escape and with over 20' of rock between them and the corridor you\
 are sure not to hear any of them.\
 ", 
-         Tag = "", 
-         Name = "&Y Security Corridor", 
-      }, 
-      [6935] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6934, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6903, 
-               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "Cell door", 
                Distance = 0, 
+               DestinationVnum = 6932, 
+               Description = "", 
+               Direction = "north", 
+               Key = 6821, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6943, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6933, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6935, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6935] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R West Entrance Customs", 
          Description = "&c This very busy customs area is both interior and exterior. There is a\
 large shell protecting the turbo-lift from the water sprinklers. In front\
 of the turbo-lift is a small path leading back to the main roads. There is\
@@ -3984,35 +4286,44 @@ check by now. The ground is a rough rock material carved in by ore miners.\
 As you look up you can see the clear dome glass allowing you to see a pure\
 picture of the ocean.\
 ", 
-         Tag = "", 
-         Name = "&R West Entrance Customs", 
-      }, 
-      [6936] = 
-      {
-         Sector = "field", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6935, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6896, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6903, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6943, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6936, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6936] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mine Secritary's office", 
          Description = "The interior of the mine office is barely decorated. Most of the room is\
 covered with dust and dirt form miners with complaints. There is only one\
 picture on the wall, which is of the first shovel taken form the ground at\
@@ -4022,35 +4333,35 @@ adjacent room. There is a bash proof door to the east, that has no handles\
 and cannot be opened form this side, without a mechanicla button. Which is\
 most likely attached tot he secretary's desk.\
 ", 
-         Tag = "", 
-         Name = "&B Mine Secritary's office", 
-      }, 
-      [6937] = 
-      {
-         Sector = "field", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6936, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-         }, 
+         Sector = "field", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6936, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6896, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6937, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6937] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mine Boss's office", 
          Description = "This large room is made of think rock walls A desk is placed in the corner\
 with comlinks, datapads and all sorts of mine pieces  scatterd all over\
 it. A heavy filing cabinet is to the left of a large pickax sculpture\
@@ -4059,14 +4370,37 @@ straight chair with  it's back towards you has been  placed behind the\
 desk.  The floor is covered with mine layouts and statistics of mine\
 output and costs.\
 ", 
-         Tag = "", 
-         Name = "&B Mine Boss's office", 
-      }, 
-      [6938] = 
-      {
+         Vnum = 6937, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "field", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6936, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+         }, 
+      }, 
+      [6938] = 
+      {
+         TeleDelay = 0, 
+         Name = "Miner's Interior", 
+         Description = "", 
+         Vnum = 6938, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4076,33 +4410,33 @@ output and costs.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "field", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6890, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6890, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6938, 
-         Description = "", 
          Tag = "", 
-         Name = "Miner's Interior", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6939] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Miner Interior", 
+         Description = "", 
+         Vnum = 6939, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4112,33 +4446,33 @@ output and costs.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6885, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6885, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6939, 
-         Description = "", 
          Tag = "", 
-         Name = "Miner Interior", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6940] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Miner Interior", 
+         Description = "", 
+         Vnum = 6940, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4148,33 +4482,34 @@ output and costs.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6894, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6894, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6940, 
-         Description = "", 
          Tag = "", 
-         Name = "Miner Interior", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6941] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Miner Interior", 
+         Description = "This is a empty house for sale!\
+", 
+         Vnum = 6941, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4184,140 +4519,116 @@ output and costs.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6897, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6897, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6941, 
-         Description = "This is a empty house for sale!\
-", 
          Tag = "", 
-         Name = "Miner Interior", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6942] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Security Doors", 
+         Description = "The large doors are guarded by an extremly tough guard making sure noone\
+who doesn't belong enters the service entrance of the city.\
+", 
+         Vnum = 6942, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6905, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6943, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6905, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6943, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6942, 
-         Description = "The large doors are guarded by an extremly tough guard making sure noone\
-who doesn't belong enters the service entrance of the city.\
-", 
-         Tag = "", 
-         Name = "Security Doors", 
       }, 
       [6943] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6905, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6935, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6943, 
+         Name = "Slide Shaft", 
          Description = "This cold room leads around into a circle. There is nothing to look at\
 except the small slide shaft in the middle of the room allowing you to\
 slide down to what ever lies below. As you scan below you see nothing but\
 darkness.  The walls are a shinny metals you swear you have seen before\
 perhaps on a blaster of some kind. \
 ", 
-         Tag = "", 
-         Name = "Slide Shaft", 
-      }, 
-      [6944] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6943, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6928, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6905, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6935, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6944, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [6944] = 
+      {
+         TeleDelay = 0, 
+         Name = "Chief Security office", 
          Description = "The empty room is where the last top Security officer worked.\
 Until he was blown away in an attack duringa peace mission.\
 Apparently he wasn't cautious enough.\
@@ -4327,17 +4638,51 @@ The post on the door read:\
 Help Wanted:  Security Chief -  Please talk to Ackbar if your interested in\
 the job.\
 ", 
-         Tag = "", 
-         Name = "Chief Security office", 
-      }, 
-      [6945] = 
-      {
+         Vnum = 6944, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6928, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6945] = 
+      {
+         TeleDelay = 0, 
+         Name = "Real Estate Agent", 
+         Description = "&c Entering in the Real Estate agents office you notice that the place was\
+left bare. Rumor has it ever since Ackbar was promoted he deserted his\
+former retiring job. The walls are bare of decoration and the floor looks\
+as if it see's very little traffic. There is a large sign in the center of\
+the room with writing on it.\
+", 
+         Vnum = 6945, 
          ExtraDescriptions = 
          {
             [1] = 
+            {
+               Keyword = "cost", 
+               Description = "Sorry not for sale!\
+\13", 
+            }, 
+            [2] = 
             {
                Keyword = "sign", 
                Description = "Welcome, due to demanding bosses I can no longer work form here.\
@@ -4352,67 +4697,32 @@ the job.\
 \13the contract.\
 \13", 
             }, 
-            [2] = 
-            {
-               Keyword = "cost", 
-               Description = "Sorry not for sale!\
-\13", 
-            }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6901, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6901, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6945, 
-         Description = "&c Entering in the Real Estate agents office you notice that the place was\
-left bare. Rumor has it ever since Ackbar was promoted he deserted his\
-former retiring job. The walls are bare of decoration and the floor looks\
-as if it see's very little traffic. There is a large sign in the center of\
-the room with writing on it.\
-", 
          Tag = "", 
-         Name = "Real Estate Agent", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6946] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [8] = "Bank", 
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6915, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6946, 
+         Name = "Remote training Level - 5", 
          Description = "This room is extremly large area that alows you to move around and dodge\
 quite freely. It is mostly empty except for a remote launcher. The floors\
 and walls are made up of carved out black gravel rock are covered in scuff\
@@ -4421,89 +4731,121 @@ There is also a small Security camera used to analiyze your  skills. The\
 Quarren are very cautious about who they train. And are curious why they\
 want to be tougher.\
 ", 
-         Tag = "", 
-         Name = "Remote training Level - 5", 
-      }, 
-      [6947] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6946, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6915, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [8] = "Bank", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6947] = 
+      {
          TeleDelay = 0, 
+         Name = "Security Doors", 
+         Description = "The large doors are guarded by an extremly tough guard making sure noone\
+who doesn't belong enters the service entrance of the city. \
+", 
+         Vnum = 6947, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6905, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [10] = "Safe", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6905, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6947, 
-         Description = "The large doors are guarded by an extremly tough guard making sure noone\
-who doesn't belong enters the service entrance of the city. \
-", 
-         Tag = "", 
-         Name = "Security Doors", 
       }, 
       [6989] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Floating in a void", 
+         Description = "", 
+         Vnum = 6989, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6989, 
-         Description = "", 
-         Tag = "", 
-         Name = "Floating in a void", 
       }, 
       [7000] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Pick", 
+         Description = "", 
+         Vnum = 7000, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 7000, 
-         Description = "", 
-         Tag = "", 
-         Name = "Pick", 
       }, 
       [6800] = 
       {
-         Sector = "water_swim", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "&C Calamari Ocean - Top", 
+         Description = "&c You glance across the great Mon Calamari Ocean , seeing a vast body of\
+water. The view looks peaceful dispite the creatures that lurk below. A\
+soft breeze blows past your head , and even through the strong smell of\
+salt-water you can swear you smell, Rich Mon food cooking. Of coarse it\
+might be the seaweed being burned by the sun But considering most food\
+here is made of seaweed, the smell makes you hungrier yet. Maybe you\
+should wrap up your swim early and head back to town. You can see the\
+metal ladder leading you back up to the dock in fornt.\
+", 
+         Vnum = 6800, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4515,220 +4857,116 @@ who doesn't belong enters the service entrance of the city. \
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "water_swim", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6801, 
+               Description = "Cargo Hold\
+", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6906, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [16] = "Silence", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "Cargo Hold\
-", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6801, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6906, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6800, 
-         Description = "&c You glance across the great Mon Calamari Ocean , seeing a vast body of\
-water. The view looks peaceful dispite the creatures that lurk below. A\
-soft breeze blows past your head , and even through the strong smell of\
-salt-water you can swear you smell, Rich Mon food cooking. Of coarse it\
-might be the seaweed being burned by the sun But considering most food\
-here is made of seaweed, the smell makes you hungrier yet. Maybe you\
-should wrap up your swim early and head back to town. You can see the\
-metal ladder leading you back up to the dock in fornt.\
-", 
-         Tag = "", 
-         Name = "&C Calamari Ocean - Top", 
       }, 
       [6801] = 
       {
+         TeleDelay = 0, 
+         Name = "&C Calamari Ocean - Top", 
+         Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
+water. The view looks peaceful dispite the creatures that lurk below. A\
+soft breeze blows past your head , and even through the strong smell of\
+salt-water you can swear you smell, Rich Mon food cooking. Of coarse it\
+might be the seaweed being burned by the sun But considering most food\
+here is made of seaweed, the smell makes you hungrier yet. Maybe you\
+should wrap up your swim early and head back to town.\
+", 
+         Vnum = 6801, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6802, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "Calamri Ocean - Top\
-", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6802, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "Calamri Ocean - Top\
+", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6800, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6800, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6802, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6801, 
-         Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
-water. The view looks peaceful dispite the creatures that lurk below. A\
-soft breeze blows past your head , and even through the strong smell of\
-salt-water you can swear you smell, Rich Mon food cooking. Of coarse it\
-might be the seaweed being burned by the sun But considering most food\
-here is made of seaweed, the smell makes you hungrier yet. Maybe you\
-should wrap up your swim early and head back to town.\
-", 
          Tag = "", 
-         Name = "&C Calamari Ocean - Top", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
       }, 
       [6802] = 
       {
-         Sector = "water_swim", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6801, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6802, 
+         Name = "&C Calamari Ocean - Top", 
          Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
 water. The view looks peaceful dispite the creatures that lurk below. A\
 soft breeze blows past your head , and even through the strong smell of\
@@ -4737,108 +4975,108 @@ might be the seaweed being burned by the sun But considering most food\
 here is made of seaweed, the smell makes you hungrier yet. Maybe you\
 should wrap up your swim early and head back to town.\
 ", 
+         Vnum = 6802, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "water_swim", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6801, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&C Calamari Ocean - Top", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6803] = 
       {
-         Sector = "water_swim", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6803, 
+         Name = "&C Calamari Ocean - Top ", 
          Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
 water. The view looks peaceful dispite the creatures that lurk below. A\
 soft breeze blows past your head , and even through the strong smell of\
@@ -4847,108 +5085,108 @@ might be the seaweed being burned by the sun But considering most food\
 here is made of seaweed, the smell makes you hungrier yet. Maybe you\
 should wrap up your swim early and head back to town.\
 ", 
+         Vnum = 6803, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "water_swim", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&C Calamari Ocean - Top ", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6804] = 
       {
-         Sector = "water_swim", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6802, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6804, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6804, 
+         Name = "&C Calamari Ocean - Top.", 
          Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
 water. The view looks peaceful dispite the creatures that lurk below. A\
 soft breeze blows past your head , and even through the strong smell of\
@@ -4957,116 +5195,108 @@ might be the seaweed being burned by the sun But considering most food\
 here is made of seaweed, the smell makes you hungrier yet. Maybe you\
 should wrap up your swim early and head back to town.\
 ", 
-         Tag = "", 
-         Name = "&C Calamari Ocean - Top.", 
-      }, 
-      [6805] = 
-      {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6804, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
+         Sector = "water_swim", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6808, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6809, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6812, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6811, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6802, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6818, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6805, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6804, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [10] = 
-            {
+               DestinationVnum = 6804, 
                Description = "", 
-               Key = -1, 
                Direction = "southwest", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6805, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6805] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&c The murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5074,116 +5304,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 &c it is just a strong current. &w\
 ", 
-         Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
-      }, 
-      [6806] = 
-      {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6805, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6807, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6801, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6802, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6818, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6805, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [10] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6806, 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6806] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5191,116 +5421,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current. \
 ", 
+         Vnum = 6806, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6801, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6807] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6806, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6803, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6807, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5308,116 +5538,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
+         Vnum = 6807, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6803, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6808] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6806, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6816, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6808, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6808, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5425,116 +5655,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
+         Vnum = 6808, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6816, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6809] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6807, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6809, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5542,116 +5772,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
+         Vnum = 6809, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6810] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6810, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5659,116 +5889,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
+         Vnum = 6810, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6811] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6806, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6816, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6811, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5776,116 +6006,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
+         Vnum = 6811, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6816, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6812] = 
       {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6813, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6805, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [10] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6812, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -5893,116 +6123,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
-         Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
-      }, 
-      [6813] = 
-      {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6812, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6805, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6805, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [10] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6813, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6813, 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6813] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&c &CYou glance across the great Mon Calamari Ocean , seeing a vast body of\
 water. The view looks peaceful dispite the creatures that lurk below. A\
 soft breeze blows past your head , and even through the strong smell of\
@@ -6022,116 +6252,116 @@ below, that can move you to just about anywhere in the ocean. Below in the\
 dark crevises you swear you can see movement or maybe it is just a strong\
 current.\
 ", 
-         Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
-      }, 
-      [6814] = 
-      {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6813, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6806, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6805, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6809, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [10] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6814, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6813, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6814, 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6814] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mon Calamari Ocean - Middle", 
          Description = "&CThe murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still primitive\
 fish still reside. Movement through here is very difficult as you can see\
@@ -6139,116 +6369,116 @@ a swirling undertow below, that can move you to just about anywhere in the\
 ocean. Below in the dark crevises you swear you can see movement or maybe\
 it is just a strong current.\
 ", 
-         Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle", 
-      }, 
-      [6815] = 
-      {
-         Sector = "underwater", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6814, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6807, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6806, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6809, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [10] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6815, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6815, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [6815] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mon Calamari Ocean - Middle &w", 
          Description = "&c The murky waters of the Middle ocean are covered with small water born\
 insects. Rotting leafy plant structures layout where the still\
 still reside. Movement through here is very difficult as\
@@ -6256,107 +6486,116 @@ you can see a swirling undertow below, that can move you to just about\
 anywhere in the ocean. Below in the dark crevises you swear you can see\
 movement or maybe it is just a strong current.\
 ", 
-         Tag = "", 
-         Name = "&B Mon Calamari Ocean - Middle &w", 
-      }, 
-      [6816] = 
-      {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6815, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
+         Sector = "underwater", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6808, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6807, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
             [7] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [8] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [9] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [10] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6816, 
+         Tag = "", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6816] = 
+      {
+         TeleDelay = 0, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&c  &b You stand in the darkest part of the ocean, very few people other\
 then Quarran have walked this land The ground surface is a coarsely edged\
 rock surface, obviously from volcanic activity  ,although it apears to be\
@@ -6365,107 +6604,107 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it. &x\
 ", 
+         Vnum = 6816, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6808, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6817] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6816, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6817, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -6474,107 +6713,107 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6817, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6816, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6818] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6827, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6818, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -6583,98 +6822,107 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6818, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6827, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6819] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6820, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6819, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -6683,107 +6931,98 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6819, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6820, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6820] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6809, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6820, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -6792,108 +7031,107 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6820, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6809, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6821] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6820, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6821, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -6902,108 +7140,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
-      }, 
-      [6822] = 
-      {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6821, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6820, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [16] = "Silence", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6822, 
+      }, 
+      [6822] = 
+      {
+         TeleDelay = 0, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&b You stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7012,108 +7250,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6822, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6823] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6819, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6810, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6821, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6824, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6820, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6823, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7122,108 +7360,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6823, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6819, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6810, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6821, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6824, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6820, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6824] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6825, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6824, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7232,108 +7470,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6824, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6825, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6825] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6824, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6826, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6825, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7342,108 +7580,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6825, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6824, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6826, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6826] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6822, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6824, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6824, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6811, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6825, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6823, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6824, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6836, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6826, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7452,108 +7690,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6826, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6822, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6824, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6824, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6811, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6825, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6823, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6824, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6836, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6827] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6818, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6827, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7562,98 +7800,208 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
-      }, 
-      [6828] = 
-      {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6827, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6818, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6828] = 
+      {
          TeleDelay = 0, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
+         Description = "&bYou stand in the darkest part of the ocean, very few people other then\
+Quarran have walked this land The ground surface is a coarsely edged rock\
+surface, obviously from volcanic activity  ,although it apears to be quite\
+old. The merky water temperature sends shivers down your spine and\
+visibility is limited to around 10 ft in front of you. Very few things\
+have the ability to withstand this enviroment. It seems strange to you\
+that an entire race would prefer it.\
+", 
+         Vnum = 6828, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6827, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [0] = "Dark", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6827, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6828, 
+      }, 
+      [6829] = 
+      {
+         TeleDelay = 0, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7662,169 +8010,108 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
-      }, 
-      [6829] = 
-      {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6829, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6830, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [8] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+            [9] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6828, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [16] = "Silence", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6830, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [7] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [8] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [9] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6828, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6829, 
-         Description = "&bYou stand in the darkest part of the ocean, very few people other then\
-Quarran have walked this land The ground surface is a coarsely edged rock\
-surface, obviously from volcanic activity  ,although it apears to be quite\
-old. The merky water temperature sends shivers down your spine and\
-visibility is limited to around 10 ft in front of you. Very few things\
-have the ability to withstand this enviroment. It seems strange to you\
-that an entire race would prefer it.\
-", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
       }, 
       [6830] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "floor", 
-               Description = "The floor is made of shells that scoop up toward the east to form a wall.\
-\13The shells  are brown and dirty of ages of not being disturbed.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "large", 
-               Description = "This massive shell's color is much different from the rest being glossy\
-\13pink the light from your artificial source reflects extremly well making\
-\13visibility extremely easy. \
-\13", 
-            }, 
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6829, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6812, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6830, 
+         Name = "&O Clam Bed &w", 
          Description = "&O It appears you have found the hidden location of the rare &z Ultima\
 Pearl &O This treasure is considered the greatest gem known to the galexy.\
 The floor is covered with small clam shells laying one on top of each\
@@ -7833,81 +8120,59 @@ shell that is unlike all the rest. This discovery will make you the envy\
 of the Universe, ofcoarse if you take the pearl, you will be ^rwanted^x &O\
 on Mon  Calamari\
 ", 
+         Vnum = 6830, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "large", 
+               Description = "This massive shell's color is much different from the rest being glossy\
+\13pink the light from your artificial source reflects extremly well making\
+\13visibility extremely easy. \
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "floor", 
+               Description = "The floor is made of shells that scoop up toward the east to form a wall.\
+\13The shells  are brown and dirty of ages of not being disturbed.\
+\13", 
+            }, 
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6829, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6812, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&O Clam Bed &w", 
+         Flags = 
+         {
+            [16] = "Silence", 
+         }, 
       }, 
       [6831] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6837, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6832, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6831, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7916,81 +8181,81 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6831, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6837, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6832, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6832] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6831, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6832, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -7999,81 +8264,81 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6832, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6831, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6833] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6832, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6833, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -8082,81 +8347,81 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
+         Vnum = 6833, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6832, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
       }, 
       [6834] = 
       {
-         Sector = "oceanfloor", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [16] = "Silence", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6835, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6814, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6833, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6834, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -8165,79 +8430,81 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
-      }, 
-      [6835] = 
-      {
+         Vnum = 6834, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "oceanfloor", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
+         Exits = 
          {
             [1] = 
             {
-               Keyword = "ground", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
                Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "ground metal ore", 
-               Description = "It is nothing more than scrap ore and metals of very little worth.\
-\13", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "sign", 
-               Description = "&R DaxbnabEW    KLis'sjkdjfu     ^R Suop  Suop Suop!!!!!^x\
-\13", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6835, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Keyword = "hatch", 
-               Description = "&x The hatch is manmade, cilinder door a Quarren apparently climbs into.\
-\13You can see a security panel on the wall, with a voice code box.\
-\13", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6814, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6833, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [16] = "Silence", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6834, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6815, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "A well lubed air compression hatch is closed here.\
-", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6839, 
-               Keyword = "Hatch", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6835, 
+      }, 
+      [6835] = 
+      {
+         TeleDelay = 0, 
+         Name = "&z Mine Enterence &w", 
          Description = "&w You stand before a Quarren mine enterence. The main hole is covered by a\
 sythetic  clear dome. At one corner is a small one man hatch used for\
 enterence. On the ground you can see scraps of metal and rock apparently\
@@ -8245,45 +8512,79 @@ dropped from a shipment boat heading up to the city of Akatamer. There is\
 a large sign above the Enterance written in Quarran. But from the disign\
 and colors you know the sign is not positive.\
 ", 
-         Tag = "", 
-         Name = "&z Mine Enterence &w", 
-      }, 
-      [6836] = 
-      {
+         Vnum = 6835, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "hatch", 
+               Description = "&x The hatch is manmade, cilinder door a Quarren apparently climbs into.\
+\13You can see a security panel on the wall, with a voice code box.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "ground", 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "ground metal ore", 
+               Description = "It is nothing more than scrap ore and metals of very little worth.\
+\13", 
+            }, 
+            [4] = 
+            {
+               Keyword = "sign", 
+               Description = "&R DaxbnabEW    KLis'sjkdjfu     ^R Suop  Suop Suop!!!!!^x\
+\13", 
+            }, 
+         }, 
          Sector = "oceanfloor", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
+         Exits = 
          {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6834, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6815, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "Hatch", 
+               Distance = 0, 
+               DestinationVnum = 6839, 
+               Description = "A well lubed air compression hatch is closed here.\
+", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
          }, 
-         TeleDelay = 0, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [16] = "Silence", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6837, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6826, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6836, 
+      }, 
+      [6836] = 
+      {
+         TeleDelay = 0, 
+         Name = "&b Mon Calamari Ocean - Bottom", 
          Description = "&bYou stand in the darkest part of the ocean, very few people other then\
 Quarran have walked this land The ground surface is a coarsely edged rock\
 surface, obviously from volcanic activity  ,although it apears to be quite\
@@ -8292,90 +8593,45 @@ visibility is limited to around 10 ft in front of you. Very few things\
 have the ability to withstand this enviroment. It seems strange to you\
 that an entire race would prefer it.\
 ", 
-         Tag = "", 
-         Name = "&b Mon Calamari Ocean - Bottom", 
-      }, 
-      [6837] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
+         Vnum = 6836, 
          ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Keyword = "dome", 
-               Description = "The Quarren developed this dome in order to allow them to have both\
-\13luxuries, air and water.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "enterence", 
-               Description = "The enterence is a water pressured enterence and looks highly\
-\13sophisticated.\
-\13", 
-            }, 
          }, 
+         Sector = "oceanfloor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6817, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6837, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6836, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
+               DestinationVnum = 6826, 
                Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6831, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6880, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Key = -1, 
                Direction = "northeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
                Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6817, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6837, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [16] = "Silence", 
+         }, 
+      }, 
+      [6837] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R Domed Quarren City of Heurkea &w", 
          Description = "&c Standing before you is one of the largest underwater cities on Mon\
 Calamari  The dome shield hosts thousands of Quarren citizens who spend\
 most of their life  underwater. Although the Quarren can breath Oxagen\
@@ -8384,15 +8640,98 @@ domed cities to allow them to live underwater and still have the luxuries\
 of above ground.   To the West is a workers enterence from a nerby Mine. \
 In every other direction is the &B Mon Calamarian Ocean. &w\
 ", 
+         Vnum = 6837, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "enterence", 
+               Description = "The enterence is a water pressured enterence and looks highly\
+\13sophisticated.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "dome", 
+               Description = "The Quarren developed this dome in order to allow them to have both\
+\13luxuries, air and water.\
+\13", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6836, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6831, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6880, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6817, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&R Domed Quarren City of Heurkea &w", 
+         TeleVnum = 0, 
       }, 
       [6838] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
+         Name = "Security Post", 
+         Description = "The security post is a large square box you entered disigned to do a\
+bioscan of your entire body. Two miniture 5-tgy droids continue by\
+anyalizing your fingerprints and retna lines. It is a cold damp machine\
+that was created with no idea of luxuries. There is a red sign before you\
+with directions. \
+", 
+         Vnum = 6838, 
+         Sector = "underground", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -8408,44 +8747,37 @@ In every other direction is the &B Mon Calamarian Ocean. &w\
 \13", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6880, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6880, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6838, 
-         Description = "The security post is a large square box you entered disigned to do a\
-bioscan of your entire body. Two miniture 5-tgy droids continue by\
-anyalizing your fingerprints and retna lines. It is a cold damp machine\
-that was created with no idea of luxuries. There is a red sign before you\
-with directions. \
-", 
          Tag = "", 
-         Name = "Security Post", 
+         TeleVnum = 0, 
       }, 
       [6839] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Mine Enterance Door", 
+         Description = "&c The interior of this enterence is loaded with hi-tech gadgets and\
+devices. used to make sure the intended Quarran is authorized to enter.\
+Precautionary measures do to the suspected allegince to the Empire. On the\
+wall directly ahead is a voice activated code box. The floor has apparent\
+dirt and soot , that most likely came from the mines.  There is a large\
+sign written in two languages above the code box.\
+", 
+         Vnum = 6839, 
          ExtraDescriptions = 
          {
             [1] = 
-            {
-               Keyword = "code box voice", 
-               Description = "The device is used for enterence into the cave, It is a standard X-4t6\
-\13model,\
-\13that allows attmitence with use of the correct word!\
-\13", 
-            }, 
-            [2] = 
             {
                Keyword = "sign", 
                Description = "&R   Tkishdiihsh, Jisaidsydy, jidudusjalpsdo!\
@@ -8454,88 +8786,40 @@ with directions. \
 \13If you don't have clerance from the employer in town, DONOT ENTER!\
 \13", 
             }, 
+            [2] = 
+            {
+               Keyword = "code box voice", 
+               Description = "The device is used for enterence into the cave, It is a standard X-4t6\
+\13model,\
+\13that allows attmitence with use of the correct word!\
+\13", 
+            }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6835, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6835, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6839, 
-         Description = "&c The interior of this enterence is loaded with hi-tech gadgets and\
-devices. used to make sure the intended Quarran is authorized to enter.\
-Precautionary measures do to the suspected allegince to the Empire. On the\
-wall directly ahead is a voice activated code box. The floor has apparent\
-dirt and soot , that most likely came from the mines.  There is a large\
-sign written in two languages above the code box.\
-", 
-         Tag = "", 
-         Name = "Mine Enterance Door", 
       }, 
       [6840] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6844, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6843, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6841, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6839, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6840, 
+         Name = "Cave Enterence", 
          Description = "&c You enter the cave with a slight weasyness from the decompressure.\
 Non-Quarren  creatures tend to have problems with the deep ocean pressure.\
 The cave is a standard layout, with a Front office to the left. Some tools\
@@ -8546,14 +8830,70 @@ were done by primitive tools. To the north is the mine shaft, just before\
 it though is small gate, to make sure you donot fall down it , and to keep\
 pesky ore haulers from buzzing around the office window.\
 ", 
-         Tag = "", 
-         Name = "Cave Enterence", 
-      }, 
-      [6841] = 
-      {
+         Vnum = 6840, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6844, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6843, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6841, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6839, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6841] = 
+      {
+         TeleDelay = 0, 
+         Name = "Mine Office", 
+         Description = "&c You stand in the Main lobby of the mine shaft . The floor is\
+constructed, of old Takisi plant timbers layed over one another. The walls\
+are slightly decorated with pictures of the mine shafts and pinups of\
+Quarran women. The room smells of some strong drink made from an exotic\
+bean plant, a mainstay in long hour professions. To the south is the\
+Foreman's office . Back East is the Cave Enterence.&x \
+", 
+         Vnum = 6841, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -8571,96 +8911,40 @@ pesky ore haulers from buzzing around the office window.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6840, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6842, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6840, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6842, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6841, 
-         Description = "&c You stand in the Main lobby of the mine shaft . The floor is\
-constructed, of old Takisi plant timbers layed over one another. The walls\
-are slightly decorated with pictures of the mine shafts and pinups of\
-Quarran women. The room smells of some strong drink made from an exotic\
-bean plant, a mainstay in long hour professions. To the south is the\
-Foreman's office . Back East is the Cave Enterence.&x \
-", 
-         Tag = "", 
-         Name = "Mine Office", 
       }, 
       [6842] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "desk chair", 
-               Description = "This great wooden desk/chair set obiviously was imported from a different\
-\13planet, as you have never seen this grain before.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "books", 
-               Description = "You glance over at the books and see old mine shaft lore and fables.\
-\13", 
-            }, 
-            [3] = 
-            {
-               Keyword = "floor ", 
-               Description = "The floor is made from the base of a Higjk ocean plant. Known for it's\
-\13durability.\
-\13", 
-            }, 
-            [4] = 
-            {
-               Keyword = "shower", 
-               Description = "If you stare at this device long enough you will see water as it bounces of\
-\13your eyelids.\
-\13", 
-            }, 
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6841, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6842, 
+         Name = "Large Wooden Desk", 
          Description = "&c The mine foreman's office is true Quarran decorating. Plant boards are\
 stacked on the floor to allow easy movement, a man-made shower system is\
 installed in the  ceiling to keep the room at an exact humidity level. \
@@ -8668,105 +8952,97 @@ There is a large desk, a chair and various books attached to wall. A sign\
 rests on the door, and you can tell by the foot marks on the floor this is\
 a place of heavy trafic.\
 ", 
-         Tag = "", 
-         Name = "Large Wooden Desk", 
-      }, 
-      [6843] = 
-      {
+         Vnum = 6842, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "shower", 
+               Description = "If you stare at this device long enough you will see water as it bounces of\
+\13your eyelids.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "desk chair", 
+               Description = "This great wooden desk/chair set obiviously was imported from a different\
+\13planet, as you have never seen this grain before.\
+\13", 
+            }, 
+            [3] = 
+            {
+               Keyword = "books", 
+               Description = "You glance over at the books and see old mine shaft lore and fables.\
+\13", 
+            }, 
+            [4] = 
+            {
+               Keyword = "floor ", 
+               Description = "The floor is made from the base of a Higjk ocean plant. Known for it's\
+\13durability.\
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6840, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6841, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6843, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6843] = 
+      {
+         TeleDelay = 0, 
+         Name = "Tool Shed", 
          Description = "&c The mine tool shed was made for easy access of the tools when a worker\
 reports to duty. Originally, the foreman was having trouble with workers\
 leaving thier tools in the mine or taking them home. So this beaten up,\
 tool shed was built. The two main doors always remain open , exposing\
 several shelves with tools placed on the rack.\
 ", 
-         Tag = "", 
-         Name = "Tool Shed", 
-      }, 
-      [6844] = 
-      {
+         Vnum = 6843, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "mine shaft", 
-               Description = "The shaft goes down to a point where you can only see blackness.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "metal", 
-               Description = "The shimmering metal is of no use to you considering it is in dust form.\
-\13", 
-            }, 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6867, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
                DestinationVnum = 6840, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
                Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 6845, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
                Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6846, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6844, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [6844] = 
+      {
+         TeleDelay = 0, 
+         Name = "Cave Corridor", 
          Description = "&c You stand before the mine shaft that goes straight down as far as you\
 can imagine. There is a cut away walkway in a circular motion that allows\
 workers to go down. Although most prefer to just ride the Ore hauler down.\
@@ -8775,24 +9051,94 @@ various levels and can drive to differnt mining locations. The floor is\
 damp and covered in some kind of shimering metal that must have been mined\
 recently. To the west is the Ore carrier shed.\
 ", 
-         Tag = "", 
-         Name = "Cave Corridor", 
-      }, 
-      [6845] = 
-      {
+         Vnum = 6844, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
             [1] = 
+            {
+               Keyword = "metal", 
+               Description = "The shimmering metal is of no use to you considering it is in dust form.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "mine shaft", 
+               Description = "The shaft goes down to a point where you can only see blackness.\
+\13", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6867, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6840, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6845, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6846, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6845] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Carrier Shed", 
+         Description = "&c The ore carrier shed was sloped toghther in order to keep the sprinkler\
+system from rusting out the machines. Tire tracks run from here to the ore\
+shaft along the floor. There is a dim light reflecting from above and a\
+large sign placed on top of the shed. There is also a note nailed to the\
+main pole, that has cought your eye. \
+", 
+         Vnum = 6845, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "tracks", 
+               Description = "You stare at the tracks already knowing what they are and think maybe I\
+\13should be doing my job instead.\
+\13", 
+            }, 
+            [2] = 
             {
                Keyword = "sign", 
                Description = "&R Ore Carrier Shed &x\
 \13", 
             }, 
-            [2] = 
+            [3] = 
             {
                Keyword = "note", 
                Description = "If you check one of these out , you are responsible for returning it back\
@@ -8802,73 +9148,33 @@ recently. To the west is the Ore carrier shed.\
 \13don't break it or your buying new...   Foreman assisatnt ,   Kaytow\
 \13", 
             }, 
-            [3] = 
+            [4] = 
             {
                Keyword = "shed", 
                Description = "A small Quarran made shed for practical use.\
 \13", 
             }, 
-            [4] = 
-            {
-               Keyword = "tracks", 
-               Description = "You stare at the tracks already knowing what they are and think maybe I\
-\13should be doing my job instead.\
-\13", 
-            }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6844, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6844, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6845, 
-         Description = "&c The ore carrier shed was sloped toghther in order to keep the sprinkler\
-system from rusting out the machines. Tire tracks run from here to the ore\
-shaft along the floor. There is a dim light reflecting from above and a\
-large sign placed on top of the shed. There is also a note nailed to the\
-main pole, that has cought your eye. \
-", 
          Tag = "", 
-         Name = "Ore Carrier Shed", 
+         TeleVnum = 0, 
       }, 
       [6846] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6844, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6847, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6846, 
+         Name = "Ore Shaft", 
          Description = "&c You stand in the middle of the main ore shaft. These massive corridors\
 were created for easy access to  differnt areas of the mine. Along the\
 sides are specially constructed walkways so that miners can travel around\
@@ -8877,49 +9183,40 @@ Carrier vehicles attach to to allow them to move around much faster and\
 safer. The walls are clearly polished and smooth, you know this was done\
 by highly sophisticated machinery.\
 ", 
-         Tag = "", 
-         Name = "Ore Shaft", 
-      }, 
-      [6847] = 
-      {
+         Vnum = 6846, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6856, 
-               Keyword = "Level Corridor", 
+               Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6844, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6846, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
+               DestinationVnum = 6847, 
                Description = "", 
-               Key = -1, 
                Direction = "down", 
-               DestinationVnum = 6848, 
-               Keyword = "", 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6847, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6847] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Shaft", 
          Description = "&c You stand in the middle of the main ore shaft. These massive corridors\
 were created for easy access to  differnt areas of the mine. Along the\
 sides are specially constructed walkways so that miners can travel around\
@@ -8929,49 +9226,49 @@ safer. The walls are clearly polished and smooth, you know this was done\
 by highly sophisticated machinery. To the west you can see the first\
 branch off corridor.\
 ", 
-         Tag = "", 
-         Name = "Ore Shaft", 
-      }, 
-      [6848] = 
-      {
+         Vnum = 6847, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6861, 
-               Keyword = "", 
+               Keyword = "Level Corridor", 
                Distance = 0, 
+               DestinationVnum = 6856, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6847, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6846, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6849, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6848, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6848, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6848] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Shaft", 
          Description = "&c You stand in the middle of the main ore shaft. These massive corridors\
 were created for easy access to  differnt areas of the mine. Along the\
 sides are specially constructed walkways so that miners can travel around\
@@ -8981,40 +9278,49 @@ safer. The walls are clearly polished and smooth, you know this was done\
 by highly sophisticated machinery. To the north you can see the second\
 branch off corridor.\
 ", 
-         Tag = "", 
-         Name = "Ore Shaft", 
-      }, 
-      [6849] = 
-      {
+         Vnum = 6848, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6848, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6861, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6850, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6847, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6849, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6849, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6849] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Shaft", 
          Description = "&c You stand in the middle of the main ore shaft. These massive corridors\
 were created for easy access to  differnt areas of the mine. Along the\
 sides are specially constructed walkways so that miners can travel around\
@@ -9023,40 +9329,40 @@ Carrier vehicles attach to to allow them to move around much faster and\
 safer. The walls are clearly polished and smooth, you know this was done\
 by highly sophisticated machinery.\
 ", 
-         Tag = "", 
-         Name = "Ore Shaft", 
-      }, 
-      [6850] = 
-      {
+         Vnum = 6849, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6851, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6848, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 6849, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6850, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6850, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6850] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Shaft", 
          Description = "&c You stand in the middle of the main ore shaft. These massive corridors\
 were created for easy access to  differnt areas of the mine. Along the\
 sides are specially constructed walkways so that miners can travel around\
@@ -9066,40 +9372,40 @@ safer. The walls are clearly polished and smooth, you know this was done\
 by highly sophisticated machinery. To the East you can see the third\
 branch off corridor.\
 ", 
-         Tag = "", 
-         Name = "Ore Shaft", 
-      }, 
-      [6851] = 
-      {
+         Vnum = 6850, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6852, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6851, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6850, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6849, 
+               Description = "", 
+               Direction = "up", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6851, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6851] = 
+      {
+         TeleDelay = 0, 
+         Name = "Lower Level Corridor", 
          Description = "&c Standing in the lower Level corridor you can see why most of the\
 oldtimers prefer not to work down here..The shaft is not carved out well\
 and is extremly dry (something residents of here don't like alot) The\
@@ -9108,40 +9414,40 @@ coming through. It is this corridor that the the younger Quarren miners\
 make their money as this is the metal most of the shipbuilders prefer. To\
 the west you can see the main ore shaft.\
 ", 
+         Vnum = 6851, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6852, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6850, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Lower Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6852] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6853, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6851, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6852, 
+         Name = "Lower Level Corridor", 
          Description = "&c Standing in the lower Level corridor you can see why most of the\
 oldtimers prefer not to work down here..The shaft is not carved out well\
 and is extremly dry (something residents of here don't like alot) The\
@@ -9149,40 +9455,40 @@ ground is a lighter sandy color and you can see sparkles of silver metal\
 coming through. It is this corridor that the the younger Quarren miners\
 make their money as this is the metal most of the shipbuilders prefer.\
 ", 
+         Vnum = 6852, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6853, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6851, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Lower Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6853] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6854, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6852, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6853, 
+         Name = "Lower Level Corridor", 
          Description = "&c Standing in the lower Level corridor you can see why most of the\
 oldtimers prefer not to work down here..The shaft is not carved out well\
 and is extremly dry (something residents of here don't like alot) The\
@@ -9190,40 +9496,40 @@ ground is a lighter sandy color and you can see sparkles of silver metal\
 coming through. It is this corridor that the the younger Quarren miners\
 make their money as this is the metal most of the shipbuilders prefer.\
 ", 
+         Vnum = 6853, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6854, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6852, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Lower Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6854] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6855, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6853, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6854, 
+         Name = "Lower Level Corridor", 
          Description = "&c Standing in the lower Level corridor you can see why most of the\
 oldtimers prefer not to work down here..The shaft is not carved out well\
 and is extremly dry (something residents of here don't like alot) The\
@@ -9231,27 +9537,53 @@ ground is a lighter sandy color and you can see sparkles of silver metal\
 coming through. It is this corridor that the the younger Quarren miners\
 make their money as this is the metal most of the shipbuilders prefer.\
 ", 
-         Tag = "", 
-         Name = "Lower Level Corridor", 
-      }, 
-      [6855] = 
-      {
+         Vnum = 6854, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
          {
             [1] = 
             {
-               Keyword = "boarded east", 
-               Description = "The boarded up corridor is covered in cob-webs, from an underground insect.\
-\13from this and the residue you can figure out that noone has mined over\
-\13there in some time. \
-\13There is a small white note draped across the boards.\
-\13", 
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6855, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6853, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6855] = 
+      {
+         TeleDelay = 0, 
+         Name = "Lower Level Corridor", 
+         Description = "&c Standing in the lower Level corridor you can see why most of the\
+oldtimers prefer not to work down here..The shaft is not carved out well\
+and is extremly dry (something residents of here don't like alot) The\
+ground is a lighter sandy color and you can see sparkles of silver metal\
+coming through. It is this corridor that the the younger Quarren miners\
+make their money as this is the metal most of the shipbuilders prefer. To\
+the west you see a boarded up turn in the corridor.\
+", 
+         Vnum = 6855, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+            [1] = 
             {
                Keyword = "note", 
                Description = "&w Stay Out ,  Unsafe area!\
@@ -9263,76 +9595,50 @@ make their money as this is the metal most of the shipbuilders prefer.\
 \13&w This is your last an only warning.\
 \13", 
             }, 
+            [2] = 
+            {
+               Keyword = "boarded east", 
+               Description = "The boarded up corridor is covered in cob-webs, from an underground insect.\
+\13from this and the residue you can figure out that noone has mined over\
+\13there in some time. \
+\13There is a small white note draped across the boards.\
+\13", 
+            }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6854, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6854, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Flags = 
                {
                   [8] = "Dig", 
                   [11] = "Hidden", 
                }, 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6870, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6870, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6855, 
-         Description = "&c Standing in the lower Level corridor you can see why most of the\
-oldtimers prefer not to work down here..The shaft is not carved out well\
-and is extremly dry (something residents of here don't like alot) The\
-ground is a lighter sandy color and you can see sparkles of silver metal\
-coming through. It is this corridor that the the younger Quarren miners\
-make their money as this is the metal most of the shipbuilders prefer. To\
-the west you see a boarded up turn in the corridor.\
-", 
          Tag = "", 
-         Name = "Lower Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6856] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6857, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6847, 
-               Keyword = "Level Corridor", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6856, 
+         Name = "Upper Level Corridor", 
          Description = "&c  You stand in the upper corridor mine. This shaft travels within the\
 ground, and was used extensively for rock fuel mining in the early years\
 of the mine. There are still a few old-time miners who swear to it's\
@@ -9341,40 +9647,40 @@ is a dark brown , and the edges are carved out like somone used a pick ax.\
 This corridor is unlike the ones your used to, smooth and carved from\
 machines. You can see the Main Ore shaft is to the East.\
 ", 
+         Vnum = 6856, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6857, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "Level Corridor", 
+               Distance = 0, 
+               DestinationVnum = 6847, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Upper Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6857] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6856, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6858, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6857, 
+         Name = "Upper Level Corridor", 
          Description = "&c You stand in the upper corridor mine. This shaft travels within the\
 ground, and was used extensively for rock fuel mining in the early years\
 of the mine. There are still a few old-time miners who swear to it's\
@@ -9383,40 +9689,40 @@ is a dark brown , and the edges are carved out like somone used a pick ax.\
 This corridor is unlike the ones your used to, smooth and carved from\
 machines.\
 ", 
+         Vnum = 6857, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6856, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6858, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Upper Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6858] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6859, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6857, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6858, 
+         Name = "Upper Level Corridor", 
          Description = "&c You stand in the upper corridor mine. This shaft travels within the\
 ground, and was used extensively for rock fuel mining in the early years\
 of the mine. There are still a few old-time miners who swear to it's\
@@ -9425,40 +9731,40 @@ is a dark brown , and the edges are carved out like somone used a pick ax.\
 This corridor is unlike the ones your used to, smooth and carved from\
 machines.\
 ", 
+         Vnum = 6858, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6859, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6857, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Upper Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6859] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6858, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6860, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6859, 
+         Name = "Upper Level Corridor", 
          Description = "&c You stand in the upper corridor mine. This shaft travels within the\
 ground, and was used extensively for rock fuel mining in the early years\
 of the mine. There are still a few old-time miners who swear to it's\
@@ -9467,40 +9773,40 @@ is a dark brown , and the edges are carved out like somone used a pick ax.\
 This corridor is unlike the ones your used to, smooth and carved from\
 machines.\
 ", 
+         Vnum = 6859, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6858, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6860, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Upper Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6860] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6859, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6866, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6860, 
+         Name = "Upper Level Corridor", 
          Description = "&c You stand in the upper corridor mine. This shaft travels within the\
 ground, and was used extensively for rock fuel mining in the early years\
 of the mine. There are still a few old-time miners who swear to it's\
@@ -9509,40 +9815,40 @@ is a dark brown , and the edges are carved out like somone used a pick ax.\
 This corridor is unlike the ones your used to, smooth and carved from\
 machines.\
 ", 
+         Vnum = 6860, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6859, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6866, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Upper Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6861] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6862, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6848, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6861, 
+         Name = "Middle Level Corridor", 
          Description = "&c The middle level corridor is nicely polished and you can tell most of\
 the high ranking miners work thisone. Ease alone would make you want to\
 work here, the money might not be as great but the danger is way down. The\
@@ -9550,40 +9856,40 @@ floor has well driven ore vehicle tracks and you can tell by the activity\
 that has been going around, this is a very active shaft. Mostly likely you\
 will find some fikler metals used for weapons and tools.\
 ", 
+         Vnum = 6861, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6862, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6848, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Middle Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6862] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6863, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6861, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6862, 
+         Name = "Middle Level Corridor", 
          Description = "&c The middle level corridor is nicely polished and you can tell most of\
 the high ranking miners work thisone. Ease alone would make you want to\
 work here, the money might not be as great but the danger is way down. The\
@@ -9591,40 +9897,40 @@ floor has well driven ore vehicle tracks and you can tell by the activity\
 that has been going around, this is a very active shaft. Mostly likely you\
 will find some fikler metals used for weapons and tools.\
 ", 
+         Vnum = 6862, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6863, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6861, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Middle Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6863] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6864, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6862, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6863, 
+         Name = "Middle Level Corridor", 
          Description = "&c The middle level corridor is nicely polished and you can tell most of\
 the high ranking miners work thisone. Ease alone would make you want to\
 work here, the money might not be as great but the danger is way down. The\
@@ -9632,40 +9938,40 @@ floor has well driven ore vehicle tracks and you can tell by the activity\
 that has been going around, this is a very active shaft. Mostly likely you\
 will find some fikler metals used for weapons and tools.\
 ", 
+         Vnum = 6863, 
+         Sector = "underground", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6864, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6862, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Middle Level Corridor", 
+         TeleVnum = 0, 
       }, 
       [6864] = 
       {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6865, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6863, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6864, 
+         Name = "Middle Level Corridor", 
          Description = "&c The middle level corridor is nicely polished and you can tell most of\
 the high ranking miners work thisone. Ease alone would make you want to\
 work here, the money might not be as great but the danger is way down. The\
@@ -9673,31 +9979,40 @@ floor has well driven ore vehicle tracks and you can tell by the activity\
 that has been going around, this is a very active shaft. Mostly likely you\
 will find some fikler metals used for weapons and tools.\
 ", 
-         Tag = "", 
-         Name = "Middle Level Corridor", 
-      }, 
-      [6865] = 
-      {
+         Vnum = 6864, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6864, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6865, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6863, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6865, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6865] = 
+      {
+         TeleDelay = 0, 
+         Name = "Middle Level Corridor", 
          Description = "&c  The middle level corridor is nicely polished and you can tell most of\
 the high ranking miners work thisone. Ease alone would make you want to\
 work here, the money might not be as great but the danger is way down. The\
@@ -9705,47 +10020,31 @@ floor has well driven ore vehicle tracks and you can tell by the activity\
 that has been going around, this is a very active shaft. Mostly likely you\
 will find some fikler metals used for weapons and tools.\
 ", 
-         Tag = "", 
-         Name = "Middle Level Corridor", 
-      }, 
-      [6866] = 
-      {
+         Vnum = 6865, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
-            [1] = 
-            {
-               Keyword = "open ", 
-               Description = "The crate is open , there is no need to open it.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "sign", 
-               Description = "I will be open from 8 am until 8 pm big fish ...Wink wink.\
-\13", 
-            }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6860, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6864, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6866, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6866] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R Break Shed &x", 
          Description = "&Y The break shed is a place for the Quarren to hang out and relax during\
 thier ten minute breaks. The shed was created out of the wall and food and\
 drink dispensors were brought in. The upper shaft was used to house the\
@@ -9754,14 +10053,55 @@ creates on the ground to sit on although most miners just soon use the\
 floor. \
 There is a sign posted of the hours, above the shed.\
 ", 
+         Vnum = 6866, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "sign", 
+               Description = "I will be open from 8 am until 8 pm big fish ...Wink wink.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "open ", 
+               Description = "The crate is open , there is no need to open it.\
+\13", 
+            }, 
+         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6860, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&R Break Shed &x", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
       }, 
       [6867] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Cargo Hall", 
+         Description = "&c You stand in the Cargo Hall of the mine. To the north is a loading bay\
+for the ore shippers so they can take the mine's riches to the surface.\
+This room is just used for storage and so that the miners can get paid. \
+Everyone knows the man with the money. And after a hard days work, it is\
+always nice to trade in your finds for credits. There is a small sign\
+tacked to the wall here.\
+", 
+         Vnum = 6867, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -9778,65 +10118,40 @@ There is a sign posted of the hours, above the shed.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6868, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6844, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [10] = "Safe", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6868, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6844, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6867, 
-         Description = "&c You stand in the Cargo Hall of the mine. To the north is a loading bay\
-for the ore shippers so they can take the mine's riches to the surface.\
-This room is just used for storage and so that the miners can get paid. \
-Everyone knows the man with the money. And after a hard days work, it is\
-always nice to trade in your finds for credits. There is a small sign\
-tacked to the wall here.\
-", 
-         Tag = "", 
-         Name = "Cargo Hall", 
       }, 
       [6868] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6867, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6868, 
+         Name = "Ore Shippers Loading Bay", 
          Description = "&c The loading Bay is a very active area of the mine. It is here trained\
 drivers, truck the mined ores and treasure to the surface. On the main\
 wall you can see the extremly large hide belts feeding the ore into the\
@@ -9844,26 +10159,31 @@ cargo area through a sealed hatchway. The floor has remains of ore droped,\
 but nothing of worth. The activity in this room is extreme so it's not\
 recommended that you stay long. Somthing is liable to drop on your head.\
 ", 
-         Tag = "", 
-         Name = "Ore Shippers Loading Bay", 
-      }, 
-      [6869] = 
-      {
+         Vnum = 6868, 
          Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Tunnel = 0, 
          Exits = 
          {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6867, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
          }, 
-         Vnum = 6869, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6869] = 
+      {
+         TeleDelay = 0, 
+         Name = "Ore Carrier Interior", 
          Description = "The interior of the ore miner is quite spacious. The above area is a clear\
 holobubble, so you can see where your driving and that you don't run some\
 poor miner over. The floor board has two pedals , one for fuel the second\
@@ -9874,119 +10194,119 @@ large bin so you can place your digs in here for movement purposes.\
 To drive just type Drive then the direction ...\
 EX drive E         (will take you east)\
 ", 
-         Tag = "", 
-         Name = "Ore Carrier Interior", 
-      }, 
-      [6870] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6869, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+      }, 
+      [6870] = 
+      {
+         TeleDelay = 0, 
+         Name = "Dark Cave Corridor", 
+         Description = "", 
+         Vnum = 6870, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6855, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6855, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6870, 
-         Description = "", 
          Tag = "", 
-         Name = "Dark Cave Corridor", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
       }, 
       [6871] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Down the dark Corridor", 
+         Description = "", 
+         Vnum = 6871, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6871, 
-         Description = "", 
-         Tag = "", 
-         Name = "Down the dark Corridor", 
       }, 
       [6872] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "&w Down the dark Corridor", 
+         Description = "", 
+         Vnum = 6872, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6872, 
-         Description = "", 
-         Tag = "", 
-         Name = "&w Down the dark Corridor", 
       }, 
       [6876] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Floating in a void", 
+         Description = "", 
+         Vnum = 6876, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6876, 
-         Description = "", 
-         Tag = "", 
-         Name = "Floating in a void", 
       }, 
       [7200] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 7200, 
+         Name = "Ackbar's building problems.", 
          Description = "Make blasters not work underwater.\
  \
 Figure out how to set a button so it automatically pulls it back out after\
@@ -10005,86 +10325,68 @@ Need to know how you make a portal or enterable object(turbo-lift)\
 How do i add more then one mob spec tothe police and how do i get the jail\
 spec to work.\
 ", 
+         Vnum = 7200, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          Tag = "", 
-         Name = "Ackbar's building problems.", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
       }, 
       [6878] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Floating in a void", 
+         Description = "", 
+         Vnum = 6878, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6878, 
-         Description = "", 
-         Tag = "", 
-         Name = "Floating in a void", 
       }, 
       [6879] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Name = "Floating in a void", 
+         Description = "", 
+         Vnum = 6879, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Exits = 
-         {
-         }, 
-         Vnum = 6879, 
-         Description = "", 
-         Tag = "", 
-         Name = "Floating in a void", 
       }, 
       [6880] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6837, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6838, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6880, 
+         Name = "Miner's Enterence", 
          Description = "&B Standing in front of the miner enterence security post. you realize the\
 seriousness the quarren take thier job. The room is layedout with sveral\
 flatback chairs for the tired Miners to rest on. Uphead you see a\
@@ -10092,14 +10394,46 @@ bio-scanner disigned to make sure you are who you say you are. The walls\
 are well decorated and have a smooth polished look. The Quarren use alot\
 of coral and natural rocks to sculp thier underground city.\
 ", 
-         Tag = "", 
-         Name = "Miner's Enterence", 
-      }, 
-      [6881] = 
-      {
+         Vnum = 6880, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6837, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6838, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [6881] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R Gateway to Heurkea ", 
+         Description = "", 
+         Vnum = 6881, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -10109,99 +10443,58 @@ of coral and natural rocks to sculp thier underground city.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6880, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6880, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6882, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6882, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6883, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6883, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6884, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6884, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6881, 
-         Description = "", 
          Tag = "", 
-         Name = "&R Gateway to Heurkea ", 
-      }, 
-      [6882] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6881, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 21055, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6886, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6882, 
+      }, 
+      [6882] = 
+      {
+         TeleDelay = 0, 
+         Name = "East Coral St", 
          Description = "The domed city of Heurkea is divided into three main streets. Each having\
 distinct and differnt purposes. It was designed for easy access and so\
 that security could patrol and maintain order. One of the best Security\
@@ -10211,44 +10504,53 @@ ocean floor that used to be here covered with water. They have managed to\
 adapt a plant that uses very little to grow down here although the leaves\
 are a pale white. To the west you smell barbecue and ale.\
 ", 
-         Tag = "", 
-         Name = "East Coral St", 
-      }, 
-      [6883] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6882, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6885, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6881, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6881, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 21055, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6886, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6883, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6883] = 
+      {
+         TeleDelay = 0, 
+         Name = "East Lamprey St", 
          Description = "The domed city of Heurkea is divided into three main streets. Each having\
 distinct and differnt purposes. It was designed for easy access and so\
 that security could patrol and maintain order. One of the best Security\
@@ -10258,44 +10560,44 @@ ocean floor that used to be here covered with water. They have managed to\
 adapt a plant that uses very little to grow down here although the leaves\
 are a pale white.\
 ", 
-         Tag = "", 
-         Name = "East Lamprey St", 
-      }, 
-      [6884] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6883, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6881, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6885, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6887, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6881, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6884, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6884] = 
+      {
+         TeleDelay = 0, 
+         Name = "East Kelp St", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -10306,58 +10608,44 @@ adapt a plant that uses very little to grow down here although the leaves\
 are a pale white. You can see a large building of importance to the\
 southwest.\
 ", 
-         Tag = "", 
-         Name = "East Kelp St", 
-      }, 
-      [6885] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6884, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6939, 
-               Keyword = "door", 
+               Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6881, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6890, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
+               DestinationVnum = 6887, 
                Description = "", 
+               Direction = "southwest", 
                Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6883, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6885, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6885] = 
+      {
+         TeleDelay = 0, 
+         Name = "East Lamprey St", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -10368,71 +10656,58 @@ adapt a plant that uses very little to grow down here although the leaves\
 are a pale white.  Lining the walls of the street are small shacks the\
 miners use for domicles.\
 ", 
-         Tag = "", 
-         Name = "East Lamprey St", 
-      }, 
-      [6886] = 
-      {
+         Vnum = 6885, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "note", 
-               Description = "Sorry open only form 12:00p.m. until 11:00 p.m.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "cost ", 
-               Description = "Cost - 12,000 credits and Good taste buds!\
-\13", 
-            }, 
-            [3] = 
-            {
-               Keyword = "stand", 
-               Description = "The stand is decorated by dried out &G seaweed &w draped along the edge. \
-\13There is three chairs placed in front of the stand for customers to rest\
-\13while they eat.\
-\13", 
-            }, 
-            [4] = 
-            {
-               Keyword = "sign ", 
-               Description = "&B SEA BIRD  &Y BAR AND GRILL\
-\13&w Where you can get the best food this side of the ocean.\
-\13", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6882, 
-               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+               }, 
+               Keyword = "door", 
                Distance = 0, 
+               DestinationVnum = 6939, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6889, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6890, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6883, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6886, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6886] = 
+      {
+         TeleDelay = 0, 
+         Name = "Sea Bird &w Bar and Grill &x", 
          Description = "Standing on Coral st. You see the everyday rituals of the citizens(mostly\
 miners). From stoping by to get a quick meal or a faster weapon. City life\
 underwater seems to go on forever. Of coarse there isn't a sun rise or set\
@@ -10441,64 +10716,71 @@ whenever they feel like it, Unfortunately so do the shop owners.  Infront\
 of you is a small stand for purchasing food or drink. There is a large\
 sign above the stand and a smaller note tacked to the edge of the wall.\
 ", 
-         Tag = "", 
-         Name = "Sea Bird &w Bar and Grill &x", 
-      }, 
-      [6887] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6886, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "cost", 
-               Description = "You want to buy a Library?  \
+               Keyword = "sign ", 
+               Description = "&B SEA BIRD  &Y BAR AND GRILL\
+\13&w Where you can get the best food this side of the ocean.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "note", 
+               Description = "Sorry open only form 12:00p.m. until 11:00 p.m.\
+\13", 
+            }, 
+            [3] = 
+            {
+               Keyword = "cost ", 
+               Description = "Cost - 12,000 credits and Good taste buds!\
+\13", 
+            }, 
+            [4] = 
+            {
+               Keyword = "stand", 
+               Description = "The stand is decorated by dried out &G seaweed &w draped along the edge. \
+\13There is three chairs placed in front of the stand for customers to rest\
+\13while they eat.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6917, 
-               Keyword = "door", 
+               Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6882, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6884, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
+               DestinationVnum = 6889, 
                Description = "", 
+               Direction = "west", 
                Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6888, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6887, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6887] = 
+      {
+         TeleDelay = 0, 
+         Name = "Quarren Library", 
          Description = "Standing on Lamprey St. You see the everyday rituals of the\
 citizens(mostly;miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
@@ -10510,14 +10792,73 @@ they have spent many hours carving into the rock extravegant sculptures.\
 There is a large Sign on top of the building and a smaller posting on the\
 door.\
 ", 
-         Tag = "", 
-         Name = "Quarren Library", 
-      }, 
-      [6888] = 
-      {
+         Vnum = 6887, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "cost", 
+               Description = "You want to buy a Library?  \
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               Keyword = "door", 
+               Distance = 0, 
+               DestinationVnum = 6917, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6884, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6888, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6888] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R Seabed Tavern", 
+         Description = "&g Standing on Lamprey St.. You see the everyday rituals of the\
+citizens(mostly miners). From stoping by to get a quick meal or a faster\
+weapon. City life underwater seems to go on forever. Of coarse there isn't\
+a sun rise or set so time has very little relevince. Most of the people\
+wake up and go whenever they feel like it, Unfortunately so do the shop\
+owners.  In front of you is a large well decorated house used for a quick\
+overnite stay for wandering visitors.\
+", 
+         Vnum = 6888, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -10527,68 +10868,71 @@ door.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6889, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6909, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6893, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6887, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6889, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6909, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6893, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6887, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6888, 
-         Description = "&g Standing on Lamprey St.. You see the everyday rituals of the\
+      }, 
+      [6889] = 
+      {
+         TeleDelay = 0, 
+         Name = "Expiremental Wares", 
+         Description = "&O Standing on Coral st. You see the everyday rituals of the\
 citizens(mostly miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
 a sun rise or set so time has very little relevince. Most of the people\
 wake up and go whenever they feel like it, Unfortunately so do the shop\
-owners.  In front of you is a large well decorated house used for a quick\
-overnite stay for wandering visitors.\
+owners.  A high-tech building stands here with a small window for\
+conversation. The buildings walls are constructed of a rare metal found in\
+the Quarren underwater mines. It is here that the legendary inventor\
+Torisk creates some of his famous and not so famous, weapons.\
+There is a large sign and a small note fixed to the stand.\
 ", 
-         Tag = "", 
-         Name = "&R Seabed Tavern", 
-      }, 
-      [6889] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6889, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -10613,132 +10957,67 @@ overnite stay for wandering visitors.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6886, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6886, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6888, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6888, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6892, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6892, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6890, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6890, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6888, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6888, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6889, 
-         Description = "&O Standing on Coral st. You see the everyday rituals of the\
-citizens(mostly miners). From stoping by to get a quick meal or a faster\
-weapon. City life underwater seems to go on forever. Of coarse there isn't\
-a sun rise or set so time has very little relevince. Most of the people\
-wake up and go whenever they feel like it, Unfortunately so do the shop\
-owners.  A high-tech building stands here with a small window for\
-conversation. The buildings walls are constructed of a rare metal found in\
-the Quarren underwater mines. It is here that the legendary inventor\
-Torisk creates some of his famous and not so famous, weapons.\
-There is a large sign and a small note fixed to the stand.\
-", 
          Tag = "", 
-         Name = "Expiremental Wares", 
-      }, 
-      [6890] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6938, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6891, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6885, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6889, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6890, 
+      }, 
+      [6890] = 
+      {
+         TeleDelay = 0, 
+         Name = "East Lamprey St", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -10749,67 +11028,67 @@ adapt a plant that uses very little to grow down here although the leaves\
 are a pale white. Lining the walls of the street are small shacks the\
 miners use for domicles.\
 ", 
-         Tag = "", 
-         Name = "East Lamprey St", 
-      }, 
-      [6891] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6890, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Flags = 
                {
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
+                  [1] = "Closed", 
+                  [2] = "Locked", 
                }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6925, 
-               Keyword = "door", 
+               Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6938, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6890, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6891, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6892, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6885, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6894, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6889, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6891, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6891] = 
+      {
+         TeleDelay = 0, 
+         Name = "&Y Public Offices", 
          Description = "The domed city of Heurkea is divided into three main streets. Each having\
 distinct and differnt purposes. It was designed for easy access and so\
 that security could patrol and maintain order. One of the best Security\
@@ -10821,83 +11100,67 @@ are a pale white. Lining the walls of the street are small shacks the\
 miners use for domicles. To the North is a large white structure with\
 statues of great Quarren fighters framing the main steps.\
 ", 
-         Tag = "", 
-         Name = "&Y Public Offices", 
-      }, 
-      [6892] = 
-      {
+         Vnum = 6891, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "note", 
-               Description = "Store hours are from 5 a.m. until 1 p.m.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "cost", 
-               Description = "Cost - 50,000 credits Cha - 15\
-\13", 
-            }, 
-            [3] = 
-            {
-               Keyword = "sign", 
-               Description = "&G SERPANT WARES\
-\13Where you will always get the best clothing deal.\
-\13", 
-            }, 
-            [4] = 
-            {
-               Keyword = "tent", 
-               Description = "It is a large tent that can be taken down instantly.\
-\13", 
-            }, 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6891, 
-               Keyword = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               Keyword = "door", 
                Distance = 0, 
+               DestinationVnum = 6925, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6889, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6890, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6893, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6892, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6895, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6894, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6892, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6892] = 
+      {
+         TeleDelay = 0, 
+         Name = "&g Serpant Wares", 
          Description = "Standing on Coral st. You see the everyday rituals of the citizens(mostly\
 miners). From stoping by to get a quick meal or a faster weapon. City life\
 underwater seems to go on forever. Of coarse there isn't a sun rise or set\
@@ -10908,68 +11171,83 @@ moments notice. The creator and tailor Cathia works very hard to cloth\
 most of the miners. There is a large sign and a small note fixed to the\
 tent.\
 ", 
-         Tag = "", 
-         Name = "&g Serpant Wares", 
-      }, 
-      [6893] = 
-      {
+         Vnum = 6892, 
          Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "tent", 
+               Description = "It is a large tent that can be taken down instantly.\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "note", 
+               Description = "Store hours are from 5 a.m. until 1 p.m.\
+\13", 
+            }, 
+            [3] = 
+            {
                Keyword = "cost", 
-               Description = "Cost - Not for Sale\
+               Description = "Cost - 50,000 credits Cha - 15\
+\13", 
+            }, 
+            [4] = 
+            {
+               Keyword = "sign", 
+               Description = "&G SERPANT WARES\
+\13Where you will always get the best clothing deal.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6892, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6891, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6888, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6889, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6911, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6893, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6896, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6895, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6893, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6893] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Quarren Training Facility", 
          Description = "Standing on Lamprey St.. You see the everyday rituals of the\
 citizens(mostly miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
@@ -10979,67 +11257,68 @@ owners.   The main building to the south is well guarded by some of the\
 largest Quarren you have ever seen. It is said that it is there that\
 Security forces train individual quarren on weapon and battle tricks.\
 ", 
-         Tag = "", 
-         Name = "&G Quarren Training Facility", 
-      }, 
-      [6894] = 
-      {
+         Vnum = 6893, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "cost", 
+               Description = "Cost - Not for Sale\
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6940, 
-               Keyword = "door", 
+               Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6892, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6891, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6888, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6895, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6911, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6897, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6896, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6894, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6894] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Lamprey St.", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -11050,14 +11329,79 @@ adapt a plant that uses very little to grow down here although the leaves\
 are a pale white. Lining the walls of the street are small shacks the\
 miners use for domicles.\
 ", 
-         Tag = "", 
-         Name = "West Lamprey St.", 
-      }, 
-      [6895] = 
-      {
+         Vnum = 6894, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+               }, 
+               Keyword = "door", 
+               Distance = 0, 
+               DestinationVnum = 6940, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6891, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6895, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6897, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6895] = 
+      {
+         TeleDelay = 0, 
+         Name = "&P Mother of Pearl Jewlery", 
+         Description = "Standing on Coral st. You see the everyday rituals of the\
+citizens(mostly;miners). From stoping by to get a quick meal or a faster\
+weapon. City life underwater seems to go on forever. Of coarse there isn't\
+a sun rise or set so time has very little relevince. Most of the people\
+wake up and go whenever they feel like it, Unfortunately so do the shop\
+owners. There is a well guarded building with huge windows here. In the\
+glass windows you can see various gems and pearls from the Mon Cal ocean\
+and odd planets. There is a small speaker by the window where you can talk\
+and see Plantik inside. There is large sign hanging above and a small\
+letter tacked to the wall.\
+", 
+         Vnum = 6895, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11080,130 +11424,58 @@ miners use for domicles.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6894, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6892, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6896, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6898, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6895, 
-         Description = "Standing on Coral st. You see the everyday rituals of the\
-citizens(mostly;miners). From stoping by to get a quick meal or a faster\
-weapon. City life underwater seems to go on forever. Of coarse there isn't\
-a sun rise or set so time has very little relevince. Most of the people\
-wake up and go whenever they feel like it, Unfortunately so do the shop\
-owners. There is a well guarded building with huge windows here. In the\
-glass windows you can see various gems and pearls from the Mon Cal ocean\
-and odd planets. There is a small speaker by the window where you can talk\
-and see Plantik inside. There is large sign hanging above and a small\
-letter tacked to the wall.\
-", 
-         Tag = "", 
-         Name = "&P Mother of Pearl Jewlery", 
-      }, 
-      [6896] = 
-      {
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "sign", 
-               Description = "&R Help Wanted :  Apply within!\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "cost", 
-               Description = "Cost - Not for Sale\
-\13", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6895, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6894, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6893, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6892, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6936, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6896, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6899, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6898, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6896, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6896] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Mine main office", 
          Description = "Standing on Lamprey St.. You see the everyday rituals of the\
 citizens(mostly miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
@@ -11213,67 +11485,74 @@ owners.   The small office space to the south is the main mine branch. It\
 is not well decorated in fact is rather plain. In the window is a bright\
 red sign.\
 ", 
-         Tag = "", 
-         Name = "&B Mine main office", 
-      }, 
-      [6897] = 
-      {
+         Vnum = 6896, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "cost", 
+               Description = "Cost - Not for Sale\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "sign", 
+               Description = "&R Help Wanted :  Apply within!\
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-               }, 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6941, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6895, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6898, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6893, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6894, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6936, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6900, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6899, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6897, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6897] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Lamprey St.", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -11284,77 +11563,67 @@ adapt a plant that uses very little to grow down here although the leaves\
 are a pale white. Lining the walls of the street are small shacks the\
 miners use for domicles.\
 ", 
-         Tag = "", 
-         Name = "West Lamprey St.", 
-      }, 
-      [6898] = 
-      {
+         Vnum = 6897, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "sign", 
-               Description = "&z Quarren Security Armory\
-\13We buy and sell all weapons.\
-\13Dealing mostly with older models.\
-\13", 
-            }, 
-            [2] = 
-            {
-               Keyword = "cost", 
-               Description = "Cost - 29,000 credits and Str - 16\
-\13", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6897, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+               }, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6941, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6895, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6898, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6899, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6894, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6902, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6900, 
+               Description = "", 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6898, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6898] = 
+      {
+         TeleDelay = 0, 
+         Name = "Quarren Security Armory", 
          Description = "&z Standing on Coral st. You see the everyday rituals of the\
 citizens(mostly;miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
@@ -11365,14 +11634,86 @@ weapons. While most of the inventory is generic stuff you never know what\
 he might have in. There is large sign hanging above and a small letter\
 tacked to the wall.\
 ", 
-         Tag = "", 
-         Name = "Quarren Security Armory", 
-      }, 
-      [6899] = 
-      {
+         Vnum = 6898, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "cost", 
+               Description = "Cost - 29,000 credits and Str - 16\
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "sign", 
+               Description = "&z Quarren Security Armory\
+\13We buy and sell all weapons.\
+\13Dealing mostly with older models.\
+\13", 
+            }, 
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6897, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6895, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6899, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6902, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6899] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Quarren First of Mon Bank", 
+         Description = "Standing on Lamprey St.. You see the everyday rituals of the\
+citizens(mostly miners). From stoping by to get a quick meal or a faster\
+weapon. City life underwater seems to go on forever. Of coarse there isn't\
+a sun rise or set so time has very little relevince. Most of the people\
+wake up and go whenever they feel like it, Unfortunately so do the shop\
+owners.   To the south is the First of Mon Bank, the prefered bank of most\
+underwater individuals.\
+", 
+         Vnum = 6899, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11382,98 +11723,58 @@ tacked to the wall.\
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6896, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6896, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6918, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 6901, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6899, 
-         Description = "Standing on Lamprey St.. You see the everyday rituals of the\
-citizens(mostly miners). From stoping by to get a quick meal or a faster\
-weapon. City life underwater seems to go on forever. Of coarse there isn't\
-a sun rise or set so time has very little relevince. Most of the people\
-wake up and go whenever they feel like it, Unfortunately so do the shop\
-owners.   To the south is the First of Mon Bank, the prefered bank of most\
-underwater individuals.\
-", 
-         Tag = "", 
-         Name = "&G Quarren First of Mon Bank", 
-      }, 
-      [6900] = 
-      {
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6897, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6896, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 6903, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6896, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6918, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6901, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6900, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6900] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Lamprey St", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -11483,53 +11784,45 @@ ocean floor that used to be here covered with water. They have managed to\
 adapt a plant that uses very little to grow down here although the leaves\
 are a pale white.\
 ", 
-         Tag = "", 
-         Name = "West Lamprey St", 
-      }, 
-      [6901] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6900, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6945, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6897, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
+               Keyword = "", 
+               Distance = 0, 
                DestinationVnum = 6903, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
                Description = "", 
+               Direction = "southwest", 
                Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6899, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6901, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6901] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Kelp St.", 
          Description = "Standing on Lamprey St.. You see the everyday rituals of the\
 citizens(mostly miners). From stoping by to get a quick meal or a faster\
 weapon. City life underwater seems to go on forever. Of coarse there isn't\
@@ -11537,44 +11830,53 @@ a sun rise or set so time has very little relevince. Most of the people\
 wake up and go whenever they feel like it, Unfortunately so do the shop\
 owners.   \
 ", 
-         Tag = "", 
-         Name = "West Kelp St.", 
-      }, 
-      [6902] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6901, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6898, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6945, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6903, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6903, 
+               Description = "", 
+               Direction = "northwest", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6899, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6902, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6902] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Coral St.", 
          Description = "&w The domed city of Heurkea is divided into three main streets. Each\
 having distinct and differnt purposes. It was designed for easy access and\
 so that security could patrol and maintain order. One of the best Security\
@@ -11584,62 +11886,44 @@ ocean floor that used to be here covered with water. They have managed to\
 adapt a plant that uses very little to grow down here although the leaves\
 are a pale white.\
 ", 
-         Tag = "", 
-         Name = "West Coral St.", 
-      }, 
-      [6903] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6902, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6902, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6898, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6903, 
                Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 6935, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
                Key = -1, 
-               Direction = "northeast", 
-               DestinationVnum = 6900, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 6901, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6903, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6903] = 
+      {
+         TeleDelay = 0, 
+         Name = "West Entrance to City", 
          Description = "The domed city of Heurkea is divided into three main streets. Each having\
 distinct and differnt purposes. It was designed for easy access and so\
 that security could patrol and maintain order. One of the best Security\
@@ -11649,31 +11933,62 @@ ocean floor that used to be here covered with water. They have managed to\
 adapt a plant that uses very little to grow down here although the leaves\
 are a pale white.\
 ", 
-         Tag = "", 
-         Name = "West Entrance to City", 
-      }, 
-      [6904] = 
-      {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
+         Vnum = 6903, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6935, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6902, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6935, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6900, 
+               Description = "", 
+               Direction = "northeast", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6901, 
+               Description = "", 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6904, 
+         Tag = "", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6904] = 
+      {
+         TeleDelay = 0, 
+         Name = "&B Quarren City Platform", 
          Description = "You stand on a large platform surrounded by extremely rough waters. The\
 platform is well hidden and to this day is not locatable from the air.\
 Only this specific taxi knows of it's wearabouts. The platform floor is a\
@@ -11681,64 +11996,90 @@ rough dark rock almost like dried magma. In front of you is a small\
 turbo-lift heading straight down. It would be best for you to enter it\
 before the wind picks up and the waves start kncking over the platform.\
 ", 
-         Tag = "", 
-         Name = "&B Quarren City Platform", 
-      }, 
-      [6905] = 
-      {
+         Vnum = 6904, 
          Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6947, 
                Keyword = "", 
                Distance = 0, 
-            }, 
-            [2] = 
-            {
+               DestinationVnum = 6935, 
                Description = "", 
+               Direction = "down", 
                Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6942, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 21016, 
-               Keyword = "", 
-               Distance = 0, 
             }, 
          }, 
-         Vnum = 6905, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6905] = 
+      {
+         TeleDelay = 0, 
+         Name = "&R Tunnel system", 
          Description = "&w  &W This small branch off of the road leads to two underground tunnels\
 marked Mon Calamrian to the south. While the tunnel to the east is marked\
 Quarren There is extreme measures taken to make sure only those two races\
 would have access to the service entrance to the city. The floor is dark\
 and covered with soot from miners who have a few days off on vaction.\
 ", 
+         Vnum = 6905, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6947, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6942, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 21016, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
          Tag = "", 
-         Name = "&R Tunnel system", 
+         TeleVnum = 0, 
       }, 
       [6906] = 
       {
-         Sector = "field", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
+         Name = "End of Dock", 
+         Description = "&c  You stand on the end of an extremly old dock. The wooden fibers were\
+from a rare underwater tree of very little color. It's pale white timbers\
+creak as you shift your weight form side to side. On the sides of the dock\
+you can see the dark blue ocean's waves and ocasionally you swear to see a\
+rainbow colored fish swim by. The sky is a pale green and staring into one\
+of the two suns you can see the black shadow of a indigenice bird. At the\
+end of the dock you can see a shiny metal bar laying across.\
+", 
+         Vnum = 6906, 
+         Sector = "field", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11749,70 +12090,35 @@ and covered with soot from miners who have a few days off on vaction.\
 \13", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6907, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6907, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 6800, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6800, 
+               Description = "", 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6906, 
-         Description = "&c  You stand on the end of an extremly old dock. The wooden fibers were\
-from a rare underwater tree of very little color. It's pale white timbers\
-creak as you shift your weight form side to side. On the sides of the dock\
-you can see the dark blue ocean's waves and ocasionally you swear to see a\
-rainbow colored fish swim by. The sky is a pale green and staring into one\
-of the two suns you can see the black shadow of a indigenice bird. At the\
-end of the dock you can see a shiny metal bar laying across.\
-", 
          Tag = "", 
-         Name = "End of Dock", 
+         TeleVnum = 0, 
       }, 
       [6907] = 
       {
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6908, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6906, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6907, 
+         Name = "Middle of Dock", 
          Description = "&c You stand on the middle of an extremly old dock. The wooden fibers were\
 from a rare underwater tree of very little color. It's pale white\
 timbers;creak as you shift your weight form side to side. On the sides of\
@@ -11822,44 +12128,40 @@ into one of the two suns you can see the black shadow of a indigenice bird\
 To the west you can see the end of the dock , while to the east is the\
 begining.\
 ", 
-         Tag = "", 
-         Name = "Middle of Dock", 
-      }, 
-      [6908] = 
-      {
-         Sector = "field", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6907, 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 21081, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6908, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6907, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6906, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6908, 
+         Tag = "", 
+         TeleVnum = 0, 
+      }, 
+      [6908] = 
+      {
+         TeleDelay = 0, 
+         Name = "Front of Dock", 
          Description = "&c You stand on the beginning of an extremly old dock. The wooden fibers\
 were from a rare underwater tree of very little color. It's pale white\
 timbers;creak as you shift your weight form side to side. On the sides of\
@@ -11868,38 +12170,44 @@ to see a rainbow colored fish swim by. The sky is a pale green and staring\
 into one of the two suns you can see the black shadow of a indigenice bird\
 To the east is the land and city of Akatamer\
 ", 
-         Tag = "", 
-         Name = "Front of Dock", 
-      }, 
-      [6909] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6908, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [7] = "NoMagic", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         Sector = "field", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6888, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 21081, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6907, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6909, 
+         Tag = "", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [6909] = 
+      {
+         TeleDelay = 0, 
+         Name = "Lobby", 
          Description = "Here a weary traveller can seek a good rest in comfort without fear of \
 theft or, worse yet, murder.  A long counter stretches across much of the\
 room, and for a few credits the hotel keeper will gladly rent you one of\
@@ -11907,38 +12215,38 @@ his rooms.  Drunken laughter emerges from behind the room's doors.  To the\
 south beyond a door barred by the hotel keeper are the rooms. ;You may\
 safely quit here.\
 ", 
-         Tag = "", 
-         Name = "Lobby", 
-      }, 
-      [6910] = 
-      {
-         Sector = "underground", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+         Vnum = 6909, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [7] = "NoMagic", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 6909, 
                Keyword = "", 
                Distance = 0, 
+               DestinationVnum = 6888, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Vnum = 6910, 
+         Tag = "", 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [7] = "NoMagic", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6910] = 
+      {
+         TeleDelay = 0, 
+         Name = "Hot-Tub", 
          Description = "&c This former mariage suite is now known for its sociol atmosphere. The\
 owner of the hotel added a large Hot-Tub (a fovorite past time for\
 Quarren's). This additon and the removal of all the beds and dressors have\
@@ -11947,14 +12255,48 @@ with ocean lanscape pictures and soft sounds the ocean can be heard of the\
 radio system. The lighting is very low and all communication devices are\
 being scrabled in this room. \
 ", 
-         Tag = "", 
-         Name = "Hot-Tub", 
-      }, 
-      [6911] = 
-      {
+         Vnum = 6910, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "underground", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6909, 
+               Description = "", 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [7] = "NoMagic", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [6911] = 
+      {
+         TeleDelay = 0, 
+         Name = "&G Facility Main Hall", 
+         Description = "&w This extremly large building is the Security Officers Training facility.\
+For a small fee you can enter the remote area and practice your skills. \
+Although they are allowed to kick you out at anytime. The walls are\
+decorated with pictures of Victory's against the Empire! And of famous\
+Quarren citizens, There is one large statue in the middle of the room that\
+seems to have scraches and blaster marks through it, as if people were\
+practicing on it. To the south is the remote room . To the East is the\
+elderly Security trainer.\
+", 
+         Vnum = 6911, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11967,3349 +12309,3036 @@ being scrabled in this room. \
 \13", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Sector = "underground", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6893, 
+               Description = "", 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6916, 
+               Description = "", 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               DestinationVnum = 6912, 
+               Description = "", 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         Tag = "", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 6893, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 6916, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 6912, 
-               Keyword = "", 
-               Distance = 0, 
-            }, 
-         }, 
-         Vnum = 6911, 
-         Description = "&w This extremly large building is the Security Officers Training facility.\
-For a small fee you can enter the remote area and practice your skills. \
-Although they are allowed to kick you out at anytime. The walls are\
-decorated with pictures of Victory's against the Empire! And of famous\
-Quarren citizens, There is one large statue in the middle of the room that\
-seems to have scraches and blaster marks through it, as if people were\
-practicing on it. To the south is the remote room . To the East is the\
-elderly Security trainer.\
-", 
-         Tag = "", 
-         Name = "&G Facility Main Hall", 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   Filename = "quarren.lua", 
-   Mobiles = 
+   Resets = 
    {
+      [1] = 
+      {
+         Arg1 = 6801, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6806, 
+      }, 
+      [2] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6806, 
+      }, 
+      [3] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6807, 
+      }, 
+      [4] = 
+      {
+         Arg1 = 6801, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6807, 
+      }, 
+      [5] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6808, 
+      }, 
+      [6] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6809, 
+      }, 
+      [7] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6809, 
+      }, 
+      [8] = 
+      {
+         Arg1 = 6801, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6809, 
+      }, 
+      [9] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6811, 
+      }, 
+      [10] = 
+      {
+         Arg1 = 6801, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6812, 
+      }, 
+      [11] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6813, 
+      }, 
+      [12] = 
+      {
+         Arg1 = 6801, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6817, 
+      }, 
+      [13] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6818, 
+      }, 
+      [14] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6818, 
+      }, 
+      [15] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6818, 
+      }, 
+      [16] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6818, 
+      }, 
+      [17] = 
+      {
+         Arg1 = 6803, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 12, 
+         Arg3 = 6818, 
+      }, 
+      [18] = 
+      {
+         Arg1 = 6802, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6828, 
+      }, 
+      [19] = 
+      {
+         Arg1 = 6802, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6829, 
+      }, 
+      [20] = 
+      {
+         Arg1 = 6800, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6830, 
+      }, 
+      [21] = 
+      {
+         Arg1 = 6800, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6830, 
+      }, 
+      [22] = 
+      {
+         Arg1 = 6800, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6830, 
+      }, 
+      [23] = 
+      {
+         Arg1 = 6802, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6832, 
+      }, 
+      [24] = 
+      {
+         Arg1 = 6810, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6839, 
+      }, 
+      [25] = 
+      {
+         Arg1 = 6805, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6842, 
+      }, 
+      [26] = 
+      {
+         Arg1 = 6802, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6842, 
+      }, 
+      [27] = 
+      {
+         Arg1 = 6805, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6842, 
+      }, 
+      [28] = 
+      {
+         Arg1 = 6811, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [29] = 
+      {
+         Arg1 = 6811, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [30] = 
+      {
+         Arg1 = 6812, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [31] = 
+      {
+         Arg1 = 6812, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [32] = 
+      {
+         Arg1 = 6813, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [33] = 
+      {
+         Arg1 = 6813, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6843, 
+      }, 
+      [34] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6847, 
+      }, 
+      [35] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6847, 
+      }, 
+      [36] = 
+      {
+         Arg1 = 6804, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6866, 
+      }, 
+      [37] = 
+      {
+         Arg1 = 1, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [38] = 
+      {
+         Arg1 = 10314, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [39] = 
+      {
+         Arg1 = 6807, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [40] = 
+      {
+         Arg1 = 6814, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [41] = 
+      {
+         Arg1 = 6815, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [42] = 
+      {
+         Arg1 = 6803, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6866, 
+      }, 
+      [43] = 
+      {
+         Arg1 = 6808, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6867, 
+      }, 
+      [44] = 
+      {
+         Arg1 = 6819, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6838, 
+      }, 
+      [45] = 
+      {
+         Arg1 = 6818, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6854, 
+      }, 
+      [46] = 
+      {
+         Arg1 = 6818, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6851, 
+      }, 
+      [47] = 
+      {
+         Arg1 = 6816, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6862, 
+      }, 
+      [48] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6864, 
+      }, 
+      [49] = 
+      {
+         Arg1 = 6816, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6864, 
+      }, 
+      [50] = 
+      {
+         Arg1 = 6816, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6865, 
+      }, 
+      [51] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6856, 
+      }, 
+      [52] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6856, 
+      }, 
+      [53] = 
+      {
+         Arg1 = 6817, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6856, 
+      }, 
+      [54] = 
+      {
+         Arg1 = 6807, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6857, 
+      }, 
+      [55] = 
+      {
+         Arg1 = 6817, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6857, 
+      }, 
+      [56] = 
+      {
+         Arg1 = 6816, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6917, 
+      }, 
+      [57] = 
+      {
+         Arg1 = 6812, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6889, 
+      }, 
+      [58] = 
+      {
+         Arg1 = 6826, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [59] = 
+      {
+         Arg1 = 6827, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [60] = 
+      {
+         Arg1 = 6828, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [61] = 
+      {
+         Arg1 = 6829, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [62] = 
+      {
+         Arg1 = 6810, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6886, 
+      }, 
+      [63] = 
+      {
+         Arg1 = 6814, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [64] = 
+      {
+         Arg1 = 6815, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [65] = 
+      {
+         Arg1 = 1, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [66] = 
+      {
+         Arg1 = 6823, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [67] = 
+      {
+         Arg1 = 6824, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [68] = 
+      {
+         Arg1 = 6825, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [69] = 
+      {
+         Arg1 = 6817, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6886, 
+      }, 
+      [70] = 
+      {
+         Arg1 = 6815, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6898, 
+      }, 
+      [71] = 
+      {
+         Arg1 = 6817, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+         Arg3 = 6898, 
+      }, 
+      [72] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6896, 
+      }, 
+      [73] = 
+      {
+         Arg1 = 6817, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg3 = 6896, 
+      }, 
+      [74] = 
+      {
+         Arg1 = 6814, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6895, 
+      }, 
+      [75] = 
+      {
+         Arg1 = 6839, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [76] = 
+      {
+         Arg1 = 6840, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [77] = 
+      {
+         Arg1 = 6841, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [78] = 
+      {
+         Arg1 = 6840, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [79] = 
+      {
+         Arg1 = 6840, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [80] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 6895, 
+      }, 
+      [81] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+         Arg3 = 6885, 
+      }, 
+      [82] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 6881, 
+      }, 
+      [83] = 
+      {
+         Arg1 = 6820, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6881, 
+      }, 
+      [84] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 6, 
+         Arg3 = 6844, 
+      }, 
+      [85] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg3 = 6861, 
+      }, 
+      [86] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 6852, 
+      }, 
+      [87] = 
+      {
+         Arg1 = 6818, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6852, 
+      }, 
+      [88] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 9, 
+         Arg3 = 6855, 
+      }, 
+      [89] = 
+      {
+         Arg1 = 6818, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6855, 
+      }, 
+      [90] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg3 = 6859, 
+      }, 
+      [91] = 
+      {
+         Arg1 = 6817, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6859, 
+      }, 
+      [92] = 
+      {
+         Arg1 = 6806, 
+         Command = "O", 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Arg3 = 6845, 
+      }, 
+      [93] = 
+      {
+         Arg1 = 6820, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6936, 
+      }, 
+      [94] = 
+      {
+         Arg1 = 6818, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg3 = 6936, 
+      }, 
+      [95] = 
+      {
+         Arg1 = 6802, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6936, 
+      }, 
+      [96] = 
+      {
+         Arg1 = 6805, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6936, 
+      }, 
+      [97] = 
+      {
+         Arg1 = 6819, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6937, 
+      }, 
+      [98] = 
+      {
+         Arg1 = 6802, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6937, 
+      }, 
+      [99] = 
+      {
+         Arg1 = 6805, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6937, 
+      }, 
+      [100] = 
+      {
+         Arg1 = 6821, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6926, 
+      }, 
+      [101] = 
+      {
+         Arg1 = 6842, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [102] = 
+      {
+         Arg1 = 6805, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6926, 
+      }, 
+      [103] = 
+      {
+         Arg1 = 6802, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6926, 
+      }, 
+      [104] = 
+      {
+         Arg1 = 6822, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6912, 
+      }, 
+      [105] = 
+      {
+         Arg1 = 6823, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6913, 
+      }, 
+      [106] = 
+      {
+         Arg1 = 6824, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6914, 
+      }, 
+      [107] = 
+      {
+         Arg1 = 6825, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6915, 
+      }, 
+      [108] = 
+      {
+         Arg1 = 6826, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6946, 
+      }, 
+      [109] = 
+      {
+         Arg1 = 6852, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6910, 
+      }, 
+      [110] = 
+      {
+         Arg1 = 6813, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6892, 
+      }, 
+      [111] = 
+      {
+         Arg1 = 6831, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [112] = 
+      {
+         Arg1 = 6832, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [113] = 
+      {
+         Arg1 = 6833, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [114] = 
+      {
+         Arg1 = 6835, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [115] = 
+      {
+         Arg1 = 6836, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [116] = 
+      {
+         Arg1 = 6837, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [117] = 
+      {
+         Arg1 = 6828, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 6892, 
+      }, 
+      [118] = 
+      {
+         Arg1 = 6827, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6909, 
+      }, 
+      [119] = 
+      {
+         Arg1 = 6828, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6909, 
+      }, 
+      [120] = 
+      {
+         Arg1 = 6828, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+         Arg3 = 6899, 
+      }, 
+      [121] = 
+      {
+         Arg1 = 6829, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6897, 
+      }, 
+      [122] = 
+      {
+         Arg1 = 6830, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6906, 
+      }, 
+      [123] = 
+      {
+         Arg1 = 6831, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6942, 
+      }, 
+      [124] = 
+      {
+         Arg1 = 6832, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6947, 
+      }, 
+      [125] = 
+      {
+         Arg1 = 6829, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 6883, 
+      }, 
+      [126] = 
+      {
+         Arg1 = 6829, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 6894, 
+      }, 
+      [127] = 
+      {
+         Arg1 = 6829, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+         Arg3 = 6901, 
+      }, 
+      [128] = 
+      {
+         Arg1 = 6833, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6918, 
+      }, 
+      [129] = 
+      {
+         Arg1 = 6933, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg3 = 2, 
+      }, 
+      [130] = 
+      {
+         Arg1 = 21115, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6931, 
+      }, 
+      [131] = 
+      {
+         Arg1 = 21116, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6931, 
+      }, 
+      [132] = 
+      {
+         Arg1 = 6931, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg3 = 2, 
+      }, 
+      [133] = 
+      {
+         Arg1 = 6828, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 4, 
+         Arg3 = 6934, 
+      }, 
+      [134] = 
+      {
+         Arg1 = 6934, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg3 = 2, 
+      }, 
+      [135] = 
+      {
+         Arg1 = 21115, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6932, 
+      }, 
+      [136] = 
+      {
+         Arg1 = 21116, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6932, 
+      }, 
+      [137] = 
+      {
+         Arg1 = 6932, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg3 = 2, 
+      }, 
+      [138] = 
+      {
+         Arg1 = 6834, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6930, 
+      }, 
+      [139] = 
+      {
+         Arg1 = 10311, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [140] = 
+      {
+         Arg1 = 32269, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 12, 
+      }, 
+      [141] = 
+      {
+         Arg1 = 21115, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6930, 
+      }, 
+      [142] = 
+      {
+         Arg1 = 21116, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6930, 
+      }, 
+      [143] = 
+      {
+         Arg1 = 6930, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg3 = 2, 
+      }, 
+      [144] = 
+      {
+         Arg1 = 6821, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6929, 
+      }, 
+      [145] = 
+      {
+         Arg1 = 6929, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg3 = 2, 
+      }, 
+      [146] = 
+      {
+         Arg1 = 6929, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg3 = 0, 
+      }, 
+      [147] = 
+      {
+         Arg1 = 6809, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 6928, 
+      }, 
+      [148] = 
+      {
+         Arg1 = 6821, 
+         Command = "G", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 0, 
+      }, 
+      [149] = 
+      {
+         Arg1 = 6928, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg3 = 2, 
+      }, 
+   }, 
+   ResetMessage = "", 
+   FileFormatVersion = 1, 
+   Objects = 
+   {
+      [6850] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "credits", 
+         Description = "A creidts is here.", 
+         Cost = 0, 
+         Vnum = 6850, 
+         ShortDescr = "a creidts", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6851] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "remote", 
+         Description = "A remote is here.", 
+         Cost = 0, 
+         Vnum = 6851, 
+         ShortDescr = "a remote", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6852] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "hot tub bath", 
+         Description = "&b A Hot-Tub sits in the middle of the room.", 
+         Cost = 0, 
+         Vnum = 6852, 
+         ShortDescr = "&b A Hot-Tub", 
+         ObjectValues = 
+         {
+            [1] = 1, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 500, 
+         }, 
+         ItemType = "furniture", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 300, 
+      }, 
       [6800] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = -1, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-         }, 
-         NumberOfAttacks = 2, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 4, 
-         Description = "This legandary and scary sea creature is the most feared aquatic member to\
-Mon Calamari.\
-", 
-         ShortDescr = "sharklike krakanas", 
-         Weight = 0, 
-         HitRoll = 4, 
-         Sex = "male", 
-         LongDescr = "A Krakanas, sharklike animal with twin pincer tentacles swims near.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 20, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Comlink Blaster", 
+         Description = "A Comlink Blaster is here.", 
+         Cost = 0, 
          Vnum = 6800, 
-         ArmorClass = 50, 
+         ShortDescr = "a Comlink Blaster", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [12] = "Wrist", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "krakanas", 
+         Weight = 1, 
       }, 
       [6801] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "&P large clam shell", 
+         Description = "&P A large shimering clam shell rests between the smaller browish clams.", 
+         Cost = 0, 
+         Vnum = 6801, 
+         ShortDescr = "&P A large clam shell", 
+         ObjectValues = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
          Flags = 
          {
-            [0] = "Npc", 
-            [7] = "Wimpy", 
+            [0] = "Glow", 
+            [12] = "NoRemove", 
          }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ItemType = "container", 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-               Code = "mppurge corpse\
-mpoload 6822\
-", 
-               ScriptType = "MProg", 
-            }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "Clear bottom fish", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "&Y A translucent, self-illuminated fish swims here.&x\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Vnum = 6801, 
-         ArmorClass = 0, 
          Tag = "", 
-         Name = "clear fish", 
+         Weight = 2000, 
       }, 
       [6802] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "An eightlegged starfish", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "&O An eightlegged yellow starfish crawls around here. &x\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Large Wooden Desk", 
+         Description = "A large wooden desk lies prominently in the center of the room.", 
+         Cost = 0, 
          Vnum = 6802, 
-         ArmorClass = 0, 
+         ShortDescr = "A large wooden desk", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "&Y Yellow Starfish &x", 
+         Weight = 150, 
       }, 
       [6803] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-               Code = "mppurge corpse\
-mpoload 6822\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "A rainbowed fish native to Mon waters. Considered a could meal to\
-outsiders, although Mon Calamarians prefer a non seafood diet. \
-HMmmmmmm...strange. \
-", 
-         ShortDescr = "a Sweegill fish", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "&c A rainbowed &R colored &Y Sweegill &G fish &P swims &B here. &x\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "crate", 
+         Description = "A wooden crate used to bring in tools sits here.", 
+         Cost = 0, 
          Vnum = 6803, 
-         ArmorClass = 0, 
+         ShortDescr = "A wooden crate.", 
+         ObjectValues = 
+         {
+            [1] = 1, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 500, 
+         }, 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "Sweegill", 
+         Weight = 200, 
       }, 
       [6804] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "&R Shela the  kitchen cook. &x", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 100, 
-            BusinessHours = 
-            {
-               Close = 20, 
-               Open = 8, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "&R Shela the  kitchen cook. &x", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "female", 
-         LongDescr = "&R Shela the  kitchen cook prepares quick meals for the miners. &x\
-", 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 12998, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 20, 
-         Damage = 
-         {
-            DamSizeDice = 5, 
-            DamNoDice = 10, 
-            DamPlus = 10, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "", 
+         Description = "Chair", 
+         Cost = 0, 
          Vnum = 6804, 
-         ArmorClass = 0, 
+         ShortDescr = "Chair", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "Chair", 
+               Description = "What you've never seen a chair before??\
+\13", 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Shela kitchen cook", 
+         Weight = 1, 
       }, 
       [6805] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "wooden chair", 
+         Description = "A wooden chair sits here.", 
+         Cost = 0, 
+         Vnum = 6805, 
+         ShortDescr = "A wooden chair", 
+         ObjectValues = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 0, 
+            [2] = 2, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 700, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-               Code = "say &R What you need now! Can't you see I'm busy!!!!!!!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "fuck dick asshole jerk ", 
-               Code = "say &R $n your about to get your tail whipped with that language.  Infact\
-your fired!\
-mpecho Your work agreement has been revoke, Please leave immediatly!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "work job mine ", 
-               Code = "Say  Well $n you want me to hold your hand?\
- say See you take a shovel out of the shed..\
-say Stay with $n ...this is difficult.\
-laugh\
-say Then you get a ore carier..\
-say then you go down the shaft and DIG!\
-say Tuff huh?  \
-laugh\
-say Make sure you sell your minerals back.\
-say the loading bay keeper will pay you.\
-say Now get out !\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hi hello ", 
-               Code = "say Look you here for a reason?\
-say or just hear to iritate me.\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [5] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "iritate.", 
-               Code = "say Alright loser...not sure how you got in here...\
-say but I'm calling security\
-", 
-               ScriptType = "MProg", 
+               Keyword = "Chair", 
+               Description = "What you've never seen a chair before??\
+\13", 
             }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "The mine foreman Krauota", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "The mine foreman Krauota paces here stressed due to mine demands.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6805, 
-         ArmorClass = -50, 
          Tag = "", 
-         Name = "mine foreman Krauota", 
+         Weight = 1, 
       }, 
       [6806] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
-", 
-         ShortDescr = "a Quarren", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "A Quarren is daydreaming about the ocean.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 8, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 0, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Ore Carrier", 
+         Description = "&B A X-56ty7 Ore Carrier sits here waiting for use.&x", 
+         Cost = 0, 
          Vnum = 6806, 
-         ArmorClass = 88, 
+         ShortDescr = "A Ore Carrier", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "spacecraft", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "", 
+         Weight = 1, 
       }, 
       [6807] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "rand_prog", 
-               Arguments = "15", 
-               Code = "if ispc ($n)\
-   mpecho The quarren miner stops working to stare at you.\
-    mpecho Then decides to go back to work digging.\
-else\
- endif\
-endif\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hello hi help hey can ", 
-               Code = "say &R Can't you see I'm working?  Some of us work you know!\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
-", 
-         ShortDescr = "A Quarren miner", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&w A Quarren miner works diligently to strip the mine.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 8, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 0, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Bantha rib", 
+         Description = "A bantha rib is here for your enjoyment.", 
+         Cost = 10, 
          Vnum = 6807, 
-         ArmorClass = 88, 
+         ShortDescr = "a bantha rib", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "Quarren miner", 
+         Weight = 1, 
       }, 
       [6808] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Arguments = "", 
-               Code = "say &B Come over miner, if you have some goods. I'll Buy.\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "The mine ore dealer", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            BusinessHours = 
-            {
-               Close = 12, 
-               Open = 8, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "The mine ore dealer", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "female", 
-         LongDescr = "The mine ore dealer, Ketson stands here ready to give you a bad deal!\
-", 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 12998, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 20, 
-         Damage = 
-         {
-            DamSizeDice = 5, 
-            DamNoDice = 10, 
-            DamPlus = 10, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Hatch door", 
+         Description = "A Hatch door is here.", 
+         Cost = 0, 
          Vnum = 6808, 
-         ArmorClass = 0, 
-         Tag = "", 
-         Name = "mine shop dealer", 
-      }, 
-      [6809] = 
-      {
-         Stats = 
+         ShortDescr = "a Hatch door", 
+         ObjectValues = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
          Flags = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [1] = "Hum", 
          }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ItemType = "trash", 
+         ExtraDescriptions = 
          {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hi hello ", 
-               Code = "Say &R Ya need something pal?  Look can't you tell I'm busy twidling my\
-say thumbs..\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "job", 
-               Code = "Say talk to ackbar pal ,,I don't hire.\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "report crime", 
-               Code = "Say Oh a crime on this planet..what else is new, here fill out 20 copies of\
-say this form and then talk to the chief.\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "chief", 
-               Code = "say &R No chief! when that happen\
-laugh\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [5] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "reporting duty", 
-               Code = "Say About time $n\
-mpoload 6821\
-give key $n\
-say try not to goto sleep this time....\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [6] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "visit see prisoner", 
-               Code = "Say oh you need to see a prisoner ah? well ok ..\
-unlock n\
-open door\
-", 
-               ScriptType = "MProg", 
-            }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         DamRoll = 2, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
-", 
-         ShortDescr = "Krusi, A quarren clerk", 
-         Weight = 0, 
-         HitRoll = 2, 
-         Sex = "female", 
-         LongDescr = "Krusi, A Quarren Security Clerk stands behind the counter waiting.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 110, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 11, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6809, 
-         ArmorClass = 72, 
          Tag = "", 
-         Name = "quarren krusi clerk", 
+         Weight = 1, 
       }, 
       [6810] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 20, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "&B Borto the Side order cook.", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 110, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 12, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "&B Borto the Side order cook.", 
-         Weight = 0, 
-         HitRoll = 20, 
-         Sex = "male", 
-         LongDescr = "&B Borto the Side order cook waits here paitently for a costomer.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 100, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Voice box", 
+         Description = "A Security Voice Box is attached to the wall.", 
+         Cost = 0, 
          Vnum = 6810, 
-         ArmorClass = -150, 
+         ShortDescr = "A Security Voice Box", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "Say Welcome Miner step this way...\
+mptransfer all 6840\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "krebbex", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mpecho &R That is the wrong password..Please be advised Security Has been\
+mpecho Called!  Please stand back from the door!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "fuck asshole quarran mon ackbar ghett fish ", 
+            }, 
+         }, 
+         ItemType = "circuit", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "cook Borto", 
+         Weight = 200, 
       }, 
       [6811] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "shoval ", 
+         MudProgs = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mpecho You hear a loud click as the shoval vibrates back and forth, ready\
+for\
+use.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "on", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               Code = "mpecho You hear a slow HMMMMmmmmmmmmm as th shoval comes to a complete\
+mpecho stop!\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "off", 
+            }, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
+         Description = "&w A automated Shovel rests here waiting for use.", 
+         Cost = 0, 
+         Vnum = 6811, 
          Flags = 
          {
-            [0] = "Npc", 
+            [1] = "Hum", 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
+         ShortDescr = "a automated shoval", 
+         ObjectValues = 
          {
-            Speaks = 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "shovel", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
             {
-               [0] = "basic", 
+               Keyword = "shoval ", 
+               Description = "&W The automated shoval was designed to speed up the mining process. This\
+\13unit is voice activated. To work it just say \"shovel on\" then type dig\
+\13floor. \
+\13", 
             }, 
-            Speaking = 
+            [2] = 
             {
-               [0] = "basic", 
+               Keyword = "Automated Shovel", 
+               Description = "&W The automated shoval was designed to speed up the mining process. This\
+\13unit is voice activated. To work it just say \"shovel on\" then type dig\
+\13floor. \
+\13", 
             }, 
          }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a newly created tech torisk", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Some god abandoned a newly created tech torisk here.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Vnum = 6811, 
-         ArmorClass = 0, 
          Tag = "", 
-         Name = "tech torisk", 
+         Weight = 1, 
       }, 
       [6812] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [2] = "Scavenger", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 10, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "&c Torisk Inventor", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            BusinessHours = 
-            {
-               Close = 8, 
-               Open = 22, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "&c Torisk Inventor", 
-         Weight = 0, 
-         HitRoll = 10, 
-         Sex = "male", 
-         LongDescr = "&c Torisk Inventor of high-tech weapons works hard here.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Hack pick", 
+         Description = "A hack pick of some age sits here.", 
+         Cost = 0, 
          Vnum = 6812, 
-         ArmorClass = -25, 
+         ShortDescr = "A hack pick", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "shovel", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "Automated Shovel", 
+               Description = "&W The automated shoval was designed to speed up the mining process. This\
+\13unit is voice activated. To work it just say \"shovel on\" then type dig\
+\13floor. \
+\13", 
+            }, 
+            [2] = 
+            {
+               Keyword = "shoval ", 
+               Description = "&W The automated shoval was designed to speed up the mining process. This\
+\13unit is voice activated. To work it just say \"shovel on\" then type dig\
+\13floor. \
+\13", 
+            }, 
+            [3] = 
+            {
+               Keyword = "Hack pick", 
+               Description = "Elderly pick tool used for mining.\
+\13", 
+            }, 
+         }, 
          Tag = "", 
-         Name = "tech torisk inventor", 
+         Weight = 1, 
       }, 
       [6813] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 10, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "&P Cathia the tailor", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            BusinessHours = 
-            {
-               Close = 13, 
-               Open = 5, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "&P Cathia the tailor", 
-         Weight = 0, 
-         HitRoll = 10, 
-         Sex = "female", 
-         LongDescr = "&P Cathia the tailor sews diligently here.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "rope", 
+         Description = "A coil of very strong rope is here.", 
+         Cost = 60, 
          Vnum = 6813, 
-         ArmorClass = -25, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 52, 
+               Modifier = 30, 
+            }, 
+         }, 
+         ShortDescr = "A coil of Seaweed Rope", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "rope", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "cathia tailor", 
+         Weight = 3, 
       }, 
       [6814] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Shop = 
-         {
-            KeeperShortDescr = "&p Plantik the jewler", 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 7, 
-            }, 
-         }, 
-         Description = "", 
-         ShortDescr = "&p Plantik the jewler", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&p Plantik the jewler sits behind the security bars waiting for a customer.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 12998, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 20, 
-         Damage = 
-         {
-            DamSizeDice = 5, 
-            DamNoDice = 10, 
-            DamPlus = 10, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "&G Kelp salad", 
+         Description = "&G  A Kelp salad lies here ready to be eaten.", 
+         Cost = 18, 
          Vnum = 6814, 
-         ArmorClass = 0, 
+         ShortDescr = "&G  A Kelp salad", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "&G Kelp salad", 
+               Description = "&G the salad is comprised of kelp and seaweed. A tasty treat for Quarren.\
+\13", 
+            }, 
+         }, 
          Tag = "", 
-         Name = "jewler joyta", 
+         Weight = 1, 
       }, 
       [6815] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "&B glass salt water", 
+         Description = "&B A glass of salt water looks mighty tasty.", 
+         Cost = 2, 
+         Vnum = 6815, 
          Flags = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
+            [13] = "Inventory", 
          }, 
-         NumberOfAttacks = 0, 
-         DamRoll = 10, 
-         Languages = 
+         ShortDescr = "&B A glass of salt water.", 
+         ObjectValues = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
          }, 
-         Immune = 
+         ItemType = "drink_container", 
+         WearFlags = 
          {
-            [20] = "magic", 
-            [11] = "charm", 
+            [0] = "Take", 
          }, 
-         Shop = 
+         ExtraDescriptions = 
          {
-            KeeperShortDescr = "An Elderly Security Weapon resaler", 
-            ProfitBuy = 100, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
          }, 
-         Description = "", 
-         ShortDescr = "An Elderly Security Weapon resaler", 
-         Weight = 0, 
-         HitRoll = 10, 
-         Sex = "male", 
-         LongDescr = "An Elderly Security Weapon resaler waits here paintently.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6815, 
-         ArmorClass = -25, 
          Tag = "", 
-         Name = "resale elderly security", 
+         Weight = 1, 
       }, 
       [6816] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "katasik metal", 
+         Description = "A chunk of Katasik metal lies here.", 
+         Cost = 40, 
+         Vnum = 6816, 
+         ShortDescr = "A chunk of Katasik metal.", 
+         ObjectValues = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 10, 
+            [2] = 3, 
+            [3] = 3, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
+         ItemType = "rare_metal", 
+         WearFlags = 
          {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
+            [0] = "Take", 
+            [17] = "Eyes", 
          }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ExtraDescriptions = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "hello hi mam chick", 
-               Code = "say &R Hey SHHHHhhhhhhh!   This is a library not your playpen $n!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "bitch fuck shit hoe", 
-               Code = "say &b I can see your IQ matches the letters in those words.\
-say so get out.\
-mpforce $n n\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "help how ", 
-               Code = "Say just look at the computer terminal it will tell you what to do.\
-", 
-               ScriptType = "MProg", 
+               Keyword = "Katasik metal", 
+               Description = "The katasik metal is used in most weapons, as it is highly durable and easy\
+\13to minipulate.\
+\13", 
             }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         DamRoll = 10, 
-         Description = "", 
-         ShortDescr = "A female Quarren librarian", 
-         Weight = 0, 
-         HitRoll = 10, 
-         Sex = "female", 
-         LongDescr = "&p A female Quarren librarian retypes a new book.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6816, 
-         ArmorClass = -25, 
          Tag = "", 
-         Name = "librarian quarren", 
+         Weight = 1, 
       }, 
       [6817] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "coal rock", 
+         Description = "&W A lump of coal rock is laying here..", 
+         Cost = 30, 
+         Vnum = 6817, 
          Flags = 
          {
-            [0] = "Npc", 
-            [6] = "StayArea", 
+            [29] = "Burried", 
+            [25] = "Hidden", 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
+         ShortDescr = "&W A lump of coal rock", 
+         ObjectValues = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         DamRoll = 0, 
-         Description = "The Quarren are more commonly know as squidheads throughout the galaxy\
-due to the shape of their heads. The come from the ocean world of Mon\
-Calamari.\
-", 
-         ShortDescr = "&R A Quarren citizen", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "A Quarren citizen enjoys his day off.\
-", 
-         HitChance = 
+         ItemType = "treasure", 
+         WearFlags = 
          {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
+            [0] = "Take", 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 8, 
-         Damage = 
+         ExtraDescriptions = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 0, 
          }, 
-         Vnum = 6817, 
-         ArmorClass = 88, 
          Tag = "", 
-         Name = "quarren man", 
+         Weight = 1, 
       }, 
       [6818] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Platiciki Metel", 
+         Description = "A chunck of Platiciki metal lies here.", 
+         Cost = 50, 
+         Vnum = 6818, 
          Flags = 
          {
-            [24] = "NoAssist", 
-            [2] = "Scavenger", 
-            [26] = "Droid", 
-            [6] = "StayArea", 
-            [0] = "Npc", 
+            [29] = "Burried", 
+            [25] = "Hidden", 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
+         ShortDescr = "A chunck of Platiciki metal ", 
+         ObjectValues = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         DamRoll = 0, 
-         Description = "The binary load lifter is a big droid used mainly for lifting and\
-moving large objects. Its very simple processing unit can only handle\
-very simple commands as there is very little need for an intelligent\
-droid laborer.\
-", 
-         ShortDescr = "&c A LIN-V8K mining droid &x", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "&c A LIN-V8K mining droid glides past here.\
-", 
-         HitChance = 
+         ItemType = "treasure", 
+         WearFlags = 
          {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
+            [0] = "Take", 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 20, 
-         Damage = 
+         ExtraDescriptions = 
          {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
          }, 
-         Vnum = 6818, 
-         ArmorClass = 50, 
          Tag = "", 
-         Name = "mining droid", 
+         Weight = 1, 
       }, 
       [6819] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "bio scan bio-scan button", 
+         Description = "A Security BioScan button is attached here.", 
+         Cost = 0, 
+         Vnum = 6819, 
+         ShortDescr = "A bio-scan button sits here.", 
+         ObjectValues = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 700, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         NumberOfAttacks = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "", 
-               Code = "", 
                ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hi", 
-               Code = "mpecho The mine boss stares at you..\
-mpecho The mine boss presses the secretary's call button.\
-say Dang it I don't have time for visitors!\
+               Code = "mpechoat $n The lights go out in total darkness.\
+mpecho you see a   Red scanner aray flash through the your body\
+mpechoat $n starting from the bottom up to the top.\
+mptransfer $n 6881\
+mpforce $n pull button\
+mpechoat $n Welcome $n you have passed all security checks!\
 ", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "job mine work", 
-               Code = "Say &R Oh you want to work ah?\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "yes", 
-               Code = "say &R Good because we have a job for you.  \
-say &R Here take this..it will help you.\
-mpoload 6834\
-give shield $n\
-say &R good luck and be careful my insurance is high enough.\
-say oh ya tell the security voice box : Krebbex\
-Say if you don't know what that is look it up at the library!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [5] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "bye goodbye adios", 
-               Code = "say &R Get out already!\
-mpforce $n w\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [6] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "where location find", 
-               Code = "Say Just goto the east entrance then once in water.\
-Say go south until you reach the mine.\
-", 
-               ScriptType = "MProg", 
+               MudProgType = "push_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         Languages = 
+         ItemType = "button", 
+         ExtraDescriptions = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
          }, 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "&R Mine boss, Krauota", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&R Mine boss, Krauota paces here due to stress.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6819, 
-         ArmorClass = -50, 
          Tag = "", 
-         Name = "boss Hityii", 
+         Weight = 200, 
       }, 
       [6820] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Archway", 
+         Description = "A &R Gateway to Heurkea stands here.", 
+         Cost = 0, 
+         Vnum = 6820, 
          MudProgs = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "hi hello ", 
-               Code = "mpecho The Secretary looks you up and down, then \
-mpecho returns back to doodling.\
-", 
                ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "job work mine ", 
-               Code = "Say &R Ah a job let me see....\
-mpecho you see her barly glance a sheet of paper.\
-Say &R well I'm sorry $n there are some jobs but....\
-say &r most of my friends need a job and I'm not sure .\
-say &R why I should give you the job.\
-wink\
+               Code = "&B ^B Say Please come agian $n!\
 ", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "good dick hard hoe bitch slut fuck ass", 
-               Code = "Say &R i don't think that was what I'm refering to..\
-wink\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "act_prog", 
+               MudProgType = "greet_prog", 
                Arguments = "", 
-               Code = "", 
-               ScriptType = "MProg", 
-            }, 
-            [5] = 
-            {
-               MudProgType = "act_prog", 
-               Arguments = "wink", 
-               Code = "Say &R Something wrong with your eye?\
-mpecho You see the Secretary eye your credits.\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [6] = 
-            {
-               MudProgType = "bribe_prog", 
-               Arguments = "100 100", 
-               Code = "Say Now that's more like it!!!\
-mptransfer $n 6937\
-", 
-               ScriptType = "MProg", 
             }, 
          }, 
-         Languages = 
+         ShortDescr = "&R Gateway to Heurkea", 
+         ObjectValues = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "&P A female Quarren Secretary", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "female", 
-         LongDescr = "&P A female Quarren Secretary stands here and twidles here thumbs.\
-", 
-         HitChance = 
+         ItemType = "trash", 
+         WearFlags = 
          {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
+            [0] = "Take", 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
+         ExtraDescriptions = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
          }, 
-         Vnum = 6820, 
-         ArmorClass = -25, 
          Tag = "", 
-         Name = "female sec secretary ", 
+         Weight = 1, 
       }, 
       [6821] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 700, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "no", 
-               Code = "Say ah well then your familiar with this town. \
-Say in that case what do you need?\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "shit fuck help job dick ass work", 
-               Code = "Say sorry I'm the wrong person to be saying that to.\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hi hello ", 
-               Code = "Say Hello $n , our Security said you were in town. \
-say Is this your first time here?\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [4] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "yes yep ", 
-               Code = "Say ah well here take this ...\
-say it's a map of our great city.\
-mpecho You see the mayor reach in his desk and \
-mpecho pull out a holo map\
-mpoload 6842\
-give map $n\
-Say have a good time.\
-", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [24] = "quarrenese", 
-               [5] = "mon calamarian", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
-         }, 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "&c Mayor of Domed City", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&c Mayor of Domed City stands here always ready to talk.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "key", 
+         Description = "A silver key lays here.", 
+         Cost = 0, 
          Vnum = 6821, 
-         ArmorClass = -50, 
+         ShortDescr = "a key", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "Mayor", 
+         Weight = 1, 
       }, 
       [6822] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "fish fillet", 
+         Description = "&b A fillet of fish lies here.", 
+         Cost = 0, 
          Vnum = 6822, 
-         ArmorClass = 97, 
+         ShortDescr = "fillet of fish", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "&G Kelp salad", 
+               Description = "&G the salad is comprised of kelp and seaweed. A tasty treat for Quarren.\
+\13", 
+            }, 
+         }, 
          Tag = "", 
-         Name = "remote", 
+         Weight = 1, 
       }, 
       [6823] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 2, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "soup", 
+         Description = "&G A bowl of Algee soup rests here.", 
+         Cost = 10, 
          Vnum = 6823, 
-         ArmorClass = 95, 
+         ShortDescr = "&G A bowl of Algee soup", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "remote", 
+         Weight = 1, 
       }, 
       [6824] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 30, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 3, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "crunch", 
+         Description = "&Y A starfish crunch bar rests here.", 
+         Cost = 5, 
          Vnum = 6824, 
-         ArmorClass = 92, 
+         ShortDescr = "&Y A starfish crunch bar sits here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "remote", 
+         Weight = 1, 
       }, 
       [6825] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 40, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 4, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "lamprey steaks", 
+         Description = "&g A well done lamprey steak warms here.", 
+         Cost = 10, 
          Vnum = 6825, 
-         ArmorClass = 90, 
+         ShortDescr = "&g A well done lamprey steak", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "remote", 
+         Weight = 1, 
       }, 
       [6826] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 5, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Wrist Com-blaster", 
+         Description = "&w XT-3000 Wrist Com-Blaster was left here.", 
+         Cost = 3000, 
          Vnum = 6826, 
-         ArmorClass = 87, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+         }, 
+         ShortDescr = "&w XT-3000 Wrist Com-Blaster ", 
+         ObjectValues = 
+         {
+            [1] = 8, 
+            [2] = 4, 
+            [3] = 6, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [12] = "Wrist", 
+            [13] = "Wield", 
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "remote", 
+         Weight = 10, 
       }, 
       [6827] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 700, 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Coral knife", 
+         Description = "A high-tech Coral knife was left here.", 
+         Cost = 100, 
+         Vnum = 6827, 
          Flags = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
+            [19] = "LargeSize", 
+            [13] = "Inventory", 
          }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ShortDescr = "A high-tech Coral knife ", 
+         ObjectValues = 
          {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "hello hi ", 
-               Code = "Say Hello $n looking for a place to stay?\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Arguments = "yes room cost much", 
-               Code = "Say your safe in the lobby, but if you want to goto the hot-tub room\
-say you have to get me 35 credits!\
-", 
-               ScriptType = "MProg", 
-            }, 
-            [3] = 
-            {
-               MudProgType = "bribe_prog", 
-               Arguments = "35 100", 
-               Code = "say Well have fun $n\
-mptransfer $n 6910\
-", 
-               ScriptType = "MProg", 
-            }, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         Languages = 
+         ItemType = "weapon", 
+         WearFlags = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [24] = "quarrenese", 
-            }, 
+            [0] = "Take", 
+            [13] = "Wield", 
          }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "&G A hotel clerk ", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&G A hotel clerk stands here.\
-", 
-         HitChance = 
+         ExtraDescriptions = 
          {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6827, 
-         ArmorClass = -50, 
          Tag = "", 
-         Name = "hotel clerk", 
+         Weight = 1, 
       }, 
       [6828] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Mon Calamari", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         SpecFuns = 
-         {
-            [0] = "spec_police_attack", 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-            Speaking = 
-            {
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "&y A Quarren Security Officer", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&y A Quarren Security Officer patrol the streets.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 25, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6828, 
-         ArmorClass = 37, 
-         Tag = "", 
-         Name = "police cop security", 
-      }, 
-      [6829] = 
-      {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Mon Calamari", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         SpecFuns = 
-         {
-            [0] = "spec_police_attack", 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-               [24] = "quarrenese", 
-            }, 
-            Speaking = 
-            {
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         VipFlags = 
-         {
-            [5] = "Mon Calamari", 
-         }, 
-         DamRoll = 15, 
-         Description = "", 
-         ShortDescr = "&y A Quarren Security Officer", 
-         Weight = 0, 
-         HitRoll = 15, 
-         Sex = "male", 
-         LongDescr = "&y A Quarren Security Officer patrol the streets.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 10, 
-            HitPlus = 780, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 78, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 7, 
-            DamPlus = 2, 
-         }, 
-         Vnum = 6829, 
-         ArmorClass = -95, 
-         Tag = "", 
-         Name = "police security", 
-      }, 
-      [6830] = 
-      {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 700, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "Automated spear", 
+         Affects = 
          {
             [1] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "hello hi sir ", 
-               Code = "Say hello $n thinking about taking a swim?\
-", 
-               ScriptType = "MProg", 
+               Location = 19, 
+               Modifier = 1, 
             }, 
             [2] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "yes", 
-               Code = "Say Well you can always just swim on the top..\
-say but then you can try your luck swimming to..\
-say the Quarren mine city..\
-stare $n\
-say then again you look to weak to try that.\
-", 
-               ScriptType = "MProg", 
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+         }, 
+         Description = "&p A automated spear was left here.", 
+         Cost = 4100, 
+         Vnum = 6828, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&p A automated spear", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 7, 
+            [3] = 9, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 10, 
+      }, 
+      [6829] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "spear", 
+         Description = "&G A polished spear was left here.", 
+         Cost = 50, 
+         Vnum = 6829, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
+         ShortDescr = "&G A polished spear", 
+         ObjectValues = 
+         {
+            [1] = 500, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 100, 
+         }, 
+         ItemType = "bolt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6830] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "platiki earing", 
+         Description = "&Y A platiki metal earing rests here.", 
+         Cost = 300, 
+         Vnum = 6830, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 3, 
+               Modifier = 1, 
+            }, 
+            [2] = 
+            {
+               Location = 17, 
+               Modifier = -2, 
             }, 
             [3] = 
             {
-               MudProgType = "speech_prog", 
-               Arguments = "no", 
-               Code = "Say Ya well I enjoy just watching the sea to.\
-", 
-               ScriptType = "MProg", 
+               Location = 17, 
+               Modifier = 2, 
             }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
+            [4] = 
             {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
+               Location = 3, 
+               Modifier = 0, 
             }, 
-            Speaking = 
+            [5] = 
             {
-               [5] = "mon calamarian", 
+               Location = 3, 
+               Modifier = 0, 
+            }, 
+            [6] = 
+            {
+               Location = 3, 
+               Modifier = 0, 
+            }, 
+            [7] = 
+            {
+               Location = 3, 
+               Modifier = 1, 
+            }, 
+            [8] = 
+            {
+               Location = 3, 
+               Modifier = 0, 
+            }, 
+            [9] = 
+            {
+               Location = 3, 
+               Modifier = 0, 
+            }, 
+            [10] = 
+            {
+               Location = 3, 
+               Modifier = -1, 
             }, 
          }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "&b Tired old seaman", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "male", 
-         LongDescr = "&BTired old seaman rests here staring into the water.\
-", 
-         HitChance = 
+         ShortDescr = "A platiki metal earing", 
+         ObjectValues = 
          {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
+         ItemType = "comlink", 
+         WearFlags = 
          {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
+            [0] = "Take", 
+            [16] = "Ears", 
          }, 
-         Vnum = 6830, 
-         ArmorClass = -50, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "Tired old seaman", 
+         Weight = 1, 
       }, 
       [6831] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 700, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ActionDescription = "", 
+         Layers = 3, 
+         Name = "Kelp shirt", 
+         Affects = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-               Code = "if race($n) != mon calamari\
-   say Your not allowed down here!\
-     mpforce $n n\
- else\
-   say Welcome to our city Calamrian.\
-   mptransfer $n 6943\
-endif\
-", 
-               ScriptType = "MProg", 
+               Location = 17, 
+               Modifier = 2, 
             }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "Standing at his post in the checkpoint, this guard looks more than a little\
-bored afterall who would be stupid enough to try to board and attack a\
-capital ship. Maybe you. \
-", 
-         ShortDescr = "Security Guard", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Security Guard\
-", 
-         HitChance = 
-         {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 600, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 60, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 6, 
-            DamPlus = 2, 
-         }, 
+         Description = "&g A Kelp shirt was left here.", 
+         Cost = 2500, 
          Vnum = 6831, 
-         ArmorClass = -50, 
+         Flags = 
+         {
+            [8] = "Bless", 
+            [31] = "HumanSize", 
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&g A Kelp shirt", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+            [10] = "About", 
+            [3] = "Body", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "guard", 
+         Weight = 2, 
       }, 
       [6832] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ActionDescription = "", 
+         Layers = 2, 
+         Name = "belt", 
+         Affects = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-               Code = "if race($n) != quarren\
-  say Your not allowed down here!\
-  mpforce $n w\
- else\
-  Say Welcome Quarren to your city!\
-    mptransfer $n 6943\
-endif\
-", 
-               ScriptType = "MProg", 
+               Location = 5, 
+               Modifier = 1, 
             }, 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "Quarren Guard", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Quarren Guard stands here.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 1, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
+         Description = "&p A lamprey skin belt was left here.", 
+         Cost = 0, 
          Vnum = 6832, 
-         ArmorClass = 0, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&p A lamprey skin belt", 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [11] = "Waist", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "belt leather", 
+               Description = "This belt is made of a fine leather, braided for strength. You can get\
+\13it at the Darkhaven Academy.\
+\13", 
+            }, 
+         }, 
          Tag = "", 
-         Name = "Guard", 
+         Weight = 2, 
       }, 
       [6833] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Quarren", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         NumberOfAttacks = 0, 
-         MudProgs = 
+         ActionDescription = "", 
+         Layers = 64, 
+         Name = "vest", 
+         Affects = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-               Code = "Say &c Hello, welcome to the first bank of Mon , \
-Say Here your money is safe with us.\
-smile\
-mpecho You are reasured of that fact as you feal a red\
-mpecho laser beam scan you for your bio-info.\
-", 
-               ScriptType = "MProg", 
+               Location = 14, 
+               Modifier = -10, 
             }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
+            [2] = 
             {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
+               Location = 17, 
+               Modifier = 5, 
             }, 
-            Speaking = 
+            [3] = 
             {
-               [24] = "quarrenese", 
+               Location = 17, 
+               Modifier = 15, 
             }, 
          }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "&G A Quarren First Bank of Mon bank clerk", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "female", 
-         LongDescr = "&G A Quarren First Bank of Mon bank clerk stands here counting the intake.\
-", 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 50, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
-         }, 
+         Description = "&B A Security Officers's vest lays here.", 
+         Cost = 100, 
          Vnum = 6833, 
-         ArmorClass = -25, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&B A Security Officers's vest ", 
+         ObjectValues = 
+         {
+            [1] = 7, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "clerk bank", 
+         Weight = 1, 
       }, 
       [6834] = 
       {
-         Stats = 
-         {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Wookiee", 
-         Alignment = 0, 
+         ActionDescription = "", 
+         Layers = 1, 
+         Name = "shield", 
+         Description = "&b Quarren miner's Blast Shield rests here.", 
+         Cost = 0, 
+         Vnum = 6834, 
          Flags = 
          {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
+            [19] = "LargeSize", 
          }, 
-         NumberOfAttacks = 6, 
-         MudProgs = 
+         ShortDescr = "&b Quarren miner's Blast Shield", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6835] = 
+      {
+         ActionDescription = "", 
+         Layers = 1, 
+         Name = "pants", 
+         Description = "Quarren miner's pants was left here.", 
+         Cost = 300, 
+         Vnum = 6835, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "Quarren miner's pants", 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [5] = "Legs", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 5, 
+      }, 
+      [6836] = 
+      {
+         ActionDescription = "", 
+         Layers = 64, 
+         Name = "leg guards", 
+         Affects = 
          {
             [1] = 
             {
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-               Code = "if race($n) != wookiee\
-say I'll Kill you!!\
-mpkill $n \
-else\
-say Please help me back to my planet\
-endif\
-", 
-               ScriptType = "MProg", 
+               Location = 37, 
+               Modifier = 4, 
             }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
+            [2] = 
             {
-               [1] = "shyriiwook", 
+               Location = 37, 
+               Modifier = -4, 
             }, 
-            Speaking = 
+            [3] = 
             {
-               [1] = "shyriiwook", 
+               Location = 40, 
+               Modifier = 5, 
             }, 
          }, 
-         DamRoll = 6, 
-         Description = "", 
-         ShortDescr = "&z Tacebeca, Wookiee repair tech", 
-         Weight = 0, 
-         HitRoll = 6, 
-         Sex = "male", 
-         LongDescr = "&z Tacebeca, Wookiee repair tech is waiting trial here.\
-", 
-         HitChance = 
+         Description = "Leg blast guards were droped here.", 
+         Cost = 450, 
+         Vnum = 6836, 
+         Flags = 
          {
-            HitNoDice = 8, 
-            HitSizeDice = 10, 
-            HitPlus = 400, 
+            [19] = "LargeSize", 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 200, 
-         Level = 40, 
-         Damage = 
+         ShortDescr = "Leg blast guards", 
+         ObjectValues = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 0, 
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
          }, 
-         Vnum = 6834, 
-         ArmorClass = 20, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [5] = "Legs", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Tag = "", 
-         Name = "wookiee male Tacebeca", 
+         Weight = 1, 
+      }, 
+      [6837] = 
+      {
+         ActionDescription = "", 
+         Layers = 1, 
+         Name = "sleeves", 
+         Description = "Miner's protective sleeves were carelessly left here.", 
+         Cost = 20, 
+         Vnum = 6837, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "Miner's protective sleeves", 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [8] = "Arms", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 3, 
       }, 
       [6838] = 
       {
-         Stats = 
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "boots", 
+         Affects = 
          {
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
+            [1] = 
+            {
+               Location = 14, 
+               Modifier = -20, 
+            }, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Race = "Human", 
-         Alignment = 0, 
+         Description = "&B Quarren Miner's boots were left here.", 
+         Cost = 125, 
+         Vnum = 6838, 
          Flags = 
          {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
+            [19] = "LargeSize", 
          }, 
-         NumberOfAttacks = 0, 
-         Languages = 
+         ShortDescr = "&B Quarren Miner's boots", 
+         ObjectValues = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            [1] = 8, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
-         DamRoll = 0, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         Weight = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitChance = 
+         ItemType = "armor", 
+         WearFlags = 
          {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 40, 
+            [0] = "Take", 
+            [6] = "Feet", 
          }, 
-         DefaultPosition = "standing", 
-         Credits = 0, 
-         Level = 4, 
-         Damage = 
+         ExtraDescriptions = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
          }, 
-         Vnum = 6838, 
-         ArmorClass = 90, 
          Tag = "", 
-         Name = "", 
+         Weight = 1, 
+      }, 
+      [6839] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "earings", 
+         Description = "&y A platiki metal earing was left here &x", 
+         Cost = 299, 
+         Vnum = 6839, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&y A platiki metal earing", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [16] = "Ears", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 5, 
+      }, 
+      [6840] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "wrist cuffs", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 17, 
+               Modifier = 5, 
+            }, 
+         }, 
+         Description = "&R Miner's cuffs were left here.", 
+         Cost = 499, 
+         Vnum = 6840, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+         }, 
+         ShortDescr = "&R Miner's cuffs", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 12, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "wrist cuffs", 
+               Description = "These metal cuffs are worn by most of the miner's to protect their wrist\
+\13form blast debris , but normal citizens started wearing them as\
+\13fashion.\
+\13", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6841] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "ring", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+            [2] = 
+            {
+               Location = 19, 
+               Modifier = 1, 
+            }, 
+            [3] = 
+            {
+               Location = 25, 
+               Modifier = 1, 
+            }, 
+         }, 
+         Description = "&P A coral ring was dropped here.", 
+         Cost = 1000, 
+         Vnum = 6841, 
+         Flags = 
+         {
+            [19] = "LargeSize", 
+            [13] = "Inventory", 
+         }, 
+         ShortDescr = "&R&GCoral Ring&R&W", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "crystal", 
+         WearFlags = 
+         {
+            [1] = "Finger", 
+            [0] = "Take", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6842] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "map", 
+         Description = "A data map of the city was left here.", 
+         Cost = 0, 
+         Vnum = 6842, 
+         ShortDescr = "A data map of the city", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "map", 
+               Description = "Cells -   C|   B|   A |\
+\13            -----------|\
+\13                         |\
+\13                         |  |Mayor\
+\13            Security | --|--|--|Defense\
+\13                         |\
+\13            --|-----|----|----|------|---\
+\13          /  A    J      W    EX      S   \\\
+\13          -----|----|------|-----|------|------\
+\13            \\                               /\
+\13              ------|----|-----|-----|---|-- \
+\13                    B    M     Q     T   L\
+\13 \
+\13Key A- armory    B- Bank     J- jewler    L - Library   M - Mine office\
+\13Q - Quarren training     S- Seabird grill   T-Tavern  W-Weapons\
+\13", 
+            }, 
+         }, 
+         Tag = "", 
+         Weight = 1, 
+      }, 
+      [6899] = 
+      {
+         ActionDescription = "", 
+         Layers = 0, 
+         Name = "boots", 
+         Description = "Large water boots", 
+         Cost = 125, 
+         Vnum = 6899, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 17, 
+               Modifier = 30, 
+            }, 
+            [2] = 
+            {
+               Location = 14, 
+               Modifier = -20, 
+            }, 
+         }, 
+         ShortDescr = "Large water boots", 
+         ObjectValues = 
+         {
+            [1] = 8, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [6] = "Feet", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tag = "", 
+         Weight = 1, 
       }, 
    }, 
-   LowEconomy = 999519544, 
+   ResetFrequency = 0, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         First = 6800, 
+         Last = 7200, 
+      }, 
+      Mob = 
+      {
+         First = 6800, 
+         Last = 6838, 
+      }, 
+      Object = 
+      {
+         First = 6800, 
+         Last = 6899, 
+      }, 
+   }, 
+   Filename = "quarren.lua", 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+      Hard = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+   }, 
    Name = "Quarren Mine City", 
+   HighEconomy = -1, 
 }

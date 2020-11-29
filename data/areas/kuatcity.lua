@@ -1077,7 +1077,7 @@ AreaEntry
       [132] = 
       {
          Arg2 = 1, 
-         Arg1 = 329, 
+         Arg1 = 40, 
          MiscData = 1, 
          Command = "G", 
          Arg3 = 0, 
@@ -1109,7 +1109,7 @@ AreaEntry
       [136] = 
       {
          Arg2 = 1, 
-         Arg1 = 305, 
+         Arg1 = 8, 
          MiscData = 1, 
          Command = "G", 
          Arg3 = 0, 
@@ -1637,7 +1637,7 @@ AreaEntry
       [202] = 
       {
          Arg2 = 1, 
-         Arg1 = 324, 
+         Arg1 = 29, 
          MiscData = 1, 
          Command = "G", 
          Arg3 = 0, 

@@ -151,13 +151,16 @@ static void LoadResident(lua_State *L, size_t idx, std::shared_ptr<Home> home)
 
 static int L_HomeEntryFull(lua_State *L)
 {
-    vnum_t vnum = INVALID_VNUM;
-    LuaGetfieldLong(L, "Vnum", &vnum);
-    auto room = GetRoom(vnum);
+    std::shared_ptr<Room> room;
+    LuaGetfieldString(L, "Vnum",
+                      [&room](const auto &vnumOrTag)
+                      {
+                          room = GetRoom(vnumOrTag);
+                      });
 
     if(room != nullptr)
     {
-        auto home = Homes->FindByVnum(vnum);
+        auto home = Homes->FindByVnum(room->Vnum);
 
         if(home != nullptr)
         {

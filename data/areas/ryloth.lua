@@ -231,7 +231,7 @@ AreaEntry
          Arg3 = 820, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [14] = 
       {
@@ -255,7 +255,7 @@ AreaEntry
          Arg3 = 0, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [17] = 
       {
@@ -279,7 +279,7 @@ AreaEntry
          Arg3 = 0, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [20] = 
       {
@@ -295,7 +295,7 @@ AreaEntry
          Arg3 = 873, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [22] = 
       {
@@ -303,7 +303,7 @@ AreaEntry
          Arg3 = 872, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [23] = 
       {
@@ -311,7 +311,7 @@ AreaEntry
          Arg3 = 871, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [24] = 
       {
@@ -319,7 +319,7 @@ AreaEntry
          Arg3 = 869, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [25] = 
       {
@@ -327,7 +327,7 @@ AreaEntry
          Arg3 = 870, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 326, 
+         Arg1 = 48, 
       }, 
       [26] = 
       {
@@ -367,7 +367,7 @@ AreaEntry
          Arg3 = 0, 
          MiscData = 1, 
          Arg2 = 1, 
-         Arg1 = 324, 
+         Arg1 = 29, 
       }, 
       [31] = 
       {

@@ -941,6 +941,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
         pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
         pObjIndex->ItemType = ITEM_TRASH;
         pObjIndex->Weight = 1;
+        pObjIndex->Name = name;
     }
     else
     {
@@ -954,9 +955,17 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
 
         pObjIndex = std::make_shared<ProtoObject>(*cObjIndex);
         pObjIndex->Vnum = vnum;
+
+        if(name.empty())
+        {
+            pObjIndex->Name = pObjIndex->Name;
+        }
+        else
+        {
+            pObjIndex->Name = name;
+        }
     }
     
-    pObjIndex->Name = name;
     pObjIndex->Flags.set(Flag::Obj::Prototype);
     ProtoObjects.insert({ vnum, pObjIndex });
 
@@ -985,6 +994,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->Sex = SEX_NEUTRAL;
         pMobIndex->Stats = Stats(10);
         pMobIndex->Race = RACE_HUMAN;
+        pMobIndex->Name = name;
     }
     else
     {
@@ -997,10 +1007,19 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         }
         
         pMobIndex = std::make_shared<ProtoMobile>(*cMobIndex);
+        pMobIndex->Vnum = vnum;
         pMobIndex->Flags.set(Flag::Mob::Prototype);
+
+        if(name.empty())
+        {
+            pMobIndex->Name = cMobIndex->Name;
+        }
+        else
+        {
+            pMobIndex->Name = name;
+        }
     }
 
-    pMobIndex->Name = name;
     ProtoMobs.insert({ vnum, pMobIndex });
 
     return pMobIndex;

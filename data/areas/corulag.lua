@@ -1518,7 +1518,7 @@ AreaEntry
       [81] = 
       {
          Arg3 = 0, 
-         Arg1 = 324, 
+         Arg1 = 29, 
          Command = "G", 
          MiscData = 1, 
          Arg2 = 1, 

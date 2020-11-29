@@ -87,7 +87,7 @@ AreaEntry
          Arg3 = 0, 
          Arg2 = 1, 
          Command = "G", 
-         Arg1 = 324, 
+         Arg1 = 29, 
          MiscData = 1, 
       }, 
       [9] = 
@@ -471,7 +471,7 @@ AreaEntry
          Arg3 = 0, 
          Arg2 = 1, 
          Command = "G", 
-         Arg1 = 301, 
+         Arg1 = 1, 
          MiscData = 1, 
       }, 
       [57] = 
@@ -487,7 +487,7 @@ AreaEntry
          Arg3 = 0, 
          Arg2 = 1, 
          Command = "G", 
-         Arg1 = 301, 
+         Arg1 = 1, 
          MiscData = 1, 
       }, 
       [59] = 

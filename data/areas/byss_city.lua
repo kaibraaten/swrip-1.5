@@ -440,7 +440,7 @@ mpdamage $n 100\
       [6] = 
       {
          Arg3 = 0, 
-         Arg1 = 301, 
+         Arg1 = 1, 
          Command = "G", 
          MiscData = 1, 
          Arg2 = 1, 
@@ -544,7 +544,7 @@ mpdamage $n 100\
       [19] = 
       {
          Arg3 = 0, 
-         Arg1 = 305, 
+         Arg1 = 8, 
          Command = "G", 
          MiscData = 1, 
          Arg2 = 1, 

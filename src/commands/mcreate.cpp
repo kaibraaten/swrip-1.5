@@ -95,7 +95,9 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
     CharacterToRoom(mob, ch->InRoom);
     Act(AT_IMMORT, "$n waves $s arms about, and $N appears at $s command!",
         ch, NULL, mob, ActTarget::Room);
-    Act(AT_IMMORT, "You wave your arms about, and $N appears at your command!",
+    Act(AT_IMMORT,
+        FormatString("You wave your arms about, and $N (vnum %ld) appears at your command!",
+                     pMobIndex->Vnum),
         ch, NULL, mob, ActTarget::Char);
 
     auto plugin = ch->PCData->Build.Plugin;
