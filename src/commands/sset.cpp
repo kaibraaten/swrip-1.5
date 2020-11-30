@@ -606,37 +606,24 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
             {
                 skill->Teachers.clear();
             }
-            else if(argument[0] == '+')
+            if(Contains(skill->Teachers, argument))
             {
-                std::string teacher = argument.substr(1);
-                auto mob = GetProtoMobile(teacher);
-
-                if(mob != nullptr)
-                {
-                    if(!Contains(skill->Teachers, teacher))
-                    {
-                        skill->Teachers.push_back(teacher);
-                        ch->Echo("Ok.\r\n");
-                    }
-                    else
-                    {
-                        ch->Echo("That mobile is already teacher is this skill.\r\n");
-                    }
-                }
-                else
-                {
-                    ch->Echo("No such mobile: %s\r\n", teacher.c_str());
-                }
-            }
-            else if(argument[0] == '-')
-            {
-                std::string teacher = argument.substr(1);
-                skill->Teachers.remove(teacher);
-                ch->Echo("Ok.\r\n");
+                skill->Teachers.remove(argument);
+                ch->Echo("Removed teacher %s.\r\n", argument.c_str());
             }
             else
             {
-                ch->Echo("Use +<vnum/tag> or -<vnum/tag> or none.\r\n");
+                auto mob = GetProtoMobile(argument);
+
+                if(mob != nullptr)
+                {
+                    skill->Teachers.push_back(argument);
+                    ch->Echo("Added teacher %s.\r\n", argument.c_str());
+                }
+                else
+                {
+                    ch->Echo("No such mobile: %s\r\n", argument.c_str());
+                }
             }
         }
         else
