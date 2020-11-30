@@ -8,7 +8,7 @@ bool IsBadName(std::string name)
                                     {
                                         return StrCmp(badName, name) == 0;
                                     });
-    return foundName.empty();
+    return !foundName.empty();
 }
 
 void AddBadName(std::string name)
