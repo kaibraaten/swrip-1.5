@@ -9,8 +9,6 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-static const char go_ahead_str[] = { static_cast<char>(IAC), static_cast<char>(GA), '\0' };
-
 struct Descriptor::Impl
 {
     char InBuffer[MAX_INBUF_SIZE] = { '\0' };
@@ -203,11 +201,6 @@ bool Descriptor::FlushBuffer(bool fPrompt)
         if(ch->Flags.test(Flag::Plr::Prompt))
         {
             DisplayPrompt(this);
-        }
-
-        if(ch->Flags.test(Flag::Plr::TelnetGA))
-        {
-            WriteToBuffer(go_ahead_str, 0);
         }
     }
 

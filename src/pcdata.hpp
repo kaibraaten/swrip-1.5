@@ -15,15 +15,15 @@ namespace Flag
     {
         enum : size_t
         {
+            _00,
             _01,
-            _02,
             Unauthed,
-            NoRecall,
-            NoIntro,
+            _03,
+            _04,
             Gag,
             Retired,
-            Guest,
-            NoSummon,
+            _07,
+            _08,
             _09,
             NoTitle,
             ShowRoomFlags,

@@ -1690,7 +1690,7 @@ namespace Flag
                 Brief,
                 Combine,
                 Prompt,
-                TelnetGA,
+                _11,
                 Holylight,
                 WizInvis,
                 RoomVnum,
