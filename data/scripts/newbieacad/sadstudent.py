@@ -8,4 +8,5 @@ def on_spawn(mob):
         wait(4.0)
         
 def on_greet(mob, actor):
+    interpret(mob, "close north")
     say(mob, "Don't let it happen to you " + str(actor) + ".")
