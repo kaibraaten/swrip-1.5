@@ -1,5 +1,6 @@
 #include <imp/utility.hpp>
 #include <imp/runtime/intvalue.hpp>
+#include <imp/runtime/stringvalue.hpp>
 #include "impscript/impobject.hpp"
 #include "impscript/funcs/spawnobj_func.hpp"
 #include "mud.hpp"
@@ -21,19 +22,24 @@ std::shared_ptr<Imp::RuntimeValue> SpawnObjFunc::EvalFuncCall(const std::vector<
     
     if(dynamic_cast<Imp::IntValue*>(arg1.get()))
     {
-        vnum_t vnum = std::dynamic_pointer_cast<Imp::IntValue>(arg1)->GetIntValue("spawnobj param 1", where);
+        vnum_t vnum = arg1->GetIntValue("spawnobj param 1", where);
         protoobj = GetProtoObject(vnum);
-
-        if(protoobj == nullptr)
-        {
-            Imp::RuntimeValue::RuntimeError("Nonexistant vnum in spawnobj() param 1", where);
-        }
+    }
+    else if(dynamic_cast<Imp::StringValue*>(arg1.get()))
+    {
+        std::string tag = arg1->GetStringValue("spawnobj param 1", where);
+        protoobj = GetProtoObject(tag);
     }
     else
     {
         Imp::RuntimeValue::RuntimeError("Type error in spawnobj() param 1.", where);
     }
 
+    if(protoobj == nullptr)
+    {
+        Imp::RuntimeValue::RuntimeError("Nonexistant vnum in spawnobj() param 1", where);
+    }
+    
     if(actualParams.size() > 1)
     {
         Imp::CheckNumParams(actualParams, 2, "spawnobj", where);

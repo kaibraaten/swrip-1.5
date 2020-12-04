@@ -21,7 +21,7 @@ std::shared_ptr<Imp::RuntimeValue> WaitFunc::EvalFuncCall(const std::vector<std:
 
     if(dynamic_cast<Imp::FloatValue *>(ptrToWaitDuration.get()))
     {
-        auto duration = std::dynamic_pointer_cast<Imp::FloatValue>(ptrToWaitDuration)->GetFloatValue("wait() param", where);
+        auto duration = ptrToWaitDuration->GetFloatValue("wait() param", where);
 
         if(duration > 0)
         {
