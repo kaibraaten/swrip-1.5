@@ -4,6 +4,8 @@
 #include <queue>
 #include <thread>
 #include <stdexcept>
+#include <sstream>
+#include <cstdlib>
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
@@ -69,13 +71,33 @@ static std::shared_ptr<Imp::Program> MakeProg(const std::string &scriptname,
     return prog;
 }
 
+static std::shared_ptr<Imp::ListValue> GetPaths()
+{
+    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths { std::make_shared<Imp::StringValue>("scripts") };
+
+    const char *envPaths = getenv("IMP_PATH");
+
+    if(envPaths != nullptr)
+    {
+        std::istringstream buf(envPaths);
+
+        for(std::string item; std::getline(buf, item, buf.widen(':')); )
+        {
+            if(!item.empty())
+            {
+                paths.push_back(std::make_shared<Imp::StringValue>(item));
+            }
+        }
+    }
+
+    return std::make_shared<Imp::ListValue>(paths);
+}
+
 static std::shared_ptr<Imp::RuntimeScope> MakeScope()
 {
     auto lib = std::make_shared<Imp::StandardLibrary>();
-    //auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
-    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths{ std::make_shared<Imp::StringValue>("scripts") };
-    globalScope->Assign("__scriptpath__", std::make_shared<Imp::ListValue>(paths));
+    globalScope->Assign("__scriptpath__", GetPaths());
 
     return globalScope;
 }
