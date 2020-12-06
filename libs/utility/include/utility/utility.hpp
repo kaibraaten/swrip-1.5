@@ -10,6 +10,7 @@
 #include <string>
 #include <bitset>
 #include <initializer_list>
+#include <sstream>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
@@ -364,5 +365,22 @@ std::string FlagString(int bitvector, const char *const flagarray[]);
 void AppendToFile(const std::string &file, const std::string &str);
 
 void ForEachLuaFileInDir(const std::string &pathToDir, std::function<void(const std::string &path)> doOnFile);
+
+template<template<class> class ContainerT>
+ContainerT<std::string> Split(const std::string &original, char delim)
+{
+    std::istringstream buf(original);
+    ContainerT<std::string> output;
+    
+    for(std::string item; std::getline(buf, item, buf.widen(delim)); )
+    {
+        if(!item.empty())
+        {
+            output.push_back(item);
+        }
+    }
+
+    return output;
+}
 
 #endif /* include guard */

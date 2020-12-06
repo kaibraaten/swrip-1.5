@@ -70,7 +70,6 @@
 #include "protomob.hpp"
 #include "race.hpp"
 #include "skill.hpp"
-#include "mprog_ext.hpp"
 
  /* Defines by Narn for new mudprog parsing, used as
     return values from mprog_do_command. */
@@ -1877,20 +1876,6 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
     }
 }
 
-// Translate script extensions so that we end up with a
-// legacy script that can be run by the driver.
-static void PreprocessScript(std::string &com_list)
-{
-    MudProgEnvironment env(
-        {
-            std::make_shared<RewriteElIfs>(),
-            std::make_shared<RewriteIfAnd>(),
-            std::make_shared<DiscardComments>(),
-            std::make_shared<ExpandMacros>(Macros)
-        });
-    env.PreprocessScript(com_list);
-}
-
 /*
  * get a random visible player who is in the room with the mob.
  *
@@ -1978,16 +1963,6 @@ void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
     }
 
     auto rndm = GetRandomVisiblePlayerInRoom(mob->InRoom);
-
-    try
-    {
-        PreprocessScript(com_list);
-    }
-    catch(const MudProgException &ex)
-    {
-        ProgBug(ex.what(), mob);
-        return;
-    }
 
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
@@ -2385,7 +2360,7 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                            DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                 MakeScriptName(mob, type));
                         }
                         else
@@ -2426,7 +2401,7 @@ void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                     MakeScriptName(mob, type));
                             }
                             else
@@ -2460,7 +2435,7 @@ void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Charact
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, actor, vo, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                     MakeScriptName(mob, type));
             }
             else
@@ -2624,7 +2599,7 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                            DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                 MakeScriptName(obj, type));
                         }
                         else
@@ -2663,7 +2638,7 @@ void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                     MakeScriptName(obj, type));
                             }
                             else
@@ -2765,7 +2740,7 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                             std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                             auto funcName = data.first;
                             auto params = data.second;
-                            DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                            DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                 MakeScriptName(room, type));
                         }
                         else
@@ -2804,7 +2779,7 @@ void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mo
                                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, actor, arg, type);
                                 auto funcName = data.first;
                                 auto params = data.second;
-                                DispatchImpFunction(funcName, params, SplitIntoLines(mprg->comlist),
+                                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
                                                     MakeScriptName(room, type));
                             }
                             else

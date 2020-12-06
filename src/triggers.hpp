@@ -68,7 +68,6 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMo
 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpRoomProgData(std::shared_ptr<Room> room,
                                                                                            std::shared_ptr<Character> actor,
                                                                                            const Vo &vo, int type);
-std::list<std::string> SplitIntoLines(const std::string &comlist);
 std::string MakeScriptName(std::shared_ptr<Character> mob, int type);
 std::string MakeScriptName(std::shared_ptr<Object> obj, int type);
 std::string MakeScriptName(std::shared_ptr<Room> room, int type);

@@ -61,7 +61,6 @@ namespace fs = std::filesystem;
 #include "repos/storeroomrepository.hpp"
 #include "repos/vendorrepository.hpp"
 #include "repos/homerepository.hpp"
-#include "repos/macrorepository.hpp"
 #include "repos/imprepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
@@ -357,9 +356,6 @@ void BootDatabase(bool fCopyOver)
     ASSIGN_GSN(gsn_yevethan, "yevethan");
     ASSIGN_GSN(gsn_sullustan, "sullustese");
     ASSIGN_GSN(gsn_shipdocking, "ship docking");
-
-    Log->Boot("Loading mudprog macros");
-    Macros->Load();
 
     /*
      * Read in all the area files.
@@ -1134,7 +1130,6 @@ void AllocateRepositories()
     Storerooms = NewStoreroomRepository();
     Vendors = NewVendorRepository();
     Homes = NewHomeRepository();
-    Macros = NewMacroRepository();
     ImpScripts = NewImpRepository();
 }
 

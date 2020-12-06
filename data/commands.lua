@@ -4305,15 +4305,6 @@ CommandEntry
 
 CommandEntry
 {
-   Log = "build", 
-   Function = "do_macro", 
-   Position = "dead", 
-   Name = "macro", 
-   Level = 102, 
-}
-
-CommandEntry
-{
    Log = "normal", 
    Function = "do_questlog", 
    Position = "dead", 

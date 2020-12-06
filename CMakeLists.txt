@@ -62,7 +62,6 @@ src/mapper.cpp
 src/misc.cpp
 src/missile.cpp
 src/mprog.cpp
-src/mprog_ext.cpp
 src/mud_prog.cpp
 src/nanny.cpp
 src/object.cpp
@@ -307,7 +306,6 @@ src/commands/lock.cpp
 src/commands/log.cpp
 src/commands/look.cpp
 src/commands/low_purge.cpp
-src/commands/macro.cpp
 src/commands/mailroom.cpp
 src/commands/makearmor.cpp
 src/commands/makeblade.cpp
@@ -651,7 +649,6 @@ src/repos/helprepository.cpp
 src/repos/imprepository.hpp
 src/repos/lua_arearepository.cpp
 src/repos/lua_homerepository.cpp
-src/repos/lua_macrorepository.cpp
 src/repos/lua_storeroomrepository.cpp
 src/repos/lua_vendorrepository.cpp
 src/repos/objectrepository.cpp
