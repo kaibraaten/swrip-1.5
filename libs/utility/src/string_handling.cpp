@@ -384,7 +384,7 @@ std::string OneArgument(const std::string &argument, std::string &arg_first)
 
     char cEnd = ' ';
 
-    if(*argp == '\'' || *argp == '"')
+    if(argp != argument.end() && (*argp == '\'' || *argp == '"'))
         cEnd = *argp++;
 
     while(argp != argument.end())
@@ -425,7 +425,7 @@ static std::string OneArgument2(const std::string &argument, std::string &arg_fi
 
     char cEnd = ' ';
 
-    if(*argp == '\'' || *argp == '"')
+    if(argp != argument.end() && (*argp == '\'' || *argp == '"'))
         cEnd = *argp++;
 
     while(argp != argument.end())

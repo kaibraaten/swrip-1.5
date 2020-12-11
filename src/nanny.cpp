@@ -51,14 +51,28 @@
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 
-static const char echo_off_str[] = { static_cast<char>(IAC),
-                                     static_cast<char>(WILL),
-                                     TELOPT_ECHO,
-                                     '\0' };
-static const char echo_on_str[] = { static_cast<char>(IAC),
-                                    static_cast<char>(WONT),
-                                    TELOPT_ECHO,
-                                    '\0' };
+static void EchoOff(std::shared_ptr<Descriptor> d)
+{
+#ifndef _WIN32
+    static const char echo_off_str[] = { static_cast<char>(IAC),
+                                         static_cast<char>(WILL),
+                                         TELOPT_ECHO,
+                                         '\0' };
+    d->WriteToBuffer(echo_off_str);
+#endif
+}
+
+static void EchoOn(std::shared_ptr<Descriptor> d)
+{
+#ifndef _WIN32
+    static const char echo_on_str[] = { static_cast<char>(IAC),
+                                        static_cast<char>(WONT),
+                                        TELOPT_ECHO,
+                                        '\0' };
+    d->WriteToBuffer(echo_on_str);
+#endif
+}
+
 /*
  * Local functions
  */
@@ -234,7 +248,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     {
         /* Old player */
         d->WriteToBuffer("Password: ", 0);
-        d->WriteToBuffer(echo_off_str, 0);
+        EchoOff(d);
         d->ConnectionState = ConState::GetOldPassword;
         return;
     }
@@ -273,7 +287,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
         return;
     }
 
-    d->WriteToBuffer(echo_on_str, 0);
+    EchoOn(d);
 
     if(CheckPlaying(d, ch->Name, true))
     {
@@ -339,9 +353,10 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
     {
     case 'y': case 'Y':
         sprintf(buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
-                "\r\nPick a good password for %s: %s",
-                ch->Name.c_str(), echo_off_str);
+                "\r\nPick a good password for %s: ",
+                ch->Name.c_str());
         d->WriteToBuffer(buf, 0);
+        EchoOff(d);
         d->ConnectionState = ConState::GetNewPassword;
         break;
 
@@ -399,7 +414,7 @@ static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string a
         return;
     }
 
-    d->WriteToBuffer(echo_on_str, 0);
+    EchoOn(d);
     AskForRace(d);
     d->ConnectionState = ConState::GetNewRace;
 }

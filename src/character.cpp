@@ -159,7 +159,14 @@ int Character::TopLevel() const
        && pImpl->TopLevel < LEVEL_IMMORTAL
        && SysData.TopLevelFromAbility)
     {
-        return umin(Ability.Level[(int)Ability.Main], 100);
+        if (Ability.Main == AbilityClass::None)
+        {
+            return 0;
+        }
+        else
+        {
+            return umin(Ability.Level[(int)Ability.Main], 100);
+        }
     }
     else
     {
