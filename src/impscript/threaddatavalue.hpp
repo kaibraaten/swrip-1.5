@@ -16,6 +16,7 @@ public:
     bool YesReallyWakeUp = false;
     std::condition_variable &ScriptDone;
     std::condition_variable &WakeUp;
+    bool Abort = false;
 };
 
 #endif
