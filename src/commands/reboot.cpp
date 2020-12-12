@@ -4,6 +4,7 @@
 #include "skill.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "impscript/scriptscheduler.hpp"
 
 void do_reboot(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -21,6 +22,8 @@ void do_reboot(std::shared_ptr<Character> ch, std::string argument)
     {
         do_auction(ch, "stop");
     }
+
+    AbortAllScripts();
 
     sprintf(buf, "Reboot by %s.", ch->Name.c_str());
     do_echo(ch, buf);

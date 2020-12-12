@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "impscript/scriptscheduler.hpp"
 
 void do_shutdown(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -15,9 +16,12 @@ void do_shutdown(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!OngoingAuction->Item.expired())
+    if (!OngoingAuction->Item.expired())
+    {
         do_auction(ch, "stop");
+    }
 
+    AbortAllScripts();
     sprintf(buf, "Shutdown by %s.", ch->Name.c_str());
     AppendFile(ch, SHUTDOWN_FILE, buf);
     strcat(buf, "\r\n");

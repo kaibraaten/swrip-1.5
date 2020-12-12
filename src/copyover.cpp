@@ -42,6 +42,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
+#include "impscript/scriptscheduler.hpp"
 
 #ifdef _WIN32
 #include <process.h>
@@ -63,6 +64,8 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
         perror("do_copyover:fopen");
         return;
     }
+
+    AbortAllScripts();
 
     std::string buf = "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n";
 

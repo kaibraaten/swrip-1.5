@@ -7,5 +7,6 @@ class ScriptRunner;
 
 void Schedule(std::shared_ptr<ScriptRunner> scriptRunner);
 void DispatchScripts();
+void AbortAllScripts();
 
 #endif

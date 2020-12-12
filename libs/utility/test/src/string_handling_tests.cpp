@@ -17,7 +17,6 @@ protected:
     }
 };
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(StringHandlingTests, IsName)
 {
     const std::string haystack = "joe bob johnny bubba jane";
@@ -74,7 +73,6 @@ TEST_F(StringHandlingTests, NiftyIsNamePrefix)
 
     EXPECT_FALSE(NiftyIsNamePrefix("joe foobarbaz", haystack));
 }
-#endif
 
 TEST_F(StringHandlingTests, SmashTilde)
 {
@@ -220,7 +218,6 @@ TEST_F(StringHandlingTests, OneArgument)
     EXPECT_EQ(remainder, "14 apples");
 }
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(StringHandlingTests, OneArgumentEmptyArgument)
 {
     std::string original;
@@ -234,7 +231,6 @@ TEST_F(StringHandlingTests, OneArgumentEmptyArgument)
     EXPECT_EQ(head, "");
     EXPECT_EQ(remainder, "");
 }
-#endif
 
 TEST_F(StringHandlingTests, OneArgument_WithQuotes)
 {

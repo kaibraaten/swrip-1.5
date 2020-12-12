@@ -544,7 +544,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
     EXPECT_NE(timer, nullptr);
 }
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
 {
     const CraftingMaterial material;
@@ -560,7 +559,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
     EXPECT_NE(ptr, nullptr);
     EXPECT_EQ(*ptr, do_craftingengine);
 }
-#endif
 
 TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
 {

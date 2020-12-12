@@ -51,14 +51,12 @@ protected:
     std::shared_ptr<Exit> _destinationExit;
 };
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(FollowTests, FollowCommandMakesLeaderFollowersMaster)
 {
     do_follow(_follower, "leader");
 
     EXPECT_EQ(_follower->Master, _leader);
 }
-#endif
 
 TEST_F(FollowTests, FollowSelfMakesMasterNull)
 {
@@ -69,16 +67,13 @@ TEST_F(FollowTests, FollowSelfMakesMasterNull)
     EXPECT_EQ(_follower->Master, nullptr);
 }
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(FollowTests, FollowNonexistantCharacterDoesNothing)
 {
     do_follow(_follower, "foobarbaz");
 
     EXPECT_EQ(_follower->Master, nullptr);
 }
-#endif
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(FollowTests, MasterIsFollowedIntoNewRoom)
 {
     do_follow(_follower, "leader");
@@ -88,4 +83,3 @@ TEST_F(FollowTests, MasterIsFollowedIntoNewRoom)
     EXPECT_EQ(_follower->InRoom, _leader->InRoom);
     EXPECT_EQ(_follower->InRoom, _toRoom);
 }
-#endif
