@@ -308,15 +308,7 @@ void MobProgScriptTrigger(std::shared_ptr<Character> mob)
                    || mob->mprog.mpscriptpos != 0
                    || atoi(mprg->arglist.c_str()) == time_info.Hour)
                 {
-                    if(mprg->SType == ScriptType::Imp)
-                    {
-                        std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, SCRIPT_PROG);
-                        auto funcName = data.first;
-                        auto params = data.second;
-                        DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
-                                            MakeScriptName(mob, SCRIPT_PROG));
-                    }
-                    else
+                    if(mprg->SType == ScriptType::MProg)
                     {
                         MudProgDriver(mprg->comlist, mob, nullptr, nullptr, nullptr, true);
                     }
@@ -803,10 +795,6 @@ std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> GetImpMo
     else if(type == SPEECH_PROG)
     {
         return { "on_speech", { std::make_shared<ImpCharacter>(mob), std::make_shared<ImpCharacter>(actor), std::make_shared<Imp::StringValue>(vo.Txt) } };
-    }
-    else if(type == SCRIPT_PROG)
-    {
-        return { "on_script", { std::make_shared<ImpCharacter>(mob) } };
     }
     else if(type == HOUR_PROG)
     {
