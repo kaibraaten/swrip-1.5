@@ -24,10 +24,6 @@
 #include <cctype>
 #include <cstring>
 
-#ifndef _WIN32
-#include <arpa/telnet.h>
-#endif
-
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "character.hpp"
@@ -50,28 +46,6 @@
 #include "timer.hpp"
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
-
-static void EchoOff(std::shared_ptr<Descriptor> d)
-{
-#ifndef _WIN32
-    static const char echo_off_str[] = { static_cast<char>(IAC),
-                                         static_cast<char>(WILL),
-                                         TELOPT_ECHO,
-                                         '\0' };
-    d->WriteToBuffer(echo_off_str);
-#endif
-}
-
-static void EchoOn(std::shared_ptr<Descriptor> d)
-{
-#ifndef _WIN32
-    static const char echo_on_str[] = { static_cast<char>(IAC),
-                                        static_cast<char>(WONT),
-                                        TELOPT_ECHO,
-                                        '\0' };
-    d->WriteToBuffer(echo_on_str);
-#endif
-}
 
 /*
  * Local functions
@@ -175,13 +149,13 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     if(!IsNameAcceptable(argument))
     {
-        d->WriteToBuffer("Illegal name, try another.\r\nName: ", 0);
+        d->WriteToBuffer("Illegal name, try another.\r\nName: ");
         return;
     }
 
     if(CheckPlaying(d, argument, false) == BERR)
     {
-        d->WriteToBuffer("Name: ", 0);
+        d->WriteToBuffer("Name: ");
         return;
     }
 
@@ -190,7 +164,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     if(!d->Char)
     {
         Log->Bug("Bad player file %s@%s.", argument.c_str(), d->Remote.Hostname.c_str());
-        d->WriteToBuffer("Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0);
+        d->WriteToBuffer("Your playerfile is corrupt... Please notify mail@mymud.com\r\n");
         CloseDescriptor(d, false);
         return;
     }
@@ -206,7 +180,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     if(pban != nullptr)
     {
-        d->WriteToBuffer("Your site has been banned from this Mud.\r\n", 0);
+        d->WriteToBuffer("Your site has been banned from this Mud.\r\n");
         CloseDescriptor(d, false);
         return;
     }
@@ -217,7 +191,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
                                    argument.c_str(), d->Remote.Hostname.c_str());
         Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
 
-        d->WriteToBuffer("You are denied access.\r\n", 0);
+        d->WriteToBuffer("You are denied access.\r\n");
         CloseDescriptor(d, false);
         return;
     }
@@ -237,8 +211,8 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     {
         if(wizlock && !IsImmortal(ch))
         {
-            d->WriteToBuffer("The game is wizlocked. Only immortals can connect now.\r\n", 0);
-            d->WriteToBuffer("Please try back later.\r\n", 0);
+            d->WriteToBuffer("The game is wizlocked. Only immortals can connect now.\r\n");
+            d->WriteToBuffer("Please try back later.\r\n");
             CloseDescriptor(d, false);
             return;
         }
@@ -247,8 +221,8 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     if(fOld)
     {
         /* Old player */
-        d->WriteToBuffer("Password: ", 0);
-        EchoOff(d);
+        d->WriteToBuffer("Password: ");
+        d->EchoOff();
         d->ConnectionState = ConState::GetOldPassword;
         return;
     }
@@ -256,15 +230,15 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     {
         if(IsBadName(ch->Name))
         {
-            d->WriteToBuffer("\r\nThat name is unacceptable, please choose another.\r\n", 0);
-            d->WriteToBuffer("Name: ", 0);
+            d->WriteToBuffer("\r\nThat name is unacceptable, please choose another.\r\n");
+            d->WriteToBuffer("Name: ");
             d->ConnectionState = ConState::GetName;
             return;
         }
 
-        d->WriteToBuffer("\r\nI don't recognize your name, you must be new here.\r\n\r\n", 0);
+        d->WriteToBuffer("\r\nI don't recognize your name, you must be new here.\r\n\r\n");
         sprintf(buf, "Did I get that right, %s (Y/N)? ", argument.c_str());
-        d->WriteToBuffer(buf, 0);
+        d->WriteToBuffer(buf);
         d->ConnectionState = ConState::ConfirmNewName;
         return;
     }
@@ -280,14 +254,14 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     if(StrCmp(EncodeString(argument), ch->PCData->Password))
     {
-        d->WriteToBuffer("Wrong password.\r\n", 0);
+        d->WriteToBuffer("Wrong password.\r\n");
         /* clear descriptor pointer to get rid of bug message in log */
         d->Char->Desc = NULL;
         CloseDescriptor(d, false);
         return;
     }
 
-    EchoOn(d);
+    d->EchoOn();
 
     if(CheckPlaying(d, ch->Name, true))
     {
@@ -335,7 +309,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
         Log->LogStringPlus(logBuf, LogType::Comm, ch->TopLevel());
     }
 
-    d->WriteToBuffer("Press enter...\r\n", 0);
+    d->WriteToBuffer("Press enter...\r\n");
     d->ConnectionState = ConState::PressEnter;
 
     if(ch->PCData->Build.Area)
@@ -355,22 +329,22 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
         sprintf(buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
                 "\r\nPick a good password for %s: ",
                 ch->Name.c_str());
-        d->WriteToBuffer(buf, 0);
-        EchoOff(d);
+        d->WriteToBuffer(buf);
+        d->EchoOff();
         d->ConnectionState = ConState::GetNewPassword;
         break;
 
     case 'n': case 'N':
-        d->WriteToBuffer("Ok, what IS it, then? ", 0);
+        d->WriteToBuffer("Ok, what IS it, then? ");
         /* clear descriptor pointer to get rid of bug message in log */
-        d->Char->Desc = NULL;
+        d->Char->Desc = nullptr;
         FreeCharacter(d->Char);
-        d->Char = NULL;
+        d->Char = nullptr;
         d->ConnectionState = ConState::GetName;
         break;
 
     default:
-        d->WriteToBuffer("Please type Yes or No. ", 0);
+        d->WriteToBuffer("Please type Yes or No. ");
         break;
     }
 }
@@ -397,7 +371,7 @@ static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argum
     }
 
     ch->PCData->Password = pwdnew;
-    d->WriteToBuffer("\r\nPlease retype the password to confirm: ", 0);
+    d->WriteToBuffer("\r\nPlease retype the password to confirm: ");
     d->ConnectionState = ConState::ConfirmNewPassword;
 }
 
@@ -409,12 +383,12 @@ static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string a
 
     if(StrCmp(EncodeString(argument), ch->PCData->Password))
     {
-        d->WriteToBuffer("Passwords don't match.\r\nRetype password: ", 0);
+        d->WriteToBuffer("Passwords don't match.\r\nRetype password: ");
         d->ConnectionState = ConState::GetNewPassword;
         return;
     }
 
-    EchoOn(d);
+    d->EchoOn();
     AskForRace(d);
     d->ConnectionState = ConState::GetNewRace;
 }
@@ -436,7 +410,7 @@ static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
         break;
 
     default:
-        d->WriteToBuffer("That's not a sex.\r\n", 0);
+        d->WriteToBuffer("That's not a sex.\r\n");
         AskForGender(d);
         return;
     }
@@ -456,14 +430,14 @@ static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
     if(!StrCmp(arg, "help"))
     {
         do_help(ch, argument);
-        d->WriteToBuffer("Please choose a race: ", 0);
+        d->WriteToBuffer("Please choose a race: ");
         return;
     }
 
     if(!StrCmp(arg, "showstat"))
     {
         do_showstatistic(ch, argument);
-        d->WriteToBuffer("Please choose a race: ", 0);
+        d->WriteToBuffer("Please choose a race: ");
         return;
     }
 
@@ -483,7 +457,7 @@ static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
     if(iRace == MAX_RACE || iRace == RACE_GOD
        || IsNullOrEmpty(RaceTable[iRace].Name))
     {
-        d->WriteToBuffer("That's not a race.\r\n", 0);
+        d->WriteToBuffer("That's not a race.\r\n");
         AskForRace(d);
         return;
     }
@@ -512,7 +486,7 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
     if(!StrCmp(arg, "help"))
     {
         do_help(ch, argument);
-        d->WriteToBuffer("Please choose an ability class: ", 0);
+        d->WriteToBuffer("Please choose an ability class: ");
         return;
     }
 
@@ -530,12 +504,12 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
        || (iClass == (int)AbilityClass::Force && !SysData.CanChooseJedi)
        || IsNullOrEmpty(AbilityName[iClass]))
     {
-        d->WriteToBuffer("That's not a skill class.\r\n", 0);
+        d->WriteToBuffer("That's not a skill class.\r\n");
         AskForClass(d);
         return;
     }
 
-    d->WriteToBuffer("\r\nRolling stats....\r\n", 0);
+    d->WriteToBuffer("\r\nRolling stats....\r\n");
     AskForStats(d);
     d->ConnectionState = ConState::StatsOk;
 }
@@ -555,7 +529,7 @@ static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
         AskForStats(d);
         return;
     default:
-        d->WriteToBuffer("Invalid selection.\r\nYES or NO? ", 0);
+        d->WriteToBuffer("Invalid selection.\r\nYES or NO? ");
         return;
     }
 
@@ -579,19 +553,19 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 
     if(IsImmortal(ch))
     {
-        ch->Echo("&WImmortal Message of the Day&w\r\n");
+        ch->Echo("&WImmortal Message of the Day&d\r\n");
         do_help(ch, "imotd");
     }
 
     if(ch->TopLevel() > 0)
     {
-        ch->Echo("\r\n&WMessage of the Day&w\r\n");
+        ch->Echo("\r\n&WMessage of the Day&d\r\n");
         do_help(ch, "motd");
     }
 
     if(ch->TopLevel() >= 100)
     {
-        ch->Echo("\r\n&WAvatar Message of the Day&w\r\n");
+        ch->Echo("\r\n&WAvatar Message of the Day&d\r\n");
         do_help(ch, "amotd");
     }
 
@@ -866,7 +840,7 @@ bool IsNameAcceptable(const std::string &name)
 
 static void AskForGender(std::shared_ptr<Descriptor> d)
 {
-    d->WriteToBuffer("\r\nWhat is your sex (M/F)? ", 0);
+    d->WriteToBuffer("\r\nWhat is your sex (M/F)? ");
 }
 
 static void AskForRace(std::shared_ptr<Descriptor> d)
@@ -876,7 +850,7 @@ static void AskForRace(std::shared_ptr<Descriptor> d)
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf2[MAX_STRING_LENGTH];
 
-    d->WriteToBuffer("\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0);
+    d->WriteToBuffer("\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n");
 
     for(iRace = 0; iRace < MAX_RACE; iRace++)
     {
@@ -897,7 +871,7 @@ static void AskForRace(std::shared_ptr<Descriptor> d)
                 strcat(buf, "\r\n");
             }
 
-            d->WriteToBuffer(buf, 0);
+            d->WriteToBuffer(buf);
             buf[0] = '\0';
         }
     }
@@ -908,7 +882,7 @@ static void AskForRace(std::shared_ptr<Descriptor> d)
     }
 
     strcat(buf, ": ");
-    d->WriteToBuffer(buf, 0);
+    d->WriteToBuffer(buf);
 }
 
 static void AskForClass(std::shared_ptr<Descriptor> d)
@@ -917,7 +891,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
     char buf2[MAX_STRING_LENGTH];
     int columns = 0;
 
-    d->WriteToBuffer("\r\nPlease choose a main ability from the following classes:\r\n", 0);
+    d->WriteToBuffer("\r\nPlease choose a main ability from the following classes:\r\n");
 
     for(int iClass = 0; iClass < (int)AbilityClass::Max; iClass++)
     {
@@ -936,7 +910,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
                 strcat(buf, "\r\n");
             }
 
-            d->WriteToBuffer(buf, 0);
+            d->WriteToBuffer(buf);
             buf[0] = '\0';
         }
     }
@@ -947,7 +921,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
     }
 
     strcat(buf, ": ");
-    d->WriteToBuffer(buf, 0);
+    d->WriteToBuffer(buf);
 }
 
 static void AskForStats(std::shared_ptr<Descriptor> d)
@@ -973,8 +947,8 @@ static void AskForStats(std::shared_ptr<Descriptor> d)
             ch->PermStats.Str, ch->PermStats.Int, ch->PermStats.Wis,
             ch->PermStats.Dex, ch->PermStats.Con, ch->PermStats.Cha);
 
-    d->WriteToBuffer(buf, 0);
-    d->WriteToBuffer("\r\nAre these stats OK, (Y/N)? ", 0);
+    d->WriteToBuffer(buf);
+    d->WriteToBuffer("\r\nAre these stats OK, (Y/N)? ");
 }
 
 static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
@@ -985,8 +959,7 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
                                RaceTable[ch->Race].Name);
     Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
     ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
-    d->WriteToBuffer("Press [ENTER] ", 0);
-    d->WriteToBuffer("Press enter...\r\n", 0);
+    d->WriteToBuffer("Press [ENTER]\r\n");
 
     for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
     {

@@ -355,9 +355,9 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
 
     if(ch->Desc && ch->Desc->SnoopBy)
     {
-        ch->Desc->SnoopBy->WriteToBuffer(ch->Name, 0);
+        ch->Desc->SnoopBy->WriteToBuffer(ch->Name);
         ch->Desc->SnoopBy->WriteToBuffer("% ", 2);
-        ch->Desc->SnoopBy->WriteToBuffer(logline, 0);
+        ch->Desc->SnoopBy->WriteToBuffer(logline);
         ch->Desc->SnoopBy->WriteToBuffer("\r\n", 2);
     }
 
