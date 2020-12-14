@@ -28,7 +28,7 @@ public:
 
 void LuaShipRepository::Save(std::shared_ptr<Ship> ship) const
 {
-    if (ship->Class == SHIP_DEBRIS)
+    if(ship->Class == SHIP_DEBRIS)
     {
         return;
     }
@@ -38,7 +38,7 @@ void LuaShipRepository::Save(std::shared_ptr<Ship> ship) const
 
 void LuaShipRepository::Save() const
 {
-    for (auto ship : Entities())
+    for(auto ship : Entities())
     {
         Save(ship);
     }
@@ -123,12 +123,12 @@ static void PushTractorBeam(lua_State *L, std::shared_ptr<Ship> ship)
     lua_settable(L, -3);
 }
 
-static void PushTurrets(lua_State *L, const std::vector<Turret*> &turrets)
+static void PushTurrets(lua_State *L, const std::vector<Turret *> &turrets)
 {
     lua_pushstring(L, "Turrets");
     lua_newtable(L);
 
-    for (int idx = 0; idx < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++idx)
+    for(int idx = 0; idx < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++idx)
     {
         PushTurret(L, turrets[idx], idx);
     }
@@ -222,7 +222,7 @@ static void LoadInstruments(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Instruments");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "AstroArray", &ship->Instruments.AstroArray);
         LuaGetfieldInt(L, "Comm", &ship->Instruments.Comm);
@@ -237,7 +237,7 @@ static void LoadThrusters(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Thrusters");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "Maneuver", &ship->Thrusters.Maneuver);
         LoadCurrentAndMax(L, "Speed", ship->Thrusters.Speed);
@@ -253,7 +253,7 @@ static void LoadHyperdrive(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Hyperdrive");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "Speed", &ship->Hyperdrive.Speed);
     }
@@ -266,7 +266,7 @@ static void LoadTube(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Tube");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "State", &ship->WeaponSystems.Tube.State);
         LoadCurrentAndMax(L, "Missiles", ship->WeaponSystems.Tube.Missiles);
@@ -282,7 +282,7 @@ static void LoadLaser(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Laser");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "Count", &ship->WeaponSystems.Laser.Count);
         LuaGetfieldInt(L, "State", &ship->WeaponSystems.Laser.State);
@@ -296,7 +296,7 @@ static void LoadIonCannon(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "IonCannon");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "Count", &ship->WeaponSystems.IonCannon.Count);
         LuaGetfieldInt(L, "State", &ship->WeaponSystems.IonCannon.State);
@@ -310,7 +310,7 @@ static void LoadTractorBeam(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "TractorBeam");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldInt(L, "Strength", &ship->WeaponSystems.TractorBeam.Strength);
         LuaGetfieldInt(L, "State", &ship->WeaponSystems.TractorBeam.State);
@@ -324,11 +324,11 @@ static void LoadTurrets(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Turrets");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
             size_t arraySubscript = lua_tointeger(L, -2);
             LoadTurret(L, ship->WeaponSystems.Turrets[arraySubscript]);
@@ -344,7 +344,7 @@ static void LoadWeaponSystems(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "WeaponSystems");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LoadTube(L, ship);
         LoadLaser(L, ship);
@@ -361,7 +361,7 @@ static void LoadDefenses(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Defenses");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LoadCurrentAndMax(L, "Hull", ship->Defenses.Hull);
         LoadCurrentAndMax(L, "Shield", ship->Defenses.Shield);
@@ -376,7 +376,7 @@ static void LoadRooms(lua_State *L, std::shared_ptr<Ship> ship)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Rooms");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldLong(L, "First", &ship->Rooms.First);
         LuaGetfieldLong(L, "Last", &ship->Rooms.Last);
@@ -420,25 +420,25 @@ static int L_ShipEntry(lua_State *L)
     LuaGetfieldString(L, "Pilot", &ship->Pilot);
     LuaGetfieldString(L, "CoPilot", &ship->CoPilot);
     LuaGetfieldString(L, "Class",
-        [ship](const std::string &className)
-    {
-        ship->Class = GetShipClass(className);
-    });
+                      [ship](const std::string &className)
+                      {
+                          ship->Class = GetShipClass(className);
+                      });
     LuaGetfieldVnumOrTag(L, "Shipyard", &ship->Shipyard);
     LuaGetfieldVnumOrTag(L, "Location", &ship->Location);
     LuaGetfieldVnumOrTag(L, "LastDock", &ship->LastDock);
     LuaGetfieldString(L, "Type",
-        [ship](const std::string typeName)
-    {
-        ship->Type = GetShipType(typeName);
-    });
+                      [ship](const std::string typeName)
+                      {
+                          ship->Type = GetShipType(typeName);
+                      });
     LuaGetfieldInt(L, "State", &ship->State);
     LuaGetfieldBool(L, "Alarm", &ship->Alarm);
     LuaGetfieldInt(L, "DockingPorts", &ship->DockingPorts);
     LuaGetfieldBool(L, "Guard", &ship->Guard);
     LuaGetfieldString(L, "Home", &ship->Home);
 
-    LuaLoadVector3(L, ship->Position, "Position");
+    ship->Position = LuaLoadVector3(L, "Position");
     LoadInstruments(L, ship);
     LoadThrusters(L, ship);
     LoadHyperdrive(L, ship);
@@ -455,63 +455,63 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
     std::shared_ptr<Clan> clan;
     std::shared_ptr<Room> room;
 
-    if (!IsShipDisabled(ship))
+    if(!IsShipDisabled(ship))
     {
         ship->State = SHIP_LANDED;
     }
 
-    if (ship->WeaponSystems.Laser.State != LASER_DAMAGED)
+    if(ship->WeaponSystems.Laser.State != LASER_DAMAGED)
     {
         ship->WeaponSystems.Laser.State = LASER_READY;
     }
 
-    if (ship->WeaponSystems.IonCannon.State != LASER_DAMAGED)
+    if(ship->WeaponSystems.IonCannon.State != LASER_DAMAGED)
     {
         ship->WeaponSystems.IonCannon.State = LASER_READY;
     }
 
-    if (ship->WeaponSystems.Tube.State != MISSILE_DAMAGED)
+    if(ship->WeaponSystems.Tube.State != MISSILE_DAMAGED)
     {
         ship->WeaponSystems.Tube.State = MISSILE_READY;
     }
 
-    if (ship->Shipyard <= 0)
+    if(ship->Shipyard <= 0)
     {
         ship->Shipyard = ROOM_LIMBO_SHIPYARD;
     }
 
-    if (ship->LastDock <= 0)
+    if(ship->LastDock <= 0)
     {
         ship->LastDock = ship->Shipyard;
     }
 
-    if (ship->Rooms.Navseat <= 0)
+    if(ship->Rooms.Navseat <= 0)
     {
         ship->Rooms.Navseat = ship->Rooms.Cockpit;
     }
 
-    if (ship->Rooms.Gunseat <= 0)
+    if(ship->Rooms.Gunseat <= 0)
     {
         ship->Rooms.Gunseat = ship->Rooms.Cockpit;
     }
 
-    if (ship->Rooms.Coseat <= 0)
+    if(ship->Rooms.Coseat <= 0)
     {
         ship->Rooms.Coseat = ship->Rooms.Cockpit;
     }
 
-    if (ship->Rooms.Pilotseat <= 0)
+    if(ship->Rooms.Pilotseat <= 0)
     {
         ship->Rooms.Pilotseat = ship->Rooms.Cockpit;
     }
 
-    if (ship->Type == SHIP_REBEL)
+    if(ship->Type == SHIP_REBEL)
     {
         ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Missiles.Current;    /*\for back compatibility */
         ship->WeaponSystems.Tube.Missiles.Current = 0;
     }
 
-    if (ship->Class < SHIP_PLATFORM)
+    if(ship->Class < SHIP_PLATFORM)
     {
         ship->BayOpen = false;
     }
@@ -520,12 +520,12 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
 
     ship->Docking = SHIP_READY;
 
-    if ((!StrCmp("Trainer", ship->Owner)
+    if((!StrCmp("Trainer", ship->Owner)
         || !StrCmp("Public", ship->Owner)
         || ship->Type == MOB_SHIP))
     {
-        if (ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP
-            && ship->Class != CAPITAL_SHIP)
+        if(ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP
+           && ship->Class != CAPITAL_SHIP)
         {
             ExtractShip(ship);
             ShipToRoom(ship, ship->Shipyard);
@@ -536,7 +536,7 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
             ship->Docking = SHIP_READY;
         }
 
-        if (ship->PersonalName.empty())
+        if(ship->PersonalName.empty())
         {
             ship->PersonalName = ship->Name;
         }
@@ -562,30 +562,30 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
         ship->AutoTrack = false;
         ship->AutoSpeed = false;
     }
-    else if ((room = GetRoom(ship->LastDock)) != NULL
-        && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM)
+    else if((room = GetRoom(ship->LastDock)) != NULL
+            && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM)
     {
         room->Add(ship);
         ship->InRoom = room;
         ship->Location = ship->LastDock;
     }
 
-    if (ship->Class == SHIP_PLATFORM
-        || ship->Type == MOB_SHIP
-        || ship->Class == CAPITAL_SHIP)
+    if(ship->Class == SHIP_PLATFORM
+       || ship->Type == MOB_SHIP
+       || ship->Class == CAPITAL_SHIP)
     {
         ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
-        SetVector(ship->Heading, 1, 1, 1);
+        ship->Heading = Vector3(1, 1, 1);
 
-        if (ship->Position->x == 0 && ship->Position->y == 0 && ship->Position->z == 0)
+        if(ship->Position.x == 0 && ship->Position.y == 0 && ship->Position.z == 0)
         {
-            if (!ship->Home.empty())
+            if(!ship->Home.empty())
             {
                 ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
 
-                if (ship->Spaceobject)
+                if(ship->Spaceobject)
                 {
-                    CopyVector(ship->Position, ship->Spaceobject->Position);
+                    ship->Position = ship->Spaceobject->Position;
                 }
 
                 RandomizeVector(ship->Position, -5000, 5000);
@@ -603,10 +603,10 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
         ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
     }
 
-    if (ship->Type != MOB_SHIP
-        && (clan = GetClan(ship->Owner)) != NULL)
+    if(ship->Type != MOB_SHIP
+       && (clan = GetClan(ship->Owner)) != NULL)
     {
-        if (ship->Class <= SHIP_PLATFORM)
+        if(ship->Class <= SHIP_PLATFORM)
         {
             clan->Spacecraft++;
         }
@@ -636,8 +636,8 @@ std::string GetShipFilename(std::shared_ptr<Ship> ship)
     std::string buffer;
     std::string fullName;
 
-    if (ship->PersonalName.empty()
-        || !StrCmp(ship->Name, ship->PersonalName))
+    if(ship->PersonalName.empty()
+       || !StrCmp(ship->Name, ship->PersonalName))
     {
         fullName = FormatString("%s", ship->Name.c_str());
     }

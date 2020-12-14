@@ -393,31 +393,33 @@ void LuaPushSmaugAffects(lua_State *L, const std::list<std::shared_ptr<SmaugAffe
     }
 }
 
-void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
+void LuaPushVector3(lua_State *L, const Vector3 &v, const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "X", v->x);
-    LuaSetfieldNumber(L, "Y", v->y);
-    LuaSetfieldNumber(L, "Z", v->z);
+    LuaSetfieldNumber(L, "X", v.x);
+    LuaSetfieldNumber(L, "Y", v.y);
+    LuaSetfieldNumber(L, "Z", v.z);
 
     lua_settable(L, -3);
 }
 
-void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
+Vector3 LuaLoadVector3(lua_State *L, const std::string &key)
 {
+    Vector3 v;
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
     if(!lua_isnil(L, ++idx))
     {
-        LuaGetfieldDouble(L, "X", &v->x);
-        LuaGetfieldDouble(L, "Y", &v->y);
-        LuaGetfieldDouble(L, "Z", &v->z);
+        LuaGetfieldDouble(L, "X", &v.x);
+        LuaGetfieldDouble(L, "Y", &v.y);
+        LuaGetfieldDouble(L, "Z", &v.z);
     }
 
     lua_pop(L, 1);
+    return v;
 }
 
 void LuaPushCurrentAndMax(lua_State *L, const std::string &key, int current, int mx)

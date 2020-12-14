@@ -103,25 +103,26 @@ static void AddToWizList(const std::string &name, int level)
 
 static void ToOutput(const std::string &line, std::ostringstream &output)
 {
-    char outline[MAX_STRING_LENGTH] = { '\0' };
-
     if (!line.empty())
     {
         int filler = 78 - line.size();
 
-        if (filler < 1)
+        if(filler < 1)
+        {
             filler = 1;
+        }
 
         filler /= 2;
 
-        for (int xx = 0; xx < filler; xx++)
-            strcat(outline, " ");
+        for(int xx = 0; xx < filler; xx++)
+        {
+            output << " ";
+        }
 
-        strcat(outline, line.c_str());
+        output << line;
     }
 
-    strcat(outline, "\r\n");
-    output << outline;
+    output << "\r\n";
 }
 
 static int L_WizardEntry(lua_State *L)
@@ -139,11 +140,6 @@ static int L_WizardEntry(lua_State *L)
     return 0;
 }
 
-static void AddIfWizard(const std::string &filename)
-{
-    LuaLoadDataFile(filename, L_WizardEntry, "CharacterEntry");
-}
-
 std::string InMemoryPlayerRepository::MakeWizlist() const
 {
     std::ostringstream output;
@@ -159,7 +155,11 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
                 const auto &path = entry.path();
                 std::string dirname = path.string();
                 Log->Info("Scanning directory %s", dirname.c_str());
-                ForEachLuaFileInDir(dirname, AddIfWizard);
+                ForEachLuaFileInDir(dirname,
+                                    [](const auto &filename)
+                                    {
+                                        LuaLoadDataFile(filename, L_WizardEntry, "CharacterEntry");
+                                    });
             }
         }
 
@@ -198,6 +198,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
 
                     case MAX_LEVEL - 4:
                         ToOutput(" Lower Immortals ", output);
+                        break;
 
                     default:
                         ToOutput(" Builders", output);
@@ -278,7 +279,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     }
     else
     {
-        std::shared_ptr<Character> ch = std::make_shared<Character>(std::make_unique<PCData>());
+        auto ch = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(ch, d);
         ch->Name = Capitalize(name);
         ImcInitializeCharacter(ch);

@@ -185,8 +185,8 @@ std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::strin
 void LuaPushMobiles(lua_State *L, const std::list<std::shared_ptr<Character>> &mobiles,
                     const std::string &key = "Mobiles");
 std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::string &key);
-void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key);
-void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> vec, const std::string &key);
+void LuaPushVector3(lua_State *L, const Vector3 &v, const std::string &key);
+Vector3 LuaLoadVector3(lua_State *L, const std::string &key);
 void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key = "SaveVs");
 void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key);
 void LuaLoadStats(lua_State *L, Stats *stats, const std::string &key);

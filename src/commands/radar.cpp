@@ -76,13 +76,13 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
            && !spaceobj->Name.empty())
             ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n",
                      spaceobj->Name.c_str(),
-                     spaceobj->Position->x,
-                     spaceobj->Position->y,
-                     spaceobj->Position->z,
+                     spaceobj->Position.x,
+                     spaceobj->Position.y,
+                     spaceobj->Position.z,
                      "",
-                     (spaceobj->Position->x - ship->Position->x),
-                     (spaceobj->Position->y - ship->Position->y),
-                     (spaceobj->Position->z - ship->Position->z));
+                     (spaceobj->Position.x - ship->Position.x),
+                     (spaceobj->Position.y - ship->Position.y),
+                     (spaceobj->Position.z - ship->Position.z));
     }
 
     SetCharacterColor(AT_LBLUE, ch);
@@ -94,13 +94,13 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
            && !spaceobj->Name.empty())
             ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n",
                      spaceobj->Name.c_str(),
-                     spaceobj->Position->x,
-                     spaceobj->Position->y,
-                     spaceobj->Position->z,
+                     spaceobj->Position.x,
+                     spaceobj->Position.y,
+                     spaceobj->Position.z,
                      "",
-                     (spaceobj->Position->x - ship->Position->x),
-                     (spaceobj->Position->y - ship->Position->y),
-                     (spaceobj->Position->z - ship->Position->z));
+                     (spaceobj->Position.x - ship->Position.x),
+                     (spaceobj->Position.y - ship->Position.y),
+                     (spaceobj->Position.z - ship->Position.z));
     }
 
     ch->Echo("\r\n");
@@ -113,12 +113,12 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
            && !spaceobj->Name.empty())
             ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n",
                      spaceobj->Name.c_str(),
-                     spaceobj->Position->x,
-                     spaceobj->Position->y,
-                     spaceobj->Position->z, "",
-                     (spaceobj->Position->x - ship->Position->x),
-                     (spaceobj->Position->y - ship->Position->y),
-                     (spaceobj->Position->z - ship->Position->z));
+                     spaceobj->Position.x,
+                     spaceobj->Position.y,
+                     spaceobj->Position.z, "",
+                     (spaceobj->Position.x - ship->Position.x),
+                     (spaceobj->Position.y - ship->Position.y),
+                     (spaceobj->Position.z - ship->Position.z));
     }
 
     ch->Echo("\r\n");
@@ -137,14 +137,14 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
                      missile->Type == CONCUSSION_MISSILE ? "A Concusion missile" :
                      (missile->Type == PROTON_TORPEDO ? "A Torpedo" :
                       (missile->Type == HEAVY_ROCKET ? "A Heavy Rocket" : "A Heavy Bomb")),
-                     (missile->Position->x - ship->Position->x),
-                     (missile->Position->y - ship->Position->y),
-                     (missile->Position->z - ship->Position->z));
+                     (missile->Position.x - ship->Position.x),
+                     (missile->Position.y - ship->Position.y),
+                     (missile->Position.z - ship->Position.z));
         }
     }
 
     ch->Echo("\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n",
-             ship->Position->x, ship->Position->y, ship->Position->z);
+             ship->Position.x, ship->Position.y, ship->Position.z);
 
     LearnFromSuccess(ch, gsn_navigation);
 }
@@ -159,31 +159,31 @@ static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, ShowShipData *d
         if(GetShipDistanceToShip(ship, target) < 100 * (ship->Instruments.Sensor + 10) * ((target->Class == SHIP_DEBRIS ? 2 : target->Class) + 1))
             ch->Echo("%s    %.0f %.0f %.0f\r\n",
                      target->Name.c_str(),
-                     (target->Position->x - ship->Position->x),
-                     (target->Position->y - ship->Position->y),
-                     (target->Position->z - ship->Position->z));
+                     (target->Position.x - ship->Position.x),
+                     (target->Position.y - ship->Position.y),
+                     (target->Position.z - ship->Position.z));
         else if(GetShipDistanceToShip(ship, target) < 100 * (ship->Instruments.Sensor + 10) * ((target->Class == SHIP_DEBRIS ? 2 : target->Class) + 3))
         {
             if(target->Class == FIGHTER_SHIP)
                 ch->Echo("A small metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             else if(target->Class == MIDSIZE_SHIP)
                 ch->Echo("A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             else if(target->Class == SHIP_DEBRIS)
                 ch->Echo("scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             else if(target->Class >= CAPITAL_SHIP)
                 ch->Echo("A huge metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
         }
     }
 

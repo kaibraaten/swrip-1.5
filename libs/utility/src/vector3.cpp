@@ -26,61 +26,59 @@
 #include <cmath>
 #include "vector3.hpp"
 
- /*
-  * Copy vector 'from' into 'to'
-  */
-void CopyVector(std::shared_ptr<Vector3> to, std::shared_ptr<Vector3> from)
+Vector3::Vector3(double xval, double yval, double zval)
+    : x(xval),
+    y(yval),
+    z(zval)
 {
-    to->x = from->x;
-    to->y = from->y;
-    to->z = from->z;
+
+}
+
+bool Vector3::operator==(const Vector3 &rhv) const
+{
+    return x == rhv.x
+        && y == rhv.y
+        && z == rhv.z;
 }
 
 /*
  * Return the length of a vector
  */
-double GetVectorLength(std::shared_ptr<Vector3> v)
+double Vector3::Length() const
 {
-    return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+    return sqrt(x * x + y * y + z * z);
 }
 
 /*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b)
+double GetDistanceBetweenVectors(const Vector3 &a, const Vector3 &b)
 {
-    return sqrt((a->x - b->x) * (a->x - b->x)
-                + (a->y - b->y) * (a->y - b->y)
-                + (a->z - b->z) * (a->z - b->z));
+    return sqrt((a.x - b.x) * (a.x - b.x)
+                + (a.y - b.y) * (a.y - b.y)
+                + (a.z - b.z) * (a.z - b.z));
 }
 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b)
+double GetVectorDotProduct(const Vector3 &a, const Vector3 &b)
 {
-    return (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
 /*
  * Normalize a vector
  */
-void NormalizeVector(std::shared_ptr<Vector3> v)
+void Vector3::Normalize()
 {
-    double magnitude = (v->x * v->x) + (v->y * v->y) + (v->z * v->z);
+    double magnitude = (x * x) + (y * y) + (z * z);
 
     if(magnitude == 0.0)
         return;
 
     magnitude = sqrt(magnitude);
-    v->x /= magnitude;
-    v->y /= magnitude;
-    v->z /= magnitude;
-}
-
-void SetVector(std::shared_ptr<Vector3> vec, double x, double y, double z)
-{
-    vec->x = x;
-    vec->y = y;
-    vec->z = z;
+    x /= magnitude;
+    y /= magnitude;
+    z /= magnitude;
 }

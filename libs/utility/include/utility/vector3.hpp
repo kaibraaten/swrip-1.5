@@ -33,41 +33,24 @@
 class Vector3
 {
 public:
+    Vector3(double x = 0, double y = 0, double z = 0);
+    bool operator==(const Vector3 &rhv) const;
+    void Normalize();
+    double Length() const;
+
     double x = 0;
     double y = 0;
     double z = 0;
 };
 
 /*
- * Return the length of a vector
- * Not to be confused with the distance between two vectors!
- */
-double GetVectorLength(std::shared_ptr<Vector3> v);
-
-/*
- * Normalize a vector
- */
-void NormalizeVector(std::shared_ptr<Vector3> v);
-
-/*
- * Copy vector a vector
- */
-void CopyVector(std::shared_ptr<Vector3> to, std::shared_ptr<Vector3> from);
-
-/*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b);
+double GetDistanceBetweenVectors(const Vector3 &a, const Vector3 &b);
 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b);
-
-/*
- * Set the coordinates.
- */
-
-void SetVector(std::shared_ptr<Vector3> vec, double x, double y, double z);
+double GetVectorDotProduct(const Vector3 &a, const Vector3 &b);
 
 #endif

@@ -27,7 +27,7 @@ static void ShowSpaceobject(std::shared_ptr<Character> ch, std::shared_ptr<Space
              spaceobject->Type);
 
     ch->Echo("Coordinates:  %.0f %0.f %.0f\r\n",
-             spaceobject->Position->x, spaceobject->Position->y, spaceobject->Position->z);
+             spaceobject->Position.x, spaceobject->Position.y, spaceobject->Position.z);
     ch->Echo("Gravity:      %d\r\n", spaceobject->Gravity);
     ch->Echo("Landing sites:\r\n" );
 

@@ -52,9 +52,9 @@ void do_status(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("&W%s:\r\n", target->Name.c_str());
     ch->Echo("&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
-             target->Position->x, target->Position->y, target->Position->z);
+             target->Position.x, target->Position.y, target->Position.z);
     ch->Echo("&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
-             target->Heading->x, target->Heading->y, target->Heading->z);
+             target->Heading.x, target->Heading.y, target->Heading.z);
     ch->Echo("&OCurrent Speed:&Y %d&O/%d\r\n",
              target->Thrusters.Speed.Current, target->Thrusters.Speed.Max);
     ch->Echo("&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",

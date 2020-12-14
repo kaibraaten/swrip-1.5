@@ -147,7 +147,7 @@ static bool ShowIfPilotable(std::shared_ptr<Ship> ship, UserData *data)
                  buf, ship->InRoom->Name.c_str(), pilottype);
     else
         ch->Echo("%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n",
-                 buf, ship->Position->x, ship->Position->y, ship->Position->z, pilottype);
+                 buf, ship->Position.x, ship->Position.y, ship->Position.z, pilottype);
 
     data->count++;
     return true;

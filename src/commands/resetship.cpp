@@ -23,11 +23,11 @@ void do_resetship(std::shared_ptr<Character> ch, std::string argument)
 
         if(ship->Spaceobject)
         {
-            CopyVector(ship->Position, ship->Spaceobject->Position);
+            ship->Position = ship->Spaceobject->Position;
         }
         else
         {
-            ship->Position->x = ship->Position->y = ship->Position->z = 0;
+            ship->Position = Vector3();
         }
 
         RandomizeVector(ship->Position, -5000, 5000);

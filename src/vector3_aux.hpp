@@ -61,7 +61,7 @@ void TurnShip180(std::shared_ptr<Ship> ship);
  * Etc, etc...
  */
 void SetShipCourse(std::shared_ptr<Ship> ship,
-                   std::shared_ptr<Vector3> destination);
+                   const Vector3 &destination);
 
 void SetShipCourseTowardsShip(std::shared_ptr<Ship> ship,
                               std::shared_ptr<Ship> target);
@@ -89,7 +89,7 @@ double GetShipDistanceToSpaceobject(std::shared_ptr<Ship> ship,
                                     std::shared_ptr<Spaceobject> spaceobject);
 double GetMissileDistanceToShip(std::shared_ptr<Missile> m,
                                 std::shared_ptr<Ship> s);
-void RandomizeVector(std::shared_ptr<Vector3> vec, int from, int to);
-bool IsBeyondGalaxy(std::shared_ptr<Vector3> pos);
+void RandomizeVector(Vector3 &vec, int from, int to);
+bool IsBeyondGalaxy(const Vector3 &pos);
 
 #endif /* include guard */

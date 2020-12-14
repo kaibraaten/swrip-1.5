@@ -112,7 +112,7 @@ void LuaSpaceobjectRepository::PushSpaceobject(lua_State *L, const std::shared_p
     PushLandingSites(L, spaceobj);
     LuaPushVector3(L, spaceobj->Position, "Position");
 
-    if(spaceobj->Heading->x != 0 || spaceobj->Heading->y != 0 || spaceobj->Heading->z != 0)
+    if(spaceobj->Heading.x != 0 || spaceobj->Heading.y != 0 || spaceobj->Heading.z != 0)
     {
         LuaPushVector3(L, spaceobj->Heading, "Heading");
     }
@@ -225,8 +225,8 @@ int LuaSpaceobjectRepository::L_SpaceobjectEntry(lua_State *L)
                    });
     LuaGetfieldBool(L, "IsSimulator", &spaceobj->IsSimulator);
 
-    LuaLoadVector3(L, spaceobj->Position, "Position");
-    LuaLoadVector3(L, spaceobj->Heading, "Heading");
+    spaceobj->Position = LuaLoadVector3(L, "Position");
+    spaceobj->Heading = LuaLoadVector3(L, "Heading");
     LoadLandingSites(L, spaceobj);
 
     Spaceobjects->Add(spaceobj);

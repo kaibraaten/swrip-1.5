@@ -48,8 +48,6 @@ void do_shiptrack(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg, "set"))
     {
-        std::shared_ptr<Vector3> head = std::make_shared<Vector3>();
-
         if(IsShipInHyperspace(ship))
         {
             ch->Echo("&RYou can only do that in realspace!\r\n");
@@ -62,29 +60,30 @@ void do_shiptrack(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        SetVector(head, ToLong(arg1), ToLong(arg2), ToLong(arg3));
-        sprintf(buf, "%.0f %.0f %.0f", ship->Position->x + head->x,
-                ship->Position->y + head->y, ship->Position->z + head->z);
+        Vector3 head(ToLong(arg1), ToLong(arg2), ToLong(arg3));
+        sprintf(buf, "%.0f %.0f %.0f", ship->Position.x + head.x,
+                ship->Position.y + head.y, ship->Position.z + head.z);
 
-        if(head->x < 1000)
-            head->x *= 10000;
+        if(head.x < 1000)
+            head.x *= 10000;
 
-        if(head->y < 1000)
-            head->y *= 10000;
+        if(head.y < 1000)
+            head.y *= 10000;
 
-        if(head->z < 1000)
-            head->z *= 10000;
+        if(head.z < 1000)
+            head.z *= 10000;
 
-        ship->TrackVector->x = head->x;
-        ship->TrackVector->y = head->y;
-        ship->TrackVector->z = head->z;
+        ship->TrackVector.x = head.x;
+        ship->TrackVector.y = head.y;
+        ship->TrackVector.z = head.z;
 
         ship->Tracking = true;
         ship->Ch = ch;
         do_trajectory(ch, buf);
 
-        SetVector(ship->Jump, ship->Position->x + head->x,
-                  ship->Position->y + head->y, ship->Position->z + head->z);
+        ship->Jump = Vector3(ship->Position.x + head.x,
+                             ship->Position.y + head.y,
+                             ship->Position.z + head.z);
 
 
         for(auto so : Spaceobjects)
@@ -103,14 +102,14 @@ void do_shiptrack(std::shared_ptr<Character> ch, std::string argument)
         }
 
         if(IsBeyondGalaxy(ship->Jump)
-           || ship->Position->x > MAX_COORD || ship->Position->y > MAX_COORD || ship->Position->z > MAX_COORD
-           || ship->Position->x < -MAX_COORD || ship->Position->y < -MAX_COORD || ship->Position->z < -MAX_COORD
-           || ship->Heading->x > MAX_COORD || ship->Heading->y > MAX_COORD || ship->Heading->z > MAX_COORD
-           || ship->Heading->x < -MAX_COORD || ship->Heading->y < -MAX_COORD || ship->Heading->z < -MAX_COORD)
+           || ship->Position.x > MAX_COORD || ship->Position.y > MAX_COORD || ship->Position.z > MAX_COORD
+           || ship->Position.x < -MAX_COORD || ship->Position.y < -MAX_COORD || ship->Position.z < -MAX_COORD
+           || ship->Heading.x > MAX_COORD || ship->Heading.y > MAX_COORD || ship->Heading.z > MAX_COORD
+           || ship->Heading.x < -MAX_COORD || ship->Heading.y < -MAX_COORD || ship->Heading.z < -MAX_COORD)
         {
             EchoToCockpit(AT_RED, ship, "WARNING! Jump coordinates outside of the known galaxy.");
             EchoToCockpit(AT_RED, ship, "WARNING! Hyperjump NOT set.");
-            ship->CurrentJump = NULL;
+            ship->CurrentJump = nullptr;
             ship->Tracking = false;
             return;
         }
