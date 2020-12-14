@@ -219,104 +219,83 @@ static void PushShip(lua_State *L, const void *userData)
 
 static void LoadInstruments(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Instruments");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "AstroArray", &ship->Instruments.AstroArray);
-        LuaGetfieldInt(L, "Comm", &ship->Instruments.Comm);
-        LuaGetfieldInt(L, "Sensor", &ship->Instruments.Sensor);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Instruments",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "AstroArray", &ship->Instruments.AstroArray);
+                     LuaGetfieldInt(L, "Comm", &ship->Instruments.Comm);
+                     LuaGetfieldInt(L, "Sensor", &ship->Instruments.Sensor);
+                 },
+                 nullptr);
 }
 
 static void LoadThrusters(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Thrusters");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "Maneuver", &ship->Thrusters.Maneuver);
-        LoadCurrentAndMax(L, "Speed", ship->Thrusters.Speed);
-        ship->Thrusters.Speed.Current = 0;
-        LoadCurrentAndMax(L, "Energy", ship->Thrusters.Energy);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Thrusters",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "Maneuver", &ship->Thrusters.Maneuver);
+                     LoadCurrentAndMax(L, "Speed", ship->Thrusters.Speed);
+                     ship->Thrusters.Speed.Current = 0;
+                     LoadCurrentAndMax(L, "Energy", ship->Thrusters.Energy);
+                 },
+                 nullptr);
 }
 
 static void LoadHyperdrive(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Hyperdrive");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "Speed", &ship->Hyperdrive.Speed);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Hyperdrive",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "Speed", &ship->Hyperdrive.Speed);
+                 },
+                 nullptr);
 }
 
 static void LoadTube(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Tube");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "State", &ship->WeaponSystems.Tube.State);
-        LoadCurrentAndMax(L, "Missiles", ship->WeaponSystems.Tube.Missiles);
-        LoadCurrentAndMax(L, "Rockets", ship->WeaponSystems.Tube.Rockets);
-        LoadCurrentAndMax(L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Tube",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "State", &ship->WeaponSystems.Tube.State);
+                     LoadCurrentAndMax(L, "Missiles", ship->WeaponSystems.Tube.Missiles);
+                     LoadCurrentAndMax(L, "Rockets", ship->WeaponSystems.Tube.Rockets);
+                     LoadCurrentAndMax(L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes);
+                 },
+                 nullptr);
 }
 
 static void LoadLaser(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Laser");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "Count", &ship->WeaponSystems.Laser.Count);
-        LuaGetfieldInt(L, "State", &ship->WeaponSystems.Laser.State);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Laser",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "Count", &ship->WeaponSystems.Laser.Count);
+                     LuaGetfieldInt(L, "State", &ship->WeaponSystems.Laser.State);
+                 },
+                 nullptr);
 }
 
 static void LoadIonCannon(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "IonCannon");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "Count", &ship->WeaponSystems.IonCannon.Count);
-        LuaGetfieldInt(L, "State", &ship->WeaponSystems.IonCannon.State);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "IonCannon",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "Count", &ship->WeaponSystems.IonCannon.Count);
+                     LuaGetfieldInt(L, "State", &ship->WeaponSystems.IonCannon.State);
+                 },
+                 nullptr);
 }
 
 static void LoadTractorBeam(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "TractorBeam");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldInt(L, "Strength", &ship->WeaponSystems.TractorBeam.Strength);
-        LuaGetfieldInt(L, "State", &ship->WeaponSystems.TractorBeam.State);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "TractorBeam",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldInt(L, "Strength", &ship->WeaponSystems.TractorBeam.Strength);
+                     LuaGetfieldInt(L, "State", &ship->WeaponSystems.TractorBeam.State);
+                 },
+                 nullptr);
 }
 
 static void LoadTurrets(lua_State *L, std::shared_ptr<Ship> ship)
@@ -341,56 +320,47 @@ static void LoadTurrets(lua_State *L, std::shared_ptr<Ship> ship)
 
 static void LoadWeaponSystems(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "WeaponSystems");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LoadTube(L, ship);
-        LoadLaser(L, ship);
-        LoadIonCannon(L, ship);
-        LoadTractorBeam(L, ship);
-        LoadTurrets(L, ship);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "WeaponSystems",
+                 [L, ship](auto, auto)
+                 {
+                     LoadTube(L, ship);
+                     LoadLaser(L, ship);
+                     LoadIonCannon(L, ship);
+                     LoadTractorBeam(L, ship);
+                     LoadTurrets(L, ship);
+                 },
+                 nullptr);
 }
 
 static void LoadDefenses(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Defenses");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LoadCurrentAndMax(L, "Hull", ship->Defenses.Hull);
-        LoadCurrentAndMax(L, "Shield", ship->Defenses.Shield);
-        LoadCurrentAndMax(L, "Chaff", ship->Defenses.Chaff);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Defenses",
+                 [L, ship](auto, auto)
+                 {
+                     LoadCurrentAndMax(L, "Hull", ship->Defenses.Hull);
+                     LoadCurrentAndMax(L, "Shield", ship->Defenses.Shield);
+                     LoadCurrentAndMax(L, "Chaff", ship->Defenses.Chaff);
+                 },
+                 nullptr);
 }
 
 static void LoadRooms(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Rooms");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldLong(L, "First", &ship->Rooms.First);
-        LuaGetfieldLong(L, "Last", &ship->Rooms.Last);
-        LuaGetfieldLong(L, "Cockpit", &ship->Rooms.Cockpit);
-        LuaGetfieldLong(L, "Entrance", &ship->Rooms.Entrance);
-        LuaGetfieldLong(L, "Hangar", &ship->Rooms.Hangar);
-        LuaGetfieldLong(L, "Engine", &ship->Rooms.Engine);
-        LuaGetfieldLong(L, "Navseat", &ship->Rooms.Navseat);
-        LuaGetfieldLong(L, "Pilotseat", &ship->Rooms.Pilotseat);
-        LuaGetfieldLong(L, "Coseat", &ship->Rooms.Coseat);
-        LuaGetfieldLong(L, "Gunseat", &ship->Rooms.Gunseat);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Rooms",
+                 [L, ship](auto, auto)
+                 {
+                     LuaGetfieldLong(L, "First", &ship->Rooms.First);
+                     LuaGetfieldLong(L, "Last", &ship->Rooms.Last);
+                     LuaGetfieldLong(L, "Cockpit", &ship->Rooms.Cockpit);
+                     LuaGetfieldLong(L, "Entrance", &ship->Rooms.Entrance);
+                     LuaGetfieldLong(L, "Hangar", &ship->Rooms.Hangar);
+                     LuaGetfieldLong(L, "Engine", &ship->Rooms.Engine);
+                     LuaGetfieldLong(L, "Navseat", &ship->Rooms.Navseat);
+                     LuaGetfieldLong(L, "Pilotseat", &ship->Rooms.Pilotseat);
+                     LuaGetfieldLong(L, "Coseat", &ship->Rooms.Coseat);
+                     LuaGetfieldLong(L, "Gunseat", &ship->Rooms.Gunseat);
+                 },
+                 nullptr);
 }
 
 static void LuaGetfieldVnumOrTag(lua_State *L, const std::string &key, vnum_t *vnum)
