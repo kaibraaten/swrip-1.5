@@ -43,7 +43,7 @@ public:
     void RestoreClone(std::shared_ptr<Character> pc) override;
     void Delete(const std::string &name) override;
     time_t LastOnline(const std::string &name) const override;
-    
+
 protected:
     void OnAdded(const std::shared_ptr<Character> &entity) override;
     void OnRemoved(const std::shared_ptr<Character> &entity) override;
@@ -81,7 +81,7 @@ private:
 class Wizard
 {
 public:
-    Wizard(const std::string &name, short level) : Name(name), Level(level) { }
+    Wizard(const std::string &name, short level) : Name(name), Level(level) {}
     std::string Name;
     short Level = 0;
 };
@@ -103,7 +103,7 @@ static void AddToWizList(const std::string &name, int level)
 
 static void ToOutput(const std::string &line, std::ostringstream &output)
 {
-    if (!line.empty())
+    if(!line.empty())
     {
         int filler = 78 - line.size();
 
@@ -148,7 +148,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
 
     try
     {
-        for (const auto &entry : fs::directory_iterator(PLAYER_DIR))
+        for(const auto &entry : fs::directory_iterator(PLAYER_DIR))
         {
             if(entry.is_directory())
             {
@@ -167,13 +167,13 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
         int ilevel = 65535;
         char buf[MAX_STRING_LENGTH] = { '\0' };
 
-        for (const auto &wiz : Wizards)
+        for(const auto &wiz : Wizards)
         {
-            if (wiz.Level > LEVEL_AVATAR)
+            if(wiz.Level > LEVEL_AVATAR)
             {
-                if (wiz.Level < ilevel)
+                if(wiz.Level < ilevel)
                 {
-                    if (buf[0])
+                    if(buf[0])
                     {
                         ToOutput(buf, output);
                         buf[0] = '\0';
@@ -182,7 +182,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
                     ToOutput("", output);
                     ilevel = wiz.Level;
 
-                    switch (ilevel)
+                    switch(ilevel)
                     {
                     case MAX_LEVEL - 0:
                         ToOutput(" Implementors ", output);
@@ -206,7 +206,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
                     }
                 }
 
-                if (strlen(buf) + wiz.Name.size() > 76)
+                if(strlen(buf) + wiz.Name.size() > 76)
                 {
                     ToOutput(buf, output);
                     buf[0] = '\0';
@@ -215,7 +215,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
                 strcat(buf, " ");
                 strcat(buf, wiz.Name.c_str());
 
-                if (strlen(buf) > 70)
+                if(strlen(buf) > 70)
                 {
                     ToOutput(buf, output);
                     buf[0] = '\0';
@@ -223,14 +223,14 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
             }
         }
 
-        if (buf[0])
+        if(buf[0])
         {
             ToOutput(buf, output);
         }
 
         Wizards.clear();
     }
-    catch (const fs::filesystem_error &ex)
+    catch(const fs::filesystem_error &ex)
     {
         Log->Bug("%s: Filesystem error: %s", __FUNCTION__, ex.what());
         output.str("");
@@ -261,9 +261,9 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
 
     std::string filename = GetPlayerFilename(name);
 
-    if (stat(filename.c_str(), &fst) != -1)
+    if(stat(filename.c_str(), &fst) != -1)
     {
-        if (fst.st_size == 0)
+        if(fst.st_size == 0)
         {
             filename = GetPlayerBackupFilename(name);
             //ch->Echo( "Restoring your backup player file...\r\n" );
@@ -273,7 +273,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
             std::string buf = FormatString("%s player data for: %s (%dK)",
                                            preload ? "Preloading" : "Loading",
                                            Capitalize(name).c_str(),
-                                           (int)fst.st_size / 1024);
+                                           (int) fst.st_size / 1024);
             Log->LogStringPlus(buf, LogType::Comm, LEVEL_GREATER);
         }
     }
@@ -298,7 +298,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
 
     int error = luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0);
 
-    if (error)
+    if(error)
     {
         Log->Bug("%s:%d %s() : Cannot run file: %s. Msg: %s",
                  __FILE__, __LINE__, __FUNCTION__,
@@ -368,14 +368,14 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Char
     LuaGetfieldInt(L, "IllegalPk", &ch->PCData->IllegalPk);
     LuaGetfieldInt(L, "Alignment", &ch->Alignment);
     LuaGetfieldInt(L, "ArmorClass", &ch->ArmorClass);
-    
+
     ch->Flags = LuaLoadFlags(L, "Flags").to_ulong();
     ch->PCData->Flags = LuaLoadFlags(L, "PcFlags");
     ch->PCData->WantedOn = LuaLoadFlags(L, "Wanted");
 
     auto pets = LuaLoadMobiles(L, "Pets");
 
-    if (!pets.empty())
+    if(!pets.empty())
     {
         ch->PCData->Pet = pets.front();
 
@@ -402,7 +402,7 @@ void InMemoryPlayerRepository::LoadGuildData(lua_State *L, std::shared_ptr<Chara
     int outerIdx = lua_gettop(L);
     lua_getfield(L, outerIdx, "Guild");
 
-    if (!lua_isnil(L, ++outerIdx))
+    if(!lua_isnil(L, ++outerIdx))
     {
         int idx = lua_gettop(L);
         const int topAtStart = idx;
@@ -413,12 +413,12 @@ void InMemoryPlayerRepository::LoadGuildData(lua_State *L, std::shared_ptr<Chara
 
         const int elementsToPop = lua_gettop(L) - topAtStart;
 
-        if (!lua_isnil(L, ++idx))
+        if(!lua_isnil(L, ++idx))
         {
             std::string guildName = lua_tostring(L, idx);
             std::shared_ptr<Clan> guild = GetClan(guildName);
 
-            if (guild != nullptr)
+            if(guild != nullptr)
             {
                 ch->PCData->ClanInfo.ClanName = guildName;
                 ch->PCData->ClanInfo.Clan = guild;
@@ -429,14 +429,14 @@ void InMemoryPlayerRepository::LoadGuildData(lua_State *L, std::shared_ptr<Chara
             }
         }
 
-        if (ch->PCData->ClanInfo.Clan != nullptr)
+        if(ch->PCData->ClanInfo.Clan != nullptr)
         {
-            if (!lua_isnil(L, ++idx))
+            if(!lua_isnil(L, ++idx))
             {
                 ch->PCData->ClanInfo.SalaryDate = lua_tointeger(L, idx);
             }
 
-            if (!lua_isnil(L, ++idx))
+            if(!lua_isnil(L, ++idx))
             {
                 ch->PCData->ClanInfo.Salary = lua_tointeger(L, idx);
             }
@@ -458,13 +458,13 @@ void InMemoryPlayerRepository::LoadKilledData(lua_State *L, std::shared_ptr<Char
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Killed");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
-            if (ch->PCData->Killed.size() < GetKillTrackCount(ch))
+            if(ch->PCData->Killed.size() < GetKillTrackCount(ch))
             {
                 std::string vnumOrTag = "0";
                 int count = 0;
@@ -491,186 +491,128 @@ void InMemoryPlayerRepository::LoadKilledData(lua_State *L, std::shared_ptr<Char
 
 void InMemoryPlayerRepository::LoadComments(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Comments");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            std::shared_ptr<Note> note = std::make_shared<Note>();
-            LuaGetfieldString(L, "Sender", &note->Sender);
-            LuaGetfieldString(L, "Date", &note->Date);
-            LuaGetfieldString(L, "To", &note->ToList);
-            LuaGetfieldString(L, "Subject", &note->Subject);
-            LuaGetfieldString(L, "Text", &note->Text);
-            ch->PCData->Add(note);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Comments",
+                 [L, ch](auto, auto, auto)
+                 {
+                     std::shared_ptr<Note> note = std::make_shared<Note>();
+                     LuaGetfieldString(L, "Sender", &note->Sender);
+                     LuaGetfieldString(L, "Date", &note->Date);
+                     LuaGetfieldString(L, "To", &note->ToList);
+                     LuaGetfieldString(L, "Subject", &note->Subject);
+                     LuaGetfieldString(L, "Text", &note->Text);
+                     ch->PCData->Add(note);
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadSkills(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Skills");
+    LuaLoadArray(L, "Skills",
+                 [L, ch](auto, auto, auto)
+                 {
+                     std::string typeName;
+                     std::string skillName;
+                     int skillLevel = 0;
+                     LuaGetfieldString(L, "Type", &typeName);
+                     LuaGetfieldString(L, "Name", &skillName);
+                     LuaGetfieldInt(L, "Level", &skillLevel);
 
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
+                     int sn = -1;
+                     SkillType type = GetSkillType(typeName);
 
-        while (lua_next(L, -2))
-        {
-            std::string typeName;
-            std::string skillName;
-            int skillLevel = 0;
-            LuaGetfieldString(L, "Type", &typeName);
-            LuaGetfieldString(L, "Name", &skillName);
-            LuaGetfieldInt(L, "Level", &skillLevel);
+                     switch(type)
+                     {
+                     case SKILL_SPELL:
+                         sn = BSearchSkillExact(skillName, gsn_first_spell, gsn_first_skill - 1);
+                         break;
 
-            int sn = -1;
-            SkillType type = GetSkillType(typeName);
+                     case SKILL_SKILL:
+                         sn = BSearchSkillExact(skillName, gsn_first_skill, gsn_first_weapon - 1);
+                         break;
 
-            switch (type)
-            {
-            case SKILL_SPELL:
-                sn = BSearchSkillExact(skillName, gsn_first_spell, gsn_first_skill - 1);
-                break;
+                     case SKILL_WEAPON:
+                         sn = BSearchSkillExact(skillName, gsn_first_weapon, gsn_first_tongue - 1);
+                         break;
 
-            case SKILL_SKILL:
-                sn = BSearchSkillExact(skillName, gsn_first_skill, gsn_first_weapon - 1);
-                break;
+                     case SKILL_TONGUE:
+                         sn = BSearchSkillExact(skillName, gsn_first_tongue, gsn_TopSN - 1);
+                         break;
 
-            case SKILL_WEAPON:
-                sn = BSearchSkillExact(skillName, gsn_first_weapon, gsn_first_tongue - 1);
-                break;
+                     default:
+                         Log->Bug("InMemoryPlayerRepository::LoadSkills() : Invalid skill type '%s'",
+                                  typeName.c_str());
+                         break;
+                     }
 
-            case SKILL_TONGUE:
-                sn = BSearchSkillExact(skillName, gsn_first_tongue, gsn_TopSN - 1);
-                break;
-
-            default:
-                Log->Bug("InMemoryPlayerRepository::LoadSkills() : Invalid skill type '%s'",
-                         typeName.c_str());
-                break;
-            }
-
-            if (sn >= 0)
-            {
-                ch->PCData->Learned[sn] = skillLevel;
-            }
-            else
-            {
-                Log->Bug("InMemoryPlayerRepository::LoadSkills() : Unknown skill '%s'",
-                         skillName.c_str());
-            }
-
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+                     if(sn >= 0)
+                     {
+                         ch->PCData->Learned[sn] = skillLevel;
+                     }
+                     else
+                     {
+                         Log->Bug("InMemoryPlayerRepository::LoadSkills() : Unknown skill '%s'",
+                                  skillName.c_str());
+                     }
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadConditions(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Conditions");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            size_t conditionSubscript = lua_tointeger(L, -2);
-
-            if (conditionSubscript < ch->PCData->Condition.size())
-            {
-                LuaGetfieldInt(L, "Level", &ch->PCData->Condition[conditionSubscript]);
-            }
-
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Conditions",
+                 [L, ch](auto, size_t idx, auto)
+                 {
+                     if(idx < ch->PCData->Condition.size())
+                     {
+                         LuaGetfieldInt(L, "Level", &ch->PCData->Condition[idx]);
+                     }
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadHelled(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Helled");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        long releaseDate = 0;
-        LuaGetfieldLong(L, "ReleaseDate", &releaseDate);
-        ch->PCData->ReleaseDate = releaseDate;
-        LuaGetfieldString(L, "HelledBy", &ch->PCData->HelledBy);
-    }
-
-    lua_pop(L, 1);
+    LuaLoadTable(L, "Helled",
+                 [L, ch](auto, auto)
+                 {
+                     long releaseDate = 0;
+                     LuaGetfieldLong(L, "ReleaseDate", &releaseDate);
+                     ch->PCData->ReleaseDate = releaseDate;
+                     LuaGetfieldString(L, "HelledBy", &ch->PCData->HelledBy);
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadDrugLevels(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "SpiceLevels");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            size_t drug = lua_tointeger(L, -2);
-
-            if (drug < GetSpiceTableSize())
-            {
-                LuaGetfieldInt(L, "Level", &ch->PCData->DrugLevel[drug]);
-            }
-
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "SpiceLevels",
+                 [L, ch](auto, size_t drug, auto)
+                 {
+                     if(drug < GetSpiceTableSize())
+                     {
+                         LuaGetfieldInt(L, "Level", &ch->PCData->DrugLevel[drug]);
+                     }
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadAddictions(lua_State *L, std::shared_ptr<Character> ch)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Addictions");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            size_t drug = lua_tointeger(L, -2);
-
-            if (drug < GetSpiceTableSize())
-            {
-                LuaGetfieldInt(L, "Level", &ch->PCData->Addiction[drug]);
-            }
-
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Addictions",
+                 [L, ch](auto, size_t drug, auto)
+                 {
+                     if(drug < GetSpiceTableSize())
+                     {
+                         LuaGetfieldInt(L, "Level", &ch->PCData->Addiction[drug]);
+                     }
+                 },
+                 nullptr);
 }
 
 void InMemoryPlayerRepository::LoadAliases(lua_State *L, std::shared_ptr<Character> ch)
 {
     LuaLoadArray(L, "Aliases",
-                 [L](lua_State*, size_t idx, std::shared_ptr<Character> character)
+                 [L](lua_State *, size_t idx, std::shared_ptr<Character> character)
                  {
                      auto alias = std::make_shared<Alias>();
                      LuaGetfieldString(L, "Name", &alias->Name);
@@ -704,7 +646,7 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     loading_char = ch;
     ImcInitializeCharacter(ch);
 
-    if (preload)
+    if(preload)
     {
         PreloadCharacter(L, ch);
         return 0;
@@ -713,9 +655,9 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     LuaLoadCharacter(L, ch, LoadPlayerData);
 
     // Final bits and pieces
-    if (GetTrustLevel(ch) > LEVEL_AVATAR)
+    if(GetTrustLevel(ch) > LEVEL_AVATAR)
     {
-        if (ch->PCData->WizInvis < 2)
+        if(ch->PCData->WizInvis < 2)
         {
             ch->PCData->WizInvis = ch->TopLevel();
         }
@@ -724,14 +666,14 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     }
 
     auto &save_equipment = GetSaveEquipment(ch);
-    
-    for (size_t i = 0; i < MAX_WEAR; i++)
+
+    for(size_t i = 0; i < MAX_WEAR; i++)
     {
-        for (size_t x = 0; x < MAX_LAYERS; x++)
+        for(size_t x = 0; x < MAX_LAYERS; x++)
         {
-            if (save_equipment[i][x] != nullptr)
+            if(save_equipment[i][x] != nullptr)
             {
-                EquipCharacter(ch, save_equipment[i][x], (WearLocation)i);
+                EquipCharacter(ch, save_equipment[i][x], (WearLocation) i);
                 save_equipment[i][x].reset();
             }
             else
@@ -750,7 +692,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
 
     LuaSetfieldNumber(L, "SaveVersion", SAVE_VERSION);
     LuaSetfieldString(L, "CharacterType", "PlayerCharacter");
-    LuaSetfieldNumber(L, "Played", pc->PCData->Played + (int)(current_time - pc->PCData->Logon));
+    LuaSetfieldNumber(L, "Played", pc->PCData->Played + (int) (current_time - pc->PCData->Logon));
     LuaSetfieldNumber(L, "LastPlayed", current_time);
     LuaSetfieldNumber(L, "Bank", pc->PCData->Bank);
     LuaSetfieldNumber(L, "Clones", pc->PCData->Clones);
@@ -776,9 +718,9 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     LuaSetfieldNumber(L, "IllegalPk", pc->PCData->IllegalPk);
     LuaSetfieldNumber(L, "Alignment", pc->Alignment);
     LuaSetfieldNumber(L, "ArmorClass", pc->ArmorClass);
-    
-    if (pc->Desc != nullptr
-        && !pc->Desc->Remote.Hostname.empty())
+
+    if(pc->Desc != nullptr
+       && !pc->Desc->Remote.Hostname.empty())
     {
         LuaSetfieldString(L, "LastConnectedFrom", pc->Desc->Remote.Hostname);
     }
@@ -798,7 +740,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     PushAddictions(L, pc);
     PushAliases(L, pc);
 
-    if (pc->PCData->Pet != nullptr)
+    if(pc->PCData->Pet != nullptr)
     {
         LuaPushMobiles(L, { pc->PCData->Pet }, "Pets");
     }
@@ -807,14 +749,14 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
 void InMemoryPlayerRepository::PushAliases(lua_State *L, std::shared_ptr<Character> pc)
 {
     LuaPushCollection(L, pc->PCData->Aliases(), "Aliases",
-                      [L](lua_State*, size_t idx, const auto &alias)
+                      [L](lua_State *, size_t idx, const auto &alias)
                       {
                           lua_pushinteger(L, idx);
                           lua_newtable(L);
-                          
+
                           LuaSetfieldString(L, "Name", alias->Name);
                           LuaSetfieldString(L, "Value", alias->Command);
-                          
+
                           lua_settable(L, -3);
                       });
 }
@@ -824,7 +766,7 @@ void InMemoryPlayerRepository::PushAddictions(lua_State *L, std::shared_ptr<Char
     lua_pushstring(L, "Addictions");
     lua_newtable(L);
 
-    for (size_t drug = 0; drug < GetSpiceTableSize(); ++drug)
+    for(size_t drug = 0; drug < GetSpiceTableSize(); ++drug)
     {
         lua_pushnumber(L, drug);
         lua_newtable(L);
@@ -843,7 +785,7 @@ void InMemoryPlayerRepository::PushDrugLevels(lua_State *L, std::shared_ptr<Char
     lua_pushstring(L, "SpiceLevels");
     lua_newtable(L);
 
-    for (size_t drug = 0; drug < GetSpiceTableSize(); ++drug)
+    for(size_t drug = 0; drug < GetSpiceTableSize(); ++drug)
     {
         lua_pushnumber(L, drug);
         lua_newtable(L);
@@ -873,7 +815,7 @@ void InMemoryPlayerRepository::PushConditions(lua_State *L, std::shared_ptr<Char
     lua_pushstring(L, "Conditions");
     lua_newtable(L);
 
-    for (size_t idx = 0; idx < pc->PCData->Condition.size(); ++idx)
+    for(size_t idx = 0; idx < pc->PCData->Condition.size(); ++idx)
     {
         lua_pushinteger(L, idx);
         lua_newtable(L);
@@ -892,11 +834,11 @@ void InMemoryPlayerRepository::PushSkills(lua_State *L, std::shared_ptr<Characte
     lua_pushstring(L, "Skills");
     lua_newtable(L);
 
-    for (int sn = 1; sn < TopSN; ++sn)
+    for(int sn = 1; sn < TopSN; ++sn)
     {
         std::shared_ptr<Skill> skill = SkillTable[sn];
 
-        if (!skill->Name.empty() && GetSkillLevel(pc, sn) > 0)
+        if(!skill->Name.empty() && GetSkillLevel(pc, sn) > 0)
         {
             lua_pushnumber(L, sn);
             lua_newtable(L);
@@ -918,7 +860,7 @@ void InMemoryPlayerRepository::PushComments(lua_State *L, std::shared_ptr<Charac
     lua_newtable(L);
     size_t idx = 0;
 
-    for (auto note : pc->PCData->Comments())
+    for(auto note : pc->PCData->Comments())
     {
         lua_pushnumber(L, ++idx);
         lua_newtable(L);
@@ -941,7 +883,7 @@ void InMemoryPlayerRepository::PushKilledData(lua_State *L, std::shared_ptr<Char
     lua_newtable(L);
     size_t idx = 0;
 
-    for (const KilledData &killed : pc->PCData->Killed)
+    for(const KilledData &killed : pc->PCData->Killed)
     {
         lua_pushnumber(L, ++idx);
         lua_newtable(L);
@@ -956,7 +898,7 @@ void InMemoryPlayerRepository::PushKilledData(lua_State *L, std::shared_ptr<Char
                 vnumOrTag = VnumOrTag(mob);
             }
         }
-        
+
         LuaSetfieldString(L, "Vnum", vnumOrTag);
         LuaSetfieldNumber(L, "Count", killed.Count);
 
@@ -973,7 +915,7 @@ void InMemoryPlayerRepository::PushImcData(lua_State *L, std::shared_ptr<Charact
 
 void InMemoryPlayerRepository::PushGuildData(lua_State *L, std::shared_ptr<Character> pc)
 {
-    if (pc->PCData->ClanInfo.Clan != nullptr)
+    if(pc->PCData->ClanInfo.Clan != nullptr)
     {
         lua_pushstring(L, "Guild");
         lua_newtable(L);
@@ -998,19 +940,19 @@ void InMemoryPlayerRepository::PushPlayer(lua_State *L, const std::shared_ptr<Ch
 
 void InMemoryPlayerRepository::Save(std::shared_ptr<Character> pc) const
 {
-    if (IsNpc(pc) || !IsAuthed(pc))
+    if(IsNpc(pc) || !IsAuthed(pc))
     {
         return;
     }
 
-    if (pc->Desc != nullptr && pc->Desc->Original != nullptr)
+    if(pc->Desc != nullptr && pc->Desc->Original != nullptr)
     {
         pc = pc->Desc->Original;
     }
 
     saving_char = pc;
 
-    if (IsClanned(pc))
+    if(IsClanned(pc))
     {
         UpdateClanMember(pc);
     }
@@ -1072,8 +1014,8 @@ time_t InMemoryPlayerRepository::LastOnline(const std::string &name) const
     time_t tm = 0;
     struct stat fst;
     std::string filename = GetPlayerFilename(name);
-    
-    if (stat(filename.c_str(), &fst) != -1)
+
+    if(stat(filename.c_str(), &fst) != -1)
     {
         tm = fst.st_mtime;
     }

@@ -62,30 +62,6 @@ void LuaPlanetRepository::LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> 
                      }
                  },
                  nullptr);
-    /*
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Areas");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            auto area = Areas->Find(lua_tostring(L, -1));
-
-            if(area)
-            {
-                planet->Add(area);
-                area->Planet = planet;
-            }
-
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
-    */
 }
 
 int LuaPlanetRepository::L_PlanetEntry(lua_State *L)

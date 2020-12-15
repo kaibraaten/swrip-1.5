@@ -129,53 +129,50 @@ void LuaShuttleRepository::PushShuttle(lua_State *L, const std::shared_ptr<Shutt
 
 void LuaShuttleRepository::LoadRooms(lua_State *L, std::shared_ptr<Shuttle> shuttle)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Rooms");
+    LuaLoadTable(L, "Rooms",
+                 [L, shuttle](auto, auto)
+                 {
+                     LuaGetfieldString(L, "First",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
 
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldString(L, "First",
-                          [shuttle](const auto &vnumOrTag)
-                          {
-                              if(IsValidVnumOrTag(vnumOrTag))
-                              {
-                                  auto room = GetRoom(vnumOrTag);
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.First = room->Vnum;
+                                               }
+                                           }
+                                       });
+                     LuaGetfieldString(L, "Last",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
 
-                                  if(room != nullptr)
-                                  {
-                                      shuttle->Rooms.First = room->Vnum;
-                                  }
-                              }
-                          });
-        LuaGetfieldString(L, "Last",
-                          [shuttle](const auto &vnumOrTag)
-                          {
-                              if(IsValidVnumOrTag(vnumOrTag))
-                              {
-                                  auto room = GetRoom(vnumOrTag);
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.Last = room->Vnum;
+                                               }
+                                           }
+                                       });
+                     LuaGetfieldString(L, "Entrance",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
 
-                                  if(room != nullptr)
-                                  {
-                                      shuttle->Rooms.Last = room->Vnum;
-                                  }
-                              }
-                          });
-        LuaGetfieldString(L, "Entrance",
-                          [shuttle](const auto &vnumOrTag)
-                          {
-                              if(IsValidVnumOrTag(vnumOrTag))
-                              {
-                                  auto room = GetRoom(vnumOrTag);
-
-                                  if(room != nullptr)
-                                  {
-                                      shuttle->Rooms.Entrance = room->Vnum;
-                                  }
-                              }
-                          });
-    }
-
-    lua_pop(L, 1);
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.Entrance = room->Vnum;
+                                               }
+                                           }
+                                       });
+                 },
+                 nullptr);
 }
 
 void LuaShuttleRepository::LoadStop(lua_State *L, std::shared_ptr<Shuttle> shuttle)
@@ -184,38 +181,29 @@ void LuaShuttleRepository::LoadStop(lua_State *L, std::shared_ptr<Shuttle> shutt
 
     LuaGetfieldString(L, "Name", &stop->Name);
     LuaGetfieldString(L, "RoomVnum",
-                          [stop](const auto &vnumOrTag)
+                      [stop](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
                           {
-                              if(IsValidVnumOrTag(vnumOrTag))
-                              {
-                                  auto room = GetRoom(vnumOrTag);
+                              auto room = GetRoom(vnumOrTag);
 
-                                  if(room != nullptr)
-                                  {
-                                      stop->RoomVnum = room->Vnum;
-                                  }
+                              if(room != nullptr)
+                              {
+                                  stop->RoomVnum = room->Vnum;
                               }
-                          });
+                          }
+                      });
     shuttle->Add(stop);
 }
 
 void LuaShuttleRepository::LoadStops(lua_State *L, std::shared_ptr<Shuttle> shuttle)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Stops");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            LoadStop(L, shuttle);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Stops",
+                 [L, shuttle](auto, auto, auto)
+                 {
+                     LoadStop(L, shuttle);
+                 },
+                 nullptr);
 }
 
 int LuaShuttleRepository::L_ShuttleEntry(lua_State *L)
