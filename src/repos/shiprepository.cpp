@@ -300,22 +300,12 @@ static void LoadTractorBeam(lua_State *L, std::shared_ptr<Ship> ship)
 
 static void LoadTurrets(lua_State *L, std::shared_ptr<Ship> ship)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Turrets");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            size_t arraySubscript = lua_tointeger(L, -2);
-            LoadTurret(L, ship->WeaponSystems.Turrets[arraySubscript]);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Turrets",
+                 [L, ship](lua_State *, size_t idx, auto)
+                 {
+                     LoadTurret(L, ship->WeaponSystems.Turrets[idx]);
+                 },
+                 nullptr);
 }
 
 static void LoadWeaponSystems(lua_State *L, std::shared_ptr<Ship> ship)

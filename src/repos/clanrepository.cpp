@@ -148,22 +148,12 @@ void LuaClanRepository::LoadOneMember(lua_State *L, const std::shared_ptr<Clan> 
 
 void LuaClanRepository::LoadMembers(lua_State *L, const std::shared_ptr<Clan> &clan)
 {
-    int idx = lua_gettop(L);
-
-    lua_getfield(L, idx, "Members");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            LoadOneMember(L, clan);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Members",
+                 [L, clan](auto, auto, auto)
+                 {
+                     LoadOneMember(L, clan);
+                 },
+                 nullptr);
 }
 
 void LuaClanRepository::LoadStoreroom(lua_State *L, const std::shared_ptr<Clan> &clan)

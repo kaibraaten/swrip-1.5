@@ -27,7 +27,7 @@ private:
 
 void LuaPlanetRepository::Save() const
 {
-    for (auto planet : Entities())
+    for(auto planet : Entities())
     {
         Save(planet);
     }
@@ -50,18 +50,31 @@ std::shared_ptr<Planet> LuaPlanetRepository::FindByName(const std::string &name)
 
 void LuaPlanetRepository::LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> planet)
 {
+    LuaLoadArray(L, "Areas",
+                 [L, planet](auto, auto, auto)
+                 {
+                     auto area = Areas->Find(lua_tostring(L, -1));
+
+                     if(area)
+                     {
+                         planet->Add(area);
+                         area->Planet = planet;
+                     }
+                 },
+                 nullptr);
+    /*
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Areas");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
             auto area = Areas->Find(lua_tostring(L, -1));
 
-            if (area)
+            if(area)
             {
                 planet->Add(area);
                 area->Planet = planet;
@@ -72,6 +85,7 @@ void LuaPlanetRepository::LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> 
     }
 
     lua_pop(L, 1);
+    */
 }
 
 int LuaPlanetRepository::L_PlanetEntry(lua_State *L)
@@ -82,15 +96,15 @@ int LuaPlanetRepository::L_PlanetEntry(lua_State *L)
     LuaGetfieldLong(L, "BaseValue", &planet->BaseValue);
     LuaGetfieldDouble(L, "PopulationSupport", &planet->PopularSupport);
     LuaGetfieldString(L, "Spaceobject",
-        [planet](const std::string &name)
-    {
-        planet->Spaceobject = GetSpaceobject(name);
-    });
+                      [planet](const std::string &name)
+                      {
+                          planet->Spaceobject = GetSpaceobject(name);
+                      });
     LuaGetfieldString(L, "GovernedBy",
-        [planet](const std::string &name)
-    {
-        planet->GovernedBy = GetClan(name);
-    });
+                      [planet](const std::string &name)
+                      {
+                          planet->GovernedBy = GetClan(name);
+                      });
 
     planet->Flags = LuaLoadFlags(L, "Flags").to_ulong();
     LoadPlanetAreas(L, planet);
@@ -106,13 +120,13 @@ void LuaPlanetRepository::LoadPlanet(const std::string &filePath)
 
 void LuaPlanetRepository::LuaPushAreas(lua_State *L, std::shared_ptr<Planet> planet)
 {
-    if (!planet->Areas().empty())
+    if(!planet->Areas().empty())
     {
         int idx = 0;
         lua_pushstring(L, "Areas");
         lua_newtable(L);
 
-        for (auto area : planet->Areas())
+        for(auto area : planet->Areas())
         {
             lua_pushinteger(L, ++idx);
             lua_pushstring(L, area->Filename.c_str());
@@ -133,12 +147,12 @@ void LuaPlanetRepository::PushPlanet(lua_State *L, const std::shared_ptr<Planet>
     LuaSetfieldNumber(L, "BaseValue", planet->BaseValue);
     LuaSetfieldNumber(L, "PopulationSupport", planet->PopularSupport);
 
-    if (planet->Spaceobject)
+    if(planet->Spaceobject)
     {
         LuaSetfieldString(L, "Spaceobject", planet->Spaceobject->Name);
     }
 
-    if (planet->GovernedBy)
+    if(planet->GovernedBy)
     {
         LuaSetfieldString(L, "GovernedBy", planet->GovernedBy->Name);
     }

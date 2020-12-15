@@ -68,21 +68,12 @@ void LuaBoardRepository::LoadNote(lua_State *L, const std::shared_ptr<Board> &bo
 
 void LuaBoardRepository::LoadNotes(lua_State *L, const std::shared_ptr<Board> &board)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Notes");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            LoadNote(L, board);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Notes",
+                 [L, board](auto, auto, auto)
+                 {
+                     LoadNote(L, board);
+                 },
+                 nullptr);
 }
 
 int LuaBoardRepository::L_BoardEntry(lua_State *L)

@@ -21,7 +21,7 @@ private:
     static void PushOneSite(lua_State *L, const LandingSite *site, int idx);
     static void PushLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj);
     static void PushSpaceobject(lua_State *L, const std::shared_ptr<Spaceobject> &spaceobj);
-    static void LoadLandingSite(lua_State *L, LandingSite *site);
+    static void LoadLandingSite(lua_State *L, size_t idx, std::shared_ptr<Spaceobject> spaceobj);
     static void LoadLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj);
     static int L_SpaceobjectEntry(lua_State *L);
     static void ExecuteSpaceobjectFile(const std::string &filePath);
@@ -120,11 +120,12 @@ void LuaSpaceobjectRepository::PushSpaceobject(lua_State *L, const std::shared_p
     lua_setglobal(L, "spaceobject");
 }
 
-void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, LandingSite *site)
+void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, size_t idx, std::shared_ptr<Spaceobject> spaceobj)
 {
-    LuaGetfieldString(L, "Name", &site->LocationName);
+    LandingSite &site = spaceobj->LandingSites[idx];
+    LuaGetfieldString(L, "Name", &site.LocationName);
     LuaGetfieldString(L, "DockVnum",
-                      [site](const auto &vnumOrTag)
+                      [&site](const auto &vnumOrTag)
                       {
                           if(IsValidVnumOrTag(vnumOrTag))
                           {
@@ -132,32 +133,16 @@ void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, LandingSite *site)
 
                               if(room != nullptr)
                               {
-                                  site->Dock = room->Vnum;
+                                  site.Dock = room->Vnum;
                               }
                           }
                       });
-    LuaGetfieldBool(L, "IsSecret", &site->IsSecret);
+    LuaGetfieldBool(L, "IsSecret", &site.IsSecret);
 }
 
 void LuaSpaceobjectRepository::LoadLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj)
 {
-    int idx = lua_gettop(L);
-
-    lua_getfield(L, idx, "LandingSites");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            size_t subscript = lua_tointeger(L, -2);
-            LoadLandingSite(L, &spaceobj->LandingSites[subscript]);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "LandingSites", &LoadLandingSite, spaceobj);
 }
 
 int LuaSpaceobjectRepository::L_SpaceobjectEntry(lua_State *L)
