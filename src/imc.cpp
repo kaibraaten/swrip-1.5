@@ -162,8 +162,8 @@ do                                                                      \
   {                                                                       \
     if(!((result) = (type *)realloc((result), sizeof(type) * (number)))) \
       {                                                                    \
-	imclog( "Realloc failure @ %s:%d\n", __FILE__, __LINE__ );        \
-	abort();                                                          \
+    imclog( "Realloc failure @ %s:%d\n", __FILE__, __LINE__ );        \
+    abort();                                                          \
       }                                                                    \
   } while(0)
 
@@ -172,8 +172,8 @@ do                            \
   {                             \
     if((point))                \
       {                          \
-	free((point));          \
-	(point) = NULL;         \
+    free((point));          \
+    (point) = NULL;         \
       }                          \
   } while(0)
 
@@ -187,8 +187,8 @@ do                                              \
   {                                               \
     if ( !(first) )                              \
       {                                            \
-	(first) = (link);                         \
-	(last) = (link);                          \
+    (first) = (link);                         \
+    (last) = (link);                          \
       }                                            \
     else                                         \
       (last)->next = (link);                    \
@@ -217,23 +217,23 @@ do                                               \
   {                                                \
     if ( !(link)->prev )                          \
       {                                             \
-	(first) = (link)->next;                    \
+    (first) = (link)->next;                    \
         if((first))                                \
-	  (first)->prev = NULL;                   \
+      (first)->prev = NULL;                   \
       }                                             \
     else                                          \
       {                                             \
-	(link)->prev->next = (link)->next;         \
+    (link)->prev->next = (link)->next;         \
       }                                             \
     if( !(link)->next )                           \
       {                                             \
-	(last) = (link)->prev;                     \
+    (last) = (link)->prev;                     \
         if((last))                                 \
-	  (last)->next = NULL;                    \
+      (last)->next = NULL;                    \
       }                                             \
     else                                          \
       {                                             \
-	(link)->next->prev = (link)->prev;         \
+    (link)->next->prev = (link)->prev;         \
       }                                             \
   } while(0)
 
@@ -626,7 +626,7 @@ static const char *imcOneArgument(const char *argument, char *arg_first)
     if(IsNullOrEmpty(argument))
         return NULL;
 
-    while(isspace((int)*argument))
+    while(isspace((int) *argument))
         argument++;
 
     cEnd = ' ';
@@ -651,7 +651,7 @@ static const char *imcOneArgument(const char *argument, char *arg_first)
     if(arg_first)
         *arg_first = '\0';
 
-    while(isspace((int)*argument))
+    while(isspace((int) *argument))
         argument++;
 
     return argument;
@@ -826,7 +826,7 @@ static char *imc_mudof(const char *src)
      * In strict ISO C++ strchr takes non-const string as first argument,
      * resulting in error on some compilers.
      */
-    if(!(person = strchr((char *)src, '@')))
+    if(!(person = strchr((char *) src, '@')))
         strncpy(mud, src, SMST);
     else
         strncpy(mud, person + 1, SMST);
@@ -942,8 +942,8 @@ static std::shared_ptr<Character> imc_find_user(const char *name)
                          auto vch = d->Char ? d->Char : d->Original;
 
                          return vch != nullptr
-                         && !StrCmp(CH_IMCNAME(vch), name)
-                         && d->ConnectionState == ConState::Playing;
+                             && !StrCmp(CH_IMCNAME(vch), name)
+                             && d->ConnectionState == ConState::Playing;
                      });
 
     auto ch = desc->Char ? desc->Char : desc->Original;
@@ -1358,7 +1358,7 @@ static char *imcReadLine(FILE *fp)
         }
 
         c = fgetc(fp);
-    } while(isspace((int)c));
+    } while(isspace((int) c));
 
     ungetc(c, fp);
 
@@ -1483,7 +1483,7 @@ static char *imc_getData(char *output, const char *key, const char *packet)
 
     while((current = find_next_esign(packet, current)) >= 0)
     {
-        if(strlen(key) > (size_t)current)
+        if(strlen(key) > (size_t) current)
             continue;
 
         i = current - strlen(key);
@@ -2176,7 +2176,7 @@ static char *break_newlines(char *argument, char *arg_first)
     if(IsNullOrEmpty(argument))
         return NULL;
 
-    while(isspace((int)*argument))
+    while(isspace((int) *argument))
         argument++;
 
     cEnd = '\n';
@@ -2200,7 +2200,7 @@ static char *break_newlines(char *argument, char *arg_first)
     if(arg_first)
         *arg_first = '\0';
 
-    while(isspace((int)*argument))
+    while(isspace((int) *argument))
         argument++;
 
     return argument;
@@ -2830,7 +2830,7 @@ static void imc_save_ucache(void)
         fprintf(fp, "%s", "#UCACHE\n");
         fprintf(fp, "Name %s\n", user->Name);
         fprintf(fp, "Sex  %d\n", user->gender);
-        fprintf(fp, "Time %ld\n", (long int)user->time);
+        fprintf(fp, "Time %ld\n", (long int) user->time);
         fprintf(fp, "%s", "End\n\n");
     }
     fprintf(fp, "%s", "#END\n");
@@ -3368,7 +3368,7 @@ void ImcLoop(void)
     struct timeval last_time, null_time;
 
     gettimeofday(&last_time, NULL);
-    imc_time = (time_t)last_time.tv_sec;
+    imc_time = (time_t) last_time.tv_sec;
 
     if(imcwait > 0)
         imcwait--;
@@ -3650,7 +3650,7 @@ void ImcSaveCharacter(std::shared_ptr<Character> ch, FILE *fp)
         return;
 
     fprintf(fp, "IMCPerm      %d\n", IMCPERM(ch));
-    fprintf(fp, "IMCFlags     %ld\n", (long int)IMCFLAG(ch));
+    fprintf(fp, "IMCFlags     %ld\n", (long int) IMCFLAG(ch));
     if(!IsNullOrEmpty(IMC_LISTEN(ch)))
         fprintf(fp, "IMCListen    %s\n", IMC_LISTEN(ch));
     if(!IsNullOrEmpty(IMC_DENY(ch)))
@@ -3683,7 +3683,7 @@ void ImcSaveCharacter(lua_State *L, std::shared_ptr<Character> ch)
     lua_newtable(L);
 
     LuaSetfieldNumber(L, "IMCPerm", IMCPERM(ch));
-    LuaSetfieldNumber(L, "IMCFlags", (long int)IMCFLAG(ch));
+    LuaSetfieldNumber(L, "IMCFlags", (long int) IMCFLAG(ch));
 
     if(!IsNullOrEmpty(IMC_LISTEN(ch)))
     {
@@ -4354,7 +4354,7 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
                 int num = 0;
                 char hbuf[LGST];
 
-                while((signed char)(hbuf[num] = fgetc(fp)) != EOF
+                while((signed char) (hbuf[num] = fgetc(fp)) != EOF
                       && hbuf[num] != '¢' && num < (LGST - 2))
                     num++;
 
@@ -4969,7 +4969,7 @@ static void imc_delete_who_template(void)
 static void imc_load_who_template()
 {
     FILE *fp;
-    
+
     imclog("%s", "Loading IMC2 who template...");
 
     if(!(fp = fopen(IMC_WHO_FILE, "r")))
@@ -4992,7 +4992,7 @@ static void imc_load_who_template()
 
         if(!StrCmp(word, "Head:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
 
             hbuf[num] = '\0';
@@ -5000,42 +5000,42 @@ static void imc_load_who_template()
         }
         else if(!StrCmp(word, "Tail:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->tail = IMCSTRALLOC(parse_who_tail(hbuf));
         }
         else if(!StrCmp(word, "Plrline:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->plrline = IMCSTRALLOC(hbuf);
         }
         else if(!StrCmp(word, "Immline:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->immline = IMCSTRALLOC(hbuf);
         }
         else if(!StrCmp(word, "Immheader:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->immheader = IMCSTRALLOC(hbuf);
         }
         else if(!StrCmp(word, "Plrheader:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->plrheader = IMCSTRALLOC(hbuf);
         }
         else if(!StrCmp(word, "Master:"))
         {
-            while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
+            while((signed char) (hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
             hbuf[num] = '\0';
             whot->Master = IMCSTRALLOC(hbuf);
@@ -5096,7 +5096,7 @@ static socket_t ipv4_connect()
         return INVALID_SOCKET;
     }
 
-    if(connect(desc, (struct sockaddr *)&sa, sizeof(sa)) == SOCKET_ERROR)
+    if(connect(desc, (struct sockaddr *) &sa, sizeof(sa)) == SOCKET_ERROR)
     {
         if(errno != EINPROGRESS)
         {
@@ -5989,7 +5989,7 @@ IMC_CMD(imctell)
         char buf2[SMST];
 
         argument++;
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
         strncpy(buf2, argument, SMST);
         p = imc_send_social(ch, argument, 1);
@@ -6008,7 +6008,7 @@ IMC_CMD(imctell)
     else if(argument[0] == ',')
     {
         argument++;
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
         imc_send_tell(CH_IMCNAME(ch).c_str(), buf, color_mtoi(argument), 1);
         sprintf(buf1, "~WImctell: ~c%s %s\r\n", buf, argument);
@@ -6071,7 +6071,7 @@ IMC_CMD(imcreply)
         char buf2[SMST];
 
         argument++;
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
         strncpy(buf2, argument, SMST);
         p = imc_send_social(ch, argument, 1);
@@ -6090,7 +6090,7 @@ IMC_CMD(imcreply)
     else if(argument[0] == ',')
     {
         argument++;
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
         imc_send_tell(CH_IMCNAME(ch).c_str(), IMC_RREPLY(ch), color_mtoi(argument), 1);
         sprintf(buf1, "~WImctell: ~c%s %s\r\n", IMC_RREPLY(ch), argument);
@@ -7583,7 +7583,7 @@ static const char *imc_GetSocial(std::shared_ptr<Character> ch, const char *snam
     /* lower-case the social name before asking the MUD */
     for(i = 0; i < LGST && sname[i] != '\0'; i++)
     {
-        lcSocName[i] = tolower((int)sname[i]);
+        lcSocName[i] = tolower((int) sname[i]);
     }
 
     if((social = Socials->FindByName(lcSocName)) == NULL)
@@ -7681,7 +7681,7 @@ static char *imc_act_string(const char *format, std::shared_ptr<Character> ch, s
     {
         if(*format == '.' || *format == '?' || *format == '!')
             should_upper = true;
-        else if(should_upper == true && !isspace((int)*format) && *format != '$')
+        else if(should_upper == true && !isspace((int) *format) && *format != '$')
             should_upper = false;
 
         if(*format != '$')
@@ -7739,12 +7739,12 @@ static char *imc_act_string(const char *format, std::shared_ptr<Character> ch, s
 
             case 'k':
                 imcOneArgument(CH_IMCNAME(ch).c_str(), tmp_str);
-                i = (char *)tmp_str;
+                i = (char *) tmp_str;
                 break;
 
             case 'K':
                 imcOneArgument(CH_IMCNAME(vic).c_str(), tmp_str);
-                i = (char *)tmp_str;
+                i = (char *) tmp_str;
                 break;
             }
         }
@@ -7797,7 +7797,7 @@ static const char *imc_send_social(std::shared_ptr<Character> ch, const char *ar
          * In strict ISO C++ strchr takes non-const string as first argument,
          * resulting in error on some compilers.
          */
-        if(!(ps = strchr((char *)argument, '@')))
+        if(!(ps = strchr((char *) argument, '@')))
         {
             imc_to_char("You need to specify a person@mud for a target.\r\n", ch);
             return "";
@@ -7856,10 +7856,10 @@ static const char *imc_send_social(std::shared_ptr<Character> ch, const char *ar
             sex = imctodikugender(sex);
 
         skeleton = imc_make_skeleton(buf);
-        CH_IMCSEX(skeleton) = (SexType)sex;
+        CH_IMCSEX(skeleton) = (SexType) sex;
     }
 
-    strncpy(msg, (char *)imc_act_string(socbuf, ch, skeleton), LGST);
+    strncpy(msg, (char *) imc_act_string(socbuf, ch, skeleton), LGST);
     return (color_mtoi(msg));
 }
 
@@ -8143,7 +8143,7 @@ bool ImcCommandHook(std::shared_ptr<Character> ch, const std::string &stl_comman
          * Strip the , and then extra spaces - Remcon 6-28-03
          */
         argument++;
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
         imc_sendmessage(c, CH_IMCNAME(ch).c_str(), color_mtoi(argument), 1);
         break;
@@ -8153,7 +8153,7 @@ bool ImcCommandHook(std::shared_ptr<Character> ch, const std::string &stl_comman
          */
         argument++;
 
-        while(isspace((int)*argument))
+        while(isspace((int) *argument))
             argument++;
 
         p = imc_send_social(ch, argument, 0);

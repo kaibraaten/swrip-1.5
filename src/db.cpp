@@ -24,23 +24,16 @@ namespace fs = std::filesystem;
 
 #include <fstream>
 #include <cassert>
-#include <ctime>
-#include <cstring>
-#include <cctype>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
-#include "ship.hpp"
 #include "character.hpp"
-#include "reset.hpp"
 #include "shop.hpp"
 #include "command.hpp"
 #include "skill.hpp"
 #include "luascript.hpp"
 #include "area.hpp"
 #include "log.hpp"
-#include "pcdata.hpp"
-#include "plugins.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
@@ -66,7 +59,6 @@ namespace fs = std::filesystem;
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
-#include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
 #include "triggers.hpp"

@@ -6,7 +6,6 @@
 #include "object.hpp"
 #include "character.hpp"
 #include "log.hpp"
-#include "mprog.hpp"
 #include "protomob.hpp"
 #include "protoobject.hpp"
 #include "triggers.hpp"

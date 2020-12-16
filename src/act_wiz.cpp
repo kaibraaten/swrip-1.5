@@ -22,10 +22,9 @@
 #include <cassert>
 #include <cctype>
 #include <ctime>
+#include <string>
 #include "character.hpp"
 #include "mud.hpp"
-#include "area.hpp"
-#include "luascript.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "descriptor.hpp"

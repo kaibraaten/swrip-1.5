@@ -19,7 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <cctype>
 #include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
