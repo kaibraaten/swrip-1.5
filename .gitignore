@@ -36,32 +36,11 @@
 # ---> C++
 # Compiled Object files
 *.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
 # Fortran module files
 *.mod
 
-# Compiled Static libraries
 *.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
 cpptest
 ctest
 
@@ -83,9 +62,10 @@ Testing
 /out/build/x64-Debug/bin
 /out/build/x64-Debug
 /out
-/out
 src/tables.cpp
 *.bak
 /libs/3rdparty/lua/out
 /libs/colorparser/out
 build
+.idea
+cmake-build-debug
