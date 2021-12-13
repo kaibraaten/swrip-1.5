@@ -69,3 +69,4 @@ src/tables.cpp
 build
 .idea
 cmake-build-debug
+/swrip.cbp
