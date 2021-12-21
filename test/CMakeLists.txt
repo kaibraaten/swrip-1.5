@@ -20,7 +20,7 @@ target_compile_options(mud_tests
 if(WIN32)
   target_link_libraries(mud_tests gtest_main gmock utility colorparser lua WS2_32 imp)
 else()
-  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua stdc++fs dl imp)
+  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua stdc++fs dl imp pthread)
 endif()
 target_include_directories(mud_tests PRIVATE src)
 gtest_discover_tests(mud_tests)
