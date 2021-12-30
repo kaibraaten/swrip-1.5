@@ -10,7 +10,7 @@ struct BuiltinVnumConverter::Impl
 
     }
 
-    std::shared_ptr<class Area> area;
+    std::shared_ptr<Area> area;
 };
 
 BuiltinVnumConverter::BuiltinVnumConverter(std::shared_ptr<Area> area)
@@ -24,9 +24,9 @@ BuiltinVnumConverter::~BuiltinVnumConverter()
 
 }
 
-std::list<vnum_t> BuiltinVnumConverter::RoomVnums() const
+std::vector<vnum_t> BuiltinVnumConverter::RoomVnums() const
 {
-    std::list<vnum_t> roomlist;
+    std::vector<vnum_t> roomlist;
     const auto firstVnum = pImpl->area->VnumRanges.Room.First;
     const auto lastVnum = pImpl->area->VnumRanges.Room.Last;
     
@@ -41,9 +41,9 @@ std::list<vnum_t> BuiltinVnumConverter::RoomVnums() const
     return roomlist;
 }
 
-std::list<vnum_t> BuiltinVnumConverter::ObjectVnums() const
+std::vector<vnum_t> BuiltinVnumConverter::ObjectVnums() const
 {
-    std::list<vnum_t> objlist;
+    std::vector<vnum_t> objlist;
     const auto firstVnum = pImpl->area->VnumRanges.Object.First;
     const auto lastVnum = pImpl->area->VnumRanges.Object.Last;
 
@@ -58,9 +58,9 @@ std::list<vnum_t> BuiltinVnumConverter::ObjectVnums() const
     return objlist;
 }
 
-std::list<vnum_t> BuiltinVnumConverter::MobileVnums() const
+std::vector<vnum_t> BuiltinVnumConverter::MobileVnums() const
 {
-    std::list<vnum_t> moblist;
+    std::vector<vnum_t> moblist;
     const auto firstVnum = pImpl->area->VnumRanges.Mob.First;
     const auto lastVnum = pImpl->area->VnumRanges.Mob.Last;
 

@@ -15,9 +15,9 @@ class PluginVnumConverter::Impl
 public:
     Impl(const Plugin *p);
 
-    std::list<vnum_t> RoomVnums() const;
-    std::list<vnum_t> ObjectVnums() const;
-    std::list<vnum_t> MobileVnums() const;
+    std::vector<vnum_t> RoomVnums() const;
+    std::vector<vnum_t> ObjectVnums() const;
+    std::vector<vnum_t> MobileVnums() const;
 
     vnum_t AbsoluteToRelativeRoomVnum(vnum_t absolute) const;
     vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const;
@@ -52,17 +52,17 @@ PluginVnumConverter::~PluginVnumConverter()
 
 }
 
-std::list<vnum_t> PluginVnumConverter::RoomVnums() const
+std::vector<vnum_t> PluginVnumConverter::RoomVnums() const
 {
     return pImpl->RoomVnums();
 }
 
-std::list<vnum_t> PluginVnumConverter::ObjectVnums() const
+std::vector<vnum_t> PluginVnumConverter::ObjectVnums() const
 {
     return pImpl->ObjectVnums();
 }
 
-std::list<vnum_t> PluginVnumConverter::MobileVnums() const
+std::vector<vnum_t> PluginVnumConverter::MobileVnums() const
 {
     return pImpl->MobileVnums();
 }
@@ -118,42 +118,42 @@ PluginVnumConverter::Impl::Impl(const ::Plugin *p)
 
 }
 
-std::list<vnum_t> PluginVnumConverter::Impl::RoomVnums() const
+std::vector<vnum_t> PluginVnumConverter::Impl::RoomVnums() const
 {
-    std::list<vnum_t> roomlist;
+    std::vector<vnum_t> roomlist;
     std::ranges::transform(Plugin->Rooms(),
                            std::back_inserter(roomlist),
                            [](const auto &p)
                            {
                                return p.second->Vnum;
                            });
-    roomlist.sort();
+    std::ranges::sort(roomlist);
     return roomlist;
 }
 
-std::list<vnum_t> PluginVnumConverter::Impl::ObjectVnums() const
+std::vector<vnum_t> PluginVnumConverter::Impl::ObjectVnums() const
 {
-    std::list<vnum_t> objlist;
+    std::vector<vnum_t> objlist;
     std::ranges::transform(Plugin->Objects(),
                            std::back_inserter(objlist),
                            [](const auto &p)
                            {
                                return p.second->Vnum;
                            });
-    objlist.sort();
+    std::ranges::sort(objlist);
     return objlist;
 }
 
-std::list<vnum_t> PluginVnumConverter::Impl::MobileVnums() const
+std::vector<vnum_t> PluginVnumConverter::Impl::MobileVnums() const
 {
-    std::list<vnum_t> moblist;
+    std::vector<vnum_t> moblist;
     std::ranges::transform(Plugin->Mobiles(),
                            std::back_inserter(moblist),
                            [](const auto &p)
                            {
                                return p.second->Vnum;
                            });
-    moblist.sort();
+    std::ranges::sort(moblist);
     return moblist;
 }
 

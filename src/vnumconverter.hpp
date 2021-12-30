@@ -1,7 +1,8 @@
 #ifndef _SWRIP_VNUM_CONVERTER_HPP_
 #define _SWRIP_VNUM_CONVERTER_HPP_
 
-#include <list>
+#include <vector>
+#include <memory>
 #include "types.hpp"
 
 class VnumConverter
@@ -12,17 +13,17 @@ public:
     // Room vnums of area in ascending order.
     // Only return actual valid vnums, and not the
     // entire range for the area.
-    virtual std::list<vnum_t> RoomVnums() const = 0;
+    virtual std::vector<vnum_t> RoomVnums() const = 0;
 
     // ProtoObject vnums of area in ascending order.
     // Only return actual valid vnums, and not the
     // entire range for the area.
-    virtual std::list<vnum_t> ObjectVnums() const = 0;
+    virtual std::vector<vnum_t> ObjectVnums() const = 0;
 
     // ProtoMobile vnums of area in ascending order.
     // Only return actual valid vnums, and not the
     // entire range for the area.
-    virtual std::list<vnum_t> MobileVnums() const = 0;
+    virtual std::vector<vnum_t> MobileVnums() const = 0;
 
     virtual vnum_t AbsoluteToRelativeRoomVnum(vnum_t absolute) const = 0;
     virtual vnum_t AbsoluteToRelativeObjectVnum(vnum_t absolute) const = 0;
