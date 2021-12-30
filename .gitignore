@@ -70,3 +70,4 @@ build
 .idea
 cmake-build-debug
 /swrip.cbp
+valgrind.log
