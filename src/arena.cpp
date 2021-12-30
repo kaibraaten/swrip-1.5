@@ -211,7 +211,6 @@ static void FindGameWinner()
 
             if(ch->HitPoints.Current > 1)
             {
-                HallOfFameElement *fame_node = NULL;
                 char buf[MAX_INPUT_LENGTH];
 
                 if(arena.TimeLeftInGame == 1)
@@ -233,10 +232,10 @@ static void FindGameWinner()
                 Log->Info("%s awarded %d credits for winning arena", ch->Name.c_str(),
                           arena.ArenaPot / 2);
 
-                fame_node = new HallOfFameElement();
-                fame_node->Name = ch->Name;
-                fame_node->Date = time(0);
-                fame_node->Award = (arena.ArenaPot / 2);
+                HallOfFameElement fame_node;
+                fame_node.Name = ch->Name;
+                fame_node.Date = time(0);
+                fame_node.Award = (arena.ArenaPot / 2);
                 FameList.push_front(fame_node);
 
                 SaveHallOfFame();

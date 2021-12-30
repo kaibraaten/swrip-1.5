@@ -1,7 +1,7 @@
 #ifndef _SWRIP_ARENA_HPP_
 #define _SWRIP_ARENA_HPP_
 
-#include <list>
+#include <deque>
 #include <string>
 #include <ctime>
 
@@ -35,7 +35,7 @@ public:
 };
 
 inline Arena arena;
-inline std::list<HallOfFameElement*> FameList;
+inline std::deque<HallOfFameElement> FameList;
 
 void StartArena();
 void LoadHallOfFame();

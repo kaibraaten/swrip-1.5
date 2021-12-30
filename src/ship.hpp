@@ -122,7 +122,7 @@ public:
         } TractorBeam;
 
         std::shared_ptr<Ship> Target; /* Not persisted */
-        std::vector<Turret *> Turrets = std::vector<Turret *>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
+        std::vector<std::shared_ptr<Turret>> Turrets = std::vector<std::shared_ptr<Turret>>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
     } WeaponSystems;
 
     struct

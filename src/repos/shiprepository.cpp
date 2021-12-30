@@ -123,7 +123,7 @@ static void PushTractorBeam(lua_State *L, std::shared_ptr<Ship> ship)
     lua_settable(L, -3);
 }
 
-static void PushTurrets(lua_State *L, const std::vector<Turret *> &turrets)
+static void PushTurrets(lua_State *L, const std::vector<std::shared_ptr<Turret>> &turrets)
 {
     lua_pushstring(L, "Turrets");
     lua_newtable(L);

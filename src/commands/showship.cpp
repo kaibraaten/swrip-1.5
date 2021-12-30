@@ -70,7 +70,7 @@ void do_showship(std::shared_ptr<Character> ch, std::string argument)
     {
         static const char *const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
         { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        const Turret *turret = ship->WeaponSystems.Turrets[turret_num];
+        const auto &turret = ship->WeaponSystems.Turrets[turret_num];
 
         if(IsTurretInstalled(turret))
         {

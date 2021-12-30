@@ -35,18 +35,18 @@ public:
     ShipClass OwnerClass = FIGHTER_SHIP;
 };
 
-Turret *AllocateTurret(ShipClass ownerClass)
+std::shared_ptr<Turret> AllocateTurret(ShipClass ownerClass)
 {
-    auto turret = new Turret();
+    auto turret = std::make_shared<Turret>();
     turret->OwnerClass = ownerClass;
     ResetTurret(turret);
 
     return turret;
 }
 
-Turret *CopyTurret(const Turret *old_turret, ShipClass ownerClassOfNewTurret)
+std::shared_ptr<Turret> CopyTurret(const std::shared_ptr<Turret> &old_turret, ShipClass ownerClassOfNewTurret)
 {
-    Turret *new_turret = AllocateTurret(ownerClassOfNewTurret);
+    auto new_turret = AllocateTurret(ownerClassOfNewTurret);
 
     SetTurretRoom(new_turret, old_turret->RoomVnum);
     new_turret->WeaponState = old_turret->WeaponState;
@@ -56,38 +56,33 @@ Turret *CopyTurret(const Turret *old_turret, ShipClass ownerClassOfNewTurret)
     return new_turret;
 }
 
-bool IsTurretInstalled(const Turret *turret)
+bool IsTurretInstalled(const std::shared_ptr<Turret> &turret)
 {
     return GetTurretRoom(turret) != 0;
 }
 
-void FreeTurret(Turret *turret)
-{
-    delete turret;
-}
-
-void ResetTurret(Turret *turret)
+void ResetTurret(const std::shared_ptr<Turret> &turret)
 {
     SetTurretReady(turret);
     ClearTurretTarget(turret);
 }
 
-void SetTurretReady(Turret *turret)
+void SetTurretReady(const std::shared_ptr<Turret> &turret)
 {
     turret->WeaponState = LASER_READY;
 }
 
-bool IsTurretReady(const Turret *turret)
+bool IsTurretReady(const std::shared_ptr<Turret> &turret)
 {
     return turret->WeaponState == LASER_READY;
 }
 
-bool IsTurretRecharging(const Turret *turret)
+bool IsTurretRecharging(const std::shared_ptr<Turret> &turret)
 {
     return turret->WeaponState > turret->OwnerClass;
 }
 
-void FireTurret(Turret *turret)
+void FireTurret(const std::shared_ptr<Turret> &turret)
 {
     if (TurretHasTarget(turret))
     {
@@ -95,7 +90,7 @@ void FireTurret(Turret *turret)
     }
 }
 
-void SetTurretDamaged(Turret *turret)
+void SetTurretDamaged(const std::shared_ptr<Turret> &turret)
 {
     if (IsTurretInstalled(turret))
     {
@@ -103,42 +98,42 @@ void SetTurretDamaged(Turret *turret)
     }
 }
 
-bool IsTurretDamaged(const Turret *turret)
+bool IsTurretDamaged(const std::shared_ptr<Turret> &turret)
 {
     return turret->WeaponState == LASER_DAMAGED;
 }
 
-void ClearTurretTarget(Turret *turret)
+void ClearTurretTarget(const std::shared_ptr<Turret> &turret)
 {
     turret->Target = 0;
 }
 
-void SetTurretTarget(Turret *turret, std::shared_ptr<Ship> target)
+void SetTurretTarget(const std::shared_ptr<Turret> &turret, std::shared_ptr<Ship> target)
 {
     turret->Target = target;
 }
 
-std::shared_ptr<Ship> GetTurretTarget(const Turret *turret)
+std::shared_ptr<Ship> GetTurretTarget(const std::shared_ptr<Turret> &turret)
 {
     return turret->Target;
 }
 
-bool TurretHasTarget(const Turret *turret)
+bool TurretHasTarget(const std::shared_ptr<Turret> &turret)
 {
-    return GetTurretTarget(turret) != NULL;
+    return GetTurretTarget(turret) != nullptr;
 }
 
-void SetTurretRoom(Turret *turret, vnum_t room_vnum)
+void SetTurretRoom(const std::shared_ptr<Turret> &turret, vnum_t room_vnum)
 {
     turret->RoomVnum = room_vnum;
 }
 
-vnum_t GetTurretRoom(const Turret *turret)
+vnum_t GetTurretRoom(const std::shared_ptr<Turret> &turret)
 {
     return turret->RoomVnum;
 }
 
-int GetTurretEnergyDraw(const Turret *turret)
+int GetTurretEnergyDraw(const std::shared_ptr<Turret> &turret)
 {
     int draw = 0;
 
@@ -150,7 +145,7 @@ int GetTurretEnergyDraw(const Turret *turret)
     return draw;
 }
 
-void PushTurret(lua_State *L, const Turret *turret, const int idx)
+void PushTurret(lua_State *L, const std::shared_ptr<Turret> &turret, const int idx)
 {
     std::string vnumOrTag = "0";
     auto room = turret->RoomVnum != INVALID_VNUM ? GetRoom(turret->RoomVnum) : nullptr;
@@ -169,7 +164,7 @@ void PushTurret(lua_State *L, const Turret *turret, const int idx)
     lua_settable(L, -3);
 }
 
-void LoadTurret(lua_State *L, Turret *turret)
+void LoadTurret(lua_State *L, const std::shared_ptr<Turret> &turret)
 {
     LuaGetfieldString(L, "RoomVnum",
                       [turret](const auto &vnumOrTag)

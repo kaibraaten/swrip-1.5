@@ -677,7 +677,6 @@ static void MakeDebris(std::shared_ptr<Ship> ship)
 
     for(turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num)
     {
-        FreeTurret(debris->WeaponSystems.Turrets[turret_num]);
         debris->WeaponSystems.Turrets[turret_num] = CopyTurret(ship->WeaponSystems.Turrets[turret_num], debris->Class);
     }
 
@@ -699,7 +698,7 @@ static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
         EchoToShip(AT_YELLOW, ship, "Maneuver Aborted. Docking clamps damaged.");
         EchoToShip(AT_YELLOW, ship->Docked, "The ship aborted the docking manuever.");
         ship->Docking = SHIP_READY;
-        ship->Docked = NULL;
+        ship->Docked = nullptr;
         return;
     }
 
@@ -708,7 +707,7 @@ static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
         EchoToShip(AT_YELLOW, ship->Docked, "Maneuver Aborted. Docking clamps damaged.");
         EchoToShip(AT_YELLOW, ship, "The ship aborted the docking manuever.");
         ship->Docking = SHIP_READY;
-        ship->Docked = NULL;
+        ship->Docked = nullptr;
         return;
     }
 
@@ -726,14 +725,12 @@ static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
             LearnFromSuccess(ch, gsn_starfighters);
             LearnFromSuccess(ch, gsn_shipdocking);
         }
-
-        if(ship->Class == MIDSIZE_SHIP)
+        else if(ship->Class == MIDSIZE_SHIP)
         {
             LearnFromSuccess(ch, gsn_midships);
             LearnFromSuccess(ch, gsn_shipdocking);
         }
-
-        if(ship->Class == CAPITAL_SHIP)
+        else if(ship->Class == CAPITAL_SHIP)
         {
             LearnFromSuccess(ch, gsn_capitalships);
             LearnFromSuccess(ch, gsn_shipdocking);

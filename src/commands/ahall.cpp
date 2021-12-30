@@ -25,13 +25,13 @@ void do_ahall(std::shared_ptr<Character> ch, std::string argument)
            "&B---------------------------------",
            "&B---------------------------------");
 
-  for (const HallOfFameElement *fame_node : FameList )
+  for (const auto &fame_node : FameList )
     {
       std::string site;
         
-      if (fame_node->Date)
+      if (fame_node.Date)
         {
-          char *timestr = asctime(localtime(&(fame_node->Date)));
+          char *timestr = asctime(localtime(&(fame_node.Date)));
           *(timestr + 10) = 0;
           site = timestr;
         }
@@ -41,7 +41,7 @@ void do_ahall(std::shared_ptr<Character> ch, std::string argument)
         }
 
       ch->Echo("&W%-23.23s  &R%-13.13s  &Y%-16d\r\n",
-               fame_node->Name.c_str(), site.c_str(), fame_node->Award);
+               fame_node.Name.c_str(), site.c_str(), fame_node.Award);
     }
 }
 

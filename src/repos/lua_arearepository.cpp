@@ -170,7 +170,7 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, std::shared_ptr<
 
 struct SaveData
 {
-    SaveData(const LuaAreaRepository *r, std::shared_ptr<Area> a, bool i, std::shared_ptr<VnumConverter> h)
+    SaveData(const LuaAreaRepository *r, const std::shared_ptr<Area> &a, bool i, const std::shared_ptr<VnumConverter> &h)
         : Repos(r), area(a), Install(i), VnumConverter(h)
     {
     }

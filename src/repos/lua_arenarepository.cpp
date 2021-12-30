@@ -5,15 +5,15 @@
 
 static int L_HallOfFameEntry(lua_State *L)
 {
-    HallOfFameElement *fameNode = new HallOfFameElement();
+    HallOfFameElement fameNode;
 
-    LuaGetfieldString(L, "Name", &fameNode->Name);
+    LuaGetfieldString(L, "Name", &fameNode.Name);
     LuaGetfieldLong(L, "Date",
-                    [fameNode](time_t fameDate)
+                    [&fameNode](time_t fameDate)
                     {
-                        fameNode->Date = fameDate;
+                        fameNode.Date = fameDate;
                     });
-    LuaGetfieldInt(L, "Award", &fameNode->Award);
+    LuaGetfieldInt(L, "Award", &fameNode.Award);
 
     FameList.push_front(fameNode);
 
@@ -25,15 +25,15 @@ void LoadHallOfFame()
     LuaLoadDataFile(HALL_OF_FAME_FILE, L_HallOfFameEntry, "HallOfFameEntry");
 }
 
-static void PushFameElement(lua_State *L, const HallOfFameElement *fame)
+static void PushFameElement(lua_State *L, const HallOfFameElement &fame)
 {
     static int idx = 0;
     lua_pushinteger(L, ++idx);
     lua_newtable(L);
 
-    LuaSetfieldString(L, "Name", fame->Name);
-    LuaSetfieldNumber(L, "Award", fame->Award);
-    LuaSetfieldNumber(L, "Date", fame->Date);
+    LuaSetfieldString(L, "Name", fame.Name);
+    LuaSetfieldNumber(L, "Award", fame.Award);
+    LuaSetfieldNumber(L, "Date", fame.Date);
 
     lua_settable(L, -3);
 }
@@ -42,7 +42,7 @@ static void PushHallOfFame(lua_State *L)
 {
     lua_newtable(L);
 
-    for(const HallOfFameElement *fameElement : FameList)
+    for(const auto &fameElement : FameList)
     {
         PushFameElement(L, fameElement);
     }

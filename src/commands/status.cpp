@@ -74,7 +74,7 @@ void do_status(std::shared_ptr<Character> ch, std::string argument)
     {
         static const char *const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
         { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        const Turret *turret = target->WeaponSystems.Turrets[turret_num];
+        const auto &turret = target->WeaponSystems.Turrets[turret_num];
         const std::shared_ptr<Ship> turret_target = TurretHasTarget(turret) ? GetTurretTarget(turret) : NULL;
         const std::string turret_target_name = turret_target ? turret_target->Name : "none";
         const char *turret_status = IsTurretDamaged(turret) ? "Damaged" : "Good";
