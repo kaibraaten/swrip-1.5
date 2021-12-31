@@ -6869,7 +6869,7 @@ he's been in hiding, seeking to pass on what little he learned. \
             {
                Code = "def on_greet(mob, actor):\
     locs = {\"kitchen\": 31901, \"commonroom\": 31900, \"workshop\": 31906, \"sleepingquarters\": 31903}\
-    location = inroom(mob)\
+    location = getroom(mob)\
     wait(1.0)\
 \
     if vnum(location) == locs[\"kitchen\"]:\

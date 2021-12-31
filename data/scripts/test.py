@@ -38,7 +38,7 @@ def on_test2(room, actor):
         
 def test_greet(mob, actor):
     emotes = ["seems happy.", "farts so loud that the room shakes.", "is thirsty."]
-    room = inroom(mob)
+    room = getroom(mob)
     
     for i in range(0, 5):
         e = random(emotes)
@@ -50,7 +50,7 @@ def test_fight(mob, actor):
     say(mob, random(whines))
 
 def test_death(mob, killer):
-    if not inroom(mob):
+    if not getroom(mob):
         echo(killer, "Your victim is gone...")
     else:
         say(mob, "Alas! " + str(killer) + " got the better of me...")
@@ -59,8 +59,8 @@ def test_rand(mob):
     say(mob, "Rand!")
 
 def test_obj_rand(obj):
-    if inroom(obj):
-        echo(inroom(obj), str(obj) + " sheds a leaf.")
+    if getroom(obj):
+        echo(getroom(obj), str(obj) + " sheds a leaf.")
 
 def test_wear(obj, actor):
     wait(1.0)

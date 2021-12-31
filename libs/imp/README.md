@@ -21,9 +21,10 @@ In particular Imp can handle the following things:
   `len(list, dict or string)` and `exit(code)`.
 * Single line comments starting with `#`.
 * ``from <module> import *``
+
 The above list may seem very limited, but you can really do whatever you need with
 just that functionality. Remember that this interpreter was created for the express
-purpose of scripting events with a game. If you need to write more advanced code then
+purpose of scripting events within a game. If you need to write more advanced code then
 you're probably better off writing that on the C++ side.
 
 It's compatible with Python such that a valid Imp script is also a valid

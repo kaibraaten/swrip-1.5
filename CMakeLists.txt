@@ -606,6 +606,7 @@ src/impscript/funcs/random_func.cpp
 src/impscript/funcs/say_func.cpp
 src/impscript/funcs/setdata_func.cpp
 src/impscript/funcs/skill_func.cpp
+src/impscript/funcs/spawnmob_func.cpp
 src/impscript/funcs/spawnobj_func.cpp
 src/impscript/funcs/transfer_func.cpp
 src/impscript/funcs/type_func.cpp

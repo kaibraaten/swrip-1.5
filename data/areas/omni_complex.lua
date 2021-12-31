@@ -207,7 +207,7 @@ def on_wear(obj, actor):\
                Arguments = "100", 
                ScriptType = "Imp", 
                Code = "def on_rand(obj):\
-    if not inroom(obj):\
+    if not getroom(obj):\
         echoaround(obj, str(obj) + \" feels a bit tight.\")\
 ", 
             }, 

@@ -1,4 +1,3 @@
-#include <cassert>
 #include "mud.hpp"
 #include "clan.hpp"
 #include "character.hpp"
@@ -68,7 +67,7 @@ void do_makeguild(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        assert(GUILD_PRICE >= 0);
+        static_assert(GUILD_PRICE >= 0);
         ch->Gold -= GUILD_PRICE;
     }
 
