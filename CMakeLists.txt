@@ -593,7 +593,6 @@ src/impscript/funcs/error_func.cpp
 src/impscript/funcs/exit_func.cpp
 src/impscript/funcs/getdata_func.cpp
 src/impscript/funcs/getroom_func.cpp
-src/impscript/funcs/inroom_func.cpp
 src/impscript/funcs/interpret_func.cpp
 src/impscript/funcs/isfighting_func.cpp
 src/impscript/funcs/isjedi_func.cpp
