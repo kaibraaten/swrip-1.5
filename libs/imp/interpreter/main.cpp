@@ -13,10 +13,10 @@
 #include <imp/runtime/listvalue.hpp>
 #include "experimentallibrary.hpp"
 
-static std::list<std::string> LoadScript(const std::string &filename);
+static std::vector<std::string> LoadScript(const std::string &filename);
 static void ShowUsage();
 static std::shared_ptr<Imp::Program> MakeProg(const std::string &scriptname,
-                                              const std::list<std::string> &code);
+                                              const std::vector<std::string> &code);
 static std::shared_ptr<Imp::RuntimeScope> MakeScope();
 
 int main(int argc, char *argv[])
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     try
     {
-        std::list<std::string> code;
+        std::vector<std::string> code;
         
         if(strcmp(argv[1], "-s") == 0)
         {
@@ -64,7 +64,7 @@ static void ShowUsage()
 }
 
 static std::shared_ptr<Imp::Program> MakeProg(const std::string &scriptname,
-                                              const std::list<std::string> &code)
+                                              const std::vector<std::string> &code)
 {
     auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);
@@ -102,9 +102,9 @@ static std::shared_ptr<Imp::RuntimeScope> MakeScope()
     return globalScope;
 }
 
-static std::list<std::string> LoadScript(const std::string &filename)
+static std::vector<std::string> LoadScript(const std::string &filename)
 {
-    std::list<std::string> code;
+    std::vector<std::string> code;
     std::ifstream file(filename);
 
     if(!file.is_open())
