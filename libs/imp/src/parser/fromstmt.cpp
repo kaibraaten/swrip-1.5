@@ -21,9 +21,9 @@ namespace Imp
         return output;
     }
 
-    static std::list<std::string> LoadScript(const std::string &filename, bool &fileWasOpened)
+    static std::vector<std::string> LoadScript(const std::string &filename, bool &fileWasOpened)
     {
-        std::list<std::string> code;
+        std::vector<std::string> code;
         std::ifstream file(filename);
 
         if(file.is_open())

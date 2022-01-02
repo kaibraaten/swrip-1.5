@@ -25,7 +25,7 @@ std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
 }
 
 std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
-                                              const std::list<std::string> &code)
+                                              const std::vector<std::string> &code)
 {
     auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);
@@ -34,8 +34,8 @@ std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
 }
 
 void DispatchImpFunction(const std::string &funcName,
-                         std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
-                         const std::list<std::string> &code,
+                         const std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
+                         const std::vector<std::string> &code,
                          const std::string &scriptname)
 {
     try

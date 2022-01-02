@@ -131,7 +131,7 @@ void MobProgBribeTrigger(std::shared_ptr<Character> mob,
                     std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, amount, BRIBE_PROG);
                     auto funcName = data.first;
                     auto params = data.second;
-                    DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                    DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                         MakeScriptName(mob, BRIBE_PROG));
                 }
                 else
@@ -182,7 +182,7 @@ void MobProgGiveTrigger(std::shared_ptr<Character> mob,
                     std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, obj, GIVE_PROG);
                     auto funcName = data.first;
                     auto params = data.second;
-                    DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                    DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                         MakeScriptName(mob, GIVE_PROG));
                 }
                 else
@@ -250,7 +250,7 @@ void MobProgHitPercentTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Ch
                     std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, ch, nullptr, HITPRCNT_PROG);
                     auto funcName = data.first;
                     auto params = data.second;
-                    DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                    DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                         MakeScriptName(mob, HITPRCNT_PROG));
                 }
                 else
@@ -960,7 +960,7 @@ static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, actor, vo, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     "obj " + std::to_string(obj->Prototype->Vnum) + " " + std::string(MobProgTypeToName(type)) + " trigger");
             }
             else
@@ -995,7 +995,7 @@ static void RoomProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(actor->InRoom, actor, vo, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     MakeScriptName(actor->InRoom, type));
             }
             else
@@ -1039,7 +1039,7 @@ static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Ch
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, nullptr, nullptr, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     MakeScriptName(room, type));
             }
             else
@@ -1076,7 +1076,7 @@ static void MobProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Cha
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, type);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     MakeScriptName(mob, type));
             }
             else
@@ -1099,7 +1099,7 @@ void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob)
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpMobProgData(mob, nullptr, nullptr, SPAWN_PROG);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     MakeScriptName(mob, SPAWN_PROG));
                 break;
             }
@@ -1118,7 +1118,7 @@ void ImpScriptSpawnTrigger(std::shared_ptr<Object> obj)
                 std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpObjProgData(obj, nullptr, nullptr, SPAWN_PROG);
                 auto funcName = data.first;
                 auto params = data.second;
-                DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                     MakeScriptName(obj, SPAWN_PROG));
                 break;
             }
@@ -1139,7 +1139,7 @@ void RunRoomSpawnTriggers()
                     std::pair<std::string, std::vector<std::shared_ptr<Imp::RuntimeValue>>> data = GetImpRoomProgData(room, nullptr, nullptr, SPAWN_PROG);
                     auto funcName = data.first;
                     auto params = data.second;
-                    DispatchImpFunction(funcName, params, Split<std::list>(mprg->comlist, '\n'),
+                    DispatchImpFunction(funcName, params, Split<std::vector>(mprg->comlist, '\n'),
                                         MakeScriptName(room, SPAWN_PROG));
                     break;
                 }

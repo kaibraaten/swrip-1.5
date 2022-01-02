@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include <list>
+#include <vector>
 #include <utility>
 
 namespace Imp
@@ -14,7 +14,7 @@ namespace Imp
     {
     public:
         Scanner(const std::string &scriptname,
-                const std::list<std::string> &sourceCode);
+                const std::vector<std::string> &sourceCode);
         ~Scanner();
         std::shared_ptr<Token> CurToken() const;
         void ReadNextToken();

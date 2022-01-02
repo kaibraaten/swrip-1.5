@@ -1772,7 +1772,7 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
 
     std::vector<std::string> expressions;
     LuaLoadArray(L, "RuntimeData", LoadRuntimeData, &expressions);
-    std::list<std::string> code(expressions.begin(), expressions.end());
+    std::vector<std::string> code(expressions.begin(), expressions.end());
     auto program = ParseImpProgram("char " + ch->Name + " runtimedata", code);
     auto scope = std::make_shared<Imp::RuntimeScope>();
     program->Eval(scope);

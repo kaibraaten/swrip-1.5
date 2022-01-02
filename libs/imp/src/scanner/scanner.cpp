@@ -176,7 +176,7 @@ namespace Imp
 
     struct Scanner::Impl
     {
-        Impl(const std::string &scriptname, const std::list<std::string> &sourceCode);
+        Impl(const std::string &scriptname, const std::vector<std::string> &sourceCode);
         void ScannerError(const std::string &message);
         int CurLineNum() const;
         bool IsCompOpr();
@@ -195,14 +195,14 @@ namespace Imp
         void ReadNextToken();
 
         std::deque<std::shared_ptr<Token>> CurLineTokens;
-        std::list<std::string> SourceCode;
+        std::vector<std::string> SourceCode;
         std::stack<int> Indents;
         int lineNum = 0;
         std::string ScriptName;
     };
 
     Scanner::Impl::Impl(const std::string &scriptname,
-                        const std::list<std::string> &sourceCode)
+                        const std::vector<std::string> &sourceCode)
         : SourceCode(sourceCode),
         ScriptName(scriptname)
     {
@@ -215,7 +215,7 @@ namespace Imp
 
         if(CurLineNum() > 0)
         {
-            m += " on line " + CurLineNum();
+            m += " on line " + std::to_string(CurLineNum());
         }
 
         m += ": " + message;
@@ -542,7 +542,7 @@ namespace Imp
 
     // Scanner class
     Scanner::Scanner(const std::string &scriptname,
-                     const std::list<std::string> &sourceCode)
+                     const std::vector<std::string> &sourceCode)
         : pImpl(std::make_unique<Impl>(scriptname, sourceCode))
     {
 

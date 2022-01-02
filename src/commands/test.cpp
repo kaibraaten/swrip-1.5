@@ -281,7 +281,7 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     }
     else if(StrCmp(argument, "imp") == 0)
     {
-        std::list<std::string> code =
+        std::vector<std::string> code =
         {
             "from test import *"
         };

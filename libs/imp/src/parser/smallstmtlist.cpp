@@ -8,7 +8,7 @@ namespace Imp
 {
     struct SmallStmtList::Impl
     {
-        std::list<std::shared_ptr<SmallStmt>> smallStatements;
+        std::vector<std::shared_ptr<SmallStmt>> smallStatements;
     };
 
     SmallStmtList::SmallStmtList(const std::string &scriptname, int n)
