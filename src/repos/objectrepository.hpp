@@ -10,7 +10,7 @@ class ObjectRepository : public Ceris::Repository<std::shared_ptr<Object>>
 public:
 
 protected:
-  ObjectRepository() = default;
+    ObjectRepository() = default;
 };
 
 inline std::shared_ptr<ObjectRepository> Objects;

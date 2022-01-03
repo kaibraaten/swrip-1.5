@@ -27,7 +27,7 @@ public:
     void Delete(std::shared_ptr<Home> home) override;
     
     std::shared_ptr<Home> FindByVnum(vnum_t) const override;
-    std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override;
+    std::vector<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override;
     bool IsResidentOf(const std::string &name, vnum_t room) const override;
 };
 
@@ -66,9 +66,9 @@ std::shared_ptr<Home> LuaHomeRepository::FindByVnum(vnum_t vnum) const
                 });
 }
 
-std::list<std::shared_ptr<Home>> LuaHomeRepository::FindHomesForResident(const std::string &name) const
+std::vector<std::shared_ptr<Home>> LuaHomeRepository::FindHomesForResident(const std::string &name) const
 {
-    std::list<std::shared_ptr<Home>> homes;
+    std::vector<std::shared_ptr<Home>> homes;
 
     for(auto home : Entities())
     {

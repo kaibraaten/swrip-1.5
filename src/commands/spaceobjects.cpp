@@ -13,10 +13,10 @@ void do_spaceobjects(std::shared_ptr<Character> ch, std::string argument)
                        {
                            return spaceobject->Type <= SPACE_SUN;
                        });
-    suns.sort([](const auto &sun1, const auto &sun2)
-              {
-                  return StrCmp(sun1->Name, sun2->Name) < 0;
-              });
+    sort(std::begin(suns), std::end(suns), [](const auto &sun1, const auto &sun2)
+         {
+             return StrCmp(sun1->Name, sun2->Name) < 0;
+         });
     for(auto spaceobject : suns)
     {
         if(!(spaceobject->IsSimulator && (!IsGreater(ch))))
@@ -33,10 +33,10 @@ void do_spaceobjects(std::shared_ptr<Character> ch, std::string argument)
                           {
                               return spaceobject->Type == SPACE_PLANET;
                           });
-    planets.sort([](const auto &p1, const auto &p2)
-                 {
-                     return StrCmp(p1->Name, p2->Name) < 0;
-                 });
+    std::sort(std::begin(planets), std::end(planets), [](const auto &p1, const auto &p2)
+              {
+                  return StrCmp(p1->Name, p2->Name) < 0;
+              });
     for(auto spaceobject : planets)
     {
         if(!(spaceobject->IsSimulator && (!IsGreater(ch))))

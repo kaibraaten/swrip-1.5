@@ -18,7 +18,7 @@ public:
     virtual void Delete(std::shared_ptr<Home> home) = 0;
     
     virtual std::shared_ptr<Home> FindByVnum(vnum_t) const = 0;
-    virtual std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const = 0;
+    virtual std::vector<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const = 0;
     virtual bool IsResidentOf(const std::string &name, vnum_t room) const = 0;
 };
 

@@ -26,7 +26,7 @@ public:
     virtual void Install(std::shared_ptr<Area> area,
                          std::shared_ptr<VnumConverter> helper,
                          const std::string &newfilename = "") = 0;
-    const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
+    const std::vector<std::shared_ptr<Area>> AreasInProgress() const noexcept;
     virtual void ChangeFilename(std::shared_ptr<Area> area,
                                 std::shared_ptr<VnumConverter> helper,
                                 const std::string &newfilename) = 0;

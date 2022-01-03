@@ -18,9 +18,9 @@ AreaRepository::~AreaRepository()
 
 }
 
-const std::list<std::shared_ptr<Area>> &AreaRepository::AreasInProgress() const noexcept
+const std::vector<std::shared_ptr<Area>> AreaRepository::AreasInProgress() const noexcept
 {
-    return pImpl->AreasInProgress;
+    return { std::begin(pImpl->AreasInProgress), std::end(pImpl->AreasInProgress) };
 }
 
 void AreaRepository::OnAdded(const std::shared_ptr<Area> &area)

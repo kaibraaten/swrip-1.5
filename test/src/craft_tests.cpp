@@ -102,6 +102,7 @@ public:
     void Load() override
     {
     }
+
     void Save() const override
     {
     }
@@ -109,6 +110,7 @@ public:
     void Load(std::shared_ptr<Home> home) override
     {
     }
+
     void Save(std::shared_ptr<Home> home) const override
     {
     }
@@ -121,9 +123,10 @@ public:
     {
         return nullptr;
     }
-    std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
+
+    std::vector<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
     {
-        return std::list<std::shared_ptr<Home>>();
+        return { };
     }
 
     bool IsResidentOf(const std::string &name, vnum_t room) const override

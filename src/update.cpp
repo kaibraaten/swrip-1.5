@@ -1552,7 +1552,7 @@ static void AutosavePlayerCharacters()
 }
 
 static std::shared_ptr<Room> GetOwnedHome(std::shared_ptr<Character> ch,
-                                          std::list<std::shared_ptr<Home>> homes)
+                                          const std::vector<std::shared_ptr<Home>> &homes)
 {
     auto home = Find(homes,
                      [ch](const auto &h)
@@ -1601,9 +1601,9 @@ static std::shared_ptr<Room> GetRoomToQuitIn(std::shared_ptr<Character> ch)
     return room;
 }
 
-static std::list<std::shared_ptr<Character> > GetLinkdeadCharacters()
+static std::vector<std::shared_ptr<Character> > GetLinkdeadCharacters()
 {
-    std::list<std::shared_ptr<Character> > linkdeads;
+    std::vector<std::shared_ptr<Character> > linkdeads;
 
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {

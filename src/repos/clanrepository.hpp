@@ -8,9 +8,9 @@
 class ClanRepository : public Ceris::Repository<std::shared_ptr<Clan>>
 {
 public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
-  virtual void Save(const std::shared_ptr<Clan>&) const = 0;
+    virtual void Load() = 0;
+    virtual void Save() const = 0;
+    virtual void Save(const std::shared_ptr<Clan> &) const = 0;
 };
 
 inline std::shared_ptr<ClanRepository> Clans;

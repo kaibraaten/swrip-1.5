@@ -7,14 +7,14 @@
 
 struct CompareHelpFile
 {
-  bool operator()(const std::shared_ptr<HelpFile> &pHelp, const std::shared_ptr<HelpFile> &tHelp) const;
+    bool operator()(const std::shared_ptr<HelpFile> &pHelp, const std::shared_ptr<HelpFile> &tHelp) const;
 };
 
 class HelpFileRepository : public Ceris::Repository<std::shared_ptr<HelpFile>, CompareHelpFile>
 {
 public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
+    virtual void Load() = 0;
+    virtual void Save() const = 0;
 };
 
 inline std::shared_ptr<HelpFileRepository> HelpFiles;
