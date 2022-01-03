@@ -44,7 +44,7 @@
 #include "timer.hpp"
 #include "triggers.hpp"
 
-static std::list<std::shared_ptr<Object>> ExtractedObjectQueue;
+static std::vector<std::shared_ptr<Object>> ExtractedObjectQueue;
 
 class ExtractedCharacter
 {
@@ -55,7 +55,7 @@ public:
     bool Extract = false;
 };
 
-static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
+static std::vector<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
 static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2);
 
@@ -117,7 +117,7 @@ void Explode(std::shared_ptr<Object> obj)
 
 static void ExplodeRoom(std::shared_ptr<Object> obj, std::shared_ptr<Character> xch, std::shared_ptr<Room> room)
 {
-    int blast = (int)(obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500);
+    int blast = (int) (obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500);
 
     ExplodeRoom_1(obj, xch, room, blast);
     ExplodeRoom_2(room, blast);
@@ -172,7 +172,7 @@ static void ExplodeRoom_1(std::shared_ptr<Object> obj, std::shared_ptr<Character
     }
 
     /* other rooms */
-    for(std::shared_ptr<Exit> pexit : room->Exits())
+    for(const auto &pexit : room->Exits())
     {
         if(pexit->ToRoom
            && pexit->ToRoom != room)
@@ -202,7 +202,7 @@ static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast)
 
     if(blast > 0)
     {
-        for(std::shared_ptr<Exit> pexit : room->Exits())
+        for(const auto &pexit : room->Exits())
         {
             if(pexit->ToRoom && pexit->ToRoom != room)
             {
@@ -339,14 +339,14 @@ void ModifyAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf, bo
         break;
 
     case APPLY_SEX:
-        ch->Sex = (SexType)((ch->Sex + mod) % 3);
+        ch->Sex = (SexType) ((ch->Sex + mod) % 3);
 
         if(ch->Sex < SEX_NEUTRAL)
         {
-            ch->Sex = (SexType)((int)ch->Sex + 2);
+            ch->Sex = (SexType) ((int) ch->Sex + 2);
         }
 
-        ch->Sex = (SexType)urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE);
+        ch->Sex = (SexType) urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE);
         break;
 
     case APPLY_LEVEL:
@@ -633,7 +633,7 @@ void AffectToCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Affect> pa
     assert(ch != nullptr);
     assert(paf != nullptr);
 
-    std::shared_ptr<Affect> paf_new = std::make_shared<Affect>();
+    auto paf_new = std::make_shared<Affect>();
 
     ch->Add(paf_new);
     paf_new->Type = paf->Type;
@@ -671,7 +671,7 @@ void StripAffect(std::shared_ptr<Character> ch, int sn)
                                       return affect->Type == sn;
                                   });
 
-    for(auto affect : affectsToRemove)
+    for(const auto &affect : affectsToRemove)
     {
         RemoveAffect(ch, affect);
     }
@@ -684,26 +684,24 @@ void StripAffect(std::shared_ptr<Character> ch, int sn)
  */
 void JoinAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
-    for(auto paf_old : ch->Affects())
+    const auto &paf_old = Find(ch->Affects(),
+                               [paf](const auto &paf_old)
+                               {
+                                   return paf_old->Type == paf->Type;
+                               });
+
+    paf->Duration = umin(1000000, paf->Duration + paf_old->Duration);
+
+    if(paf->Modifier)
     {
-        if(paf_old->Type == paf->Type)
-        {
-            paf->Duration = umin(1000000, paf->Duration + paf_old->Duration);
-
-            if(paf->Modifier)
-            {
-                paf->Modifier = umin(5000, paf->Modifier + paf_old->Modifier);
-            }
-            else
-            {
-                paf->Modifier = paf_old->Modifier;
-            }
-
-            RemoveAffect(ch, paf_old);
-            break;
-        }
+        paf->Modifier = umin(5000, paf->Modifier + paf_old->Modifier);
+    }
+    else
+    {
+        paf->Modifier = paf_old->Modifier;
     }
 
+    RemoveAffect(ch, paf_old);
     AffectToCharacter(ch, paf);
 }
 
@@ -759,21 +757,21 @@ void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomI
             ch->InRoom->Area->MaxPlayers = ch->InRoom->Area->NumberOfPlayers;
         }
     }
-    
+
     if((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
        && obj->ItemType == ITEM_LIGHT
        && obj->Value[OVAL_LIGHT_POWER] != 0)
     {
         ++ch->InRoom->Light;
     }
-    
+
     if(!IsNpc(ch)
        && ch->InRoom->Flags.test(Flag::Room::Safe)
        && !HasTimer(ch, TimerType::ShoveDrag))
     {
         AddTimer(ch, TimerType::ShoveDrag, 10);
     }
-    
+
     /*
      * Delayed Teleport rooms                                     -Thoric
      * Should be the last thing checked in this function
@@ -820,7 +818,7 @@ std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, std::shar
     if(loading_char.lock() == ch)
     {
         auto &save_equipment = GetSaveEquipment(ch);
-        
+
         for(int x = 0; x < MAX_WEAR; x++)
         {
             for(int y = 0; y < MAX_LAYERS; y++)
@@ -1576,16 +1574,15 @@ std::shared_ptr<Object> GetObjectAnywhere(std::shared_ptr<Character> ch, std::st
 {
     std::string arg;
     std::shared_ptr<Object> obj;
-    int number = 0, count = 0;
     vnum_t vnum = INVALID_VNUM;
 
     if(!ch)
         return NULL;
 
-    if((obj = GetObjectHere(ch, argument)) != NULL)
+    if((obj = GetObjectHere(ch, argument)) != nullptr)
         return obj;
 
-    number = NumberArgument(argument, arg);
+    int number = NumberArgument(argument, arg);
 
     /*
      * Allow reference by vnum for saints+                        -Thoric
@@ -1593,7 +1590,7 @@ std::shared_ptr<Object> GetObjectAnywhere(std::shared_ptr<Character> ch, std::st
     if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
         vnum = ToLong(arg);
 
-    count = 0;
+    int count = 0;
 
     obj = Find(Objects->Entities(),
                [&count, ch, arg, vnum, number](const auto o)
@@ -1669,15 +1666,15 @@ std::shared_ptr<Object> FindObject(std::shared_ptr<Character> ch, std::string ar
 
     if(arg2.empty())
     {
-        if(carryonly && (obj = GetCarriedObject(ch, arg1)) == NULL)
+        if(carryonly && (obj = GetCarriedObject(ch, arg1)) == nullptr)
         {
             ch->Echo("You do not have that item.\r\n");
-            return NULL;
+            return nullptr;
         }
-        else if(!carryonly && (obj = GetObjectHere(ch, arg1)) == NULL)
+        else if(!carryonly && (obj = GetObjectHere(ch, arg1)) == nullptr)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1, ActTarget::Char);
-            return NULL;
+            Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg1, ActTarget::Char);
+            return nullptr;
         }
 
         return obj;
@@ -1687,24 +1684,24 @@ std::shared_ptr<Object> FindObject(std::shared_ptr<Character> ch, std::string ar
         std::shared_ptr<Object> container;
 
         if(carryonly
-           && (container = GetCarriedObject(ch, arg2)) == NULL
-           && (container = GetWornObject(ch, arg2)) == NULL)
+           && (container = GetCarriedObject(ch, arg2)) == nullptr
+           && (container = GetWornObject(ch, arg2)) == nullptr)
         {
             ch->Echo("You do not have that item.\r\n");
-            return NULL;
+            return nullptr;
         }
 
-        if(!carryonly && (container = GetObjectHere(ch, arg2)) == NULL)
+        if(!carryonly && (container = GetObjectHere(ch, arg2)) == nullptr)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2, ActTarget::Char);
-            return NULL;
+            Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg2, ActTarget::Char);
+            return nullptr;
         }
 
         if(!container->Flags.test(Flag::Obj::Covering)
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, ActTarget::Char);
-            return NULL;
+            Act(AT_PLAIN, "The $d is closed.", ch, nullptr, container->Name, ActTarget::Char);
+            return nullptr;
         }
 
         obj = GetObjectInList(ch, arg1, container->Objects());
@@ -1718,7 +1715,7 @@ std::shared_ptr<Object> FindObject(std::shared_ptr<Character> ch, std::string ar
         return obj;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 int GetObjectCount(std::shared_ptr<Object> obj)
@@ -2267,7 +2264,7 @@ bool CharacterDiedRecently(std::shared_ptr<Character> ch)
 void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract)
 {
     assert(ch != nullptr);
-    std::shared_ptr<ExtractedCharacter> ccd = std::make_shared<ExtractedCharacter>();
+    auto ccd = std::make_shared<ExtractedCharacter>();
 
     ccd->Char = ch;
     ccd->InRoom = ch->InRoom;

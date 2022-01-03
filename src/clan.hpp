@@ -71,7 +71,6 @@ std::shared_ptr<Clan> GetClan(const std::string &name);
 void UpdateClanMember(std::shared_ptr<Character> ch);
 void RemoveClanMember(std::shared_ptr<Character> ch);
 std::shared_ptr<Clan> AllocateClan();
-void FreeClan(const std::shared_ptr<Clan> &clan);
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild);
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
                            const std::shared_ptr<Clan> &mainClan);

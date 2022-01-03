@@ -36,6 +36,6 @@ std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum(vnum_t vnum);
 void SpaceobjectUpdate();
 const LandingSite *GetLandingSiteFromVnum(std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum);
 const LandingSite *GetLandingSiteFromLocationName(std::shared_ptr<Spaceobject> spaceobj,
-    const std::string &name);
+                                                  const std::string &name);
 
 #endif

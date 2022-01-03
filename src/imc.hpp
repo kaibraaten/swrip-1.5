@@ -42,12 +42,10 @@ extern SiteInfo *this_imcmud;
 
 bool ImcCommandHook(std::shared_ptr<Character> ch, const std::string &command,
                     const std::string &argument);
-void ImcCopyover(void);
+void ImcCopyover();
 void ImcStartup(bool force, socket_t desc, bool connected);
 void ImcShutdown(bool reconnect);
 void ImcInitializeCharacter(std::shared_ptr<Character> ch);
-//bool ImcLoadCharacter(std::shared_ptr<Character> ch, FILE *fp, const std::string &word);
-//void ImcSaveCharacter(std::shared_ptr<Character> ch, FILE *fp);
 void ImcFreeCharacter(std::shared_ptr<Character> ch);
 void ImcLoop();
 socket_t ImcGetSocket(SiteInfo *);
