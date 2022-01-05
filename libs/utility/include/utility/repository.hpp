@@ -100,7 +100,7 @@ namespace Ceris
         template<typename UnaryPredicate>
         T Find(UnaryPredicate pred) const
         {
-            auto iter = std::ranges::find_if(_entities, pred);
+            auto iter = std::find_if(std::begin(_entities), std::end(_entities), pred);
 
             if(iter != _entities.end())
             {

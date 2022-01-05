@@ -1,3 +1,4 @@
+#include <list>
 #include <utility/algorithms.hpp>
 #include "arearepository.hpp"
 #include "area.hpp"

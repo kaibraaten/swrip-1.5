@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include <list>
+#include <vector>
 
 struct ImpScriptEntry
 {

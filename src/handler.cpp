@@ -685,9 +685,9 @@ void StripAffect(std::shared_ptr<Character> ch, int sn)
 void JoinAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
     const auto &paf_old = Find(ch->Affects(),
-                               [paf](const auto &paf_old)
+                               [paf](const auto &affect)
                                {
-                                   return paf_old->Type == paf->Type;
+                                   return affect->Type == paf->Type;
                                });
 
     paf->Duration = umin(1000000, paf->Duration + paf_old->Duration);
