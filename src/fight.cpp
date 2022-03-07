@@ -65,7 +65,7 @@ public:
 };
 
 Fight::Fight(const std::shared_ptr<Character> &who)
-    : Who(who)
+        : Who(who)
 {
 
 }
@@ -115,7 +115,7 @@ bool IsFighting(const std::shared_ptr<Character> &ch)
 
 std::shared_ptr<Character> WhoFighting(const std::shared_ptr<Character> &ch)
 {
-    if(IsFighting(ch))
+    if (IsFighting(ch))
     {
         return ch->Fighting->Who;
     }
@@ -160,8 +160,10 @@ void StopFearing(std::shared_ptr<Character> ch)
 
 void StartHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(ch->HHF.Hunting)
+    if (ch->HHF.Hunting)
+    {
         StopHunting(ch);
+    }
 
     ch->HHF.Hunting = std::make_unique<HuntHateFear>();
     ch->HHF.Hunting->Name = victim->Name;
@@ -170,8 +172,10 @@ void StartHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vict
 
 void StartHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(ch->HHF.Hating)
+    if (ch->HHF.Hating)
+    {
         StopHating(ch);
+    }
 
     ch->HHF.Hating = std::make_unique<HuntHateFear>();
     ch->HHF.Hating->Name = victim->Name;
@@ -180,8 +184,10 @@ void StartHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
 
 void StartFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(ch->HHF.Fearing)
+    if (ch->HHF.Fearing)
+    {
         StopFearing(ch);
+    }
 
     ch->HHF.Fearing = std::make_unique<HuntHateFear>();
     ch->HHF.Fearing->Name = victim->Name;
@@ -192,15 +198,15 @@ static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
 {
     auto affects = ch->Affects();
 
-    for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
+    for (auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
     {
         const std::shared_ptr<Affect> paf = *affectIter;
 
-        if(paf->Duration > 0)
+        if (paf->Duration > 0)
         {
             paf->Duration--;
         }
-        else if(paf->Duration < 0)
+        else if (paf->Duration < 0)
         {
             // Intentionally empty
         }
@@ -210,25 +216,25 @@ static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
             auto nextIter = affectIter;
             ++nextIter;
 
-            if(nextIter != std::end(affects))
+            if (nextIter != std::end(affects))
             {
                 paf_next = *nextIter;
             }
 
-            if(paf_next == nullptr
-               || paf_next->Type != paf->Type
-               || paf_next->Duration > 0)
+            if (paf_next == nullptr
+                || paf_next->Type != paf->Type
+                || paf_next->Duration > 0)
             {
                 auto skill = GetSkill(paf->Type);
 
-                if(paf->Type > 0 && skill != nullptr && !skill->Messages.WearOff.empty())
+                if (paf->Type > 0 && skill != nullptr && !skill->Messages.WearOff.empty())
                 {
                     SetCharacterColor(AT_WEAROFF, ch);
                     ch->Echo("%s\r\n", skill->Messages.WearOff.c_str());
                 }
             }
 
-            if(paf->Type == gsn_possess)
+            if (paf->Type == gsn_possess)
             {
                 ch->Desc->Char = ch->Desc->Original;
                 ch->Desc->Original = nullptr;
@@ -252,7 +258,7 @@ static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
  */
 void ViolenceUpdate()
 {
-    for(auto ch = LastCharacter; ch; ch = gch_prev)
+    for (auto ch = LastCharacter; ch; ch = gch_prev)
     {
         SetCurrentGlobalCharacter(ch);
 
@@ -265,7 +271,7 @@ void ViolenceUpdate()
          * Since he/she's in the char_list, it's likely to be the later...
          * and should not already be in another fight already
          */
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
@@ -273,9 +279,9 @@ void ViolenceUpdate()
         /*
          * Experience gained during battle deceases as battle drags on
          */
-        if(IsFighting(ch))
+        if (IsFighting(ch))
         {
-            if((++ch->Fighting->Duration % 24) == 0)
+            if ((++ch->Fighting->Duration % 24) == 0)
             {
                 ch->Fighting->Xp = ((ch->Fighting->Xp * 9) / 10);
             }
@@ -285,7 +291,7 @@ void ViolenceUpdate()
         //       it may have side effects that must be investigated first.
         DispatchExpiredCommandCallbackTimers(ch);
 
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
@@ -294,20 +300,20 @@ void ViolenceUpdate()
 
         std::shared_ptr<Character> victim = WhoFighting(ch);
 
-        if(victim == nullptr || IsAffectedBy(ch, Flag::Affect::Paralysis))
+        if (victim == nullptr || IsAffectedBy(ch, Flag::Affect::Paralysis))
         {
             continue;
         }
 
         ch_ret retcode = rNONE;
 
-        if(ch->InRoom->Flags.test(Flag::Room::Safe))
+        if (ch->InRoom->Flags.test(Flag::Room::Safe))
         {
             Log->Info("ViolenceUpdate: %s fighting %s in a SAFE room.",
                       ch->Name.c_str(), victim->Name.c_str());
             StopFighting(ch, true);
         }
-        else if(IsAwake(ch) && ch->InRoom == victim->InRoom)
+        else if (IsAwake(ch) && ch->InRoom == victim->InRoom)
         {
             retcode = HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
         }
@@ -316,19 +322,19 @@ void ViolenceUpdate()
             StopFighting(ch, false);
         }
 
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
 
         victim = WhoFighting(ch);
 
-        if(retcode == rCHAR_DIED || victim == nullptr)
+        if (retcode == rCHAR_DIED || victim == nullptr)
         {
             continue;
         }
 
-        if(IsNpc(ch))
+        if (IsNpc(ch))
         {
             do_wear(ch, "blaster");
             do_wear(ch, "all");
@@ -339,21 +345,21 @@ void ViolenceUpdate()
          */
         RoomProgFightTrigger(ch);
 
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
 
         MobProgHitPercentTrigger(ch, victim);
 
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
 
         MobProgFightTrigger(ch, victim);
 
-        if(CharacterDiedRecently(ch))
+        if (CharacterDiedRecently(ch))
         {
             continue;
         }
@@ -363,17 +369,17 @@ void ViolenceUpdate()
          */
         const auto characterList = ch->InRoom->Characters();
 
-        for(auto rch : characterList)
+        for (auto rch : characterList)
         {
-            if(IsAwake(rch) && !IsFighting(rch))
+            if (IsAwake(rch) && !IsFighting(rch))
             {
                 /*
                  * PC's auto-assist others in their group.
                  */
-                if(!IsNpc(ch) || IsAffectedBy(ch, Flag::Affect::Charm))
+                if (!IsNpc(ch) || IsAffectedBy(ch, Flag::Affect::Charm))
                 {
-                    if((!IsNpc(rch) || IsAffectedBy(rch, Flag::Affect::Charm))
-                       && IsInSameGroup(ch, rch))
+                    if ((!IsNpc(rch) || IsAffectedBy(rch, Flag::Affect::Charm))
+                        && IsInSameGroup(ch, rch))
                     {
                         HitMultipleTimes(rch, victim, TYPE_UNDEFINED);
                     }
@@ -384,32 +390,32 @@ void ViolenceUpdate()
                 /*
                  * NPCs assist NPCs of same type or 12.5% chance regardless.
                  */
-                if(IsNpc(rch) && !IsAffectedBy(rch, Flag::Affect::Charm)
-                   && !rch->Flags.test(Flag::Mob::NoAssist))
+                if (IsNpc(rch) && !IsAffectedBy(rch, Flag::Affect::Charm)
+                    && !rch->Flags.test(Flag::Mob::NoAssist))
                 {
-                    if(CharacterDiedRecently(ch))
+                    if (CharacterDiedRecently(ch))
                     {
                         break;
                     }
 
-                    if(rch->Prototype == ch->Prototype
-                       || NumberBits(3) == 0)
+                    if (rch->Prototype == ch->Prototype
+                        || NumberBits(3) == 0)
                     {
                         std::shared_ptr<Character> target = nullptr;
                         int number = 0;
 
-                        for(std::shared_ptr<Character> vch : ch->InRoom->Characters())
+                        for (std::shared_ptr<Character> vch : ch->InRoom->Characters())
                         {
-                            if(CanSeeCharacter(rch, vch)
-                               && IsInSameGroup(vch, victim)
-                               && GetRandomNumberFromRange(0, number) == 0)
+                            if (CanSeeCharacter(rch, vch)
+                                && IsInSameGroup(vch, victim)
+                                && GetRandomNumberFromRange(0, number) == 0)
                             {
                                 target = vch;
                                 number++;
                             }
                         }
 
-                        if(target != nullptr)
+                        if (target != nullptr)
                         {
                             HitMultipleTimes(rch, target, TYPE_UNDEFINED);
                         }
@@ -425,12 +431,12 @@ static ch_ret PerformNthAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
 {
     int hit_chance = getHitChance();
 
-    if(GetRandomPercent() < hit_chance)
+    if (GetRandomPercent() < hit_chance)
     {
         LearnFromSuccess(ch, gsn);
         ch_ret retcode = HitOnce(ch, victim, dt);
 
-        if(retcode != rNONE || WhoFighting(ch) != victim)
+        if (retcode != rNONE || WhoFighting(ch) != victim)
         {
             return retcode;
         }
@@ -449,7 +455,7 @@ static ch_ret Perform2ndAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel()
-                                    : (int)((GetSkillLevel(ch, gsn_second_attack) + dual_bonus) / 1.5);
+                                                 : (int) ((GetSkillLevel(ch, gsn_second_attack) + dual_bonus) / 1.5);
                             });
 }
 
@@ -459,7 +465,8 @@ static ch_ret Perform3rdAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel()
-                                    : (int)((GetSkillLevel(ch, gsn_third_attack) + (dual_bonus * 1.5)) / 2);
+                                                 : (int) ((GetSkillLevel(ch, gsn_third_attack) + (dual_bonus * 1.5))
+                                                          / 2);
                             });
 }
 
@@ -469,7 +476,8 @@ static ch_ret Perform4thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel()
-                                    : (int)((GetSkillLevel(ch, gsn_fourth_attack) + (dual_bonus * 1.5)) / 2);
+                                                 : (int) ((GetSkillLevel(ch, gsn_fourth_attack) + (dual_bonus * 1.5))
+                                                          / 2);
                             });
 }
 
@@ -479,7 +487,8 @@ static ch_ret Perform5thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel()
-                                    : (int)((GetSkillLevel(ch, gsn_fifth_attack) + (dual_bonus * 1.5)) / 2);
+                                                 : (int) ((GetSkillLevel(ch, gsn_fifth_attack) + (dual_bonus * 1.5))
+                                                          / 2);
                             });
 }
 
@@ -489,12 +498,12 @@ static ch_ret Perform5thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
 ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt)
 {
     /* add timer if player is attacking another player */
-    if(!IsNpc(ch) && !IsNpc(victim))
+    if (!IsNpc(ch) && !IsNpc(victim))
     {
         AddTimer(ch, TimerType::RecentFight, 20);
     }
 
-    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Nice) && !IsNpc(victim))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Nice) && !IsNpc(victim))
     {
         return rNONE;
     }
@@ -502,19 +511,19 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     // First attack
     ch_ret retcode = HitOnce(ch, victim, dt);
 
-    if(retcode != rNONE)
+    if (retcode != rNONE)
     {
         return retcode;
     }
 
-    if(WhoFighting(ch) != victim)
+    if (WhoFighting(ch) != victim)
     {
         return rNONE;
     }
 
     // Don't do more attacks if this is a backstab or a circle.
-    if(dt == gsn_backstab
-       || dt == gsn_circle)
+    if (dt == gsn_backstab
+        || dt == gsn_circle)
     {
         return rNONE;
     }
@@ -525,12 +534,12 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     /* -- Altrag */
     int hit_chance = IsNpc(ch) ? 100 : (GetSkillLevel(ch, gsn_berserk) * 5 / 2);
 
-    if(IsAffectedBy(ch, Flag::Affect::Berserk) && GetRandomPercent() < hit_chance)
+    if (IsAffectedBy(ch, Flag::Affect::Berserk) && GetRandomPercent() < hit_chance)
     {
         retcode = HitOnce(ch, victim, dt);
 
-        if(retcode != rNONE
-           || WhoFighting(ch) != victim)
+        if (retcode != rNONE
+            || WhoFighting(ch) != victim)
         {
             return retcode;
         }
@@ -539,9 +548,10 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     // Dual wield
     int dual_bonus = 0;
 
-    if(GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
+    if (GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
     {
-        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, AbilityClass::Combat) / 10) : (GetSkillLevel(ch, gsn_dual_wield) / 10);
+        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, AbilityClass::Combat) / 10) : (GetSkillLevel(ch, gsn_dual_wield)
+                                                                                     / 10);
 
         retcode = PerformNthAttack(ch, victim, dt, gsn_dual_wield,
                                    [ch]()
@@ -549,7 +559,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
                                        return GetSkillLevel(ch, gsn_dual_wield);
                                    });
 
-        if(retcode != rNONE || WhoFighting(ch) != victim)
+        if (retcode != rNONE || WhoFighting(ch) != victim)
         {
             return retcode;
         }
@@ -559,7 +569,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
         dual_bonus = 0;
     }
 
-    if(ch->Fatigue.Current < 10)
+    if (ch->Fatigue.Current < 10)
     {
         dual_bonus = -20;
     }
@@ -567,13 +577,13 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     /*
      * NPC predetermined number of (extra) attacks                        -Thoric
      */
-    if(IsNpc(ch) && ch->NumberOfAttacks > 0)
+    if (IsNpc(ch) && ch->NumberOfAttacks > 0)
     {
-        for(int i = 0; i <= ch->NumberOfAttacks; ++i)
+        for (int i = 0; i <= ch->NumberOfAttacks; ++i)
         {
             retcode = HitOnce(ch, victim, dt);
 
-            if(retcode != rNONE || WhoFighting(ch) != victim)
+            if (retcode != rNONE || WhoFighting(ch) != victim)
             {
                 return retcode;
             }
@@ -582,64 +592,42 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
         return retcode;
     }
 
-    // Second attack
-    retcode = Perform2ndAttack(ch, victim, dual_bonus, dt);
-
-    if(retcode != rNONE || WhoFighting(ch) != victim)
+    for (auto &attackFun : {Perform2ndAttack, Perform3rdAttack, Perform4thAttack, Perform5thAttack})
     {
-        return retcode;
-    }
+        retcode = attackFun(ch, victim, dual_bonus, dt);
 
-    // Third attack
-    retcode = Perform3rdAttack(ch, victim, dual_bonus, dt);
-
-    if(retcode != rNONE || WhoFighting(ch) != victim)
-    {
-        return retcode;
-    }
-
-    // Fourth attack
-    retcode = Perform4thAttack(ch, victim, dual_bonus, dt);
-
-    if(retcode != rNONE || WhoFighting(ch) != victim)
-    {
-        return retcode;
-    }
-
-    // Fifth attack
-    retcode = Perform5thAttack(ch, victim, dual_bonus, dt);
-
-    if(retcode != rNONE || WhoFighting(ch) != victim)
-    {
-        return retcode;
+        if (retcode != rNONE || WhoFighting(ch) != victim)
+        {
+            return retcode;
+        }
     }
 
     retcode = rNONE;
 
     // Extra 25% chance bonus attack for NPCs.
-    hit_chance = IsNpc(ch) ? (int)(ch->TopLevel() / 4) : 0;
+    hit_chance = IsNpc(ch) ? (int) (ch->TopLevel() / 4) : 0;
 
-    if(GetRandomPercent() < hit_chance)
+    if (GetRandomPercent() < hit_chance)
     {
         retcode = HitOnce(ch, victim, dt);
     }
 
     // Inflict movement cost
-    if(retcode == rNONE)
+    if (retcode == rNONE)
     {
         int move = 0;
 
-        if(!IsAffectedBy(ch, Flag::Affect::Flying)
-           && !IsAffectedBy(ch, Flag::Affect::Floating))
+        if (!IsAffectedBy(ch, Flag::Affect::Flying)
+            && !IsAffectedBy(ch, Flag::Affect::Floating))
         {
-            move = GetCarryEncumbrance(ch, MovementLoss[umin((int)SectorType::Max - 1, (int)ch->InRoom->Sector)]);
+            move = GetCarryEncumbrance(ch, MovementLoss[umin((int) SectorType::Max - 1, (int) ch->InRoom->Sector)]);
         }
         else
         {
             move = GetCarryEncumbrance(ch, 1);
         }
 
-        if(ch->Fatigue.Current != 0)
+        if (ch->Fatigue.Current != 0)
         {
             ch->Fatigue.Current = umax(0, ch->Fatigue.Current - move);
         }
@@ -657,54 +645,54 @@ static int GetWeaponProficiencyBonus(std::shared_ptr<Character> ch, std::shared_
 
     *gsn_ptr = -1;
 
-    if(!IsNpc(ch) && wield)
+    if (!IsNpc(ch) && wield)
     {
-        switch(wield->Value[OVAL_WEAPON_TYPE])
+        switch (wield->Value[OVAL_WEAPON_TYPE])
         {
-        case WEAPON_LIGHTSABER:
-            *gsn_ptr = gsn_lightsabers;
-            break;
+            case WEAPON_LIGHTSABER:
+                *gsn_ptr = gsn_lightsabers;
+                break;
 
-        case WEAPON_VIBRO_BLADE:
-            *gsn_ptr = gsn_vibro_blades;
-            break;
+            case WEAPON_VIBRO_BLADE:
+                *gsn_ptr = gsn_vibro_blades;
+                break;
 
-        case WEAPON_WHIP:
-            *gsn_ptr = gsn_flexible_arms;
-            break;
+            case WEAPON_WHIP:
+                *gsn_ptr = gsn_flexible_arms;
+                break;
 
-        case WEAPON_CLAW:
-            *gsn_ptr = gsn_talonous_arms;
-            break;
+            case WEAPON_CLAW:
+                *gsn_ptr = gsn_talonous_arms;
+                break;
 
-        case WEAPON_BLASTER:
-            *gsn_ptr = gsn_blasters;
-            break;
+            case WEAPON_BLASTER:
+                *gsn_ptr = gsn_blasters;
+                break;
 
-        case WEAPON_BLUDGEON:
-            *gsn_ptr = gsn_bludgeons;
-            break;
+            case WEAPON_BLUDGEON:
+                *gsn_ptr = gsn_bludgeons;
+                break;
 
-        case WEAPON_BOWCASTER:
-            *gsn_ptr = gsn_bowcasters;
-            break;
+            case WEAPON_BOWCASTER:
+                *gsn_ptr = gsn_bowcasters;
+                break;
 
-        case WEAPON_FORCE_PIKE:
-            *gsn_ptr = gsn_force_pikes;
-            break;
+            case WEAPON_FORCE_PIKE:
+                *gsn_ptr = gsn_force_pikes;
+                break;
 
-        default:
-            *gsn_ptr = -1;
-            break;
+            default:
+                *gsn_ptr = -1;
+                break;
         }
 
-        if(*gsn_ptr != -1)
+        if (*gsn_ptr != -1)
         {
             bonus = GetSkillLevel(ch, *gsn_ptr);
         }
     }
 
-    if(IsNpc(ch) && wield)
+    if (IsNpc(ch) && wield)
     {
         bonus = GetTrustLevel(ch);
     }
@@ -718,31 +706,23 @@ static int GetWeaponProficiencyBonus(std::shared_ptr<Character> ch, std::shared_
  */
 static int GetObjectHitrollBonus(std::shared_ptr<Object> obj)
 {
-    int tohit = accumulate(std::begin(obj->Prototype->Affects()),
-                           std::end(obj->Prototype->Affects()),
-                           0,
-                           [](int sumSoFar, const auto affect)
-                           {
-                               if(affect->Location == APPLY_HITROLL)
-                               {
-                                   sumSoFar += affect->Modifier;
-                               }
+    auto sumHitRoll = [](int sumSoFar, const auto affect)
+    {
+        if (affect->Location == APPLY_HITROLL)
+        {
+            sumSoFar += affect->Modifier;
+        }
 
-                               return sumSoFar;
-                           });
+        return sumSoFar;
+    };
 
-    tohit += accumulate(std::begin(obj->Affects()),
-                        std::end(obj->Affects()),
-                        0,
-                        [](int sumSoFar, const auto affect)
-                        {
-                            if(affect->Location == APPLY_HITROLL)
-                            {
-                                sumSoFar += affect->Modifier;
-                            }
+    int tohit = accumulate(std::cbegin(obj->Prototype->Affects()),
+                           std::cend(obj->Prototype->Affects()),
+                           0, sumHitRoll);
 
-                            return sumSoFar;
-                        });
+    tohit += accumulate(std::cbegin(obj->Affects()),
+                        std::cend(obj->Affects()),
+                        0, sumHitRoll);
 
     return tohit;
 }
@@ -752,11 +732,11 @@ static int GetObjectHitrollBonus(std::shared_ptr<Object> obj)
  */
 static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(!IsNpc(ch))            /* players get much less effect */
+    if (!IsNpc(ch))            /* players get much less effect */
     {
         short lvl = umax(1, (GetAbilityLevel(ch, AbilityClass::Force)));
 
-        if(GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 35)
+        if (GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 35)
         {
             return lvl;
         }
@@ -769,7 +749,7 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
     {
         short lvl = ch->TopLevel();
 
-        if(GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 70)
+        if (GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 70)
         {
             return lvl;
         }
@@ -782,12 +762,16 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
 
 static int GetBackstabDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    return 2 + urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 4), 30) / 8;
+    return 2 +
+           urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 4),
+                  30) / 8;
 }
 
 static int GetCircleDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    return 2 + urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 2), 30) / 40;
+    return 2 +
+           urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 2),
+                  30) / 40;
 }
 
 static int GetEnhancedDamageModifier(std::shared_ptr<Character> ch, int dam)
@@ -809,7 +793,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      * Can't beat a dead char!
      * Guard against weird room-leavings.
      */
-    if(victim->Position == POS_DEAD || ch->InRoom != victim->InRoom)
+    if (victim->Position == POS_DEAD || ch->InRoom != victim->InRoom)
     {
         return rVICT_DIED;
     }
@@ -819,9 +803,9 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      */
     auto wield = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
 
-    if(wield != nullptr)
+    if (wield != nullptr)
     {
-        if(!dual_flip)
+        if (!dual_flip)
         {
             dual_flip = true;
             wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
@@ -840,80 +824,80 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     int prof_bonus = GetWeaponProficiencyBonus(ch, wield, &prof_gsn);
     ch_ret retcode = rNONE;
 
-    if(IsFighting(ch)            /* make sure fight is already started */
-       && dt == TYPE_UNDEFINED
-       && IsNpc(ch)
-       && ch->AttackFlags != 0)
+    if (IsFighting(ch)            /* make sure fight is already started */
+        && dt == TYPE_UNDEFINED
+        && IsNpc(ch)
+        && ch->AttackFlags != 0)
     {
         int cnt = 0;
         int attacktype = 0;
 
-        for(;; )
+        for (;;)
         {
             attacktype = GetRandomNumberFromRange(0, 6);
 
-            if(ch->AttackFlags.test(attacktype))
+            if (ch->AttackFlags.test(attacktype))
             {
                 break;
             }
 
-            if(cnt++ > 16)
+            if (cnt++ > 16)
             {
                 attacktype = 0;
                 break;
             }
         }
 
-        if(attacktype == Flag::Attack::Backstab)
+        if (attacktype == Flag::Attack::Backstab)
         {
             attacktype = 0;
         }
 
-        if(wield && GetRandomPercent() > 25)
+        if (wield && GetRandomPercent() > 25)
         {
             attacktype = 0;
         }
 
-        switch(attacktype)
+        switch (attacktype)
         {
-        default:
-            break;
+            default:
+                break;
 
-            /* These used to call empty functions so they were just joined
-               together */
-        case Flag::Attack::Bite:
-        case Flag::Attack::Claws:
-        case Flag::Attack::Tail:
-        case Flag::Attack::Sting:
-            retcode = global_retcode;
-            break;
+                /* These used to call empty functions so they were just joined
+                   together */
+            case Flag::Attack::Bite:
+            case Flag::Attack::Claws:
+            case Flag::Attack::Tail:
+            case Flag::Attack::Sting:
+                retcode = global_retcode;
+                break;
 
-        case Flag::Attack::Punch:
-            do_punch(ch, "");
-            retcode = global_retcode;
-            break;
+            case Flag::Attack::Punch:
+                do_punch(ch, "");
+                retcode = global_retcode;
+                break;
 
-        case Flag::Attack::Kick:
-            do_kick(ch, "");
-            retcode = global_retcode;
-            break;
+            case Flag::Attack::Kick:
+                do_kick(ch, "");
+                retcode = global_retcode;
+                break;
 
-        case Flag::Attack::Trip:
-            attacktype = 0;
-            break;
+            case Flag::Attack::Trip:
+                attacktype = 0;
+                break;
         }
 
-        if(attacktype)
+        if (attacktype)
         {
             return retcode;
         }
     }
 
-    if(dt == TYPE_UNDEFINED)
+    if (dt == TYPE_UNDEFINED)
     {
         dt = TYPE_HIT;
 
-        if(wield && wield->ItemType == ITEM_WEAPON)
+        if (wield && wield->ItemType == ITEM_WEAPON)
         {
             dt += wield->Value[OVAL_WEAPON_TYPE];
         }
@@ -925,25 +909,25 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     int thac0_00 = 20;
     int thac0_32 = 10;
     int thac0 = Interpolate(GetAbilityLevel(ch, AbilityClass::Combat), thac0_00, thac0_32) - GetHitRoll(ch);
-    int victim_ac = (int)(GetArmorClass(victim) / 10);
+    int victim_ac = (int) (GetArmorClass(victim) / 10);
 
     /* if you can't see what's coming... */
-    if(wield && !CanSeeObject(victim, wield))
+    if (wield && !CanSeeObject(victim, wield))
     {
         victim_ac += 1;
     }
 
-    if(!CanSeeCharacter(ch, victim))
+    if (!CanSeeCharacter(ch, victim))
     {
         victim_ac -= 4;
     }
 
-    if(ch->Race == RACE_DEFEL)
+    if (ch->Race == RACE_DEFEL)
     {
         victim_ac += 2;
     }
 
-    if(!IsAwake(victim))
+    if (!IsAwake(victim))
     {
         victim_ac += 5;
     }
@@ -956,11 +940,11 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      */
     int diceroll = GetRandomNumberFromRange(1, 20);
 
-    if(diceroll == 1
-       || (diceroll < 20 && diceroll < thac0 - victim_ac))
+    if (diceroll == 1
+        || (diceroll < 20 && diceroll < thac0 - victim_ac))
     {
         /* Miss. */
-        if(prof_gsn != -1)
+        if (prof_gsn != -1)
         {
             LearnFromFailure(ch, prof_gsn);
         }
@@ -975,7 +959,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      * Hit.
      * Calc damage.
      */
-    if(!wield)       /* dice formula fixed by Thoric */
+    if (!wield)       /* dice formula fixed by Thoric */
     {
         dam = GetRandomNumberFromRange(ch->BareNumDie, ch->BareSizeDie * ch->BareNumDie);
     }
@@ -990,37 +974,37 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      */
     dam += GetDamageRoll(ch);
 
-    if(prof_bonus)
+    if (prof_bonus)
     {
         dam *= 1 + prof_bonus / 100;
     }
 
-    if(!IsNpc(ch) && GetSkillLevel(ch, gsn_enhanced_damage) > 0)
+    if (!IsNpc(ch) && GetSkillLevel(ch, gsn_enhanced_damage) > 0)
     {
         dam += GetEnhancedDamageModifier(ch, dam);
         LearnFromSuccess(ch, gsn_enhanced_damage);
     }
 
-    if(!IsAwake(victim))
+    if (!IsAwake(victim))
     {
         dam *= GetVictimSleepingMultiplier();
     }
 
-    if(dt == gsn_backstab)
+    if (dt == gsn_backstab)
     {
         dam *= GetBackstabDamageMultiplier(ch, victim);
     }
 
-    if(dt == gsn_circle)
+    if (dt == gsn_circle)
     {
         dam *= GetCircleDamageMultiplier(ch, victim);
     }
 
     int plusris = 0;
 
-    if(wield)
+    if (wield)
     {
-        if(wield->Flags.test(Flag::Obj::Magic))
+        if (wield->Flags.test(Flag::Obj::Magic))
         {
             dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Magic);
         }
@@ -1040,31 +1024,31 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     }
 
     /* check for RIS_PLUSx                                        -Thoric */
-    if(dam != 0)
+    if (dam != 0)
     {
         int res = -1;
         int imm = -1;
         int sus = -1;
 
-        if(plusris != 0)
+        if (plusris != 0)
         {
             plusris = (1 << Flag::Ris::Plus1) << umin(plusris, 7);
         }
 
         /* find high ris */
-        for(size_t i = Flag::Ris::Plus1; i <= Flag::Ris::Plus6; ++i)
+        for (size_t i = Flag::Ris::Plus1; i <= Flag::Ris::Plus6; ++i)
         {
-            if(victim->Immune.test(i))
+            if (victim->Immune.test(i))
             {
                 imm = i;
             }
 
-            if(victim->Resistant.test(i))
+            if (victim->Resistant.test(i))
             {
                 res = i;
             }
 
-            if(victim->Susceptible.test(i))
+            if (victim->Susceptible.test(i))
             {
                 sus = i;
             }
@@ -1072,28 +1056,28 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
 
         int mod = 10;
 
-        if(imm >= plusris)
+        if (imm >= plusris)
         {
             mod -= 10;
         }
 
-        if(res >= plusris)
+        if (res >= plusris)
         {
             mod -= 2;
         }
 
-        if(sus <= plusris)
+        if (sus <= plusris)
         {
             mod += 2;
         }
 
         /* check if immune */
-        if(mod <= 0)
+        if (mod <= 0)
         {
             dam = -1;
         }
 
-        if(mod != 10)
+        if (mod != 10)
         {
             dam = (dam * mod) / 10;
         }
@@ -1105,44 +1089,45 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      * check to see if weapon is charged
      */
 
-    if(AttackIsBlaster(dt, wield))
+    if (AttackIsBlaster(dt, wield))
     {
-        if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
+        if (wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
             Act(AT_YELLOW, "$n points their blaster at you but nothing happens.",
                 ch, NULL, victim, ActTarget::Vict);
             Act(AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!",
                 ch, NULL, victim, ActTarget::Char);
 
-            if(IsNpc(ch))
+            if (IsNpc(ch))
             {
                 do_remove(ch, wield->Name);
             }
 
             return rNONE;
         }
-        else if(wield->BlasterSetting == BLASTER_FULL && wield->Value[OVAL_WEAPON_CHARGE] >= 5)
+        else if (wield->BlasterSetting == BLASTER_FULL && wield->Value[OVAL_WEAPON_CHARGE] >= 5)
         {
             dam *= 1.5;
             wield->Value[OVAL_WEAPON_CHARGE] -= 5;
         }
-        else if(wield->BlasterSetting == BLASTER_HIGH && wield->Value[OVAL_WEAPON_CHARGE] >= 4)
+        else if (wield->BlasterSetting == BLASTER_HIGH && wield->Value[OVAL_WEAPON_CHARGE] >= 4)
         {
             dam *= 1.25;
             wield->Value[OVAL_WEAPON_CHARGE] -= 4;
         }
-        else if(wield->BlasterSetting == BLASTER_NORMAL && wield->Value[OVAL_WEAPON_CHARGE] >= 3)
+        else if (wield->BlasterSetting == BLASTER_NORMAL && wield->Value[OVAL_WEAPON_CHARGE] >= 3)
         {
             wield->Value[OVAL_WEAPON_CHARGE] -= 3;
         }
-        else if(wield->BlasterSetting == BLASTER_STUN && wield->Value[OVAL_WEAPON_CHARGE] >= 5)
+        else if (wield->BlasterSetting == BLASTER_STUN && wield->Value[OVAL_WEAPON_CHARGE] >= 5)
         {
             dam /= 10;
             wield->Value[OVAL_WEAPON_CHARGE] -= 3;
-            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, AbilityClass::Combat), Flag::Ris::Paralysis);
+            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, AbilityClass::Combat),
+                                                                Flag::Ris::Paralysis);
             bool fail = false;
 
-            if(hit_chance == 1000)
+            if (hit_chance == 1000)
             {
                 fail = true;
             }
@@ -1151,7 +1136,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
                 fail = SaveVsParalyze(hit_chance, victim);
             }
 
-            if(victim->WasStunned > 0)
+            if (victim->WasStunned > 0)
             {
                 fail = true;
                 victim->WasStunned--;
@@ -1159,7 +1144,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
 
             hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel(victim, AbilityClass::Combat) / 2;
             /* harder for player to stun another player */
-            if(!IsNpc(ch) && !IsNpc(victim))
+            if (!IsNpc(ch) && !IsNpc(victim))
             {
                 hit_chance -= SysData.StunModPlrVsPlr;
             }
@@ -1170,26 +1155,29 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
 
             hit_chance = urange(5, hit_chance, 95);
 
-            if(!fail && GetRandomPercent() < hit_chance)
+            if (!fail && GetRandomPercent() < hit_chance)
             {
                 SetWaitState(victim, PULSE_VIOLENCE);
-                Act(AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, nullptr, ch, ActTarget::Char);
-                Act(AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, nullptr, victim, ActTarget::Char);
-                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, nullptr, victim, ActTarget::NotVict);
+                Act(AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim,
+                    nullptr, ch, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, nullptr,
+                    victim, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, nullptr, victim,
+                    ActTarget::NotVict);
                 StopFighting(victim, true);
 
-                if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
+                if (!IsAffectedBy(victim, Flag::Affect::Paralysis))
                 {
                     auto af = std::make_shared<Affect>();
                     af->Type = gsn_stun;
                     af->Location = APPLY_AC;
                     af->Modifier = 20;
                     af->Duration = 7;
-                    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Paralysis });
+                    af->AffectedBy = CreateBitSet<Flag::MAX>({Flag::Affect::Paralysis});
                     AffectToCharacter(victim, af);
                     UpdatePosition(victim);
 
-                    if(IsNpc(victim))
+                    if (IsNpc(victim))
                     {
                         StartHating(victim, ch);
                         StartHunting(victim, ch);
@@ -1199,12 +1187,15 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
             }
             else
             {
-                Act(AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, ActTarget::Char);
-                Act(AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, ActTarget::Char);
-                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, ActTarget::NotVict);
+                Act(AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch,
+                    ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL,
+                    victim, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL,
+                    victim, ActTarget::NotVict);
             }
         }
-        else if(wield->BlasterSetting == BLASTER_HALF && wield->Value[OVAL_WEAPON_CHARGE] >= 2)
+        else if (wield->BlasterSetting == BLASTER_HALF && wield->Value[OVAL_WEAPON_CHARGE] >= 2)
         {
             dam *= 0.75;
             wield->Value[OVAL_WEAPON_CHARGE] -= 2;
@@ -1215,17 +1206,17 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
             wield->Value[OVAL_WEAPON_CHARGE] -= 1;
         }
     }
-    else if(AttackIsVibroBlade(dt, wield))
+    else if (AttackIsVibroBlade(dt, wield))
     {
-        if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
+        if (wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
             Act(AT_YELLOW, "Your vibro-blade needs recharging...", ch, nullptr, victim, ActTarget::Char);
             dam /= 3;
         }
     }
-    else if(AttackIsForcePike(dt, wield))
+    else if (AttackIsForcePike(dt, wield))
     {
-        if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
+        if (wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
             Act(AT_YELLOW, "Your force-pike needs recharging...", ch, nullptr, victim, ActTarget::Char);
             dam /= 2;
@@ -1235,14 +1226,15 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
             wield->Value[OVAL_WEAPON_CHARGE]--;
         }
     }
-    else if(AttackIsLightsaber(dt, wield))
+    else if (AttackIsLightsaber(dt, wield))
     {
-        if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
+        if (wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
             Act(AT_YELLOW, "$n waves a dead hand grip around in the air.", ch, nullptr, victim, ActTarget::Vict);
-            Act(AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, nullptr, victim, ActTarget::Char);
+            Act(AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, nullptr,
+                victim, ActTarget::Char);
 
-            if(IsNpc(ch))
+            if (IsNpc(ch))
             {
                 do_remove(ch, wield->Name);
             }
@@ -1250,14 +1242,16 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
             return rNONE;
         }
     }
-    else if(AttackIsBowcaster(dt, wield))
+    else if (AttackIsBowcaster(dt, wield))
     {
-        if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
+        if (wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
-            Act(AT_YELLOW, "$n points their bowcaster at you but nothing happens.", ch, nullptr, victim, ActTarget::Vict);
-            Act(AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, nullptr, victim, ActTarget::Char);
+            Act(AT_YELLOW, "$n points their bowcaster at you but nothing happens.", ch, nullptr, victim,
+                ActTarget::Vict);
+            Act(AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, nullptr, victim,
+                ActTarget::Char);
 
-            if(IsNpc(ch))
+            if (IsNpc(ch))
             {
                 do_remove(ch, wield->Name);
             }
@@ -1270,14 +1264,14 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
         }
     }
 
-    if(dam <= 0)
+    if (dam <= 0)
     {
         dam = 1;
     }
 
-    if(prof_gsn != -1)
+    if (prof_gsn != -1)
     {
-        if(dam > 0)
+        if (dam > 0)
         {
             LearnFromSuccess(ch, prof_gsn);
         }
@@ -1288,32 +1282,32 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     }
 
     /* immune to damage */
-    if(dam == -1)
+    if (dam == -1)
     {
-        if(dt >= 0 && dt < TopSN)
+        if (dt >= 0 && dt < TopSN)
         {
             std::shared_ptr<Skill> skill = SkillTable[dt];
             bool found = false;
 
-            if(!skill->Messages.VictimImmune.ToCaster.empty())
+            if (!skill->Messages.VictimImmune.ToCaster.empty())
             {
                 Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, ActTarget::Char);
                 found = true;
             }
 
-            if(!skill->Messages.VictimImmune.ToVictim.empty())
+            if (!skill->Messages.VictimImmune.ToVictim.empty())
             {
                 Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, ActTarget::Vict);
                 found = true;
             }
 
-            if(!skill->Messages.VictimImmune.ToRoom.empty())
+            if (!skill->Messages.VictimImmune.ToRoom.empty())
             {
                 Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                 found = true;
             }
 
-            if(found)
+            if (found)
             {
                 return rNONE;
             }
@@ -1324,63 +1318,63 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
 
     retcode = InflictDamage(ch, victim, dam, dt);
 
-    if(retcode != rNONE)
+    if (retcode != rNONE)
     {
         return retcode;
     }
 
-    if(CharacterDiedRecently(ch))
+    if (CharacterDiedRecently(ch))
     {
         return rCHAR_DIED;
     }
 
-    if(CharacterDiedRecently(victim))
+    if (CharacterDiedRecently(victim))
     {
         return rVICT_DIED;
     }
 
     retcode = rNONE;
 
-    if(dam == 0)
+    if (dam == 0)
     {
         return retcode;
     }
 
     /* weapon spells      -Thoric */
-    if(wield != nullptr
-       && !victim->Immune.test(Flag::Ris::Magic)
-       && !victim->InRoom->Flags.test(Flag::Room::NoMagic))
+    if (wield != nullptr
+        && !victim->Immune.test(Flag::Ris::Magic)
+        && !victim->InRoom->Flags.test(Flag::Room::NoMagic))
     {
-        for(auto aff : wield->Prototype->Affects())
+        for (auto aff : wield->Prototype->Affects())
         {
-            if(aff->Location == APPLY_WEAPONSPELL
-               && IS_VALID_SN(aff->Modifier)
-               && SkillTable[aff->Modifier]->SpellFunction)
+            if (aff->Location == APPLY_WEAPONSPELL
+                && IS_VALID_SN(aff->Modifier)
+                && SkillTable[aff->Modifier]->SpellFunction)
             {
                 retcode = SkillTable[aff->Modifier]->SpellFunction(aff->Modifier, (wield->Level + 3) / 3, ch, victim);
             }
         }
 
-        if(retcode != rNONE
-           || CharacterDiedRecently(ch)
-           || CharacterDiedRecently(victim))
+        if (retcode != rNONE
+            || CharacterDiedRecently(ch)
+            || CharacterDiedRecently(victim))
         {
             return retcode;
         }
 
-        for(const auto &aff : wield->Affects())
+        for (const auto &aff : wield->Affects())
         {
-            if(aff->Location == APPLY_WEAPONSPELL
-               && IS_VALID_SN(aff->Modifier)
-               && SkillTable[aff->Modifier]->SpellFunction)
+            if (aff->Location == APPLY_WEAPONSPELL
+                && IS_VALID_SN(aff->Modifier)
+                && SkillTable[aff->Modifier]->SpellFunction)
             {
                 retcode = SkillTable[aff->Modifier]->SpellFunction(aff->Modifier, (wield->Level + 3) / 3, ch, victim);
             }
         }
 
-        if(retcode != rNONE
-           || CharacterDiedRecently(ch)
-           || CharacterDiedRecently(victim))
+        if (retcode != rNONE
+            || CharacterDiedRecently(ch)
+            || CharacterDiedRecently(victim))
         {
             return retcode;
         }
@@ -1389,28 +1383,28 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     /*
      * magic shields that retaliate                               -Thoric
      */
-    if(IsAffectedBy(victim, Flag::Affect::Fireshield)
-       && !IsAffectedBy(ch, Flag::Affect::Fireshield))
+    if (IsAffectedBy(victim, Flag::Affect::Fireshield)
+        && !IsAffectedBy(ch, Flag::Affect::Fireshield))
     {
         retcode = spell_fireball(gsn_fireball, GetOffensiveShieldLevelModifier(victim, ch), victim, ch);
     }
 
-    if(retcode != rNONE
-       || CharacterDiedRecently(ch)
-       || CharacterDiedRecently(victim))
+    if (retcode != rNONE
+        || CharacterDiedRecently(ch)
+        || CharacterDiedRecently(victim))
     {
         return retcode;
     }
 
-    if(IsAffectedBy(victim, Flag::Affect::Shockshield)
-       && !IsAffectedBy(ch, Flag::Affect::Shockshield))
+    if (IsAffectedBy(victim, Flag::Affect::Shockshield)
+        && !IsAffectedBy(ch, Flag::Affect::Shockshield))
     {
         retcode = spell_lightning_bolt(gsn_lightning_bolt, GetOffensiveShieldLevelModifier(victim, ch), victim, ch);
     }
 
-    if(retcode != rNONE
-       || CharacterDiedRecently(ch)
-       || CharacterDiedRecently(victim))
+    if (retcode != rNONE
+        || CharacterDiedRecently(ch)
+        || CharacterDiedRecently(victim))
     {
         return retcode;
     }
@@ -1418,13 +1412,13 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     /*
      *   folks with blasters move and snipe instead of getting neatin up in one spot.
      */
-    if(IsNpc(victim))
+    if (IsNpc(victim))
     {
         auto wielding = GetEquipmentOnCharacter(victim, WEAR_WIELD);
 
-        if(wielding != nullptr
-           && wielding->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
-           && SprintForCover(victim) == true)
+        if (wielding != nullptr
+            && wielding->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
+            && SprintForCover(victim) == true)
         {
             StartHating(victim, ch);
             StartHunting(victim, ch);
@@ -1442,22 +1436,22 @@ static bool AttackIsBowcaster(int dt, const std::shared_ptr<Object> &wield)
 static bool AttackIsLightsaber(int dt, const std::shared_ptr<Object> &wield)
 {
     return dt == (TYPE_HIT + WEAPON_LIGHTSABER)
-        && wield != nullptr
-        && wield->ItemType == ITEM_WEAPON;
+           && wield != nullptr
+           && wield->ItemType == ITEM_WEAPON;
 }
 
 static bool AttackIsForcePike(int dt, const std::shared_ptr<Object> &wield)
 {
     return dt == (TYPE_HIT + WEAPON_FORCE_PIKE)
-        && wield != nullptr
-        && wield->ItemType == ITEM_WEAPON;
+           && wield != nullptr
+           && wield->ItemType == ITEM_WEAPON;
 }
 
 static bool AttackIsVibroBlade(int dt, const std::shared_ptr<Object> &wield)
 {
     return dt == (TYPE_HIT + WEAPON_VIBRO_BLADE)
-        && wield != nullptr
-        && wield->ItemType == ITEM_WEAPON;
+           && wield != nullptr
+           && wield->ItemType == ITEM_WEAPON;
 }
 
 static bool AttackIsBlaster(int dt, const std::shared_ptr<Object> &wield)
@@ -1473,32 +1467,42 @@ short ModifyDamageBasedOnResistance(std::shared_ptr<Character> ch, short dam, in
 {
     short modifier = 10;
 
-    if(ch->Immune.test(ris))
+    if (ch->Immune.test(ris))
+    {
         modifier -= 10;
+    }
 
-    if(ch->Resistant.test(ris))
+    if (ch->Resistant.test(ris))
+    {
         modifier -= 2;
+    }
 
-    if(ch->Susceptible.test(ris))
+    if (ch->Susceptible.test(ris))
+    {
         modifier += 2;
+    }
 
-    if(modifier <= 0)
+    if (modifier <= 0)
+    {
         return -1;
+    }
 
-    if(modifier == 10)
+    if (modifier == 10)
+    {
         return dam;
+    }
 
     return (dam * modifier) / 10;
 }
 
 static void WimpOut(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam)
 {
-    if(IsNpc(victim) && dam > 0)
+    if (IsNpc(victim) && dam > 0)
     {
-        if((victim->Flags.test(Flag::Mob::Wimpy) && NumberBits(1) == 0
-            && victim->HitPoints.Current < victim->HitPoints.Max / 2)
-           || (IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
-               && victim->Master->InRoom != victim->InRoom))
+        if ((victim->Flags.test(Flag::Mob::Wimpy) && NumberBits(1) == 0
+             && victim->HitPoints.Current < victim->HitPoints.Max / 2)
+            || (IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
+                && victim->Master->InRoom != victim->InRoom))
         {
             StartFearing(victim, ch);
             StopHunting(victim);
@@ -1506,14 +1510,14 @@ static void WimpOut(std::shared_ptr<Character> ch, std::shared_ptr<Character> vi
         }
     }
 
-    if(!IsNpc(victim)
-       && victim->HitPoints.Current > 0
-       && victim->HitPoints.Current <= victim->Wimpy
-       && victim->Wait == 0)
+    if (!IsNpc(victim)
+        && victim->HitPoints.Current > 0
+        && victim->HitPoints.Current <= victim->Wimpy
+        && victim->Wait == 0)
     {
         do_flee(victim, "");
     }
-    else if(!IsNpc(victim) && victim->Flags.test(Flag::Plr::Flee))
+    else if (!IsNpc(victim) && victim->Flags.test(Flag::Plr::Flee))
     {
         do_flee(victim, "");
     }
@@ -1524,19 +1528,19 @@ static void WimpOut(std::shared_ptr<Character> ch, std::shared_ptr<Character> vi
  */
 ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt)
 {
-    if(!ch)
+    if (!ch)
     {
         Log->Bug("%s: null ch!", __FUNCTION__);
         return rERROR;
     }
 
-    if(!victim)
+    if (!victim)
     {
         Log->Bug("%s: null victim!", __FUNCTION__);
         return rVICT_DIED;
     }
 
-    if(victim->Position == POS_DEAD)
+    if (victim->Position == POS_DEAD)
     {
         return rVICT_DIED;
     }
@@ -1544,57 +1548,77 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     /*
      * Check damage types for RIS                         -Thoric
      */
-    if(dam && dt != TYPE_UNDEFINED)
+    if (dam && dt != TYPE_UNDEFINED)
     {
-        if(IS_FIRE(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Fire);
-        else if(IS_COLD(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Cold);
-        else if(IS_ACID(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Acid);
-        else if(IS_ELECTRICITY(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Electricity);
-        else if(IS_ENERGY(dt) || dt == (TYPE_HIT + 6))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Energy);
-        else if(IS_DRAIN(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Drain);
-        else if(dt == gsn_poison || IS_POISON(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Poison);
-        else if(dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Blunt);
-        else if(dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11)
-                || dt == (TYPE_HIT + 10))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Pierce);
-        else if(dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3)
-                || dt == (TYPE_HIT + 4) || dt == (TYPE_HIT + 5))
-            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Slash);
-
-        if(dam == -1)
+        if (IS_FIRE(dt))
         {
-            if(dt >= 0 && dt < TopSN)
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Fire);
+        }
+        else if (IS_COLD(dt))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Cold);
+        }
+        else if (IS_ACID(dt))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Acid);
+        }
+        else if (IS_ELECTRICITY(dt))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Electricity);
+        }
+        else if (IS_ENERGY(dt) || dt == (TYPE_HIT + 6))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Energy);
+        }
+        else if (IS_DRAIN(dt))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Drain);
+        }
+        else if (dt == gsn_poison || IS_POISON(dt))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Poison);
+        }
+        else if (dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Blunt);
+        }
+        else if (dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11)
+                 || dt == (TYPE_HIT + 10))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Pierce);
+        }
+        else if (dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3)
+                 || dt == (TYPE_HIT + 4) || dt == (TYPE_HIT + 5))
+        {
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Slash);
+        }
+
+        if (dam == -1)
+        {
+            if (dt >= 0 && dt < TopSN)
             {
                 bool found = false;
                 std::shared_ptr<Skill> skill = SkillTable[dt];
 
-                if(!skill->Messages.VictimImmune.ToCaster.empty())
+                if (!skill->Messages.VictimImmune.ToCaster.empty())
                 {
                     Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, ActTarget::Char);
                     found = true;
                 }
 
-                if(!skill->Messages.VictimImmune.ToVictim.empty())
+                if (!skill->Messages.VictimImmune.ToVictim.empty())
                 {
                     Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, ActTarget::Vict);
                     found = true;
                 }
 
-                if(!skill->Messages.VictimImmune.ToRoom.empty())
+                if (!skill->Messages.VictimImmune.ToRoom.empty())
                 {
                     Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                     found = true;
                 }
 
-                if(found)
+                if (found)
                 {
                     return rNONE;
                 }
@@ -1604,67 +1628,78 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         }
     }
 
-    if(dam && IsNpc(victim) && ch != victim)
+    if (dam && IsNpc(victim) && ch != victim)
     {
-        if(!victim->Flags.test(Flag::Mob::Sentinel))
+        if (!victim->Flags.test(Flag::Mob::Sentinel))
         {
-            if(victim->HHF.Hunting)
+            if (victim->HHF.Hunting)
             {
-                if(victim->HHF.Hunting->Who != ch)
+                if (victim->HHF.Hunting->Who != ch)
                 {
                     victim->HHF.Hunting->Name = ch->Name;
                     victim->HHF.Hunting->Who = ch;
                 }
             }
             else
+            {
                 StartHunting(victim, ch);
+            }
         }
 
-        if(victim->HHF.Hating)
+        if (victim->HHF.Hating)
         {
-            if(victim->HHF.Hating->Who != ch)
+            if (victim->HHF.Hating->Who != ch)
             {
                 victim->HHF.Hating->Name = ch->Name;
                 victim->HHF.Hating->Who = ch;
             }
         }
         else
+        {
             StartHating(victim, ch);
+        }
     }
 
-    if(victim != ch)
+    if (victim != ch)
     {
         /*
          * Certain attacks are forbidden.
          * Most other attacks are returned.
          */
-        if(IsSafe(ch, victim))
-            return rNONE;
-
-
-        if(victim->Position > POS_STUNNED)
+        if (IsSafe(ch, victim))
         {
-            if(!IsFighting(victim))
-                StartFighting(victim, ch);
-
-            if(IsFighting(victim))
-                victim->Position = POS_FIGHTING;
+            return rNONE;
         }
 
-        if(victim->Position > POS_STUNNED)
+        if (victim->Position > POS_STUNNED)
         {
-            if(!IsFighting(ch))
+            if (!IsFighting(victim))
+            {
+                StartFighting(victim, ch);
+            }
+
+            if (IsFighting(victim))
+            {
+                victim->Position = POS_FIGHTING;
+            }
+        }
+
+        if (victim->Position > POS_STUNNED)
+        {
+            if (!IsFighting(ch))
+            {
                 StartFighting(ch, victim);
+            }
 
             /*
              * If victim is charmed, ch might attack victim's master.
              */
-            if(IsNpc(ch)
-               && IsNpc(victim)
-               && IsAffectedBy(victim, Flag::Affect::Charm)
-               && victim->Master
-               && victim->Master->InRoom == ch->InRoom
-               && NumberBits(3) == 0)
+            if (IsNpc(ch)
+                && IsNpc(victim)
+                && IsAffectedBy(victim, Flag::Affect::Charm)
+                && victim->Master
+                && victim->Master->InRoom == ch->InRoom
+                && NumberBits(3) == 0)
             {
                 StopFighting(ch, false);
                 ch_ret retcode = HitMultipleTimes(ch, victim->Master, TYPE_UNDEFINED);
@@ -1675,7 +1710,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         /*
          * More charm stuff.
          */
-        if(victim->Master == ch)
+        if (victim->Master == ch)
         {
             StopFollowing(victim);
         }
@@ -1683,7 +1718,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         /*
          * Inviso attacks ... not.
          */
-        if(IsAffectedBy(ch, Flag::Affect::Invisible))
+        if (IsAffectedBy(ch, Flag::Affect::Invisible))
         {
             StripAffect(ch, gsn_invis);
             StripAffect(ch, gsn_mass_invis);
@@ -1692,7 +1727,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         }
 
         /* Take away Hide */
-        if(IsAffectedBy(ch, Flag::Affect::Hide) && ch->Race != RACE_DEFEL)
+        if (IsAffectedBy(ch, Flag::Affect::Hide) && ch->Race != RACE_DEFEL)
         {
             ch->AffectedBy.reset(Flag::Affect::Hide);
         }
@@ -1700,17 +1735,17 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         /*
          * Damage modifiers.
          */
-        if(IsAffectedBy(victim, Flag::Affect::Sanctuary))
+        if (IsAffectedBy(victim, Flag::Affect::Sanctuary))
         {
             dam /= 2;
         }
 
-        if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+        if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         {
-            dam -= (int)(dam / 4);
+            dam -= (int) (dam / 4);
         }
 
-        if(dam < 0)
+        if (dam < 0)
         {
             dam = 0;
         }
@@ -1718,28 +1753,28 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         /*
          * Check for disarm, trip, parry, and dodge.
          */
-        if(dt >= TYPE_HIT)
+        if (dt >= TYPE_HIT)
         {
-            if(IsNpc(ch)
-               && ch->AttackFlags.test(Flag::Defense::Disarm)
-               && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat) / 2)
+            if (IsNpc(ch)
+                && ch->AttackFlags.test(Flag::Defense::Disarm)
+                && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat) / 2)
             {
                 Disarm(ch, victim);
             }
 
-            if(IsNpc(ch)
-               && ch->AttackFlags.test(Flag::Attack::Trip)
-               && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat))
+            if (IsNpc(ch)
+                && ch->AttackFlags.test(Flag::Attack::Trip)
+                && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat))
             {
                 Trip(ch, victim);
             }
 
-            if(CheckParry(ch, victim))
+            if (CheckParry(ch, victim))
             {
                 return rNONE;
             }
 
-            if(CheckDodge(ch, victim))
+            if (CheckDodge(ch, victim))
             {
                 return rNONE;
             }
@@ -1750,9 +1785,9 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
          */
         short dampmod = 0;
 
-        if(IsNpc(ch))
+        if (IsNpc(ch))
         {
-            if(IsNpc(victim))
+            if (IsNpc(victim))
             {
                 dampmod = SysData.DamageMobVsMob;
             }
@@ -1763,7 +1798,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         }
         else
         {
-            if(IsNpc(victim))
+            if (IsNpc(victim))
             {
                 dampmod = SysData.DamagePlrVsMob;
             }
@@ -1773,7 +1808,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             }
         }
 
-        if(dampmod > 0)
+        if (dampmod > 0)
         {
             dam = (dam * dampmod) / 100;
         }
@@ -1786,15 +1821,15 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
      * Code to handle equipment getting damaged, and also support  -Thoric
      * bonuses/penalties for having or not having equipment where hit
      */
-    if(dam > 10 && dt != TYPE_UNDEFINED)
+    if (dam > 10 && dt != TYPE_UNDEFINED)
     {
         /* get a random body eq part */
-        WearLocation dameq = (WearLocation)GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
+        WearLocation dameq = (WearLocation) GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
         auto damobj = GetEquipmentOnCharacter(victim, dameq);
 
-        if(damobj)
+        if (damobj)
         {
-            if(dam > GetObjectResistance(damobj))
+            if (dam > GetObjectResistance(damobj))
             {
                 SetCurrentGlobalObject(damobj);
                 DamageObject(damobj);
@@ -1818,21 +1853,21 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     /*
      * Get experience based on % of damage done                   -Thoric
      */
-    if(dam && ch != victim
-       && !IsNpc(ch) && IsFighting(ch) && ch->Fighting->Xp)
+    if (dam && ch != victim
+        && !IsNpc(ch) && IsFighting(ch) && ch->Fighting->Xp)
     {
-        long xp_gain = (long)(ComputeXP(ch, victim) * 0.1 * dam) / victim->HitPoints.Max;
+        long xp_gain = (long) (ComputeXP(ch, victim) * 0.1 * dam) / victim->HitPoints.Max;
         GainXP(ch, AbilityClass::Combat, xp_gain);
     }
 
-    if(!IsNpc(victim)
-       && (victim->TopLevel() >= LEVEL_IMMORTAL
-           || IsInArena(victim))
-       && victim->HitPoints.Current < 1)
+    if (!IsNpc(victim)
+        && (victim->TopLevel() >= LEVEL_IMMORTAL
+            || IsInArena(victim))
+        && victim->HitPoints.Current < 1)
     {
         victim->HitPoints.Current = 1;
 
-        if(IsInArena(victim))
+        if (IsInArena(victim))
         {
             char buf[MAX_STRING_LENGTH];
             CharacterFromRoom(victim);
@@ -1848,23 +1883,23 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         }
     }
 
-    if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Immortal))
+    if (IsNpc(victim) && victim->Flags.test(Flag::Mob::Immortal))
     {
         victim->HitPoints.Current = victim->HitPoints.Max;
     }
 
     /* Make sure newbies dont die */
 
-    if(!IsNpc(victim) && !IsAuthed(victim) && victim->HitPoints.Current < 1)
+    if (!IsNpc(victim) && !IsAuthed(victim) && victim->HitPoints.Current < 1)
     {
         victim->HitPoints.Current = 1;
     }
 
-    if(dam > 0 && dt > TYPE_HIT
-       && !IsAffectedBy(victim, Flag::Affect::Poison)
-       && IsWieldingPoisonedWeapon(ch)
-       && !victim->Immune.test(Flag::Ris::Poison)
-       && !SaveVsPoisonDeath(GetAbilityLevel(ch, AbilityClass::Combat), victim))
+    if (dam > 0 && dt > TYPE_HIT
+        && !IsAffectedBy(victim, Flag::Affect::Poison)
+        && IsWieldingPoisonedWeapon(ch)
+        && !victim->Immune.test(Flag::Ris::Poison)
+        && !SaveVsPoisonDeath(GetAbilityLevel(ch, AbilityClass::Combat), victim))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
@@ -1872,122 +1907,122 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         af->Duration = 20;
         af->Location = APPLY_STR;
         af->Modifier = -2;
-        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Poison });
+        af->AffectedBy = CreateBitSet<Flag::MAX>({Flag::Affect::Poison});
         JoinAffect(victim, af);
         ch->MentalState = urange(20, ch->MentalState + 2, 100);
     }
 
-    if(!IsNpc(victim)
-       && GetTrustLevel(victim) >= LEVEL_IMMORTAL
-       && GetTrustLevel(ch) >= LEVEL_IMMORTAL
-       && victim->HitPoints.Current < 1)
+    if (!IsNpc(victim)
+        && GetTrustLevel(victim) >= LEVEL_IMMORTAL
+        && GetTrustLevel(ch) >= LEVEL_IMMORTAL
+        && victim->HitPoints.Current < 1)
     {
         victim->HitPoints.Current = 1;
     }
 
     UpdatePosition(victim);
 
-    switch(victim->Position)
+    switch (victim->Position)
     {
-    case POS_MORTAL:
-        Act(AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
-            victim, nullptr, nullptr, ActTarget::Room);
-        victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.\r\n");
-        break;
-
-    case POS_INCAP:
-        Act(AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
-            victim, nullptr, nullptr, ActTarget::Room);
-        victim->Echo("&RYou are incapacitated and will slowly die, if not aided.\r\n");
-        break;
-
-    case POS_STUNNED:
-        if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
-        {
-            Act(AT_ACTION, "$n is stunned, but will probably recover.",
+        case POS_MORTAL:
+            Act(AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
                 victim, nullptr, nullptr, ActTarget::Room);
-            victim->Echo("&RYou are stunned, but will probably recover.\r\n");
-        }
-        break;
+            victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.\r\n");
+            break;
 
-    case POS_DEAD:
-        if(dt >= 0 && dt < TopSN)
-        {
-            std::shared_ptr<Skill> skill = SkillTable[dt];
+        case POS_INCAP:
+            Act(AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
+                victim, nullptr, nullptr, ActTarget::Room);
+            victim->Echo("&RYou are incapacitated and will slowly die, if not aided.\r\n");
+            break;
 
-            if(!skill->Messages.VictimDeath.ToCaster.empty())
+        case POS_STUNNED:
+            if (!IsAffectedBy(victim, Flag::Affect::Paralysis))
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, ActTarget::Char);
+                Act(AT_ACTION, "$n is stunned, but will probably recover.",
+                    victim, nullptr, nullptr, ActTarget::Room);
+                victim->Echo("&RYou are stunned, but will probably recover.\r\n");
+            }
+            break;
+
+        case POS_DEAD:
+            if (dt >= 0 && dt < TopSN)
+            {
+                std::shared_ptr<Skill> skill = SkillTable[dt];
+
+                if (!skill->Messages.VictimDeath.ToCaster.empty())
+                {
+                    Act(AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, ActTarget::Char);
+                }
+
+                if (!skill->Messages.VictimDeath.ToVictim.empty())
+                {
+                    Act(AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, ActTarget::Vict);
+                }
+
+                if (!skill->Messages.VictimDeath.ToRoom.empty())
+                {
+                    Act(AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, ActTarget::NotVict);
+                }
             }
 
-            if(!skill->Messages.VictimDeath.ToVictim.empty())
+            if (IsNpc(victim) && victim->Flags.test(Flag::Mob::NoKill))
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, ActTarget::Vict);
+                Act(AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
+                    victim, 0, 0, ActTarget::Room);
+            }
+            else if (IsDroid(victim))
+            {
+                Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, ActTarget::Room);
+            }
+            else
+            {
+                Act(AT_DEAD, "$n is DEAD!", victim, 0, 0, ActTarget::Room);
             }
 
-            if(!skill->Messages.VictimDeath.ToRoom.empty())
+            victim->Echo("&WYou have been KILLED!\r\n");
+            break;
+
+        default:
+            if (dam > victim->HitPoints.Max / 4)
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, ActTarget::NotVict);
+                Act(AT_HURT, "That really did HURT!", victim, 0, 0, ActTarget::Char);
+
+                if (NumberBits(3) == 0)
+                {
+                    WorsenMentalState(ch, 1);
+                }
             }
-        }
 
-        if(IsNpc(victim) && victim->Flags.test(Flag::Mob::NoKill))
-        {
-            Act(AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
-                victim, 0, 0, ActTarget::Room);
-        }
-        else if(IsDroid(victim))
-        {
-            Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, ActTarget::Room);
-        }
-        else
-        {
-            Act(AT_DEAD, "$n is DEAD!", victim, 0, 0, ActTarget::Room);
-        }
-
-        victim->Echo("&WYou have been KILLED!\r\n");
-        break;
-
-    default:
-        if(dam > victim->HitPoints.Max / 4)
-        {
-            Act(AT_HURT, "That really did HURT!", victim, 0, 0, ActTarget::Char);
-
-            if(NumberBits(3) == 0)
+            if (victim->HitPoints.Current < victim->HitPoints.Max / 4)
             {
-                WorsenMentalState(ch, 1);
-            }
-        }
+                Act(AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
+                    victim, 0, 0, ActTarget::Char);
 
-        if(victim->HitPoints.Current < victim->HitPoints.Max / 4)
-        {
-            Act(AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
-                victim, 0, 0, ActTarget::Char);
-
-            if(NumberBits(2) == 0)
-            {
-                WorsenMentalState(ch, 1);
+                if (NumberBits(2) == 0)
+                {
+                    WorsenMentalState(ch, 1);
+                }
             }
-        }
-        break;
+            break;
     }
 
     /*
      * Sleep spells and extremely wounded folks.
      */
-    if(!IsAwake(victim)                /* lets make NPC's not slaughter PC's */
-       && !IsAffectedBy(victim, Flag::Affect::Paralysis))
+    if (!IsAwake(victim)                /* lets make NPC's not slaughter PC's */
+        && !IsAffectedBy(victim, Flag::Affect::Paralysis))
     {
-        if(IsFighting(victim)
-           && victim->Fighting->Who->HHF.Hunting
-           && victim->Fighting->Who->HHF.Hunting->Who == victim)
+        if (IsFighting(victim)
+            && victim->Fighting->Who->HHF.Hunting
+            && victim->Fighting->Who->HHF.Hunting->Who == victim)
         {
             StopHunting(victim->Fighting->Who);
         }
 
-        if(IsFighting(victim)
-           && victim->Fighting->Who->HHF.Hating
-           && victim->Fighting->Who->HHF.Hating->Who == victim)
+        if (IsFighting(victim)
+            && victim->Fighting->Who->HHF.Hating
+            && victim->Fighting->Who->HHF.Hating->Who == victim)
         {
             StopHating(victim->Fighting->Who);
         }
@@ -1995,38 +2030,38 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         StopFighting(victim, true);
     }
 
-    if(victim->HitPoints.Current <= 0 && !IsNpc(victim))
+    if (victim->HitPoints.Current <= 0 && !IsNpc(victim))
     {
         StopFighting(victim, true);
-        const auto wearLocsToUnequip = { WEAR_DUAL_WIELD, WEAR_WIELD, WEAR_HOLD, WEAR_MISSILE_WIELD, WEAR_LIGHT };
+        const auto wearLocsToUnequip = {WEAR_DUAL_WIELD, WEAR_WIELD, WEAR_HOLD, WEAR_MISSILE_WIELD, WEAR_LIGHT};
 
-        for(const auto wearLoc : wearLocsToUnequip)
+        for (const auto wearLoc : wearLocsToUnequip)
         {
             auto equippedObject = GetEquipmentOnCharacter(victim, wearLoc);
 
-            if(equippedObject != nullptr)
+            if (equippedObject != nullptr)
             {
                 UnequipCharacter(victim, equippedObject);
             }
         }
 
-        if(SysData.DropOnDefeat)
+        if (SysData.DropOnDefeat)
         {
-            for(auto i = std::begin(victim->Objects()), i_next = std::end(victim->Objects());
-                i != std::end(victim->Objects());
-                i = i_next)
+            for (auto i = std::begin(victim->Objects()), i_next = std::end(victim->Objects());
+                 i != std::end(victim->Objects());
+                 i = i_next)
             {
                 auto obj = *i;
                 i_next = ++i;
 
-                if(obj->WearLoc == WEAR_NONE)
+                if (obj->WearLoc == WEAR_NONE)
                 {
-                    if(obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1)
+                    if (obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1)
                     {
                         SeparateOneObjectFromGroup(obj);
                         ObjectFromCharacter(obj);
 
-                        if(i_next == std::end(victim->Objects()))
+                        if (i_next == std::end(victim->Objects()))
                         {
                             i_next = std::begin(victim->Objects());
                         }
@@ -2043,15 +2078,16 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             }
         }
 
-        if(IsNpc(ch) && !IsNpc(victim))
+        if (IsNpc(ch) && !IsNpc(victim))
         {
             auto ability = AbilityClass::Combat;
-            long xp_to_lose = umax(GetAbilityXP(victim, ability) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)), 0);
+            long xp_to_lose = umax(GetAbilityXP(victim, ability) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)),
+                                   0);
             long xp_actually_lost = LoseXP(victim, ability, xp_to_lose);
 
             victim->Echo("You lose %ld %s experience.\r\n",
                          xp_actually_lost,
-                         AbilityName[(int)ability]);
+                         AbilityName[(int) ability]);
         }
 
         AddTimer(victim, TimerType::RecentFight, 100);
@@ -2060,11 +2096,11 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     /*
      * Payoff for killing things.
      */
-    if(victim->Position == POS_DEAD)
+    if (victim->Position == POS_DEAD)
     {
         GainGroupXP(ch, victim);
 
-        if(!IsNpc(victim))
+        if (!IsNpc(victim))
         {
             auto logBuf = FormatString("%s killed by %s at %ld",
                                        victim->Name.c_str(),
@@ -2074,7 +2110,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
 
         }
-        else if(!IsNpc(ch))              /* keep track of mob vnum killed */
+        else if (!IsNpc(ch))              /* keep track of mob vnum killed */
         {
             AddKill(ch, victim);
         }
@@ -2082,21 +2118,21 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         ApplyWantedFlags(ch, victim);
         UpdateKillStats(ch, victim);
 
-        if(!IsNpc(ch) && ch->PCData->ClanInfo.Clan)
+        if (!IsNpc(ch) && ch->PCData->ClanInfo.Clan)
         {
             UpdateClanMember(ch);
         }
 
-        if(!IsNpc(victim) && victim->PCData->ClanInfo.Clan)
+        if (!IsNpc(victim) && victim->PCData->ClanInfo.Clan)
         {
             UpdateClanMember(victim);
         }
 
         bool loot = false;
 
-        if(victim->InRoom != ch->InRoom
-           || !IsNpc(victim)
-           || !victim->Flags.test(Flag::Mob::NoKill))
+        if (victim->InRoom != ch->InRoom
+            || !IsNpc(victim)
+            || !victim->Flags.test(Flag::Mob::NoKill))
         {
             loot = CanLootVictim(ch, victim);
         }
@@ -2109,23 +2145,23 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         RawKill(ch, victim);
         victim = nullptr;
 
-        if(!IsNpc(ch) && loot)
+        if (!IsNpc(ch) && loot)
         {
             /* Autogold by Scryn 8/12 */
-            if(ch->Flags.test(Flag::Plr::Autocred))
+            if (ch->Flags.test(Flag::Plr::Autocred))
             {
                 int init_gold = ch->Gold;
                 do_get(ch, "credits corpse");
                 int new_gold = ch->Gold;
                 int gold_diff = (new_gold - init_gold);
 
-                if(gold_diff > 0)
+                if (gold_diff > 0)
                 {
                     do_split(ch, std::to_string(gold_diff));
                 }
             }
 
-            if(ch->Flags.test(Flag::Plr::Autoloot))
+            if (ch->Flags.test(Flag::Plr::Autoloot))
             {
                 do_get(ch, "all corpse");
             }
@@ -2134,31 +2170,31 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
                 do_look(ch, "in corpse");
             }
 
-            if(ch->Flags.test(Flag::Plr::Autosac))
+            if (ch->Flags.test(Flag::Plr::Autosac))
             {
                 do_junk(ch, "corpse");
             }
         }
 
-        if(IsNpc(ch) && loot)
+        if (IsNpc(ch) && loot)
         {
             do_get(ch, "credits corpse");
             do_get(ch, "all corpse");
 
-            if(ch->InRoom && ch->InRoom->Area)
+            if (ch->InRoom && ch->InRoom->Area)
             {
                 BoostEconomy(ch->InRoom->Area, ch->Gold / 5);
                 ch->Gold /= 5;
             }
         }
 
-        if(!loot && victim && IsNpc(victim)
-           && victim->InRoom && victim->InRoom->Area)
+        if (!loot && victim && IsNpc(victim)
+            && victim->InRoom && victim->InRoom->Area)
         {
             BoostEconomy(victim->InRoom->Area, victim->Gold);
         }
 
-        if(SysData.SaveFlags.test(Flag::AutoSave::Kill))
+        if (SysData.SaveFlags.test(Flag::AutoSave::Kill))
         {
             PlayerCharacters->Save(ch);
         }
@@ -2166,7 +2202,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         return rVICT_DIED;
     }
 
-    if(victim == ch)
+    if (victim == ch)
     {
         return rNONE;
     }
@@ -2174,10 +2210,10 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     /*
      * Take care of link dead people.
      */
-    if(!IsNpc(victim) && !victim->Desc && !victim->Switched
-       && GetRandomNumberFromRange(0, victim->Wait) == 0)
+    if (!IsNpc(victim) && !victim->Desc && !victim->Switched
+        && GetRandomNumberFromRange(0, victim->Wait) == 0)
     {
-        for(size_t i = 0; i < 5; ++i)
+        for (size_t i = 0; i < 5; ++i)
         {
             do_flee(victim, "");
         }
@@ -2194,14 +2230,14 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
 
 bool IsSafe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(victim == nullptr
-       || WhoFighting(ch) == ch
-       || GetTrustLevel(ch) > LEVEL_AVATAR
-       || (IsNpc(ch) || IsNpc(victim)))
+    if (victim == nullptr
+        || WhoFighting(ch) == ch
+        || GetTrustLevel(ch) > LEVEL_AVATAR
+        || (IsNpc(ch) || IsNpc(victim)))
     {
         return false;
     }
-    else if(victim->InRoom->Flags.test(Flag::Room::Safe))
+    else if (victim->InRoom->Flags.test(Flag::Room::Safe))
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("You'll have to do that elsewhere.\r\n");
@@ -2219,21 +2255,25 @@ bool IsSafe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 bool CanLootVictim(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     /* pc's can now loot .. why not .. death is pretty final */
-    if(!IsNpc(ch))
+    if (!IsNpc(ch))
+    {
         return true;
+    }
 
     /* non-charmed mobs can loot anything */
-    if(IsNpc(ch) && !ch->Master)
+    if (IsNpc(ch) && !ch->Master)
+    {
         return true;
+    }
 
     return false;
 }
 
 static void ApplyWantedFlags(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(IsAffectedBy(ch, Flag::Affect::Charm))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
     {
-        if(!ch->Master)
+        if (!ch->Master)
         {
             Log->Bug("%s: %s bad AFF_CHARM",
                      __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str());
@@ -2242,17 +2282,17 @@ static void ApplyWantedFlags(std::shared_ptr<Character> ch, std::shared_ptr<Char
             return;
         }
 
-        if(ch->Master)
+        if (ch->Master)
         {
             ApplyWantedFlags(ch->Master, victim);
         }
     }
 
-    if(IsNpc(victim) && !IsNpc(ch))
+    if (IsNpc(victim) && !IsNpc(ch))
     {
-        for(size_t x = 0; x < Flag::MAX; x++)
+        for (size_t x = 0; x < Flag::MAX; x++)
         {
-            if(victim->VipFlags.test(x))
+            if (victim->VipFlags.test(x))
             {
                 ch->PCData->WantedOn.set(x);
                 ch->Echo("&YYou are now wanted on %s.&w\r\n", WantedFlags[x]);
@@ -2263,9 +2303,9 @@ static void ApplyWantedFlags(std::shared_ptr<Character> ch, std::shared_ptr<Char
 
 static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(IsAffectedBy(ch, Flag::Affect::Charm))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
     {
-        if(!ch->Master)
+        if (!ch->Master)
         {
             Log->Bug("%s: %s bad AFF_CHARM",
                      __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str());
@@ -2274,15 +2314,15 @@ static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Chara
             return;
         }
 
-        if(ch->Master)
+        if (ch->Master)
         {
             UpdateKillStats(ch->Master, victim);
         }
     }
 
-    if(!IsNpc(ch) && IsNpc(victim))
+    if (!IsNpc(ch) && IsNpc(victim))
     {
-        if(ch->PCData->ClanInfo.Clan)
+        if (ch->PCData->ClanInfo.Clan)
         {
             ch->PCData->ClanInfo.Clan->MobKills++;
         }
@@ -2290,14 +2330,14 @@ static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Chara
         ch->PCData->MKills++;
         ch->InRoom->Area->MKills++;
     }
-    else if(!IsNpc(ch) && !IsNpc(victim))
+    else if (!IsNpc(ch) && !IsNpc(victim))
     {
-        if(IsClanned(ch))
+        if (IsClanned(ch))
         {
             ch->PCData->ClanInfo.Clan->PlayerKills++;
         }
 
-        if(IsClanned(victim))
+        if (IsClanned(victim))
         {
             victim->PCData->ClanInfo.Clan->PlayerDeaths++;
         }
@@ -2305,7 +2345,7 @@ static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Chara
         ch->PCData->PKills++;
         UpdatePosition(victim);
     }
-    else if(IsNpc(ch) && !IsNpc(victim))
+    else if (IsNpc(ch) && !IsNpc(victim))
     {
         victim->InRoom->Area->MDeaths++;
     }
@@ -2318,14 +2358,14 @@ void UpdatePosition(std::shared_ptr<Character> victim)
 {
     assert(victim != nullptr);
 
-    if(victim->HitPoints.Current > 0)
+    if (victim->HitPoints.Current > 0)
     {
-        if(victim->Position <= POS_STUNNED)
+        if (victim->Position <= POS_STUNNED)
         {
             victim->Position = POS_STANDING;
         }
 
-        if(IsAffectedBy(victim, Flag::Affect::Paralysis))
+        if (IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
             victim->Position = POS_STUNNED;
         }
@@ -2333,17 +2373,17 @@ void UpdatePosition(std::shared_ptr<Character> victim)
         return;
     }
 
-    if(!SysData.PermaDeath)
+    if (!SysData.PermaDeath)
     {
-        if(!IsNpc(victim) && victim->HitPoints.Current <= -500)
+        if (!IsNpc(victim) && victim->HitPoints.Current <= -500)
         {
             victim->HitPoints.Current = -250;
         }
     }
 
-    if(IsNpc(victim) || victim->HitPoints.Current <= -500)
+    if (IsNpc(victim) || victim->HitPoints.Current <= -500)
     {
-        if(victim->Mount)
+        if (victim->Mount)
         {
             Act(AT_ACTION, "$n falls from $N.", victim, NULL, victim->Mount, ActTarget::Room);
             victim->Mount->Flags.reset(Flag::Mob::Mounted);
@@ -2354,11 +2394,11 @@ void UpdatePosition(std::shared_ptr<Character> victim)
         return;
     }
 
-    if(victim->HitPoints.Current <= -400)
+    if (victim->HitPoints.Current <= -400)
     {
         victim->Position = POS_MORTAL;
     }
-    else if(victim->HitPoints.Current <= -200)
+    else if (victim->HitPoints.Current <= -200)
     {
         victim->Position = POS_INCAP;
     }
@@ -2367,13 +2407,13 @@ void UpdatePosition(std::shared_ptr<Character> victim)
         victim->Position = POS_STUNNED;
     }
 
-    if(victim->Position > POS_STUNNED
-       && IsAffectedBy(victim, Flag::Affect::Paralysis))
+    if (victim->Position > POS_STUNNED
+        && IsAffectedBy(victim, Flag::Affect::Paralysis))
     {
         victim->Position = POS_STUNNED;
     }
 
-    if(victim->Mount)
+    if (victim->Mount)
     {
         Act(AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->Mount, ActTarget::Room);
         victim->Mount->Flags.reset(Flag::Mob::Mounted);
@@ -2386,7 +2426,7 @@ void UpdatePosition(std::shared_ptr<Character> victim)
  */
 void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    if(IsFighting(ch))
+    if (IsFighting(ch))
     {
         Log->Bug("%s: %s -> %s (already fighting %s)",
                  __FUNCTION__, ch->Name.c_str(), victim->Name.c_str(),
@@ -2394,13 +2434,13 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
         return;
     }
 
-    if(IsAffectedBy(ch, Flag::Affect::Sleep))
+    if (IsAffectedBy(ch, Flag::Affect::Sleep))
     {
         StripAffect(ch, gsn_sleep);
     }
 
     /* Limit attackers -Thoric */
-    if(NumFighting(victim) > MAX_NUMBER_OF_FIGHTERS)
+    if (NumFighting(victim) > MAX_NUMBER_OF_FIGHTERS)
     {
         ch->Echo("There are too many people fighting for you to join in.\r\n");
         return;
@@ -2413,7 +2453,7 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
     ch->Position = POS_FIGHTING;
     victim->NumFighting++;
 
-    if(victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
+    if (victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
         victim->Switched->Echo("You are disturbed!\r\n");
         do_return(victim->Switched, "");
@@ -2422,15 +2462,15 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
 
 void FreeFight(std::shared_ptr<Character> ch)
 {
-    if(ch == nullptr)
+    if (ch == nullptr)
     {
         Log->Bug("Free_fight: null ch!");
         return;
     }
 
-    if(IsFighting(ch))
+    if (IsFighting(ch))
     {
-        if(!CharacterDiedRecently(ch->Fighting->Who))
+        if (!CharacterDiedRecently(ch->Fighting->Who))
         {
             --ch->Fighting->Who->NumFighting;
         }
@@ -2438,7 +2478,7 @@ void FreeFight(std::shared_ptr<Character> ch)
 
     ch->Fighting.reset();
 
-    if(ch->Mount)
+    if (ch->Mount)
     {
         ch->Position = POS_MOUNTED;
     }
@@ -2448,7 +2488,7 @@ void FreeFight(std::shared_ptr<Character> ch)
     }
 
     /* Berserk wears off after combat. -- Altrag */
-    if(IsAffectedBy(ch, Flag::Affect::Berserk))
+    if (IsAffectedBy(ch, Flag::Affect::Berserk))
     {
         StripAffect(ch, gsn_berserk);
         SetCharacterColor(AT_WEAROFF, ch);
@@ -2464,14 +2504,14 @@ void StopFighting(std::shared_ptr<Character> ch, bool fBoth)
     FreeFight(ch);
     UpdatePosition(ch);
 
-    if(!fBoth)   /* major short cut here by Thoric */
+    if (!fBoth)   /* major short cut here by Thoric */
     {
         return;
     }
 
-    for(auto fch = FirstCharacter; fch; fch = fch->Next)
+    for (auto fch = FirstCharacter; fch; fch = fch->Next)
     {
-        if(WhoFighting(fch) == ch)
+        if (WhoFighting(fch) == ch)
         {
             FreeFight(fch);
             UpdatePosition(fch);
@@ -2481,7 +2521,7 @@ void StopFighting(std::shared_ptr<Character> ch, bool fBoth)
 
 static bool RemoveShipOwner(std::shared_ptr<Ship> ship, const std::shared_ptr<Character> &victim)
 {
-    if(!StrCmp(ship->Owner, victim->Name))
+    if (!StrCmp(ship->Owner, victim->Name))
     {
         ship->Owner.erase();
         ship->Pilot.erase();
@@ -2497,14 +2537,14 @@ class RemoveResident
 {
 public:
     RemoveResident(const std::string &name)
-        : _resident(name)
+            : _resident(name)
     {
 
     }
 
     void operator()(const std::shared_ptr<Home> home) const
     {
-        if(StrCmp(home->Owner(), _resident) == 0)
+        if (StrCmp(home->Owner(), _resident) == 0)
         {
             Homes->Delete(home);
         }
@@ -2523,7 +2563,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
 {
     std::shared_ptr<Character> victmp = nullptr;
 
-    if(!victim)
+    if (!victim)
     {
         Log->Bug("RawKill: null victim!");
         return;
@@ -2533,11 +2573,13 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
 
     StopFighting(victim, true);
 
-    if(killer && !IsNpc(killer) && !IsNpc(victim))
+    if (killer && !IsNpc(killer) && !IsNpc(victim))
+    {
         ClaimBounty(killer, victim);
+    }
 
     /* Take care of polymorphed chars */
-    if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Polymorphed))
+    if (IsNpc(victim) && victim->Flags.test(Flag::Mob::Polymorphed))
     {
         CharacterFromRoom(victim->Desc->Original);
         CharacterToRoom(victim->Desc->Original, victim->InRoom);
@@ -2547,30 +2589,42 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
         return;
     }
 
-    if(victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area && victim->InRoom->Area->Planet)
+    if (victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area
+        && victim->InRoom->Area->Planet)
     {
         victim->InRoom->Area->Planet->Population--;
         victim->InRoom->Area->Planet->Population = umax(victim->InRoom->Area->Planet->Population, 0);
-        victim->InRoom->Area->Planet->PopularSupport -= (float)(1 + 1 / (victim->InRoom->Area->Planet->Population + 1));
+        victim->InRoom->Area->Planet->PopularSupport -= (float) (1
+                                                                 + 1 / (victim->InRoom->Area->Planet->Population + 1));
 
-        if(victim->InRoom->Area->Planet->PopularSupport < -100)
+        if (victim->InRoom->Area->Planet->PopularSupport < -100)
+        {
             victim->InRoom->Area->Planet->PopularSupport = -100;
+        }
     }
 
-    if(!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
+    if (!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
+    {
         MobProgDeathTrigger(killer, victim);
+    }
 
-    if(CharacterDiedRecently(victim))
+    if (CharacterDiedRecently(victim))
+    {
         return;
+    }
 
-    if(!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
+    if (!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
+    {
         RoomProgDeathTrigger(killer, victim);
+    }
 
-    if(CharacterDiedRecently(victim))
+    if (CharacterDiedRecently(victim))
+    {
         return;
+    }
 
-    if(!IsNpc(victim)
-       || (!victim->Flags.test(Flag::Mob::NoKill) && !victim->Flags.test(Flag::Mob::NoCorpse)))
+    if (!IsNpc(victim)
+        || (!victim->Flags.test(Flag::Mob::NoKill) && !victim->Flags.test(Flag::Mob::NoCorpse)))
     {
         MakeCorpse(victim);
     }
@@ -2578,14 +2632,14 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     {
         auto carriedByVictim = Reverse(victim->Objects());
 
-        for(auto obj : carriedByVictim)
+        for (auto obj : carriedByVictim)
         {
             ObjectFromCharacter(obj);
             ExtractObject(obj);
         }
     }
 
-    if(IsNpc(victim))
+    if (IsNpc(victim))
     {
         victim->Prototype->Killed++;
         ExtractCharacter(victim, true);
@@ -2595,23 +2649,23 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     SetCharacterColor(AT_DIEMSG, victim);
     do_help(victim, "_DIEMSG_");
 
-    if(SysData.PermaDeath)
+    if (SysData.PermaDeath)
     {
         ForEachShip(RemoveShipOwner, victim);
         ForEach(Homes->FindHomesForResident(victim->Name), RemoveResident(victim->Name));
-        
-        if(victim->PCData && victim->PCData->ClanInfo.Clan)
+
+        if (victim->PCData && victim->PCData->ClanInfo.Clan)
         {
             RemoveClanMember(victim);
-            
-            if(!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader))
+
+            if (!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader))
             {
-                if(!victim->PCData->ClanInfo.Clan->Leadership.Number1.empty())
+                if (!victim->PCData->ClanInfo.Clan->Leadership.Number1.empty())
                 {
                     victim->PCData->ClanInfo.Clan->Leadership.Leader = victim->PCData->ClanInfo.Clan->Leadership.Number1;
                     victim->PCData->ClanInfo.Clan->Leadership.Number1.erase();
                 }
-                else if(!victim->PCData->ClanInfo.Clan->Leadership.Number2.empty())
+                else if (!victim->PCData->ClanInfo.Clan->Leadership.Number2.empty())
                 {
                     victim->PCData->ClanInfo.Clan->Leadership.Leader = victim->PCData->ClanInfo.Clan->Leadership.Number2;
                     victim->PCData->ClanInfo.Clan->Leadership.Number2.erase();
@@ -2622,9 +2676,9 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
                 }
             }
 
-            if(!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1))
+            if (!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1))
             {
-                if(!victim->PCData->ClanInfo.Clan->Leadership.Number2.empty())
+                if (!victim->PCData->ClanInfo.Clan->Leadership.Number2.empty())
                 {
                     victim->PCData->ClanInfo.Clan->Leadership.Number1 = victim->PCData->ClanInfo.Clan->Leadership.Number2;
                     victim->PCData->ClanInfo.Clan->Leadership.Number2.erase();
@@ -2635,13 +2689,13 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
                 }
             }
 
-            if(!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2))
+            if (!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2))
             {
                 victim->PCData->ClanInfo.Clan->Leadership.Number1.erase();
             }
         }
 
-        if(!victim)
+        if (!victim)
         {
             /* Make sure they aren't halfway logged in. */
             auto d = Find(Descriptors->Entities(),
@@ -2650,7 +2704,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
                               return (victim = descriptor->Char) && !IsNpc(victim);
                           });
 
-            if(d != nullptr)
+            if (d != nullptr)
             {
                 CloseDescriptor(d, true);
             }
@@ -2669,7 +2723,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     {
         auto cloningCylinder = GetRoom(ROOM_VNUM_CLONING_CYLINDER);
 
-        if(!cloningCylinder)
+        if (!cloningCylinder)
         {
             cloningCylinder = GetRoom(ROOM_VNUM_LIMBO);
         }
@@ -2685,16 +2739,16 @@ static void CheckObjectAlignmentZapping(std::shared_ptr<Character> ch)
 {
     auto carriedObjects = ch->Objects();
 
-    for(auto obj : carriedObjects)
+    for (auto obj : carriedObjects)
     {
-        if(obj->WearLoc == WEAR_NONE)
+        if (obj->WearLoc == WEAR_NONE)
         {
             continue;
         }
 
-        if((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
-           || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
-           || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
+        if ((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
+            || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
+            || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
         {
             Act(AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, ActTarget::Char);
             Act(AT_MAGIC, "$n is zapped by $p.", ch, obj, NULL, ActTarget::Room);
@@ -2703,7 +2757,7 @@ static void CheckObjectAlignmentZapping(std::shared_ptr<Character> ch)
             obj = ObjectToRoom(obj, ch->InRoom);
             ObjProgZapTrigger(ch, obj);  /* mudprogs */
 
-            if(CharacterDiedRecently(ch))
+            if (CharacterDiedRecently(ch))
             {
                 return;
             }
@@ -2726,14 +2780,14 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
      * Monsters don't get kill xp's or alignment changes.
      * Dying of mortal wounds or poison doesn't give xp to anyone!
      */
-    if(IsNpc(ch) || victim == ch)
+    if (IsNpc(ch) || victim == ch)
     {
         return;
     }
 
     int members = CountGroupMembersInRoom(ch);
 
-    if(members == 0)
+    if (members == 0)
     {
         Log->Bug("%s: zero members.", __FUNCTION__);
         members = 1;
@@ -2741,9 +2795,9 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
 
     std::shared_ptr<Character> lch = ch->Leader ? ch->Leader : ch;
 
-    for(std::shared_ptr<Character> gch : ch->InRoom->Characters())
+    for (std::shared_ptr<Character> gch : ch->InRoom->Characters())
     {
-        if(!IsInSameGroup(gch, ch))
+        if (!IsInSameGroup(gch, ch))
         {
             continue;
         }
@@ -2752,8 +2806,8 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
 
         gch->Alignment = ComputeNewAlignment(gch, victim);
 
-        if(!IsNpc(gch) && IsNpc(victim) && gch->PCData && gch->PCData->ClanInfo.Clan
-           && !StrCmp(gch->PCData->ClanInfo.Clan->Name, victim->MobClan))
+        if (!IsNpc(gch) && IsNpc(victim) && gch->PCData && gch->PCData->ClanInfo.Clan
+            && !StrCmp(gch->PCData->ClanInfo.Clan->Name, victim->MobClan))
         {
             xp = 0;
             gch->Echo("You receive no experience for killing your organizations resources.\r\n");
@@ -2761,16 +2815,18 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
         else
         {
             gch->Echo("You receive %ld %s experience.\r\n", xp,
-                      AbilityName[(int)AbilityClass::Combat]);
+                      AbilityName[(int) AbilityClass::Combat]);
         }
 
         GainXP(gch, AbilityClass::Combat, xp);
 
-        if(lch == gch && members > 1)
+        if (lch == gch && members > 1)
         {
-            xp = urange(members, xp * members, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership)) / 10));
+            xp = urange(members, xp * members,
+                        (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership) + 1)
+                         - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership)) / 10));
             gch->Echo("You get %ld %s experience for leading your group to victory.\r\n",
-                      xp, AbilityName[(int)AbilityClass::Leadership]);
+                      xp, AbilityName[(int) AbilityClass::Leadership]);
             GainXP(gch, AbilityClass::Leadership, xp);
         }
 
@@ -2778,11 +2834,10 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
     }
 }
 
-
 static int ComputeNewAlignment(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim)
 {
     return urange(-1000,
-                  (int)(gch->Alignment - victim->Alignment / 5),
+                  (int) (gch->Alignment - victim->Alignment / 5),
                   1000);
 }
 
@@ -2793,16 +2848,17 @@ static int ComputeNewAlignment(std::shared_ptr<Character> gch, std::shared_ptr<C
 long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim)
 {
     long xp = (GetXPWorth(victim)
-               * urange(1, (GetAbilityLevel(victim, AbilityClass::Combat) - GetAbilityLevel(gch, AbilityClass::Combat)) + 10, 20)) / 10;
+               * urange(1, (GetAbilityLevel(victim, AbilityClass::Combat) - GetAbilityLevel(gch, AbilityClass::Combat))
+                           + 10, 20)) / 10;
     int align = gch->Alignment - victim->Alignment;
 
     /* bonus for attacking opposite alignment */
-    if(align > 990 || align < -990)
+    if (align > 990 || align < -990)
     {
         xp = (xp * 5) >> 2;
     }
-    /* penalty for good attacking same alignment */
-    else if(gch->Alignment > 300 && align < 250)
+        /* penalty for good attacking same alignment */
+    else if (gch->Alignment > 300 && align < 250)
     {
         xp = (xp * 3) >> 2;
     }
@@ -2810,15 +2866,15 @@ long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim
     xp = GetRandomNumberFromRange((xp * 3) >> 2, (xp * 5) >> 2);
 
     /* reduce exp for killing the same mob repeatedly             -Thoric */
-    if(!IsNpc(gch) && IsNpc(victim))
+    if (!IsNpc(gch) && IsNpc(victim))
     {
         int times = TimesKilled(gch, victim);
 
-        if(times >= 5)
+        if (times >= 5)
         {
             xp = 0;
         }
-        else if(times)
+        else if (times)
         {
             xp = (xp * (5 - times)) / 5;
         }
@@ -2826,7 +2882,8 @@ long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim
 
     /* new xp cap for swreality */
 
-    return urange(1, xp, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat))));
+    return urange(1, xp, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat) + 1)
+                          - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat))));
 }
 
 /*
@@ -2844,108 +2901,108 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     bool gcflag = false;
     bool gvflag = false;
 
-    if(dam)
+    if (dam)
     {
         dampc = ((dam * 1000) / victim->HitPoints.Max) +
-            (50 - ((victim->HitPoints.Current * 50) / victim->HitPoints.Max));
+                (50 - ((victim->HitPoints.Current * 50) / victim->HitPoints.Max));
     }
 
-    if(dam == 0)
+    if (dam == 0)
     {
         vs = "miss";
         vp = "misses";
     }
-    else if(dampc <= 5)
+    else if (dampc <= 5)
     {
         vs = "barely scratch";
         vp = "barely scratches";
     }
-    else if(dampc <= 10)
+    else if (dampc <= 10)
     {
         vs = "scratch";
         vp = "scratches";
     }
-    else if(dampc <= 20)
+    else if (dampc <= 20)
     {
         vs = "nick";
         vp = "nicks";
     }
-    else if(dampc <= 30)
+    else if (dampc <= 30)
     {
         vs = "graze";
         vp = "grazes";
     }
-    else if(dampc <= 40)
+    else if (dampc <= 40)
     {
         vs = "bruise";
         vp = "bruises";
     }
-    else if(dampc <= 50)
+    else if (dampc <= 50)
     {
         vs = "hit";
         vp = "hits";
     }
-    else if(dampc <= 60)
+    else if (dampc <= 60)
     {
         vs = "injure";
         vp = "injures";
     }
-    else if(dampc <= 75)
+    else if (dampc <= 75)
     {
         vs = "thrash";
         vp = "thrashes";
     }
-    else if(dampc <= 80)
+    else if (dampc <= 80)
     {
         vs = "wound";
         vp = "wounds";
     }
-    else if(dampc <= 90)
+    else if (dampc <= 90)
     {
         vs = "maul";
         vp = "mauls";
     }
-    else if(dampc <= 125)
+    else if (dampc <= 125)
     {
         vs = "decimate";
         vp = "decimates";
     }
-    else if(dampc <= 150)
+    else if (dampc <= 150)
     {
         vs = "devastate";
         vp = "devastates";
     }
-    else if(dampc <= 200)
+    else if (dampc <= 200)
     {
         vs = "maim";
         vp = "maims";
     }
-    else if(dampc <= 300)
+    else if (dampc <= 300)
     {
         vs = "MUTILATE";
         vp = "MUTILATES";
     }
-    else if(dampc <= 400)
+    else if (dampc <= 400)
     {
         vs = "DISEMBOWEL";
         vp = "DISEMBOWELS";
     }
-    else if(dampc <= 500)
+    else if (dampc <= 500)
     {
         vs = "MASSACRE";
         vp = "MASSACRES";
     }
-    else if(dampc <= 600)
+    else if (dampc <= 600)
     {
         vs = "PULVERIZE";
         vp = "PULVERIZES";
     }
-    else if(dampc <= 750)
+    else if (dampc <= 750)
     {
         vs = "EVISCERATE";
         vp = "EVISCERATES";
     }
-    else if(dampc <= 990)
+    else if (dampc <= 990)
     {
         vs = "* OBLITERATE *";
         vp = "* OBLITERATES *";
@@ -2958,32 +3015,32 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
 
     punct = (dampc <= 30) ? '.' : '!';
 
-    if(dam == 0
-       && !IsNpc(ch) && ch->PCData->Flags.test(Flag::PCData::Gag))
+    if (dam == 0
+        && !IsNpc(ch) && ch->PCData->Flags.test(Flag::PCData::Gag))
     {
         gcflag = true;
     }
 
-    if(dam == 0
-       && !IsNpc(victim) && victim->PCData->Flags.test(Flag::PCData::Gag))
+    if (dam == 0
+        && !IsNpc(victim) && victim->PCData->Flags.test(Flag::PCData::Gag))
     {
         gvflag = true;
     }
 
-    if(0 <= dt && dt < TopSN)
+    if (0 <= dt && dt < TopSN)
     {
         skill = SkillTable[dt];
     }
 
-    if(dt == TYPE_HIT || dam == 0)
+    if (dt == TYPE_HIT || dam == 0)
     {
         sprintf(buf1, "$n %s $N%c", vp, punct);
         sprintf(buf2, "You %s $N%c", vs, punct);
         sprintf(buf3, "$n %s you%c", vp, punct);
     }
-    else if(dt > TYPE_HIT && IsWieldingPoisonedWeapon(ch))
+    else if (dt > TYPE_HIT && IsWieldingPoisonedWeapon(ch))
     {
-        if(dt < TYPE_HIT + (int)GetAttackTableSize())
+        if (dt < TYPE_HIT + (int) GetAttackTableSize())
         {
             attack = GetAttackTypeName(dt - TYPE_HIT);
         }
@@ -3000,57 +3057,57 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     }
     else
     {
-        if(skill)
+        if (skill)
         {
             attack = skill->Messages.NounDamage.c_str();
 
-            if(dam == 0)
+            if (dam == 0)
             {
                 bool found = false;
 
-                if(!skill->Messages.Failure.ToCaster.empty())
+                if (!skill->Messages.Failure.ToCaster.empty())
                 {
                     Act(AT_HIT, skill->Messages.Failure.ToCaster, ch, NULL, victim, ActTarget::Char);
                     found = true;
                 }
 
-                if(!skill->Messages.Failure.ToVictim.empty())
+                if (!skill->Messages.Failure.ToVictim.empty())
                 {
                     Act(AT_HITME, skill->Messages.Failure.ToVictim, ch, NULL, victim, ActTarget::Vict);
                     found = true;
                 }
 
-                if(!skill->Messages.Failure.ToRoom.empty())
+                if (!skill->Messages.Failure.ToRoom.empty())
                 {
                     Act(AT_ACTION, skill->Messages.Failure.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                     found = true;
                 }
 
-                if(found)    /* miss message already sent */
+                if (found)    /* miss message already sent */
                 {
                     return;
                 }
             }
             else
             {
-                if(!skill->Messages.Success.ToCaster.empty())
+                if (!skill->Messages.Success.ToCaster.empty())
                 {
                     Act(AT_HIT, skill->Messages.Success.ToCaster, ch, NULL, victim, ActTarget::Char);
                 }
 
-                if(!skill->Messages.Success.ToVictim.empty())
+                if (!skill->Messages.Success.ToVictim.empty())
                 {
                     Act(AT_HITME, skill->Messages.Success.ToVictim, ch, NULL, victim, ActTarget::Vict);
                 }
 
-                if(!skill->Messages.Success.ToRoom.empty())
+                if (!skill->Messages.Success.ToRoom.empty())
                 {
                     Act(AT_ACTION, skill->Messages.Success.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                 }
             }
         }
-        else if(dt >= TYPE_HIT
-                && dt < TYPE_HIT + (int)GetAttackTableSize())
+        else if (dt >= TYPE_HIT
+                 && dt < TYPE_HIT + (int) GetAttackTableSize())
         {
             attack = GetAttackTypeName(dt - TYPE_HIT);
         }
@@ -3066,7 +3123,7 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
         sprintf(buf3, "$n's %s %s you%c", attack, vp, punct);
     }
 
-    if(GetAbilityLevel(ch, AbilityClass::Combat) >= 50)
+    if (GetAbilityLevel(ch, AbilityClass::Combat) >= 50)
     {
         char damageAmountMsg[100];
         sprintf(damageAmountMsg, " You do %d points of damage.", dam);
@@ -3075,12 +3132,12 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
 
     Act(AT_ACTION, buf1, ch, NULL, victim, ActTarget::NotVict);
 
-    if(!gcflag)
+    if (!gcflag)
     {
         Act(AT_HIT, buf2, ch, NULL, victim, ActTarget::Char);
     }
 
-    if(!gvflag)
+    if (!gvflag)
     {
         Act(AT_HITME, buf3, ch, NULL, victim, ActTarget::Vict);
     }
@@ -3088,24 +3145,28 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
 
 static bool SprintForCover(std::shared_ptr<Character> ch)
 {
-    if(!WhoFighting(ch))
+    if (!WhoFighting(ch))
+    {
         return false;
+    }
 
-    if(ch->Position < POS_FIGHTING)
+    if (ch->Position < POS_FIGHTING)
+    {
         return false;
+    }
 
-    for(int attempt = 0; attempt < 10; attempt++)
+    for (int attempt = 0; attempt < 10; attempt++)
     {
         auto was_in = ch->InRoom;
-        DirectionType door = (DirectionType)GetRandomDoor();
+        DirectionType door = (DirectionType) GetRandomDoor();
         std::shared_ptr<Exit> pexit = GetExit(was_in, door);
 
-        if(pexit == nullptr
-           || !pexit->ToRoom
-           || (pexit->Flags.test(Flag::Exit::Closed)
-               && !IsAffectedBy(ch, Flag::Affect::PassDoor))
-           || (IsNpc(ch)
-               && pexit->ToRoom->Flags.test(Flag::Room::NoMob)))
+        if (pexit == nullptr
+            || !pexit->ToRoom
+            || (pexit->Flags.test(Flag::Exit::Closed)
+                && !IsAffectedBy(ch, Flag::Affect::PassDoor))
+            || (IsNpc(ch)
+                && pexit->ToRoom->Flags.test(Flag::Room::NoMob)))
         {
             continue;
         }
@@ -3113,7 +3174,7 @@ static bool SprintForCover(std::shared_ptr<Character> ch)
         StripAffect(ch, gsn_sneak);
         ch->AffectedBy.reset(Flag::Affect::Sneak);
 
-        if(ch->Mount && IsFighting(ch->Mount))
+        if (ch->Mount && IsFighting(ch->Mount))
         {
             StopFighting(ch->Mount, true);
         }
@@ -3122,7 +3183,7 @@ static bool SprintForCover(std::shared_ptr<Character> ch)
 
         auto now_in = ch->InRoom;
 
-        if(now_in == was_in)
+        if (now_in == was_in)
         {
             continue;
         }
