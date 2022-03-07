@@ -36,7 +36,7 @@ I feel I have something that is worth using.
 ## Requirements
 * A compiler supporting C++20. GCC 10+ and Visual Studio 2019 16.8+ are known to work.
 * Lua 5.3 (included in libs/3rdparty directory)
-* Google Test and Google Mock (downloaded automatically)
+* Google Test and Google Mock
 * cmake 3.10 or higher.
 * Python 3.
 

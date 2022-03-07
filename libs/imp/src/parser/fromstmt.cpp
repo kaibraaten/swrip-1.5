@@ -33,6 +33,12 @@ namespace Imp
 
             while(std::getline(file, line))
             {
+                // std::getline doesn't remove carriage return.
+                if(!line.empty() && line.ends_with('\r'))
+                {
+                    line.erase(line.end() - 1);
+                }
+
                 code.push_back(line);
             }
         }

@@ -14,14 +14,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 enable_testing()
 
-add_executable(swrip $<TARGET_OBJECTS:mud> bootstrap/main.cpp)
+add_executable(swrip bootstrap/main.cpp)
 target_compile_features(swrip PRIVATE cxx_std_20)
 target_compile_options(swrip
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-DHAVE_ZLIB -DHAVE_UNAME -Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation -std=c++20>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /wd4996 /wd6262 /wd26451 /std:c++latest>
   )
 
-add_library(mud OBJECT
+add_library(mud SHARED
 src/act.cpp
 src/act_comm.cpp
 src/act_info.cpp
@@ -727,12 +727,13 @@ src/spells/weaken.cpp)
 set(COMMANDTABLE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp)
 
 if(WIN32)
-  target_link_libraries(swrip utility colorparser lua WS2_32 imp)
+  target_link_libraries(mud utility colorparser lua WS2_32 imp)
   set(BUILD_SHARED_LIBS ON)
 else()
-  target_link_libraries(swrip utility colorparser lua stdc++fs dl imp pthread)
+  target_link_libraries(mud utility colorparser lua stdc++fs dl imp pthread)
 endif()
 
+target_link_libraries(swrip mud)
 set(PYTHON python3)
 set(RM ${PYTHON} scripts/rm.py)
 
@@ -742,25 +743,6 @@ target_compile_options(mud
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /std:c++latest>
   )
 
-configure_file(${CMAKE_SOURCE_DIR}/cmake/GoogleTest-CMakeLists.txt.in ${CMAKE_BINARY_DIR}/googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
-
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-                 ${CMAKE_BINARY_DIR}/googletest-build
-                 EXCLUDE_FROM_ALL)
 add_subdirectory(libs/colorparser)
 add_subdirectory(libs/utility)
 add_subdirectory(libs/3rdparty/lua)

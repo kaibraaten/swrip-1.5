@@ -13,7 +13,7 @@ namespace Imp
     {
         for(char c : line)
         {
-            if(c != ' ' && c != '\t' && c != '\n')
+            if(c != ' ' && c != '\t' && c != '\n' && c != '\r')
             {
                 return false;
             }

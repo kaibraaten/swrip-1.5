@@ -79,7 +79,7 @@ public:
 
     ~FakeSkillRepository()
     {
-        SkillTable[gsn_mycraftingskill] = nullptr;
+
     }
 
     std::shared_ptr<Skill> GetSkill(int sn) override
@@ -165,14 +165,6 @@ protected:
     void TearDown() override
     {
         CleanupCharacter(_engineer);
-        _engineer = nullptr;
-
-        _resultantObject = nullptr;
-        _location = nullptr;
-
-        _area = nullptr;
-
-        Log = nullptr;
     }
 
     std::list<std::shared_ptr<Object>> MakeMaterials() const
