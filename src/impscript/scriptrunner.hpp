@@ -14,6 +14,7 @@ public:
                  std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval);
     ~ScriptRunner();
     double Resume();
+    void Abort();
 
 private:
     struct Impl;

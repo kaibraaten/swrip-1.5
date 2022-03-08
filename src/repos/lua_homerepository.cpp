@@ -5,6 +5,7 @@
 #include "room.hpp"
 #include "mud.hpp"
 #include "home.hpp"
+#include "log.hpp"
 
 #define HOME_DIR DATA_DIR "homes/"
 
@@ -26,7 +27,7 @@ public:
     void Delete(std::shared_ptr<Home> home) override;
     
     std::shared_ptr<Home> FindByVnum(vnum_t) const override;
-    std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override;
+    std::vector<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override;
     bool IsResidentOf(const std::string &name, vnum_t room) const override;
 };
 
@@ -65,9 +66,9 @@ std::shared_ptr<Home> LuaHomeRepository::FindByVnum(vnum_t vnum) const
                 });
 }
 
-std::list<std::shared_ptr<Home>> LuaHomeRepository::FindHomesForResident(const std::string &name) const
+std::vector<std::shared_ptr<Home>> LuaHomeRepository::FindHomesForResident(const std::string &name) const
 {
-    std::list<std::shared_ptr<Home>> homes;
+    std::vector<std::shared_ptr<Home>> homes;
 
     for(auto home : Entities())
     {
@@ -128,11 +129,11 @@ static void PushHome(lua_State *L, const std::shared_ptr<Home> &home)
     lua_pushinteger(L, 1);
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Vnum", home->Vnum());
+    auto room = GetRoom(home->Vnum());
+    LuaSetfieldString(L, "Vnum", VnumOrTag(room));
     LuaSetfieldString(L, "RoomName", home->RoomName());
     LuaSetfieldString(L, "Description", home->Description());
     
-    auto room = GetRoom(home->Vnum());
     LuaPushObjects(L, room->Objects());
     LuaPushCollection(L, home->Residents(), "Residents", PushResident);
     LuaPushFlags(L, home->Flags, HomeFlags, "Flags");
@@ -150,13 +151,16 @@ static void LoadResident(lua_State *L, size_t idx, std::shared_ptr<Home> home)
 
 static int L_HomeEntryFull(lua_State *L)
 {
-    vnum_t vnum = INVALID_VNUM;
-    LuaGetfieldLong(L, "Vnum", &vnum);
-    auto room = GetRoom(vnum);
+    std::shared_ptr<Room> room;
+    LuaGetfieldString(L, "Vnum",
+                      [&room](const auto &vnumOrTag)
+                      {
+                          room = GetRoom(vnumOrTag);
+                      });
 
     if(room != nullptr)
     {
-        auto home = Homes->FindByVnum(vnum);
+        auto home = Homes->FindByVnum(room->Vnum);
 
         if(home != nullptr)
         {
@@ -190,17 +194,29 @@ static int L_HomeEntryFull(lua_State *L)
 
 static int L_HomeEntryMeta(lua_State *L)
 {
-    vnum_t vnum = INVALID_VNUM;
-    LuaGetfieldLong(L, "Vnum", &vnum);
-    auto home = std::make_shared<Home>(vnum);
-    LuaGetfieldString(L, "RoomName",
-                      [home](const auto &name)
+    std::shared_ptr<Room> room;
+    LuaGetfieldString(L, "Vnum",
+                      [&room](const auto &vnumOrTag)
                       {
-                          home->RoomName(name);
+                          room = GetRoom(vnumOrTag);
                       });
-    Homes->Add(home);
-    LuaLoadArray(L, "Residents", LoadResident, home);
 
+    if(room != nullptr)
+    {
+        auto home = std::make_shared<Home>(room->Vnum);
+        LuaGetfieldString(L, "RoomName",
+                          [home](const auto &name)
+                          {
+                              home->RoomName(name);
+                          });
+        Homes->Add(home);
+        LuaLoadArray(L, "Residents", LoadResident, home);
+    }
+    else
+    {
+        Log->Bug("%s: room == nullptr", __FUNCTION__);
+    }
+    
     return 0;
 }
 

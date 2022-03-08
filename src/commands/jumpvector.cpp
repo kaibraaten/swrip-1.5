@@ -67,9 +67,9 @@ void do_jumpvector(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsShipInHyperspace(ship))
     {
-        projected.x = (target->Position->x - target->OriginPosition->x) * randnum;
-        projected.y = (target->Position->y - target->OriginPosition->y) * randnum;
-        projected.z = (target->Position->z - target->OriginPosition->z) * randnum;
+        projected.x = (target->Position.x - target->OriginPosition.x) * randnum;
+        projected.y = (target->Position.y - target->OriginPosition.y) * randnum;
+        projected.z = (target->Position.z - target->OriginPosition.z) * randnum;
 
         ch->Echo("After some deliberation, you figure out its projected course.\r\n");
         sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
@@ -79,9 +79,9 @@ void do_jumpvector(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    projected.x = (target->HyperPosition->x - target->OriginPosition->x) * randnum;
-    projected.y = (target->HyperPosition->y - target->OriginPosition->y) * randnum;
-    projected.z = (target->HyperPosition->z - target->OriginPosition->z) * randnum;
+    projected.x = (target->HyperPosition.x - target->OriginPosition.x) * randnum;
+    projected.y = (target->HyperPosition.y - target->OriginPosition.y) * randnum;
+    projected.z = (target->HyperPosition.z - target->OriginPosition.z) * randnum;
 
     ch->Echo("After some deliberation, you figure out its projected course.\r\n");
     sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",

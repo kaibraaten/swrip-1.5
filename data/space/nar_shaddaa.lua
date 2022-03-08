@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 522, 
          Name = "Spaceport Bravo-Beta", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

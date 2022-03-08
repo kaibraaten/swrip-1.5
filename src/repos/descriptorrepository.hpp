@@ -10,7 +10,7 @@ class DescriptorRepository : public Ceris::Repository<std::shared_ptr<Descriptor
 public:
 
 protected:
-  DescriptorRepository() { }
+    DescriptorRepository() {}
 };
 
 inline std::shared_ptr<DescriptorRepository> Descriptors;

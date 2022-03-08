@@ -17,10 +17,6 @@ void do_config(std::shared_ptr<Character> ch, std::string arg)
                  ? "[+FLEE     ] You flee if you get attacked.\r\n"
                  : "[-flee     ] You fight back if you get attacked.\r\n");
 
-        ch->Echo("%s", ch->PCData->Flags.test(Flag::PCData::NoRecall)
-                 ? "[+NORECALL ] You fight to the death, link-dead or not.\r\n"
-                 : "[-norecall ] You try to recall if fighting link-dead.\r\n");
-
         ch->Echo("%s", ch->Flags.test(Flag::Plr::Autoexits)
                  ? "[+AUTOEXIT ] You automatically see exits.\r\n"
                  : "[-autoexit ] You don't automatically see exits.\r\n");
@@ -53,17 +49,9 @@ void do_config(std::shared_ptr<Character> ch, std::string arg)
                  ? "[+COMBINE  ] You see object lists in combined format.\r\n"
                  : "[-combine  ] You see object lists in single format.\r\n");
 
-        ch->Echo("%s", ch->PCData->Flags.test(Flag::PCData::NoIntro)
-                 ? "[+NOINTRO  ] You don't see the ascii intro screen on login.\r\n"
-                 : "[-nointro  ] You see the ascii intro screen on login.\r\n");
-
         ch->Echo("%s", ch->Flags.test(Flag::Plr::Prompt)
                  ? "[+PROMPT   ] You have a prompt.\r\n"
                  : "[-prompt   ] You don't have a prompt.\r\n");
-
-        ch->Echo("%s", ch->Flags.test(Flag::Plr::TelnetGA)
-                 ? "[+TELNETGA ] You receive a telnet GA sequence.\r\n"
-                 : "[-telnetga ] You don't receive a telnet GA sequence.\r\n");
 
         ch->Echo("%s", ch->Flags.test(Flag::Plr::Ansi)
                  ? "[+ANSI     ] You receive ANSI color sequences.\r\n"
@@ -74,9 +62,6 @@ void do_config(std::shared_ptr<Character> ch, std::string arg)
                  ? "[+SHOVEDRAG] You allow yourself to be shoved and dragged around.\r\n"
                  : "[-shovedrag] You'd rather not be shoved or dragged around.\r\n");
 
-        ch->Echo("%s", ch->PCData->Flags.test(Flag::PCData::NoSummon)
-                 ? "[+NOSUMMON ] You do not allow other players to summon you.\r\n"
-                 : "[-nosummon ] You allow other players to summon you.\r\n");
 
         ch->Echo("%s", ch->Flags.test(Flag::Plr::DontAutofuel)
                  ? "[+dontautofuel ] You will not refuel automatically on launch.\r\n"
@@ -150,8 +135,6 @@ void do_config(std::shared_ptr<Character> ch, std::string arg)
             bit = Flag::Plr::Combine;
         else if(!StringPrefix(option, "prompt"))
             bit = Flag::Plr::Prompt;
-        else if(!StringPrefix(option, "telnetga"))
-            bit = Flag::Plr::TelnetGA;
         else if(!StringPrefix(option, "ansi"))
             bit = Flag::Plr::Ansi;
         else if(!StringPrefix(option, "flee"))
@@ -186,19 +169,7 @@ void do_config(std::shared_ptr<Character> ch, std::string arg)
         }
         else
         {
-            if(!StringPrefix(option, "norecall"))
-            {
-                bit = Flag::PCData::NoRecall;
-            }
-            else if(!StringPrefix(option, "nointro"))
-            {
-                bit = Flag::PCData::NoIntro;
-            }
-            else if(!StringPrefix(option, "nosummon"))
-            {
-                bit = Flag::PCData::NoSummon;
-            }
-            else if(!StringPrefix(option, "gag"))
+            if(!StringPrefix(option, "gag"))
             {
                 bit = Flag::PCData::Gag;
             }

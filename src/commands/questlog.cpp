@@ -18,6 +18,6 @@ void do_questlog(std::shared_ptr<Character> ch, std::string arguments)
         };
     DispatchImpFunction("do_questlog",
                         params,
-                        std::list<std::string>({"from commands.questlog import *" }),
+                        {"from commands.questlog import *"},
                         "<do_questlog>");
 }

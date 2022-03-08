@@ -31,7 +31,7 @@ std::shared_ptr<Imp::RuntimeValue> AddCreditsFunc::EvalFuncCall(const std::vecto
 
     if(dynamic_cast<Imp::IntValue*>(arg2.get()))
     {
-        credits = std::dynamic_pointer_cast<Imp::IntValue>(arg2)->GetIntValue("addcredits() param 2", where);
+        credits = arg2->GetIntValue("addcredits() param 2", where);
 
         if(credits <= 0)
         {

@@ -85,16 +85,16 @@ void do_calculate_diff(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    ship->Jump->x = ship->Position->x + strtol(arg1.c_str(), nullptr, 10);
-    ship->Jump->y = ship->Position->y + strtol(arg2.c_str(), nullptr, 10);
-    ship->Jump->z = ship->Position->z + strtol(arg3.c_str(), nullptr, 10);
+    ship->Jump.x = ship->Position.x + strtol(arg1.c_str(), nullptr, 10);
+    ship->Jump.y = ship->Position.y + strtol(arg2.c_str(), nullptr, 10);
+    ship->Jump.z = ship->Position.z + strtol(arg3.c_str(), nullptr, 10);
 
     std::shared_ptr<Spaceobject> spaceobject = ship->CurrentJump;
 
     RandomizeVector(ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray);
-    ship->Jump->x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
-    ship->Jump->y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
-    ship->Jump->z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
+    ship->Jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
+    ship->Jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
+    ship->Jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0));
 
     for(auto spaceobj : Spaceobjects)
     {

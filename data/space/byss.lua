@@ -9,19 +9,19 @@ SpaceobjectEntry
       {
          DockVnum = 28247, 
          Name = "Byss Spaceport", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
       [2] = 
       {
          DockVnum = 10006, 
          Name = "Cloning Facility", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
       [0] = 
       {
          DockVnum = 700, 
          Name = "Throne City", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

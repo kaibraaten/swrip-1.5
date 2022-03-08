@@ -113,7 +113,7 @@ void do_land(std::shared_ptr<Character> ch, std::string argument)
         SetCharacterColor(AT_CYAN, ch);
         ch->Echo("Land where?\r\n\r\nChoices: ");
 
-        for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = Spaceobjects->Entities().cbegin();
+        for(auto &&i = Spaceobjects->Entities().cbegin();
             i != Spaceobjects->Entities().cend(); ++i)
         {
             spaceobj = *i;
@@ -131,20 +131,20 @@ void do_land(std::shared_ptr<Character> ch, std::string argument)
                         ch->Echo("%s (%s)  %.0f %.0f %.0f\r\n         ",
                                  site->LocationName.c_str(),
                                  spaceobj->Name.c_str(),
-                                 spaceobj->Position->x,
-                                 spaceobj->Position->y,
-                                 spaceobj->Position->z);
+                                 spaceobj->Position.x,
+                                 spaceobj->Position.y,
+                                 spaceobj->Position.z);
                     }
                 }
             }
         }
 
         ch->Echo("\r\nYour Coordinates: %.0f %.0f %.0f\r\n",
-                 ship->Position->x, ship->Position->y, ship->Position->z);
+                 ship->Position.x, ship->Position.y, ship->Position.z);
         return;
     }
 
-    for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = Spaceobjects->Entities().cbegin();
+    for(auto &&i = Spaceobjects->Entities().cbegin();
         i != Spaceobjects->Entities().cend(); ++i)
     {
         spaceobj = *i;

@@ -9,13 +9,13 @@ SpaceobjectEntry
       {
          DockVnum = 3300, 
          Name = "Mos Espa", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
       [0] = 
       {
          DockVnum = 31847, 
          Name = "Mos Eisley", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

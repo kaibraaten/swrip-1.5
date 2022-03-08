@@ -29,6 +29,7 @@
 #include <memory>
 #include <bitset>
 #include <list>
+#include <vector>
 #include <array>
 #include <functional>
 #include "types.hpp"
@@ -78,8 +79,7 @@ public:
     void RuntimeData(std::shared_ptr<Imp::RuntimeScope> scope);
     
     // Player AND mob
-    std::function<bool(std::shared_ptr<Character>)> spec_fun;
-    std::function<bool(std::shared_ptr<Character>)> spec_2;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> SpecFuns = { nullptr, nullptr };
     std::shared_ptr<ProtoMobile> Prototype;
     std::shared_ptr<Descriptor> Desc;
     std::unique_ptr<class PCData> PCData;
@@ -137,12 +137,6 @@ public:
     Stats PermStats;
     Stats StatMods;
 
-    // Player only
-
-
-    // Mob only
-
-
     /////////////////////////////////////////////////////
     // Not persisted runtime data
     /////////////////////////////////////////////////////
@@ -158,8 +152,8 @@ public:
     std::shared_ptr<Character> Leader;
     std::shared_ptr<Fight> Fighting;
     std::weak_ptr<Character> Reply;
-    std::shared_ptr<Character> Switched = NULL;
-    std::shared_ptr<Character> Mount = NULL;
+    std::shared_ptr<Character> Switched;
+    std::shared_ptr<Character> Mount;
     std::shared_ptr<Room> InRoom;
     std::shared_ptr<Room> WasInRoom;
     std::shared_ptr<Room> WasSentinel;

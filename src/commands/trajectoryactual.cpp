@@ -14,7 +14,6 @@ void do_trajectory_actual(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     std::string arg3;
     int the_chance = 0;
-    std::shared_ptr<Vector3> argvec = std::make_shared<Vector3>();
     std::shared_ptr<Ship> ship;
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
@@ -107,25 +106,23 @@ void do_trajectory_actual(std::shared_ptr<Character> ch, std::string argument)
     argument = OneArgument(argument, arg2);
     argument = OneArgument(argument, arg3);
 
-    SetVector(argvec, std::stod(arg2), std::stod(arg3), std::stod(argument));
+    Vector3 argvec = Vector3(std::stod(arg2), std::stod(arg3), std::stod(argument));
 
-    if(argvec->x == ship->Position->x
-       && argvec->y == ship->Position->y
-       && argvec->z == ship->Position->z)
+    if(argvec == ship->Position)
     {
         ch->Echo("The ship is already at %.0f %.0f %.0f!",
-                 argvec->x, argvec->y, argvec->z);
+                 argvec.x, argvec.y, argvec.z);
         return;
     }
 
-    if(argvec->x == 0 && argvec->y == 0 && argvec->z == 0)
-        argvec->z = ship->Position->z + 1;
+    if(argvec.x == 0 && argvec.y == 0 && argvec.z == 0)
+        argvec.z = ship->Position.z + 1;
 
     SetShipCourse(ship, argvec);
     ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
     ch->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
-             argvec->x, argvec->y, argvec->z);
+             argvec.x, argvec.y, argvec.z);
     Act(AT_PLAIN, "$n manipulates the ship's controls.",
         ch, nullptr, nullptr, ActTarget::Room);
 

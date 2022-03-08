@@ -1,17 +1,17 @@
 -- galactic
--- Last saved Sunday 19-Apr-2020 15:51:02
+-- Last saved Wednesday 25-Nov-2020 22:45:04
 
 BoardEntry
 {
    ExtraRemovers = "", 
-   MinReadLevel = 0, 
    MinRemoveLevel = 101, 
-   Name = "galactic", 
-   MaxPosts = 0, 
-   Type = "Note", 
-   MinPostLevel = 0, 
-   BoardObjectVnum = 32201, 
-   ReadGroup = "", 
-   PostGroup = "", 
    ExtraReaders = "", 
+   MinReadLevel = 0, 
+   Name = "galactic", 
+   BoardObjectVnum = "galactic_net_message_terminal", 
+   ReadGroup = "", 
+   MinPostLevel = 0, 
+   Type = "Note", 
+   PostGroup = "", 
+   MaxPosts = 0, 
 }

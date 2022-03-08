@@ -21,6 +21,8 @@
 
 static void LinkForwardExits(const std::shared_ptr<Area> &tarea);
 static void LinkReverseExits(const std::shared_ptr<Area> &tarea);
+static void LinkRoomForwardExits(std::shared_ptr<Room> room);
+static void LinkRoomReverseExits(std::shared_ptr<Room> room);
 static void ExtractCharactersFromArea(const std::shared_ptr<Area> &pArea);
 static void ExtractObjectsFromArea(const std::shared_ptr<Area> &pArea);
 static void EraseRooms(const std::shared_ptr<Area> &pArea);
@@ -41,20 +43,25 @@ static void LinkReverseExits(const std::shared_ptr<Area> &tarea)
 
         if(pRoomIndex != nullptr)
         {
-            for(auto pexit : pRoomIndex->Exits())
-            {
-                if(pexit->ToRoom && !pexit->ReverseExit)
-                {
-                    std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom,
-                                                               GetReverseDirection(pexit->Direction),
-                                                               pRoomIndex->Vnum);
+            LinkRoomReverseExits(pRoomIndex);
+        }
+    }
+}
 
-                    if(rev_exit != nullptr)
-                    {
-                        pexit->ReverseExit = rev_exit;
-                        rev_exit->ReverseExit = pexit;
-                    }
-                }
+static void LinkRoomReverseExits(std::shared_ptr<Room> room)
+{
+    for(auto pexit : room->Exits())
+    {
+        if(pexit->ToRoom && !pexit->ReverseExit)
+        {
+            std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom,
+                                                       GetReverseDirection(pexit->Direction),
+                                                       room->Vnum);
+
+            if(rev_exit != nullptr)
+            {
+                pexit->ReverseExit = rev_exit;
+                rev_exit->ReverseExit = pexit;
             }
         }
     }
@@ -68,27 +75,32 @@ static void LinkForwardExits(const std::shared_ptr<Area> &tarea)
 
         if(pRoomIndex != nullptr)
         {
-            if(!pRoomIndex->Exits().empty())
-            {
-                for(auto pexit : pRoomIndex->Exits())
-                {
-                    pexit->ReverseVnum = pRoomIndex->Vnum;
+            LinkRoomForwardExits(pRoomIndex);
+        }
+    }
+}
 
-                    if(pexit->Vnum <= 0)
-                    {
-                        pexit->ToRoom = nullptr;
-                    }
-                    else
-                    {
-                        pexit->ToRoom = GetRoom(pexit->Vnum);
-                    }
-                }
+static void LinkRoomForwardExits(std::shared_ptr<Room> pRoomIndex)
+{
+    if(!pRoomIndex->Exits().empty())
+    {
+        for(auto pexit : pRoomIndex->Exits())
+        {
+            pexit->ReverseVnum = pRoomIndex->Vnum;
+            
+            if(pexit->Vnum <= 0)
+            {
+                pexit->ToRoom = nullptr;
             }
             else
             {
-                pRoomIndex->Flags.set(Flag::Room::NoMob);
+                pexit->ToRoom = GetRoom(pexit->Vnum);
             }
         }
+    }
+    else
+    {
+        pRoomIndex->Flags.set(Flag::Room::NoMob);
     }
 }
 
@@ -483,4 +495,67 @@ void CleanResets(std::shared_ptr<Area> tarea)
 
     tarea->FirstReset = nullptr;
     tarea->LastReset = nullptr;
+}
+
+vnum_t GetFreeRoomVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Room.First;
+    vnum_t last = area->VnumRanges.Room.Last;
+    
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetRoom(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+vnum_t GetFreeObjectVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Object.First;
+    vnum_t last = area->VnumRanges.Object.Last;
+
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetProtoObject(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+vnum_t GetFreeMobileVnum(std::shared_ptr<Area> area)
+{
+    vnum_t first = area->VnumRanges.Mob.First;
+    vnum_t last = area->VnumRanges.Mob.Last;
+
+    for(vnum_t vnum = first; vnum <= last; ++vnum)
+    {
+        if(!GetProtoMobile(vnum))
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
+}
+
+bool RoomVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Room.First && vnum <= area->VnumRanges.Room.Last;
+}
+
+bool ObjectVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Object.First && vnum <= area->VnumRanges.Object.Last;
+}
+
+bool MobileVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area)
+{
+    return vnum >= area->VnumRanges.Mob.First && vnum <= area->VnumRanges.Mob.Last;
 }

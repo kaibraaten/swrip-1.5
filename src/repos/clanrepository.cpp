@@ -4,6 +4,8 @@
 #include "constants.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
+#include "protoobject.hpp"
 
 #define CLAN_DIR DATA_DIR "clans/"
 
@@ -49,8 +51,8 @@ void LuaClanRepository::Save(const std::shared_ptr<Clan> &clan) const
 }
 
 void LuaClanRepository::PushMember(lua_State *L,
-    const std::shared_ptr<ClanMember> &member,
-    int idx)
+                                   const std::shared_ptr<ClanMember> &member,
+                                   int idx)
 {
     lua_pushinteger(L, idx);
     lua_newtable(L);
@@ -103,32 +105,13 @@ void LuaClanRepository::PushClan(lua_State *L, const std::shared_ptr<Clan> &clan
     LuaSetfieldNumber(L, "MobDeaths", clan->MobDeaths);
     LuaSetfieldNumber(L, "Type", (int)clan->Type);
 
-    if (clan->Board != INVALID_VNUM)
-    {
-        LuaSetfieldNumber(L, "BoardVnum", clan->Board);
-    }
-
-    if (clan->Storeroom != INVALID_VNUM)
-    {
-        LuaSetfieldNumber(L, "StoreroomVnum", clan->Storeroom);
-    }
+    LuaSetfieldString(L, "BoardVnum", VnumOrTagForObject(clan->Board));
+    LuaSetfieldString(L, "StoreroomVnum", VnumOrTagForRoom(clan->Storeroom));
 
     LuaSetfieldNumber(L, "Funds", clan->Funds);
-
-    if (clan->Jail != INVALID_VNUM)
-    {
-        LuaSetfieldNumber(L, "JailVnum", clan->Jail);
-    }
-
-    if (clan->EnlistRoom1 != INVALID_VNUM)
-    {
-        LuaSetfieldNumber(L, "EnlistRoom1Vnum", clan->EnlistRoom1);
-    }
-
-    if (clan->EnlistRoom2 != INVALID_VNUM)
-    {
-        LuaSetfieldNumber(L, "EnlistRoom2Vnum", clan->EnlistRoom2);
-    }
+    LuaSetfieldString(L, "JailVnum", VnumOrTagForRoom(clan->Jail));
+    LuaSetfieldString(L, "EnlistRoom1Vnum", VnumOrTagForRoom(clan->EnlistRoom1));
+    LuaSetfieldString(L, "EnlistRoom2Vnum", VnumOrTagForRoom(clan->EnlistRoom2));
 
     LuaSetfieldString(L, "Leader", clan->Leadership.Leader);
     LuaSetfieldString(L, "Number1", clan->Leadership.Number1);
@@ -165,22 +148,12 @@ void LuaClanRepository::LoadOneMember(lua_State *L, const std::shared_ptr<Clan> 
 
 void LuaClanRepository::LoadMembers(lua_State *L, const std::shared_ptr<Clan> &clan)
 {
-    int idx = lua_gettop(L);
-
-    lua_getfield(L, idx, "Members");
-
-    if (!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while (lua_next(L, -2))
-        {
-            LoadOneMember(L, clan);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Members",
+                 [L, clan](auto, auto, auto)
+                 {
+                     LoadOneMember(L, clan);
+                 },
+                 nullptr);
 }
 
 void LuaClanRepository::LoadStoreroom(lua_State *L, const std::shared_ptr<Clan> &clan)
@@ -214,12 +187,72 @@ int LuaClanRepository::L_ClanEntry(lua_State *L)
                    {
                        clan->Type = ClanType(type);
                    });
-    LuaGetfieldLong(L, "BoardVnum", &clan->Board);
-    LuaGetfieldLong(L, "StoreroomVnum", &clan->Storeroom);
+    LuaGetfieldString(L, "BoardVnum",
+                      [clan](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto obj = GetProtoObject(vnumOrTag);
+
+                              if(obj != nullptr)
+                              {
+                                  clan->Board = obj->Vnum;
+                              }
+                          }
+                      });
+    LuaGetfieldString(L, "StoreroomVnum",
+                      [clan](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->Storeroom = room->Vnum;
+                              }
+                          }
+                      });
     LuaGetfieldLong(L, "Funds", &clan->Funds);
-    LuaGetfieldLong(L, "JailVnum", &clan->Jail);
-    LuaGetfieldLong(L, "EnlistRoom1Vnum", &clan->EnlistRoom1);
-    LuaGetfieldLong(L, "EnlistRoom2Vnum", &clan->EnlistRoom2);
+    LuaGetfieldString(L, "JailVnum",
+                      [clan](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->Jail = room->Vnum;
+                              }
+                          }
+                      });
+    LuaGetfieldString(L, "EnlistRoom1Vnum",
+                      [clan](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+                              
+                              if(room != nullptr)
+                              {
+                                  clan->EnlistRoom1 = room->Vnum;
+                              }
+                          }
+                      });
+    LuaGetfieldString(L, "EnlistRoom2Vnum",
+                      [clan](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  clan->EnlistRoom2 = room->Vnum;
+                              }
+                          }
+                      });
     LuaGetfieldString(L, "Leader", &clan->Leadership.Leader);
     LuaGetfieldString(L, "Number1", &clan->Leadership.Number1);
     LuaGetfieldString(L, "Number2", &clan->Leadership.Number2);

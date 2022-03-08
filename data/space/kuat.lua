@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 23000, 
          Name = "Kuat Starport", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

@@ -18,7 +18,7 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
     int the_chance = 0;
     std::shared_ptr<Ship> ship;
     std::shared_ptr<Spaceobject> spaceobject;
-    std::shared_ptr<Vector3> tmp = std::make_shared<Vector3>();
+    Vector3 tmp;
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
     {
@@ -131,16 +131,16 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
             if(!spaceobject)
                 ship->CurrentJump = ship->Spaceobject;
 
-            CopyVector(tmp, ship->Position);
-            CopyVector(ship->Position, ship->HyperPosition);
-            CopyVector(ship->HyperPosition, tmp);
-            ship->CurrentJump = NULL;
+            tmp = ship->Position;
+            ship->Position = ship->HyperPosition;
+            ship->HyperPosition = tmp;
+            ship->CurrentJump = nullptr;
 
             EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
             EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
             auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
-                                    ship->Name.c_str(), ship->Position->x,
-                                    ship->Position->y, ship->Position->z);
+                                    ship->Name.c_str(), ship->Position.x,
+                                    ship->Position.y, ship->Position.z);
             EchoToNearbyShips(AT_YELLOW, ship, buf);
             ship->State = SHIP_READY;
             ship->Home = ship->Spaceobject->Name;
@@ -226,11 +226,11 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
 
     ship->Thrusters.Energy.Current -= 100;
 
-    CopyVector(tmp, ship->Position);
-    CopyVector(ship->Position, ship->Jump);
-    CopyVector(ship->HyperPosition, tmp);
-    CopyVector(ship->Jump, tmp);
-    CopyVector(ship->OriginPosition, tmp);
+    tmp = ship->Position;
+    ship->Position = ship->Jump;
+    ship->HyperPosition = tmp;
+    ship->Jump = tmp;
+    ship->OriginPosition = tmp;
 
     if(ship->Class == FIGHTER_SHIP)
         LearnFromSuccess(ch, gsn_starfighters);
@@ -251,8 +251,8 @@ static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, std::share
         EchoToShip(AT_YELLOW, dockedShip,
                    "The ship lurches slightly as it comes out of hyperspace.");
         auto buf = FormatString("%s enters the starsystem at %.0f %.0f %.0f",
-                                dockedShip->Name.c_str(), dockedShip->Position->x,
-                                dockedShip->Position->y, dockedShip->Position->z);
+                                dockedShip->Name.c_str(), dockedShip->Position.x,
+                                dockedShip->Position.y, dockedShip->Position.z);
         EchoToNearbyShips(AT_YELLOW, dockedShip, buf);
         dockedShip->Home = ship->Home;
 

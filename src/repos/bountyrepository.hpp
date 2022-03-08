@@ -8,8 +8,8 @@
 class BountyRepository : public Ceris::Repository<std::shared_ptr<Bounty>>
 {
 public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
+    virtual void Load() = 0;
+    virtual void Save() const = 0;
 };
 
 inline std::shared_ptr<BountyRepository> Bounties;

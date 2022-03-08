@@ -89,6 +89,8 @@ class SaveVs;
 class Home;
 struct Vo;
 class MudProgMacroCode;
+class Plugin;
+class VnumConverter;
 
 /*
  * Function types.

@@ -15,6 +15,7 @@
 #include "repos/arearepository.hpp"
 #include "repos/homerepository.hpp"
 #include "repos/shiprepository.hpp"
+#include "vnumconverter.hpp"
 
 namespace fs = std::filesystem;
 
@@ -95,7 +96,8 @@ void do_destroy(std::shared_ptr<Character> ch, std::string victimName)
         {
             if (!StrCmp(pArea->Filename, areaName))
             {
-                Areas->Save(pArea);
+                auto vnumConverter = VnumConverter::Create(pArea);
+                Areas->Save(pArea, vnumConverter);
                 CloseArea(pArea);
                 SetCharacterColor(AT_RED, ch); /* Log message changes
                                                 * colors */

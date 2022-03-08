@@ -182,7 +182,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "xpos"))
     {
-        spaceobject->Position->x = ToLong(argument);
+        spaceobject->Position.x = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;
@@ -190,7 +190,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "ypos"))
     {
-        spaceobject->Position->y = ToLong(argument);
+        spaceobject->Position.y = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;
@@ -198,7 +198,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "zpos"))
     {
-        spaceobject->Position->z = ToLong(argument);
+        spaceobject->Position.z = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;
@@ -214,7 +214,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "hx"))
     {
-        spaceobject->Heading->x = ToLong(argument);
+        spaceobject->Heading.x = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;
@@ -222,7 +222,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "hy"))
     {
-        spaceobject->Heading->y = ToLong(argument);
+        spaceobject->Heading.y = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;
@@ -230,7 +230,7 @@ void do_setspaceobject(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "hz"))
     {
-        spaceobject->Heading->z = ToLong(argument);
+        spaceobject->Heading.z = ToLong(argument);
         ch->Echo("Done.\r\n");
         Spaceobjects->Save(spaceobject);
         return;

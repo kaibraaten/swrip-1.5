@@ -9,13 +9,13 @@ SpaceobjectEntry
       {
          DockVnum = 21821, 
          Name = "Imperial Academy", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
       [0] = 
       {
          DockVnum = 21944, 
          Name = "Gzenah Landing Facility", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

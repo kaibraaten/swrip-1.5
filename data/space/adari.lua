@@ -9,13 +9,13 @@ SpaceobjectEntry
       {
          DockVnum = 29065, 
          Name = "Baituh City", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
       [0] = 
       {
          DockVnum = 29001, 
          Name = "Alfuh City", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

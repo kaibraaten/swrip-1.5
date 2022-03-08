@@ -34,9 +34,9 @@ this is a hobby project after all. I will make a release when
 I feel I have something that is worth using.
 
 ## Requirements
-* A compiler supporting C++20. GCC 10 and Visual Studio 2019 16.8+ are known to work.
+* A compiler supporting C++20. GCC 10+ and Visual Studio 2019 16.8+ are known to work.
 * Lua 5.3 (included in libs/3rdparty directory)
-* Google Test and Google Mock (downloaded automatically)
+* Google Test and Google Mock
 * cmake 3.10 or higher.
 * Python 3.
 
@@ -65,7 +65,7 @@ exit editor. You can now enter the game, and you will be top level admin. Yay.
 ## Credits
 Below is the history of SWRiP.
 
-Star Wars: Rise in Power 1.5 &copy; 2016-2020 by Kai Braaten
+Star Wars: Rise in Power 1.5 &copy; 2016-2022 by Kai Braaten
 
 Star Wars: Rise in Power 1.0.1 &copy; 2001 by Mark Miller (Darrik Vequir)
 

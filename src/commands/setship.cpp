@@ -123,7 +123,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
         ship->Rooms.Navseat = tempnum;
         ship->Rooms.Entrance = tempnum;
 
-        for (Turret *turret : ship->WeaponSystems.Turrets)
+        for (const auto &turret : ship->WeaponSystems.Turrets)
         {
             SetTurretRoom(turret, INVALID_VNUM);
         }
@@ -1099,7 +1099,7 @@ static bool room_is_in_use(std::shared_ptr<Ship> ship, vnum_t room_vnum)
     }
     else
     {
-        for (const Turret *turret : ship->WeaponSystems.Turrets)
+        for (const auto &turret : ship->WeaponSystems.Turrets)
         {
             if (GetTurretRoom(turret) == room_vnum)
             {

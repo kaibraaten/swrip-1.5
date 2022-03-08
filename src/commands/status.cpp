@@ -52,9 +52,9 @@ void do_status(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("&W%s:\r\n", target->Name.c_str());
     ch->Echo("&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
-             target->Position->x, target->Position->y, target->Position->z);
+             target->Position.x, target->Position.y, target->Position.z);
     ch->Echo("&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
-             target->Heading->x, target->Heading->y, target->Heading->z);
+             target->Heading.x, target->Heading.y, target->Heading.z);
     ch->Echo("&OCurrent Speed:&Y %d&O/%d\r\n",
              target->Thrusters.Speed.Current, target->Thrusters.Speed.Max);
     ch->Echo("&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
@@ -74,7 +74,7 @@ void do_status(std::shared_ptr<Character> ch, std::string argument)
     {
         static const char *const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
         { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        const Turret *turret = target->WeaponSystems.Turrets[turret_num];
+        const auto &turret = target->WeaponSystems.Turrets[turret_num];
         const std::shared_ptr<Ship> turret_target = TurretHasTarget(turret) ? GetTurretTarget(turret) : NULL;
         const std::string turret_target_name = turret_target ? turret_target->Name : "none";
         const char *turret_status = IsTurretDamaged(turret) ? "Damaged" : "Good";

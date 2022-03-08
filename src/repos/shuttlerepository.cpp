@@ -3,6 +3,7 @@
 #include "luascript.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 
@@ -70,7 +71,7 @@ void LuaShuttleRepository::PushStop(lua_State *L, std::shared_ptr<ShuttleStop> s
     lua_newtable(L);
 
     LuaSetfieldString(L, "Name", stop->Name);
-    LuaSetfieldNumber(L, "RoomVnum", stop->RoomVnum);
+    LuaSetfieldString(L, "RoomVnum", VnumOrTagForRoom(stop->RoomVnum));
 
     lua_settable(L, -3);
 }
@@ -94,9 +95,9 @@ void LuaShuttleRepository::PushRooms(lua_State *L, std::shared_ptr<Shuttle> shut
     lua_pushstring(L, "Rooms");
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "First", shuttle->Rooms.First);
-    LuaSetfieldNumber(L, "Last", shuttle->Rooms.Last);
-    LuaSetfieldNumber(L, "Entrance", shuttle->Rooms.Entrance);
+    LuaSetfieldString(L, "First", VnumOrTagForRoom(shuttle->Rooms.First));
+    LuaSetfieldString(L, "Last", VnumOrTagForRoom(shuttle->Rooms.Last));
+    LuaSetfieldString(L, "Entrance", VnumOrTagForRoom(shuttle->Rooms.Entrance));
 
     lua_settable(L, -3);
 }
@@ -128,17 +129,50 @@ void LuaShuttleRepository::PushShuttle(lua_State *L, const std::shared_ptr<Shutt
 
 void LuaShuttleRepository::LoadRooms(lua_State *L, std::shared_ptr<Shuttle> shuttle)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Rooms");
+    LuaLoadTable(L, "Rooms",
+                 [L, shuttle](auto, auto)
+                 {
+                     LuaGetfieldString(L, "First",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
 
-    if(!lua_isnil(L, ++idx))
-    {
-        LuaGetfieldLong(L, "First", &shuttle->Rooms.First);
-        LuaGetfieldLong(L, "Last", &shuttle->Rooms.Last);
-        LuaGetfieldLong(L, "Entrance", &shuttle->Rooms.Entrance);
-    }
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.First = room->Vnum;
+                                               }
+                                           }
+                                       });
+                     LuaGetfieldString(L, "Last",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
 
-    lua_pop(L, 1);
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.Last = room->Vnum;
+                                               }
+                                           }
+                                       });
+                     LuaGetfieldString(L, "Entrance",
+                                       [shuttle](const auto &vnumOrTag)
+                                       {
+                                           if(IsValidVnumOrTag(vnumOrTag))
+                                           {
+                                               auto room = GetRoom(vnumOrTag);
+
+                                               if(room != nullptr)
+                                               {
+                                                   shuttle->Rooms.Entrance = room->Vnum;
+                                               }
+                                           }
+                                       });
+                 },
+                 nullptr);
 }
 
 void LuaShuttleRepository::LoadStop(lua_State *L, std::shared_ptr<Shuttle> shuttle)
@@ -146,28 +180,30 @@ void LuaShuttleRepository::LoadStop(lua_State *L, std::shared_ptr<Shuttle> shutt
     std::shared_ptr<ShuttleStop> stop = std::make_shared<ShuttleStop>();
 
     LuaGetfieldString(L, "Name", &stop->Name);
-    LuaGetfieldLong(L, "RoomVnum", &stop->RoomVnum);
+    LuaGetfieldString(L, "RoomVnum",
+                      [stop](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
 
+                              if(room != nullptr)
+                              {
+                                  stop->RoomVnum = room->Vnum;
+                              }
+                          }
+                      });
     shuttle->Add(stop);
 }
 
 void LuaShuttleRepository::LoadStops(lua_State *L, std::shared_ptr<Shuttle> shuttle)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Stops");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            LoadStop(L, shuttle);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Stops",
+                 [L, shuttle](auto, auto, auto)
+                 {
+                     LoadStop(L, shuttle);
+                 },
+                 nullptr);
 }
 
 int LuaShuttleRepository::L_ShuttleEntry(lua_State *L)

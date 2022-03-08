@@ -44,9 +44,7 @@ Command *GetCommand(const std::string &name, bool allowPrefixMatch)
 
 Command *AllocateCommand()
 {
-    Command *command = new Command();
-
-    return command;
+    return new Command();
 }
 
 /*

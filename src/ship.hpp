@@ -60,7 +60,7 @@ public:
     std::string CoPilot;
     ShipClass Class = FIGHTER_SHIP;
     vnum_t Shipyard = INVALID_VNUM;
-    std::shared_ptr<Vector3> Position = std::make_shared<Vector3>();
+    Vector3 Position;
     vnum_t Location = INVALID_VNUM;
     vnum_t LastDock = INVALID_VNUM;
     ShipType Type = SHIP_CIVILIAN;
@@ -122,7 +122,7 @@ public:
         } TractorBeam;
 
         std::shared_ptr<Ship> Target; /* Not persisted */
-        std::vector<Turret *> Turrets = std::vector<Turret *>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
+        std::vector<std::shared_ptr<Turret>> Turrets = std::vector<std::shared_ptr<Turret>>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
     } WeaponSystems;
 
     struct
@@ -165,11 +165,11 @@ public:
     bool AutoSpeed = false;
     bool Tracking = false;
     int tcount = 0;
-    std::shared_ptr<Vector3> TrackVector = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> Heading = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> Jump = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> HyperPosition = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> OriginPosition = std::make_shared<Vector3>();
+    Vector3 TrackVector;
+    Vector3 Heading;
+    Vector3 Jump;
+    Vector3 HyperPosition;
+    Vector3 OriginPosition;
     long Collision = 0;
     std::shared_ptr<Ship> TractoredBy;
     std::shared_ptr<class Spaceobject> CurrentJump;

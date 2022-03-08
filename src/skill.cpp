@@ -679,32 +679,15 @@ static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk
 
 static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
-    if(!skill->Teachers.empty())
-    {
-        std::string teacherList = skill->Teachers;
+    LuaPushCollection(L, skill->Teachers, "Teachers",
+                      [L](lua_State*, size_t idx, const auto &teacher)
+                      {
+                          lua_pushinteger(L, idx);
+                          lua_newtable(L);
 
-        lua_pushstring(L, "Teachers");
-        lua_newtable(L);
-
-        while(!teacherList.empty())
-        {
-            std::string teacher;
-            vnum_t vnum = INVALID_VNUM;
-
-            teacherList = OneArgument(teacherList, teacher);
-            vnum = strtol(teacher.c_str(), nullptr, 10);
-            auto mobile = GetProtoMobile(vnum);
-
-            if(mobile)
-            {
-                lua_pushinteger(L, vnum);
-                lua_pushstring(L, mobile->Name.c_str());
-                lua_settable(L, -3);
-            }
-        }
-
-        lua_settable(L, -3);
-    }
+                          LuaSetfieldString(L, "Vnum", teacher);
+                          lua_settable(L, -3);
+                      });
 }
 
 void PushSkillMessages(lua_State *L, std::shared_ptr<Skill> skill)
@@ -856,38 +839,14 @@ void SaveSkills()
 
 static void LoadSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
-    int idx = lua_gettop(L);
-    lua_getfield(L, idx, "Teachers");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        bool first = true;
-        char buf[MAX_STRING_LENGTH] = { '\0' };
-
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            vnum_t vnum = lua_tointeger(L, -2);
-
-            if(!first)
-            {
-                strcat(buf, " ");
-            }
-            else
-            {
-                first = false;
-            }
-
-            strcat(buf, std::to_string(vnum).c_str());
-
-            lua_pop(L, 1);
-        }
-
-        skill->Teachers = buf;
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "Teachers",
+                 [L](lua_State*, size_t idx, std::shared_ptr<Skill> sk)
+                 {
+                     std::string teacher;
+                     LuaGetfieldString(L, "Vnum", &teacher);
+                     sk->Teachers.push_back(teacher);
+                 },
+                 skill);
 }
 
 static void LoadBasicMessages(lua_State *L, std::shared_ptr<Skill> skill)

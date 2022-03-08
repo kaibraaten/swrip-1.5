@@ -40,7 +40,7 @@ class CraftRecipe
 {
 public:
     int Skill = 0;
-    std::list<CraftingMaterial> Materials;
+    std::vector<CraftingMaterial> Materials;
     int Duration = 0;
     std::shared_ptr<ProtoObject> Prototype;
     std::bitset<Flag::MAX> Flags;
@@ -88,7 +88,7 @@ public:
 static void AfterDelay(std::shared_ptr<CraftingSession> session);
 static void AbortSession(std::shared_ptr<CraftingSession> session);
 static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract);
-static FoundMaterial* AllocateFoundMaterials(const std::list<CraftingMaterial> &recipeMaterials);
+static FoundMaterial *AllocateFoundMaterials(const std::vector<CraftingMaterial> &recipeMaterials);
 static bool CheckSkillLevel(std::shared_ptr<CraftingSession> session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
 static FoundMaterial *GetUnfoundMaterial(std::shared_ptr<CraftingSession> session, std::shared_ptr<Object> obj);
@@ -185,7 +185,7 @@ static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> da
                   GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Class) + 1)
                   - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Class)));
     GainXP(ch, skill->Class, xpgain);
-    ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[(int)skill->Class]);
+    ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[(int) skill->Class]);
 
     LearnFromSuccess(ch, data->Recipe->Skill);
 }
@@ -254,7 +254,7 @@ std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, std::initializer_list<C
     return recipe;
 }
 
-static FoundMaterial *AllocateFoundMaterials(const std::list<CraftingMaterial> &recipeMaterials)
+static FoundMaterial *AllocateFoundMaterials(const std::vector<CraftingMaterial> &recipeMaterials)
 {
     FoundMaterial *foundMaterials = new FoundMaterial[recipeMaterials.size() + 1]; // Plus one to accomodate end-marker (ITEM_NONE).
     int i = 0;

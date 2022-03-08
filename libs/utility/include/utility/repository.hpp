@@ -26,7 +26,7 @@
 #ifndef _CERIS_REPOSITORY_HPP_
 #define _CERIS_REPOSITORY_HPP_
 
-#include <list>
+#include <vector>
 #include <set>
 #include <memory>
 
@@ -60,7 +60,7 @@ namespace Ceris
          *
          * \return All the objects in the repository.
          */
-        const std::list<T> &Entities() const noexcept;
+        const std::vector<T> &Entities() const noexcept;
 
         /**
          * Add a new object to the repository. This will NOT automatically
@@ -100,7 +100,7 @@ namespace Ceris
         template<typename UnaryPredicate>
         T Find(UnaryPredicate pred) const
         {
-            auto iter = find_if(_entities.begin(), _entities.end(), pred);
+            auto iter = std::find_if(std::begin(_entities), std::end(_entities), pred);
 
             if(iter != _entities.end())
             {
@@ -156,7 +156,7 @@ namespace Ceris
 
     private:
         std::set<T, Compare> _entities;
-        mutable std::list<T> _cachedEntities;
+        mutable std::vector<T> _cachedEntities;
         mutable bool _containerChanged = false;
     };
 
@@ -173,7 +173,7 @@ namespace Ceris
     }
 
     template<typename T, typename Compare>
-    const std::list<T> &Repository<T, Compare>::Entities() const noexcept
+    const std::vector<T> &Repository<T, Compare>::Entities() const noexcept
     {
         if(_containerChanged)
         {

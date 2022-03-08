@@ -343,6 +343,8 @@ std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_
 /*
  * Command functions.
  */
+DECLARE_CMD_FUN(do_finddependencies);
+DECLARE_CMD_FUN(do_rcreate);
 DECLARE_CMD_FUN(do_editplugin);
 DECLARE_CMD_FUN(do_passign);
 DECLARE_CMD_FUN(do_plugins);
@@ -822,7 +824,6 @@ DECLARE_CMD_FUN(do_zones);
 DECLARE_CMD_FUN(do_dock);
 
 /* mob prog stuff */
-DECLARE_CMD_FUN(do_macro);
 DECLARE_CMD_FUN(do_mp_close_passage);
 DECLARE_CMD_FUN(do_mp_damage);
 DECLARE_CMD_FUN(do_mp_restore);
@@ -856,8 +857,6 @@ DECLARE_CMD_FUN(do_mpstat);
 DECLARE_CMD_FUN(do_opstat);
 DECLARE_CMD_FUN(do_rpstat);
 DECLARE_CMD_FUN(do_mptransfer);
-DECLARE_CMD_FUN(do_mpapply);
-DECLARE_CMD_FUN(do_mpapplyb);
 DECLARE_CMD_FUN(do_mpgain);
 
 /*
@@ -1085,9 +1084,14 @@ void AddCharacter(std::shared_ptr<Character> ch);
 std::shared_ptr<Character> CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 std::shared_ptr<Object> CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
+
 std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum);
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);
 std::shared_ptr<Room> GetRoom(vnum_t vnum);
+std::shared_ptr<ProtoMobile> GetProtoMobile(const std::string &vnumOrTag);
+std::shared_ptr<ProtoObject> GetProtoObject(const std::string &vnumOrTag);
+std::shared_ptr<Room> GetRoom(const std::string &vnumOrTag);
+
 std::shared_ptr<Room> MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
@@ -1199,8 +1203,6 @@ void ObjectFromObject(std::shared_ptr<Object> obj);
 void ExtractObject(std::shared_ptr<Object> obj);
 void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit);
 void CleanRoom(std::shared_ptr<Room> room);
-void CleanObject(std::shared_ptr<ProtoObject> obj);
-void CleanMobile(std::shared_ptr<ProtoMobile> mob);
 void ExtractCharacter(std::shared_ptr<Character> ch, bool fPull);
 std::shared_ptr<Character> GetCharacterInRoom(std::shared_ptr<Character> ch, std::string argument);
 std::shared_ptr<Character> GetCharacterAnywhere(std::shared_ptr<Character> ch, std::string argument);
@@ -1305,6 +1307,14 @@ void UpdateHandler();
 void RebootCheck(time_t reset);
 void RemovePortal(std::shared_ptr<Object> portal);
 int GetMaxAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability);
+
+std::string VnumOrTag(std::shared_ptr<Room> room);
+std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob);
+std::string VnumOrTag(std::shared_ptr<ProtoObject> obj);
+bool IsValidVnumOrTag(const std::string &vnumOrTag);
+std::string VnumOrTagForRoom(vnum_t vnum);
+std::string VnumOrTagForMobile(vnum_t vnum);
+std::string VnumOrTagForObject(vnum_t vnum);
 
 /* newscore.c */
 const char *GetCharacterRace(std::shared_ptr<Character> ch);

@@ -1,16 +1,57 @@
 -- Coruscant Academy
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Friday 04-Dec-2020 10:20:32
 
 AreaEntry
 {
+   ResetMessage = "You hear the hum of repulsorlifts powering up in the distance", 
    Rooms = 
    {
       [10304] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [16] = "Silence", 
+            [3] = "Indoors", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "A Marble Corridor\
+", 
+               Direction = "north", 
+               DestinationVnum = 10314, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "A Stone Corridor\
+", 
+               Direction = "south", 
+               DestinationVnum = 10301, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "Wandering the Academy\
+", 
+               Direction = "west", 
+               DestinationVnum = 10307, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "This is a silent room, which means while here you will not see any of the\
 channels. In fact, you can only use socials, emotes and group tell here.\
 The room was created to give you a quiet place to read our help files. You\
@@ -24,57 +65,28 @@ descriptions until you can find your way back to this point. If you get\
 lost at any time, type U to return here.  Once you have successfully\
 returned here, please continue to the north to explore further.\
 ", 
-         Vnum = 10304, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10314, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "A Marble Corridor\
-", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10301, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Description = "A Stone Corridor\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10307, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "Wandering the Academy\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [16] = "Silence", 
-            [3] = "Indoors", 
-         }, 
          Name = "The Reading Room", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10304, 
       }, 
       [10305] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          Description = "Here you will experience your first full combat against MOBILES, also known\
 as MOBS. Mobile is the name used for monsters and the like in the game.\
 All exits, except down, lead to a CAGE mob. Some of these cage mobs may be\
@@ -88,28 +100,37 @@ transferred to your inventory. You may suffer injury during the battle, so \
 return here and type REST or SLEEP. This will speed your healing process. \
 When you are finished healing, type WAKE or STAND to continue.\
 ", 
-         Vnum = 10305, 
-         Exits = 
-         {
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
          Name = "Chamber of Trials for Rangers", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10305, 
       }, 
       [10306] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "A Stone Corridor\
+", 
+               Direction = "east", 
+               DestinationVnum = 10301, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "UNTIL FURTHER NOTICE:  ALL LANGUAGES CAN BE LEARNED FROM THE OLD MAN ON THE\
 PLUOGUS. Some information about languages:  Languages are learned\
 differently from skills, spells and weapons, as you must be adept at a\
@@ -121,37 +142,62 @@ fluency in a language. Those who are intelligent, wise and lucky will find\
 it takes fewer practices to become adept at a language. Wookiees can NEVER\
 learn to speak common.\
 ", 
+         Name = "Abbigayle's Language Lessons", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10306, 
+      }, 
+      [10307] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Description = "You see a solid oak door.\
+\13", 
+               Keyword = "Door", 
+            }, 
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10301, 
+               Description = "The Reading Room\
+", 
+               Direction = "east", 
+               DestinationVnum = 10304, 
                Key = -1, 
                Keyword = "", 
-               Direction = "east", 
-               Description = "A Stone Corridor\
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "Wandering Darkhaven Academy, it looks safe\
 ", 
+               Direction = "west", 
+               DestinationVnum = 10309, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "Back to the beginning\
+", 
+               Direction = "up", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Name = "Abbigayle's Language Lessons", 
-      }, 
-      [10307] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
          Description = "Each player has a menu of items that the game controls automatically once\
 it has been configured. To get a list of this menu, type CONFIG. For this\
 part of your schooling, it is suggested you type CONFIG +AUTOEXIT. This\
@@ -163,62 +209,36 @@ be close by. You may also try to LOOK in adjoining rooms. You do this by\
 typing LOOK <direction>. Your next move is to the west, to see what you\
 are walking into, try typing EXIT and L W. \
 ", 
+         Name = "Wandering the Academy", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10307, 
+      }, 
+      [10308] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Description = "The Reading Room\
+               Description = "A Dank Pit\
 ", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10309, 
-               Key = -1, 
-               Keyword = "", 
                Direction = "west", 
-               Description = "Wandering Darkhaven Academy, it looks safe\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
+               DestinationVnum = 10316, 
                Key = -1, 
                Keyword = "", 
-               Direction = "up", 
-               Description = "Back to the beginning\
-", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "You see a solid oak door.\
-\13", 
-               Keyword = "Door", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Wandering the Academy", 
-      }, 
-      [10308] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
          Description = "Here stands a Chadoyn.  He was captured trying to slaughter the students\
 of the Academy, and the Immortals decided to spare his life and throw him\
 in chains for use as a teaching aid.  With him you can practice attacking\
@@ -231,94 +251,20 @@ ALWAYS consider a mob before fighting it the first time.  This will many\
 times save your life, as mobs are often a lot more difficult then they\
 outwardly appear.  Be careful and enjoy your fight.\
 ", 
-         Vnum = 10308, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10316, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "A Dank Pit\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "A Dank Pit", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10308, 
+      }, 
+      [10309] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Dank Pit", 
-      }, 
-      [10309] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "inside", 
-         Description = "This is where you will start learning about exits not listed under \"Exits\".\
-Doors are not seen on the game. You must read room description and LOOK\
-<direction> to find them. Another method of finding a door is to \"bump\" into\
-the walls. Type N. OUCH! You ran into the door. You want to be careful not\
-to be affected with the pass door spell while using the bump method, as you\
-may end up in a room you would rather not visit. Now, type OPEN N or OPEN\
-DOOR. Next type EXIT, you will now see the north exit listed under \"Exits\".\
-Type HELP OPEN to find out more information on doors.\
-", 
-         Vnum = 10309, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10310, 
-               Key = -1, 
-               Keyword = "door", 
-               Direction = "north", 
-               Description = "An Enclosed Room\
-", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10307, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Description = "Wandering the Academy\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10311, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "Lost in Darkhaven Academy\
-", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "up", 
-               Description = "Back to the beginning\
-", 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -328,19 +274,98 @@ Type HELP OPEN to find out more information on doors.\
                Keyword = "door", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Description = "An Enclosed Room\
+", 
+               Direction = "north", 
+               DestinationVnum = 10310, 
+               Key = -1, 
+               Keyword = "door", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "Wandering the Academy\
+", 
+               Direction = "east", 
+               DestinationVnum = 10307, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "Lost in Darkhaven Academy\
+", 
+               Direction = "west", 
+               DestinationVnum = 10311, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "Back to the beginning\
+", 
+               Direction = "up", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
+         Description = "This is where you will start learning about exits not listed under \"Exits\".\
+Doors are not seen on the game. You must read room description and LOOK\
+<direction> to find them. Another method of finding a door is to \"bump\" into\
+the walls. Type N. OUCH! You ran into the door. You want to be careful not\
+to be affected with the pass door spell while using the bump method, as you\
+may end up in a room you would rather not visit. Now, type OPEN N or OPEN\
+DOOR. Next type EXIT, you will now see the north exit listed under \"Exits\".\
+Type HELP OPEN to find out more information on doors.\
+", 
+         Name = "Wandering Coruscant Academy", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10309, 
+      }, 
+      [10310] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Wandering Coruscant Academy", 
-      }, 
-      [10310] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Description = "Wandering Darkhaven Academy\
+", 
+               Direction = "south", 
+               DestinationVnum = 10309, 
+               Key = -1, 
+               Keyword = "door", 
+            }, 
+         }, 
          Description = "You did it! Well done. You will find many rooms such as this all over the\
 game. Some are easy to find because of hints in the room descriptions.\
 Some are very hard to find, as the clues could be rooms away. However, you\
@@ -354,41 +379,56 @@ gives you information on what level you may practice each, to what percent\
 you are currently practiced in each, and what the maximum percent that you\
 may practice each.\
 ", 
-         Vnum = 10310, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10309, 
-               Key = -1, 
-               Keyword = "door", 
-               Direction = "south", 
-               Description = "Wandering Darkhaven Academy\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "An Enclosed Room", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10310, 
+      }, 
+      [10311] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "An Enclosed Room", 
-      }, 
-      [10311] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "Lost in Darkhaven Academy\
+", 
+               Direction = "north", 
+               DestinationVnum = 10312, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "Wandering Darkhaven Academy\
+", 
+               Direction = "east", 
+               DestinationVnum = 10309, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "Back to the beginning\
+", 
+               Direction = "up", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "There are several special exit types that you may encounter in your travels.\
 You have experienced open exits and closed doors to this point. There are\
 also hidden doors. The hidden door can not be found with the \"bump\" method.\
@@ -404,106 +444,20 @@ N, E, W, S, NE, NW, SE, SW, U, or D. There are also SOMEWHERE exits that\
 use \"leave\", \"climb\", \"enter\", or just a word to use. To the north you\
 will experience a hidden exit, use the room description to find the door name.\
 ", 
-         Vnum = 10311, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10312, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "Lost in Darkhaven Academy\
-", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10309, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Description = "Wandering Darkhaven Academy\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "up", 
-               Description = "Back to the beginning\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Lost in Coruscant Academy", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10311, 
+      }, 
+      [10312] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Lost in Coruscant Academy", 
-      }, 
-      [10312] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "inside", 
-         Description = "You are standing in a richly decorated room. A large oak table surrounded\
-by twelve chairs dominates a large portion of the area. Crystal globes with\
-continual light spells cast on them hover about the room, providing a soft\
-comfortable light. The walls are adorned with tapestries of the finest\
-quality. The tapestry on the west wall draws your attention more so than\
-the others. Now, you have many clues on the possible exit. Try to find the\
-right word by typing LOOK <word>. For example, try LOOK GLOBES. Sometimes\
-looking at other things in the rooms description will lead you to the word\
-that will open the exit. \
-", 
-         Vnum = 10312, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10311, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Description = "Lost in Darkhaven Academy\
-", 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [3] = "Secret", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10313, 
-               Key = -1, 
-               Keyword = "tapestry door", 
-               Direction = "west", 
-               Description = "door\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "up", 
-               Description = "Back to the beginning\
-", 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -540,88 +494,73 @@ that will open the exit. \
                Keyword = "Crystal globes", 
             }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Lost in Coruscant Academy", 
-      }, 
-      [10313] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
-         Description = "Well Done! You have found this secret room. Sometimes these secret rooms\
-will contain valuable items or will lead to other parts of the area you\
-are exploring. Always pay close attention to room descriptions, mobiles\
-descriptions and items, this will many times bring profitable results.\
-This is a where you will experience a Somewhere exit. To find your way\
-out, try looking at the picture on the wall. If you can not figure it out, \
-you may leave by the up exit. Good luck!\
-", 
-         Vnum = 10313, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
+               Description = "Lost in Darkhaven Academy\
+", 
+               Direction = "south", 
+               DestinationVnum = 10311, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
+                  [3] = "Secret", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 10312, 
-               Key = -1, 
-               Keyword = "door", 
-               Direction = "east", 
-               Description = "Lost in Darkhaven Academy\
+               Description = "door\
 ", 
+               Direction = "west", 
+               DestinationVnum = 10313, 
+               Key = -1, 
+               Keyword = "tapestry door", 
             }, 
-            [2] = 
+            [3] = 
             {
                Distance = 0, 
+               Description = "Back to the beginning\
+", 
+               Direction = "up", 
                DestinationVnum = 10304, 
                Key = -1, 
                Keyword = "", 
-               Direction = "up", 
-               Description = "Back to the beginning\
-", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10302, 
-               Key = -1, 
-               Keyword = "crack", 
-               Direction = "somewhere", 
-               Description = "", 
             }, 
          }, 
+         Description = "You are standing in a richly decorated room. A large oak table surrounded\
+by twelve chairs dominates a large portion of the area. Crystal globes with\
+continual light spells cast on them hover about the room, providing a soft\
+comfortable light. The walls are adorned with tapestries of the finest\
+quality. The tapestry on the west wall draws your attention more so than\
+the others. Now, you have many clues on the possible exit. Try to find the\
+right word by typing LOOK <word>. For example, try LOOK GLOBES. Sometimes\
+looking at other things in the rooms description will lead you to the word\
+that will open the exit. \
+", 
+         Name = "Lost in Coruscant Academy", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10312, 
+      }, 
+      [10313] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
          ExtraDescriptions = 
          {
             [1] = 
-            {
-               Description = "This is a picture of fresh cut flowers in a glass vase. It seems to\
-\13be hanging here just to cover a huge crack. That crack is so large, you\
-\13can probably squeeze through it! Perhaps you should look closer at the\
-\13crack. HINT: type CRACK.\
-\13", 
-               Keyword = "wall", 
-            }, 
-            [2] = 
-            {
-               Description = "You see an oak door.\
-\13", 
-               Keyword = "door", 
-            }, 
-            [3] = 
             {
                Description = "This is a picture of fresh cut flowers in a glass vase. It seems to\
 \13be hanging here just to cover a huge crack. That crack is so large, you\
@@ -630,27 +569,118 @@ you may leave by the up exit. Good luck!\
 \13", 
                Keyword = "picture", 
             }, 
-            [4] = 
+            [2] = 
             {
                Description = "This is a huge CRACK, you could probably squeeze through it. \
 \13", 
                Keyword = "crack", 
             }, 
+            [3] = 
+            {
+               Description = "This is a picture of fresh cut flowers in a glass vase. It seems to\
+\13be hanging here just to cover a huge crack. That crack is so large, you\
+\13can probably squeeze through it! Perhaps you should look closer at the\
+\13crack. HINT: type CRACK.\
+\13", 
+               Keyword = "wall", 
+            }, 
+            [4] = 
+            {
+               Description = "You see an oak door.\
+\13", 
+               Keyword = "door", 
+            }, 
          }, 
-         TeleDelay = 0, 
-         Flags = 
+         Exits = 
          {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
+            [1] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Description = "Lost in Darkhaven Academy\
+", 
+               Direction = "east", 
+               DestinationVnum = 10312, 
+               Key = -1, 
+               Keyword = "door", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "Back to the beginning\
+", 
+               Direction = "up", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               DestinationVnum = 10302, 
+               Key = -1, 
+               Keyword = "crack", 
+            }, 
          }, 
+         Description = "Well Done! You have found this secret room. Sometimes these secret rooms\
+will contain valuable items or will lead to other parts of the area you\
+are exploring. Always pay close attention to room descriptions, mobiles\
+descriptions and items, this will many times bring profitable results.\
+This is a where you will experience a Somewhere exit. To find your way\
+out, try looking at the picture on the wall. If you can not figure it out, \
+you may leave by the up exit. Good luck!\
+", 
          Name = "A Secret Alcove", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10313, 
       }, 
       [10314] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "Preparing for combat\
+", 
+               Direction = "north", 
+               DestinationVnum = 10315, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "The Reading Room\
+", 
+               Direction = "south", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "This room will teach you several commands to check your statistics and \
 character health. These commands are SCORE, EQUIPMENT, INVENTORY, and\
 LEVEL. Score is used by typing SC, it tells you all the basic statistics\
@@ -662,46 +692,55 @@ experience points, and the experience needed for the next few levels.\
 Use the help menu to get more information on the topics covered here,\
 type HELP <subject>.\
 ", 
+         Name = "A Marble Corridor", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10314, 
+      }, 
+      [10315] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10315, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10317, 
                Key = -1, 
                Keyword = "", 
-               Direction = "north", 
-               Description = "Preparing for combat\
-", 
             }, 
             [2] = 
             {
                Distance = 0, 
-               DestinationVnum = 10304, 
+               Description = "A Marble Corridor\
+", 
+               Direction = "south", 
+               DestinationVnum = 10314, 
                Key = -1, 
                Keyword = "", 
-               Direction = "south", 
-               Description = "The Reading Room\
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "A Dank Pit\
 ", 
+               Direction = "down", 
+               DestinationVnum = 10316, 
+               Key = -1, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "A Marble Corridor", 
-      }, 
-      [10315] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
          Description = "The time is drawing near to experience combat.  Directly below you  is the\
 Chadoyn Pit, the home of a creature which will assist you in learning how\
 to initiate combat. The Chadoyn is not aggressive, which means you must\
@@ -711,55 +750,47 @@ capable of initiating combat.  Some of the more popular spells that do so\
 are:  DISPEL FORCE, SLEEP, DOMINATE, WEAKEN and BLINDNESS. Some of the\
 most popular skills used are STEAL and BACKSTAB.\
 ", 
+         Name = "Preparing for combat", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10315, 
+      }, 
+      [10316] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10317, 
+               Description = "A Dank Pit\
+", 
+               Direction = "east", 
+               DestinationVnum = 10308, 
                Key = -1, 
                Keyword = "", 
-               Direction = "north", 
-               Description = "", 
             }, 
             [2] = 
             {
                Distance = 0, 
-               DestinationVnum = 10314, 
+               Description = "Preparing for combat\
+", 
+               Direction = "up", 
+               DestinationVnum = 10315, 
                Key = -1, 
                Keyword = "", 
-               Direction = "south", 
-               Description = "A Marble Corridor\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10316, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "down", 
-               Description = "A Dank Pit\
-", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Preparing for combat", 
-      }, 
-      [10316] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
          Description = "This room explains about WIMPY, FLEE, and RECALL as a way to leave from\
 combat. Wimpy is an automatic withdrawal from a fight when your hitpoints\
 reach a set minimum. To set your wimpy, type WIMPY or WIMPY <number>. The\
@@ -770,47 +801,45 @@ death. You may also manually withdraw from a fight with flee. To use flee,\
 just type FLEE. You may flee out of the fight at any amount of hitpoints.\
 Fleeing will cost you loss of experience. \
 ", 
+         Name = "A Dank Pit", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10316, 
+      }, 
+      [10317] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10308, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10327, 
                Key = -1, 
                Keyword = "", 
-               Direction = "east", 
-               Description = "A Dank Pit\
-", 
             }, 
             [2] = 
             {
                Distance = 0, 
+               Description = "", 
+               Direction = "south", 
                DestinationVnum = 10315, 
                Key = -1, 
                Keyword = "", 
-               Direction = "up", 
-               Description = "Preparing for combat\
-", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Name = "A Dank Pit", 
-      }, 
-      [10317] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "After a long fight or even a long walk you character may need to rest. The\
 safest way to do this is to type REST. You may also SLEEP but only do that\
 in safe places as you will be more open to being attacked or robbed when\
@@ -823,45 +852,36 @@ really hungry you might have to do this twice. There is also a fountain\
 here you may drink out of or use to fill your canteen. (try: fill canteen\
 fountain)\
 ", 
-         Vnum = 10317, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10327, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10315, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Time To Take A Break", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10317, 
+      }, 
+      [10318] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Time To Take A Break", 
-      }, 
-      [10318] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 10322, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "Sometimes an item may appear useless at first.  There are many junk items\
 that are just that, junk.  But some items can come in handy.  Try making\
 small talk with this student. HE seems to have found something that might\
@@ -870,70 +890,69 @@ look in to an object that is a container use :  LOOK IN <container>.  To\
 get an item from a container, use :  GET <item> FROM <container> as well. \
                           Hint:  say hello. \
 ", 
+         Name = "A Useless Item?", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10318, 
+      }, 
+      [10319] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
+               Description = "", 
+               Direction = "down", 
                DestinationVnum = 10322, 
                Key = -1, 
                Keyword = "", 
-               Direction = "up", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Name = "A Useless Item?", 
-      }, 
-      [10319] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "Sometimes items can be obtained by manipulating other items. Some classes\
 can make items from other ones using skills such as MAKEBLASTER, MAKESPICE,\
 or MAKELIGHTSABER. Other times it is as simple as opening a box or pushing\
 a button as is the case in this room.\
 ", 
+         Name = "Up in a Small Loft", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10319, 
+      }, 
+      [10320] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
+               Description = "", 
+               Direction = "west", 
                DestinationVnum = 10322, 
                Key = -1, 
                Keyword = "", 
-               Direction = "down", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Up in a Small Loft", 
-      }, 
-      [10320] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "The most common way in most muds to gain equipment is by looting the\
 corpses of dead mobiles(monsters etc). After you kill this droid use\
 EXAMINE CORPSE to see what it was carrying. Then use GET ALL FROM CORPSE\
@@ -941,35 +960,36 @@ to get the goodies from it. To automaticly loot corpses when you kill\
 something you can set CONFIG +AUTOLOOT or CONFIG +AUTOCRED for just\
 credits.\
 ", 
+         Name = "Looting Your Kills", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10320, 
+      }, 
+      [10321] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
+               Description = "", 
+               Direction = "east", 
                DestinationVnum = 10322, 
                Key = -1, 
                Keyword = "", 
-               Direction = "west", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Looting Your Kills", 
-      }, 
-      [10321] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "Shops are a great way of aquiring equipment and getting rid of extras.\
 To get a list of what a shopkeeper is selling type LIST. To buy an item\
 type BUY <objectname>. If you have extra equipment or have found something\
@@ -981,36 +1001,84 @@ bought one you can put any extra items you have in it for safe keeping.\
 You may also wear it. If you don't have enough credits to buy anything try\
 getting some from the droid a couple of rooms to the east.\
 ", 
+         Name = "Academy Store", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10321, 
+      }, 
+      [10322] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10322, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10323, 
                Key = -1, 
                Keyword = "", 
-               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
                Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10320, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10327, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10321, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [5] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 10319, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [6] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 10318, 
+               Key = -1, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Name = "Academy Store", 
-      }, 
-      [10322] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "One of the major goals you will have playing the mud, is finding better\
 equipment to make your character's life safer and easier.  There are\
 several ways of doing this. Two that you need to remember but won't yet be\
@@ -1022,84 +1090,51 @@ west, as well as the ones up and down from here, exhibit different ways of\
 getting items. After exploring these four rooms and getting everything you\
 need, you may move on to the next room to the north.\
 ", 
+         Name = "Getting More Useful Items", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10322, 
+      }, 
+      [10323] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Distance = 0, 
-               DestinationVnum = 10323, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
                Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10324, 
+               Key = 10423, 
+               Keyword = "", 
             }, 
             [2] = 
             {
                Distance = 0, 
-               DestinationVnum = 10320, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
                Description = "", 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10327, 
-               Key = -1, 
-               Keyword = "", 
                Direction = "south", 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10321, 
+               DestinationVnum = 10322, 
                Key = -1, 
                Keyword = "", 
-               Direction = "west", 
-               Description = "", 
-            }, 
-            [5] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10319, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "up", 
-               Description = "", 
-            }, 
-            [6] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10318, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "down", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "Getting More Useful Items", 
-      }, 
-      [10323] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "Congratulations, you're almost done. The graduation hall is just to the\
 north. Only one problem though. The door's locked. Maybe this kid knows\
 where the key is. If only he'd stop crying long enough for you to ask.\
@@ -1107,66 +1142,42 @@ hint: find his doll\
 hint: give doll child\
 hint: say where's the key\
 ", 
+         Name = "The Last Challenge", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10323, 
+      }, 
+      [10324] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Flags = 
                {
                   [1] = "Closed", 
-                  [2] = "Locked", 
                   [0] = "IsDoor", 
+                  [5] = "PickProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 10324, 
-               Key = 10423, 
-               Keyword = "", 
-               Direction = "north", 
                Description = "", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10322, 
+               Direction = "south", 
+               DestinationVnum = 10323, 
                Key = -1, 
                Keyword = "", 
-               Direction = "south", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Name = "The Last Challenge", 
-      }, 
-      [10324] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "iamauthed", 
-               MudProgType = "speech_prog", 
-               Code = "if isimmort($n)\
-mpechoat $n dumbass! trans yourself!\
-else\
-mptransfer $n 10325\
-endif\
-", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "Congratulations you did it... line up and get your diploma.   You are in a\
 long wide hallway. The floor is covered in a plush red carpet. The walls\
 are made of a tansparent duraplast and come together to form a dome over\
@@ -1184,41 +1195,50 @@ PLEASE LOOK AT THE ROOM ONCE YOU HAVE SAID 'IAMAUTHED'!\
  \
 When the schoolmaster shakes your hand, you are authed.\
 ", 
+         Name = "Graduating from the Academy", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "if isimmort($n)\
+mpechoat $n dumbass! trans yourself!\
+else\
+mptransfer $n 10325\
+endif\
+", 
+               Arguments = "iamauthed", 
+            }, 
+         }, 
+         TeleDelay = 0, 
          Vnum = 10324, 
+      }, 
+      [10325] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Flags = 
                {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
+                  [17] = "CanEnter", 
+                  [11] = "Hidden", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 10323, 
+               Description = "", 
+               Direction = "somewhere", 
+               DestinationVnum = 10326, 
                Key = -1, 
                Keyword = "", 
-               Direction = "south", 
-               Description = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-         }, 
-         Name = "Graduating from the Academy", 
-      }, 
-      [10325] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "Detached from the rest of the Academy to leave room for ships to manuever,\
 this docking bay is large enough to hold four or five shuttles. The space\
 above is clear and you can see the clouds above you. Anyone launching\
@@ -1233,35 +1253,39 @@ There is a small shuttle here waiting to take you home. To board it type\
 ENTER.\
 ", 
          Name = "Academy Docking Bay", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [17] = "CanEnter", 
-                  [11] = "Hidden", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10326, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "somewhere", 
-               Description = "", 
-            }, 
-         }, 
+         Tunnel = 0, 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Vnum = 10325, 
       }, 
       [10326] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [11] = "Hidden", 
+               }, 
+               Description = "", 
+               Direction = "somewhere", 
+               DestinationVnum = 10325, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "You are in a small single compartment shuttle. The passenger seats are\
 directly behind the pilots chair and slightly raised to give you a\
 nice view for your journey. The seats recline back into a sleeping\
@@ -1274,40 +1298,51 @@ to the driver before he will launch... Wouldn't want to spend this\
 much money on drop outs. If you don't have a diploma yet type LEAVE,\
 and then go look for the schoolmaster. \
 ", 
+         Name = "The Shuttle home", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
          Vnum = 10326, 
+      }, 
+      [10327] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Flags = 
                {
-                  [18] = "CanLeave", 
-                  [11] = "Hidden", 
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 10325, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10322, 
                Key = -1, 
                Keyword = "", 
-               Direction = "somewhere", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
                Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10317, 
+               Key = -1, 
+               Keyword = "", 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Name = "The Shuttle home", 
-      }, 
-      [10327] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
          Description = "A very important thing to learn about early is cloning. Death is permanent.\
 When you die you loose everything. However... somewhere deep in the core\
 worlds is a place that creates and stores the clones of those who are\
@@ -1320,161 +1355,146 @@ from the beginning.   To exit, open the door north of you by using the\
 command open north. This can be used any place doors are located. Simply\
 use 'open' and then the direction. \
 ", 
-         Vnum = 10327, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 10322, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10317, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Description = "", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
          Name = "Some Important Words of Advice", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10327, 
       }, 
       [10399] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Description = "", 
-         Vnum = 10399, 
-         Exits = 
-         {
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "This Room is used by a Mob program do not delete.", 
-      }, 
-      [10400] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "city", 
-         Description = "", 
-         Vnum = 10400, 
-         Exits = 
-         {
-         }, 
          ExtraDescriptions = 
          {
          }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "This Room is used by a Mob program do not delete.", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10399, 
+      }, 
+      [10400] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [26] = "Factory", 
          }, 
-         Name = "A test workshop", 
-      }, 
-      [10401] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
-         Tunnel = 0, 
          Sector = "city", 
-         Description = "", 
-         Vnum = 10401, 
-         Exits = 
-         {
-         }, 
          ExtraDescriptions = 
          {
          }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "A test workshop", 
+         Tunnel = 0, 
          TeleDelay = 0, 
+         Vnum = 10400, 
+      }, 
+      [10401] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
          Flags = 
          {
             [16] = "Silence", 
             [10] = "Safe", 
             [2] = "NoMob", 
          }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
          Name = "a quiet place", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10401, 
       }, 
       [10340] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Description = "", 
-         Vnum = 10340, 
-         Exits = 
-         {
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
          Name = "Floating in a void", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10340, 
       }, 
       [10342] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Description = "", 
-         Vnum = 10342, 
-         Exits = 
-         {
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
          Name = "Floating in a void", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10342, 
       }, 
       [10430] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [10] = "Safe", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10300, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "You stand in the player lounge.  It is the last safe zone in the galaxy.  \
 Relax and have a cool drink, as this will be the last time you can let\
 your guard down and not be marked for death.\
@@ -1484,79 +1504,70 @@ messages.  Use NOTE LIST to get a list of the messages, and NOTE READ\
 <message number> to read a specific message.\
 Type HELP NOTE for more commands.\
 ", 
-         Vnum = 10430, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10300, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Description = "", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [10] = "Safe", 
-         }, 
          Name = "Student Lounge", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10430, 
       }, 
       [10429] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Description = "", 
-         Vnum = 10429, 
-         Exits = 
-         {
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
          Name = "Floating in a void", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10429, 
       }, 
       [10300] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         MudProgs = 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [10] = "Safe", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
          {
             [1] = 
             {
-               ScriptType = "MProg", 
-               Arguments = "throat", 
-               MudProgType = "act_prog", 
-               Code = "mpat 122 mpecho $n just slit his own throat at the creations room!\
-mpat 101 mpecho $n just sucicided at the creations room.\
-", 
+               Distance = 0, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10301, 
+               Key = -1, 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               ScriptType = "MProg", 
-               Arguments = "entered", 
-               MudProgType = "act_prog", 
-               Code = "mpat 122 mpecho $n has just begun life!\
-mpat 101 mpecho $n has just entered the game.\
-", 
+               Distance = 0, 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10430, 
+               Key = -1, 
+               Keyword = "", 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "inside", 
          Description = "You stand inside the Coruscant Academy, an establishment designed to teach\
 the basics of survival within the galaxy. Each room has a specific purpose\
 and contains information on the various commands available to you for\
@@ -1580,160 +1591,170 @@ no longer acceptable on this mud. Don't use them.\
 &RHere is a good website on naming conventions:&R&W\
 http://themudjournal.com/rp/ABCs-A.html\
 ", 
-         Vnum = 10300, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10301, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10430, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [10] = "Safe", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
          Name = "Coruscant Academy", 
-      }, 
-      [10301] = 
-      {
-         TeleVnum = 0, 
-         Tag = "", 
          MudProgs = 
          {
             [1] = 
             {
                ScriptType = "MProg", 
-               Arguments = "100", 
+               MudProgType = "act_prog", 
+               Code = "mpat 122 mpecho $n just slit his own throat at the creations room!\
+mpat 101 mpecho $n just sucicided at the creations room.\
+", 
+               Arguments = "throat", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
+               Code = "mpat 122 mpecho $n has just begun life!\
+mpat 101 mpecho $n has just entered the game.\
+", 
+               Arguments = "entered", 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 10300, 
+      }, 
+      [10301] = 
+      {
+         Tag = "", 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "Reading Room\
+", 
+               Direction = "north", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "The Laboratory of Skills.\
+", 
+               Direction = "east", 
+               DestinationVnum = 10303, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "Entrance to Darkhaven Academy\
+", 
+               Direction = "south", 
+               DestinationVnum = 10300, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "Abbigayle's Language Lessons.\
+", 
+               Direction = "west", 
+               DestinationVnum = 10306, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
+         Description = "To the west is Lady Abbigayle's room, and to the east is Domick.  Lady\
+Abbigayle has information about languages, and Domick has information on\
+practicing weapons and skills. When you are finished exploring these\
+areas, come back here and continue north through the Academy.\
+", 
+         Name = "A Duraplast Corridor", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
                MudProgType = "leave_prog", 
                Code = "if isimmort($n)\
 else\
   mpforce $n vis\
 endif\
 ", 
+               Arguments = "100", 
             }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "inside", 
-         Description = "To the west is Lady Abbigayle's room, and to the east is Domick.  Lady\
-Abbigayle has information about languages, and Domick has information on\
-practicing weapons and skills. When you are finished exploring these\
-areas, come back here and continue north through the Academy.\
-", 
-         Vnum = 10301, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "Reading Room\
-", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10303, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Description = "The Laboratory of Skills.\
-", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10300, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Description = "Entrance to Darkhaven Academy\
-", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10306, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "Abbigayle's Language Lessons.\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
          }, 
          TeleDelay = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Name = "A Duraplast Corridor", 
+         Vnum = 10301, 
       }, 
       [10302] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
-         Sector = "inside", 
-         Description = "You did it! You are an excellent student! To continue your education,\
-please leave north. That will return you to the Reading room.\
-", 
-         Vnum = 10302, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10304, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Description = "The Reading Room\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
+         TeleVnum = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "The Reading Room\
+", 
+               Direction = "north", 
+               DestinationVnum = 10304, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
+         Description = "You did it! You are an excellent student! To continue your education,\
+please leave north. That will return you to the Reading room.\
+", 
          Name = "Somewhere", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10302, 
       }, 
       [10303] = 
       {
-         TeleVnum = 0, 
          Tag = "", 
-         Tunnel = 0, 
+         TeleVnum = 0, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
          Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "A Stone Corridor\
+", 
+               Direction = "west", 
+               DestinationVnum = 10301, 
+               Key = -1, 
+               Keyword = "", 
+            }, 
+         }, 
          Description = "This is where you will practice your arsenal of weapons and skills. Type\
 PRACTICE to get a list of these currently available to you.  Everyone will\
 have sections listing skills, weapons, and languages. You will also have\
@@ -1746,1765 +1767,266 @@ until adepted. To see information about a specific skill or weapon, type\
 HELP <skill or weapon style>.  For general questions on practicing, type\
 HELP PRACTICE.\
 ", 
-         Vnum = 10303, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               DestinationVnum = 10301, 
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Description = "A Stone Corridor\
-", 
-            }, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
          Name = "The Laboratory of Skills", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         Vnum = 10303, 
       }, 
    }, 
-   Name = "Coruscant Academy", 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   Author = "Scarab/Durga", 
-   Filename = "newacad.lua", 
-   ResetMessage = "You hear the hum of repulsorlifts powering up in the distance", 
-   VnumRanges = 
-   {
-      Object = 
-      {
-         Last = 10499, 
-         First = 10300, 
-      }, 
-      Mob = 
-      {
-         Last = 10499, 
-         First = 10340, 
-      }, 
-      Room = 
-      {
-         Last = 10430, 
-         First = 10300, 
-      }, 
-   }, 
+   LowEconomy = 496050830, 
    Resets = 
    {
       [1] = 
       {
-         Arg3 = 10303, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 0, 
          Arg1 = 10340, 
+         Arg3 = 10303, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [2] = 
       {
-         Arg3 = 10306, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 0, 
          Arg1 = 10394, 
+         Arg3 = 10306, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [3] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 0, 
-         MiscData = 0, 
          Arg1 = 10309, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Command = "D", 
       }, 
       [4] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 2, 
-         MiscData = 0, 
          Arg1 = 10310, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Command = "D", 
       }, 
       [5] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 3, 
-         MiscData = 0, 
          Arg1 = 10312, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 3, 
+         Command = "D", 
       }, 
       [6] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 1, 
-         MiscData = 0, 
          Arg1 = 10313, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "D", 
       }, 
       [7] = 
       {
-         Arg3 = 10430, 
-         Command = "O", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10414, 
+         Arg3 = 10430, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
       }, 
       [8] = 
       {
-         Arg3 = 10308, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10345, 
+         Arg3 = 10308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [9] = 
       {
-         Arg3 = 10320, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10360, 
+         Arg3 = 10320, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [10] = 
       {
-         Arg3 = 8, 
-         Command = "E", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10301, 
+         Arg3 = 8, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
       }, 
       [11] = 
       {
-         Arg3 = 13, 
-         Command = "E", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10302, 
+         Arg3 = 13, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
       }, 
       [12] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10304, 
+         Arg3 = 0, 
+         MiscData = 1, 
+         Arg2 = 1, 
          Command = "G", 
       }, 
       [13] = 
       {
-         Arg3 = 10319, 
-         Command = "O", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10318, 
+         Arg3 = 10319, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
       }, 
       [14] = 
       {
-         Arg3 = 10318, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10342, 
+         Arg3 = 10318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [15] = 
       {
-         Arg3 = 10323, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10343, 
+         Arg3 = 10323, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [16] = 
       {
-         Arg3 = 2, 
-         Command = "D", 
-         Arg2 = 0, 
-         MiscData = 0, 
          Arg1 = 10323, 
+         Arg3 = 2, 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Command = "D", 
       }, 
       [17] = 
       {
-         Arg3 = 10326, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10355, 
+         Arg3 = 10326, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [18] = 
       {
-         Arg3 = 10317, 
-         Command = "O", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10315, 
+         Arg3 = 10317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
       }, 
       [19] = 
       {
-         Arg3 = 10317, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 0, 
          Arg1 = 10365, 
+         Arg3 = 10317, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [20] = 
       {
-         Arg3 = 10327, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10395, 
+         Arg3 = 10327, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [21] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 0, 
-         MiscData = 0, 
          Arg1 = 10327, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Command = "D", 
       }, 
       [22] = 
       {
-         Arg3 = 10321, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10370, 
+         Arg3 = 10321, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [23] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10317, 
+         Arg3 = 0, 
+         MiscData = 1, 
+         Arg2 = 1, 
          Command = "G", 
       }, 
       [24] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10311, 
+         Arg3 = 0, 
+         MiscData = 1, 
+         Arg2 = 1, 
          Command = "G", 
       }, 
       [25] = 
       {
-         Arg3 = 10324, 
-         Command = "M", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10350, 
+         Arg3 = 10324, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
       }, 
       [26] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10423, 
+         Arg3 = 0, 
+         MiscData = 1, 
+         Arg2 = 1, 
          Command = "G", 
       }, 
       [27] = 
       {
-         Arg3 = 10324, 
-         Command = "O", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10414, 
+         Arg3 = 10324, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
       }, 
       [28] = 
       {
-         Arg3 = 1, 
-         Command = "D", 
-         Arg2 = 2, 
-         MiscData = 0, 
          Arg1 = 10324, 
+         Arg3 = 1, 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Command = "D", 
       }, 
       [29] = 
       {
-         Arg3 = 10325, 
-         Command = "O", 
-         Arg2 = 1, 
-         MiscData = 1, 
          Arg1 = 10322, 
+         Arg3 = 10325, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
       }, 
    }, 
-   ResetFrequency = 3, 
-   LowEconomy = 496052990, 
-   HighEconomy = 0, 
-   Mobiles = 
-   {
-      [10370] = 
-      {
-         HitRoll = 2, 
-         AffectedBy = 
-         {
-            [3] = "DetectInvis", 
-         }, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 100, 
-         Damage = 
-         {
-            DamPlus = 10, 
-            DamNoDice = 2, 
-            DamSizeDice = 10, 
-         }, 
-         Shop = 
-         {
-            ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "a shopkeeper", 
-            ProfitSell = 90, 
-         }, 
-         LongDescr = "A droid is here selling useful items to students.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [14] = "gamorrese", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [14] = "gamorrese", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [0] = "basic", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [26] = "Droid", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Level = 20, 
-         ArmorClass = 80, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a shopkeeper", 
-         Vnum = 10370, 
-         Height = 0, 
-         DamRoll = 2, 
-         Sex = "undistinguished", 
-         Name = "shopkeeper droid", 
-         HitChance = 
-         {
-            HitPlus = 2, 
-            HitSizeDice = 20, 
-            HitNoDice = 2, 
-         }, 
-      }, 
-      [10355] = 
-      {
-         SpecFuns = 
-         {
-            [0] = "spec_newbie_pilot", 
-         }, 
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "A Mon Calamarian pilot is here ferrying academy graduates.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "bow $n\
-say May I see your diploma please.\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "p gives you a diploma.", 
-               MudProgType = "act_prog", 
-               Code = "look diploma\
-say Thank-you.\
-give diploma $n\
-", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a pilot", 
-         Vnum = 10355, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "pilot", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-      }, 
-      [10340] = 
-      {
-         HitRoll = 0, 
-         AffectedBy = 
-         {
-            [7] = "Sanctuary", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         DefaultPosition = "standing", 
-         Description = "Domick carries himself with a grace and confidence born from his\
-long life and many experiences in these Realms. He is looked on\
-with awe and unquestioned respect. That respect is well deserved.\
-Do not attempt to kill him, for you shall surely die.\
-", 
-         Credits = 100, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "practices", 
-               MudProgType = "act_prog", 
-               Code = "tell $n That will be 10 credits.\
-mpechoat $n All teachers will charge you a certain amount \
-mpechoat $n of credits, depending on the level you receive the skill at.\
-mpechoat $n It is taken out automatically, so do not give Domick 10\
-mpechoat $n credits :).\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "tell $n Are you ready for your lessons?\
-", 
-            }, 
-         }, 
-         LongDescr = "Domick, Lord of Knowledge, sits here reading, waiting for students.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [17] = "jawaese", 
-            }, 
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-            [30] = "Prototype", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Level = 1, 
-         ArmorClass = 94, 
-         Race = "Human", 
-         Alignment = 1000, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "Domick", 
-         Vnum = 10340, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "male", 
-         Name = "Domick Dom teacher", 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitSizeDice = 1, 
-            HitNoDice = 1, 
-         }, 
-      }, 
-      [10342] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "An acadamy student is here taking a break from his studies.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "no nope", 
-               MudProgType = "speech_prog", 
-               Code = "say You can have it anyways.\
-give luke $n\
-drop all\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "yes yep", 
-               MudProgType = "speech_prog", 
-               Code = "say Ok you can have it then.\
-give luke $n\
-drop all\
-", 
-            }, 
-            [3] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "hi hello", 
-               MudProgType = "speech_prog", 
-               Code = "say Hello.\
-Say I found this toy ... is it yours?\
-mpat 10399 mpoload 10320\
-mpecho A student shows you a Luke Skywalker Action Figure.\
-", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a student", 
-         Vnum = 10342, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "academy student", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-      }, 
-      [10343] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "A young child is sitting here.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "p gives you a Luke Skywalker action figure.", 
-               MudProgType = "act_prog", 
-               Code = "say thank you\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "snif\
-say I lost my Luke Skywalker toy\
-cry\
-", 
-            }, 
-            [3] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "key", 
-               MudProgType = "speech_prog", 
-               Code = "if ovnuminv (10320) >= 1\
-say You want the key for this door?\
-point north\
-say here let me open it for you\
-mpat 10399 mpoload 10423\
-unlock north\
-open north\
-mpat 10399 drop all\
-mpat 10399 purge\
-else\
-cry\
-endif\
-", 
-            }, 
-            [4] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "door door? key?", 
-               MudProgType = "speech_prog", 
-               Code = "if ovnuminv (10320) >= 1\
-say You want the key for this door?\
-point north\
-say here let me open it for you\
-mpat 10399 mpoload 10423\
-unlock north\
-open north\
-mpat 10399 drop all\
-mpat 10399 purge\
-else\
-cry\
-endif\
-", 
-            }, 
-            [5] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "door? north", 
-               MudProgType = "speech_prog", 
-               Code = "if ovnuminv (10320) >= 1\
-say You want the key for this door?\
-point north\
-say here let me open it for you\
-mpat 10399 mpoload 10423\
-unlock north\
-open north\
-mpat 10399 drop all\
-mpat 10399 purge\
-else\
-cry\
-endif\
-", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a small child", 
-         Vnum = 10343, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "male", 
-         Name = "kid child", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-      }, 
-      [10360] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 10, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "A practice droid is here waiting for combat.\
-", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 100, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a practice droid", 
-         Vnum = 10360, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "practice droid", 
-         HitChance = 
-         {
-            HitPlus = 5, 
-            HitSizeDice = 4, 
-            HitNoDice = 1, 
-         }, 
-      }, 
-      [10345] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "He looks back at you with his beady little eyes and a snarl on his face.\
-You are pretty sure you can best him in regards to combat.\
-", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "85", 
-               MudProgType = "death_prog", 
-               Code = "if level($n) >= 6\
-if rand(50)\
-mpechoat $n You feel an overwhelming desire for greater challenge.\
-else\
-mpechoat $n The chadoyn is far too easy for you to kill.\
-endif\
-endif\
-", 
-            }, 
-         }, 
-         LongDescr = "The chadoyn is straining its leash, attempting to attack you.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [17] = "jawaese", 
-            }, 
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Level = 2, 
-         ArmorClass = 25, 
-         Race = "_85", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "the chadoyn", 
-         Vnum = 10345, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "chadoyn cage", 
-         HitChance = 
-         {
-            HitPlus = 1, 
-            HitSizeDice = 4, 
-            HitNoDice = 2, 
-         }, 
-      }, 
-      [10394] = 
-      {
-         HitRoll = 0, 
-         AffectedBy = 
-         {
-            [7] = "Sanctuary", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         DefaultPosition = "standing", 
-         Description = "This has to be one of the most beautiful women in these Realms, both inside\
-and out. Her eyes have a sparkle of amusement and her face an easy smile.\
-She knows you are admiring her, and she does not seem to mind. She is\
-comfortable and confident that the picture she makes is breath taking. Her\
-voice at last breaks the spell. Her voice is like satin, you can hardly\
-wait for your lessons to begin. Any reason to hear her speak the tongues\
-foreign to your ears.\
-", 
-         Credits = 50, 
-         Damage = 
-         {
-            DamPlus = 3, 
-            DamNoDice = 1, 
-            DamSizeDice = 6, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "if ispc($n)\
-wink $n\
-if level($n) < 20\
-tell $n My lessons start when you reach level 20. Have fun until then.\
-else\
-tell $n I am ready to teach you, are you prepared for the lessons?\
-endif\
-grin $n\
-endif\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-               Code = "say You know, I am really a lover, not a fighter ...\
-mpslay $n\
-mpat $n mpechoat $n But alas, killing me was a slaying offense.\
-mpgoto 10399\
-mpat 10306 mpmload 10394\
-", 
-            }, 
-            [3] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "p flees head over heels!", 
-               MudProgType = "act_prog", 
-               Code = "mptrans 0.$n\
-mpechoat $n Abbigayle says, 'You fled, so I shall spare your life!'\
-mpgoto 10399\
-mpat 10306 mpmload 10394\
-", 
-            }, 
-         }, 
-         LongDescr = "A beautiful lady stands here, waiting for her students.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [28] = "yevethan", 
-               [29] = "gand", 
-               [30] = "durese", 
-               [31] = "coyn", 
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [28] = "yevethan", 
-               [29] = "gand", 
-               [30] = "durese", 
-               [31] = "coyn", 
-               [0] = "basic", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [20] = "Scholar", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Level = 5, 
-         ArmorClass = 5, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "abbigayle", 
-         Vnum = 10394, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "female", 
-         Name = "Abbigayle language teacher", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 1, 
-            HitNoDice = 1000, 
-         }, 
-      }, 
-      [10395] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "A sad student leans against the wall.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "", 
-               MudProgType = "script_prog", 
-               Code = "say My brother is dead.\
-say Killed by a stray blaster shot.\
-snif\
-say If only he had made a clone.\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "close north\
-say Don't let it happen to you $n\
-", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a sad student", 
-         Vnum = 10395, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "sad student", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-      }, 
-      [10365] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 25, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "A service droid is here handing out canteens and rations.\
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "food? ration? food ration", 
-               MudProgType = "speech_prog", 
-               Code = "mpoload 10313 1\
-give ration $n\
-drop all\
-", 
-            }, 
-            [2] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "canteen? canteen", 
-               MudProgType = "speech_prog", 
-               Code = "mpoload 10314 1\
-give canteen $n\
-drop all\
-", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 10, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a service droid", 
-         Vnum = 10365, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "service droid", 
-         HitChance = 
-         {
-            HitPlus = 100, 
-            HitSizeDice = 0, 
-            HitNoDice = 10, 
-         }, 
-      }, 
-      [10350] = 
-      {
-         SpecFuns = 
-         {
-            [0] = "spec_auth", 
-         }, 
-         HitRoll = 0, 
-         AffectedBy = 
-         {
-            [7] = "Sanctuary", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         DefaultPosition = "standing", 
-         Description = "Domick carries himself with a grace and confidence born from his\
-long life and many experiences in these Realms. He is looked on\
-with awe and unquestioned respect. That respect is well deserved.\
-Do not attempt to kill him, for you shall surely die.\
-", 
-         Credits = 100, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-               Code = "mpadvance $n 2\
-mpoload 10423\
-mpat 10323 close n\
-mpat 10323 lock n\
-at 10299 drop 10423\
-at 10299 mppurge\
- \
-if goldamt($n) > 10500\
-mpechoat $n &RDon't carry so much money as a newbie.\
-mpechoat $n It's hazardous to your health.\
-mpdamage $n 3000\
-mppurge\
-endif\
-", 
-            }, 
-         }, 
-         LongDescr = "The schoolmaster is here offering diplomas to academy graduates.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Level = 1, 
-         ArmorClass = 94, 
-         Race = "Human", 
-         Alignment = 1000, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "the Schoolmaster", 
-         Vnum = 10350, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "male", 
-         Name = "professor schoolmaster teacher headmaster", 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitSizeDice = 1, 
-            HitNoDice = 1, 
-         }, 
-      }, 
-      [10499] = 
-      {
-         HitRoll = 0, 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Credits = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         LongDescr = "Some god abandoned a newly created final mob here.\
-", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-         }, 
-         Position = "standing", 
-         Stats = 
-         {
-            Intelligence = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Dexterity = 10, 
-            Constitution = 10, 
-         }, 
-         Level = 1, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Alignment = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "a newly created final mob", 
-         Vnum = 10499, 
-         Height = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "final mob", 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-         }, 
-      }, 
-   }, 
-   Flags = 
-   {
-      [1] = "_01", 
-      [0] = "NoPkill", 
-   }, 
+   Filename = "newacad.lua", 
    Objects = 
    {
       [10304] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 0, 
          Cost = 0, 
          ObjectValues = 
          {
@@ -3515,36 +2037,7 @@ endif\
             [5] = 0, 
             [0] = 3, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "A Coruscant Academy cap is here.", 
-         Weight = 2, 
-         ShortDescr = "an academy cap", 
-         Vnum = 10304, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 3, 
-            }, 
-         }, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3555,12 +2048,41 @@ endif\
                Keyword = "helmet iron", 
             }, 
          }, 
+         ShortDescr = "an academy cap", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 3, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Description = "A Coruscant Academy cap is here.", 
          Name = "academy cap", 
+         Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         Vnum = 10304, 
       }, 
       [10305] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -3570,28 +2092,7 @@ endif\
             [5] = 0, 
             [0] = 2, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "A black brocade cape from the academy", 
-         ShortDescr = "a black brocade cape", 
-         Vnum = 10305, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Weight = 3, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3603,12 +2104,34 @@ endif\
                Keyword = "cape brocade", 
             }, 
          }, 
+         ShortDescr = "a black brocade cape", 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "A black brocade cape from the academy", 
          Name = "cape brocade academy", 
+         Weight = 3, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         Vnum = 10305, 
       }, 
       [10306] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -3618,28 +2141,7 @@ endif\
             [5] = 0, 
             [0] = 3, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "A strong metal collar from the academy", 
-         ShortDescr = "a strong metal collar", 
-         Vnum = 10306, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         Weight = 5, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3650,12 +2152,40 @@ endif\
                Keyword = "collar metal ", 
             }, 
          }, 
+         ShortDescr = "a strong metal collar", 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "A strong metal collar from the academy", 
          Name = "collar metal academy", 
+         Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 10306, 
       }, 
       [10307] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "wear_prog", 
+               Code = "mpechoat $n As you wear this visor, you feel more intelligent and wise!\
+mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
          Cost = 0, 
+         Layers = 0, 
+         Flags = 
+         {
+            [6] = "Magic", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3665,21 +2195,7 @@ endif\
             [5] = 0, 
             [0] = 2, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "wear_prog", 
-               Code = "mpechoat $n As you wear this visor, you feel more intelligent and wise!\
-mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Weight = 1, 
-         Description = "A visor of completion is here, emitting a faint glow.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3691,12 +2207,6 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             }, 
          }, 
          ShortDescr = "a visor of completion", 
-         Name = "visor completion academy", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [17] = "Eyes", 
-         }, 
          Affects = 
          {
             [1] = 
@@ -3711,16 +2221,20 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             }, 
          }, 
          ItemType = "armor", 
-         Flags = 
+         Description = "A visor of completion is here, emitting a faint glow.", 
+         Name = "visor completion academy", 
+         Weight = 1, 
+         WearFlags = 
          {
-            [6] = "Magic", 
+            [0] = "Take", 
+            [17] = "Eyes", 
          }, 
          Vnum = 10307, 
       }, 
       [10308] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -3730,17 +2244,7 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-         Description = "An academy vest was left here.", 
-         ShortDescr = "an academy vest", 
-         Vnum = 10308, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Weight = 5, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3751,11 +2255,34 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
                Keyword = "plate armour", 
             }, 
          }, 
+         ShortDescr = "an academy vest", 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "An academy vest was left here.", 
          Name = "academy vest", 
+         Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 10308, 
       }, 
       [10309] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 0, 
          Cost = 0, 
          ObjectValues = 
          {
@@ -3766,36 +2293,7 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 3, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "Lightweight tin sleeves from the academy", 
-         Weight = 1, 
-         ShortDescr = "lightweight tin sleeves", 
-         Vnum = 10309, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [8] = "Arms", 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 1, 
-            }, 
-         }, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3806,12 +2304,30 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
                Keyword = "sleeves tin", 
             }, 
          }, 
+         ShortDescr = "lightweight tin sleeves", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 1, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Description = "Lightweight tin sleeves from the academy", 
          Name = "sleeves tin academy", 
+         Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [8] = "Arms", 
+         }, 
+         Vnum = 10309, 
       }, 
       [10310] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -3821,17 +2337,7 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-         Description = "An energy shield was dropped here.", 
-         ShortDescr = "an energy shield", 
-         Vnum = 10310, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [9] = "Shield", 
-         }, 
-         Weight = 5, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -3842,12 +2348,30 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
                Keyword = "shield crest", 
             }, 
          }, 
+         ShortDescr = "an energy shield", 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "An energy shield was dropped here.", 
          Name = "forceshield energyshield shields shield", 
+         Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [9] = "Shield", 
+         }, 
+         Vnum = 10310, 
       }, 
       [10311] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
          Cost = 5, 
+         Layers = 0, 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [13] = "Inventory", 
+            [6] = "Magic", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3857,18 +2381,11 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Weight = 1, 
-         Description = "A glowrod would make a good light source.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "a glowrod", 
-         Name = "light glowrod glowstick", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
          Affects = 
          {
             [1] = 
@@ -3878,18 +2395,24 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             }, 
          }, 
          ItemType = "light", 
-         Flags = 
+         Description = "A glowrod would make a good light source.", 
+         Name = "light glowrod glowstick", 
+         Weight = 1, 
+         WearFlags = 
          {
-            [0] = "Glow", 
-            [13] = "Inventory", 
-            [6] = "Magic", 
+            [0] = "Take", 
          }, 
          Vnum = 10311, 
       }, 
       [10312] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
          Cost = 250, 
+         Layers = 0, 
+         Flags = 
+         {
+            [6] = "Magic", 
+         }, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -3899,19 +2422,11 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 1000, 
             [0] = 12, 
          }, 
-         Layers = 0, 
-         Weight = 3, 
-         Description = "You see a finely honed vibro-blade here.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "a vibro-blade", 
-         Name = "academy vibro blade knife dagger vibro-blade", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
          Affects = 
          {
             [1] = 
@@ -3921,16 +2436,24 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             }, 
          }, 
          ItemType = "weapon", 
-         Flags = 
+         Description = "You see a finely honed vibro-blade here.", 
+         Name = "academy vibro blade knife dagger vibro-blade", 
+         Weight = 3, 
+         WearFlags = 
          {
-            [6] = "Magic", 
+            [0] = "Take", 
+            [13] = "Wield", 
          }, 
          Vnum = 10312, 
       }, 
       [10313] = 
       {
-         ActionDescription = "", 
-         Cost = 5, 
+         Tag = "", 
+         Layers = 0, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 50, 
@@ -3940,29 +2463,26 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 50, 
          }, 
-         Layers = 0, 
-         Description = "A packaged ration is here, waiting to be eaten.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "a packaged ration", 
+         Cost = 5, 
+         ItemType = "food", 
+         Description = "A packaged ration is here, waiting to be eaten.", 
          Name = "ration standard packaged", 
+         Weight = 2, 
          WearFlags = 
          {
             [0] = "Take", 
-         }, 
-         Weight = 2, 
-         ItemType = "food", 
-         Flags = 
-         {
-            [13] = "Inventory", 
          }, 
          Vnum = 10313, 
       }, 
       [10314] = 
       {
-         ActionDescription = "", 
-         Cost = 10, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 40, 
@@ -3972,25 +2492,26 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 40, 
          }, 
-         Layers = 0, 
-         Description = "A small grey canteen has been drooped here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a canteen", 
-         Vnum = 10314, 
+         Cost = 10, 
+         ItemType = "drink_container", 
+         Description = "A small grey canteen has been drooped here.", 
+         Name = "canteen water grey stock", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "drink_container", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "canteen water grey stock", 
+         Vnum = 10314, 
       }, 
       [10315] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 1000, 
@@ -4000,21 +2521,26 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 1000, 
          }, 
-         Layers = 0, 
-         Description = "A drinking fountain rests against the wall.", 
+         ActionDescription = "", 
          ShortDescr = "a fountain", 
-         Vnum = 10315, 
-         Weight = 1, 
-         ItemType = "fountain", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "fountain", 
+         Description = "A drinking fountain rests against the wall.", 
          Name = "drinking fountain", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10315, 
       }, 
       [10316] = 
       {
-         ActionDescription = "", 
-         Cost = 5, 
+         Tag = "", 
+         Layers = 1, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 1, 
@@ -4024,29 +2550,27 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 1, 
-         Description = "A pair of socks is in a ball on the floor.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "a pair of socks", 
+         Cost = 5, 
+         ItemType = "armor", 
+         Description = "A pair of socks is in a ball on the floor.", 
          Name = "socks", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [6] = "Feet", 
          }, 
-         Weight = 1, 
-         ItemType = "armor", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
          Vnum = 10316, 
       }, 
       [10317] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         Layers = 64, 
          Cost = 5, 
          ObjectValues = 
          {
@@ -4057,16 +2581,11 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 20, 
          }, 
-         Layers = 64, 
-         Description = "An academy backpack was carelessly misplaced here.", 
-         Weight = 1, 
-         ShortDescr = "a backpack", 
-         Vnum = 10317, 
-         WearFlags = 
+         ActionDescription = "", 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
-            [10] = "About", 
          }, 
+         ShortDescr = "a backpack", 
          Affects = 
          {
             [1] = 
@@ -4076,15 +2595,20 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             }, 
          }, 
          ItemType = "container", 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "An academy backpack was carelessly misplaced here.", 
          Name = "academy backpack", 
+         Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         Vnum = 10317, 
       }, 
       [10318] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4094,12 +2618,12 @@ mpechoaround $n As $n wears the visor of completion, $e looks more complete!\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ActionDescription = "", 
          MudProgs = 
          {
             [1] = 
             {
                ScriptType = "MProg", 
-               Arguments = "100", 
                MudProgType = "push_prog", 
                Code = "mpoload 10316 1\
 mpoload 10308 1\
@@ -4108,23 +2632,24 @@ pull button\
 drop all\
 mpecho A small panel opens revealing several articles of clothing.\
 ", 
+               Arguments = "100", 
             }, 
          }, 
-         Layers = 0, 
-         Description = "A small grey button seems out of place on the wall here.", 
          ShortDescr = "a button", 
-         Vnum = 10318, 
-         Weight = 1, 
-         ItemType = "button", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "button", 
+         Description = "A small grey button seems out of place on the wall here.", 
          Name = "grey button", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10318, 
       }, 
       [10319] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 1, 
@@ -4134,25 +2659,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 10, 
          }, 
-         Layers = 0, 
-         Description = "A small box .. I wonder whats inside, maybe you should open it.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a box", 
-         Vnum = 10319, 
+         Cost = 0, 
+         ItemType = "container", 
+         Description = "A small box .. I wonder whats inside, maybe you should open it.", 
+         Name = "box", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "container", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "box", 
+         Vnum = 10319, 
       }, 
       [10320] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4162,25 +2688,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A Luke Skywalker action figure was misplaced here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a Luke Skywalker action figure", 
-         Vnum = 10320, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Description = "A Luke Skywalker action figure was misplaced here.", 
+         Name = "luke toy action figure doll", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "luke toy action figure doll", 
+         Vnum = 10320, 
       }, 
       [10321] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4190,25 +2717,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Someone dropped their coruscant academy graduation diploma here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a diploma", 
-         Vnum = 10321, 
+         Cost = 0, 
+         ItemType = "paper", 
+         Description = "Someone dropped their coruscant academy graduation diploma here.", 
+         Name = "diploma academy coruscant graduation", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "paper", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "diploma academy coruscant graduation", 
+         Vnum = 10321, 
       }, 
       [10322] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4218,21 +2746,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A small shuttle is docked here.", 
+         ActionDescription = "", 
          ShortDescr = "a shuttle", 
-         Vnum = 10322, 
-         Weight = 1, 
-         ItemType = "trash", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "trash", 
+         Description = "A small shuttle is docked here.", 
          Name = "academy shuttle", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10322, 
       }, 
       [10323] = 
       {
-         ActionDescription = "", 
-         Cost = 500, 
+         Tag = "", 
+         Layers = 0, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4242,8 +2775,7 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 1000, 
             [0] = 12, 
          }, 
-         Layers = 0, 
-         Description = "A practice lightsaber is here.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4262,24 +2794,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             }, 
          }, 
          ShortDescr = "a practice lightsaber", 
+         Cost = 500, 
+         ItemType = "weapon", 
+         Description = "A practice lightsaber is here.", 
          Name = "practice lightsaber", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Weight = 1, 
-         ItemType = "weapon", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
          Vnum = 10323, 
       }, 
       [10324] = 
       {
-         ActionDescription = "", 
-         Cost = 50, 
+         Tag = "", 
+         Layers = 0, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4289,8 +2823,7 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 1000, 
          }, 
-         Layers = 0, 
-         Description = "A lightsaber battery is lying here.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4302,23 +2835,21 @@ mpecho A small panel opens revealing several articles of clothing.\
             }, 
          }, 
          ShortDescr = "a lightsaber battery", 
+         Cost = 50, 
+         ItemType = "battery", 
+         Description = "A lightsaber battery is lying here.", 
          Name = "battery", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
-         }, 
-         Weight = 1, 
-         ItemType = "battery", 
-         Flags = 
-         {
-            [13] = "Inventory", 
          }, 
          Vnum = 10324, 
       }, 
       [10499] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4328,21 +2859,22 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created final object here.", 
+         ActionDescription = "", 
          ShortDescr = "a newly created final object", 
-         Vnum = 10499, 
-         Weight = 1, 
-         ItemType = "trash", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "trash", 
+         Description = "Some god dropped a newly created final object here.", 
          Name = "final object", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10499, 
       }, 
       [10498] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4352,25 +2884,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A superconductor is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a superconductor", 
-         Vnum = 10498, 
+         Cost = 0, 
+         ItemType = "superconductor", 
+         Description = "A superconductor is lying here.", 
+         Name = "superconductor", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "superconductor", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "superconductor", 
+         Vnum = 10498, 
       }, 
       [10497] = 
       {
-         ActionDescription = "", 
-         Cost = 120, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4380,25 +2913,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A circuit board was dropped here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a circuit board", 
-         Vnum = 10497, 
+         Cost = 120, 
+         ItemType = "circuit", 
+         Description = "A circuit board was dropped here.", 
+         Name = "circuit board", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "circuit", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "circuit board", 
+         Vnum = 10497, 
       }, 
       [10496] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4408,25 +2942,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A tiny, round mirror is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a tiny, round mirror", 
-         Vnum = 10496, 
+         Cost = 0, 
+         ItemType = "mirror", 
+         Description = "A tiny, round mirror is lying here.", 
+         Name = "mirror", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "mirror", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "mirror", 
+         Vnum = 10496, 
       }, 
       [10495] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4436,25 +2971,30 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A non-adegan crystal is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a non-adegan crystal", 
-         Vnum = 10495, 
+         Cost = 0, 
+         ItemType = "crystal", 
+         Description = "A non-adegan crystal is lying here.", 
+         Name = "non-adegan crystal", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "crystal", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "non-adegan crystal", 
+         Vnum = 10495, 
       }, 
       [10494] = 
       {
-         ActionDescription = "", 
-         Cost = 50, 
+         Tag = "", 
+         Layers = 0, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4464,29 +3004,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A scrap of some material lies here.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "some scrap durasteel", 
+         Cost = 50, 
+         ItemType = "durasteel", 
+         Description = "A scrap of some material lies here.", 
          Name = "some scrap durasteel", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
-         }, 
-         Weight = 1, 
-         ItemType = "durasteel", 
-         Flags = 
-         {
-            [13] = "Inventory", 
          }, 
          Vnum = 10494, 
       }, 
       [10493] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4496,25 +3033,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A portable oven is here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a portable oven", 
-         Vnum = 10493, 
+         Cost = 0, 
+         ItemType = "oven", 
+         Description = "A portable oven is here.", 
+         Name = "portable oven", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "oven", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "portable oven", 
+         Vnum = 10493, 
       }, 
       [10492] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4524,25 +3062,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A battery is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a battery", 
-         Vnum = 10492, 
+         Cost = 0, 
+         ItemType = "battery", 
+         Description = "A battery is lying here.", 
+         Name = "battery", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "battery", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "battery", 
+         Vnum = 10492, 
       }, 
       [10491] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4552,25 +3091,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A durastaff is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a durastaff", 
-         Vnum = 10491, 
+         Cost = 0, 
+         ItemType = "staff", 
+         Description = "A durastaff is lying here.", 
+         Name = "staff durastaff", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "staff", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "staff durastaff", 
+         Vnum = 10491, 
       }, 
       [10490] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4580,25 +3120,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A toolkit is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a toolkit", 
-         Vnum = 10490, 
+         Cost = 0, 
+         ItemType = "toolkit", 
+         Description = "A toolkit is lying here.", 
+         Name = "toolkit", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "toolkit", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "toolkit", 
+         Vnum = 10490, 
       }, 
       [10489] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4608,25 +3149,30 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A small lens is lying here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a small lens", 
-         Vnum = 10489, 
+         Cost = 0, 
+         ItemType = "lens", 
+         Description = "A small lens is lying here.", 
+         Name = "lens", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "lens", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "lens", 
+         Vnum = 10489, 
       }, 
       [10488] = 
       {
-         ActionDescription = "", 
-         Cost = 10, 
+         Tag = "", 
+         Layers = 0, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 500, 
@@ -4636,30 +3182,27 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 500, 
          }, 
-         Layers = 0, 
-         Description = "An ammunition cell was carelessly left here.", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "an ammunition cell", 
+         Cost = 10, 
+         ItemType = "ammo", 
+         Description = "An ammunition cell was carelessly left here.", 
          Name = "ammo cell amunition cartridge", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Weight = 1, 
-         ItemType = "ammo", 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
          Vnum = 10488, 
       }, 
       [10487] = 
       {
-         ActionDescription = "", 
-         Cost = 200, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 10, 
@@ -4669,25 +3212,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 1, 
          }, 
-         Layers = 0, 
-         Description = "Some carsanum was dropped here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "some poorly refined carsanum", 
-         Vnum = 10487, 
+         Cost = 200, 
+         ItemType = "spice", 
+         Description = "Some carsanum was dropped here.", 
+         Name = "carsanum spice", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "spice", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "carsanum spice", 
+         Vnum = 10487, 
       }, 
       [10435] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4697,25 +3241,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype spice is here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a prototype spice", 
-         Vnum = 10435, 
+         Cost = 0, 
+         ItemType = "spice", 
+         Description = "A prototype spice is here.", 
+         Name = "prototype spice", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "spice", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype spice", 
+         Vnum = 10435, 
       }, 
       [10434] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4725,25 +3270,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype disguise is here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a prototype disguise", 
-         Vnum = 10434, 
+         Cost = 0, 
+         ItemType = "disguise", 
+         Description = "A prototype disguise is here.", 
+         Name = "prototype disguise", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "disguise", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype disguise", 
+         Vnum = 10434, 
       }, 
       [10433] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4753,25 +3299,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype armor is here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a prototype armor", 
-         Vnum = 10433, 
+         Cost = 100, 
+         ItemType = "armor", 
+         Description = "A prototype armor is here.", 
+         Name = "prototype armor", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "armor", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype armor", 
+         Vnum = 10433, 
       }, 
       [10414] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "student_message_terminal", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4781,21 +3328,22 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A student message terminal is here for you to play with.", 
+         ActionDescription = "", 
          ShortDescr = "a student message terminal", 
-         Vnum = 10414, 
-         Weight = 1, 
-         ItemType = "furniture", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "furniture", 
+         Description = "A student message terminal is here for you to play with.", 
          Name = "student message terminal", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10414, 
       }, 
       [10432] = 
       {
-         ActionDescription = "", 
-         Cost = 100, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4805,25 +3353,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype container is here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a prototype container", 
-         Vnum = 10432, 
+         Cost = 100, 
+         ItemType = "container", 
+         Description = "A prototype container is here.", 
+         Name = "prototype container", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "container", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype container", 
+         Vnum = 10432, 
       }, 
       [10431] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4833,26 +3382,27 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A proottype bowcaster is here", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "prototype bowcaster", 
-         Vnum = 10431, 
+         Cost = 0, 
+         ItemType = "weapon", 
+         Description = "A proottype bowcaster is here", 
+         Name = "prototype bowcaster", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Weight = 1, 
-         ItemType = "weapon", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype bowcaster", 
+         Vnum = 10431, 
       }, 
       [10430] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4862,21 +3412,22 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created prototype comlink here.", 
+         ActionDescription = "", 
          ShortDescr = "a newly created prototype comlink", 
-         Vnum = 10430, 
-         Weight = 1, 
-         ItemType = "comlink", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "comlink", 
+         Description = "Some god dropped a newly created prototype comlink here.", 
          Name = "prototype comlink", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10430, 
       }, 
       [10429] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4886,26 +3437,27 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created prototype shield here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a newly created prototype shield", 
-         Vnum = 10429, 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "Some god dropped a newly created prototype shield here.", 
+         Name = "prototype shield", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [9] = "Shield", 
          }, 
-         Weight = 1, 
-         ItemType = "armor", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype shield", 
+         Vnum = 10429, 
       }, 
       [10428] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4915,25 +3467,26 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created prototype light here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a newly created prototype light", 
-         Vnum = 10428, 
+         Cost = 0, 
+         ItemType = "light", 
+         Description = "Some god dropped a newly created prototype light here.", 
+         Name = "prototype light", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "light", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype light", 
+         Vnum = 10428, 
       }, 
       [10420] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4943,26 +3496,44 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype blaster is here", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "prototype blaster", 
-         Vnum = 10420, 
+         Cost = 0, 
+         ItemType = "weapon", 
+         Description = "A prototype blaster is here", 
+         Name = "prototype blaster", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Weight = 1, 
-         ItemType = "weapon", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype blaster", 
+         Vnum = 10420, 
       }, 
       [10421] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "use_prog", 
+               Code = "mpechoat $n Your lightsaber ignites with a soft hum and a bright glow.\
+mpechoaround $n $n's lightsaber seemingly jumps into $s hand.\
+mpechoaround $n &WIt ignites with a hum and a bright glow.\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 128, 
+         Flags = 
+         {
+            [4] = "Contraband", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4972,43 +3543,27 @@ mpecho A small panel opens revealing several articles of clothing.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "use_prog", 
-               Code = "mpechoat $n Your lightsaber ignites with a soft hum and a bright glow.\
-mpechoaround $n $n's lightsaber seemingly jumps into $s hand.\
-mpechoaround $n &WIt ignites with a hum and a bright glow.\
-", 
-            }, 
-         }, 
-         Layers = 128, 
-         Description = "A prototype lightsaber shouldn't be here", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ShortDescr = "a prototype lightsaber", 
+         Cost = 0, 
+         ItemType = "weapon", 
+         Description = "A prototype lightsaber shouldn't be here", 
          Name = "prototype saber lightsaber", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Weight = 1, 
-         ItemType = "weapon", 
-         Flags = 
-         {
-            [4] = "Contraband", 
-         }, 
          Vnum = 10421, 
       }, 
       [10422] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5018,26 +3573,27 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A prototype vibro-blade shouldn't be here", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "prototype vibro-blade", 
-         Vnum = 10422, 
+         Cost = 0, 
+         ItemType = "weapon", 
+         Description = "A prototype vibro-blade shouldn't be here", 
+         Name = "prototype vibro-blade", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Weight = 1, 
-         ItemType = "weapon", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "prototype vibro-blade", 
+         Vnum = 10422, 
       }, 
       [10423] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5047,25 +3603,26 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "An old fashioned mechanical key was left on the ground here.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a key", 
-         Vnum = 10423, 
+         Cost = 0, 
+         ItemType = "key", 
+         Description = "An old fashioned mechanical key was left on the ground here.", 
+         Name = "key", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "key", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "key", 
+         Vnum = 10423, 
       }, 
       [10424] = 
       {
-         ActionDescription = "", 
-         Cost = 50, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5075,26 +3632,27 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A small hand-held comlink.", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a comlink", 
-         Vnum = 10424, 
+         Cost = 50, 
+         ItemType = "comlink", 
+         Description = "A small hand-held comlink.", 
+         Name = "comlink radio communicator", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Weight = 1, 
-         ItemType = "comlink", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "comlink radio communicator", 
+         Vnum = 10424, 
       }, 
       [10425] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 350, 
@@ -5104,49 +3662,26 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 200, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created prototype grenade here.", 
+         ActionDescription = "", 
          ShortDescr = "a newly created prototype grenade", 
-         Vnum = 10425, 
-         Weight = 1, 
-         ItemType = "grenade", 
          ExtraDescriptions = 
          {
          }, 
+         ItemType = "grenade", 
+         Description = "Some god dropped a newly created prototype grenade here.", 
          Name = "prototype grenade", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10425, 
       }, 
       [10426] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Tag = "", 
          Layers = 0, 
-         Description = "Some god dropped a newly created generic armor here.", 
-         ShortDescr = "a newly created generic armor", 
-         Name = "generic armor", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Weight = 1, 
-         ItemType = "trash", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Vnum = 10426, 
-      }, 
-      [10427] = 
-      {
-         ActionDescription = "", 
-         Cost = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5156,24 +3691,62 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ActionDescription = "", 
+         ShortDescr = "a newly created generic armor", 
+         ExtraDescriptions = 
+         {
+         }, 
+         ItemType = "trash", 
+         Description = "Some god dropped a newly created generic armor here.", 
+         Name = "generic armor", 
+         Weight = 1, 
+         Cost = 0, 
+         Vnum = 10426, 
+      }, 
+      [10427] = 
+      {
+         Tag = "", 
          Layers = 0, 
-         Description = "Some god dropped a newly created protoype landmine here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          ShortDescr = "a newly created protoype landmine", 
-         Vnum = 10427, 
+         Cost = 0, 
+         ItemType = "landmine", 
+         Description = "Some god dropped a newly created protoype landmine here.", 
+         Name = "protoype landmine", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Weight = 1, 
-         ItemType = "landmine", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "protoype landmine", 
+         Vnum = 10427, 
       }, 
       [10300] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 0, 
          Cost = 0, 
          ObjectValues = 
          {
@@ -5184,36 +3757,7 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 2, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "A charm bracelet from the academy lies here", 
-         Weight = 2, 
-         ShortDescr = "a charm bracelet", 
-         Vnum = 10300, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [12] = "Wrist", 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 31, 
-            }, 
-         }, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -5224,11 +3768,41 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
                Keyword = "bracelet charm", 
             }, 
          }, 
+         ShortDescr = "a charm bracelet", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 31, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Description = "A charm bracelet from the academy lies here", 
          Name = "bracelet charm academy", 
+         Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
+         Vnum = 10300, 
       }, 
       [10301] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 126, 
          Cost = 0, 
          ObjectValues = 
          {
@@ -5239,36 +3813,7 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 3, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 126, 
-         Description = "A pair of black combat boots from the Academy lies here", 
-         Weight = 3, 
-         ShortDescr = "a pair of black combat boots", 
-         Vnum = 10301, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [6] = "Feet", 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 100, 
-               Location = 14, 
-            }, 
-         }, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -5279,11 +3824,41 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
                Keyword = "combat boots", 
             }, 
          }, 
+         ShortDescr = "a pair of black combat boots", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 100, 
+               Location = 14, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Description = "A pair of black combat boots from the Academy lies here", 
          Name = "combat boots academy", 
+         Weight = 3, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [6] = "Feet", 
+         }, 
+         Vnum = 10301, 
       }, 
       [10302] = 
       {
-         ActionDescription = "", 
+         Tag = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "drop_prog", 
+               Code = "mpforce $n sac $o\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Layers = 0, 
          Cost = 0, 
          ObjectValues = 
          {
@@ -5294,36 +3869,7 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 2, 
          }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               ScriptType = "MProg", 
-               Arguments = "100", 
-               MudProgType = "drop_prog", 
-               Code = "mpforce $n sac $o\
-", 
-            }, 
-         }, 
-         Layers = 0, 
-         Description = "A braided leather belt from the Academy lies here", 
-         Weight = 2, 
-         ShortDescr = "a braided leather belt", 
-         Vnum = 10302, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [11] = "Waist", 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 5, 
-            }, 
-         }, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -5334,12 +3880,30 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
                Keyword = "belt leather", 
             }, 
          }, 
+         ShortDescr = "a braided leather belt", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 5, 
+            }, 
+         }, 
+         ItemType = "armor", 
+         Description = "A braided leather belt from the Academy lies here", 
          Name = "belt leather academy", 
+         Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [11] = "Waist", 
+         }, 
+         Vnum = 10302, 
       }, 
       [10303] = 
       {
-         ActionDescription = "", 
-         Cost = 0, 
+         Tag = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -5349,17 +3913,7 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-         Description = "A pair of academy leggings is here.", 
-         ShortDescr = "some leggings", 
-         Vnum = 10303, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [5] = "Legs", 
-         }, 
-         Weight = 3, 
-         ItemType = "armor", 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -5370,7 +3924,1508 @@ mpechoaround $n &WIt ignites with a hum and a bright glow.\
                Keyword = "leggings", 
             }, 
          }, 
+         ShortDescr = "some leggings", 
+         Cost = 0, 
+         ItemType = "armor", 
+         Description = "A pair of academy leggings is here.", 
          Name = "pants trousers slacks leggings", 
+         Weight = 3, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [5] = "Legs", 
+         }, 
+         Vnum = 10303, 
       }, 
    }, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
+   Mobiles = 
+   {
+      [10370] = 
+      {
+         LongDescr = "A droid is here selling useful items to students.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [26] = "Droid", 
+         }, 
+         Credits = 100, 
+         Alignment = 0, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "shopkeeper droid", 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "a shopkeeper", 
+            ProfitSell = 90, 
+         }, 
+         HitRoll = 2, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 20, 
+            HitPlus = 2, 
+         }, 
+         Height = 0, 
+         Level = 20, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [14] = "gamorrese", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [14] = "gamorrese", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 2, 
+         Weight = 0, 
+         ShortDescr = "a shopkeeper", 
+         AffectedBy = 
+         {
+            [3] = "DetectInvis", 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Sex = "undistinguished", 
+         ArmorClass = 80, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 2, 
+            DamPlus = 10, 
+         }, 
+         Tag = "", 
+         Vnum = 10370, 
+      }, 
+      [10355] = 
+      {
+         LongDescr = "A Mon Calamarian pilot is here ferrying academy graduates.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "pilot", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "all_greet_prog", 
+               Code = "bow $n\
+say May I see your diploma please.\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
+               Code = "look diploma\
+say Thank-you.\
+give diploma $n\
+", 
+               Arguments = "p gives you a diploma.", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_newbie_pilot", 
+         }, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a pilot", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10355, 
+      }, 
+      [10340] = 
+      {
+         LongDescr = "Domick, Lord of Knowledge, sits here reading, waiting for students.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+            [30] = "Prototype", 
+         }, 
+         Credits = 100, 
+         Alignment = 1000, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "Domick carries himself with a grace and confidence born from his\
+long life and many experiences in these Realms. He is looked on\
+with awe and unquestioned respect. That respect is well deserved.\
+Do not attempt to kill him, for you shall surely die.\
+", 
+         Name = "Domick Dom teacher", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
+               Code = "tell $n That will be 10 credits.\
+mpechoat $n All teachers will charge you a certain amount \
+mpechoat $n of credits, depending on the level you receive the skill at.\
+mpechoat $n It is taken out automatically, so do not give Domick 10\
+mpechoat $n credits :).\
+", 
+               Arguments = "practices", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "all_greet_prog", 
+               Code = "tell $n Are you ready for your lessons?\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitSizeDice = 1, 
+            HitPlus = 1000, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [17] = "jawaese", 
+            }, 
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         Weight = 0, 
+         ShortDescr = "Domick", 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Sex = "male", 
+         ArmorClass = 94, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Tag = "", 
+         Vnum = 10340, 
+      }, 
+      [10342] = 
+      {
+         LongDescr = "An acadamy student is here taking a break from his studies.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "academy student", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "say You can have it anyways.\
+give luke $n\
+drop all\
+", 
+               Arguments = "no nope", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "say Ok you can have it then.\
+give luke $n\
+drop all\
+", 
+               Arguments = "yes yep", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "say Hello.\
+Say I found this toy ... is it yours?\
+mpat 10399 mpoload 10320\
+mpecho A student shows you a Luke Skywalker Action Figure.\
+", 
+               Arguments = "hi hello", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10342, 
+      }, 
+      [10343] = 
+      {
+         LongDescr = "A young child is sitting here.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "kid child", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
+               Code = "say thank you\
+", 
+               Arguments = "p gives you a Luke Skywalker action figure.", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "all_greet_prog", 
+               Code = "snif\
+say I lost my Luke Skywalker toy\
+cry\
+", 
+               Arguments = "100", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "if ovnuminv (10320) >= 1\
+say You want the key for this door?\
+point north\
+say here let me open it for you\
+mpat 10399 mpoload 10423\
+unlock north\
+open north\
+mpat 10399 drop all\
+mpat 10399 purge\
+else\
+cry\
+endif\
+", 
+               Arguments = "key", 
+            }, 
+            [4] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "if ovnuminv (10320) >= 1\
+say You want the key for this door?\
+point north\
+say here let me open it for you\
+mpat 10399 mpoload 10423\
+unlock north\
+open north\
+mpat 10399 drop all\
+mpat 10399 purge\
+else\
+cry\
+endif\
+", 
+               Arguments = "door door? key?", 
+            }, 
+            [5] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "speech_prog", 
+               Code = "if ovnuminv (10320) >= 1\
+say You want the key for this door?\
+point north\
+say here let me open it for you\
+mpat 10399 mpoload 10423\
+unlock north\
+open north\
+mpat 10399 drop all\
+mpat 10399 purge\
+else\
+cry\
+endif\
+", 
+               Arguments = "door? north", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a small child", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "male", 
+         Vnum = 10343, 
+      }, 
+      [10360] = 
+      {
+         LongDescr = "A practice droid is here waiting for combat.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         Credits = 10, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "practice droid", 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitSizeDice = 4, 
+            HitPlus = 5, 
+         }, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a practice droid", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 100, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10360, 
+      }, 
+      [10345] = 
+      {
+         LongDescr = "The chadoyn is straining its leash, attempting to attack you.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "He looks back at you with his beady little eyes and a snarl on his face.\
+You are pretty sure you can best him in regards to combat.\
+", 
+         Name = "chadoyn cage", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "Imp", 
+               MudProgType = "death_prog", 
+               Code = "from newbieacad.chadoyn import *\
+", 
+               Arguments = "85", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "_85", 
+         HitChance = 
+         {
+            HitNoDice = 2, 
+            HitSizeDice = 4, 
+            HitPlus = 1, 
+         }, 
+         Level = 2, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [17] = "jawaese", 
+            }, 
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "the chadoyn", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 25, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10345, 
+      }, 
+      [10394] = 
+      {
+         LongDescr = "A beautiful lady stands here, waiting for her students.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [20] = "Scholar", 
+         }, 
+         Credits = 50, 
+         Alignment = 0, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "This has to be one of the most beautiful women in these Realms, both inside\
+and out. Her eyes have a sparkle of amusement and her face an easy smile.\
+She knows you are admiring her, and she does not seem to mind. She is\
+comfortable and confident that the picture she makes is breath taking. Her\
+voice at last breaks the spell. Her voice is like satin, you can hardly\
+wait for your lessons to begin. Any reason to hear her speak the tongues\
+foreign to your ears.\
+", 
+         Name = "Abbigayle language teacher", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "all_greet_prog", 
+               Code = "if ispc($n)\
+wink $n\
+if level($n) < 20\
+tell $n My lessons start when you reach level 20. Have fun until then.\
+else\
+tell $n I am ready to teach you, are you prepared for the lessons?\
+endif\
+grin $n\
+endif\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "death_prog", 
+               Code = "say You know, I am really a lover, not a fighter ...\
+mpslay $n\
+mpat $n mpechoat $n But alas, killing me was a slaying offense.\
+mpgoto 10399\
+mpat 10306 mpmload 10394\
+", 
+               Arguments = "100", 
+            }, 
+            [3] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "act_prog", 
+               Code = "mptrans 0.$n\
+mpechoat $n Abbigayle says, 'You fled, so I shall spare your life!'\
+mpgoto 10399\
+mpat 10306 mpmload 10394\
+", 
+               Arguments = "p flees head over heels!", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 1000, 
+            HitSizeDice = 1, 
+            HitPlus = 0, 
+         }, 
+         Height = 0, 
+         Level = 5, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [28] = "yevethan", 
+               [29] = "gand", 
+               [30] = "durese", 
+               [31] = "coyn", 
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [28] = "yevethan", 
+               [29] = "gand", 
+               [30] = "durese", 
+               [31] = "coyn", 
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         Weight = 0, 
+         ShortDescr = "abbigayle", 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Sex = "female", 
+         ArmorClass = 5, 
+         Damage = 
+         {
+            DamSizeDice = 6, 
+            DamNoDice = 1, 
+            DamPlus = 3, 
+         }, 
+         Tag = "", 
+         Vnum = 10394, 
+      }, 
+      [10395] = 
+      {
+         LongDescr = "A sad student leans against the wall.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "sad student", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "Imp", 
+               MudProgType = "spawn_prog", 
+               Code = "from newbieacad.sadstudent import *\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "Imp", 
+               MudProgType = "all_greet_prog", 
+               Code = "from newbieacad.sadstudent import *\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a sad student", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10395, 
+      }, 
+      [10365] = 
+      {
+         LongDescr = "A service droid is here handing out canteens and rations.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "service droid", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "Imp", 
+               MudProgType = "speech_prog", 
+               Code = "from newbieacad.servicedroid import *\
+def on_speech(mob, actor, txt):\
+    on_speech_canteen(mob, actor, txt)\
+", 
+               Arguments = "canteen? canteen", 
+            }, 
+            [2] = 
+            {
+               ScriptType = "Imp", 
+               MudProgType = "speech_prog", 
+               Code = "from newbieacad.servicedroid import *\
+def on_speech(mob, actor, txt):\
+    on_speech_ration(mob, actor, txt)\
+", 
+               Arguments = "food? ration? food ration", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 0, 
+            HitPlus = 100, 
+         }, 
+         Level = 10, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a service droid", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 25, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10365, 
+      }, 
+      [10350] = 
+      {
+         LongDescr = "The schoolmaster is here offering diplomas to academy graduates.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         Credits = 100, 
+         Alignment = 1000, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "Domick carries himself with a grace and confidence born from his\
+long life and many experiences in these Realms. He is looked on\
+with awe and unquestioned respect. That respect is well deserved.\
+Do not attempt to kill him, for you shall surely die.\
+", 
+         Name = "professor schoolmaster teacher headmaster", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               ScriptType = "MProg", 
+               MudProgType = "all_greet_prog", 
+               Code = "mpadvance $n 2\
+mpoload 10423\
+mpat 10323 close n\
+mpat 10323 lock n\
+at 10299 drop 10423\
+at 10299 mppurge\
+ \
+if goldamt($n) > 10500\
+mpechoat $n &RDon't carry so much money as a newbie.\
+mpechoat $n It's hazardous to your health.\
+mpdamage $n 3000\
+mppurge\
+endif\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitSizeDice = 1, 
+            HitPlus = 1000, 
+         }, 
+         Height = 0, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_auth", 
+         }, 
+         DamRoll = 0, 
+         Weight = 0, 
+         ShortDescr = "the Schoolmaster", 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Sex = "male", 
+         ArmorClass = 94, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Tag = "", 
+         Vnum = 10350, 
+      }, 
+      [10499] = 
+      {
+         LongDescr = "Some god abandoned a newly created final mob here.\
+", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Credits = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Description = "", 
+         Name = "final mob", 
+         HitRoll = 0, 
+         Race = "Human", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Stats = 
+         {
+            Constitution = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+         }, 
+         DamRoll = 0, 
+         ShortDescr = "a newly created final mob", 
+         Weight = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Tag = "", 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Sex = "undistinguished", 
+         Vnum = 10499, 
+      }, 
+   }, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 10499, 
+         First = 10340, 
+      }, 
+      Room = 
+      {
+         Last = 10430, 
+         First = 10300, 
+      }, 
+      Object = 
+      {
+         Last = 10499, 
+         First = 10300, 
+      }, 
+   }, 
+   ResetFrequency = 3, 
+   Author = "Scarab/Durga", 
+   Name = "Coruscant Academy", 
+   FileFormatVersion = 1, 
+   HighEconomy = 0, 
 }

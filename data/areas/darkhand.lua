@@ -1,13 +1,881 @@
 -- Star Destroyer - Dark Hand
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
-   LowEconomy = 30523830, 
+   HighEconomy = 0, 
+   Filename = "darkhand.lua", 
+   ResetFrequency = 5, 
+   FileFormatVersion = 1, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg3 = 606, 
+         Arg2 = 4, 
+         MiscData = 0, 
+         Arg1 = 601, 
+         Command = "M", 
+      }, 
+      [2] = 
+      {
+         Arg3 = 0, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32254, 
+         Command = "G", 
+      }, 
+      [3] = 
+      {
+         Arg3 = 0, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10488, 
+         Command = "G", 
+      }, 
+      [4] = 
+      {
+         Arg3 = 16, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 53, 
+         Command = "E", 
+      }, 
+      [5] = 
+      {
+         Arg3 = 13, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32250, 
+         Command = "E", 
+      }, 
+      [6] = 
+      {
+         Arg3 = 7, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 609, 
+         Command = "E", 
+      }, 
+      [7] = 
+      {
+         Arg3 = 5, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 607, 
+         Command = "E", 
+      }, 
+      [8] = 
+      {
+         Arg3 = 15, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 606, 
+         Command = "E", 
+      }, 
+      [9] = 
+      {
+         Arg3 = 14, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 606, 
+         Command = "E", 
+      }, 
+      [10] = 
+      {
+         Arg3 = 3, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 605, 
+         Command = "E", 
+      }, 
+      [11] = 
+      {
+         Arg3 = 10, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 604, 
+         Command = "E", 
+      }, 
+      [12] = 
+      {
+         Arg3 = 9, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 603, 
+         Command = "E", 
+      }, 
+      [13] = 
+      {
+         Arg3 = 6, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 601, 
+         Command = "E", 
+      }, 
+      [14] = 
+      {
+         Arg3 = 606, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 600, 
+         Command = "O", 
+      }, 
+      [15] = 
+      {
+         Arg3 = 612, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 610, 
+         Command = "O", 
+      }, 
+      [16] = 
+      {
+         Arg3 = 601, 
+         Arg2 = 10, 
+         MiscData = 0, 
+         Arg1 = 602, 
+         Command = "M", 
+      }, 
+      [17] = 
+      {
+         Arg3 = 7, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32240, 
+         Command = "E", 
+      }, 
+      [18] = 
+      {
+         Arg3 = 5, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32239, 
+         Command = "E", 
+      }, 
+      [19] = 
+      {
+         Arg3 = 13, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32250, 
+         Command = "E", 
+      }, 
+      [20] = 
+      {
+         Arg3 = 7, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32248, 
+         Command = "E", 
+      }, 
+      [21] = 
+      {
+         Arg3 = 13, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32247, 
+         Command = "E", 
+      }, 
+      [22] = 
+      {
+         Arg3 = 5, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32246, 
+         Command = "E", 
+      }, 
+      [23] = 
+      {
+         Arg3 = 14, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32245, 
+         Command = "E", 
+      }, 
+      [24] = 
+      {
+         Arg3 = 3, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32244, 
+         Command = "E", 
+      }, 
+      [25] = 
+      {
+         Arg3 = 10, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32243, 
+         Command = "E", 
+      }, 
+      [26] = 
+      {
+         Arg3 = 9, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32242, 
+         Command = "E", 
+      }, 
+      [27] = 
+      {
+         Arg3 = 6, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32241, 
+         Command = "E", 
+      }, 
+      [28] = 
+      {
+         Arg3 = 16, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 50, 
+         Command = "E", 
+      }, 
+      [29] = 
+      {
+         Arg3 = 0, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32254, 
+         Command = "G", 
+      }, 
+      [30] = 
+      {
+         Arg3 = 0, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10488, 
+         Command = "G", 
+      }, 
+      [31] = 
+      {
+         Arg3 = 612, 
+         Arg2 = 5, 
+         MiscData = 0, 
+         Arg1 = 604, 
+         Command = "M", 
+      }, 
+      [32] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 633, 
+         Command = "D", 
+      }, 
+      [33] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 633, 
+         Command = "D", 
+      }, 
+      [34] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 632, 
+         Command = "D", 
+      }, 
+      [35] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 632, 
+         Command = "D", 
+      }, 
+      [36] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 634, 
+         Command = "D", 
+      }, 
+      [37] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 634, 
+         Command = "D", 
+      }, 
+      [38] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 635, 
+         Command = "D", 
+      }, 
+      [39] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 635, 
+         Command = "D", 
+      }, 
+      [40] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 630, 
+         Command = "D", 
+      }, 
+      [41] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 630, 
+         Command = "D", 
+      }, 
+      [42] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 631, 
+         Command = "D", 
+      }, 
+      [43] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 631, 
+         Command = "D", 
+      }, 
+      [44] = 
+      {
+         Arg3 = 613, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 611, 
+         Command = "O", 
+      }, 
+      [45] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 672, 
+         Command = "D", 
+      }, 
+      [46] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 672, 
+         Command = "D", 
+      }, 
+      [47] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 671, 
+         Command = "D", 
+      }, 
+      [48] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 671, 
+         Command = "D", 
+      }, 
+      [49] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 670, 
+         Command = "D", 
+      }, 
+      [50] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 670, 
+         Command = "D", 
+      }, 
+      [51] = 
+      {
+         Arg3 = 692, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 38, 
+         Command = "O", 
+      }, 
+      [52] = 
+      {
+         Arg3 = 691, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32201, 
+         Command = "O", 
+      }, 
+      [53] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 614, 
+         Command = "D", 
+      }, 
+      [54] = 
+      {
+         Arg3 = 695, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 621, 
+         Command = "O", 
+      }, 
+      [55] = 
+      {
+         Arg3 = 2, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 695, 
+         Command = "D", 
+      }, 
+      [56] = 
+      {
+         Arg3 = 645, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 612, 
+         Command = "O", 
+      }, 
+      [57] = 
+      {
+         Arg3 = 693, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 607, 
+         Command = "M", 
+      }, 
+      [58] = 
+      {
+         Arg3 = 693, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 608, 
+         Command = "M", 
+      }, 
+      [59] = 
+      {
+         Arg3 = 696, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 606, 
+         Command = "M", 
+      }, 
+      [60] = 
+      {
+         Arg3 = 696, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 622, 
+         Command = "O", 
+      }, 
+      [61] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 680, 
+         Command = "D", 
+      }, 
+      [62] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 683, 
+         Command = "D", 
+      }, 
+      [63] = 
+      {
+         Arg3 = 686, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 613, 
+         Command = "O", 
+      }, 
+      [64] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 686, 
+         Command = "D", 
+      }, 
+      [65] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 686, 
+         Command = "D", 
+      }, 
+      [66] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 688, 
+         Command = "D", 
+      }, 
+      [67] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 688, 
+         Command = "D", 
+      }, 
+      [68] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 687, 
+         Command = "D", 
+      }, 
+      [69] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 687, 
+         Command = "D", 
+      }, 
+      [70] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 684, 
+         Command = "D", 
+      }, 
+      [71] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 684, 
+         Command = "D", 
+      }, 
+      [72] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 684, 
+         Command = "D", 
+      }, 
+      [73] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 681, 
+         Command = "D", 
+      }, 
+      [74] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 681, 
+         Command = "D", 
+      }, 
+      [75] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 681, 
+         Command = "D", 
+      }, 
+      [76] = 
+      {
+         Arg3 = 619, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 609, 
+         Command = "M", 
+      }, 
+      [77] = 
+      {
+         Arg3 = 0, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 624, 
+         Command = "G", 
+      }, 
+      [78] = 
+      {
+         Arg3 = 679, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 610, 
+         Command = "M", 
+      }, 
+      [79] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 679, 
+         Command = "D", 
+      }, 
+      [80] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Arg1 = 679, 
+         Command = "D", 
+      }, 
+      [81] = 
+      {
+         Arg3 = 682, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 611, 
+         Command = "M", 
+      }, 
+      [82] = 
+      {
+         Arg3 = 621, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 612, 
+         Command = "M", 
+      }, 
+      [83] = 
+      {
+         Arg3 = 621, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 612, 
+         Command = "M", 
+      }, 
+      [84] = 
+      {
+         Arg3 = 699, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 613, 
+         Command = "M", 
+      }, 
+      [85] = 
+      {
+         Arg3 = 677, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 615, 
+         Command = "M", 
+      }, 
+      [86] = 
+      {
+         Arg3 = 674, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 616, 
+         Command = "M", 
+      }, 
+      [87] = 
+      {
+         Arg3 = 673, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 617, 
+         Command = "M", 
+      }, 
+      [88] = 
+      {
+         Arg3 = 675, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 614, 
+         Command = "M", 
+      }, 
+      [89] = 
+      {
+         Arg3 = 689, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 618, 
+         Command = "M", 
+      }, 
+      [90] = 
+      {
+         Arg3 = 16, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32200, 
+         Command = "E", 
+      }, 
+      [91] = 
+      {
+         Arg3 = 6, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32206, 
+         Command = "E", 
+      }, 
+      [92] = 
+      {
+         Arg3 = 8, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32205, 
+         Command = "E", 
+      }, 
+      [93] = 
+      {
+         Arg3 = 13, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32204, 
+         Command = "E", 
+      }, 
+      [94] = 
+      {
+         Arg3 = 7, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32203, 
+         Command = "E", 
+      }, 
+      [95] = 
+      {
+         Arg3 = 5, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32202, 
+         Command = "E", 
+      }, 
+      [96] = 
+      {
+         Arg3 = 689, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 618, 
+         Command = "M", 
+      }, 
+      [97] = 
+      {
+         Arg3 = 16, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32200, 
+         Command = "E", 
+      }, 
+      [98] = 
+      {
+         Arg3 = 6, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32206, 
+         Command = "E", 
+      }, 
+      [99] = 
+      {
+         Arg3 = 8, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32205, 
+         Command = "E", 
+      }, 
+      [100] = 
+      {
+         Arg3 = 13, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32204, 
+         Command = "E", 
+      }, 
+      [101] = 
+      {
+         Arg3 = 7, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32203, 
+         Command = "E", 
+      }, 
+      [102] = 
+      {
+         Arg3 = 5, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32202, 
+         Command = "E", 
+      }, 
+      [103] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Arg1 = 689, 
+         Command = "D", 
+      }, 
+      [104] = 
+      {
+         Arg3 = 690, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 619, 
+         Command = "M", 
+      }, 
+      [105] = 
+      {
+         Arg3 = 690, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 620, 
+         Command = "M", 
+      }, 
+      [106] = 
+      {
+         Arg3 = 1, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Arg1 = 690, 
+         Command = "D", 
+      }, 
+      [107] = 
+      {
+         Arg3 = 644, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 9001, 
+         Command = "O", 
+      }, 
+   }, 
    Rooms = 
    {
       [640] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -16,45 +884,45 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 637, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 637, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 639, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 639, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 640, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [641] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -63,172 +931,176 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 638, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 638, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 637, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 637, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 641, 
          Tag = "", 
+      }, 
+      [642] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [642] = 
-      {
          Description = "This corridor looks like just about every other corridor on the spaceship.\
 Imperial designs aren't the most original but they do convey a strong\
 message. The walls are standard imperial blue-grey and the floor is a\
 polished jet black. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Hallway", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 643, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 643, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 646, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 646, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 617, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 617, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Hallway", 
+         TeleDelay = 0, 
          Vnum = 642, 
          Tag = "", 
+      }, 
+      [643] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [643] = 
-      {
          Description = "Neat rows of clean organized tables fill the room. Each table is\
 rectangular in shape and seats exactly one dozen troopers. The room is\
 filled with the talking but it is not over loud. There is a strong sense\
 of disciplin even here. \
 ", 
+         TeleVnum = 0, 
+         Name = "The Mess Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 644, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 644, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 645, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 645, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 642, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 642, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Mess Hall", 
+         TeleDelay = 0, 
          Vnum = 643, 
          Tag = "", 
+      }, 
+      [644] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [644] = 
-      {
          Description = "Neat rows of clean organized tables fill the room. Each table is\
 rectangular in shape and seats exactly one dozen troopers. The room is\
 filled with the talking but it is not over loud. There is a strong sense\
 of disciplin even here.   Say \"food\" for a ration.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Mess Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 643, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 643, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 644, 
          MudProgs = 
          {
             [1] = 
@@ -238,92 +1110,94 @@ mpecho &YA ration pops out.\
 give ration $n\
 drop ration\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "food", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "The Mess Hall", 
-         Vnum = 644, 
          Tag = "", 
+      }, 
+      [645] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [645] = 
-      {
          Description = "The barracks kitchen is a huge assembly line. There are many enormous ovens\
 and stoves and several long prep tables. A row of large sinks spans the\
 length of the longest wall. Troopers take shifts at kitchen duty. Extra\
 hours are rarely given for infractions as they happen so very seldom.\
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Kitchen", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 643, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 643, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Kitchen", 
+         TeleDelay = 0, 
          Vnum = 645, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [646] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [2] = "NoMob", 
+            [23] = "Hotel", 
+         }, 
          Description = "This is a standard looking miitary bunkroom. Rows of stacked beds line the\
 walls. At the end of each bed is a foot locker. Small closets are on the\
 walls inbetween the beds. The room is clean and very orderly. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barrack Bunkroom", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 642, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 642, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 647, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 647, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barrack Bunkroom", 
+         TeleDelay = 0, 
          Vnum = 646, 
          Tag = "", 
+      }, 
+      [647] = 
+      {
          Sector = "city", 
          Flags = 
          {
@@ -331,131 +1205,131 @@ walls inbetween the beds. The room is clean and very orderly. \
             [2] = "NoMob", 
             [23] = "Hotel", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [647] = 
-      {
          Description = "This is a standard looking miitary bunkroom. Rows of stacked beds line the\
 walls. At the end of each bed is a foot locker. Small closets are on the\
 walls inbetween the beds. The room is clean and very orderly. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barrack Bunkroom", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 646, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 646, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barrack Bunkroom", 
+         TeleDelay = 0, 
          Vnum = 647, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [2] = "NoMob", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [648] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This corridor looks like just about every other corridor on the spaceship.\
 Imperial designs aren't the most original but they do convey a strong\
 message. The walls are standard imperial blue-grey and the floor is a\
 polished jet black. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Hallway", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 617, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 617, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 649, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 649, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 651, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 651, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Hallway", 
+         TeleDelay = 0, 
          Vnum = 648, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [649] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [2] = "NoMob", 
+            [23] = "Hotel", 
+         }, 
          Description = "This is a standard looking miitary bunkroom. Rows of stacked beds line the\
 walls. At the end of each bed is a foot locker. Small closets are on the\
 walls inbetween the beds. The room is clean and very orderly. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barrack Bunkroom", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 648, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 648, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 650, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 650, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barrack Bunkroom", 
+         TeleDelay = 0, 
          Vnum = 649, 
          Tag = "", 
+      }, 
+      [650] = 
+      {
          Sector = "city", 
          Flags = 
          {
@@ -463,46 +1337,40 @@ walls inbetween the beds. The room is clean and very orderly. \
             [2] = "NoMob", 
             [23] = "Hotel", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [650] = 
-      {
          Description = "This is a standard looking miitary bunkroom. Rows of stacked beds line the\
 walls. At the end of each bed is a foot locker. Small closets are on the\
 walls inbetween the beds. The room is clean and very orderly. \
 ", 
+         TeleVnum = 0, 
+         Name = "Barrack Bunkroom", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 649, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 649, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barrack Bunkroom", 
+         TeleDelay = 0, 
          Vnum = 650, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [2] = "NoMob", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [651] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The barracks lounge contains several off duty amusements for the troops.\
 The is a large holovid at one end of the room. Several games tables are\
 scattered about as well as an area for just sitting and chatting. There\
@@ -510,54 +1378,54 @@ are a few skill testing games at one end of the rom as well. these\
 generally involve throwing something at a small target or ricocheting\
 small objects over a playing surface.\
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Lounge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 652, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 652, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 648, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 648, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 653, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 653, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Lounge", 
+         TeleDelay = 0, 
          Vnum = 651, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [652] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "he barracks lounge contains several off duty amusements for the troops. The\
 is a large holovid at one end of the room. Several games tables are\
 scattered about as well as an area for just sitting and chatting. There\
@@ -565,36 +1433,36 @@ are a few skill testing games at one end of the rom as well. these\
 generally involve throwing something at a small target or ricocheting\
 small objects over a playing surface.\
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Lounge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 651, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 651, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Lounge", 
+         TeleDelay = 0, 
          Vnum = 652, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [653] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "he barracks lounge contains several off duty amusements for the troops. The\
 is a large holovid at one end of the room. Several games tables are\
 scattered about as well as an area for just sitting and chatting. There\
@@ -602,569 +1470,573 @@ are a few skill testing games at one end of the rom as well. these\
 generally involve throwing something at a small target or ricocheting\
 small objects over a playing surface.\
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Lounge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 651, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 651, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Lounge", 
+         TeleDelay = 0, 
          Vnum = 653, 
          Tag = "", 
+      }, 
+      [654] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
+         TeleVnum = 0, 
+         Name = "Hallway To Turrets", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 656, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 615, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 655, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 654, 
+         Tag = "", 
+      }, 
+      [655] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
+         TeleVnum = 0, 
+         Name = "Hallway To Turrets", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 654, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 697, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 655, 
+         Tag = "", 
+      }, 
+      [656] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
+         TeleVnum = 0, 
+         Name = "Hallway To Turrets", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 698, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 654, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 656, 
+         Tag = "", 
+      }, 
+      [657] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [654] = 
-      {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 656, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 615, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 655, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Hallway To Turrets", 
-         Vnum = 654, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [655] = 
-      {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 654, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 697, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Hallway To Turrets", 
-         Vnum = 655, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [656] = 
-      {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 698, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 654, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Hallway To Turrets", 
-         Vnum = 656, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [657] = 
-      {
          Description = "This room is filled with several stretchers and a couple dozen chairs. The\
 back of the room is section off by several curtains. A door to the north\
 has a sign on it saying \"Medical staff only\"\
 ", 
+         TeleVnum = 0, 
+         Name = "Emergency", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 658, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 658, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 620, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 620, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Emergency", 
+         TeleDelay = 0, 
          Vnum = 657, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [658] = 
       {
-         Description = "A cool to cold room, the operating arena is dominated by a large center\
-table.  Around it stand droids and equipment ready to aid the doctors in\
-surgery. A set of flood lights hangs suspended over the table, and provide\
-brilliant light for the procedures.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 659, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 657, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Operating Room", 
-         Vnum = 658, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "A cool to cold room, the operating arena is dominated by a large center\
+table.  Around it stand droids and equipment ready to aid the doctors in\
+surgery. A set of flood lights hangs suspended over the table, and provide\
+brilliant light for the procedures.\
+", 
          TeleVnum = 0, 
+         Name = "Operating Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 659, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 657, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 658, 
+         Tag = "", 
       }, 
       [659] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 661, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 660, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 620, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 658, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 659, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 661, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 660, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 620, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 658, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 659, 
+         Tag = "", 
       }, 
       [660] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "A cool to cold room, the operating arena is dominated by a large center\
 table.  Around it stand droids and equipment ready to aid the doctors in\
 surgery. A set of flood lights hangs suspended over the table, and provide\
 brilliant light for the procedures.\
 ", 
+         TeleVnum = 0, 
+         Name = "Operating Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 659, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 659, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Operating Room", 
+         TeleDelay = 0, 
          Vnum = 660, 
          Tag = "", 
+      }, 
+      [661] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [661] = 
-      {
          Description = "This corridor looks like just about every other corridor on the spaceship.\
 Imperial designs aren't the most original but they do convey a strong\
 message. The walls are standard imperial blue-grey and the floor is a\
 polished jet black. \
 ", 
+         TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 664, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 664, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 662, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 662, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 659, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 659, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 663, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 663, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Corridor", 
+         TeleDelay = 0, 
          Vnum = 661, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [662] = 
       {
-         Description = "The recovery rooms are semi-pleasant.  There are several beds per room,\
-each separated by thick curtains.  Each bed has some simple medical\
-equipment beside it.  The room smells of disinfectant.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 661, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Recovery Room", 
-         Vnum = 662, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The recovery rooms are semi-pleasant.  There are several beds per room,\
+each separated by thick curtains.  Each bed has some simple medical\
+equipment beside it.  The room smells of disinfectant.\
+", 
          TeleVnum = 0, 
+         Name = "A Recovery Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 661, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 662, 
+         Tag = "", 
       }, 
       [663] = 
       {
-         Description = "The recovery rooms are semi-pleasant.  There are several beds per room,\
-each separated by thick curtains.  Each bed has some simple medical\
-equipment beside it.  The room smells of disinfectant.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 661, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Recovery Room", 
-         Vnum = 663, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The recovery rooms are semi-pleasant.  There are several beds per room,\
+each separated by thick curtains.  Each bed has some simple medical\
+equipment beside it.  The room smells of disinfectant.\
+", 
          TeleVnum = 0, 
+         Name = "A Recovery Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 661, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 663, 
+         Tag = "", 
       }, 
       [664] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The intensive care unit is for people who need constant monitoring and\
 care.  There are several beds here, surrounded by medical equipment and\
 bacta tanks.\
 ", 
+         TeleVnum = 0, 
+         Name = "Intensive Care", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 665, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 665, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 666, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 666, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 661, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 661, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 667, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 667, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Intensive Care", 
+         TeleDelay = 0, 
          Vnum = 664, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [665] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "You are floating in a tank of gelatinous red liquid.  A small air hose and\
 mask is available for you to breath through.   There is nothing to do here\
 but rest and heal.\
 ", 
+         TeleVnum = 0, 
+         Name = "A Bacta Tank", 
+         Tunnel = 1, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 664, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 664, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 665, 
          MudProgs = 
          {
             [1] = 
@@ -1172,45 +2044,45 @@ but rest and heal.\
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
                Arguments = "100", 
+               MudProgType = "rand_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "A Bacta Tank", 
-         Vnum = 665, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 1, 
-         TeleVnum = 0, 
       }, 
       [666] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "You are floating in a tank of gelatinous red liquid.  A small air hose and\
 mask is available for you to breath through.   There is nothing to do here\
 but rest and heal.\
 ", 
+         TeleVnum = 0, 
+         Name = "A Bacta Tank", 
+         Tunnel = 1, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 664, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 664, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 666, 
          MudProgs = 
          {
             [1] = 
@@ -1218,45 +2090,45 @@ but rest and heal.\
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
                Arguments = "100", 
+               MudProgType = "rand_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "A Bacta Tank", 
-         Vnum = 666, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 1, 
-         TeleVnum = 0, 
       }, 
       [667] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "You are floating in a tank of gelatinous red liquid.  A small air hose and\
 mask is available for you to breath through.   There is nothing to do here\
 but rest and heal.\
 ", 
+         TeleVnum = 0, 
+         Name = "A Bacta Tank", 
+         Tunnel = 1, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 664, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 664, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 667, 
          MudProgs = 
          {
             [1] = 
@@ -1264,47 +2136,47 @@ but rest and heal.\
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
                Arguments = "100", 
+               MudProgType = "rand_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "A Bacta Tank", 
-         Vnum = 667, 
          Tag = "", 
+      }, 
+      [668] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 1, 
-         TeleVnum = 0, 
-      }, 
-      [668] = 
-      {
          Description = "The dining area somewhat tasteful. There are several large tables\
 throughout the room. Each is covered in a fine table cloth and set in a\
 manner generally considered proper amongst most human worlds and\
 especially on all imperial controlled worlds. Just say \"food\" to get a\
 ration. \
 ", 
+         TeleVnum = 0, 
+         Name = "A Dining Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 618, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 618, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 668, 
          MudProgs = 
          {
             [1] = 
@@ -1314,399 +2186,395 @@ mpecho &YA ration pops out.\
 give ration $n\
 drop ration\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "food", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "A Dining Room", 
-         Vnum = 668, 
          Tag = "", 
+      }, 
+      [669] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [669] = 
-      {
          Description = "This is a comfortable room with several couches. There are several game and\
 card tables about the room. The games played at them are mostly strategy\
 games designed to force competition between opponents at a high\
 intellectual level.\
 ", 
+         TeleVnum = 0, 
+         Name = "Officers Lounge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 618, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 618, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Officers Lounge", 
+         TeleDelay = 0, 
          Vnum = 669, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [670] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 671, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 670, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 618, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 670, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Hallway", 
-         Vnum = 670, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 671, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 670, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 618, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 670, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 670, 
+         Tag = "", 
       }, 
       [671] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 672, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 671, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 670, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 671, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Hallway", 
-         Vnum = 671, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 672, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 671, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 670, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 671, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 671, 
+         Tag = "", 
       }, 
       [672] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 689, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 672, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 671, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 672, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Hallway", 
-         Vnum = 672, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 689, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 672, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 671, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 672, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 672, 
+         Tag = "", 
       }, 
       [673] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The navigator station contains a large computer with several monitors used\
 in comparing charts and maps and making complex calculations. Most of this\
 is done by the computer and monitored by the navigator. \
 ", 
+         TeleVnum = 0, 
+         Name = "Navigators Station", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 675, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 675, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 699, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 699, 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 621, 
-               Key = -1, 
-               Direction = "southwest", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 621, 
+               Direction = "southwest", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Navigators Station", 
+         TeleDelay = 0, 
          Vnum = 673, 
          Tag = "", 
+      }, 
+      [674] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [674] = 
-      {
          Description = "The gunners station contains controls for monitoring and manipulating the\
 ships main lasers as well as the ships missile launchers torpedos and\
 bombs. There are several turrets located around the ship however that are\
 controlled from inside the turret and not from here. \
 ", 
+         TeleVnum = 0, 
+         Name = "Gunners Seat", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 677, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 677, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 699, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 699, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 621, 
-               Key = -1, 
-               Direction = "southeast", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 621, 
+               Direction = "southeast", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Gunners Seat", 
+         TeleDelay = 0, 
          Vnum = 674, 
          Tag = "", 
+      }, 
+      [675] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [675] = 
-      {
          Description = "The pilots job is heavily assisted by computer on larger ships thus the\
 controls at this station resemble a large computer panel rather than being\
 centered around a flight stick like in starfighters. There are dozens of\
@@ -1714,276 +2582,242 @@ minitors around the station giving smaller versions of the large wall\
 mounted ones as well as dozens of others monitering different aspects of\
 the ships flight.\
 ", 
+         TeleVnum = 0, 
+         Name = "Pilots Chair", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 673, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 673, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 676, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 676, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Pilots Chair", 
+         TeleDelay = 0, 
          Vnum = 675, 
          Tag = "", 
+      }, 
+      [676] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [676] = 
-      {
          Description = "This part of the bridge contains a panel for controling several non\
 critical ship systems. It is located right beneath the main view window\
 thus it is nearly impossible to see whats going on outside the ship from\
 here. \
 ", 
+         TeleVnum = 0, 
+         Name = "The Bridge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 675, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 675, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 699, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "Chairn", 
+               DestinationVnum = 699, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 677, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 677, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Bridge", 
+         TeleDelay = 0, 
          Vnum = 676, 
          Tag = "", 
+      }, 
+      [677] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [677] = 
-      {
          Description = "The co pilot station contains controls for the ships defence systems. The\
 most important controls being those for monitering and controlling the\
 ships shields. \
 ", 
+         TeleVnum = 0, 
+         Name = "Co Pilots Chair", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 676, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 676, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 674, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 674, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Co Pilots Chair", 
+         TeleDelay = 0, 
          Vnum = 677, 
          Tag = "", 
+      }, 
+      [678] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [678] = 
-      {
          Description = "This large wide hallway is dimly lit. The floor is polished black like the\
 rest of the ship but the walls are quite different containing many\
 carvings. The carvings seem to have been painstakingly carved out of the\
 wall. The are all strange designs that look very beautiful yet at the same\
 time very frightening. Staring at them sends shivers down your spine.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Royal Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 679, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 679, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 619, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 619, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Royal Hall", 
+         TeleDelay = 0, 
          Vnum = 678, 
          Tag = "", 
+      }, 
+      [679] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [679] = 
-      {
          Description = "The audience chamber is a large long room. At the north end of the room a\
 wide staircase leads up to a large throne that rests high above the rest\
 of the room. \
 ", 
+         TeleVnum = 0, 
+         Name = "Audience Chamber", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 680, 
-               Key = -1, 
-               Direction = "east", 
                Keyword = "", 
+               DestinationVnum = 680, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 678, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 678, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 681, 
-               Key = -1, 
-               Direction = "west", 
                Keyword = "", 
+               DestinationVnum = 681, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Audience Chamber", 
+         TeleDelay = 0, 
          Vnum = 679, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [680] = 
       {
-         Description = "This small room is a safe quiet place that the current emporer uses to get\
-work done that requires some concentration. It is also a good place to\
-rest and contemplate. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 679, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "The Royal Office", 
-         Vnum = 680, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
@@ -1993,374 +2827,360 @@ rest and contemplate. \
             [29] = "Spacecraft", 
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
+         Description = "This small room is a safe quiet place that the current emporer uses to get\
+work done that requires some concentration. It is also a good place to\
+rest and contemplate. \
+", 
          TeleVnum = 0, 
+         Name = "The Royal Office", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 679, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 680, 
+         Tag = "", 
       }, 
       [681] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The mirrors in this hallway reflect against each other giving an illusion\
 of a thousand hallways stacked in a row. The glass is crystal clear and\
 gives an excellent reflectyion yet somehow the image seems wrong. Distored\
 and twisted yet not quite visible to the naked eye. \
 ", 
+         TeleVnum = 0, 
+         Name = "A Mirrored Hallway", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 679, 
-               Key = -1, 
-               Direction = "east", 
                Keyword = "", 
+               DestinationVnum = 679, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 683, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 683, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 684, 
-               Key = -1, 
-               Direction = "west", 
                Keyword = "", 
+               DestinationVnum = 684, 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [4] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [19] = "Auto", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 682, 
-               Key = -1, 
-               Direction = "somewhere", 
                Keyword = "guard post", 
+               DestinationVnum = 682, 
+               Direction = "somewhere", 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Mirrored Hallway", 
+         TeleDelay = 0, 
          Vnum = 681, 
          Tag = "", 
+      }, 
+      [682] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [682] = 
-      {
          Description = "This alcove is designed to give a good view of the hallway yet because of\
 the mirrors make it difficult to locate. This gives the guard stationed\
 here a good advantage in stopping anyone who has entered the area\
 unauthorized, even though this is very unlikely to happen. \
 ", 
+         TeleVnum = 0, 
+         Name = "Guard Post", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 681, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 681, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Guard Post", 
+         TeleDelay = 0, 
          Vnum = 682, 
          Tag = "", 
+      }, 
+      [683] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [683] = 
-      {
          Description = "The closet is very large. There are many shelves stacked along the edges as\
 well many hangars for clothes. Maybe if you looked carefully you'd find\
 something useful. \
 ", 
+         TeleVnum = 0, 
+         Name = "A Closet", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 681, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 681, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Closet", 
+         TeleDelay = 0, 
          Vnum = 683, 
          Tag = "", 
+      }, 
+      [684] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [684] = 
-      {
          Description = "This room is very well decorated compared to the rest of the ship. The\
 walls and floor are black but all of the furniture is made of colored\
 crystal. There are many pieces of beautiful artwork placed about the room.\
 It is quite a contrast to what you have seen outside the royal chambers.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Living Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 685, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 685, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 681, 
-               Key = -1, 
-               Direction = "east", 
                Keyword = "", 
+               DestinationVnum = 681, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 686, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 686, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 687, 
-               Key = -1, 
-               Direction = "west", 
                Keyword = "", 
+               DestinationVnum = 687, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Living Room", 
+         TeleDelay = 0, 
          Vnum = 684, 
          Tag = "", 
+      }, 
+      [685] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [685] = 
-      {
          Description = "The dining room is nicely decorated in a style similar to the living room.\
 The large wooden table in the center of the room is trimmed with crystal\
 designs as are the chairs. A large crystal chendelier hangs over the\
 table. \
 ", 
+         TeleVnum = 0, 
+         Name = "The Dining Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 684, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 684, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Dining Room", 
+         TeleDelay = 0, 
          Vnum = 685, 
          Tag = "", 
+      }, 
+      [686] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [686] = 
-      {
          Description = "This room is a small comfortable room. It is decrated in soft leathers and\
 the artwork is simpler than that in the living area. It still however has\
 a dark feeling to it. Thus although it looks comfortable you can't help\
 feeling somewhat on edge. \
 ", 
+         TeleVnum = 0, 
+         Name = "The Den", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 684, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 684, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 688, 
-               Key = -1, 
-               Direction = "west", 
                Keyword = "", 
+               DestinationVnum = 688, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Den", 
+         TeleDelay = 0, 
          Vnum = 686, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [687] = 
       {
-         Description = "The bedroom is a beautiful and frightening place. An enormous bed is the\
-centerpiece of the room.  On the walls are terrifying pictures of that\
-suggest pain and sex in very abstract yet obvious ways. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 684, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 688, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "The Bedroom", 
-         Vnum = 687, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
@@ -2368,239 +3188,286 @@ suggest pain and sex in very abstract yet obvious ways. \
             [2] = "NoMob", 
             [23] = "Hotel", 
          }, 
-         Tunnel = 0, 
+         Description = "The bedroom is a beautiful and frightening place. An enormous bed is the\
+centerpiece of the room.  On the walls are terrifying pictures of that\
+suggest pain and sex in very abstract yet obvious ways. \
+", 
          TeleVnum = 0, 
+         Name = "The Bedroom", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 684, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 688, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 687, 
+         Tag = "", 
       }, 
       [688] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This huge bathroom is beatiful. Everything in it shines. Everything is\
 either a shiny polished black or a crystal clear glass. Light gleams of\
 every surface reflecting all about the room. The bathtub is large and has\
 many small water jets around its inside wall. \
 ", 
+         TeleVnum = 0, 
+         Name = "The Bathroom", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 687, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 687, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 686, 
-               Key = -1, 
-               Direction = "east", 
                Keyword = "", 
+               DestinationVnum = 686, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Bathroom", 
+         TeleDelay = 0, 
          Vnum = 688, 
          Tag = "", 
+      }, 
+      [689] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [689] = 
-      {
          Description = "This area of the Dark Hand is where officers meet and hold council. Every\
 important thing the empire does is discussed in rooms like the one to the\
 north of here. This area is strictly off limits to unauthorized persons.\
 ", 
+         TeleVnum = 0, 
+         Name = "Before The War Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 690, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 690, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 691, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 691, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 672, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 672, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 692, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 692, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Before The War Room", 
+         TeleDelay = 0, 
          Vnum = 689, 
          Tag = "", 
+      }, 
+      [690] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [690] = 
-      {
          Description = "This room is very simple in design. A large round table takes up most of\
 the room. Around it are several chairs. The walls are sound proofed and\
 electronic devices jam any attempts to record or electronicly snoop the\
 discussions that take place here.\
 ", 
+         TeleVnum = 0, 
+         Name = "The War room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 689, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 689, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The War room", 
+         TeleDelay = 0, 
          Vnum = 690, 
          Tag = "", 
+      }, 
+      [691] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [691] = 
-      {
          Description = "The computer room is a small room with several terminals and a few extra\
 chairs. The decore is simple and military yet considerably nicer than the\
 rest of the ship. \
 ", 
+         TeleVnum = 0, 
+         Name = "Computer Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 689, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 689, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Computer Room", 
+         TeleDelay = 0, 
          Vnum = 691, 
          Tag = "", 
+      }, 
+      [692] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [692] = 
-      {
          Description = "The mail room is a small room with several terminals and a few extra\
 chairs. The decore is simple and military yet considerably nicer than the\
 rest of the ship.  \
 ", 
+         TeleVnum = 0, 
+         Name = "Mail Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 689, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 689, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Mail Room", 
+         TeleDelay = 0, 
          Vnum = 692, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [693] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "As far as droid maintenance rooms go this one is very organized. The stacks\
 of parts and equipment found in most technical areas do not exist. Instead\
 anything not in use seems to be put away in one of hundreds of wall\
@@ -2609,55 +3476,30 @@ droids either recharging or in a state of repair. Even these however are\
 lined up in an organized maner giving a strong sense of order to the\
 place.\
 ", 
+         TeleVnum = 0, 
+         Name = "Droid Maintenance Room", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 614, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 614, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Droid Maintenance Room", 
+         TeleDelay = 0, 
          Vnum = 693, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [694] = 
       {
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 695, 
-               Key = -1, 
-               Direction = "down", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Drop Chute", 
-         Vnum = 694, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
@@ -2665,23 +3507,52 @@ place.\
             [29] = "Spacecraft", 
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
+         Description = "", 
          TeleVnum = 0, 
-      }, 
-      [695] = 
-      {
-         Description = "You can think of about 10 million other places youd rather be right now.\
-The coom is filled with garbage and foul smeliing water. The door seems to\
-be locked. To top it all off the walls are slowly closing in around you.\
-", 
+         Name = "A Drop Chute", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 695, 
+               Direction = "down", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 694, 
+         Tag = "", 
+      }, 
+      [695] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
+         Description = "You can think of about 10 million other places youd rather be right now.\
+The coom is filled with garbage and foul smeliing water. The door seems to\
+be locked. To top it all off the walls are slowly closing in around you.\
+", 
+         TeleVnum = 0, 
+         Name = "Trash Compactor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -2689,13 +3560,14 @@ be locked. To top it all off the walls are slowly closing in around you.\
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 614, 
-               Key = 621, 
-               Direction = "east", 
                Keyword = "", 
+               DestinationVnum = 614, 
+               Direction = "east", 
+               Key = 621, 
             }, 
          }, 
+         TeleDelay = 0, 
+         Vnum = 695, 
          MudProgs = 
          {
             [1] = 
@@ -2703,128 +3575,124 @@ be locked. To top it all off the walls are slowly closing in around you.\
                Code = "mpecho You are slowly crushed as the walls close in around you.\
 feel harm $n\
 ", 
-               MudProgType = "rand_prog", 
                Arguments = "100", 
+               MudProgType = "rand_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "Trash Compactor", 
-         Vnum = 695, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [696] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "This room is very long. It consists of several rows of shelves stacked to\
 the ceiling. Each shelf is filled with labelled boxes, crates or loose\
 parts. Maybe searching through this room could produce something usefull.\
 ", 
+         TeleVnum = 0, 
+         Name = "Storage Closet", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 614, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 614, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Storage Closet", 
+         TeleDelay = 0, 
          Vnum = 696, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [697] = 
       {
-         Description = "This swivelling laser turret is located in a good position to cover most of\
-the ships belly and side. The seat is gyroscopicly suspended and attached\
-to the cannon so that they all swivel as a single unit enabling excellent\
-target tracking. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 655, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Laser Turret", 
-         Vnum = 697, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This swivelling laser turret is located in a good position to cover most of\
+the ships belly and side. The seat is gyroscopicly suspended and attached\
+to the cannon so that they all swivel as a single unit enabling excellent\
+target tracking. \
+", 
          TeleVnum = 0, 
+         Name = "Laser Turret", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 655, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 697, 
+         Tag = "", 
       }, 
       [698] = 
       {
-         Description = "This swivelling laser turret is located in a good position to cover most of\
-the ships belly and side. The seat is gyroscopicly suspended and attached\
-to the cannon so that they all swivel as a single unit enabling excellent\
-target tracking. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 656, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Laser Turret", 
-         Vnum = 698, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This swivelling laser turret is located in a good position to cover most of\
+the ships belly and side. The seat is gyroscopicly suspended and attached\
+to the cannon so that they all swivel as a single unit enabling excellent\
+target tracking. \
+", 
          TeleVnum = 0, 
+         Name = "Laser Turret", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 656, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 698, 
+         Tag = "", 
       }, 
       [699] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This chair is raised somewhat above the rest of the bridge. This not only\
 gives the captain a good view of the rest of the bridge but makes the\
 captain look more powerful. It is standard imperial practice that lower\
@@ -2832,623 +3700,627 @@ ranks should always have to look up at their superiors. There are very few\
 controls located here as the captains job is mostly to issue orders to the\
 rest of the crew.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Captains Chair", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 676, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 676, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 673, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 673, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 621, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 621, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 674, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 674, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Captains Chair", 
+         TeleDelay = 0, 
          Vnum = 699, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [600] = 
       {
-         Description = "The main hangar is an enormous room, with areas sectioned off for all types\
-of ships.  In the middle of the hangar, the floor is mechanically designed\
-to separate and open, allowing large ships to enter and leave. There are\
-also smaller launch tunnels that can be used by smaller ships.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 601, 
-               Key = -1, 
-               Direction = "up", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Main Hangar of the Star Destroyer Dark Hand", 
-         Vnum = 600, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The main hangar is an enormous room, with areas sectioned off for all types\
+of ships.  In the middle of the hangar, the floor is mechanically designed\
+to separate and open, allowing large ships to enter and leave. There are\
+also smaller launch tunnels that can be used by smaller ships.\
+", 
          TeleVnum = 0, 
+         Name = "Main Hangar of the Star Destroyer Dark Hand", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 601, 
+               Direction = "up", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 600, 
+         Tag = "", 
       }, 
       [601] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "The main hangar is an enormous room, with areas sectioned off for all types\
 of ships.  In the middle of the hangar, the floor is mechanically designed\
 to separate and open, allowing large ships to enter and leave. There are\
 also smaller launch tunnels that can be used by smaller ships.\
 ", 
+         TeleVnum = 0, 
+         Name = "Balcony Overlooking The Main Hangar", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 602, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 602, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 600, 
-               Key = -1, 
-               Direction = "down", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 600, 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Balcony Overlooking The Main Hangar", 
+         TeleDelay = 0, 
          Vnum = 601, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [602] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 601, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 603, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 602, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 601, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 603, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 602, 
+         Tag = "", 
       }, 
       [603] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 602, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 604, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 603, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 602, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 604, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 603, 
+         Tag = "", 
       }, 
       [604] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 603, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 609, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 607, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 604, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 603, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 609, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 607, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 604, 
+         Tag = "", 
       }, 
       [605] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "The transport hangar is similar to the main hangar except that the ships\
 exit through shield walls along the outermost wall of the hangar. Another\
 main difference is that the ships are all of two types: assault transports\
 designed to carry and deploy troopers and large vehicle transports used to\
 carry ground assault vehicles. \
 ", 
+         TeleVnum = 0, 
+         Name = "Balcony Overlooking a Transport Hangar", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 608, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 608, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 606, 
-               Key = -1, 
-               Direction = "down", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 606, 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Balcony Overlooking a Transport Hangar", 
+         TeleDelay = 0, 
          Vnum = 605, 
          Tag = "", 
+      }, 
+      [606] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [606] = 
-      {
          Description = "The transport hangar is similar to the main hangar except that the ships\
 exit through shield walls along the outermost wall of the hangar. Another\
 main difference is that the ships are all of two types: assault transports\
 designed to carry and deploy troopers and large vehicle transports used to\
 carry ground assault vehicles.  \
 ", 
+         TeleVnum = 0, 
+         Name = "Transport Hangar", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 605, 
-               Key = -1, 
-               Direction = "up", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 605, 
+               Direction = "up", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Transport Hangar", 
+         TeleDelay = 0, 
          Vnum = 606, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [607] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 604, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 608, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 607, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 604, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 608, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 607, 
+         Tag = "", 
       }, 
       [608] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 607, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 605, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 608, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 607, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 605, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 608, 
+         Tag = "", 
       }, 
       [609] = 
       {
-         Description = "This corridor looks like just about every other corridor on the spaceship.\
-Imperial designs aren't the most original but they do convey a strong\
-message. The walls are standard imperial blue-grey and the floor is a\
-polished jet black. \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 610, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 604, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "A Corridor", 
-         Vnum = 609, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This corridor looks like just about every other corridor on the spaceship.\
+Imperial designs aren't the most original but they do convey a strong\
+message. The walls are standard imperial blue-grey and the floor is a\
+polished jet black. \
+", 
          TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 610, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 604, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 609, 
+         Tag = "", 
       }, 
       [610] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "This corridor looks like just about every other corridor on the spaceship.\
 Imperial designs aren't the most original but they do convey a strong\
 message. The walls are standard imperial blue-grey and the floor is a\
 polished jet black. \
 ", 
+         TeleVnum = 0, 
+         Name = "A Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 611, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 611, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 609, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 609, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Corridor", 
+         TeleDelay = 0, 
          Vnum = 610, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [611] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "The TIE fighter hangar is arranged differently from the standard hangar.\
 The TIE fighters are arranged in rows, suspended from thick metal arms. \
 When they are ready to launch, they are lowered through airlocks below\
 them and released.\
 ", 
+         TeleVnum = 0, 
+         Name = "Balcony Overlooking A TIE Fighter Hangar", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 610, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 610, 
+               Direction = "west", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 612, 
-               Key = -1, 
-               Direction = "down", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 612, 
+               Direction = "down", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Balcony Overlooking A TIE Fighter Hangar", 
+         TeleDelay = 0, 
          Vnum = 611, 
          Tag = "", 
+      }, 
+      [612] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [612] = 
-      {
          Description = "The TIE fighter hangar is arranged differently from the standard hangar.\
 The TIE fighters are arranged in rows, suspended from thick metal arms. \
 When they are ready to launch, they are lowered through airlocks below\
 them and released.\
 ", 
+         TeleVnum = 0, 
+         Name = "TIE Fighter Hangar", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 611, 
-               Key = -1, 
-               Direction = "up", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 611, 
+               Direction = "up", 
+               Key = -1, 
             }, 
          }, 
-         Name = "TIE Fighter Hangar", 
+         TeleDelay = 0, 
          Vnum = 612, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [613] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This turbolift is located near the rear of the ship, enabling it to reach\
 all levels of the destroyer.  It is voice activated.   There is a small\
 'list' of available levels on the wall.\
 ", 
+         TeleVnum = 0, 
+         Name = "A Turbolift", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
+               Keyword = "list levels level note sign list. lists", 
                Description = "Levels:\
 \13 \
 \0131. Hangar\
@@ -3461,13 +4333,13 @@ all levels of the destroyer.  It is voice activated.   There is a small\
 \0138. Royal\
 \0139. Bridge\
 \13", 
-               Keyword = "list levels level note sign list. lists", 
             }, 
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
          }, 
+         TeleDelay = 0, 
+         Vnum = 613, 
          MudProgs = 
          {
             [1] = 
@@ -3478,8 +4350,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 604\
 mpat 604 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "hangar 1", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [2] = 
@@ -3488,8 +4360,8 @@ mpat 604 mpechoaround $n $n arrives from a turbolift.\
 mpechoaround $n The doors open and close briefly letting $n in.\
 mpecho An electonic voice says. \"What level please.\"\
 ", 
-               MudProgType = "entry_prog", 
                Arguments = "100", 
+               MudProgType = "entry_prog", 
                ScriptType = "MProg", 
             }, 
             [3] = 
@@ -3500,8 +4372,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 615\
 mpat 615 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "engineering 2", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [4] = 
@@ -3512,8 +4384,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 614\
 mpat 614 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "service 3 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [5] = 
@@ -3524,8 +4396,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 616\
 mpat 616 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "detention 4 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [6] = 
@@ -3536,8 +4408,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 617\
 mpat 617 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "barracks 5 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [7] = 
@@ -3548,8 +4420,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 620\
 mpat 620 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "medical 6 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [8] = 
@@ -3560,8 +4432,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 618\
 mpat 618 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "officer 7 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [9] = 
@@ -3572,8 +4444,8 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 619\
 mpat 619 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "royal 8 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
             [10] = 
@@ -3584,992 +4456,991 @@ mpechoaround $n The doors open and $n step out before they reclose.\
 mptransfer $n 621\
 mpat 621 mpechoaround $n $n arrives from a turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "bridge 9 ", 
+               MudProgType = "speech_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "A Turbolift", 
-         Vnum = 613, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [614] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "The service level appears similar to all other levels of the ship. The\
 floor is the same polished black and the walls are the same blue-grey that\
 adorns the rest of the ship. The most recognisable difference is the\
 nature of the sounds. The sounds of droids far outweighs the sound of\
 humans on this part of the ship. \
 ", 
+         TeleVnum = 0, 
+         Name = "Service Level", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 696, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 696, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 693, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 693, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 695, 
-               Key = -1, 
-               Direction = "west", 
                Keyword = "", 
+               DestinationVnum = 695, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Service Level", 
+         TeleDelay = 0, 
          Vnum = 614, 
          Tag = "", 
+      }, 
+      [615] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [615] = 
-      {
          Description = "The engineering deck is located around the ships main reactor. Catwalks are\
 made of solid grating connect various computer consoles and other pieces\
 of machinery. \
 ", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 654, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 654, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 622, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 622, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 628, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 628, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Engineering Deck", 
+         TeleDelay = 0, 
          Vnum = 615, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [616] = 
       {
-         Description = "This room contains a control desk for monitoring the detention block. \
-There are many automated defense guns positioned about the room, as well\
-as several cameras monitoring activities.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 630, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 632, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 634, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Detention Level", 
-         Vnum = 616, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "This room contains a control desk for monitoring the detention block. \
+There are many automated defense guns positioned about the room, as well\
+as several cameras monitoring activities.\
+", 
          TeleVnum = 0, 
+         Name = "Detention Level", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 630, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 632, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 634, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 616, 
+         Tag = "", 
       }, 
       [617] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
          Description = "The barracks area of imperial installations is an interesting mix of\
 youthful energy and strict order. This is a strange combination of sweat\
 and polish. The sounds of seargents shouting orders to the north mixes\
 with the loud chatter of off duty trops to the west.\
 ", 
+         TeleVnum = 0, 
+         Name = "Barracks Level", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 636, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 636, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 642, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 642, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 648, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 648, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Barracks Level", 
+         TeleDelay = 0, 
          Vnum = 617, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [618] = 
       {
-         Description = "The officers section of the darkhand contains the same uninspiring\
-architecture as the rest of the ship. However the atmosphere is slightly\
-lighter by the addition of a few personal touches added by the officers\
-such as a small sculpture on a pedistal near the northern corridor.\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 670, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 668, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 669, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Officers Foyer", 
-         Vnum = 618, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The officers section of the darkhand contains the same uninspiring\
+architecture as the rest of the ship. However the atmosphere is slightly\
+lighter by the addition of a few personal touches added by the officers\
+such as a small sculpture on a pedistal near the northern corridor.\
+", 
          TeleVnum = 0, 
+         Name = "Officers Foyer", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 670, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 668, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 669, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 618, 
+         Tag = "", 
       }, 
       [619] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This large wide hallway is dimly lit. The floor is polished black like the\
 rest of the ship but the walls are quite different containing many\
 carvings. The carvings seem to have been painstakingly carved out of the\
 wall. The are all strange designs that look very beautiful yet at the same\
 time very frightening. Staring at them sends shivers down your spine.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Royal Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 678, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 678, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Royal Hall", 
+         TeleDelay = 0, 
          Vnum = 619, 
          Tag = "", 
+      }, 
+      [620] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [620] = 
-      {
          Description = "The medical level smells of strongly of antiseptic. A sign on the wall\
 saying \"emergency\" points to the west.  There are a few chairs along the\
 wall to sit and wait in if the emergency room is full.\
 ", 
+         TeleVnum = 0, 
+         Name = "Medical Level", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 659, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 659, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 657, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 657, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Medical Level", 
+         TeleDelay = 0, 
          Vnum = 620, 
          Tag = "", 
+      }, 
+      [621] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [621] = 
-      {
          Description = "The bridge of the star destroyer is a large room with several work stations\
 around the perimeter and a raised command section in the center. It is\
 wider than it is long and a large transparisteel view window covers the\
 front wall. Several other large monitors give views from ship mounted\
 cameras giving a complete view of whats outside the ship.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Bridge", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 699, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 699, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 613, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 613, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 673, 
-               Key = -1, 
-               Direction = "northeast", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 673, 
+               Direction = "northeast", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 674, 
-               Key = -1, 
-               Direction = "northwest", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 674, 
+               Direction = "northwest", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Bridge", 
+         TeleDelay = 0, 
          Vnum = 621, 
          Tag = "", 
+      }, 
+      [622] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 623, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 615, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 622, 
+         Tag = "", 
+      }, 
+      [623] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 622, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 624, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 623, 
+         Tag = "", 
+      }, 
+      [624] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 623, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 625, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 624, 
+         Tag = "", 
+      }, 
+      [625] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 624, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 629, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 626, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 625, 
+         Tag = "", 
+      }, 
+      [626] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 627, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 625, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 626, 
+         Tag = "", 
+      }, 
+      [627] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 628, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 626, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 627, 
+         Tag = "", 
+      }, 
+      [628] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
+made of solid grating connect various computer consoles and other pieces\
+of machinery.  \
+", 
+         TeleVnum = 0, 
+         Name = "Engineering Deck", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 615, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 627, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 628, 
+         Tag = "", 
+      }, 
+      [629] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [622] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 623, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 615, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 622, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [623] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 622, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 624, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 623, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [624] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 623, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 625, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 624, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [625] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 624, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 629, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 626, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 625, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [626] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 627, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 625, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 626, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [627] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 628, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 626, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 627, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [628] = 
-      {
-         Description = "The engineering deck is located around the ships main reactor. Catwalks are\
-made of solid grating connect various computer consoles and other pieces\
-of machinery.  \
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 615, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 627, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Engineering Deck", 
-         Vnum = 628, 
-         Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [629] = 
-      {
          Description = "The main reactor control is a large computer console containing the\
 controls for the ships main reactor as well as for monitoring the\
 functions of the rest of engineering. This would be an ideal location to\
 cordinate the ships engineering efforts and you will often fiend the chief\
 of engineering posted here. \
 ", 
+         TeleVnum = 0, 
+         Name = "Main Reactor Control", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 625, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 625, 
+               Direction = "north", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Main Reactor Control", 
+         TeleDelay = 0, 
          Vnum = 629, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [630] = 
       {
-         Description = "The detention levels corridors form a hexagonal shape.  The ceiling is\
-relatively low and there is little room for manuevering.  Locked cell\
-doors are spaced evenly down the hall in each direction\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 631, 
-               Key = -1, 
-               Direction = "north", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 630, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 616, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 630, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Detention Level Corridor", 
-         Vnum = 630, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The detention levels corridors form a hexagonal shape.  The ceiling is\
+relatively low and there is little room for manuevering.  Locked cell\
+doors are spaced evenly down the hall in each direction\
+", 
          TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 631, 
+               Direction = "north", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 630, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 616, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 630, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 630, 
+         Tag = "", 
       }, 
       [631] = 
       {
-         Description = "The detention levels corridors form a hexagonal shape.  The ceiling is\
-relatively low and there is little room for manuevering.  Locked cell\
-doors are spaced evenly down the hall in each direction\
-", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 631, 
-               Key = -1, 
-               Direction = "east", 
-               Keyword = "", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 630, 
-               Key = -1, 
-               Direction = "south", 
-               Keyword = "", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-                  [23] = "BashProof", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 631, 
-               Key = -1, 
-               Direction = "west", 
-               Keyword = "", 
-            }, 
-         }, 
-         Name = "Detention Level Corridor", 
-         Vnum = 631, 
-         Tag = "", 
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
+         Description = "The detention levels corridors form a hexagonal shape.  The ceiling is\
+relatively low and there is little room for manuevering.  Locked cell\
+doors are spaced evenly down the hall in each direction\
+", 
          TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 631, 
+               Direction = "east", 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Keyword = "", 
+               DestinationVnum = 630, 
+               Direction = "south", 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Description = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+                  [23] = "BashProof", 
+               }, 
+               Keyword = "", 
+               DestinationVnum = 631, 
+               Direction = "west", 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 631, 
+         Tag = "", 
       }, 
       [632] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "This corridors walls and floors make a hexagonal shape. The ceiling is\
 relatively low and there is very little room for manuevering around.\
 Locked cell doors are spaced evenly out down the hall.\
 ", 
+         TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4579,23 +5450,23 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 632, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 632, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 633, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 633, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4605,48 +5476,48 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 632, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 632, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 616, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 616, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Detention Level Corridor", 
+         TeleDelay = 0, 
          Vnum = 632, 
          Tag = "", 
+      }, 
+      [633] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [633] = 
-      {
          Description = "This corridors walls and floors make a hexagonal shape. The ceiling is\
 relatively low and there is very little room for manuevering around.\
 Locked cell doors are spaced evenly out down the hall.\
 ", 
+         TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4656,14 +5527,14 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 633, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 633, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4673,48 +5544,48 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 633, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 633, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 632, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 632, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Detention Level Corridor", 
+         TeleDelay = 0, 
          Vnum = 633, 
          Tag = "", 
+      }, 
+      [634] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [634] = 
-      {
          Description = "The detention levels corridors form a hexagonal shape.  The ceiling is\
 relatively low and there is little room for manuevering.  Locked cell\
 doors are spaced evenly down the hall in each direction\
 ", 
+         TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4724,23 +5595,23 @@ doors are spaced evenly down the hall in each direction\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 634, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 634, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 616, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 616, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4750,48 +5621,48 @@ doors are spaced evenly down the hall in each direction\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 634, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 634, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 635, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 635, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Detention Level Corridor", 
+         TeleDelay = 0, 
          Vnum = 634, 
          Tag = "", 
+      }, 
+      [635] = 
+      {
          Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-      [635] = 
-      {
          Description = "This corridors walls and floors make a hexagonal shape. The ceiling is\
 relatively low and there is very little room for manuevering around.\
 Locked cell doors are spaced evenly out down the hall.\
 ", 
+         TeleVnum = 0, 
+         Name = "Detention Level Corridor", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4801,23 +5672,23 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 635, 
-               Key = -1, 
-               Direction = "north", 
                Keyword = "", 
+               DestinationVnum = 635, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 634, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 634, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
+               Distance = 0, 
                Description = "", 
                Flags = 
                {
@@ -4827,27 +5698,24 @@ Locked cell doors are spaced evenly out down the hall.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Distance = 0, 
-               DestinationVnum = 635, 
-               Key = -1, 
-               Direction = "south", 
                Keyword = "", 
+               DestinationVnum = 635, 
+               Direction = "south", 
+               Key = -1, 
             }, 
          }, 
-         Name = "Detention Level Corridor", 
+         TeleDelay = 0, 
          Vnum = 635, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [636] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -4856,63 +5724,63 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 637, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 637, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 638, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 638, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 617, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 617, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 639, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 639, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 636, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [637] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -4921,54 +5789,54 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 641, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 641, 
+               Direction = "east", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 636, 
-               Key = -1, 
-               Direction = "south", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 636, 
+               Direction = "south", 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 640, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 640, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 637, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [638] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -4977,45 +5845,45 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 641, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 641, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 636, 
-               Key = -1, 
-               Direction = "west", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 636, 
+               Direction = "west", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 638, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
       }, 
       [639] = 
       {
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
          Description = "The drill hall is an enormous hall taking up a large portion of this deck.\
 It is devided into several sections. A blaster range is used for target\
 practice at the north east corner of the room. The south east section is\
@@ -5024,922 +5892,57 @@ contains several types of artificial terrain used for combat simulation.\
 The center of the room however is empty and used for the standard drills\
 that take up many hours of the day.\
 ", 
+         TeleVnum = 0, 
+         Name = "The Drill Hall", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 640, 
-               Key = -1, 
-               Direction = "north", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 640, 
+               Direction = "north", 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               DestinationVnum = 636, 
-               Key = -1, 
-               Direction = "east", 
+               Description = "", 
                Keyword = "", 
+               DestinationVnum = 636, 
+               Direction = "east", 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Drill Hall", 
+         TeleDelay = 0, 
          Vnum = 639, 
          Tag = "", 
-         Sector = "city", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-      }, 
-   }, 
-   Filename = "darkhand.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg2 = 4, 
-         Command = "M", 
-         MiscData = 0, 
-         Arg1 = 601, 
-         Arg3 = 606, 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 32254, 
-         Command = "G", 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10488, 
-         Command = "G", 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 53, 
-         Arg3 = 16, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32250, 
-         Arg3 = 13, 
-      }, 
-      [6] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 609, 
-         Arg3 = 7, 
-      }, 
-      [7] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 607, 
-         Arg3 = 5, 
-      }, 
-      [8] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 606, 
-         Arg3 = 15, 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 606, 
-         Arg3 = 14, 
-      }, 
-      [10] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 605, 
-         Arg3 = 3, 
-      }, 
-      [11] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 604, 
-         Arg3 = 10, 
-      }, 
-      [12] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 603, 
-         Arg3 = 9, 
-      }, 
-      [13] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 601, 
-         Arg3 = 6, 
-      }, 
-      [14] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 600, 
-         Arg3 = 606, 
-      }, 
-      [15] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 610, 
-         Arg3 = 612, 
-      }, 
-      [16] = 
-      {
-         Arg2 = 10, 
-         Command = "M", 
-         MiscData = 0, 
-         Arg1 = 602, 
-         Arg3 = 601, 
-      }, 
-      [17] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32240, 
-         Arg3 = 7, 
-      }, 
-      [18] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32239, 
-         Arg3 = 5, 
-      }, 
-      [19] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32250, 
-         Arg3 = 13, 
-      }, 
-      [20] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32248, 
-         Arg3 = 7, 
-      }, 
-      [21] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32247, 
-         Arg3 = 13, 
-      }, 
-      [22] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32246, 
-         Arg3 = 5, 
-      }, 
-      [23] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32245, 
-         Arg3 = 14, 
-      }, 
-      [24] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32244, 
-         Arg3 = 3, 
-      }, 
-      [25] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32243, 
-         Arg3 = 10, 
-      }, 
-      [26] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32242, 
-         Arg3 = 9, 
-      }, 
-      [27] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32241, 
-         Arg3 = 6, 
-      }, 
-      [28] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 50, 
-         Arg3 = 16, 
-      }, 
-      [29] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 32254, 
-         Command = "G", 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10488, 
-         Command = "G", 
-      }, 
-      [31] = 
-      {
-         Arg2 = 5, 
-         Command = "M", 
-         MiscData = 0, 
-         Arg1 = 604, 
-         Arg3 = 612, 
-      }, 
-      [32] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 633, 
-         Arg3 = 2, 
-      }, 
-      [33] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 633, 
-         Arg3 = 2, 
-      }, 
-      [34] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 632, 
-         Arg3 = 2, 
-      }, 
-      [35] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 632, 
-         Arg3 = 2, 
-      }, 
-      [36] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 634, 
-         Arg3 = 2, 
-      }, 
-      [37] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 634, 
-         Arg3 = 2, 
-      }, 
-      [38] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 635, 
-         Arg3 = 2, 
-      }, 
-      [39] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 635, 
-         Arg3 = 2, 
-      }, 
-      [40] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 630, 
-         Arg3 = 2, 
-      }, 
-      [41] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 630, 
-         Arg3 = 2, 
-      }, 
-      [42] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 631, 
-         Arg3 = 2, 
-      }, 
-      [43] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 631, 
-         Arg3 = 2, 
-      }, 
-      [44] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 611, 
-         Arg3 = 613, 
-      }, 
-      [45] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 672, 
-         Arg3 = 2, 
-      }, 
-      [46] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 672, 
-         Arg3 = 2, 
-      }, 
-      [47] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 671, 
-         Arg3 = 2, 
-      }, 
-      [48] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 671, 
-         Arg3 = 2, 
-      }, 
-      [49] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 670, 
-         Arg3 = 2, 
-      }, 
-      [50] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 670, 
-         Arg3 = 2, 
-      }, 
-      [51] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 38, 
-         Arg3 = 692, 
-      }, 
-      [52] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 32201, 
-         Arg3 = 691, 
-      }, 
-      [53] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 614, 
-         Arg3 = 1, 
-      }, 
-      [54] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 621, 
-         Arg3 = 695, 
-      }, 
-      [55] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 695, 
-         Arg3 = 2, 
-      }, 
-      [56] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 612, 
-         Arg3 = 645, 
-      }, 
-      [57] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 607, 
-         Arg3 = 693, 
-      }, 
-      [58] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 608, 
-         Arg3 = 693, 
-      }, 
-      [59] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 606, 
-         Arg3 = 696, 
-      }, 
-      [60] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 622, 
-         Arg3 = 696, 
-      }, 
-      [61] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 680, 
-         Arg3 = 1, 
-      }, 
-      [62] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 683, 
-         Arg3 = 1, 
-      }, 
-      [63] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 613, 
-         Arg3 = 686, 
-      }, 
-      [64] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 686, 
-         Arg3 = 1, 
-      }, 
-      [65] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 686, 
-         Arg3 = 1, 
-      }, 
-      [66] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 688, 
-         Arg3 = 1, 
-      }, 
-      [67] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 688, 
-         Arg3 = 1, 
-      }, 
-      [68] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 687, 
-         Arg3 = 1, 
-      }, 
-      [69] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 687, 
-         Arg3 = 1, 
-      }, 
-      [70] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 684, 
-         Arg3 = 1, 
-      }, 
-      [71] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 684, 
-         Arg3 = 1, 
-      }, 
-      [72] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 684, 
-         Arg3 = 1, 
-      }, 
-      [73] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 681, 
-         Arg3 = 1, 
-      }, 
-      [74] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 681, 
-         Arg3 = 1, 
-      }, 
-      [75] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 681, 
-         Arg3 = 1, 
-      }, 
-      [76] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 609, 
-         Arg3 = 619, 
-      }, 
-      [77] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 624, 
-         Command = "G", 
-      }, 
-      [78] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 610, 
-         Arg3 = 679, 
-      }, 
-      [79] = 
-      {
-         Arg2 = 1, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 679, 
-         Arg3 = 1, 
-      }, 
-      [80] = 
-      {
-         Arg2 = 3, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 679, 
-         Arg3 = 1, 
-      }, 
-      [81] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 611, 
-         Arg3 = 682, 
-      }, 
-      [82] = 
-      {
-         Arg2 = 2, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 612, 
-         Arg3 = 621, 
-      }, 
-      [83] = 
-      {
-         Arg2 = 2, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 612, 
-         Arg3 = 621, 
-      }, 
-      [84] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 613, 
-         Arg3 = 699, 
-      }, 
-      [85] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 615, 
-         Arg3 = 677, 
-      }, 
-      [86] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 616, 
-         Arg3 = 674, 
-      }, 
-      [87] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 617, 
-         Arg3 = 673, 
-      }, 
-      [88] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 614, 
-         Arg3 = 675, 
-      }, 
-      [89] = 
-      {
-         Arg2 = 2, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 618, 
-         Arg3 = 689, 
-      }, 
-      [90] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32200, 
-         Arg3 = 16, 
-      }, 
-      [91] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32206, 
-         Arg3 = 6, 
-      }, 
-      [92] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32205, 
-         Arg3 = 8, 
-      }, 
-      [93] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32204, 
-         Arg3 = 13, 
-      }, 
-      [94] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32203, 
-         Arg3 = 7, 
-      }, 
-      [95] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32202, 
-         Arg3 = 5, 
-      }, 
-      [96] = 
-      {
-         Arg2 = 2, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 618, 
-         Arg3 = 689, 
-      }, 
-      [97] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32200, 
-         Arg3 = 16, 
-      }, 
-      [98] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32206, 
-         Arg3 = 6, 
-      }, 
-      [99] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32205, 
-         Arg3 = 8, 
-      }, 
-      [100] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32204, 
-         Arg3 = 13, 
-      }, 
-      [101] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32203, 
-         Arg3 = 7, 
-      }, 
-      [102] = 
-      {
-         Arg2 = 1, 
-         Command = "E", 
-         MiscData = 1, 
-         Arg1 = 32202, 
-         Arg3 = 5, 
-      }, 
-      [103] = 
-      {
-         Arg2 = 0, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 689, 
-         Arg3 = 1, 
-      }, 
-      [104] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 619, 
-         Arg3 = 690, 
-      }, 
-      [105] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg1 = 620, 
-         Arg3 = 690, 
-      }, 
-      [106] = 
-      {
-         Arg2 = 2, 
-         Command = "D", 
-         MiscData = 0, 
-         Arg1 = 690, 
-         Arg3 = 1, 
-      }, 
-      [107] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg1 = 9001, 
-         Arg3 = 644, 
       }, 
    }, 
    Objects = 
    {
       [608] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "A stormtrooper groin plate was left here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "assault stormtrooper groin plate s608", 
          WearFlags = 
          {
             [0] = "Take", 
             [11] = "Waist", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "assault stormtrooper groin plate s608", 
-         Vnum = 608, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "an assault stormtrooper groin plate", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -5949,30 +5952,31 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 56, 
+         ShortDescr = "an assault stormtrooper groin plate", 
+         Vnum = 608, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [609] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Some stormtrooper leg armor was left here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "stormtrooper leg plates s609", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 6, 
-         Name = "stormtrooper leg plates s609", 
-         Vnum = 609, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper leg plates", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -5982,21 +5986,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 56, 
+         ShortDescr = "assault stormtrooper leg plates", 
+         Vnum = 609, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [610] = 
       {
          Description = "An Imperial Tie Fighter is docked here.", 
-         Weight = 1, 
+         Name = "tie fighter", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "tie fighter", 
-         Vnum = 610, 
-         Cost = 0, 
-         ShortDescr = "a tie fighter", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6006,21 +6011,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "spacecraft", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "a tie fighter", 
+         Vnum = 610, 
+         ActionDescription = "", 
+         ItemType = "spacecraft", 
+         Tag = "", 
       }, 
       [611] = 
       {
          Description = "A list is on the wall here.", 
-         Weight = 1, 
+         Name = "listtttt", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "listtttt", 
-         Vnum = 611, 
-         Cost = 0, 
-         ShortDescr = "a list", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6030,25 +6036,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "furniture", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "a list", 
+         Vnum = 611, 
+         ActionDescription = "", 
+         ItemType = "furniture", 
+         Tag = "", 
       }, 
       [612] = 
       {
-         Description = "A portable oven is plugged into a wall socket.", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A portable oven is plugged into a wall socket.", 
+         Name = "portable oven", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 1000, 
-         Name = "portable oven", 
-         Vnum = 612, 
          Weight = 20, 
-         ShortDescr = "a portable oven", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6058,25 +6065,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "oven", 
+         Cost = 1000, 
          Layers = 0, 
+         ShortDescr = "a portable oven", 
+         Vnum = 612, 
+         ActionDescription = "", 
+         ItemType = "oven", 
+         Tag = "", 
       }, 
       [613] = 
       {
-         Description = "An ancient book holds many dark secrets.", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "An ancient book holds many dark secrets.", 
+         Name = "ancient book sith teachings book123sith", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Name = "ancient book sith teachings book123sith", 
-         Vnum = 613, 
          Weight = 1, 
-         ShortDescr = "an ancient book", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6086,30 +6094,31 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "book", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "an ancient book", 
+         Vnum = 613, 
+         ActionDescription = "", 
+         ItemType = "book", 
+         Tag = "", 
       }, 
       [620] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Some white boots are here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "assault stormtrooper boots", 
          WearFlags = 
          {
             [0] = "Take", 
             [6] = "Feet", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "assault stormtrooper boots", 
-         Vnum = 620, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper boots", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -6119,29 +6128,30 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "assault stormtrooper boots", 
+         Vnum = 620, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [621] = 
       {
-         Description = "Thank the force the trash compactor key is here.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         Name = "trash comapctor key", 
-         Vnum = 621, 
          Flags = 
          {
             [25] = "Hidden", 
          }, 
-         ShortDescr = "trash comapctor key", 
-         ActionDescription = "", 
+         Description = "Thank the force the trash compactor key is here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "trash comapctor key", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6151,25 +6161,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "key", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "trash comapctor key", 
+         Vnum = 621, 
+         ActionDescription = "", 
+         ItemType = "key", 
+         Tag = "", 
       }, 
       [622] = 
       {
-         Description = "A piece of duraplast tubing is here.", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A piece of duraplast tubing is here.", 
+         Name = "duraplast", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 100, 
-         Name = "duraplast", 
-         Vnum = 622, 
          Weight = 1, 
-         ShortDescr = "duraplast tubing", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6179,25 +6190,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "duraplast", 
+         Cost = 100, 
          Layers = 0, 
+         ShortDescr = "duraplast tubing", 
+         Vnum = 622, 
+         ActionDescription = "", 
+         ItemType = "duraplast", 
+         Tag = "", 
       }, 
       [623] = 
       {
-         Description = "A small sculture depicts a strange batlike creature devouring a humaniod form.", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A small sculture depicts a strange batlike creature devouring a humaniod form.", 
+         Name = "a sculpture", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 10000, 
-         Name = "a sculpture", 
-         Vnum = 623, 
          Weight = 1, 
-         ShortDescr = "a sculpture", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6207,17 +6219,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "treasure", 
+         Cost = 10000, 
          Layers = 0, 
+         ShortDescr = "a sculpture", 
+         Vnum = 623, 
+         ActionDescription = "", 
+         ItemType = "treasure", 
+         Tag = "", 
       }, 
       [624] = 
       {
-         Description = "A royal guards force pike was left here.", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
+         Description = "A royal guards force pike was left here.", 
          Affects = 
          {
             [1] = 
@@ -6226,15 +6243,11 @@ that take up many hours of the day.\
                Location = 18, 
             }, 
          }, 
+         Name = "royal guards force pike", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 1500, 
-         Name = "royal guards force pike", 
-         Vnum = 624, 
          Weight = 12, 
-         ShortDescr = "a royal guards force pike", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -6244,21 +6257,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "weapon", 
+         Cost = 1500, 
          Layers = 0, 
+         ShortDescr = "a royal guards force pike", 
+         Vnum = 624, 
+         ActionDescription = "", 
+         ItemType = "weapon", 
+         Tag = "", 
       }, 
       [699] = 
       {
          Description = "Dark hand key", 
-         Weight = 1, 
+         Name = "Dark hand key", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Dark hand key", 
-         Vnum = 699, 
-         Cost = 0, 
-         ShortDescr = "Dark hand key", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6268,21 +6282,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "Dark hand key", 
+         Vnum = 699, 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         Tag = "", 
       }, 
       [698] = 
       {
          Description = "Some god dropped a newly created the Dark hand key here.", 
-         Weight = 1, 
+         Name = "the Dark hand key", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "the Dark hand key", 
-         Vnum = 698, 
-         Cost = 0, 
-         ShortDescr = "a newly created the Dark hand key", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6292,21 +6307,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "a newly created the Dark hand key", 
+         Vnum = 698, 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         Tag = "", 
       }, 
       [697] = 
       {
          Description = "Some god dropped a newly created the silver urchin key here.", 
-         Weight = 1, 
+         Name = "the silver urchin key", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "the silver urchin key", 
-         Vnum = 697, 
-         Cost = 0, 
-         ShortDescr = "a newly created the silver urchin key", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6316,25 +6332,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "government", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "a newly created the silver urchin key", 
+         Vnum = 697, 
+         ActionDescription = "", 
+         ItemType = "government", 
+         Tag = "", 
       }, 
       [696] = 
       {
-         Description = "Imperial battle plans were left here.", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Imperial battle plans were left here.", 
+         Name = "Battle Plans", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Name = "Battle Plans", 
-         Vnum = 696, 
          Weight = 1, 
-         ShortDescr = "the battle plans", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6344,17 +6361,21 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "paper", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "the battle plans", 
+         Vnum = 696, 
+         ActionDescription = "", 
+         ItemType = "paper", 
+         Tag = "", 
       }, 
       [666] = 
       {
-         Description = "A Clan Tattoo", 
-         WearFlags = 
+         Flags = 
          {
-            [0] = "Take", 
-            [7] = "Hands", 
+            [30] = "Prototype", 
          }, 
+         Description = "A Clan Tattoo", 
          Affects = 
          {
             [1] = 
@@ -6367,28 +6388,25 @@ that take up many hours of the day.\
          {
             [1] = 
             {
+               Keyword = "tattoo ", 
                Description = "A beautiful piece of artwork makes you feel strong and proud to have your\
 \13Clan's Tattoo on your hands. \
 \13", 
-               Keyword = "tattoo ", 
             }, 
             [2] = 
             {
+               Keyword = "tattoo ", 
                Description = "Your Clan's Tattoo makes you feel strong and proud you joined them.\
 \13", 
-               Keyword = "tattoo ", 
             }, 
          }, 
-         Cost = 0, 
-         Weight = 1, 
          Name = "tattoo ", 
-         Vnum = 666, 
-         Flags = 
+         WearFlags = 
          {
-            [30] = "Prototype", 
+            [0] = "Take", 
+            [7] = "Hands", 
          }, 
-         ShortDescr = "A Clan Tattoo", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6398,25 +6416,26 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "trash", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "A Clan Tattoo", 
+         Vnum = 666, 
+         ActionDescription = "", 
+         ItemType = "trash", 
+         Tag = "", 
       }, 
       [695] = 
       {
-         Description = "A lift leading to The Imperial Star Destroyer Darkhand is here.", 
-         Weight = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Name = "The Imperial Star Destroyer Darkhand", 
-         Vnum = 695, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         ShortDescr = "The Imperial Star Destroyer Darkhand", 
-         ActionDescription = "", 
+         Description = "A lift leading to The Imperial Star Destroyer Darkhand is here.", 
+         Name = "The Imperial Star Destroyer Darkhand", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6426,21 +6445,22 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "spacecraft", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "The Imperial Star Destroyer Darkhand", 
+         Vnum = 695, 
+         ActionDescription = "", 
+         ItemType = "spacecraft", 
+         Tag = "", 
       }, 
       [600] = 
       {
          Description = "An assault transport is docked here.", 
-         Weight = 1, 
+         Name = "an assault transport", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "an assault transport", 
-         Vnum = 600, 
-         Cost = 0, 
-         ShortDescr = "an assault transport", 
-         ActionDescription = "", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -6450,18 +6470,37 @@ that take up many hours of the day.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "spacecraft", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "an assault transport", 
+         Vnum = 600, 
+         ActionDescription = "", 
+         ItemType = "spacecraft", 
+         Tag = "", 
       }, 
       [601] = 
       {
-         Description = "A stormtrooper helmet was dropped here.", 
-         WearFlags = 
+         MudProgs = 
          {
-            [0] = "Take", 
-            [4] = "Head", 
+            [1] = 
+            {
+               Code = "if clan($n) != The Empire\
+mpechoat $n What do you think you are a stormtrooper?\
+mpechoat $n Go join the empire if you want to wear that!\
+mpechoaround $n $n thinks $ss a stormtrooper.\
+mpforce $n remove as601 \
+endif\
+", 
+               Arguments = "100", 
+               MudProgType = "wear_prog", 
+               ScriptType = "MProg", 
+            }, 
          }, 
-         Weight = 5, 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         Description = "A stormtrooper helmet was dropped here.", 
          Affects = 
          {
             [1] = 
@@ -6478,31 +6517,13 @@ that take up many hours of the day.\
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if clan($n) != The Empire\
-mpechoat $n What do you think you are a stormtrooper?\
-mpechoat $n Go join the empire if you want to wear that!\
-mpechoaround $n $n thinks $ss a stormtrooper.\
-mpforce $n remove as601 \
-endif\
-", 
-               MudProgType = "wear_prog", 
-               Arguments = "100", 
-               ScriptType = "MProg", 
-            }, 
-         }, 
          Name = "assault stormtrooper helmet as601", 
-         Vnum = 601, 
-         Flags = 
+         WearFlags = 
          {
-            [31] = "HumanSize", 
+            [0] = "Take", 
+            [4] = "Head", 
          }, 
-         ShortDescr = "an assault stormtrooper helmet", 
-         ActionDescription = "", 
+         Weight = 5, 
          ObjectValues = 
          {
             [1] = 9, 
@@ -6512,30 +6533,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "an assault stormtrooper helmet", 
+         Vnum = 601, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [602] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "A stormtrooper helmet was dropped here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "stormtrooper helmet s602", 
          WearFlags = 
          {
             [0] = "Take", 
             [4] = "Head", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 5, 
-         Name = "stormtrooper helmet s602", 
-         Vnum = 602, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "a stormtrooper helmet", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -6545,30 +6567,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "a stormtrooper helmet", 
+         Vnum = 602, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [603] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Stormtrooper gloves were dropped here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Assault stormtrooper gloves s603", 
          WearFlags = 
          {
             [0] = "Take", 
             [7] = "Hands", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "Assault stormtrooper gloves s603", 
-         Vnum = 603, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper gloves", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 4, 
@@ -6578,30 +6601,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "assault stormtrooper gloves", 
+         Vnum = 603, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [604] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Some stormtrooper arm plates were left here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Assault stormtrooper arm plates s604", 
          WearFlags = 
          {
             [0] = "Take", 
             [8] = "Arms", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "Assault stormtrooper arm plates s604", 
-         Vnum = 604, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper arm plates", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -6611,30 +6635,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "assault stormtrooper arm plates", 
+         Vnum = 604, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [605] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Stormtrooper shoulder plates were discarded here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Assault stormtrooper shoulder plates s605", 
          WearFlags = 
          {
             [0] = "Take", 
             [2] = "Neck", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "Assault stormtrooper shoulder plates s605", 
-         Vnum = 605, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper shoulder plates", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -6644,30 +6669,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "assault stormtrooper shoulder plates", 
+         Vnum = 605, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [606] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "Stormtrooper hand plates were discarded here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Assault stormtrooper hand plates s606", 
          WearFlags = 
          {
             [0] = "Take", 
             [12] = "Wrist", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 3, 
-         Name = "Assault stormtrooper hand plates s606", 
-         Vnum = 606, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "assault stormtrooper hand plates", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -6677,30 +6703,31 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 0, 
+         ShortDescr = "assault stormtrooper hand plates", 
+         Vnum = 606, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
       [607] = 
       {
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          Description = "A white stormtrooper chest plate was left here.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "assault stormtrooper chest plate s607", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Weight = 7, 
-         Name = "assault stormtrooper chest plate s607", 
-         Vnum = 607, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         ShortDescr = "an assault stormtrooper chest plate", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -6710,20 +6737,35 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ItemType = "armor", 
+         Cost = 0, 
          Layers = 56, 
+         ShortDescr = "an assault stormtrooper chest plate", 
+         Vnum = 607, 
+         ActionDescription = "", 
+         ItemType = "armor", 
+         Tag = "", 
       }, 
    }, 
+   Name = "Star Destroyer - Dark Hand", 
+   LowEconomy = 30506310, 
    Author = "Durga", 
-   FileFormatVersion = 1, 
+   LevelRanges = 
+   {
+      Hard = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+   }, 
+   ResetMessage = "", 
    VnumRanges = 
    {
       Object = 
-      {
-         Last = 699, 
-         First = 600, 
-      }, 
-      Room = 
       {
          Last = 699, 
          First = 600, 
@@ -6733,85 +6775,18 @@ endif\
          Last = 699, 
          First = 600, 
       }, 
-   }, 
-   ResetMessage = "", 
-   ResetFrequency = 5, 
-   Name = "Star Destroyer - Dark Hand", 
-   HighEconomy = 0, 
-   LevelRanges = 
-   {
-      Soft = 
+      Room = 
       {
-         Low = 0, 
-         High = 105, 
-      }, 
-      Hard = 
-      {
-         Low = 0, 
-         High = 105, 
+         Last = 699, 
+         First = 600, 
       }, 
    }, 
    Mobiles = 
    {
       [608] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a mouse droid", 
-         Vnum = 608, 
-         Level = 1, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An MSE droid wheels around the floor.\
 ", 
-         Description = "The MSE droid is a small black droid less than a foot in hight. It\
-wheels around the floor rapidly and comunicates in high pitched\
-beeps. This behavior along with the sound of its initials have easily\
-led it to being more commonly known as a \"mouse droid\
-", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [11] = "barabel", 
-            }, 
-            Speaking = 
-            {
-               [11] = "barabel", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "mouse droid mse", 
-         ArmorClass = 100, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [0] = "Npc", 
@@ -6819,353 +6794,431 @@ led it to being more commonly known as a \"mouse droid\
             [26] = "Droid", 
             [7] = "Wimpy", 
          }, 
+         Description = "The MSE droid is a small black droid less than a foot in hight. It\
+wheels around the floor rapidly and comunicates in high pitched\
+beeps. This behavior along with the sound of its initials have easily\
+led it to being more commonly known as a \"mouse droid\
+", 
+         ArmorClass = 100, 
+         Name = "mouse droid mse", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 1, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [11] = "barabel", 
+            }, 
+            Speaks = 
+            {
+               [11] = "barabel", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 1, 
-            DamPlus = 0, 
             DamSizeDice = 2, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a mouse droid", 
+         Vnum = 608, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [609] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 16, 
-         ShortDescr = "imperial royal guard", 
-         Vnum = 609, 
-         Level = 80, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial royal guard stands at his post.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 16, 
-         NumberOfAttacks = 0, 
-         Name = "the empire", 
-         ArmorClass = -100, 
-         Credits = 500, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = -100, 
+         Name = "the empire", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 80, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 500, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 8, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 16, 
+         DefaultPosition = "standing", 
+         HitRoll = 16, 
+         ShortDescr = "imperial royal guard", 
+         Vnum = 609, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [610] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "imperial royal guard", 
-         Vnum = 610, 
-         Level = 80, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial royal guard stands at his post.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "the empire", 
-         ArmorClass = -100, 
-         Credits = 500, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = -100, 
+         Name = "the empire", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 80, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 500, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 8, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "imperial royal guard", 
+         Vnum = 610, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [611] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "imperial royal guard", 
-         Vnum = 611, 
-         Level = 80, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial royal guard stands at his post.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "the empire", 
-         ArmorClass = -100, 
-         Credits = 500, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = -100, 
+         Name = "the empire", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 80, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 500, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 8, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "imperial royal guard", 
+         Vnum = 611, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [612] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "imperial royal guard", 
-         Vnum = 612, 
-         Level = 80, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial royal guard stands at his post.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "the empire", 
-         ArmorClass = -100, 
-         Credits = 500, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Damage = 
-         {
-            DamNoDice = 8, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [613] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 17, 
-         ShortDescr = "Captain Harlef", 
-         Vnum = 613, 
-         Level = 85, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "Captain Harlef stands supervising the bridge.\
-", 
          Description = "", 
-         DefaultPosition = "standing", 
-         NumberOfAttacks = 0, 
+         ArmorClass = -100, 
+         Name = "the empire", 
          Height = 0, 
+         Position = "standing", 
+         Level = 80, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 500, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 17, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 8, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "imperial royal guard", 
+         Vnum = 612, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [613] = 
+      {
+         LongDescr = "Captain Harlef stands supervising the bridge.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         Description = "", 
+         ArmorClass = -112, 
+         Name = "captain Harlef", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 85, 
+         DamRoll = 17, 
+         HitChance = 
+         {
+            HitPlus = 850, 
+            HitSizeDice = 10, 
+            HitNoDice = 17, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 600, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 8, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
          MudProgs = 
          {
             [1] = 
@@ -7183,681 +7236,660 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
-               MudProgType = "act_prog", 
                Arguments = "package", 
+               MudProgType = "act_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "captain Harlef", 
-         ArmorClass = -112, 
-         Credits = 600, 
+         DefaultPosition = "standing", 
+         HitRoll = 17, 
+         ShortDescr = "Captain Harlef", 
+         Vnum = 613, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [614] = 
+      {
+         LongDescr = "An imperial pilot sits at his station.\
+", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         ArmorClass = -100, 
+         Name = "pilot", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 80, 
          HitChance = 
          {
-            HitNoDice = 17, 
+            HitPlus = 800, 
             HitSizeDice = 10, 
-            HitPlus = 850, 
+            HitNoDice = 16, 
          }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 8, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 16, 
+         DefaultPosition = "standing", 
+         HitRoll = 16, 
+         ShortDescr = "an imperial pilot", 
+         Vnum = 614, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [615] = 
+      {
+         LongDescr = "A copilot sits at his post.\
+", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         ArmorClass = -87, 
+         Name = "copilot", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 75, 
+         HitChance = 
+         {
+            HitPlus = 750, 
+            HitSizeDice = 10, 
+            HitNoDice = 15, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 15, 
+         DefaultPosition = "standing", 
+         HitRoll = 15, 
+         ShortDescr = "a copilot", 
+         Vnum = 615, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [616] = 
+      {
+         LongDescr = "A gunner checks of the weaponsystems.\
+", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         ArmorClass = -75, 
+         Name = "gunner", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 70, 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 14, 
+         DefaultPosition = "standing", 
+         HitRoll = 14, 
+         ShortDescr = "a gunner", 
+         Vnum = 616, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [617] = 
+      {
+         LongDescr = "A navigator is calculating a hyperjump.\
+", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         ArmorClass = -75, 
+         Name = "navigator", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 70, 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 14, 
+         DefaultPosition = "standing", 
+         HitRoll = 14, 
+         ShortDescr = "a navigator", 
+         Vnum = 617, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [618] = 
+      {
+         LongDescr = "An imperial guard stands at attention.\
+", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
          }, 
-         Damage = 
-         {
-            DamNoDice = 8, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [614] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 16, 
-         ShortDescr = "an imperial pilot", 
-         Vnum = 614, 
-         Level = 80, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "An imperial pilot sits at his station.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 16, 
-         NumberOfAttacks = 0, 
-         Name = "pilot", 
-         ArmorClass = -100, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 8, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [615] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 15, 
-         ShortDescr = "a copilot", 
-         Vnum = 615, 
-         Level = 75, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "A copilot sits at his post.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 15, 
-         NumberOfAttacks = 0, 
-         Name = "copilot", 
-         ArmorClass = -87, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 10, 
-            HitPlus = 750, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [616] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 14, 
-         ShortDescr = "a gunner", 
-         Vnum = 616, 
-         Level = 70, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "A gunner checks of the weaponsystems.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
-         Name = "gunner", 
-         ArmorClass = -75, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 14, 
-            HitSizeDice = 10, 
-            HitPlus = 700, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [617] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 14, 
-         ShortDescr = "a navigator", 
-         Vnum = 617, 
-         Level = 70, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "A navigator is calculating a hyperjump.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
-         Name = "navigator", 
-         ArmorClass = -75, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 14, 
-            HitSizeDice = 10, 
-            HitPlus = 700, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [618] = 
-      {
-         Alignment = -500, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 8, 
-         ShortDescr = "an imperial guard", 
-         Vnum = 618, 
-         Level = 40, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "An imperial guard stands at attention.\
-", 
          Description = "The imperial guard stands at an unwaivering alert attention. He is\
 dressed in the standard black imperial military uniform common to\
 many imperial naval troopers. \
 ", 
-         DefaultPosition = "standing", 
+         ArmorClass = 0, 
+         Name = "the empire", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 40, 
          SpecFuns = 
          {
             [0] = "spec_clan_guard", 
          }, 
-         Height = 0, 
+         HitChance = 
+         {
+            HitPlus = 400, 
+            HitSizeDice = 10, 
+            HitNoDice = 8, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 15, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 8, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
          NumberOfAttacks = 0, 
-         Name = "the empire", 
-         ArmorClass = 0, 
-         Credits = 15, 
-         HitChance = 
-         {
-            HitNoDice = 8, 
-            HitSizeDice = 10, 
-            HitPlus = 400, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
          Damage = 
          {
             DamNoDice = 4, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = -500, 
+         Sex = "undistinguished", 
+         DamRoll = 8, 
+         DefaultPosition = "standing", 
+         HitRoll = 8, 
+         ShortDescr = "an imperial guard", 
+         Vnum = 618, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [619] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 14, 
-         ShortDescr = "An imperial officer", 
-         Vnum = 619, 
-         Level = 70, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial officer sits at the war table.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
-         Name = "An imperial Officer", 
-         ArmorClass = -75, 
-         Credits = 600, 
-         HitChance = 
-         {
-            HitNoDice = 14, 
-            HitSizeDice = 10, 
-            HitPlus = 700, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
-         Race = "Human", 
-      }, 
-      [620] = 
-      {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 18, 
-         ShortDescr = "General Hanson", 
-         Vnum = 620, 
-         Level = 90, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         LongDescr = "General Hanson sits at the war table.\
-", 
          Description = "", 
-         DefaultPosition = "standing", 
+         ArmorClass = -75, 
+         Name = "An imperial Officer", 
          Height = 0, 
+         Position = "standing", 
+         Level = 70, 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 600, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 18, 
-         NumberOfAttacks = 0, 
-         Name = "General Hanson", 
-         ArmorClass = -125, 
-         Credits = 600, 
-         HitChance = 
+         Stats = 
          {
-            HitNoDice = 18, 
-            HitSizeDice = 10, 
-            HitPlus = 900, 
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
          }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 14, 
+         DefaultPosition = "standing", 
+         HitRoll = 14, 
+         ShortDescr = "An imperial officer", 
+         Vnum = 619, 
+         Weight = 0, 
+         Race = "Human", 
+         Tag = "", 
+      }, 
+      [620] = 
+      {
+         LongDescr = "General Hanson sits at the war table.\
+", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
+         Description = "", 
+         ArmorClass = -125, 
+         Name = "General Hanson", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 90, 
+         HitChance = 
+         {
+            HitPlus = 900, 
+            HitSizeDice = 10, 
+            HitNoDice = 18, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 600, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 9, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "male", 
+         DamRoll = 18, 
+         DefaultPosition = "standing", 
+         HitRoll = 18, 
+         ShortDescr = "General Hanson", 
+         Vnum = 620, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [699] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a newly created spot", 
-         Vnum = 699, 
-         Level = 1, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "Some god abandoned a newly created spot here.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "spot", 
-         ArmorClass = 0, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = 0, 
+         Name = "spot", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 1, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 0, 
-            DamPlus = 0, 
             DamSizeDice = 0, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a newly created spot", 
+         Vnum = 699, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [600] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a newly created spot", 
-         Vnum = 600, 
-         Level = 1, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "Some god abandoned a newly created spot here.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "spot", 
-         ArmorClass = 0, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = 0, 
+         Name = "spot", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 1, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 0, 
-            DamPlus = 0, 
             DamSizeDice = 0, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a newly created spot", 
+         Vnum = 600, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [601] = 
       {
-         Alignment = -500, 
-         Weight = 0, 
-         Sex = "male", 
-         DamRoll = 12, 
-         ShortDescr = "an assault stormtrooper", 
-         Vnum = 601, 
-         Level = 60, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An assault stormtrooper is preparing for a mission.\
 ", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
          Description = "Dressed in white armored space suits over black body gloves the storm\
 trooper is a sight well recognized throughout the galaxy. Known and\
 feared. They are the Empires elite troopers. They are well trained\
@@ -7865,78 +7897,78 @@ and fearless. They have been conditioned with unquestioning loyalty\
 to their superiors and will always execute their orders precisly and\
 without question.\
 ", 
-         DefaultPosition = "standing", 
+         ArmorClass = -50, 
+         Name = "assault stormtrooper", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 60, 
          SpecFuns = 
          {
             [0] = "spec_stormtrooper", 
          }, 
-         Height = 0, 
+         HitChance = 
+         {
+            HitPlus = 600, 
+            HitSizeDice = 10, 
+            HitNoDice = 12, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 20, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 12, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
          NumberOfAttacks = 0, 
-         Name = "assault stormtrooper", 
-         ArmorClass = -50, 
-         Credits = 20, 
-         HitChance = 
-         {
-            HitNoDice = 12, 
-            HitSizeDice = 10, 
-            HitPlus = 600, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
          Damage = 
          {
             DamNoDice = 6, 
-            DamPlus = 2, 
             DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         Position = "standing", 
+         Alignment = -500, 
+         Sex = "male", 
+         DamRoll = 12, 
+         DefaultPosition = "standing", 
+         HitRoll = 12, 
+         ShortDescr = "an assault stormtrooper", 
+         Vnum = 601, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [602] = 
       {
-         Alignment = -500, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a stormtrooper", 
-         Vnum = 602, 
-         Level = 33, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial stormtrooper patrols the ship.\
 ", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          Description = "Dressed in white armored space suits over black body gloves the storm\
 trooper is a sight well recognized throughout the galaxy. Known and\
 feared. They are the Empires elite troopers. They are well trained\
@@ -7944,77 +7976,78 @@ and fearless. They have been conditioned with unquestioning loyalty\
 to their superiors and will always execute their orders precisly and\
 without question.\
 ", 
-         DefaultPosition = "standing", 
+         ArmorClass = 25, 
+         Name = "imperial stormtrooper", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 33, 
          SpecFuns = 
          {
             [0] = "spec_stormtrooper", 
          }, 
-         Height = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 0, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 0, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
          NumberOfAttacks = 0, 
-         Name = "imperial stormtrooper", 
-         ArmorClass = 25, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
          Damage = 
          {
             DamNoDice = 4, 
-            DamPlus = 0, 
             DamSizeDice = 4, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = -500, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a stormtrooper", 
+         Vnum = 602, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [603] = 
       {
-         Alignment = -500, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a stormtrooper", 
-         Vnum = 603, 
-         Level = 33, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "An imperial stormtrooper patrols the shipyard.\
 ", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          Description = "Dressed in white armored space suits over black body gloves the storm\
 trooper is a sight well recognized throughout the galaxy. Known and\
 feared. They are the Empires elite troopers. They are well trained\
@@ -8022,184 +8055,217 @@ and fearless. They have been conditioned with unquestioning loyalty\
 to their superiors and will always execute their orders precisly and\
 without question.\
 ", 
-         DefaultPosition = "standing", 
+         ArmorClass = 25, 
+         Name = "imperial stormtrooper", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 33, 
          SpecFuns = 
          {
             [0] = "spec_stormtrooper", 
          }, 
-         Height = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Credits = 0, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         HitRoll = 0, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
          NumberOfAttacks = 0, 
-         Name = "imperial stormtrooper", 
-         ArmorClass = 25, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
          Damage = 
          {
             DamNoDice = 4, 
-            DamPlus = 0, 
             DamSizeDice = 4, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = -500, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a stormtrooper", 
+         Vnum = 603, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [604] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a TIE Fighter pilot", 
-         Vnum = 604, 
-         Level = 23, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "A TIE Fighter pilot is preparing for flight.\
 ", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "tie fighter pilot", 
-         ArmorClass = 50, 
-         Credits = 30, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         Description = "", 
+         ArmorClass = 50, 
+         Name = "tie fighter pilot", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 23, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Credits = 30, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 1, 
-            DamPlus = 0, 
             DamSizeDice = 10, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a TIE Fighter pilot", 
+         Vnum = 604, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [605] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 21, 
-         ShortDescr = "an ancient sith spirit", 
-         Vnum = 605, 
-         Level = 105, 
+         LongDescr = "A faint image of a dark hooded figure sends shivers down your spine.\
+", 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         Description = "", 
+         ArmorClass = -162, 
+         Name = "ancient sith spirit teacher sith9870", 
+         Height = 0, 
          SpecFuns = 
          {
             [0] = "spec_dark_jedi", 
          }, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
-         NumberOfAttacks = 0, 
+         DamRoll = 21, 
+         Position = "standing", 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         LongDescr = "A faint image of a dark hooded figure sends shivers down your spine.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
+         Level = 105, 
          SaveVs = 
          {
+            SpellStaff = 0, 
             Wand = 0, 
             Breath = 0, 
             ParaPetri = 0, 
-            SpellStaff = 0, 
             PoisonDeath = 0, 
          }, 
-         Height = 0, 
-         HitRoll = 21, 
-         AttackFlags = 
+         HitChance = 
          {
-            [28] = "_28", 
-            [30] = "_30", 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
          }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         Credits = 0, 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [10] = "backstab", 
          }, 
+         AttackFlags = 
+         {
+            [28] = "_28", 
+            [30] = "_30", 
+         }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Alignment = 0, 
+         Sex = "undistinguished", 
          MudProgs = 
          {
             [1] = 
@@ -8208,94 +8274,23 @@ without question.\
 mpgoto 7\
 say ok purge me\
 ", 
-               MudProgType = "act_prog", 
                Arguments = "practices", 
+               MudProgType = "act_prog", 
                ScriptType = "MProg", 
             }, 
          }, 
-         Name = "ancient sith spirit teacher sith9870", 
-         ArmorClass = -162, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 21, 
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Position = "standing", 
+         DefaultPosition = "standing", 
+         HitRoll = 21, 
+         ShortDescr = "an ancient sith spirit", 
+         Vnum = 605, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [606] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-         ShortDescr = "a binary load lifter", 
-         Vnum = 606, 
-         Level = 20, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "A binary load lifter methodicly goes about its work.\
 ", 
-         Description = "The binary load lifter is a big droid used mainly for lifting and\
-moving large objects. Its very simple processing unit can only handle\
-very simple commands as there is very little need for an intelligent\
-droid laborer.\
-", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [11] = "barabel", 
-            }, 
-            Speaking = 
-            {
-               [11] = "barabel", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "binary load lifter", 
-         ArmorClass = 50, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -8304,74 +8299,75 @@ droid laborer.\
             [18] = "Mountable", 
             [24] = "NoAssist", 
          }, 
+         Description = "The binary load lifter is a big droid used mainly for lifting and\
+moving large objects. Its very simple processing unit can only handle\
+very simple commands as there is very little need for an intelligent\
+droid laborer.\
+", 
+         ArmorClass = 50, 
+         Name = "binary load lifter", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 20, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [11] = "barabel", 
+            }, 
+            Speaks = 
+            {
+               [11] = "barabel", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 0, 
-            DamPlus = 0, 
             DamSizeDice = 0, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         DefaultPosition = "standing", 
+         HitRoll = 0, 
+         ShortDescr = "a binary load lifter", 
+         Vnum = 606, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
       [607] = 
       {
-         Alignment = 0, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         DamRoll = 2, 
-         ShortDescr = "a power droid", 
-         Vnum = 607, 
-         Level = 10, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Strength = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-         }, 
          LongDescr = "A power droid is here.\
 ", 
-         Description = "The binary load lifter is a big droid used mainly for lifting and\
-moving large objects. Its very simple processing unit can only handle\
-very simple commands as there is very little need for an intelligent\
-droid laborer.\
-", 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [11] = "barabel", 
-            }, 
-            Speaking = 
-            {
-               [11] = "barabel", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "power droid", 
-         ArmorClass = 75, 
-         Credits = 0, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -8380,14 +8376,70 @@ droid laborer.\
             [18] = "Mountable", 
             [24] = "NoAssist", 
          }, 
+         Description = "The binary load lifter is a big droid used mainly for lifting and\
+moving large objects. Its very simple processing unit can only handle\
+very simple commands as there is very little need for an intelligent\
+droid laborer.\
+", 
+         ArmorClass = 75, 
+         Name = "power droid", 
+         Height = 0, 
+         Position = "standing", 
+         Level = 10, 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [11] = "barabel", 
+            }, 
+            Speaks = 
+            {
+               [11] = "barabel", 
+            }, 
+         }, 
+         Credits = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Dexterity = 10, 
+            Force = 0, 
+            Luck = 10, 
+            Charisma = 10, 
+            Wisdom = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Constitution = 10, 
+         }, 
+         NumberOfAttacks = 0, 
          Damage = 
          {
             DamNoDice = 0, 
-            DamPlus = 0, 
             DamSizeDice = 0, 
+            DamPlus = 0, 
          }, 
-         Position = "standing", 
+         Alignment = 0, 
+         Sex = "undistinguished", 
+         DamRoll = 2, 
+         DefaultPosition = "standing", 
+         HitRoll = 2, 
+         ShortDescr = "a power droid", 
+         Vnum = 607, 
+         Weight = 0, 
          Race = "Human", 
+         Tag = "", 
       }, 
    }, 
 }

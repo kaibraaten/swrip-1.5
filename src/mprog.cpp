@@ -14,6 +14,18 @@ MProg::MProg()
 
 }
 
+MProg::MProg(const MProg &rhv)
+    : progtypes(rhv.progtypes),
+      pImpl(std::make_unique<Impl>())
+{
+    for(auto mprogData : rhv.MudProgs())
+    {
+        auto mudprog = std::make_shared<MPROG_DATA>(*mprogData);
+        mudprog->triggered = false;
+        Add(mudprog);
+    }
+}
+
 MProg::~MProg()
 {
 

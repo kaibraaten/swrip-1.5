@@ -14,7 +14,7 @@ void do_trajectory(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     std::string arg3;
     int the_chance = 0;
-    std::shared_ptr<Vector3> argvec = std::make_shared<Vector3>();
+    Vector3 argvec;
     std::shared_ptr<Ship> ship;
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
@@ -114,23 +114,23 @@ void do_trajectory(std::shared_ptr<Character> ch, std::string argument)
     argument = OneArgument(argument, arg3);
 
     if(!arg2.empty())
-        argvec->x = std::stod(arg2);
+        argvec.x = std::stod(arg2);
 
     if(!arg3.empty())
-        argvec->y = std::stod(arg3);
+        argvec.y = std::stod(arg3);
 
     if(!argument.empty())
-        argvec->z = std::stod(argument);
-    else if(argvec->x != ship->Position->x && argvec->y != ship->Position->y)
-        argvec->z = 0;
+        argvec.z = std::stod(argument);
+    else if(argvec.x != ship->Position.x && argvec.y != ship->Position.y)
+        argvec.z = 0;
     else
-        argvec->z = 1;
+        argvec.z = 1;
 
-    CopyVector(ship->Heading, argvec);
+    ship->Heading = argvec;
     ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
     ch->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
-             argvec->x, argvec->y, argvec->z);
+             argvec.x, argvec.y, argvec.z);
     Act(AT_PLAIN, "$n manipulates the ship's controls.",
         ch, nullptr, nullptr, ActTarget::Room);
 

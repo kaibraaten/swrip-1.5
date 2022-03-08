@@ -77,6 +77,9 @@ public:
     Room(vnum_t vnum);
     virtual ~Room();
 
+    Room(const Room&) = delete;
+    Room &operator=(const Room&) = delete;
+    
     void Add(std::shared_ptr<Ship> ship);
     void Remove(std::shared_ptr<Ship> ship);
     const std::list<std::shared_ptr<Ship>> &Ships() const;
@@ -103,9 +106,12 @@ public:
 
     std::string Tag() const;
     void Tag(const std::string &tag);
+
+    class Plugin *Plugin = nullptr;
     
+    std::shared_ptr<Reset> FirstReset;
+    std::shared_ptr<Reset> LastReset;
     std::shared_ptr<Room> Next;
-    std::shared_ptr<Room> NextSort;
     std::shared_ptr<class Area> Area;
     std::string Name = "Floating in a void";
     std::string Description;

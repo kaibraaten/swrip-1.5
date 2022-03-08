@@ -73,27 +73,27 @@ namespace Flag
         enum :size_t
         {
             Coruscant,
-                Kashyyyk,
-                Ryloth,
-                _03,
-                _04,
-                MonCalamari,
-                Honoghr,
-                Gamorr,
-                Tatooine,
-                Adari,
-                Byss,
-                Endor,
-                _12,
-                _13,
-                _14,
-                _15,
-                Corellia,
-                Hoth,
-                _18,
-                _19,
-                Kuat
-                };
+            Kashyyyk,
+            Ryloth,
+            _03,
+            _04,
+            MonCalamari,
+            Honoghr,
+            Gamorr,
+            Tatooine,
+            Adari,
+            Byss,
+            Endor,
+            _12,
+            _13,
+            _14,
+            _15,
+            Corellia,
+            Hoth,
+            _18,
+            _19,
+            Kuat
+        };
     }
 }
 
@@ -220,7 +220,7 @@ constexpr auto OS_CORPSE = 1;
 /*
  * Time and weather stuff.
  */
-/* Sun position */
+ /* Sun position */
 enum class SunPosition
 {
     Dark,
@@ -561,10 +561,10 @@ constexpr auto MAX_NUMBER_OF_TURRETS_IN_SHIP = 10;
  *                                                                         *
  ***************************************************************************/
 
-/*
- * Well known mob virtual numbers.
- * Defined in #MOBILES.
- */
+ /*
+  * Well known mob virtual numbers.
+  * Defined in #MOBILES.
+  */
 inline vnum_t MOB_VNUM_ANIMATED_CORPSE = 5;
 inline vnum_t MOB_VNUM_SUPERMOB = 3;
 inline vnum_t MOB_VNUM_STORMTROOPER = 20;
@@ -594,38 +594,38 @@ namespace Flag
         enum : size_t
         {
             Npc,
-                Sentinel,
-                Scavenger,
-                _03,
-                _04,
-                Aggressive,
-                StayArea,
-                Wimpy,
-                Pet,
-                Train,
-                Practice,
-                Immortal,
-                _12,
-                _13,
-                _14,
-                _15,
-                Running,
-                _17,
-                Mountable,
-                Mounted,
-                Scholar,
-                Secretive,
-                Polymorphed,
-                MobInvis,
-                NoAssist,
-                NoKill,
-                Droid,
-                NoCorpse,
-                _28,
-                _29,
-                Prototype,
-                _31
-                };
+            Sentinel,
+            Scavenger,
+            _03,
+            _04,
+            Aggressive,
+            StayArea,
+            Wimpy,
+            Pet,
+            Train,
+            Practice,
+            Immortal,
+            _12,
+            _13,
+            _14,
+            _15,
+            Running,
+            _17,
+            Mountable,
+            Mounted,
+            Scholar,
+            Secretive,
+            Polymorphed,
+            MobInvis,
+            NoAssist,
+            NoKill,
+            Droid,
+            NoCorpse,
+            _28,
+            _29,
+            Prototype,
+            _31
+        };
     }
 }
 
@@ -646,38 +646,38 @@ namespace Flag
         enum : size_t
         {
             Blind,
-                Invisible,
-                DetectEvil,
-                DetectInvis,
-                DetectMagic,
-                DetectHidden,
-                Weaken,
-                Sanctuary,
-                FaerieFire,
-                Infrared,
-                Curse,
-                _flaming,
-                Poison,
-                Protect,
-                Paralysis,
-                Sneak,
-                Hide,
-                Sleep,
-                Charm,
-                Flying,
-                PassDoor,
-                Floating,
-                TrueSight,
-                DetectTraps,
-                Scrying,
-                Fireshield,
-                Shockshield,
-                _27,
-                Iceshield,
-                Possess,
-                Berserk,
-                AquaBreath
-                };
+            Invisible,
+            DetectEvil,
+            DetectInvis,
+            DetectMagic,
+            DetectHidden,
+            Weaken,
+            Sanctuary,
+            FaerieFire,
+            Infrared,
+            Curse,
+            _flaming,
+            Poison,
+            Protect,
+            Paralysis,
+            Sneak,
+            Hide,
+            Sleep,
+            Charm,
+            Flying,
+            PassDoor,
+            Floating,
+            TrueSight,
+            DetectTraps,
+            Scrying,
+            Fireshield,
+            Shockshield,
+            _27,
+            Iceshield,
+            Possess,
+            Berserk,
+            AquaBreath
+        };
     }
 }
 
@@ -691,40 +691,40 @@ namespace Flag
         enum : size_t
         {
             Fire,
-                Cold,
-                Electricity,
-                Energy,
-                Blunt,
-                Pierce,
-                Slash,
-                Acid,
-                Poison,
-                Drain,
-                Sleep,
-                Charm,
-                Hold,
-                NonMagic,
+            Cold,
+            Electricity,
+            Energy,
+            Blunt,
+            Pierce,
+            Slash,
+            Acid,
+            Poison,
+            Drain,
+            Sleep,
+            Charm,
+            Hold,
+            NonMagic,
 
-                // The Plusx bits have something to do with vs weapon hitroll.
-                Plus1,
-                Plus2,
-                Plus3,
-                Plus4,
-                Plus5,
-                Plus6,
-                Magic,
-                Paralysis,
-                Steal,
-                _23,
-                _24,
-                _25,
-                _26,
-                _27,
-                _28,
-                _29,
-                _30,
-                _31
-                };
+            // The Plusx bits have something to do with vs weapon hitroll.
+            Plus1,
+            Plus2,
+            Plus3,
+            Plus4,
+            Plus5,
+            Plus6,
+            Magic,
+            Paralysis,
+            Steal,
+            _23,
+            _24,
+            _25,
+            _26,
+            _27,
+            _28,
+            _29,
+            _30,
+            _31
+        };
     }
 }
 
@@ -735,38 +735,38 @@ namespace Flag
         enum : size_t
         {
             Bite,
-                Claws,
-                Tail,
-                Sting,
-                Punch,
-                Kick,
-                Trip,
-                _07,
-                _08,
-                _09,
-                Backstab,
-                _11,
-                _12,
-                _13,
-                _14,
-                _15,
-                _16,
-                _17,
-                _18,
-                _19,
-                _20,
-                _21,
-                _22,
-                _23,
-                _24,
-                _25,
-                _26,
-                _27,
-                _28,
-                _29,
-                _30,
-                _31
-                };
+            Claws,
+            Tail,
+            Sting,
+            Punch,
+            Kick,
+            Trip,
+            _07,
+            _08,
+            _09,
+            Backstab,
+            _11,
+            _12,
+            _13,
+            _14,
+            _15,
+            _16,
+            _17,
+            _18,
+            _19,
+            _20,
+            _21,
+            _22,
+            _23,
+            _24,
+            _25,
+            _26,
+            _27,
+            _28,
+            _29,
+            _30,
+            _31
+        };
     }
 }
 
@@ -781,38 +781,38 @@ namespace Flag
         enum : size_t
         {
             Parry,
-                Dodge,
-                _02,
-                _03,
-                _04,
-                _05,
-                _06,
-                _07,
-                _08,
-                _09,
-                _10,
-                _11,
-                _12,
-                _13,
-                _14,
-                _15,
-                _16,
-                _17,
-                _18,
-                Disarm,
-                _20,
-                Grip,
-                _22,
-                _23,
-                _24,
-                _25,
-                _26,
-                _27,
-                _28,
-                _29,
-                _30,
-                _31
-                };
+            Dodge,
+            _02,
+            _03,
+            _04,
+            _05,
+            _06,
+            _07,
+            _08,
+            _09,
+            _10,
+            _11,
+            _12,
+            _13,
+            _14,
+            _15,
+            _16,
+            _17,
+            _18,
+            Disarm,
+            _20,
+            Grip,
+            _22,
+            _23,
+            _24,
+            _25,
+            _26,
+            _27,
+            _28,
+            _29,
+            _30,
+            _31
+        };
     }
 }
 
@@ -921,7 +921,7 @@ enum
  * Sex.
  * Used in #MOBILES.
  */
-/* SexType */
+ /* SexType */
 enum
 {
     SEX_NEUTRAL,
@@ -1020,7 +1020,7 @@ constexpr auto NEW_CHARACTER_START_CREDITS = 5000;
  * Item types.
  * Used in #OBJECTS.
  */
-/* ItemTypes */
+ /* ItemTypes */
 enum
 {
     ITEM_NONE,
@@ -1288,38 +1288,38 @@ namespace Flag
         enum : size_t
         {
             Glow,
-                Hum,
-                _02,
-                HuttSize,
-                Contraband,
-                Invis,
-                Magic,
-                NoDrop,
-                Bless,
-                AntiGood,
-                AntiEvil,
-                AntiNeutral,
-                NoRemove,
-                Inventory,
-                _14,
-                _15,
-                _16,
-                _17,
-                SmallSize,
-                LargeSize,
-                _20,
-                ClanObject,
-                _22,
-                _23,
-                _24,
-                Hidden,
-                Poisoned,
-                Covering,
-                DeathRot,
-                Burried,
-                Prototype,
-                HumanSize
-                };
+            Hum,
+            _02,
+            HuttSize,
+            Contraband,
+            Invis,
+            Magic,
+            NoDrop,
+            Bless,
+            AntiGood,
+            AntiEvil,
+            AntiNeutral,
+            NoRemove,
+            Inventory,
+            _14,
+            _15,
+            _16,
+            _17,
+            SmallSize,
+            LargeSize,
+            _20,
+            ClanObject,
+            _22,
+            _23,
+            _24,
+            Hidden,
+            Poisoned,
+            Covering,
+            DeathRot,
+            Burried,
+            Prototype,
+            HumanSize
+        };
     }
 }
 
@@ -1418,38 +1418,38 @@ namespace Flag
         enum : size_t
         {
             Take,
-                Finger,
-                Neck,
-                Body,
-                Head,
-                Legs,
-                Feet,
-                Hands,
-                Arms,
-                Shield,
-                About,
-                Waist,
-                Wrist,
-                Wield,
-                Hold,
-                _dual_,
-                Ears,
-                Eyes,
-                _missile_,
-                Floating,
-                Over,
-                Disguise,
-                MaxWear,
-                _23,
-                _24,
-                _25,
-                _26,
-                _27,
-                _28,
-                _29,
-                _30,
-                _31
-                };
+            Finger,
+            Neck,
+            Body,
+            Head,
+            Legs,
+            Feet,
+            Hands,
+            Arms,
+            Shield,
+            About,
+            Waist,
+            Wrist,
+            Wield,
+            Hold,
+            _dual_,
+            Ears,
+            Eyes,
+            _missile_,
+            Floating,
+            Over,
+            Disguise,
+            MaxWear,
+            _23,
+            _24,
+            _25,
+            _26,
+            _27,
+            _28,
+            _29,
+            _30,
+            _31
+        };
     }
 }
 
@@ -1457,7 +1457,7 @@ namespace Flag
  * Apply types (for affects).
  * Used in #OBJECTS.
  */
-/* ApplyType */
+ /* ApplyType */
 enum
 {
     APPLY_NONE,
@@ -1564,7 +1564,7 @@ inline vnum_t ROOM_VNUM_CLONING_CLINIC = 10002;
  * Directions.
  * Used in #ROOMS.
  */
-/* DirectionType */
+ /* DirectionType */
 enum
 {
     DIR_INVALID = -1,
@@ -1587,7 +1587,7 @@ enum
  * Equpiment wear locations.
  * Used in #RESETS.
  */
-/* WearLocation */
+ /* WearLocation */
 enum
 {
     WEAR_NONE = -1,
@@ -1634,10 +1634,10 @@ enum
  *                                                                         *
  ***************************************************************************/
 
-/*
- * Conditions.
- */
-/* ConditionType */
+ /*
+  * Conditions.
+  */
+  /* ConditionType */
 enum
 {
     COND_DRUNK,
@@ -1650,7 +1650,7 @@ enum
 /*
  * Positions.
  */
-/* PositionType */
+ /* PositionType */
 enum
 {
     POS_DEAD,
@@ -1680,38 +1680,38 @@ namespace Flag
         enum : size_t
         {
             Npc,
-                BoughtPet,
-                ShoveDrag,
-                Autoexits,
-                Autoloot,
-                Autosac,
-                Blank,
-                _07,
-                Brief,
-                Combine,
-                Prompt,
-                TelnetGA,
-                Holylight,
-                WizInvis,
-                RoomVnum,
-                Silence,
-                NoEmote,
-                DontAutofuel,
-                NoTell,
-                Log,
-                Deny,
-                Freeze,
-                Killer,
-                _23,
-                Litterbug,
-                Ansi,
-                _26,
-                Nice,
-                Flee,
-                Autocred,
-                Automap,
-                Afk
-                };
+            BoughtPet,
+            ShoveDrag,
+            Autoexits,
+            Autoloot,
+            Autosac,
+            Blank,
+            _07,
+            Brief,
+            Combine,
+            Prompt,
+            _11,
+            Holylight,
+            WizInvis,
+            RoomVnum,
+            Silence,
+            NoEmote,
+            DontAutofuel,
+            NoTell,
+            Log,
+            Deny,
+            Freeze,
+            Killer,
+            _23,
+            Litterbug,
+            Ansi,
+            _26,
+            Nice,
+            Flee,
+            Autocred,
+            Automap,
+            Afk
+        };
     }
 }
 
@@ -1772,7 +1772,7 @@ constexpr auto LIQ_MAX = 39;
  *   'R': randomize room exits
  *   'S': stop (end of list)
  */
-/* Constants for arg2 of 'B' resets. */
+ /* Constants for arg2 of 'B' resets. */
 
 constexpr auto BIT_RESET_DOOR = 0;
 constexpr auto BIT_RESET_OBJECT = 1;
@@ -1798,7 +1798,7 @@ constexpr auto TYPE_PERSONAL = 3000; /* allows for 1000 herb types    */
 /*
  *  Target types.
  */
-/* SkillTargetType */
+ /* SkillTargetType */
 enum
 {
     TAR_IGNORE,
@@ -1893,7 +1893,7 @@ constexpr auto LEAVE_PROG = BV29;
 constexpr auto SCRIPT_PROG = BV30;
 constexpr auto USE_PROG = BV31;
 
-extern const std::array<const char *const, (int)AbilityClass::Max> AbilityName;
+extern const std::array<const char *const, (int) AbilityClass::Max> AbilityName;
 extern const std::array<const char *const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
 extern const std::array<const char *const, MAX_WEAR> WhereName;
 extern const std::array<int, MAX_DIR + 1> TrapDoor;
@@ -1926,7 +1926,7 @@ extern const std::array<int, LANG_MAX + 1> LanguageArray;
 extern const std::array<const char *const, LANG_MAX + 1> LanguageNames;
 
 extern const std::array<const char *const, MAX_POSITION> PositionName;
-extern const std::array<const char *const, (unsigned long)LogType::Max> CmdLogName;
+extern const std::array<const char *const, (unsigned long) LogType::Max> CmdLogName;
 extern const std::array<const char *const, MAX_SHIP_TYPE> ShipTypes;
 extern const std::array<const char *const, MAX_SHIP_CLASS> ShipClasses;
 extern const std::array<const char *const, Flag::MAX> ChannelNames;

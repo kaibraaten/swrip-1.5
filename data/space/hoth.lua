@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 11246, 
          Name = "Snowfield", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

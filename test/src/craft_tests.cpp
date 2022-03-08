@@ -79,7 +79,7 @@ public:
 
     ~FakeSkillRepository()
     {
-        SkillTable[gsn_mycraftingskill] = nullptr;
+
     }
 
     std::shared_ptr<Skill> GetSkill(int sn) override
@@ -102,6 +102,7 @@ public:
     void Load() override
     {
     }
+
     void Save() const override
     {
     }
@@ -109,6 +110,7 @@ public:
     void Load(std::shared_ptr<Home> home) override
     {
     }
+
     void Save(std::shared_ptr<Home> home) const override
     {
     }
@@ -121,9 +123,10 @@ public:
     {
         return nullptr;
     }
-    std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
+
+    std::vector<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
     {
-        return std::list<std::shared_ptr<Home>>();
+        return { };
     }
 
     bool IsResidentOf(const std::string &name, vnum_t room) const override
@@ -162,14 +165,6 @@ protected:
     void TearDown() override
     {
         CleanupCharacter(_engineer);
-        _engineer = nullptr;
-
-        _resultantObject = nullptr;
-        _location = nullptr;
-
-        _area = nullptr;
-
-        Log = nullptr;
     }
 
     std::list<std::shared_ptr<Object>> MakeMaterials() const
@@ -544,7 +539,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
     EXPECT_NE(timer, nullptr);
 }
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
 {
     const CraftingMaterial material;
@@ -560,7 +554,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
     EXPECT_NE(ptr, nullptr);
     EXPECT_EQ(*ptr, do_craftingengine);
 }
-#endif
 
 TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
 {

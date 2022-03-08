@@ -1,7 +1,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <list>
+#include <vector>
 #include <utility>
 
 #include "imp/scanner/tokenkind.hpp"
@@ -13,7 +13,7 @@ using namespace Imp;
 TEST(ScannerTests, TestSmallProgram)
 {
     // Arrange
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "",
         "# En hyggelig hilsen",
@@ -21,7 +21,7 @@ TEST(ScannerTests, TestSmallProgram)
         "print ('Hei, ', navn)"
     };
 
-    std::list<TokenKind> expected =
+    std::vector<TokenKind> expected =
     { 
         TokenKind::NameToken,
         TokenKind::EqualToken,
@@ -51,7 +51,7 @@ TEST(ScannerTests, TestSmallProgram)
 TEST(ScannerTests, TestStringLiteral)
 {
     // Arrange
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "\"Kai Braaten\"",
         "'Kai Braaten'"
@@ -80,7 +80,7 @@ TEST(ScannerTests, TestStringLiteral)
 
 TEST(ScannerTests, ForLoop)
 {
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "for y in [2020, 2021, 2022, 2023, 2024, 2025]:",
         "    a = y % 19",
@@ -89,7 +89,7 @@ TEST(ScannerTests, ForLoop)
         "    pass"
     };
 
-    std::list<Imp::TokenKind> expected =
+    std::vector<Imp::TokenKind> expected =
     {
         TokenKind::ForToken,
         TokenKind::NameToken,
@@ -148,14 +148,14 @@ TEST(ScannerTests, ForLoop)
 
 TEST(ScannerTests, Expressions)
 {
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "def myfun(a, b):",
         "    x = -(-2); print('Yo!');",
         "    x <= 5.4 and foo or bar"
     };
 
-    std::list<Imp::TokenKind> expected =
+    std::vector<Imp::TokenKind> expected =
     {
         TokenKind::DefToken,
         TokenKind::NameToken,
@@ -207,12 +207,12 @@ TEST(ScannerTests, Expressions)
 
 TEST(ScannerTests, Numbers)
 {
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "10 5.4 0 0.5 123 0.0"
     };
 
-    std::list<Imp::TokenKind> expected =
+    std::vector<Imp::TokenKind> expected =
     {
         TokenKind::IntegerToken,
         TokenKind::FloatToken,
@@ -237,7 +237,7 @@ TEST(ScannerTests, Numbers)
 
 TEST(ScannerTests, Indents)
 {
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "True",
         "    True",
@@ -251,7 +251,7 @@ TEST(ScannerTests, Indents)
         "    True"
     };
 
-    std::list<Imp::TokenKind> expected =
+    std::vector<Imp::TokenKind> expected =
     {
         TokenKind::TrueToken, TokenKind::NewLineToken,
         TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
@@ -282,7 +282,7 @@ TEST(ScannerTests, Indents)
 
 TEST(ScannerTests, Defs)
 {
-    std::list<std::string> source =
+    std::vector<std::string> source =
     {
         "def a1(b):",
         "    return True",
@@ -292,7 +292,7 @@ TEST(ScannerTests, Defs)
         ""
     };
 
-    std::list<Imp::TokenKind> expected =
+    std::vector<Imp::TokenKind> expected =
     {
         TokenKind::DefToken,
         TokenKind::NameToken,

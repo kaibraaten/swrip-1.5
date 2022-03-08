@@ -5,6 +5,7 @@
 #include "repos/planetrepository.hpp"
 #include "mud.hpp"
 #include "planet.hpp"
+#include "room.hpp"
 
 #define SPACE_DIR       DATA_DIR "space/"
 
@@ -20,7 +21,7 @@ private:
     static void PushOneSite(lua_State *L, const LandingSite *site, int idx);
     static void PushLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj);
     static void PushSpaceobject(lua_State *L, const std::shared_ptr<Spaceobject> &spaceobj);
-    static void LoadLandingSite(lua_State *L, LandingSite *site);
+    static void LoadLandingSite(lua_State *L, size_t idx, std::shared_ptr<Spaceobject> spaceobj);
     static void LoadLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj);
     static int L_SpaceobjectEntry(lua_State *L);
     static void ExecuteSpaceobjectFile(const std::string &filePath);
@@ -56,8 +57,8 @@ void LuaSpaceobjectRepository::PushOneSite(lua_State *L, const LandingSite *site
     lua_newtable(L);
 
     LuaSetfieldString(L, "Name", site->LocationName);
-    LuaSetfieldNumber(L, "DockVnum", site->Dock);
-    LuaSetfieldNumber(L, "IsSecret", site->IsSecret);
+    LuaSetfieldString(L, "DockVnum", VnumOrTagForRoom(site->Dock));
+    LuaSetfieldBoolean(L, "IsSecret", site->IsSecret);
 
     lua_settable(L, -3);
 }
@@ -111,7 +112,7 @@ void LuaSpaceobjectRepository::PushSpaceobject(lua_State *L, const std::shared_p
     PushLandingSites(L, spaceobj);
     LuaPushVector3(L, spaceobj->Position, "Position");
 
-    if(spaceobj->Heading->x != 0 || spaceobj->Heading->y != 0 || spaceobj->Heading->z != 0)
+    if(spaceobj->Heading.x != 0 || spaceobj->Heading.y != 0 || spaceobj->Heading.z != 0)
     {
         LuaPushVector3(L, spaceobj->Heading, "Heading");
     }
@@ -119,32 +120,29 @@ void LuaSpaceobjectRepository::PushSpaceobject(lua_State *L, const std::shared_p
     lua_setglobal(L, "spaceobject");
 }
 
-void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, LandingSite *site)
+void LuaSpaceobjectRepository::LoadLandingSite(lua_State *L, size_t idx, std::shared_ptr<Spaceobject> spaceobj)
 {
-    LuaGetfieldString(L, "Name", &site->LocationName);
-    LuaGetfieldLong(L, "DockVnum", &site->Dock);
-    LuaGetfieldBool(L, "IsSecret", &site->IsSecret);
+    LandingSite &site = spaceobj->LandingSites[idx];
+    LuaGetfieldString(L, "Name", &site.LocationName);
+    LuaGetfieldString(L, "DockVnum",
+                      [&site](const auto &vnumOrTag)
+                      {
+                          if(IsValidVnumOrTag(vnumOrTag))
+                          {
+                              auto room = GetRoom(vnumOrTag);
+
+                              if(room != nullptr)
+                              {
+                                  site.Dock = room->Vnum;
+                              }
+                          }
+                      });
+    LuaGetfieldBool(L, "IsSecret", &site.IsSecret);
 }
 
 void LuaSpaceobjectRepository::LoadLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj)
 {
-    int idx = lua_gettop(L);
-
-    lua_getfield(L, idx, "LandingSites");
-
-    if(!lua_isnil(L, ++idx))
-    {
-        lua_pushnil(L);
-
-        while(lua_next(L, -2))
-        {
-            size_t subscript = lua_tointeger(L, -2);
-            LoadLandingSite(L, &spaceobj->LandingSites[subscript]);
-            lua_pop(L, 1);
-        }
-    }
-
-    lua_pop(L, 1);
+    LuaLoadArray(L, "LandingSites", &LoadLandingSite, spaceobj);
 }
 
 int LuaSpaceobjectRepository::L_SpaceobjectEntry(lua_State *L)
@@ -212,8 +210,8 @@ int LuaSpaceobjectRepository::L_SpaceobjectEntry(lua_State *L)
                    });
     LuaGetfieldBool(L, "IsSimulator", &spaceobj->IsSimulator);
 
-    LuaLoadVector3(L, spaceobj->Position, "Position");
-    LuaLoadVector3(L, spaceobj->Heading, "Heading");
+    spaceobj->Position = LuaLoadVector3(L, "Position");
+    spaceobj->Heading = LuaLoadVector3(L, "Heading");
     LoadLandingSites(L, spaceobj);
 
     Spaceobjects->Add(spaceobj);

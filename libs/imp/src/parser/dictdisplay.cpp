@@ -9,7 +9,7 @@ namespace Imp
 {
     struct DictDisplay::Impl
     {
-        std::list<std::pair<std::shared_ptr<StringLiteral>, std::shared_ptr<Expr>>> elements;
+        std::vector<std::pair<std::shared_ptr<StringLiteral>, std::shared_ptr<Expr>>> elements;
     };
 
     DictDisplay::DictDisplay(const std::string &scriptname, int n)

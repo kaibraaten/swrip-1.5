@@ -33,7 +33,7 @@ void do_reload(std::shared_ptr<Character> ch, std::string arg)
     if(ship->WeaponSystems.Laser.State == LASER_DAMAGED)
         price += 50;
 
-    for(const Turret *turret : ship->WeaponSystems.Turrets)
+    for(const auto &turret : ship->WeaponSystems.Turrets)
     {
         if(IsTurretDamaged(turret))
         {
@@ -76,7 +76,7 @@ void do_reload(std::shared_ptr<Character> ch, std::string arg)
     ship->WeaponSystems.Tube.State = MISSILE_READY;
     ship->WeaponSystems.Laser.State = LASER_READY;
 
-    for(Turret *turret : ship->WeaponSystems.Turrets)
+    for(const auto &turret : ship->WeaponSystems.Turrets)
     {
         SetTurretReady(turret);
     }

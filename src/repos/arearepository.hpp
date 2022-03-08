@@ -16,13 +16,20 @@ public:
     AreaRepository();
     virtual ~AreaRepository();
     virtual void Load() = 0;
+    virtual void Load(std::shared_ptr<Area>) = 0;
     virtual void Save() const = 0;
-    virtual void Save(const std::shared_ptr<Area>&) const = 0;
-    virtual void Save(const std::shared_ptr<Area>&, bool install) const = 0;
+    virtual void Save(const std::shared_ptr<Area>&,
+                      std::shared_ptr<VnumConverter> helper) const = 0;
+    virtual void Save(const std::shared_ptr<Area>&, bool install,
+                      std::shared_ptr<VnumConverter> helper) const = 0;
     virtual std::string GetAreaFilename(std::shared_ptr<Area> area) const = 0;
-    virtual void Install(std::shared_ptr<Area> area, const std::string &newfilename = "") = 0;
-    const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
-    virtual void ChangeFilename(std::shared_ptr<Area> area, const std::string &newfilename) = 0;
+    virtual void Install(std::shared_ptr<Area> area,
+                         std::shared_ptr<VnumConverter> helper,
+                         const std::string &newfilename = "") = 0;
+    const std::vector<std::shared_ptr<Area>> AreasInProgress() const noexcept;
+    virtual void ChangeFilename(std::shared_ptr<Area> area,
+                                std::shared_ptr<VnumConverter> helper,
+                                const std::string &newfilename) = 0;
 
     // Find by filename OR full name.
     std::shared_ptr<Area> Find(const std::string &name) const;

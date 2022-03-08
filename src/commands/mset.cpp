@@ -60,7 +60,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("  attack defense NumberOfAttacks\r\n");
         ch->Echo("  speaking speaks (see LANGUAGES)\r\n");
         ch->Echo("  name short long description title spec spec2\r\n");
-        ch->Echo("  clan vip wanted\r\n");
+        ch->Echo("  clan vip wanted tag\r\n");
         ch->Echo("\r\n");
         ch->Echo("For editing index/prototype mobiles:\r\n");
         ch->Echo("  hitnumdie hitsizedie HitPlus (hit points)\r\n");
@@ -131,8 +131,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "int"))
+    else if(!StrCmp(arg2, "int"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -150,8 +149,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "wis"))
+    else if(!StrCmp(arg2, "wis"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -169,8 +167,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "dex"))
+    else if(!StrCmp(arg2, "dex"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -188,8 +185,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "con"))
+    else if(!StrCmp(arg2, "con"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -207,8 +203,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "cha"))
+    else if(!StrCmp(arg2, "cha"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -226,8 +221,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "lck"))
+    else if(!StrCmp(arg2, "lck"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -245,8 +239,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "frc"))
+    else if(!StrCmp(arg2, "frc"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -261,8 +254,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Stats.Frc = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sav1"))
+    else if(!StrCmp(arg2, "sav1"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -276,8 +268,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Saving.PoisonDeath = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sav2"))
+    else if(!StrCmp(arg2, "sav2"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -291,8 +282,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Saving.Wand = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sav3"))
+    else if(!StrCmp(arg2, "sav3"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -306,8 +296,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Saving.ParaPetri = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sav4"))
+    else if(!StrCmp(arg2, "sav4"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -321,8 +310,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Saving.Breath = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sav5"))
+    else if(!StrCmp(arg2, "sav5"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -336,8 +324,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Saving.SpellStaff = value;
         return;
     }
-
-    if(!StrCmp(arg2, "sex"))
+    else if(!StrCmp(arg2, "sex"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -355,8 +342,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "race"))
+    else if(!StrCmp(arg2, "race"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -378,8 +364,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Race = value;
         return;
     }
-
-    if(!StrCmp(arg2, "armor"))
+    else if(!StrCmp(arg2, "armor"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -393,8 +378,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->ArmorClass = value;
         return;
     }
-
-    if(!StrCmp(arg2, "level"))
+    else if(!StrCmp(arg2, "level"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -442,8 +426,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "NumberOfAttacks"))
+    else if(!StrCmp(arg2, "NumberOfAttacks"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -463,8 +446,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->NumberOfAttacks = value;
         return;
     }
-
-    if(!StrCmp(arg2, "credits"))
+    else if(!StrCmp(arg2, "credits"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -473,8 +455,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Gold = value;
         return;
     }
-
-    if(!StrCmp(arg2, "hitroll"))
+    else if(!StrCmp(arg2, "hitroll"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -483,8 +464,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->HitRoll = victim->HitRoll;
         return;
     }
-
-    if(!StrCmp(arg2, "damroll"))
+    else if(!StrCmp(arg2, "damroll"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -493,8 +473,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->DamRoll = victim->DamRoll;
         return;
     }
-
-    if(!StrCmp(arg2, "hp"))
+    else if(!StrCmp(arg2, "hp"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -509,8 +488,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->HitPoints.Max = value;
         return;
     }
-
-    if(!StrCmp(arg2, "force"))
+    else if(!StrCmp(arg2, "force"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -524,8 +502,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->Mana.Max = value;
         return;
     }
-
-    if(!StrCmp(arg2, "move"))
+    else if(!StrCmp(arg2, "move"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -538,8 +515,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->Fatigue.Max = value;
         return;
     }
-
-    if(!StrCmp(arg2, "align"))
+    else if(!StrCmp(arg2, "align"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -553,8 +529,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Alignment = value;
         return;
     }
-
-    if(!StrCmp(arg2, "password"))
+    else if(!StrCmp(arg2, "password"))
     {
         if(GetTrustLevel(ch) < LEVEL_SUB_IMPLEM)
         {
@@ -585,8 +560,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->Echo("Your password has been changed by %s.\r\n", ch->Name.c_str());
         return;
     }
-
-    if(!StrCmp(arg2, "mentalstate"))
+    else if(!StrCmp(arg2, "mentalstate"))
     {
         if(value < -100 || value > 100)
         {
@@ -596,8 +570,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->MentalState = value;
         return;
     }
-
-    if(!StrCmp(arg2, "emotion"))
+    else if(!StrCmp(arg2, "emotion"))
     {
         if(value < -100 || value > 100)
         {
@@ -607,8 +580,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->EmotionalState = value;
         return;
     }
-
-    if(!StrCmp(arg2, "thirst"))
+    else if(!StrCmp(arg2, "thirst"))
     {
         if(IsNpc(victim))
         {
@@ -625,8 +597,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->PCData->Condition[COND_THIRST] = value;
         return;
     }
-
-    if(!StrCmp(arg2, "drunk"))
+    else if(!StrCmp(arg2, "drunk"))
     {
         if(IsNpc(victim))
         {
@@ -643,8 +614,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->PCData->Condition[COND_DRUNK] = value;
         return;
     }
-
-    if(!StrCmp(arg2, "full"))
+    else if(!StrCmp(arg2, "full"))
     {
         if(IsNpc(victim))
         {
@@ -661,8 +631,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->PCData->Condition[COND_FULL] = value;
         return;
     }
-
-    if(!StrCmp(arg2, "blood"))
+    else if(!StrCmp(arg2, "blood"))
     {
         if(IsNpc(victim))
         {
@@ -679,8 +648,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         victim->PCData->Condition[COND_BLOODTHIRST] = value;
         return;
     }
-
-    if(!StrCmp(arg2, "name"))
+    else if(!StrCmp(arg2, "name"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -698,8 +666,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         }
         return;
     }
-
-    if(!StrCmp(arg2, "minsnoop"))
+    else if(!StrCmp(arg2, "minsnoop"))
     {
         if(GetTrustLevel(ch) < LEVEL_SUB_IMPLEM)
         {
@@ -717,8 +684,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
     }
-
-    if(!StrCmp(arg2, "clan"))
+    else if(!StrCmp(arg2, "clan"))
     {
         std::shared_ptr<Clan> clan;
 
@@ -767,9 +733,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         PlayerCharacters->Save(victim);
         return;
     }
-
-
-    if(!StrCmp(arg2, "short"))
+    else if(!StrCmp(arg2, "short"))
     {
         victim->ShortDescr = arg3;
 
@@ -779,8 +743,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         }
         return;
     }
-
-    if(!StrCmp(arg2, "long"))
+    else if(!StrCmp(arg2, "long"))
     {
         strcpy(buf, arg3.c_str());
         strcat(buf, "\r\n");
@@ -792,8 +755,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         }
         return;
     }
-
-    if(StrCmp(arg2, "description") == 0
+    else if(StrCmp(arg2, "description") == 0
        || StrCmp(arg2, "desc") == 0)
     {
         if(arg3[0])
@@ -827,8 +789,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
                       victim->Prototype->Vnum, victim->Name.c_str());
         return;
     }
-
-    if(!StrCmp(arg2, "title"))
+    else if(!StrCmp(arg2, "title"))
     {
         if(IsNpc(victim))
         {
@@ -839,8 +800,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         SetCharacterTitle(victim, arg3);
         return;
     }
-
-    if(!StrCmp(arg2, "spec"))
+    else if(!StrCmp(arg2, "spec"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
@@ -852,30 +812,34 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg3, "none"))
         {
-            victim->spec_fun = NULL;
+            victim->SpecFuns[0] = nullptr;
             ch->Echo("Special function removed.\r\n");
+            
             if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-                victim->Prototype->spec_fun = victim->spec_fun;
+                victim->Prototype->SpecFuns[0] = victim->SpecFuns[0];
+            
             return;
         }
 
-        victim->spec_fun = SpecialLookup(arg3);
-        const auto specptr = victim->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+        victim->SpecFuns[0] = SpecialLookup(arg3);
+        const auto specptr = victim->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
         
         if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;
         }
+
         if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-            victim->Prototype->spec_fun = victim->spec_fun;
+            victim->Prototype->SpecFuns[0] = victim->SpecFuns[0];
+
         return;
     }
-
-    if(!StrCmp(arg2, "spec2"))
+    else if(!StrCmp(arg2, "spec2"))
     {
         if(!CanModifyCharacter(ch, victim))
             return;
+        
         if(!IsNpc(victim))
         {
             ch->Echo("Not on PC's.\r\n");
@@ -884,26 +848,30 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg3, "none"))
         {
-            victim->spec_2 = NULL;
+            victim->SpecFuns[1] = nullptr;
             ch->Echo("Special function removed.\r\n");
+            
             if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-                victim->Prototype->spec_2 = victim->spec_2;
+                victim->Prototype->SpecFuns[1] = victim->SpecFuns[1];
+            
             return;
         }
 
-        victim->spec_2 = SpecialLookup(arg3);
-        const auto specptr = victim->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+        victim->SpecFuns[1] = SpecialLookup(arg3);
+        const auto specptr = victim->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
         
         if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;
         }
+        
         if(IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-            victim->Prototype->spec_2 = victim->spec_2;
+            victim->Prototype->SpecFuns[1] = victim->SpecFuns[1];
+
         return;
     }
-    if(!StrCmp(arg2, "whoCloak"))
+    else if(!StrCmp(arg2, "whoCloak"))
     {
         if(IsNpc(victim))
         {
@@ -926,8 +894,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Error setting whoCloak.");
         return;
     }
-
-    if(!StrCmp(arg2, "flags"))
+    else if(!StrCmp(arg2, "flags"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_GREATER)
         {
@@ -999,8 +966,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "wanted"))
+    else if(!StrCmp(arg2, "wanted"))
     {
         if(IsNpc(victim))
         {
@@ -1035,8 +1001,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         }
         return;
     }
-
-    if(!StrCmp(arg2, "vip"))
+    else if(!StrCmp(arg2, "vip"))
     {
         if(!IsNpc(victim))
         {
@@ -1066,8 +1031,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->VipFlags = victim->VipFlags;
         return;
     }
-
-    if(!StrCmp(arg2, "affected"))
+    else if(!StrCmp(arg2, "affected"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1100,11 +1064,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    /*
-     * save some more finger-leather for setting RIS stuff
-     */
-    if(!StrCmp(arg2, "r"))
+    else if(!StrCmp(arg2, "r"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1118,7 +1078,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    if(!StrCmp(arg2, "i"))
+    else if(!StrCmp(arg2, "i"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1133,7 +1093,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    if(!StrCmp(arg2, "s"))
+    else if(!StrCmp(arg2, "s"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1147,7 +1107,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    if(!StrCmp(arg2, "ri"))
+    else if(!StrCmp(arg2, "ri"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1163,8 +1123,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-
-    if(!StrCmp(arg2, "rs"))
+    else if(!StrCmp(arg2, "rs"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1180,7 +1139,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    if(!StrCmp(arg2, "is"))
+    else if(!StrCmp(arg2, "is"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1196,7 +1155,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    if(!StrCmp(arg2, "ris"))
+    else if(!StrCmp(arg2, "ris"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1214,8 +1173,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-
-    if(!StrCmp(arg2, "resistant"))
+    else if(!StrCmp(arg2, "resistant"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1246,8 +1204,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Resistant = victim->Resistant;
         return;
     }
-
-    if(!StrCmp(arg2, "immune"))
+    else if(!StrCmp(arg2, "immune"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1279,8 +1236,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->Immune = victim->Immune;
         return;
     }
-
-    if(!StrCmp(arg2, "susceptible"))
+    else if(!StrCmp(arg2, "susceptible"))
     {
         if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_CREATOR)
         {
@@ -1311,8 +1267,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
-
-    if(!StrCmp(arg2, "attack"))
+    else if(!StrCmp(arg2, "attack"))
     {
         if(!IsNpc(victim))
         {
@@ -1344,8 +1299,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->AttackFlags = victim->AttackFlags;
         return;
     }
-
-    if(!StrCmp(arg2, "defense"))
+    else if(!StrCmp(arg2, "defense"))
     {
         if(!IsNpc(victim))
         {
@@ -1376,8 +1330,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             victim->Prototype->DefenseFlags = victim->DefenseFlags;
         return;
     }
-
-    if(!StrCmp(arg2, "pos"))
+    else if(!StrCmp(arg2, "pos"))
     {
         if(!IsNpc(victim))
         {
@@ -1402,8 +1355,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "defpos"))
+    else if(!StrCmp(arg2, "defpos"))
     {
         if(!IsNpc(victim))
         {
@@ -1428,11 +1380,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    /*
-     * save some finger-leather
-     */
-    if(!StrCmp(arg2, "hitdie"))
+    else if(!StrCmp(arg2, "hitdie"))
     {
         if(!IsNpc(victim))
         {
@@ -1453,10 +1401,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-    /*
-     * save some more finger-leather
-     */
-    if(!StrCmp(arg2, "damdie"))
+    else if(!StrCmp(arg2, "damdie"))
     {
         if(!IsNpc(victim))
         {
@@ -1475,8 +1420,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         do_mset(ch, outbuf);
         return;
     }
-
-    if(!StrCmp(arg2, "hitnumdie"))
+    else if(!StrCmp(arg2, "hitnumdie"))
     {
         if(!IsNpc(victim))
         {
@@ -1496,8 +1440,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "hitsizedie"))
+    else if(!StrCmp(arg2, "hitsizedie"))
     {
         if(!IsNpc(victim))
         {
@@ -1517,8 +1460,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "HitPlus"))
+    else if(!StrCmp(arg2, "HitPlus"))
     {
         if(!IsNpc(victim))
         {
@@ -1538,8 +1480,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "damnumdie"))
+    else if(!StrCmp(arg2, "damnumdie"))
     {
         if(!IsNpc(victim))
         {
@@ -1558,8 +1499,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "damsizedie"))
+    else if(!StrCmp(arg2, "damsizedie"))
     {
         if(!IsNpc(victim))
         {
@@ -1579,8 +1519,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "DamPlus"))
+    else if(!StrCmp(arg2, "DamPlus"))
     {
         if(!IsNpc(victim))
         {
@@ -1601,9 +1540,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         return;
 
     }
-
-
-    if(!StrCmp(arg2, "speaks"))
+    else if(!StrCmp(arg2, "speaks"))
     {
         if(!CanModifyCharacter(ch, victim))
         {
@@ -1669,8 +1606,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    if(!StrCmp(arg2, "speaking"))
+    else if(!StrCmp(arg2, "speaking"))
     {
         if(!IsNpc(victim))
         {
@@ -1701,9 +1637,39 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    /*
-     * Generate usage message.
-     */
-    do_mset(ch, "");
+    else if(StrCmp(arg2, "tag") == 0)
+    {
+        if(argument.empty())
+        {
+            ch->Echo("Add a tag to a protomob to be used by the GOTO (and mpgoto) command.\r\n");
+            ch->Echo("Usage: redit tag <tag-name>\r\n");
+            ch->Echo("       redit tag none\r\n");
+        }
+        else if(GetMobFromTag(argument))
+        {
+            ch->Echo("That tag is already in use.\r\n");
+        }
+        else if(!victim->Flags.test(Flag::Mob::Prototype))
+        {
+            ch->Echo("Only on mobs with prototype flag.\r\n");
+        }
+        else if(StrCmp(argument, "none") == 0
+                || StrCmp(argument, "clear") == 0)
+        {
+            victim->Prototype->Tag("");
+            ch->Echo("Tag cleared.\r\n");
+        }
+        else
+        {
+            victim->Prototype->Tag(argument);
+            ch->Echo("Tag set to: %s\r\n", argument.c_str());
+        }
+    }
+    else
+    {
+        /*
+         * Generate usage message.
+         */
+        do_mset(ch, "");
+    }
 }

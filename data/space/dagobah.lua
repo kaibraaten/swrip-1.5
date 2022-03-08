@@ -9,7 +9,7 @@ SpaceobjectEntry
       {
          DockVnum = 8201, 
          Name = "Swamp", 
-         IsSecret = 0, 
+         IsSecret = false, 
       }, 
    }, 
    Type = "planet", 

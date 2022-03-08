@@ -18,6 +18,8 @@ public:
     virtual void ReadFromBuffer();
     virtual bool Read();
     virtual bool HasInput() const;
+    void EchoOn();
+    void EchoOff();
 
     std::shared_ptr<Character> Original;
     std::shared_ptr<Character> Char;

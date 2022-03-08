@@ -70,7 +70,7 @@ void do_showship(std::shared_ptr<Character> ch, std::string argument)
     {
         static const char *const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
         { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        const Turret *turret = ship->WeaponSystems.Turrets[turret_num];
+        const auto &turret = ship->WeaponSystems.Turrets[turret_num];
 
         if(IsTurretInstalled(turret))
         {
@@ -102,15 +102,15 @@ void do_showship(std::shared_ptr<Character> ch, std::string argument)
              ship->Defenses.Chaff.Current,
              ship->Defenses.Chaff.Max);
     ch->Echo("Current Coordinates: %.0f %.0f %.0f\r\n",
-             ship->Position->x, ship->Position->y, ship->Position->z);
+             ship->Position.x, ship->Position.y, ship->Position.z);
     ch->Echo("Current Heading: %.0f %.0f %.0f\r\n",
-             ship->Heading->x, ship->Heading->y, ship->Heading->z);
+             ship->Heading.x, ship->Heading.y, ship->Heading.z);
     ch->Echo("Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
              ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max,
              ship->Hyperdrive.Speed, ship->Thrusters.Maneuver);
     ch->Echo("Docked: ");
 
-    if(ship->Docked != NULL)
+    if(ship->Docked != nullptr)
     {
         ch->Echo("with %s", ship->Docked->Name.c_str());
     }

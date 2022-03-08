@@ -1,24 +1,24 @@
 -- Coruscant
--- Last saved Tuesday 25-Oct-2016 19:04:54
+-- Last saved Wednesday 25-Nov-2020 20:58:50
 
 SpaceobjectEntry
 {
+   Position = 
+   {
+      Z = 0, 
+      Y = 1000000, 
+      X = 0, 
+   }, 
+   Name = "Coruscant", 
+   Gravity = 100, 
    LandingSites = 
    {
       [0] = 
       {
-         DockVnum = 203, 
+         IsSecret = false, 
          Name = "Manarai Spaceport", 
-         IsSecret = 0, 
+         DockVnum = 203, 
       }, 
    }, 
    Type = "planet", 
-   Name = "Coruscant", 
-   Position = 
-   {
-      Y = 1000000, 
-      X = 0, 
-      Z = 0, 
-   }, 
-   Gravity = 100, 
 }

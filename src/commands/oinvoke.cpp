@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -115,5 +116,6 @@ void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_IMMORT, "$n has created $p!", ch, obj, NULL, ActTarget::Room);
     }
 
+    ImpScriptSpawnTrigger(obj);
     ch->Echo("Ok.\r\n");
 }

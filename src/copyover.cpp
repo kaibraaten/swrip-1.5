@@ -42,10 +42,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
-
-#ifdef _WIN32
-#include <process.h>
-#endif
+#include "impscript/scriptscheduler.hpp"
 
 #define COPYOVER_FILE   DATA_DIR "copyover.dat"
 
@@ -54,6 +51,9 @@ extern socket_t control;                /* Controlling descriptor       */
 
 void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 {
+#ifdef _WIN32
+    ch->Echo("Not supported on Windows.\r\n");
+#else
     FILE *fp = fopen(COPYOVER_FILE, "w");
 
     if(!fp)
@@ -63,6 +63,8 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
         perror("do_copyover:fopen");
         return;
     }
+
+    AbortAllScripts();
 
     std::string buf = "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n";
 
@@ -95,9 +97,6 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 
     ImcCopyover();
 
-#ifdef _WIN32
-    std::string filename = "\"swrip\"";
-#else
     std::string buf3 = std::to_string(ImcGetSocket(this_imcmud));
 
     /* exec - descriptors are inherited */
@@ -119,12 +118,6 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 /* Recover from a copyover - load players */
 void RecoverFromCopyover()
 {
-    /*
-    socket_t desc = 0;
-    bool fOld = false;
-    int use_mccp = 0;
-    */
-
     Log->Info("Copyover recovery initiated");
 
     FILE *fp = fopen(COPYOVER_FILE, "r");
@@ -142,9 +135,9 @@ void RecoverFromCopyover()
     {
         int use_mccp = 0;
         socket_t desc = 0;
-        char ip[MAX_STRING_LENGTH];
-        char host[MAX_STRING_LENGTH];
-        char name[MAX_STRING_LENGTH];
+        char ip[MAX_STRING_LENGTH] = { '\0' };
+        char host[MAX_STRING_LENGTH] = { '\0' };
+        char name[MAX_STRING_LENGTH] = { '\0' };
         fscanf(fp, "%d %d %s %s %s\n", &desc, &use_mccp, name, ip, host);
 
         if(desc == -1 || feof(fp))
@@ -157,7 +150,7 @@ void RecoverFromCopyover()
         d->Remote.HostIP = ip;
 
         /* Write something, and check if it goes error-free */
-        if(!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew.\r\n", 0))
+        if(!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew.\r\n"))
         {
             Log->Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
             FreeDescriptor(d);

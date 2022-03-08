@@ -9,7 +9,9 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-static const char go_ahead_str[] = { static_cast<char>(IAC), static_cast<char>(GA), '\0' };
+#ifndef _WIN32
+#include <arpa/telnet.h>
+#endif
 
 struct Descriptor::Impl
 {
@@ -39,6 +41,28 @@ void Descriptor::WriteToBuffer(const std::string & txt, size_t length)
     OutBuffer << txt;
 }
 
+void Descriptor::EchoOff()
+{
+#ifndef _WIN32
+    static const char echo_off_str[] = { static_cast<char>(IAC),
+                                         static_cast<char>(WILL),
+                                         TELOPT_ECHO,
+                                         '\0' };
+    WriteToBuffer(echo_off_str);
+#endif
+}
+
+void Descriptor::EchoOn()
+{
+#ifndef _WIN32
+    static const char echo_on_str[] = { static_cast<char>(IAC),
+                                        static_cast<char>(WONT),
+                                        TELOPT_ECHO,
+                                        '\0' };
+    WriteToBuffer(echo_on_str);
+#endif
+}
+
 unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & name, bool fConn)
 {
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
@@ -50,7 +74,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
         {
             if(fConn && ch->Switched)
             {
-                d->WriteToBuffer("Already playing.\r\nName: ", 0);
+                d->WriteToBuffer("Already playing.\r\nName: ");
                 d->ConnectionState = ConState::GetName;
 
                 if(d->Char != nullptr)
@@ -138,7 +162,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
             if(ch->Name.empty()
                || (cstate != ConState::Playing && cstate != ConState::Editing))
             {
-                d->WriteToBuffer("Already connected - try again.\r\n", 0);
+                d->WriteToBuffer("Already connected - try again.\r\n");
                 auto logBuf = FormatString("%s already connected.", ch->Name.c_str());
                 Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
                 return BERR;
@@ -149,8 +173,8 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
                 return true;
             }
 
-            d->WriteToBuffer("Already playing... Kicking off old connection.\r\n", 0);
-            dold->WriteToBuffer("Kicking off old connection... bye!\r\n", 0);
+            d->WriteToBuffer("Already playing... Kicking off old connection.\r\n");
+            dold->WriteToBuffer("Kicking off old connection... bye!\r\n");
             CloseDescriptor(dold, false);
             /* clear descriptor pointer to get rid of bug message in log */
             d->Char->Desc = nullptr;
@@ -203,11 +227,6 @@ bool Descriptor::FlushBuffer(bool fPrompt)
         if(ch->Flags.test(Flag::Plr::Prompt))
         {
             DisplayPrompt(this);
-        }
-
-        if(ch->Flags.test(Flag::Plr::TelnetGA))
-        {
-            WriteToBuffer(go_ahead_str, 0);
         }
     }
 

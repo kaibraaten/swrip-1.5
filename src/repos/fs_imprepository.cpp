@@ -8,24 +8,24 @@ namespace fs = std::filesystem;
 static const std::string IMPSCRIPT_DIR = DATA_DIR "scripts/";
 
 static ImpScriptEntry ReadScript(const std::string &path);
-static std::list<ImpScriptEntry> GetScriptEntries(const std::string &pathToDir);
+static std::vector<ImpScriptEntry> GetScriptEntries(const std::string &pathToDir);
 
 class FsImpRepository : public ImpRepository
 {
 public:
-    std::list<ImpScriptEntry> Entities() const
+    std::vector<ImpScriptEntry> Entities() const
     {
         return GetScriptEntries(IMPSCRIPT_DIR);
     }
     
-    std::list<ImpScriptEntry> FindByPath(const std::string &path)
+    std::vector<ImpScriptEntry> FindByPath(const std::string &path)
     {
-        return std::list<ImpScriptEntry>();
+        return std::vector<ImpScriptEntry>();
     }
 
-    std::list<ImpScriptEntry> FindByFullText(const std::string &path)
+    std::vector<ImpScriptEntry> FindByFullText(const std::string &path)
     {
-        return std::list<ImpScriptEntry>();
+        return std::vector<ImpScriptEntry>();
     }
 };
 
@@ -35,11 +35,11 @@ std::shared_ptr<ImpRepository> NewFsImpRepository()
     return std::make_shared<FsImpRepository>();
 }
 
-static std::list<ImpScriptEntry> GetScriptEntries(const std::string &pathToDir)
+static std::vector<ImpScriptEntry> GetScriptEntries(const std::string &pathToDir)
 {
     try
     {
-        std::list<ImpScriptEntry> list;
+        std::vector<ImpScriptEntry> list;
         
         for(const auto &entry : fs::directory_iterator(pathToDir.empty() ? "." : pathToDir))
         {
@@ -101,9 +101,9 @@ static std::string GetModuleName(std::string path)
     return path;
 }
 
-static std::list<std::string> ReadScriptLines(const std::string &path)
+static std::vector<std::string> ReadScriptLines(const std::string &path)
 {
-    std::list<std::string> code;
+    std::vector<std::string> code;
     std::ifstream file(path);
 
     if(file.is_open())

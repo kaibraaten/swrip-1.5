@@ -49,9 +49,10 @@
 #include "protomob.hpp"
 #include "exit.hpp"
 #include "triggers.hpp"
+#include "pcdata.hpp"
 
 static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
-static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3);
+static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3, const Plugin *plugin);
 static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pReset);
 static std::shared_ptr<Reset> FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int num);
 static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
@@ -476,779 +477,860 @@ static std::shared_ptr<Reset> FindMobileReset(std::shared_ptr<Character> ch, std
     return reset;
 }
 
-void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+static void EditResetShowSyntax(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    const char *nm = aRoom ? "rreset " : "reset ";
+    const char *rn = aRoom ? "" : " [room#]";
+    ch->Echo("Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
+             nm, (aRoom ? "" : "|area"));
+    ch->Echo("Syntax: %sremove <#>\r\n", nm);
+    ch->Echo("Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn);
+    ch->Echo("Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn);
+    ch->Echo("Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm);
+    ch->Echo("Syntax: %sobject <obj#> equip <mob name> <location> [limit]\r\n", nm);
+    ch->Echo("Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n", nm);
+    ch->Echo("Syntax: %shide <obj name>\r\n", nm);
+    ch->Echo("Syntax: %strap <obj name> <type> <charges> <flags>\r\n", nm);
+    ch->Echo("Syntax: %strap room <type> <charges> <flags>\r\n", nm);
+    ch->Echo("Syntax: %sbit <set|toggle|remove> door%s <dir> <exit flags>\r\n", nm, rn);
+    ch->Echo("Syntax: %sbit <set|toggle|remove> object <obj name> <extra flags>\r\n", nm);
+    ch->Echo("Syntax: %sbit <set|toggle|remove> mobile <mob name> <affect flags>\r\n", nm);
+    ch->Echo("Syntax: %sbit <set|toggle|remove> room%s <room flags>\r\n", nm, rn);
+    ch->Echo("Syntax: %srandom <last dir>%s\r\n", nm, rn);
+
+    if(!aRoom)
+    {
+        ch->Echo("\r\n[room#] will default to the room you are in, if unspecified.\r\n");
+    }
+}
+
+static void EditResetArea(std::shared_ptr<Character> ch, std::string argument,
+                          std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom,
+                          const Plugin *plugin)
+{
+    if(!pArea->FirstReset)
+    {
+        ch->Echo("You don't have any resets defined.\r\n");
+        return;
+    }
+
+    int num = pArea->NumberOfPlayers;
+    pArea->NumberOfPlayers = 0;
+    ResetArea(pArea);
+    pArea->NumberOfPlayers = num;
+    ch->Echo("Done.\r\n");
+}
+
+static void EditResetList(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    int start = 0, end = 0;
+    std::string arg;
+    argument = OneArgument(argument, arg);
+    start = IsNumber(arg) ? ToLong(arg) : -1;
+
+    argument = OneArgument(argument, arg);
+    end = IsNumber(arg) ? ToLong(arg) : -1;
+
+    ListResets(ch, pArea, aRoom, start, end);
+}
+
+static void EditResetEdit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
 {
     std::string arg;
-    std::shared_ptr<Reset> pReset;
-    std::shared_ptr<Reset> reset;
-    std::shared_ptr<ProtoMobile> pMob;
-    std::shared_ptr<Room> pRoom;
-    std::shared_ptr<ProtoObject> pObj;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !IsNumber(arg))
+    {
+        ch->Echo("Usage: reset edit <number> <command>\r\n");
+        return;
+    }
+
+    auto pReset = FindReset(pArea, aRoom, 0);
+
+    if(pReset == nullptr)
+    {
+        ch->Echo("Reset not found.\r\n");
+        return;
+    }
+
+    auto reset = ParseReset(pArea, argument, ch);
+
+    if(reset == nullptr)
+    {
+        ch->Echo("Error in reset. Reset not changed.\r\n");
+        return;
+    }
+
+    reset->Previous = pReset->Previous;
+    reset->Next = pReset->Next;
+
+    if(!pReset->Previous)
+    {
+        pArea->FirstReset = reset;
+    }
+    else
+    {
+        pReset->Previous->Next = reset;
+    }
+
+    if(!pReset->Next)
+    {
+        pArea->LastReset = reset;
+    }
+    else
+    {
+        pReset->Next->Previous = reset;
+    }
+
+    ch->Echo("Done.\r\n");
+}
+
+static void EditResetAdd(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    auto pReset = ParseReset(pArea, argument, ch);
+
+    if(pReset == nullptr)
+    {
+        ch->Echo("Error in reset. Reset not added.\r\n");
+        return;
+    }
+
+    AddReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
+             pReset->Arg2, pReset->Arg3, plugin);
+    ch->Echo("Done.\r\n");
+}
+
+static void EditResetPlace(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    auto pReset = ParseReset(pArea, argument, ch);
+
+    if(pReset == nullptr)
+    {
+        ch->Echo("Error in reset. Reset not added.\r\n");
+        return;
+    }
+
+    PlaceReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
+               pReset->Arg2, pReset->Arg3, plugin);
+    ch->Echo("Done.\r\n");
+}
+
+static void EditResetInsert(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !IsNumber(arg))
+    {
+        ch->Echo("Usage: reset insert <number> <command>\r\n");
+        return;
+    }
+
+    int num = strtol(arg.c_str(), nullptr, 10);
+    auto reset = FindReset(pArea, aRoom, num);
+
+    if(reset == nullptr)
+    {
+        ch->Echo("Reset not found.\r\n");
+        return;
+    }
+
+    auto pReset = ParseReset(pArea, argument, ch);
+
+    if(pReset == nullptr)
+    {
+        ch->Echo("Error in reset. Reset not inserted.\r\n");
+        return;
+    }
+
+    INSERT(pReset, reset, pArea->FirstReset, Next, Previous);
+    ch->Echo("Done.\r\n");
+}
+
+static void EditResetDelete(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    if(argument.empty())
+    {
+        ch->Echo("Usage: reset delete <start> [end]\r\n");
+        return;
+    }
+
+    bool found = false;
+    std::string arg;
+    argument = OneArgument(argument, arg);
+    int start = IsNumber(arg) ? ToLong(arg) : -1;
+    int end = IsNumber(arg) ? ToLong(arg) : -1;
     int num = 0;
-    vnum_t vnum = INVALID_VNUM;
-    std::string origarg = argument;
+
+    for(std::shared_ptr<Reset> pReset = pArea->FirstReset, reset; pReset; pReset = reset)
+    {
+        reset = pReset->Next;
+
+        if(!IsRoomReset(pReset, aRoom, pArea))
+        {
+            continue;
+        }
+
+        if(start > ++num)
+        {
+            continue;
+        }
+
+        if((end != -1 && num > end) || (end == -1 && found))
+        {
+            return;
+        }
+
+        UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
+
+        if(pReset == pArea->LastMobReset)
+        {
+            pArea->LastMobReset = NULL;
+        }
+
+        top_reset--;
+        found = true;
+    }
+
+    if(!found)
+    {
+        ch->Echo("Reset not found.\r\n");
+    }
+    else
+    {
+        ch->Echo("Done.\r\n");
+    }
+}
+
+static void EditResetRemove(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !IsNumber(arg))
+    {
+        ch->Echo("Delete which reset?\r\n");
+        return;
+    }
+
+    int iarg = strtol(arg.c_str(), nullptr, 10);
+    std::shared_ptr<Reset> pReset;
+    int num = 0;
+
+    for(pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
+    {
+        if(IsRoomReset(pReset, aRoom, pArea) && ++num == iarg)
+        {
+            break;
+        }
+    }
+
+    if(!pReset)
+    {
+        ch->Echo("Reset does not exist.\r\n");
+        return;
+    }
+
+    DeleteReset(pArea, pReset);
+    ch->Echo("Reset deleted.\r\n");
+}
+
+static void EditResetMobile(std::shared_ptr<Character> ch, std::string argument,
+                            std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom,
+                            const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !IsNumber(arg))
+    {
+        ch->Echo("Reset which mobile vnum?\r\n");
+        return;
+    }
+
+    auto pMob = GetProtoMobile(strtol(arg.c_str(), nullptr, 10));
+
+    if(pMob == nullptr)
+    {
+        ch->Echo("Mobile does not exist.\r\n");
+        return;
+    }
+
+    argument = OneArgument(argument, arg);
+    int num = 0;
+
+    if(arg.empty())
+    {
+        num = 1;
+    }
+    else if(!IsNumber(arg))
+    {
+        ch->Echo("Reset how many mobiles?\r\n");
+        return;
+    }
+    else
+    {
+        num = strtol(arg.c_str(), nullptr, 10);
+    }
+
+    auto pRoom = FindRoom(ch, argument, aRoom);
+
+    if(pRoom == nullptr)
+    {
+        return;
+    }
+
+    auto pReset = MakeReset('M', 0, pMob->Vnum, num, pRoom->Vnum, plugin);
+    LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
+    ch->Echo("Mobile reset added.\r\n");
+}
+
+static void EditResetObject(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                            std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !IsNumber(arg))
+    {
+        ch->Echo("Reset which object vnum?\r\n");
+        return;
+    }
+
+    auto pObj = GetProtoObject(strtol(arg.c_str(), nullptr, 10));
+
+    if(pObj == nullptr)
+    {
+        ch->Echo("Object does not exist.\r\n");
+        return;
+    }
 
     argument = OneArgument(argument, arg);
 
-    if(arg.empty() || !StrCmp(arg, "?"))
-    {
-        const char *nm = aRoom ? "rreset " : "reset ";
-        const char *rn = aRoom ? "" : " [room#]";
-        ch->Echo("Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
-                 nm, (aRoom ? "" : "|area"));
-        ch->Echo("Syntax: %sremove <#>\r\n", nm);
-        ch->Echo("Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn);
-        ch->Echo("Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn);
-        ch->Echo("Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm);
-        ch->Echo("Syntax: %sobject <obj#> equip <mob name> <location> [limit]\r\n", nm);
-        ch->Echo("Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n", nm);
-        ch->Echo("Syntax: %shide <obj name>\r\n", nm);
-        ch->Echo("Syntax: %strap <obj name> <type> <charges> <flags>\r\n", nm);
-        ch->Echo("Syntax: %strap room <type> <charges> <flags>\r\n", nm);
-        ch->Echo("Syntax: %sbit <set|toggle|remove> door%s <dir> <exit flags>\r\n", nm, rn);
-        ch->Echo("Syntax: %sbit <set|toggle|remove> object <obj name> <extra flags>\r\n", nm);
-        ch->Echo("Syntax: %sbit <set|toggle|remove> mobile <mob name> <affect flags>\r\n", nm);
-        ch->Echo("Syntax: %sbit <set|toggle|remove> room%s <room flags>\r\n", nm, rn);
-        ch->Echo("Syntax: %srandom <last dir>%s\r\n", nm, rn);
+    if(arg.empty())
+        arg = "room";
 
-        if(!aRoom)
-        {
-            ch->Echo("\r\n[room#] will default to the room you are in, if unspecified.\r\n");
-        }
-
-        return;
-    }
-
-    if(!aRoom && !StrCmp(arg, "area"))
-    {
-        if(!pArea->FirstReset)
-        {
-            ch->Echo("You don't have any resets defined.\r\n");
-            return;
-        }
-
-        num = pArea->NumberOfPlayers;
-        pArea->NumberOfPlayers = 0;
-        ResetArea(pArea);
-        pArea->NumberOfPlayers = num;
-        ch->Echo("Done.\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "list"))
-    {
-        int start = 0, end = 0;
-
-        argument = OneArgument(argument, arg);
-        start = IsNumber(arg) ? ToLong(arg) : -1;
-
-        argument = OneArgument(argument, arg);
-        end = IsNumber(arg) ? ToLong(arg) : -1;
-
-        ListResets(ch, pArea, aRoom, start, end);
-        return;
-    }
-
-    if(!StrCmp(arg, "edit"))
+    if(!StringPrefix(arg, "put"))
     {
         argument = OneArgument(argument, arg);
+        auto reset = FindObjectReset(ch, pArea, aRoom, arg);
 
-        if(arg.empty() || !IsNumber(arg))
+        if(reset == nullptr)
         {
-            ch->Echo("Usage: reset edit <number> <command>\r\n");
             return;
         }
 
-        if(!(pReset = FindReset(pArea, aRoom, num)))
+        /* Put in_objects after hide and trap resets */
+        while(reset->Next && (reset->Next->Command == 'H'
+                              || reset->Next->Command == 'T'
+                              || reset->Next->Command == 'B'))
         {
-            ch->Echo("Reset not found.\r\n");
-            return;
-        }
-
-        if(!(reset = ParseReset(pArea, argument, ch)))
-        {
-            ch->Echo("Error in reset. Reset not changed.\r\n");
-            return;
-        }
-
-        reset->Previous = pReset->Previous;
-        reset->Next = pReset->Next;
-
-        if(!pReset->Previous)
-        {
-            pArea->FirstReset = reset;
-        }
-        else
-        {
-            pReset->Previous->Next = reset;
-        }
-
-        if(!pReset->Next)
-        {
-            pArea->LastReset = reset;
-        }
-        else
-        {
-            pReset->Next->Previous = reset;
-        }
-
-        ch->Echo("Done.\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "add"))
-    {
-        if((pReset = ParseReset(pArea, argument, ch)) == NULL)
-        {
-            ch->Echo("Error in reset. Reset not added.\r\n");
-            return;
-        }
-
-        AddReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
-                 pReset->Arg2, pReset->Arg3);
-        ch->Echo("Done.\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "place"))
-    {
-        if((pReset = ParseReset(pArea, argument, ch)) == NULL)
-        {
-            ch->Echo("Error in reset. Reset not added.\r\n");
-            return;
-        }
-
-        PlaceReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
-                   pReset->Arg2, pReset->Arg3);
-        ch->Echo("Done.\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "insert"))
-    {
-        argument = OneArgument(argument, arg);
-
-        if(arg.empty() || !IsNumber(arg))
-        {
-            ch->Echo("Usage: reset insert <number> <command>\r\n");
-            return;
-        }
-
-        num = strtol(arg.c_str(), nullptr, 10);
-
-        if((reset = FindReset(pArea, aRoom, num)) == NULL)
-        {
-            ch->Echo("Reset not found.\r\n");
-            return;
-        }
-
-        if((pReset = ParseReset(pArea, argument, ch)) == NULL)
-        {
-            ch->Echo("Error in reset. Reset not inserted.\r\n");
-            return;
-        }
-
-        INSERT(pReset, reset, pArea->FirstReset, Next, Previous);
-        ch->Echo("Done.\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "delete"))
-    {
-        int start = 0, end = 0;
-        bool found = false;
-
-        if(argument.empty())
-        {
-            ch->Echo("Usage: reset delete <start> [end]\r\n");
-            return;
+            reset = reset->Next;
         }
 
         argument = OneArgument(argument, arg);
-        start = IsNumber(arg) ? ToLong(arg) : -1;
-        end = IsNumber(arg) ? ToLong(arg) : -1;
-        num = 0;
+        vnum_t vnum = strtol(arg.c_str(), nullptr, 10);
 
-        for(pReset = pArea->FirstReset; pReset; pReset = reset)
+        if(vnum < 1)
         {
-            reset = pReset->Next;
-
-            if(!IsRoomReset(pReset, aRoom, pArea))
-            {
-                continue;
-            }
-
-            if(start > ++num)
-            {
-                continue;
-            }
-
-            if((end != -1 && num > end) || (end == -1 && found))
-            {
-                return;
-            }
-
-            UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-
-            if(pReset == pArea->LastMobReset)
-            {
-                pArea->LastMobReset = NULL;
-            }
-
-            top_reset--;
-            found = true;
+            vnum = 1;
         }
 
-        if(!found)
-        {
-            ch->Echo("Reset not found.\r\n");
-        }
-        else
-        {
-            ch->Echo("Done.\r\n");
-        }
-
-        return;
+        auto pReset = MakeReset('P', reset->MiscData + 1, pObj->Vnum, vnum, 0, plugin);
+        /* Grumble.. insert puts pReset before reset, and we need it after,
+           so we make a hackup and reverse all the list params.. :P.. */
+        INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+        ch->Echo("Object reset in object created.\r\n");
     }
-
-    if(!StrCmp(arg, "remove"))
+    else if(!StringPrefix(arg, "give"))
     {
-        int iarg = 0;
-
         argument = OneArgument(argument, arg);
+        auto reset = FindMobileReset(ch, pArea, aRoom, arg);
 
-        if(arg.empty() || !IsNumber(arg))
+        if(reset == nullptr)
         {
-            ch->Echo("Delete which reset?\r\n");
             return;
         }
 
-        iarg = strtol(arg.c_str(), nullptr, 10);
-
-        for(pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
+        while(reset->Next && reset->Next->Command == 'B')
         {
-            if(IsRoomReset(pReset, aRoom, pArea) && ++num == iarg)
+            reset = reset->Next;
+        }
+
+        argument = OneArgument(argument, arg);
+        vnum_t vnum = strtol(arg.c_str(), nullptr, 10);
+
+        if(vnum < 1)
+        {
+            vnum = 1;
+        }
+
+        auto pReset = MakeReset('G', 1, pObj->Vnum, vnum, 0, plugin);
+        INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+        ch->Echo("Object reset to mobile created.\r\n");
+    }
+    else if(!StringPrefix(arg, "equip"))
+    {
+        argument = OneArgument(argument, arg);
+        auto reset = FindMobileReset(ch, pArea, aRoom, arg);
+
+        if(reset == nullptr)
+        {
+            return;
+        }
+
+        while(reset->Next && reset->Next->Command == 'B')
+        {
+            reset = reset->Next;
+        }
+
+        int num = GetWearLocation(argument);
+
+        if(num < 0)
+        {
+            ch->Echo("Reset object to which location?\r\n");
+            return;
+        }
+
+        for(auto pReset = reset->Next; pReset; pReset = pReset->Next)
+        {
+            if(pReset->Command == 'M')
             {
                 break;
             }
+
+            if(pReset->Command == 'E' && pReset->Arg3 == num)
+            {
+                ch->Echo("Mobile already has an item equipped there.\r\n");
+                return;
+            }
         }
 
-        if(!pReset)
+        argument = OneArgument(argument, arg);
+        vnum_t vnum = strtol(arg.c_str(), nullptr, 10);
+
+        if(vnum < 1)
         {
-            ch->Echo("Reset does not exist.\r\n");
-            return;
+            vnum = 1;
         }
 
-        DeleteReset(pArea, pReset);
-        ch->Echo("Reset deleted.\r\n");
-        return;
+        auto pReset = MakeReset('E', 1, pObj->Vnum, vnum, num, plugin);
+        INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+        ch->Echo("Object reset equipped by mobile created.\r\n");
     }
-
-    if(!StringPrefix(arg, "mobile"))
+    else if(arg.empty() || StrCmp(arg, "room") == 0 || IsNumber(arg))
     {
-        argument = OneArgument(argument, arg);
-
-        if(arg.empty() || !IsNumber(arg))
-        {
-            ch->Echo("Reset which mobile vnum?\r\n");
-            return;
-        }
-
-        pMob = GetProtoMobile(strtol(arg.c_str(), nullptr, 10));
-
-        if(pMob == nullptr)
-        {
-            ch->Echo("Mobile does not exist.\r\n");
-            return;
-        }
-
-        argument = OneArgument(argument, arg);
-
-        if(arg.empty())
-        {
-            num = 1;
-        }
-        else if(!IsNumber(arg))
-        {
-            ch->Echo("Reset how many mobiles?\r\n");
-            return;
-        }
-        else
-        {
-            num = strtol(arg.c_str(), nullptr, 10);
-        }
-
-        if(!(pRoom = FindRoom(ch, argument, aRoom)))
-        {
-            return;
-        }
-
-        pReset = MakeReset('M', 0, pMob->Vnum, num, pRoom->Vnum);
-        LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-        ch->Echo("Mobile reset added.\r\n");
-        return;
-    }
-
-    if(!StringPrefix(arg, "object"))
-    {
-        argument = OneArgument(argument, arg);
-
-        if(arg.empty() || !IsNumber(arg))
-        {
-            ch->Echo("Reset which object vnum?\r\n");
-            return;
-        }
-
-        pObj = GetProtoObject(strtol(arg.c_str(), nullptr, 10));
-
-        if(pObj == nullptr)
-        {
-            ch->Echo("Object does not exist.\r\n");
-            return;
-        }
-
-        argument = OneArgument(argument, arg);
-
-        if(arg.empty())
-            arg = "room";
-
-        if(!StringPrefix(arg, "put"))
+        if(StrCmp(arg, "room") == 0)
         {
             argument = OneArgument(argument, arg);
-
-            if(!(reset = FindObjectReset(ch, pArea, aRoom, arg)))
-            {
-                return;
-            }
-
-            /* Put in_objects after hide and trap resets */
-            while(reset->Next && (reset->Next->Command == 'H'
-                                  || reset->Next->Command == 'T'
-                                  || reset->Next->Command == 'B'))
-            {
-                reset = reset->Next;
-            }
-
-            argument = OneArgument(argument, arg);
-            vnum = strtol(arg.c_str(), nullptr, 10);
-
-            if(vnum < 1)
-            {
-                vnum = 1;
-            }
-
-            pReset = MakeReset('P', reset->MiscData + 1, pObj->Vnum, vnum, 0);
-            /* Grumble.. insert puts pReset before reset, and we need it after,
-               so we make a hackup and reverse all the list params.. :P.. */
-            INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-            ch->Echo("Object reset in object created.\r\n");
-            return;
         }
 
-        if(!StringPrefix(arg, "give"))
+        auto pRoom = FindRoom(ch, argument, aRoom);
+
+        if(pRoom == nullptr)
         {
-            argument = OneArgument(argument, arg);
-
-            if(!(reset = FindMobileReset(ch, pArea, aRoom, arg)))
-            {
-                return;
-            }
-
-            while(reset->Next && reset->Next->Command == 'B')
-            {
-                reset = reset->Next;
-            }
-
-            argument = OneArgument(argument, arg);
-            vnum = strtol(arg.c_str(), nullptr, 10);
-
-            if(vnum < 1)
-            {
-                vnum = 1;
-            }
-
-            pReset = MakeReset('G', 1, pObj->Vnum, vnum, 0);
-            INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-            ch->Echo("Object reset to mobile created.\r\n");
             return;
         }
-
-        if(!StringPrefix(arg, "equip"))
-        {
-            argument = OneArgument(argument, arg);
-
-            if(!(reset = FindMobileReset(ch, pArea, aRoom, arg)))
-            {
-                return;
-            }
-
-            while(reset->Next && reset->Next->Command == 'B')
-            {
-                reset = reset->Next;
-            }
-
-            num = GetWearLocation(argument);
-
-            if(num < 0)
-            {
-                ch->Echo("Reset object to which location?\r\n");
-                return;
-            }
-
-            for(pReset = reset->Next; pReset; pReset = pReset->Next)
-            {
-                if(pReset->Command == 'M')
-                {
-                    break;
-                }
-
-                if(pReset->Command == 'E' && pReset->Arg3 == num)
-                {
-                    ch->Echo("Mobile already has an item equipped there.\r\n");
-                    return;
-                }
-            }
-
-            argument = OneArgument(argument, arg);
-            vnum = strtol(arg.c_str(), nullptr, 10);
-
-            if(vnum < 1)
-            {
-                vnum = 1;
-            }
-
-            pReset = MakeReset('E', 1, pObj->Vnum, vnum, num);
-            INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-            ch->Echo("Object reset equipped by mobile created.\r\n");
-            return;
-        }
-
-        if(arg.empty() || !(num = (int)StrCmp(arg, "room"))
-           || IsNumber(arg))
-        {
-            if(!(bool)num)
-            {
-                argument = OneArgument(argument, arg);
-            }
-
-            if(!(pRoom = FindRoom(ch, argument, aRoom)))
-            {
-                return;
-            }
-
-            if(pRoom->Area != pArea)
-            {
-                ch->Echo("Cannot reset objects to other areas.\r\n");
-                return;
-            }
-
-            vnum = strtol(arg.c_str(), nullptr, 10);
-
-            if(vnum < 1)
-            {
-                vnum = 1;
-            }
-
-            pReset = MakeReset('O', 0, pObj->Vnum, vnum, pRoom->Vnum);
-            LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-            ch->Echo("Object reset added.\r\n");
-            return;
-        }
-
-        ch->Echo("Reset object to where?\r\n");
-        return;
-    }
-
-    if(!StrCmp(arg, "random"))
-    {
-        DirectionType direction = DIR_INVALID;
-
-        argument = OneArgument(argument, arg);
-        direction = GetDirection(arg);
-
-        if(direction <= DIR_INVALID || direction > DIR_SOUTHWEST)
-        {
-            ch->Echo("Reset which random doors?\r\n");
-            return;
-        }
-
-        if(direction == DIR_NORTH)
-        {
-            ch->Echo("There is no point in randomizing one door.\r\n");
-            return;
-        }
-
-        pRoom = FindRoom(ch, argument, aRoom);
 
         if(pRoom->Area != pArea)
         {
-            ch->Echo("Cannot randomize doors in other areas.\r\n");
+            ch->Echo("Cannot reset objects to other areas.\r\n");
             return;
         }
 
-        pReset = MakeReset('R', 0, pRoom->Vnum, direction, 0);
+        vnum_t vnum = strtol(arg.c_str(), nullptr, 10);
+
+        if(vnum < 1)
+        {
+            vnum = 1;
+        }
+
+        auto pReset = MakeReset('O', 0, pObj->Vnum, vnum, pRoom->Vnum, plugin);
         LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-        ch->Echo("Reset random doors created.\r\n");
+        ch->Echo("Object reset added.\r\n");
+    }
+    else
+    {
+        ch->Echo("Reset object to where?\r\n");
+    }
+}
+
+static void EditResetRandom(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                            std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+    DirectionType direction = GetDirection(arg);
+
+    if(direction <= DIR_INVALID || direction > DIR_SOUTHWEST)
+    {
+        ch->Echo("Reset which random doors?\r\n");
         return;
     }
 
-    if(!StrCmp(arg, "trap"))
+    if(direction == DIR_NORTH)
     {
-        std::string oname;
-        int extra = 0;
-        argument = OneArgument(argument, oname);
-        argument = OneArgument(argument, arg);
-        num = IsNumber(arg) ? ToLong(arg) : -1;
-        argument = OneArgument(argument, arg);
-        const int chrg = IsNumber(arg) ? ToLong(arg) : -1;
-        const bool isobj = IsName(argument, "obj") == 0;
+        ch->Echo("There is no point in randomizing one door.\r\n");
+        return;
+    }
 
-        if(isobj == (IsName(argument, "room") == 0))
-        {
-            ch->Echo("Reset: TRAP: Must specify ROOM or OBJECT\r\n");
-            return;
-        }
+    auto pRoom = FindRoom(ch, argument, aRoom);
 
-        if(!StrCmp(oname, "room") && !isobj)
+    if(pRoom->Area != pArea)
+    {
+        ch->Echo("Cannot randomize doors in other areas.\r\n");
+        return;
+    }
+
+    auto pReset = MakeReset('R', 0, pRoom->Vnum, direction, 0, plugin);
+    LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
+    ch->Echo("Reset random doors created.\r\n");
+}
+
+static void EditResetTrap(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                          std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string oname;
+    std::string arg;
+    int extra = 0;
+    vnum_t vnum = INVALID_VNUM;
+    argument = OneArgument(argument, oname);
+    argument = OneArgument(argument, arg);
+    int num = IsNumber(arg) ? ToLong(arg) : -1;
+    argument = OneArgument(argument, arg);
+    const int chrg = IsNumber(arg) ? ToLong(arg) : -1;
+    const bool isobj = IsName(argument, "obj") == 0;
+    std::shared_ptr<Reset> reset;
+
+    if(isobj == (IsName(argument, "room") == 0))
+    {
+        ch->Echo("Reset: TRAP: Must specify ROOM or OBJECT\r\n");
+        return;
+    }
+
+    if(!StrCmp(oname, "room") && !isobj)
+    {
+        vnum = (aRoom ? aRoom->Vnum : ch->InRoom->Vnum);
+        extra = TRAP_ROOM;
+    }
+    else
+    {
+        if(IsNumber(oname) && !isobj)
         {
-            vnum = (aRoom ? aRoom->Vnum : ch->InRoom->Vnum);
+            vnum = ToLong(oname);
+
+            if(!GetRoom(vnum))
+            {
+                ch->Echo("Reset: TRAP: no such room\r\n");
+                return;
+            }
+
+            reset = nullptr;
             extra = TRAP_ROOM;
         }
         else
         {
-            if(IsNumber(oname) && !isobj)
-            {
-                vnum = ToLong(oname);
-
-                if(!GetRoom(vnum))
-                {
-                    ch->Echo("Reset: TRAP: no such room\r\n");
-                    return;
-                }
-
-                reset = NULL;
-                extra = TRAP_ROOM;
-            }
-            else
-            {
-                if(!(reset = FindObjectReset(ch, pArea, aRoom, oname)))
-                    return;
-                /*        vnum = reset->Arg1;*/
-                vnum = 0;
-                extra = TRAP_OBJ;
-            }
-        }
-
-        if(num < 1 || num > MAX_TRAPTYPE)
-        {
-            ch->Echo("Reset: TRAP: invalid trap type\r\n");
-            return;
-        }
-
-        if(chrg < 0 || chrg > 10000)
-        {
-            ch->Echo("Reset: TRAP: invalid trap charges\r\n");
-            return;
-        }
-
-        while(!argument.empty())
-        {
-            argument = OneArgument(argument, arg);
-            int value = GetTrapFlag(arg);
-
-            if(value < 0 || value > 31)
-            {
-                ch->Echo("Reset: TRAP: bad flag\r\n");
+            if(!(reset = FindObjectReset(ch, pArea, aRoom, oname)))
                 return;
-            }
 
-            SetBit(extra, 1 << value);
+            vnum = INVALID_VNUM;
+            extra = TRAP_OBJ;
         }
+    }
 
-        pReset = MakeReset('T', extra, num, chrg, vnum);
-
-        if(reset)
-            INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-        else
-            LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-
-        ch->Echo("Trap created.\r\n");
+    if(num < 1 || num > MAX_TRAPTYPE)
+    {
+        ch->Echo("Reset: TRAP: invalid trap type\r\n");
         return;
     }
 
-    if(!StrCmp(arg, "bit"))
+    if(chrg < 0 || chrg > 10000)
     {
-        int(*flfunc)(const std::string & type);
-        int flags = 0;
-        std::string option;
-        const char *parg = nullptr;
-
-        argument = OneArgument(argument, option);
-
-        if(option.empty())
-        {
-            ch->Echo("You must specify SET, REMOVE, or TOGGLE.\r\n");
-            return;
-        }
-
-        num = 0;
-
-        if(!StringPrefix(option, "set"))
-        {
-            SetBit(num, BIT_RESET_SET);
-        }
-        else if(!StringPrefix(option, "toggle"))
-        {
-            SetBit(num, BIT_RESET_TOGGLE);
-        }
-        else if(StringPrefix(option, "remove"))
-        {
-            ch->Echo("You must specify SET, REMOVE, or TOGGLE.\r\n");
-            return;
-        }
-
-        argument = OneArgument(argument, option);
-        parg = argument.c_str();
-        argument = OneArgument(argument, arg);
-
-        if(option.empty())
-        {
-            ch->Echo("Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n");
-            return;
-        }
-
-        if(!StringPrefix(option, "door"))
-        {
-            SetBit(num, BIT_RESET_DOOR);
-
-            if(aRoom)
-            {
-                pRoom = aRoom;
-                argument = parg;
-            }
-            else if(!IsNumber(arg))
-            {
-                pRoom = ch->InRoom;
-                argument = parg;
-            }
-            else if(!(pRoom = FindRoom(ch, arg, aRoom)))
-            {
-                return;
-            }
-
-            argument = OneArgument(argument, arg);
-
-            if(arg.empty())
-            {
-                ch->Echo("Must specify direction.\r\n");
-                return;
-            }
-
-            vnum = GetDirection(arg);
-            SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
-            vnum = pRoom->Vnum;
-            flfunc = &GetExitFlag;
-            reset = NULL;
-        }
-        else if(!StringPrefix(option, "object"))
-        {
-            SetBit(num, BIT_RESET_OBJECT);
-            vnum = 0;
-            flfunc = &GetObjectFlag;
-
-            if(!(reset = FindObjectReset(ch, pArea, aRoom, arg)))
-            {
-                return;
-            }
-        }
-        else if(!StringPrefix(option, "mobile"))
-        {
-            SetBit(num, BIT_RESET_MOBILE);
-            vnum = 0;
-            flfunc = &GetAffectFlag;
-
-            if(!(reset = FindMobileReset(ch, pArea, aRoom, arg)))
-            {
-                return;
-            }
-        }
-        else if(!StringPrefix(option, "room"))
-        {
-            SetBit(num, BIT_RESET_ROOM);
-
-            if(aRoom)
-            {
-                pRoom = aRoom;
-                argument = parg;
-            }
-            else if(!IsNumber(arg))
-            {
-                pRoom = ch->InRoom;
-                argument = parg;
-            }
-            else if(!(pRoom = FindRoom(ch, arg, aRoom)))
-            {
-                return;
-            }
-
-            vnum = pRoom->Vnum;
-            flfunc = &GetRoomFlag;
-            reset = NULL;
-        }
-        else
-        {
-            ch->Echo("Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n");
-            return;
-        }
-
-        while(!argument.empty())
-        {
-            argument = OneArgument(argument, arg);
-            int value = flfunc(arg);
-
-            if(value < 0 || value > 31)
-            {
-                ch->Echo("Reset: BIT: bad flag\r\n");
-                return;
-            }
-
-            SetBit(flags, 1 << value);
-        }
-
-        if(!flags)
-        {
-            ch->Echo("Set which flags?\r\n");
-            return;
-        }
-
-        pReset = MakeReset('B', 1, vnum, num, flags);
-
-        if(reset)
-            INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-        else
-            LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-
-        ch->Echo("Bitvector reset created.\r\n");
+        ch->Echo("Reset: TRAP: invalid trap charges\r\n");
         return;
     }
 
-    if(!StrCmp(arg, "hide"))
+    while(!argument.empty())
     {
         argument = OneArgument(argument, arg);
+        int value = GetTrapFlag(arg);
 
-        if(!(reset = FindObjectReset(ch, pArea, aRoom, arg)))
+        if(value < 0 || value > 31)
+        {
+            ch->Echo("Reset: TRAP: bad flag\r\n");
             return;
+        }
 
-        pReset = MakeReset('H', 1, 0, 0, 0);
+        SetBit(extra, 1 << value);
+    }
+
+    auto pReset = MakeReset('T', extra, num, chrg, vnum, plugin);
+
+    if(reset)
+    {
         INSERT(pReset, reset, pArea->LastReset, Previous, Next);
-        ch->Echo("Object hide reset created.\r\n");
-        return;
     }
-
-    EditReset(ch, "", pArea, aRoom);
+    else
+    {
+        LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
+    }
+    
+    ch->Echo("Trap created.\r\n");
 }
 
-static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3)
+static void EditResetBit(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                         std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::function<int(const std::string &)> getFlag;
+    int flags = 0;
+    std::string option;
+    std::string arg;
+    const char *parg = nullptr;
+    int num = 0;
+    std::shared_ptr<Room> pRoom;
+    vnum_t vnum = INVALID_VNUM;
+    std::shared_ptr<Reset> reset;
+
+    argument = OneArgument(argument, option);
+
+    if(option.empty())
+    {
+        ch->Echo("You must specify SET, REMOVE, or TOGGLE.\r\n");
+        return;
+    }
+
+    if(!StringPrefix(option, "set"))
+    {
+        SetBit(num, BIT_RESET_SET);
+    }
+    else if(!StringPrefix(option, "toggle"))
+    {
+        SetBit(num, BIT_RESET_TOGGLE);
+    }
+    else if(StringPrefix(option, "remove"))
+    {
+        ch->Echo("You must specify SET, REMOVE, or TOGGLE.\r\n");
+        return;
+    }
+
+    argument = OneArgument(argument, option);
+    parg = argument.c_str();
+    argument = OneArgument(argument, arg);
+
+    if(option.empty())
+    {
+        ch->Echo("Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n");
+        return;
+    }
+    else if(!StringPrefix(option, "door"))
+    {
+        SetBit(num, BIT_RESET_DOOR);
+
+        if(aRoom)
+        {
+            pRoom = aRoom;
+            argument = parg;
+        }
+        else if(!IsNumber(arg))
+        {
+            pRoom = ch->InRoom;
+            argument = parg;
+        }
+        else if(!(pRoom = FindRoom(ch, arg, aRoom)))
+        {
+            return;
+        }
+
+        argument = OneArgument(argument, arg);
+
+        if(arg.empty())
+        {
+            ch->Echo("Must specify direction.\r\n");
+            return;
+        }
+
+        vnum = GetDirection(arg);
+        SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
+        vnum = pRoom->Vnum;
+        getFlag = GetExitFlag;
+        reset = nullptr;
+    }
+    else if(!StringPrefix(option, "object"))
+    {
+        SetBit(num, BIT_RESET_OBJECT);
+        vnum = 0;
+        getFlag = GetObjectFlag;
+
+        if(!(reset = FindObjectReset(ch, pArea, aRoom, arg)))
+        {
+            return;
+        }
+    }
+    else if(!StringPrefix(option, "mobile"))
+    {
+        SetBit(num, BIT_RESET_MOBILE);
+        vnum = 0;
+        getFlag = GetAffectFlag;
+
+        if(!(reset = FindMobileReset(ch, pArea, aRoom, arg)))
+        {
+            return;
+        }
+    }
+    else if(!StringPrefix(option, "room"))
+    {
+        SetBit(num, BIT_RESET_ROOM);
+
+        if(aRoom)
+        {
+            pRoom = aRoom;
+            argument = parg;
+        }
+        else if(!IsNumber(arg))
+        {
+            pRoom = ch->InRoom;
+            argument = parg;
+        }
+        else if(!(pRoom = FindRoom(ch, arg, aRoom)))
+        {
+            return;
+        }
+
+        vnum = pRoom->Vnum;
+        getFlag = GetRoomFlag;
+        reset = nullptr;
+    }
+    else
+    {
+        ch->Echo("Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n");
+        return;
+    }
+
+    while(!argument.empty())
+    {
+        argument = OneArgument(argument, arg);
+        int value = getFlag(arg);
+
+        if(value < 0)
+        {
+            ch->Echo("Reset: BIT: bad flag\r\n");
+            return;
+        }
+
+        SetBit(flags, 1 << value);
+    }
+
+    if(!flags)
+    {
+        ch->Echo("Set which flags?\r\n");
+        return;
+    }
+
+    auto pReset = MakeReset('B', 1, vnum, num, flags, plugin);
+
+    if(reset)
+    {
+        INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+    }
+    else
+    {
+        LINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
+    }
+    
+    ch->Echo("Bitvector reset created.\r\n");
+}
+
+static void EditResetHide(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+                          std::shared_ptr<Room> aRoom, const Plugin *plugin)
+{
+    std::string arg;
+    argument = OneArgument(argument, arg);
+    auto reset = FindObjectReset(ch, pArea, aRoom, arg);
+
+    if(reset == nullptr)
+    {
+        return;
+    }
+
+    auto pReset = MakeReset('H', 1, 0, 0, 0, plugin);
+    INSERT(pReset, reset, pArea->LastReset, Previous, Next);
+    ch->Echo("Object hide reset created.\r\n");
+}
+
+void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+               std::shared_ptr<Room> aRoom)
+{
+    const Plugin *plugin = ch->PCData->Build.Plugin.get();
+    std::string arg;
+    argument = OneArgument(argument, arg);
+
+    if(arg.empty() || !StrCmp(arg, "?"))
+    {
+        EditResetShowSyntax(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!aRoom && !StrCmp(arg, "area"))
+    {
+        EditResetArea(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "list"))
+    {
+        EditResetList(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "edit"))
+    {
+        EditResetEdit(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "add"))
+    {
+        EditResetAdd(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "place"))
+    {
+        EditResetPlace(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "insert"))
+    {
+        EditResetInsert(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "delete"))
+    {
+        EditResetDelete(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "remove"))
+    {
+        EditResetRemove(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StringPrefix(arg, "mobile"))
+    {
+        EditResetMobile(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StringPrefix(arg, "object"))
+    {
+        EditResetObject(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "random"))
+    {
+        EditResetRandom(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "trap"))
+    {
+        EditResetTrap(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "bit"))
+    {
+        EditResetBit(ch, argument, pArea, aRoom, plugin);
+    }
+    else if(!StrCmp(arg, "hide"))
+    {
+        EditResetHide(ch, argument, pArea, aRoom, plugin);
+    }
+    else
+    {
+        EditReset(ch, "", pArea, aRoom);
+    }
+}
+
+static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3, const Plugin *plugin)
 {
     static int iNest;
 
@@ -1256,14 +1338,14 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
     {
         if(cm == 'O')
         {
-            AddReset(pArea, 'T', obj->Value[OVAL_TRAP_FLAGS], obj->Value[OVAL_TRAP_TYPE], obj->Value[OVAL_TRAP_CHARGE], v3);
+            AddReset(pArea, 'T', obj->Value[OVAL_TRAP_FLAGS], obj->Value[OVAL_TRAP_TYPE], obj->Value[OVAL_TRAP_CHARGE], v3, plugin);
         }
 
         return;
     }
 
     AddReset(pArea, cm, (cm == 'P' ? iNest : 1), obj->Prototype->Vnum,
-             v2, v3);
+             v2, v3, plugin);
 
     /* Only add hide for in-room objects that are hidden and cant be moved, as
        hide is an update reset, not a load-only reset. */
@@ -1271,14 +1353,14 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
        && obj->Flags.test(Flag::Obj::Hidden)
        && !obj->WearFlags.test(Flag::Wear::Take))
     {
-        AddReset(pArea, 'H', 1, 0, 0, 0);
+        AddReset(pArea, 'H', 1, 0, 0, 0, plugin);
     }
 
     for(auto inobj : obj->Objects())
     {
         if(inobj->Prototype->Vnum == OBJ_VNUM_TRAP)
         {
-            AddObjectReset(pArea, 'O', inobj, 0, 0);
+            AddObjectReset(pArea, 'O', inobj, 0, 0, plugin);
         }
     }
 
@@ -1289,7 +1371,7 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
 
     for(auto inobj : obj->Objects())
     {
-        AddObjectReset(pArea, 'P', inobj, 1, 0);
+        AddObjectReset(pArea, 'P', inobj, 1, 0, plugin);
     }
 
     if(cm == 'P')
@@ -1298,7 +1380,8 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
     }
 }
 
-void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors)
+void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors,
+                 const Plugin *plugin)
 {
     for(std::shared_ptr<Character> rch : pRoom->Characters())
     {
@@ -1308,17 +1391,17 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
         }
 
         AddReset(pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->Count,
-                 pRoom->Vnum);
+                 pRoom->Vnum, plugin);
 
         for(auto obj : rch->Objects())
         {
             if(obj->WearLoc == WEAR_NONE)
             {
-                AddObjectReset(pArea, 'G', obj, 1, 0);
+                AddObjectReset(pArea, 'G', obj, 1, 0, plugin);
             }
             else
             {
-                AddObjectReset(pArea, 'E', obj, 1, obj->WearLoc);
+                AddObjectReset(pArea, 'E', obj, 1, obj->WearLoc, plugin);
             }
         }
     }
@@ -1331,7 +1414,7 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
 
     for(auto obj : objectsToAddResetsTo)
     {
-        AddObjectReset(pArea, 'O', obj, 1, pRoom->Vnum);
+        AddObjectReset(pArea, 'O', obj, 1, pRoom->Vnum, plugin);
     }
 
     if(dodoors)
@@ -1357,7 +1440,7 @@ void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool 
                 }
             }
 
-            AddReset(pArea, 'D', 0, pRoom->Vnum, pexit->Direction, state);
+            AddReset(pArea, 'D', 0, pRoom->Vnum, pexit->Direction, state, plugin);
         }
     }
 }
@@ -1501,7 +1584,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
 
     std::shared_ptr<Character> mob = NULL;
     std::shared_ptr<Object> obj;
-    std::shared_ptr<Object> lastobj ;
+    std::shared_ptr<Object> lastobj;
     std::shared_ptr<Room> pRoomIndex;
     std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<ProtoObject> pObjIndex;
@@ -1580,9 +1663,8 @@ void ResetArea(std::shared_ptr<Area> pArea)
             EconomizeMobileGold(mob);
             level = urange(0, mob->TopLevel() - 2, LEVEL_AVATAR);
 
-            // Insert spawn trigger here
             ImpScriptSpawnTrigger(mob);
-            
+
             // Check if mob died in spawn trigger (then issue bug log,
             // because having a mob that dies the moment it spawned must
             // be an error.
@@ -1679,6 +1761,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
             obj->Cost = 0;
             ObjectToRoom(obj, pRoomIndex);
             lastobj = obj;
+            ImpScriptSpawnTrigger(obj);
             break;
 
         case 'P':
@@ -2236,8 +2319,7 @@ static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pAre
 
         case 'B':
         {
-            //std::array<const char * const, MAX_BIT> flagarray;
-            const char *const *flagarray;
+            const char *const *flagarray = nullptr;
 
             strcpy(pbuf, "BIT: ");
             pbuf += 5;
@@ -2436,10 +2518,10 @@ void RenumberPutResets(std::shared_ptr<Area> pArea)
 /*
  * Create a new reset (for online building)                     -Thoric
  */
-std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3, const Plugin *plugin)
 {
     auto pReset = std::make_shared<Reset>();
-
+    pReset->Plugin = plugin;
     pReset->Command = letter;
     pReset->MiscData = extra;
     pReset->Arg1 = arg1;
@@ -2453,13 +2535,15 @@ std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int
 /*
  * Add a reset to an area                               -Thoric
  */
-std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea,
+                                char letter, int extra, int arg1, int arg2, int arg3,
+                                const Plugin *plugin)
 {
     assert(tarea != nullptr);
 
     letter = CharToUppercase(letter);
-    auto pReset = MakeReset(letter, extra, arg1, arg2, arg3);
-
+    auto pReset = MakeReset(letter, extra, arg1, arg2, arg3, plugin);
+    
     switch(letter)
     {
     case 'M':
@@ -2495,15 +2579,16 @@ std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int ex
 /*
  * Place a reset into an area, insert sorting it                -Thoric
  */
-std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3,
+                                  const Plugin *plugin)
 {
     assert(tarea != nullptr);
     std::shared_ptr<Reset> tmp;
     std::shared_ptr<Reset> tmp2;
 
     letter = CharToUppercase(letter);
-    std::shared_ptr<Reset> pReset = MakeReset(letter, extra, arg1, arg2, arg3);
-
+    std::shared_ptr<Reset> pReset = MakeReset(letter, extra, arg1, arg2, arg3, plugin);
+    
     if(letter == 'M')
     {
         tarea->LastMobReset = pReset;

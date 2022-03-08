@@ -29,34 +29,33 @@
 
 class Turret;
 
-Turret *AllocateTurret(ShipClass ownerClass);
-void FreeTurret(Turret *turret);
-Turret *CopyTurret(const Turret *old_turret, ShipClass ownerClassOfNewTurret);
+std::shared_ptr<Turret> AllocateTurret(ShipClass ownerClass);
+std::shared_ptr<Turret> CopyTurret(const std::shared_ptr<Turret> &old_turret, ShipClass ownerClassOfNewTurret);
 
-bool IsTurretInstalled(const Turret *turret);
+bool IsTurretInstalled(const std::shared_ptr<Turret> &turret);
 
-void ResetTurret(Turret *turret);
+void ResetTurret(const std::shared_ptr<Turret> &turret);
 
-void SetTurretReady(Turret *turret);
-bool IsTurretReady(const Turret *turret);
+void SetTurretReady(const std::shared_ptr<Turret> &turret);
+bool IsTurretReady(const std::shared_ptr<Turret> &turret);
 
-void SetTurretDamaged(Turret *turret);
-bool IsTurretDamaged(const Turret *turret);
+void SetTurretDamaged(const std::shared_ptr<Turret> &turret);
+bool IsTurretDamaged(const std::shared_ptr<Turret> &turret);
 
-bool IsTurretRecharging(const Turret *turret);
-void FireTurret(Turret *turret);
+bool IsTurretRecharging(const std::shared_ptr<Turret> &turret);
+void FireTurret(const std::shared_ptr<Turret> &turret);
 
-void ClearTurretTarget(Turret *turret);
-void SetTurretTarget(Turret *turret, std::shared_ptr<Ship> target);
-std::shared_ptr<Ship> GetTurretTarget(const Turret *turret);
-bool TurretHasTarget(const Turret *turret);
+void ClearTurretTarget(const std::shared_ptr<Turret> &turret);
+void SetTurretTarget(const std::shared_ptr<Turret> &turret, std::shared_ptr<Ship> target);
+std::shared_ptr<Ship> GetTurretTarget(const std::shared_ptr<Turret> &turret);
+bool TurretHasTarget(const std::shared_ptr<Turret> &turret);
 
-void SetTurretRoom(Turret *turret, vnum_t room_vnum);
-vnum_t GetTurretRoom(const Turret *turret);
+void SetTurretRoom(const std::shared_ptr<Turret> &turret, vnum_t room_vnum);
+vnum_t GetTurretRoom(const std::shared_ptr<Turret> &turret);
 
-int GetTurretEnergyDraw(const Turret *turret);
+int GetTurretEnergyDraw(const std::shared_ptr<Turret> &turret);
 
-void PushTurret(lua_State *L, const Turret *turret, const int idx);
-void LoadTurret(lua_State *L, Turret *turret);
+void PushTurret(lua_State *L, const std::shared_ptr<Turret> &turret, const int idx);
+void LoadTurret(lua_State *L, const std::shared_ptr<Turret> &turret);
 
 #endif

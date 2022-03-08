@@ -66,6 +66,11 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
         << "  &cGroupcount: &C" << obj->Count
         << "&d\r\n";
 
+    if(!obj->Prototype->Tag().empty())
+    {
+        outbuf << "&cTag: &C" << obj->Prototype->Tag() << "&d\r\n";
+    }
+    
     outbuf << "&cSerial#: &C" << obj->Serial
         << "  &cTopIdxSerial#: &C" << obj->Prototype->Serial
         << "  &cTopSerial#: &C" << cur_obj_serial

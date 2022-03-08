@@ -65,7 +65,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
             if(ch->InRoom->Vnum == ship->Rooms.Gunseat)
                 ship->WeaponSystems.Target = NULL;
 
-            for(Turret *turret : ship->WeaponSystems.Turrets)
+            for(const auto &turret : ship->WeaponSystems.Turrets)
             {
                 if(ch->InRoom->Vnum == GetTurretRoom(turret))
                 {
@@ -170,7 +170,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
     if(ch->InRoom->Vnum == ship->Rooms.Gunseat)
         ship->WeaponSystems.Target = target;
 
-    for(Turret *turret : ship->WeaponSystems.Turrets)
+    for(const auto &turret : ship->WeaponSystems.Turrets)
     {
         if(ch->InRoom->Vnum == GetTurretRoom(turret))
         {

@@ -1,41 +1,22 @@
 -- Nal Hutta
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
+   HighEconomy = 0, 
    Objects = 
    {
       [21500] = 
       {
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Description = "Universe Construction Board rests on the wall here.", 
-         Name = "board terminal", 
-         ShortDescr = "Universe Construction Board", 
          Layers = 0, 
-         Cost = 0, 
+         Description = "Universe Construction Board rests on the wall here.", 
+         ShortDescr = "Universe Construction Board", 
+         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         Weight = 1, 
+         Cost = 0, 
          ItemType = "trash", 
-         Vnum = 21500, 
-      }, 
-      [21501] = 
-      {
-         Flags = 
-         {
-            [0] = "Glow", 
-         }, 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -45,42 +26,47 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Vnum = 21500, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "board terminal", 
+      }, 
+      [21501] = 
+      {
+         Layers = 0, 
          Description = "&g A Tk_9U slot machine rest on the wall.", 
-         Name = "slot machine ", 
          ShortDescr = "A TK_9U Slot Machine", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "lever", 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "mpecho You have just reset the Machine! Pull for Money!\
-", 
-               ScriptType = "MProg", 
+               MudProgType = "pull_prog", 
                Arguments = "", 
-               MudProgType = "push_prog", 
-            }, 
-            [2] = 
-            {
                Code = "mpecho Bing .bang Baong!\
 mpecho You see small pictures of rotate in circles showing up in various\
 forms.\
 ", 
                ScriptType = "MProg", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "push_prog", 
                Arguments = "", 
-               MudProgType = "pull_prog", 
+               Code = "mpecho You have just reset the Machine! Pull for Money!\
+", 
+               ScriptType = "MProg", 
             }, 
          }, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
+         Flags = 
          {
+            [0] = "Glow", 
          }, 
-         Weight = 1, 
-         ItemType = "lever", 
-         Vnum = 21501, 
-      }, 
-      [21799] = 
-      {
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -90,27 +76,57 @@ forms.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Description = "A bookend is here.", 
-         Name = "bookend", 
-         ShortDescr = "a bookend", 
+         Vnum = 21501, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "slot machine ", 
+      }, 
+      [21799] = 
+      {
          Layers = 0, 
-         Cost = 0, 
+         Description = "A bookend is here.", 
+         ShortDescr = "a bookend", 
+         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         Weight = 1, 
+         Cost = 0, 
          ItemType = "trash", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Vnum = 21799, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "bookend", 
       }, 
    }, 
-   ResetMessage = "", 
-   Author = "Ackbar", 
-   LowEconomy = 6250000, 
-   HighEconomy = 0, 
-   Name = "Nal Hutta", 
-   FileFormatVersion = 1, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
    VnumRanges = 
    {
+      Object = 
+      {
+         Last = 21799, 
+         First = 21500, 
+      }, 
       Mob = 
       {
          Last = 21799, 
@@ -121,432 +137,336 @@ forms.\
          Last = 21515, 
          First = 21500, 
       }, 
-      Object = 
-      {
-         Last = 21799, 
-         First = 21500, 
-      }, 
    }, 
-   Mobiles = 
+   ResetMessage = "", 
+   ResetFrequency = 0, 
+   Resets = 
    {
-      [21500] = 
+      [1] = 
       {
-         Weight = 0, 
-         Description = "", 
-         Name = "mobhead", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Leave this reset until you make a new one. If you don't have at least one bad things will happen.\
-", 
-         Credits = 0, 
-         Vnum = 21500, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-         }, 
-         HitRoll = 0, 
-         ShortDescr = "a newly created mobhead", 
-         Level = 1, 
-         DamRoll = 0, 
-         DefaultPosition = "standing", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
+         Arg3 = 21500, 
+         Arg1 = 21500, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
-      [21799] = 
+      [2] = 
       {
-         Weight = 0, 
-         Description = "", 
-         Name = "mobtail", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Sex = "undistinguished", 
-         LongDescr = "Some god abandoned a newly created mobtail here.\
-", 
-         Credits = 0, 
-         Vnum = 21799, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Strength = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Constitution = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-         }, 
-         HitRoll = 0, 
-         ShortDescr = "a newly created mobtail", 
-         Level = 1, 
-         DamRoll = 0, 
-         DefaultPosition = "standing", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
+         Arg3 = 21186, 
+         Arg1 = 21500, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [3] = 
+      {
+         Arg3 = 0, 
+         Arg1 = 21186, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
       }, 
    }, 
+   Author = "Ackbar", 
    Rooms = 
    {
       [21504] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21504, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21505] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21505, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21506] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21506, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21507] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21507, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21508] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21508, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21509] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21509, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21510] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21510, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21511] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21511, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21512] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21512, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21513] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21513, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21514] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21514, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21515] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21515, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21500] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "I will start building with this number ...Durga please separtae the world\
-form this point!\
-", 
-         Name = "Begiing of zone Nal HUTTA", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Exits = 
          {
          }, 
-         Sector = "city", 
          Vnum = 21500, 
+         Description = "I will start building with this number ...Durga please separtae the world\
+form this point!\
+", 
+         Tag = "", 
+         Name = "Begiing of zone Nal HUTTA", 
       }, 
       [21501] = 
       {
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
+         Tunnel = 0, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Description = "", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 21502, 
+               Keyword = "", 
+               Distance = 0, 
+            }, 
+         }, 
+         Vnum = 21501, 
          Description = "A clearing in the large terrestrial planet of Nal Hutta. There are some\
 burn marks from transport vehicle exahust on the ground. From the tracks\
 and burn circles you can tell this area recives alot of trafic. Looking up\
@@ -555,129 +475,214 @@ lights form the eciting citys of above. Looking up to the west you can see\
 a red outline of a nearby gas cloud. There is a wide path heading toward\
 the east and one to the west from here. \
 ", 
+         Tag = "", 
          Name = "A Landing Clearing", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 21502, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         Sector = "city", 
-         Vnum = 21501, 
       }, 
       [21502] = 
       {
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 21503, 
                Description = "", 
-               Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 21503, 
+               Keyword = "", 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 21501, 
                Description = "", 
-               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 21501, 
+               Keyword = "", 
+               Distance = 0, 
             }, 
          }, 
-         Sector = "city", 
          Vnum = 21502, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
       [21503] = 
       {
+         Sector = "city", 
          TeleVnum = 0, 
-         Tag = "", 
-         Description = "", 
-         Name = "Floating in a void", 
          Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 21502, 
                Description = "", 
-               Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 21502, 
+               Keyword = "", 
+               Distance = 0, 
             }, 
          }, 
-         Sector = "city", 
          Vnum = 21503, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
    }, 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
+   FileFormatVersion = 1, 
    Filename = "nal_hutta.lua", 
-   ResetFrequency = 0, 
-   Resets = 
+   Mobiles = 
    {
-      [1] = 
+      [21500] = 
       {
-         Command = "M", 
-         Arg1 = 21500, 
-         MiscData = 1, 
-         Arg3 = 21500, 
-         Arg2 = 1, 
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a newly created mobhead", 
+         Weight = 0, 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
+         LongDescr = "Leave this reset until you make a new one. If you don't have at least one bad things will happen.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 21500, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "mobhead", 
       }, 
-      [2] = 
+      [21799] = 
       {
-         Command = "O", 
-         Arg1 = 21500, 
-         MiscData = 1, 
-         Arg3 = 21186, 
-         Arg2 = 1, 
-      }, 
-      [3] = 
-      {
-         Command = "D", 
-         Arg1 = 21186, 
-         MiscData = 0, 
-         Arg3 = 0, 
-         Arg2 = 2, 
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a newly created mobtail", 
+         Weight = 0, 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
+         LongDescr = "Some god abandoned a newly created mobtail here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 21799, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "mobtail", 
       }, 
    }, 
+   LowEconomy = 6250000, 
+   Name = "Nal Hutta", 
 }

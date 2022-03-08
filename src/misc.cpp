@@ -62,7 +62,7 @@ void PullOrPush(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool
         break;
 
     case ITEM_BUTTON:
-        if((!pull && isup) || (pull & !isup))
+        if((!pull && isup) || (pull && !isup))
         {
             ch->Echo("It is already %s.\r\n", isup ? "in" : "out");
             return;

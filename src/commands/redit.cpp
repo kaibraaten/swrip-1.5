@@ -497,6 +497,12 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
+        if(location->Plugin != tmp->Plugin)
+        {
+            ch->Echo("Cannot create exits to or from plugins, only within.\r\n");
+            return;
+        }
+        
         if(addexit || !xit)
         {
             if(numnotdir)

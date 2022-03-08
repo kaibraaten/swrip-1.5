@@ -2,6 +2,8 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "character.hpp"
+#include "protomob.hpp"
+#include "area.hpp"
 
 /*
  * Lookup a skills information
@@ -125,8 +127,27 @@ void do_slookup(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("Dice: %s\r\n", skill->Dice.c_str());
 
         if(!skill->Teachers.empty())
-            ch->Echo("Teachers: %s\r\n", skill->Teachers.c_str());
+        {
+            ch->Echo("Teachers:\r\n");
 
+            for(auto t : skill->Teachers)
+            {
+                auto mob = GetProtoMobile(t);
+
+                if(mob != nullptr)
+                {
+                    ch->Echo("  %s : %s : %s\r\n",
+                             t.c_str(),
+                             mob->ShortDescr.c_str(),
+                             GetAreaOf(mob)->Filename.c_str());
+                }
+                else
+                {
+                    ch->Echo("  *** %s: no such mobile! ***\r\n", t.c_str());
+                }
+            }
+        }
+        
         if(skill->Participants != 0)
             ch->Echo("Participants: %d\r\n", (int)skill->Participants);
 

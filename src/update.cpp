@@ -973,28 +973,28 @@ static bool IsReadyToPerformSpecFun(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
-        && ch->spec_fun != nullptr;
+        && ch->SpecFuns[0] != nullptr;
 }
 
 static bool TryPerformSpecFun(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun(ch));
 
-    return ch->spec_fun(ch);
+    return ch->SpecFuns[0](ch);
 }
 
 static bool IsReadyToPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
-        && ch->spec_2 != nullptr;
+        && ch->SpecFuns[1] != nullptr;
 }
 
 static bool TryPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun2(ch));
 
-    return ch->spec_2(ch);
+    return ch->SpecFuns[1](ch);
 }
 
 static bool MobHasScriptTrigger(std::shared_ptr<Character> ch)
@@ -1552,7 +1552,7 @@ static void AutosavePlayerCharacters()
 }
 
 static std::shared_ptr<Room> GetOwnedHome(std::shared_ptr<Character> ch,
-                                          std::list<std::shared_ptr<Home>> homes)
+                                          const std::vector<std::shared_ptr<Home>> &homes)
 {
     auto home = Find(homes,
                      [ch](const auto &h)
@@ -1601,9 +1601,9 @@ static std::shared_ptr<Room> GetRoomToQuitIn(std::shared_ptr<Character> ch)
     return room;
 }
 
-static std::list<std::shared_ptr<Character> > GetLinkdeadCharacters()
+static std::vector<std::shared_ptr<Character> > GetLinkdeadCharacters()
 {
-    std::list<std::shared_ptr<Character> > linkdeads;
+    std::vector<std::shared_ptr<Character> > linkdeads;
 
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
@@ -2394,9 +2394,9 @@ static void CharacterCheck()
                     continue;
                 }
 
-                if(ch->spec_fun)
+                if(ch->SpecFuns[0])
                 {
-                    if(ch->spec_fun(ch))
+                    if(ch->SpecFuns[0](ch))
                     {
                         continue;
                     }
@@ -2407,9 +2407,9 @@ static void CharacterCheck()
                     }
                 }
 
-                if(ch->spec_2)
+                if(ch->SpecFuns[1])
                 {
-                    if(ch->spec_2(ch))
+                    if(ch->SpecFuns[1](ch))
                     {
                         continue;
                     }

@@ -14,14 +14,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 enable_testing()
 
-add_executable(swrip $<TARGET_OBJECTS:mud> bootstrap/main.cpp)
+add_executable(swrip bootstrap/main.cpp)
 target_compile_features(swrip PRIVATE cxx_std_20)
 target_compile_options(swrip
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-DHAVE_ZLIB -DHAVE_UNAME -Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation -std=c++20>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /wd4996 /wd6262 /wd26451 /std:c++latest>
   )
 
-add_library(mud OBJECT
+add_library(mud SHARED
 src/act.cpp
 src/act_comm.cpp
 src/act_info.cpp
@@ -35,6 +35,7 @@ src/badname.cpp
 src/board.cpp
 src/bounty.cpp
 src/build.cpp
+src/builtinvnumconverter.cpp
 src/character.cpp
 src/clan.cpp
 src/command.cpp
@@ -61,13 +62,13 @@ src/mapper.cpp
 src/misc.cpp
 src/missile.cpp
 src/mprog.cpp
-src/mprog_ext.cpp
 src/mud_prog.cpp
 src/nanny.cpp
 src/object.cpp
 src/pcdata.cpp
 src/planet.cpp
 src/plugins.cpp
+src/pluginvnumconverter.cpp
 src/protomob.cpp
 src/protoobject.cpp
 src/reset.cpp
@@ -88,6 +89,7 @@ src/triggers.cpp
 src/turret.cpp
 src/update.cpp
 src/vector3_aux.cpp
+src/vnumconverter.cpp
 src/commands/aassign.cpp
 src/commands/accelerate.cpp
 src/commands/accept.cpp
@@ -229,6 +231,7 @@ src/commands/enter.cpp
 src/commands/equipment.cpp
 src/commands/examine.cpp
 src/commands/exits.cpp
+src/commands/finddependencies.cpp
 src/commands/fill.cpp
 src/commands/fire.cpp
 src/commands/firstaid.cpp
@@ -303,7 +306,6 @@ src/commands/lock.cpp
 src/commands/log.cpp
 src/commands/look.cpp
 src/commands/low_purge.cpp
-src/commands/macro.cpp
 src/commands/mailroom.cpp
 src/commands/makearmor.cpp
 src/commands/makeblade.cpp
@@ -408,6 +410,7 @@ src/commands/radar.cpp
 src/commands/rank.cpp
 src/commands/rassign.cpp
 src/commands/rat.cpp
+src/commands/rcreate.cpp
 src/commands/rdelete.cpp
 src/commands/reboot.cpp
 src/commands/recall.cpp
@@ -590,7 +593,6 @@ src/impscript/funcs/error_func.cpp
 src/impscript/funcs/exit_func.cpp
 src/impscript/funcs/getdata_func.cpp
 src/impscript/funcs/getroom_func.cpp
-src/impscript/funcs/inroom_func.cpp
 src/impscript/funcs/interpret_func.cpp
 src/impscript/funcs/isfighting_func.cpp
 src/impscript/funcs/isjedi_func.cpp
@@ -603,13 +605,12 @@ src/impscript/funcs/random_func.cpp
 src/impscript/funcs/say_func.cpp
 src/impscript/funcs/setdata_func.cpp
 src/impscript/funcs/skill_func.cpp
+src/impscript/funcs/spawnmob_func.cpp
 src/impscript/funcs/spawnobj_func.cpp
 src/impscript/funcs/transfer_func.cpp
 src/impscript/funcs/type_func.cpp
 src/impscript/funcs/vnum_func.cpp
 src/impscript/funcs/wait_func.cpp
-src/mpcommands/mpapplyb.cpp
-src/mpcommands/mpapply.cpp
 src/mpcommands/mpasound.cpp
 src/mpcommands/mpat.cpp
 src/mpcommands/mpclosepassage.cpp
@@ -647,8 +648,8 @@ src/repos/fs_imprepository.cpp
 src/repos/helprepository.cpp
 src/repos/imprepository.hpp
 src/repos/lua_arearepository.cpp
+src/repos/lua_arenarepository.cpp
 src/repos/lua_homerepository.cpp
-src/repos/lua_macrorepository.cpp
 src/repos/lua_storeroomrepository.cpp
 src/repos/lua_vendorrepository.cpp
 src/repos/objectrepository.cpp
@@ -726,12 +727,13 @@ src/spells/weaken.cpp)
 set(COMMANDTABLE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp)
 
 if(WIN32)
-  target_link_libraries(swrip utility colorparser lua WS2_32 imp)
+  target_link_libraries(mud utility colorparser lua WS2_32 imp)
   set(BUILD_SHARED_LIBS ON)
 else()
-  target_link_libraries(swrip utility colorparser lua stdc++fs dl imp pthread)
+  target_link_libraries(mud utility colorparser lua stdc++fs dl imp pthread)
 endif()
 
+target_link_libraries(swrip mud)
 set(PYTHON python3)
 set(RM ${PYTHON} scripts/rm.py)
 
@@ -741,25 +743,6 @@ target_compile_options(mud
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /std:c++latest>
   )
 
-configure_file(${CMAKE_SOURCE_DIR}/cmake/GoogleTest-CMakeLists.txt.in ${CMAKE_BINARY_DIR}/googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
-
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-                 ${CMAKE_BINARY_DIR}/googletest-build
-                 EXCLUDE_FROM_ALL)
 add_subdirectory(libs/colorparser)
 add_subdirectory(libs/utility)
 add_subdirectory(libs/3rdparty/lua)

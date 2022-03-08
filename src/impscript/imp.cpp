@@ -3,6 +3,7 @@
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/runtime/stringvalue.hpp>
 #include <imp/scanner/scanner.hpp>
+#include <imp/runtime/listvalue.hpp>
 #include "impscript/imp.hpp"
 #include "impscript/mudlibrary.hpp"
 #include "impscript/scriptrunner.hpp"
@@ -14,12 +15,17 @@ std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     auto standardLib = std::make_shared<Imp::StandardLibrary>();
     auto mudLib = std::make_shared<MudLibrary>(standardLib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
-    globalScope->Assign("__scriptpath__", std::make_shared<Imp::StringValue>("data/scripts"));
+    std::deque<std::shared_ptr<Imp::RuntimeValue>> paths
+        {
+            std::make_shared<Imp::StringValue>("data/scripts"),
+            std::make_shared<Imp::StringValue>("data/plugins")
+        };
+    globalScope->Assign("__scriptpath__", std::make_shared<Imp::ListValue>(paths));
     return globalScope;
 }
 
 std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
-                                              const std::list<std::string> &code)
+                                              const std::vector<std::string> &code)
 {
     auto scanner = std::make_shared<Imp::Scanner>(scriptname, code);
     auto prog = Imp::Program::Parse(scanner);
@@ -28,8 +34,8 @@ std::shared_ptr<Imp::Program> ParseImpProgram(const std::string &scriptname,
 }
 
 void DispatchImpFunction(const std::string &funcName,
-                         std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
-                         const std::list<std::string> &code,
+                         const std::vector<std::shared_ptr<Imp::RuntimeValue>> params,
+                         const std::vector<std::string> &code,
                          const std::string &scriptname)
 {
     try

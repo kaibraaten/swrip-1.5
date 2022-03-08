@@ -118,16 +118,15 @@ void do_calculate(std::shared_ptr<Character> ch, std::string argument)
 
         if(ship->CurrentJump)
         {
-            CopyVector(ship->Jump, ship->CurrentJump->Position);
+            ship->Jump = ship->CurrentJump->Position;
             found = true;
         }
     }
     else if(!arg2.empty() && !arg3.empty())
     {
-        SetVector(ship->Jump,
-                  strtol(arg1.c_str(), nullptr, 10),
-                  strtol(arg2.c_str(), nullptr, 10),
-                  strtol(arg3.c_str(), nullptr, 10));
+        ship->Jump = Vector3{ (double)strtol(arg1.c_str(), nullptr, 10),
+            (double)strtol(arg2.c_str(), nullptr, 10),
+            (double)strtol(arg3.c_str(), nullptr, 10) };
         found = true;
     }
     else
@@ -161,9 +160,9 @@ void do_calculate(std::shared_ptr<Character> ch, std::string argument)
 
     RandomizeVector(ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray);
 
-    ship->Jump->x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
-    ship->Jump->y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
-    ship->Jump->z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
+    ship->Jump.x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
+    ship->Jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
+    ship->Jump.z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity * 5 : 0);
 
     for(auto spaceobj : Spaceobjects)
     {

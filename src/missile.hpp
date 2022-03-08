@@ -18,8 +18,8 @@ public:
     MissileType Type = 0;
     short Age = 0;
     int Speed = 0;
-    std::shared_ptr<Vector3> Position = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> Heading = std::make_shared<Vector3>();
+    Vector3 Position;
+    Vector3 Heading;
 };
 
 void UpdateMissile(std::shared_ptr<Missile> missile);

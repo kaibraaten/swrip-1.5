@@ -1,11 +1,323 @@
 -- Landspeeders and Cloudcars etc
--- Last saved Tuesday 27-Oct-2020 11:58:45
+-- Last saved Thursday 26-Nov-2020 15:24:24
 
 AreaEntry
 {
-   Name = "Landspeeders and Cloudcars etc", 
    HighEconomy = 0, 
-   ResetMessage = "", 
+   Objects = 
+   {
+      [30000] = 
+      {
+         Layers = 0, 
+         Description = "Landspeeder (id# 30000) is hovering here.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30000, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "landspeeder 30000", 
+      }, 
+      [30001] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30001, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30002] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30002, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30003] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30003, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30004] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30004, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30005] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30005, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30006] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30006, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30007] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30007, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30008] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30008, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30009] = 
+      {
+         Layers = 0, 
+         Description = "A small speeder.", 
+         ShortDescr = "a landspeeder", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "spacecraft", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30009, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "speeder", 
+      }, 
+      [30999] = 
+      {
+         Layers = 0, 
+         Description = "Some god dropped a newly created dud here.", 
+         ShortDescr = "a newly created dud", 
+         Weight = 1, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         ItemType = "trash", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Vnum = 30999, 
+         ActionDescription = "", 
+         Tag = "", 
+         Name = "dud", 
+      }, 
+   }, 
    LevelRanges = 
    {
       Soft = 
@@ -19,325 +331,6 @@ AreaEntry
          Low = 0, 
       }, 
    }, 
-   Filename = "land_vehicles.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Command = "O", 
-         Arg2 = 1, 
-         Arg3 = 30999, 
-         MiscData = 1, 
-         Arg1 = 30999, 
-      }, 
-   }, 
-   ResetFrequency = 0, 
-   FileFormatVersion = 1, 
-   Objects = 
-   {
-      [30000] = 
-      {
-         Name = "landspeeder 30000", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "Landspeeder (id# 30000) is hovering here.", 
-         ItemType = "spacecraft", 
-         Vnum = 30000, 
-         Weight = 1, 
-      }, 
-      [30001] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30001, 
-         Weight = 1, 
-      }, 
-      [30002] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30002, 
-         Weight = 1, 
-      }, 
-      [30003] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30003, 
-         Weight = 1, 
-      }, 
-      [30004] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30004, 
-         Weight = 1, 
-      }, 
-      [30005] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30005, 
-         Weight = 1, 
-      }, 
-      [30006] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30006, 
-         Weight = 1, 
-      }, 
-      [30007] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30007, 
-         Weight = 1, 
-      }, 
-      [30008] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30008, 
-         Weight = 1, 
-      }, 
-      [30009] = 
-      {
-         Name = "speeder", 
-         ShortDescr = "a landspeeder", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "A small speeder.", 
-         ItemType = "spacecraft", 
-         Vnum = 30009, 
-         Weight = 1, 
-      }, 
-      [30999] = 
-      {
-         Name = "dud", 
-         ShortDescr = "a newly created dud", 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         Description = "Some god dropped a newly created dud here.", 
-         ItemType = "trash", 
-         Vnum = 30999, 
-         Weight = 1, 
-      }, 
-   }, 
-   Author = "Durga", 
-   LowEconomy = 130050000, 
    VnumRanges = 
    {
       Object = 
@@ -356,160 +349,41 @@ AreaEntry
          First = 30000, 
       }, 
    }, 
-   Mobiles = 
+   ResetMessage = "", 
+   ResetFrequency = 0, 
+   Resets = 
    {
-      [30000] = 
+      [1] = 
       {
-         HitRoll = 0, 
-         Name = "dud", 
-         ShortDescr = "a newly created dud", 
-         LongDescr = "Some god abandoned a newly created dud here.\
-", 
-         ArmorClass = 0, 
-         Description = "", 
-         DamRoll = 0, 
-         Level = 1, 
-         Height = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-         }, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Race = "Human", 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Vnum = 30000, 
-         DefaultPosition = "standing", 
-      }, 
-      [30999] = 
-      {
-         HitRoll = 0, 
-         Name = "dud", 
-         ShortDescr = "a newly created dud", 
-         LongDescr = "Some god abandoned a newly created dud here.\
-", 
-         ArmorClass = 0, 
-         Description = "", 
-         DamRoll = 0, 
-         Level = 1, 
-         Height = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Dexterity = 10, 
-            Luck = 10, 
-            Force = 0, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-         }, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-         }, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Weight = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Race = "Human", 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Vnum = 30999, 
-         DefaultPosition = "standing", 
+         Arg3 = 30999, 
+         Arg1 = 30999, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
    }, 
+   Author = "Durga", 
    Rooms = 
    {
       [30000] = 
       {
-         TeleDelay = 0, 
-         Name = "A Landspeeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 5, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 5, 
+         Vnum = 30000, 
          Description = "This old SoroSuub landspeeder seats 4 people comfortably. Landspeeders\
 empoy a repulsorlift engine allowing them to hover suspended about a meter\
 off the ground. This affect continues even after they are shut down.\
@@ -517,278 +391,417 @@ Landspeeders are also referred to as floaters or skimmers.  \
  \
 Speeders can be driven with: DRIVE <DIR>\
 ", 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Vnum = 30000, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Landspeeder", 
       }, 
       [30001] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30001, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30001, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30002] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30002, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it. \
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30002, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30003] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30003, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
+         Tag = "", 
+         Name = "A Small Speeder", 
+      }, 
+      [30004] = 
+      {
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Vnum = 30003, 
-         TeleVnum = 0, 
-      }, 
-      [30004] = 
-      {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
-         ExtraDescriptions = 
-         {
-         }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30004, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it. \
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30004, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30005] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30005, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30005, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30006] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30006, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30006, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30007] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30007, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30007, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30008] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30008, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30008, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30009] = 
       {
-         TeleDelay = 0, 
-         Name = "A Small Speeder", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Vnum = 30009, 
          Description = "This is a small Sorosuub speeder designed for quick travel throught busy\
 city streets. It can only hold two people due to its small size. This\
 speeder has been proframed with a small radar that allows it to move\
 quickly down the street automaticly avoiding collisions and slowing down\
 only at intersections. Use DRIVE <DIR> to use it.\
 ", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Vnum = 30009, 
-         TeleVnum = 0, 
+         Tag = "", 
+         Name = "A Small Speeder", 
       }, 
       [30999] = 
       {
-         TeleDelay = 0, 
-         Name = "Floating in a void", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
+         }, 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
          }, 
          Exits = 
          {
          }, 
-         Tag = "", 
-         Sector = "city", 
-         Tunnel = 0, 
-         Description = "", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
          Vnum = 30999, 
-         TeleVnum = 0, 
+         Description = "", 
+         Tag = "", 
+         Name = "Floating in a void", 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   Filename = "land_vehicles.lua", 
+   Mobiles = 
+   {
+      [30000] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a newly created dud", 
+         Weight = 0, 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
+         LongDescr = "Some god abandoned a newly created dud here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 30000, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "dud", 
+      }, 
+      [30999] = 
+      {
+         Stats = 
+         {
+            Strength = 10, 
+            Wisdom = 10, 
+            Luck = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+         }, 
+         Race = "Human", 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         ShortDescr = "a newly created dud", 
+         Weight = 0, 
+         HitRoll = 0, 
+         Sex = "undistinguished", 
+         LongDescr = "Some god abandoned a newly created dud here.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Credits = 0, 
+         Level = 1, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Vnum = 30999, 
+         ArmorClass = 0, 
+         Tag = "", 
+         Name = "dud", 
+      }, 
+   }, 
+   LowEconomy = 130050000, 
+   Name = "Landspeeders and Cloudcars etc", 
 }

@@ -40,6 +40,8 @@
 #include "impscript/improom.hpp"
 #include "impscript/scriptrunner.hpp"
 #include "impscript/scriptscheduler.hpp"
+#include "vnumconverter.hpp"
+#include "plugins.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 
@@ -279,7 +281,7 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     }
     else if(StrCmp(argument, "imp") == 0)
     {
-        std::list<std::string> code =
+        std::vector<std::string> code =
         {
             "from test import *"
         };
@@ -351,6 +353,46 @@ void do_test(std::shared_ptr<Character> ch, std::string argument)
     {
         LuaLoadVnumConstants();
         ch->Echo("Ok.\r\n");
+    }
+    else if(StrCmp(argument, "areaflags") == 0)
+    {
+        for(auto area : Areas)
+        {
+            ch->Echo("%s: %s\r\n", area->Filename.c_str(),
+                     FlagString(area->Flags, AreaFlags).c_str());
+        }
+    }
+    else if(StrCmp(argument, "verifyareasavehelper") == 0)
+    {
+        auto coreArea = Areas->Find("core.lua");
+        auto vnumConverter = VnumConverter::Create(coreArea);
+        auto classicVnum = coreArea->VnumRanges.Room.First;
+        const auto roomVnums = vnumConverter->RoomVnums();
+
+        for(auto helperVnum : roomVnums)
+        {
+            while(!GetRoom(classicVnum))
+            {
+                ch->Echo("***** -> %ld\r\n", classicVnum);
+                ++classicVnum;
+            }
+
+            ch->Echo("%ld -> %ld\r\n", helperVnum, classicVnum);
+            
+            if(helperVnum != classicVnum)
+            {
+                ch->Echo("Rooms: helperVnum != classicVnum");
+                break;
+            }
+
+            ++classicVnum;
+        }
+
+        ch->Echo("Done verifying.");
+    }
+    else if(StrCmp(argument, "loadplugins") == 0)
+    {
+        LoadPlugins();
     }
     else
     {

@@ -148,18 +148,35 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key, double *value)
 
 void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
-                     const std::string &callbackFunctionName)
+                     const std::string &callbackFunctionName,
+                     void *userData)
 {
     lua_State *L = CreateLuaState();
 
     lua_pushcfunction(L, callback);
     lua_setglobal(L, callbackFunctionName.c_str());
 
-    int error = luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0);
+    if(userData != nullptr)
+    {
+        lua_pushlightuserdata(L, userData);
+        lua_setglobal(L, "UserData");
+    }
+    
+    int error = luaL_loadfile(L, filename.c_str());
 
     if(error)
     {
-        Log->Bug("Cannot run file: %s", lua_tostring(L, -1));
+        Log->Bug("Cannot run file %s: %s",
+                 filename.c_str(), lua_tostring(L, -1));
+        return;
+    }
+
+    error = lua_pcall(L, 0, 0, 0);
+
+    if(error)
+    {
+        Log->Bug("Cannot pcall %s in file %s: %s",
+                 callbackFunctionName.c_str(), filename.c_str(), lua_tostring(L, -1));
         return;
     }
 
@@ -376,31 +393,33 @@ void LuaPushSmaugAffects(lua_State *L, const std::list<std::shared_ptr<SmaugAffe
     }
 }
 
-void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
+void LuaPushVector3(lua_State *L, const Vector3 &v, const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "X", v->x);
-    LuaSetfieldNumber(L, "Y", v->y);
-    LuaSetfieldNumber(L, "Z", v->z);
+    LuaSetfieldNumber(L, "X", v.x);
+    LuaSetfieldNumber(L, "Y", v.y);
+    LuaSetfieldNumber(L, "Z", v.z);
 
     lua_settable(L, -3);
 }
 
-void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
+Vector3 LuaLoadVector3(lua_State *L, const std::string &key)
 {
+    Vector3 v;
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
     if(!lua_isnil(L, ++idx))
     {
-        LuaGetfieldDouble(L, "X", &v->x);
-        LuaGetfieldDouble(L, "Y", &v->y);
-        LuaGetfieldDouble(L, "Z", &v->z);
+        LuaGetfieldDouble(L, "X", &v.x);
+        LuaGetfieldDouble(L, "Y", &v.y);
+        LuaGetfieldDouble(L, "Z", &v.z);
     }
 
     lua_pop(L, 1);
+    return v;
 }
 
 void LuaPushCurrentAndMax(lua_State *L, const std::string &key, int current, int mx)
@@ -695,7 +714,7 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
     lua_newtable(L);
     std::shared_ptr<ProtoObject> proto = obj->Prototype;
 
-    LuaSetfieldNumber(L, "Vnum", proto->Vnum);
+    LuaSetfieldString(L, "Vnum", VnumOrTag(proto));
 
     if(obj->Count > 1)
     {
@@ -724,7 +743,7 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
 
     if(obj->InRoom != nullptr)
     {
-        LuaSetfieldNumber(L, "InRoom", obj->InRoom->Vnum);
+        LuaSetfieldString(L, "InRoom", VnumOrTag(obj->InRoom));
     }
 
     if(obj->Flags != proto->Flags)
@@ -883,7 +902,7 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     assert(IsNpc(mob));
     auto proto = mob->Prototype;
 
-    LuaSetfieldNumber(L, "Vnum", proto->Vnum);
+    LuaSetfieldString(L, "Vnum", VnumOrTag(proto));
     LuaSetfieldString(L, "CharacterType", "Mobile");
 
     auto mobflags = mob->Flags;
@@ -902,24 +921,24 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
 
     std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 
-    const auto mobspec1ptr = mob->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
-    const auto protospec1ptr = proto->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto mobspec1ptr = mob->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec1ptr = proto->SpecFuns[0].target<bool(*)(std::shared_ptr<Character>)>();
     
     if(mobspec1ptr != nullptr
        && protospec1ptr != nullptr
        && *mobspec1ptr != *protospec1ptr)
     {
-        specfuns.push_back(mob->spec_fun);
+        specfuns.push_back(mob->SpecFuns[0]);
     }
 
-    const auto mobspec2ptr = mob->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
-    const auto protospec2ptr = proto->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto mobspec2ptr = mob->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec2ptr = proto->SpecFuns[1].target<bool(*)(std::shared_ptr<Character>)>();
 
     if(mobspec2ptr != nullptr
        && protospec2ptr != nullptr
        && *mobspec2ptr != *protospec2ptr)
     {
-        specfuns.push_back(mob->spec_2);
+        specfuns.push_back(mob->SpecFuns[1]);
     }
     
     LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);
@@ -1079,9 +1098,9 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaSetfieldNumber(L, "Speaking", ch->Speaking);
     LuaSetfieldNumber(L, "Level", ch->TopLevel());
     LuaSetfieldNumber(L, "Trust", ch->Trust);
-    LuaSetfieldNumber(L, "InRoom",
+    LuaSetfieldString(L, "InRoom",
                       ch->InRoom == GetRoom(ROOM_VNUM_LIMBO) && ch->WasInRoom
-                      ? ch->WasInRoom->Vnum : ch->InRoom->Vnum);
+                      ? VnumOrTag(ch->WasInRoom) : VnumOrTag(ch->InRoom));
     PushCurrentAndMax(L, "HitPoints", ch->HitPoints);
     PushCurrentAndMax(L, "ForcePoints", ch->Mana);
     PushCurrentAndMax(L, "Fatigue", ch->Fatigue);
@@ -1466,16 +1485,17 @@ static void LuaLoadObjectSpells(lua_State *L, std::shared_ptr<Object> obj)
 
 static std::shared_ptr<Object> LuaLoadObject(lua_State *L)
 {
-    vnum_t vnum = 0;
+    std::string vnumOrTag;
     int level = 0;
-    LuaGetfieldLong(L, "Vnum", &vnum);
+    
+    LuaGetfieldString(L, "Vnum", &vnumOrTag);
     LuaGetfieldInt(L, "Level", &level);
-    std::shared_ptr<ProtoObject> proto = GetProtoObject(vnum);
+    std::shared_ptr<ProtoObject> proto = GetProtoObject(vnumOrTag);
 
     if(proto == nullptr)
     {
-        Log->Bug("%s:%d %s : Unknown vnum %ld",
-                 __FILE__, __LINE__, __FUNCTION__, vnum);
+        Log->Bug("%s:%d %s : Unknown vnum/tag %s",
+                 __FILE__, __LINE__, __FUNCTION__, vnumOrTag.c_str());
         return nullptr;
     }
 
@@ -1486,10 +1506,10 @@ static std::shared_ptr<Object> LuaLoadObject(lua_State *L)
     LuaGetfieldString(L, "ShortDescription", &obj->ShortDescr);
     LuaGetfieldString(L, "Description", &obj->Description);
     LuaGetfieldString(L, "ActionDescription", &obj->ActionDescription);
-    LuaGetfieldLong(L, "InRoom",
-                    [obj](const long v)
+    LuaGetfieldString(L, "InRoom",
+                    [obj](const auto &vOrT)
                     {
-                        obj->InRoom = GetRoom(v);
+                        obj->InRoom = GetRoom(vOrT);
                     });
     LuaGetfieldString(L, "ItemType",
                       [obj](const std::string &typeName)
@@ -1632,18 +1652,22 @@ std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::st
 
         while(lua_next(L, -2))
         {
-            vnum_t vnum = INVALID_VNUM;
-            LuaGetfieldLong(L, "Vnum", &vnum);
-            auto proto = GetProtoMobile(vnum);
-            auto mob = CreateMobile(proto);
-            LuaLoadCharacter(L, mob, LoadMobileData);
+            std::string vnumOrTag;
+            LuaGetfieldString(L, "Vnum", &vnumOrTag);
+            auto proto = GetProtoMobile(vnumOrTag);
 
-            if(mob != nullptr)
+            if(proto != nullptr)
             {
-                mobs.push_back(mob);
-                CharacterToRoom(mob, mob->InRoom);
-            }
+                auto mob = CreateMobile(proto);
+                LuaLoadCharacter(L, mob, LoadMobileData);
 
+                if(mob != nullptr)
+                {
+                    mobs.push_back(mob);
+                    CharacterToRoom(mob, mob->InRoom);
+                }
+            }
+            
             lua_pop(L, 1);
         }
     }
@@ -1686,16 +1710,16 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
                        ch->TopLevel(lvl);
                    });
     LuaGetfieldInt(L, "Trust", &ch->Trust);
-    LuaGetfieldInt(L, "InRoom",
-                   [&ch](const int vnum)
-                   {
-                       ch->InRoom = GetRoom(vnum);
+    LuaGetfieldString(L, "InRoom",
+                      [&ch](const auto &vnumOrTag)
+                      {
+                          ch->InRoom = GetRoom(vnumOrTag);
 
-                       if(ch->InRoom == nullptr)
-                       {
-                           ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
-                       }
-                   });
+                          if(ch->InRoom == nullptr)
+                          {
+                              ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
+                          }
+                      });
     LuaGetfieldInt(L, "Credits", &ch->Gold);
     LuaGetfieldString(L, "Position",
                       [ch](const std::string &posName)
@@ -1748,7 +1772,7 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
 
     std::vector<std::string> expressions;
     LuaLoadArray(L, "RuntimeData", LoadRuntimeData, &expressions);
-    std::list<std::string> code(expressions.begin(), expressions.end());
+    std::vector<std::string> code(expressions.begin(), expressions.end());
     auto program = ParseImpProgram("char " + ch->Name + " runtimedata", code);
     auto scope = std::make_shared<Imp::RuntimeScope>();
     program->Eval(scope);

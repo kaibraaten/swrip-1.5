@@ -40,11 +40,13 @@ void LuaStoreroomRepository::Save(std::shared_ptr<Room> storeroom)
 
 static int L_StoreroomEntry(lua_State *L)
 {
-    vnum_t vnum = INVALID_VNUM;
-    LuaGetfieldLong(L, "Vnum", &vnum);
-
-    auto storeroom = GetRoom(vnum);
-
+    std::shared_ptr<Room> storeroom;
+    LuaGetfieldString(L, "Vnum",
+                      [&storeroom](const auto &vnumOrTag)
+                      {
+                          storeroom = GetRoom(vnumOrTag);
+                      });
+    
     if(storeroom != nullptr)
     {
         auto objects = LuaLoadObjects(L, "Contents");
@@ -73,7 +75,7 @@ static void PushStoreroom(lua_State *L, const std::shared_ptr<Room> &storeroom)
     lua_pushinteger(L, 1);
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Vnum", storeroom->Vnum);
+    LuaSetfieldString(L, "Vnum", VnumOrTag(storeroom));
     LuaPushObjects(L, storeroom->Objects(), "Contents");
 
     lua_setglobal(L, "storeroom");

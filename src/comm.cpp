@@ -25,6 +25,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <iostream>
 #include <sstream>
 #include <cassert>
 #include <cstring>
@@ -48,6 +49,10 @@
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
+
+#ifdef _WIN32
+#include <process.h>
+#endif
 
 constexpr unsigned short DEFAULT_LISTEN_PORT = 7000;
 bool bootup = false;
@@ -90,7 +95,7 @@ static void InitializeTime()
      * Init time.
      */
     gettimeofday(&now_time, nullptr);
-    current_time = (time_t)now_time.tv_sec;
+    current_time = (time_t) now_time.tv_sec;
 
     boot_time = time(0);
     str_boot_time = ctime(&current_time);
@@ -145,12 +150,12 @@ int SwripMain(int argc, char *argv[])
     {
         if(!IsNumber(argv[1]))
         {
-            fprintf(stderr, "Usage: %s [port #]\n", argv[0]);
+            std::cerr << "Usage: " << argv[0] << " [port #]" << std::endl;
             exit(1);
         }
         else if((SysData.Port = atoi(argv[1])) <= 1024)
         {
-            fprintf(stderr, "Port number must be above 1024.\n");
+            std::cerr << "Port number must be above 1024." << std::endl;
             exit(1);
         }
 
@@ -171,10 +176,7 @@ int SwripMain(int argc, char *argv[])
      */
     bootup = true;
 
-#ifndef _WIN32
     Log->Info("PID: %d", getpid());
-#endif
-
     Log->Info("Starting IMC2");
     ImcStartup(false, imcsocket, fCopyOver);
 
@@ -234,7 +236,7 @@ socket_t InitializeSocket(unsigned short port)
     ld.l_linger = 1000;
 
     if(setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
-                  (const char *)&ld, sizeof(ld)) == SOCKET_ERROR)
+                  (const char *) &ld, sizeof(ld)) == SOCKET_ERROR)
     {
         perror("Init_socket: SO_DONTLINGER");
         closesocket(fd);
@@ -246,7 +248,7 @@ socket_t InitializeSocket(unsigned short port)
     sa.sin_family = AF_INET; /* hp->h_addrtype; */
     sa.sin_port = htons(port);
 
-    if(bind(fd, (struct sockaddr *)&sa, sizeof(sa)) == SOCKET_ERROR)
+    if(bind(fd, (struct sockaddr *) &sa, sizeof(sa)) == SOCKET_ERROR)
     {
         perror("Init_socket: bind");
         closesocket(fd);
@@ -350,7 +352,7 @@ static void GameLoop()
     signal(SIGALRM, CaughtAlarm);
 #endif
     gettimeofday(&last_time, nullptr);
-    current_time = (time_t)last_time.tv_sec;
+    current_time = (time_t) last_time.tv_sec;
 
     /* Main loop */
     while(!mud_down)
@@ -526,9 +528,9 @@ static void Sleep(timeval &last_time)
 {
     timeval now_time;
     gettimeofday(&now_time, nullptr);
-    long usecDelta = ((int)last_time.tv_usec) - ((int)now_time.tv_usec)
+    long usecDelta = ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
         + 1000000 / PULSE_PER_SECOND;
-    long secDelta = ((int)last_time.tv_sec) - ((int)now_time.tv_sec);
+    long secDelta = ((int) last_time.tv_sec) - ((int) now_time.tv_sec);
 
     while(usecDelta < 0)
     {
@@ -545,19 +547,16 @@ static void Sleep(timeval &last_time)
     if(secDelta > 0 || (secDelta == 0 && usecDelta > 0))
     {
         timeval stall_time;
-        int result = 0;
+        stall_time.tv_usec = usecDelta;
+        stall_time.tv_sec = secDelta;
+
 #ifdef _WIN32
         fd_set dummy_set;
         FD_ZERO(&dummy_set);
         FD_SET(control, &dummy_set);
-#endif
-        stall_time.tv_usec = usecDelta;
-        stall_time.tv_sec = secDelta;
-
-#if defined(_WIN32)
-        result = select(0, nullptr, nullptr, &dummy_set, &stall_time);
+        int result = select(0, nullptr, nullptr, &dummy_set, &stall_time);
 #else
-        result = select(0, nullptr, nullptr, nullptr, &stall_time);
+        int result = select(0, nullptr, nullptr, nullptr, &stall_time);
 #endif
         if(result == SOCKET_ERROR)
         {
@@ -567,7 +566,7 @@ static void Sleep(timeval &last_time)
     }
 
     gettimeofday(&last_time, nullptr);
-    current_time = (time_t)last_time.tv_sec;
+    current_time = (time_t) last_time.tv_sec;
 }
 
 static void NewDescriptor(socket_t new_desc)
@@ -588,7 +587,7 @@ static void NewDescriptor(socket_t new_desc)
 
     SetAlarm(20);
 
-    if((desc = accept(new_desc, (struct sockaddr *)&sock, &size)) == INVALID_SOCKET)
+    if((desc = accept(new_desc, (struct sockaddr *) &sock, &size)) == INVALID_SOCKET)
     {
         perror("New_descriptor: accept");
         SetAlarm(0);
@@ -630,7 +629,7 @@ static void NewDescriptor(socket_t new_desc)
 
     if(!SysData.NoNameResolving)
     {
-        from = gethostbyaddr((char *)&sock.sin_addr,
+        from = gethostbyaddr((char *) &sock.sin_addr,
                              sizeof(sock.sin_addr), AF_INET);
     }
     else
@@ -1026,7 +1025,7 @@ void DisplayPrompt(Descriptor *d)
                 break;
             }
 
-            if((unsigned int)the_stat != 0x80000000)
+            if((unsigned int) the_stat != 0x80000000)
                 sprintf(pbuf, "%d", the_stat);
 
             pbuf += strlen(pbuf);

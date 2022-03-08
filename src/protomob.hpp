@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <bitset>
+#include <vector>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
@@ -13,11 +14,13 @@ class ProtoMobile
 public:
     ProtoMobile() = delete;
     ProtoMobile(vnum_t vnum);
+    ProtoMobile(const ProtoMobile &rhv);
+    
     virtual ~ProtoMobile();
+    std::string Tag() const;
+    void Tag(const std::string &tag);
 
-    std::shared_ptr<ProtoMobile> NextSort;
-    std::function<bool(std::shared_ptr<Character>)> spec_fun;
-    std::function<bool(std::shared_ptr<Character>)> spec_2;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> SpecFuns = { nullptr, nullptr };
     std::shared_ptr<class Shop> Shop;
     std::shared_ptr<class RepairShop> RepairShop;
     std::string Name;
@@ -25,6 +28,7 @@ public:
     std::string LongDescr;
     std::string Description;
     vnum_t Vnum = INVALID_VNUM;
+    class Plugin *Plugin = nullptr;
     int Count = 0;
     int Killed = 0;
     SexType Sex = 0;
@@ -62,6 +66,12 @@ public:
 
     class Stats Stats;
     SaveVs Saving;
+
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
 };
+
+std::shared_ptr<ProtoMobile> GetMobFromTag(const std::string &tag);
 
 #endif

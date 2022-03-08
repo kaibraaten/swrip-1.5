@@ -13,6 +13,8 @@ class ProtoObject
 public:
     ProtoObject() = delete;
     ProtoObject(vnum_t vnum);
+    ProtoObject(const ProtoObject &rhv);
+    
     virtual ~ProtoObject();
 
     const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
@@ -23,12 +25,15 @@ public:
     void Add(std::shared_ptr<Affect> affect);
     void Remove(std::shared_ptr<Affect> affect);
 
-    std::shared_ptr<ProtoObject> NextSort;
+    std::string Tag() const;
+    void Tag(const std::string &tag);
+
     std::string Name;
     std::string ShortDescr;
     std::string Description;
     std::string ActionDescription;
     vnum_t Vnum = INVALID_VNUM;
+    class Plugin *Plugin = nullptr;
     int Level = 0;
     ItemTypes ItemType = 0;
     std::bitset<Flag::MAX> Flags;
@@ -46,5 +51,7 @@ private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;
 };
+
+std::shared_ptr<ProtoObject> GetObjectFromTag(const std::string &tag);
 
 #endif

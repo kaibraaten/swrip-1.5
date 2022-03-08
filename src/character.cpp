@@ -67,8 +67,7 @@ Character::Character(std::unique_ptr<class PCData> pcdata)
 }
 
 Character::Character(std::shared_ptr<ProtoMobile> protoMob)
-    : spec_fun(protoMob->spec_fun),
-      spec_2(protoMob->spec_2),
+    : SpecFuns(protoMob->SpecFuns),
       Prototype(protoMob),
       Name(protoMob->Name),
       ShortDescr(protoMob->ShortDescr),
@@ -160,7 +159,14 @@ int Character::TopLevel() const
        && pImpl->TopLevel < LEVEL_IMMORTAL
        && SysData.TopLevelFromAbility)
     {
-        return umin(Ability.Level[(int)Ability.Main], 100);
+        if (Ability.Main == AbilityClass::None)
+        {
+            return 0;
+        }
+        else
+        {
+            return umin(Ability.Level[(int)Ability.Main], 100);
+        }
     }
     else
     {

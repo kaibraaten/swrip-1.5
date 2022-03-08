@@ -22,8 +22,8 @@ public:
     std::shared_ptr<class Planet> Planet;
     std::string Name;
     SpaceobjectType Type = 0;
-    std::shared_ptr<Vector3> Position = std::make_shared<Vector3>();
-    std::shared_ptr<Vector3> Heading = std::make_shared<Vector3>();
+    Vector3 Position;
+    Vector3 Heading;
     int Speed = 0;
     int Gravity = 0;
     bool IsSimulator = false;
@@ -36,6 +36,6 @@ std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum(vnum_t vnum);
 void SpaceobjectUpdate();
 const LandingSite *GetLandingSiteFromVnum(std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum);
 const LandingSite *GetLandingSiteFromLocationName(std::shared_ptr<Spaceobject> spaceobj,
-    const std::string &name);
+                                                  const std::string &name);
 
 #endif

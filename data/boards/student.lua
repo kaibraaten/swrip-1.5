@@ -1,17 +1,17 @@
 -- student
--- Last saved Sunday 19-Apr-2020 15:47:00
+-- Last saved Wednesday 25-Nov-2020 22:52:14
 
 BoardEntry
 {
-   MinRemoveLevel = 101, 
-   ExtraReaders = "", 
-   ExtraRemovers = "", 
-   MinPostLevel = 0, 
-   ReadGroup = "", 
    Type = "Note", 
    Name = "student", 
-   PostGroup = "", 
+   MinRemoveLevel = 101, 
+   ReadGroup = "", 
    MinReadLevel = 0, 
+   MinPostLevel = 0, 
+   ExtraReaders = "", 
    MaxPosts = 0, 
-   BoardObjectVnum = 10414, 
+   ExtraRemovers = "", 
+   BoardObjectVnum = "student_message_terminal", 
+   PostGroup = "", 
 }

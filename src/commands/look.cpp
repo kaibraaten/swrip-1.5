@@ -21,6 +21,7 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "act.hpp"
 #include "triggers.hpp"
+#include "plugins.hpp"
 
 struct UserData
 {
@@ -987,8 +988,14 @@ static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto)
            && ch->PCData->Flags.test(Flag::PCData::ShowRoomFlags))
         {
             SetCharacterColor(AT_PURPLE, ch);
-            ch->Echo("{%ld:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
+            ch->Echo("{%ld:%s", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
 
+            if(ch->InRoom->Plugin != nullptr)
+            {
+                ch->Echo(":%s", ch->InRoom->Plugin->Name().c_str());
+            }
+
+            ch->Echo("}");
             SetCharacterColor(AT_CYAN, ch);
             ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags).c_str());
 
@@ -1084,39 +1091,39 @@ static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, const UserData *
         {
             ch->Echo("%s    %.0f %.0f %.0f\r\n",
                      target->Name.c_str(),
-                     (target->Position->x - ship->Position->x),
-                     (target->Position->y - ship->Position->y),
-                     (target->Position->z - ship->Position->z));
+                     (target->Position.x - ship->Position.x),
+                     (target->Position.y - ship->Position.y),
+                     (target->Position.z - ship->Position.z));
         }
         else if(GetShipDistanceToShip(target, ship) < 100 * (ship->Instruments.Sensor + 10) * ((target->Class == SHIP_DEBRIS ? 2 : target->Class) + 3))
         {
             if(target->Class == FIGHTER_SHIP)
             {
                 ch->Echo("A small metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             }
             else if(target->Class == MIDSIZE_SHIP)
             {
                 ch->Echo("A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             }
             else if(target->Class == SHIP_DEBRIS)
             {
                 ch->Echo("scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             }
             else if(target->Class >= CAPITAL_SHIP)
             {
                 ch->Echo("A huge metallic mass    %.0f %.0f %.0f\r\n",
-                         (target->Position->x - ship->Position->x),
-                         (target->Position->y - ship->Position->y),
-                         (target->Position->z - ship->Position->z));
+                         (target->Position.x - ship->Position.x),
+                         (target->Position.y - ship->Position.y),
+                         (target->Position.z - ship->Position.z));
             }
             else
             {

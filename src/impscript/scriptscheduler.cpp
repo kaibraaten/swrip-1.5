@@ -6,27 +6,11 @@
 #include "scriptrunner.hpp"
 #include "log.hpp"
 
-class ScriptScheduler
-{
-public:
-    ScriptScheduler();
-    ~ScriptScheduler();
-
-    void Schedule(std::shared_ptr<ScriptRunner> scriptRunner);
-    void Dispatch();
-
-private:
-    struct Impl;
-    std::unique_ptr<Impl> pImpl;
-};
-
-static ScriptScheduler Scheduler;
-
 using Entry = std::pair<std::chrono::time_point<std::chrono::system_clock>, std::shared_ptr<ScriptRunner>>;
 
 struct EntryComparison
 {
-    bool operator()(const Entry &lhs, const Entry &rhs) const
+    bool operator()(const Entry& lhs, const Entry& rhs) const
     {
         return lhs.first > rhs.first;
     }
@@ -34,37 +18,29 @@ struct EntryComparison
 
 using Queue = std::priority_queue<Entry, std::vector<Entry>, EntryComparison>;
 
-struct ScriptScheduler::Impl
+class ScriptScheduler
 {
-    Impl()
-    {
+public:
+    void Schedule(std::shared_ptr<ScriptRunner> scriptRunner);
+    void Dispatch();
+    void AbortAll();
 
-    }
-    
-    Queue PendingScripts;
+private:
+    Queue _pendingScripts;
 };
 
-ScriptScheduler::ScriptScheduler()
-    : pImpl(std::make_unique<Impl>())
-{
-
-}
-
-ScriptScheduler::~ScriptScheduler()
-{
-
-}
+static ScriptScheduler Scheduler;
 
 void ScriptScheduler::Schedule(std::shared_ptr<ScriptRunner> scriptRunner)
 {
-    pImpl->PendingScripts.push({ std::chrono::system_clock::now(), scriptRunner });
+    _pendingScripts.push({ std::chrono::system_clock::now(), scriptRunner });
 }
 
 void ScriptScheduler::Dispatch()
 {
-    while(!pImpl->PendingScripts.empty())
+    while(!_pendingScripts.empty())
     {
-        auto entry = pImpl->PendingScripts.top();
+        auto entry = _pendingScripts.top();
 
         if(entry.first > std::chrono::system_clock::now())
         {
@@ -72,15 +48,25 @@ void ScriptScheduler::Dispatch()
         }
         else
         {
-            pImpl->PendingScripts.pop();
+            _pendingScripts.pop();
             auto scriptRunner = entry.second;
             double waitDuration = scriptRunner->Resume();
 
             if(waitDuration > 0)
             {
-                pImpl->PendingScripts.push({ std::chrono::system_clock::now() + std::chrono::milliseconds((int)(waitDuration * 1000)), scriptRunner });
+                _pendingScripts.push({ std::chrono::system_clock::now() + std::chrono::milliseconds((int)(waitDuration * 1000)), scriptRunner });
             }
         }
+    }
+}
+
+void ScriptScheduler::AbortAll()
+{
+    while (!_pendingScripts.empty())
+    {
+        auto entry = _pendingScripts.top();
+        entry.second->Abort();
+        _pendingScripts.pop();
     }
 }
 
@@ -92,4 +78,9 @@ void Schedule(std::shared_ptr<ScriptRunner> scriptRunner)
 void DispatchScripts()
 {
     Scheduler.Dispatch();
+}
+
+void AbortAllScripts()
+{
+    Scheduler.AbortAll();
 }

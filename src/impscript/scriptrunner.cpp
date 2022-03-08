@@ -13,6 +13,7 @@ struct ScriptRunner::Impl
          std::shared_ptr<Imp::RuntimeScope> scope,
          std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval);
     double Resume();
+    void Abort();
     void DispatchScript();
     std::shared_ptr<Imp::Program> Prog;
     std::shared_ptr<Imp::RuntimeScope> Scope;
@@ -28,8 +29,8 @@ ScriptRunner::Impl::Impl(std::shared_ptr<Imp::Program> prog,
                          std::shared_ptr<Imp::RuntimeScope> scope,
                          std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval)
     : Prog(prog),
-      Scope(scope),
-      DoAfterEval(doAfterEval)
+    Scope(scope),
+    DoAfterEval(doAfterEval)
 {
 
 }
@@ -54,9 +55,9 @@ double ScriptRunner::Impl::Resume()
     std::mutex mtx;
     std::unique_lock lk(mtx);
     ScriptDone.wait(lk, [&]
-                        {
-                            return ThreadData->YesReallyDone;
-                        });
+                    {
+                        return ThreadData->YesReallyDone;
+                    });
     ThreadData->YesReallyDone = false;
     waitDuration = ThreadData->WaitDuration;
     ThreadData->WaitDuration = 0;
@@ -71,6 +72,21 @@ double ScriptRunner::Impl::Resume()
     }
 
     return waitDuration;
+}
+
+void ScriptRunner::Impl::Abort()
+{
+    scriptWaiting = false;
+    ThreadData->YesReallyWakeUp = true;
+    ThreadData->Abort = true;
+    ThreadData->WakeUp.notify_one();
+    std::mutex mtx;
+    std::unique_lock lk(mtx);
+    ScriptDone.wait(lk, [&]
+                    {
+                        return ThreadData->YesReallyDone;
+                    });
+    TheThread->join();
 }
 
 void ScriptRunner::Impl::DispatchScript()
@@ -89,7 +105,7 @@ void ScriptRunner::Impl::DispatchScript()
         // Script aborted normally with exit() function,
         // so do nothing special.
     }
-    
+
     scriptWaiting = false;
     ThreadData->YesReallyDone = true;
     ThreadData->WaitDuration = 0;
@@ -113,4 +129,9 @@ ScriptRunner::~ScriptRunner()
 double ScriptRunner::Resume()
 {
     return pImpl->Resume();
+}
+
+void ScriptRunner::Abort()
+{
+    pImpl->Abort();
 }

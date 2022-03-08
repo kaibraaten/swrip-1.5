@@ -119,7 +119,7 @@ void do_launch(std::shared_ptr<Character> ch, std::string argument)
             if(ship->WeaponSystems.Laser.State == LASER_DAMAGED)
                 price += 2500;
 
-            for(const Turret *turret : ship->WeaponSystems.Turrets)
+            for(const auto &turret : ship->WeaponSystems.Turrets)
             {
                 if(IsTurretDamaged(turret))
                 {
@@ -191,7 +191,7 @@ void do_launch(std::shared_ptr<Character> ch, std::string argument)
             ship->WeaponSystems.Tube.State = MISSILE_READY;
             ship->WeaponSystems.Laser.State = LASER_READY;
 
-            for(Turret *turret : ship->WeaponSystems.Turrets)
+            for(const auto &turret : ship->WeaponSystems.Turrets)
             {
                 SetTurretReady(turret);
             }

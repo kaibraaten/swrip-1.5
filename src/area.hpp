@@ -13,9 +13,7 @@ namespace Flag
     {
         enum : size_t
         {
-            NoPkill,
-            _01,
-            Changed,
+            PluginZone,
             Prototype
         };
     }
@@ -35,7 +33,7 @@ public:
     short Age = 0;
     short NumberOfPlayers = 0;
     short ResetFrequency = 0;
-
+    
     struct
     {
         struct
@@ -66,6 +64,8 @@ public:
     int IllegalPk = 0;
     int HighEconomy = 0;
     int LowEconomy = 0;
+
+    Plugin *SavingPlugin = nullptr;
 };
 
 void FixAreaExits(std::shared_ptr<Area> tarea);
@@ -74,5 +74,11 @@ void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);
 void AssignAreaTo(std::shared_ptr<Character> ch);
 void CleanResets(std::shared_ptr<Area> tarea);
+vnum_t GetFreeRoomVnum(std::shared_ptr<Area> area);
+vnum_t GetFreeObjectVnum(std::shared_ptr<Area> area);
+vnum_t GetFreeMobileVnum(std::shared_ptr<Area> area);
+bool RoomVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
+bool ObjectVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
+bool MobileVnumIsInArea(vnum_t vnum, std::shared_ptr<Area> area);
 
 #endif

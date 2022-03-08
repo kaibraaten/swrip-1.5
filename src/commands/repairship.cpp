@@ -137,7 +137,6 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
     {
         std::string number_string;
         long turret_number = 0;
-        Turret *turret = NULL;
 
         argument = OneArgument(argument, number_string);
         turret_number = ToLong(number_string);
@@ -148,7 +147,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        turret = ship->WeaponSystems.Turrets[turret_number - 1];
+        const auto &turret = ship->WeaponSystems.Turrets[turret_number - 1];
 
         if(!IsTurretInstalled(turret))
         {

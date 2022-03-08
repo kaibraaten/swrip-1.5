@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/arearepository.hpp"
+#include "vnumconverter.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
@@ -37,7 +38,8 @@ void do_installarea(std::shared_ptr<Character> ch, std::string argument)
         }
 
         ch->Echo("Installing area...\r\n");
-        Areas->Install(tarea, newfilename);
+        auto vnumConverter = VnumConverter::Create(tarea);
+        Areas->Install(tarea, vnumConverter, newfilename);
         ch->Echo("Done.\r\n");
 
         /* Fix up author if online */

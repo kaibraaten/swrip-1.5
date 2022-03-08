@@ -45,7 +45,7 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Syntax: oset <object> <field>  <value>\r\n");
         ch->Echo("\r\n");
         ch->Echo("Field being one of:\r\n");
-        ch->Echo("  flags wear level weight cost timer\r\n");
+        ch->Echo("  flags wear level weight cost timer tag\r\n");
         ch->Echo("  name short long desc ed rmed actiondesc\r\n");
         ch->Echo("  type value0 value1 value2 value3 value4 value5\r\n");
         ch->Echo("  affect rmaffect layers\r\n");
@@ -682,6 +682,38 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
 
         return;
     }
+
+    if(StrCmp(arg2, "tag") == 0)
+    {
+        if(argument.empty())
+        {
+            ch->Echo("Add a tag to a protoobject to be used by the GOTO (and mpgoto) command.\r\n");
+            ch->Echo("Usage: redit tag <tag-name>\r\n");
+            ch->Echo("       redit tag none\r\n");
+        }
+        else if(GetObjectFromTag(argument))
+        {
+            ch->Echo("That tag is already in use.\r\n");
+        }
+        else if(!obj->Flags.test(Flag::Obj::Prototype))
+        {
+            ch->Echo("Only on objects with prototype flag.\r\n");
+        }
+        else if(StrCmp(argument, "none") == 0
+                || StrCmp(argument, "clear") == 0)
+        {
+            obj->Prototype->Tag("");
+            ch->Echo("Tag cleared.\r\n");
+        }
+        else
+        {
+            obj->Prototype->Tag(argument);
+            ch->Echo("Tag set to: %s\r\n", argument.c_str());
+        }
+
+        return;
+    }
+
     /*
      * save some finger-leather
      */

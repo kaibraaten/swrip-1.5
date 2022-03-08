@@ -71,7 +71,7 @@ void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
         missile->Speed = 50;
     }
 
-    CopyVector(missile->Position, ship->Position);
+    missile->Position = ship->Position;
 }
 
 void ExtractMissile(std::shared_ptr<Missile> missile)

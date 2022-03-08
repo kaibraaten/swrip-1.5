@@ -4,6 +4,7 @@
 #include <imp/runtime/runtimescope.hpp>
 #include "impscript/funcs/wait_func.hpp"
 #include "impscript/threaddatavalue.hpp"
+#include "impscript/exitexception.hpp"
 
 WaitFunc::WaitFunc()
     : Imp::FunctionValue("wait")
@@ -21,7 +22,7 @@ std::shared_ptr<Imp::RuntimeValue> WaitFunc::EvalFuncCall(const std::vector<std:
 
     if(dynamic_cast<Imp::FloatValue *>(ptrToWaitDuration.get()))
     {
-        auto duration = std::dynamic_pointer_cast<Imp::FloatValue>(ptrToWaitDuration)->GetFloatValue("wait() param", where);
+        auto duration = ptrToWaitDuration->GetFloatValue("wait() param", where);
 
         if(duration > 0)
         {
@@ -35,7 +36,15 @@ std::shared_ptr<Imp::RuntimeValue> WaitFunc::EvalFuncCall(const std::vector<std:
                                         {
                                             return threadData->YesReallyWakeUp;
                                         });
-            threadData->YesReallyWakeUp = false;
+
+            if(threadData->Abort)
+            {
+                throw ImpExitException();
+            }
+            else
+            {
+                threadData->YesReallyWakeUp = false;
+            }
         }
         else
         {

@@ -146,7 +146,6 @@ const std::list<std::shared_ptr<ExtraDescription>> &Room::ExtraDescriptions() co
 
 std::shared_ptr<Room> GetRoomFromTag(const std::string &tag)
 {
-#if 1
     /*
     for(auto room : Rooms)
     {
@@ -165,18 +164,6 @@ std::shared_ptr<Room> GetRoomFromTag(const std::string &tag)
             return room;
         }
     }
-#else
-    for(int key = 0; key < MAX_KEY_HASH; ++key)
-    {
-        for(auto room = RoomIndexHash[key]; room != nullptr; room = room->Next)
-        {
-            if(StrCmp(room->Tag(), tag) == 0)
-            {
-                return room;
-            }
-        }
-    }
-#endif
     
     return nullptr;
 }

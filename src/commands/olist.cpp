@@ -58,7 +58,7 @@ void do_olist(std::shared_ptr<Character> ch, std::string argument)
         trange = (IsNumber(arg2) ? ToLong(arg2) : 3);
     }
 
-    for (vnum_t vnum = lrange; vnum <= trange; ++vnum)
+    for (vnum_t vnum = lrange; vnum <= trange && vnum != INVALID_VNUM; ++vnum)
     {
         auto obj = GetProtoObject(vnum);
 

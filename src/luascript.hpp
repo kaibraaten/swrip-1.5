@@ -128,7 +128,8 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key,
 bool FieldExists(lua_State *L, const std::string &key);
 void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
-                     const std::string &callbackFunctionName);
+                     const std::string &callbackFunctionName,
+                     void *userData = nullptr);
 void LuaSaveDataFile(lua_State *L, const std::string &filename, const std::string &data);
 
 template<typename CallableT, typename UserDataT>
@@ -184,8 +185,8 @@ std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::strin
 void LuaPushMobiles(lua_State *L, const std::list<std::shared_ptr<Character>> &mobiles,
                     const std::string &key = "Mobiles");
 std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::string &key);
-void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key);
-void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> vec, const std::string &key);
+void LuaPushVector3(lua_State *L, const Vector3 &v, const std::string &key);
+Vector3 LuaLoadVector3(lua_State *L, const std::string &key);
 void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key = "SaveVs");
 void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key);
 void LuaLoadStats(lua_State *L, Stats *stats, const std::string &key);
@@ -215,11 +216,11 @@ void AssignSpecFuns(const EntityT &mob,
 {
     if(!specfuns.empty())
     {
-        mob->spec_fun = specfuns[0];
+        mob->SpecFuns[0] = specfuns[0];
 
         if(specfuns.size() > 1)
         {
-            mob->spec_2 = specfuns[1];
+            mob->SpecFuns[1] = specfuns[1];
         }
     }
 }

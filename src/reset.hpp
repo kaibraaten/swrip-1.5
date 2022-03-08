@@ -57,20 +57,22 @@ public:
     int Arg1 = 0;
     int Arg2 = 0;
     int Arg3 = 0;
+    const class Plugin *Plugin = nullptr;
 };
-
 
 std::shared_ptr<Room> FindRoom(std::shared_ptr<Character> ch, const std::string &argument, std::shared_ptr<Room> pRoom);
 void WipeResets(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom);
-void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors);
-void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom);
+void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors,
+    const Plugin *plugin);
+void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea,
+               std::shared_ptr<Room> aRoom);
 void ResetArea(std::shared_ptr<Area> pArea);
 std::string SPrintReset(std::shared_ptr<Character> ch, std::shared_ptr<Reset> pReset, short num, bool rlist);
-std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
+std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3, const Plugin *plugin);
 std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra,
-                                int arg1, int arg2, int arg3);
+                                int arg1, int arg2, int arg3, const Plugin *plugin);
 std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter,
-                                  int extra, int arg1, int arg2, int arg3);
+                                  int extra, int arg1, int arg2, int arg3, const Plugin *plugin);
 void RenumberPutResets(std::shared_ptr<Area> pArea);
 
 #endif

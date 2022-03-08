@@ -7,7 +7,6 @@
 #include "lua_arearepository.hpp"
 #include "lua_vendorrepository.hpp"
 #include "lua_homerepository.hpp"
-#include "lua_macrorepository.hpp"
 #include "fs_imprepository.hpp"
 
 std::shared_ptr<AreaRepository> NewAreaRepository()
@@ -28,11 +27,6 @@ std::shared_ptr<VendorRepository> NewVendorRepository()
 std::shared_ptr<HomeRepository> NewHomeRepository()
 {
     return NewLuaHomeRepository();
-}
-
-std::shared_ptr<MacroRepository> NewMacroRepository()
-{
-    return NewLuaMacroRepository();
 }
 
 std::shared_ptr<ImpRepository> NewImpRepository()

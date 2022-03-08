@@ -1,1072 +1,21 @@
 -- nar.shadda
--- Last saved Tuesday 27-Oct-2020 11:58:44
+-- Last saved Sunday 29-Nov-2020 17:36:02
 
 AreaEntry
 {
-   Name = "nar.shadda", 
-   Author = "Skeesh", 
-   Filename = "nar_shaddaa.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 502, 
-         Arg1 = 506, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [2] = 
-      {
-         Arg2 = 0, 
-         Arg3 = 1, 
-         Arg1 = 511, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [3] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 0, 
-         Arg1 = 512, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 514, 
-         Arg1 = 512, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 506, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [6] = 
-      {
-         Arg2 = 3, 
-         Arg3 = 514, 
-         Arg1 = 310, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [7] = 
-      {
-         Arg2 = 0, 
-         Arg3 = 0, 
-         Arg1 = 514, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [8] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 526, 
-         Arg1 = 513, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 526, 
-         Arg1 = 514, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [10] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 526, 
-         Arg1 = 507, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [11] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 0, 
-         Arg1 = 526, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [12] = 
-      {
-         Arg2 = 0, 
-         Arg3 = 1, 
-         Arg1 = 534, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [13] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 1, 
-         Arg1 = 534, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [14] = 
-      {
-         Arg2 = 3, 
-         Arg3 = 1, 
-         Arg1 = 534, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [15] = 
-      {
-         Arg2 = 0, 
-         Arg3 = 0, 
-         Arg1 = 548, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [16] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 0, 
-         Arg1 = 551, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [17] = 
-      {
-         Arg2 = 6, 
-         Arg3 = 1, 
-         Arg1 = 567, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [18] = 
-      {
-         Arg2 = 7, 
-         Arg3 = 1, 
-         Arg1 = 567, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [19] = 
-      {
-         Arg2 = 8, 
-         Arg3 = 1, 
-         Arg1 = 567, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [20] = 
-      {
-         Arg2 = 9, 
-         Arg3 = 1, 
-         Arg1 = 567, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [21] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 575, 
-         Arg1 = 507, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [22] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 525, 
-         Arg1 = 515, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [23] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 525, 
-         Arg1 = 32231, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [24] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 574, 
-         Arg1 = 517, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [25] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 13, 
-         Arg1 = 32228, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [26] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 546, 
-         Arg1 = 516, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [27] = 
-      {
-         Arg1 = 520, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [28] = 
-      {
-         Arg2 = 4, 
-         Arg3 = 550, 
-         Arg1 = 310, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [29] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 550, 
-         Arg1 = 521, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [30] = 
-      {
-         Arg2 = 0, 
-         Arg3 = 1, 
-         Arg1 = 550, 
-         Command = "D", 
-         MiscData = 0, 
-      }, 
-      [31] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 504, 
-         Arg1 = 502, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [32] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 17, 
-         Arg1 = 511, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [33] = 
-      {
-         Arg1 = 511, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [34] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 504, 
-         Arg1 = 522, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [35] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 505, 
-         Arg1 = 527, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [36] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 503, 
-         Arg1 = 523, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [37] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 10312, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [38] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 503, 
-         Arg1 = 524, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [39] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 56, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [40] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 564, 
-         Arg1 = 529, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [41] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 524, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [42] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 563, 
-         Arg1 = 530, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [43] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 28020, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [44] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 3, 
-         Arg1 = 28120, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [45] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 6, 
-         Arg1 = 21059, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [46] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 14, 
-         Arg1 = 28017, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [47] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 13, 
-         Arg1 = 28011, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [48] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 507, 
-         Arg1 = 508, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [49] = 
-      {
-         Arg1 = 513, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [50] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 17, 
-         Arg1 = 510, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [51] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 505, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [52] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 507, 
-         Arg1 = 531, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [53] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 562, 
-         Arg1 = 505, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [54] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 508, 
-         Arg1 = 32208, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [55] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 509, 
-         Arg1 = 532, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [56] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 509, 
-         Arg1 = 534, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [57] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 17, 
-         Arg1 = 45, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [58] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 316, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [59] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 529, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [60] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 509, 
-         Arg1 = 528, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [61] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 535, 
-         Arg1 = 535, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [62] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 536, 
-         Arg1 = 535, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [63] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 537, 
-         Arg1 = 536, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [64] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 587, 
-         Arg1 = 537, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [65] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 516, 
-         Arg1 = 538, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [66] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 516, 
-         Arg1 = 501, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [67] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 552, 
-         Arg1 = 541, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [68] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 552, 
-         Arg1 = 542, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [69] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 552, 
-         Arg1 = 543, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [70] = 
-      {
-         Arg1 = 201, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [71] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 525, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [72] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 552, 
-         Arg1 = 545, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [73] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 555, 
-         Arg1 = 546, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [74] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 533, 
-         Arg1 = 547, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [75] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 526, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [76] = 
-      {
-         Arg1 = 32230, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [77] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 553, 
-         Arg1 = 552, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [78] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 539, 
-         Arg1 = 550, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [79] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 539, 
-         Arg1 = 553, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [80] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 539, 
-         Arg1 = 554, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [81] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 539, 
-         Arg1 = 531, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [82] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 554, 
-         Arg1 = 556, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [83] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 559, 
-         Arg1 = 557, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [84] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 532, 
-         Arg1 = 526, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [85] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 7, 
-         Arg1 = 318, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [86] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 532, 
-         Arg1 = 504, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [87] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 515, 
-         Arg1 = 551, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [88] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 578, 
-         Arg1 = 558, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [89] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 521, 
-         Arg1 = 559, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [90] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 522, 
-         Arg1 = 560, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [91] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 522, 
-         Arg1 = 561, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [92] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 500, 
-         Arg1 = 510, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [93] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 13, 
-         Arg1 = 32258, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [94] = 
-      {
-         Arg1 = 514, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [95] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 500, 
-         Arg1 = 528, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [96] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 8, 
-         Arg1 = 21061, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [97] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 12, 
-         Arg1 = 522, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [98] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 592, 
-         Arg1 = 564, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [99] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 590, 
-         Arg1 = 563, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [100] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 594, 
-         Arg1 = 565, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [101] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 17, 
-         Arg1 = 535, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [102] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 594, 
-         Arg1 = 566, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [103] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 593, 
-         Arg1 = 567, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [104] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 9, 
-         Arg1 = 536, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [105] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 585, 
-         Arg1 = 525, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [106] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 20, 
-         Arg1 = 538, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [107] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 586, 
-         Arg1 = 569, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [108] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 537, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [109] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 506, 
-         Arg1 = 511, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [110] = 
-      {
-         Arg1 = 504, 
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-      }, 
-      [111] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 509, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [112] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 503, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [113] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 13, 
-         Arg1 = 32228, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [114] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 506, 
-         Arg1 = 549, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [115] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 530, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [116] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 506, 
-         Arg1 = 562, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [117] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 532, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [118] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 5, 
-         Arg1 = 533, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [119] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 506, 
-         Arg1 = 539, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [120] = 
-      {
-         Arg2 = 2, 
-         Arg3 = 510, 
-         Arg1 = 505, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [121] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 510, 
-         Arg1 = 539, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [122] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 20, 
-         Arg1 = 32238, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [123] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 16, 
-         Arg1 = 54, 
-         Command = "E", 
-         MiscData = 1, 
-      }, 
-      [124] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 510, 
-         Arg1 = 540, 
-         Command = "O", 
-         MiscData = 1, 
-      }, 
-      [125] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 530, 
-         Arg1 = 572, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [126] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 513, 
-         Arg1 = 568, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [127] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 513, 
-         Arg1 = 570, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [128] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 513, 
-         Arg1 = 571, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [129] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 579, 
-         Arg1 = 548, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-      [130] = 
-      {
-         Arg2 = 1, 
-         Arg3 = 579, 
-         Arg1 = 573, 
-         Command = "M", 
-         MiscData = 1, 
-      }, 
-   }, 
-   LowEconomy = 6239675, 
    FileFormatVersion = 1, 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
+   ResetMessage = "", 
+   HighEconomy = 0, 
    VnumRanges = 
    {
-      Mob = 
-      {
-         Last = 573, 
-         First = 500, 
-      }, 
       Object = 
       {
          Last = 541, 
+         First = 500, 
+      }, 
+      Mob = 
+      {
+         Last = 573, 
          First = 500, 
       }, 
       Room = 
@@ -1075,5883 +24,1060 @@ AreaEntry
          First = 500, 
       }, 
    }, 
-   Objects = 
+   Filename = "nar_shaddaa.lua", 
+   Name = "nar.shadda", 
+   ResetFrequency = 0, 
+   Resets = 
    {
-      [512] = 
+      [1] = 
       {
-         Name = "Cyborg leg", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a Cyborg leg", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Location = 1, 
-               Modifier = 10, 
-            }, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [5] = "Legs", 
-         }, 
-         Vnum = 512, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Cyborg leg is here.", 
-         Weight = 1, 
+         Arg1 = 506, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 502, 
       }, 
-      [513] = 
+      [2] = 
       {
-         Name = "briefcase", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "container", 
-         ShortDescr = "a briefcase", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 513, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A briefcase is here.", 
-         Weight = 1, 
+         Arg1 = 511, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [514] = 
+      [3] = 
       {
-         Name = "Klatooine patty frog", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "food", 
-         ShortDescr = "a Klatooine patty frogs", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 514, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "Klatooine patty frog", 
-         Weight = 1, 
+         Arg1 = 512, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 0, 
       }, 
-      [517] = 
+      [4] = 
       {
-         Name = "Dark Jedi Cape", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "A Dark Jedi Cape", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Vnum = 517, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 9, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         Description = "A Dark Jedi Cape", 
-         Flags = 
-         {
-            [6] = "Magic", 
-            [31] = "HumanSize", 
-         }, 
+         Arg1 = 512, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 514, 
       }, 
-      [518] = 
+      [5] = 
       {
-         Name = "BlasTech DH-17 blaster pistol", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a BlasTech DH-17 blaster pistol", 
-         Cost = 0, 
-         Vnum = 518, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A BlasTech DH-17 blaster pistol is here.", 
-         Weight = 1, 
+         Arg1 = 506, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
-      [520] = 
+      [6] = 
       {
-         Name = "A guide", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "A guide", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 520, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A guide is here.", 
-         Weight = 1, 
+         Arg1 = 518, 
+         Arg2 = 3, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 514, 
       }, 
-      [522] = 
+      [7] = 
       {
-         Name = "A black robe", 
-         Layers = 32, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a A black robe", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Vnum = 522, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 10, 
-         Weight = 5, 
-         Description = "A A black robe is here.", 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
+         Arg1 = 514, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 0, 
       }, 
-      [523] = 
+      [8] = 
       {
-         Name = "A large black cape", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "A long black cape", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         Vnum = 523, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A large black cape is here.", 
-         Weight = 6, 
+         Arg1 = 513, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 526, 
       }, 
-      [524] = 
+      [9] = 
       {
-         Name = "A dirty old shirt", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "dirty old shirt", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Vnum = 524, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A dirty old shirt is here.", 
-         Weight = 1, 
+         Arg1 = 514, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 526, 
       }, 
-      [525] = 
+      [10] = 
       {
-         Name = "A black one peice suit", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a A black one peice suit", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Vnum = 525, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A black one peice suit is here.", 
-         Weight = 1, 
+         Arg1 = 507, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 526, 
       }, 
-      [526] = 
+      [11] = 
       {
-         Name = "A small shirt", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "Small shirt", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Vnum = 526, 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "Small shirt", 
-         Weight = 1, 
+         Arg1 = 526, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 0, 
       }, 
-      [527] = 
+      [12] = 
       {
-         Name = "A large bag", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a A large bag", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 527, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "Large bag filled with someone's possesions", 
-         Weight = 1, 
+         Arg1 = 534, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [528] = 
+      [13] = 
       {
-         Name = "A large oak desc", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "furniture", 
-         ShortDescr = "A nicely polished oak desc", 
-         Cost = 0, 
-         Vnum = 528, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A A large oak desc is here.", 
-         Weight = 100, 
+         Arg1 = 534, 
+         Arg2 = 1, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [529] = 
+      [14] = 
       {
-         Name = "A rancor skin jacket", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "A rancor skin jacket", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Vnum = 529, 
-         ObjectValues = 
-         {
-            [1] = 4, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A rancor skin jacket is here.", 
-         Weight = 1, 
+         Arg1 = 534, 
+         Arg2 = 3, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [530] = 
+      [15] = 
       {
-         Name = "A small legal vibro blade", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "A vibro blade", 
-         WearFlags = 
-         {
-            [13] = "Wield", 
-         }, 
-         Vnum = 530, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 2, 
-            [4] = 99, 
-            [5] = 99, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A small legal vibro blade is here.", 
-         Weight = 1, 
+         Arg1 = 548, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 0, 
       }, 
-      [531] = 
+      [16] = 
       {
-         Name = "A large box", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "furniture", 
-         ShortDescr = "a A large box", 
-         Cost = 0, 
-         Vnum = 531, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A A large box is here.", 
-         Weight = 1000, 
+         Arg1 = 551, 
+         Arg2 = 2, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 0, 
       }, 
-      [532] = 
+      [17] = 
       {
-         Name = "Blastech sporting blaster", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "a Blastech sporting blaster", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 532, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 6, 
-            [4] = 1000, 
-            [5] = 1000, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Blastech sporting blaster is here.", 
-         Weight = 1, 
+         Arg1 = 567, 
+         Arg2 = 6, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [533] = 
+      [18] = 
       {
-         Name = "A blue parka", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "Blue parka", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Vnum = 533, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "Blue parka", 
-         Weight = 1, 
+         Arg1 = 567, 
+         Arg2 = 7, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [535] = 
+      [19] = 
       {
-         Name = "fizz", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a fizz", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 535, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A fizz is here.", 
-         Weight = 1, 
+         Arg1 = 567, 
+         Arg2 = 8, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [536] = 
+      [20] = 
       {
-         Name = "Fingerless gloves", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a A fingerless glove", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [7] = "Hands", 
-         }, 
-         Vnum = 536, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         Description = "Fingerless gloves", 
-         Flags = 
-         {
-            [3] = "HuttSize", 
-         }, 
+         Arg1 = 567, 
+         Arg2 = 9, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [537] = 
+      [21] = 
       {
-         Name = "small dagger", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "a small dagger", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 537, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 2, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 50, 
-         Description = "A small dagger is here.", 
-         Weight = 2, 
+         Arg1 = 507, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 575, 
       }, 
-      [538] = 
+      [22] = 
       {
-         Name = "pair of glaces", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "lens", 
-         ShortDescr = "A unusual pair of glaces", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [17] = "Eyes", 
-         }, 
-         Vnum = 538, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A pair of glaces look incredibly weird.  They seem to be all red.", 
-         Weight = 1, 
+         Arg1 = 515, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 525, 
       }, 
-      [539] = 
+      [23] = 
       {
-         Name = "A large monitor", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "furniture", 
-         ShortDescr = "monitor", 
-         Cost = 0, 
-         Vnum = 539, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A Monitor is hanging on the wall", 
-         Weight = 1, 
+         Arg1 = 32231, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 525, 
       }, 
-      [540] = 
+      [24] = 
       {
-         Name = "a pair of speakers", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "furniture", 
-         ShortDescr = "a a pair of speakers", 
-         Cost = 0, 
-         Vnum = 540, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A pair of speakers", 
-         Weight = 1, 
+         Arg1 = 517, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 574, 
       }, 
-      [541] = 
+      [25] = 
       {
-         Name = "control panel", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "button", 
-         ShortDescr = "a control panel", 
-         Cost = 0, 
-         Vnum = 541, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = -1, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A control panel is here.", 
-         Weight = 1, 
+         Arg1 = 32228, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 13, 
       }, 
-      [500] = 
+      [26] = 
       {
-         Name = "Booth", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a Booth", 
-         Cost = 0, 
-         Vnum = 500, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A Booth is here.", 
-         Weight = 1, 
+         Arg1 = 516, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 546, 
       }, 
-      [501] = 
+      [27] = 
       {
-         Name = "Large oak podium", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a Large oak podium", 
-         Cost = 0, 
-         Vnum = 501, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A polished oak podium stands here solidely.\
-\13", 
-         Weight = 1, 
+         Arg1 = 520, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
       }, 
-      [502] = 
+      [28] = 
       {
-         Name = "A slug thrower pistol", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "a A slug thrower pistol", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 502, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 2, 
-            [3] = 6, 
-            [4] = 5, 
-            [5] = 5, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A A slug thrower pistol is here.", 
-         Weight = 1, 
+         Arg1 = 518, 
+         Arg2 = 4, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 550, 
       }, 
-      [503] = 
+      [29] = 
       {
-         Name = "Prax Arms Stealth-2VX Palm Shooter", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "Prax Arms Stealth-2VX Palm Shooter", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 503, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 10, 
-            [3] = 9, 
-            [4] = 10, 
-            [5] = 10, 
-            [0] = 0, 
-         }, 
-         Cost = 1000, 
-         Weight = 1, 
-         Description = "A Prax Arms Stealth-2VX Palm Shooter is here.", 
-         Flags = 
-         {
-            [4] = "Contraband", 
-         }, 
+         Arg1 = 521, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 550, 
       }, 
-      [504] = 
+      [30] = 
       {
-         Name = "Darts", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "bolt", 
-         ShortDescr = "a Darts", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 504, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 3, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Darts is here.", 
-         Weight = 1, 
+         Arg1 = 550, 
+         Arg2 = 0, 
+         MiscData = 0, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
-      [505] = 
+      [31] = 
       {
-         Name = "Drearian Defense Conglomerate Defender Blaster", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "weapon", 
-         ShortDescr = "a Drearian Defense Conglomerate Defender Blaster", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 505, 
-         ObjectValues = 
-         {
-            [1] = 1, 
-            [2] = 2, 
-            [3] = 6, 
-            [4] = 1000, 
-            [5] = 1000, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 2500, 
-         Description = "A Drearian Defense Conglomerate Defender Blaster is here.", 
-         Weight = 1, 
+         Arg1 = 502, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 504, 
       }, 
-      [506] = 
+      [32] = 
       {
-         Name = "Oversize coat", 
-         Layers = 2, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a Oversize coat", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-            [3] = "Body", 
-         }, 
-         Vnum = 506, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 25, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Weight = 4, 
-         Description = "A Oversize coat is here.", 
-         Flags = 
-         {
-            [3] = "HuttSize", 
-         }, 
+         Arg1 = 511, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 17, 
       }, 
-      [507] = 
+      [33] = 
       {
-         Name = "Chair", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a Chair", 
-         Cost = 0, 
-         Vnum = 507, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A Chair is here.", 
-         Weight = 50, 
+         Arg1 = 511, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
       }, 
-      [509] = 
+      [34] = 
       {
-         Name = "Large trench coat", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "armor", 
-         ShortDescr = "a Large trench coat", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-            [3] = "Body", 
-         }, 
-         Vnum = 509, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         Description = "A Large trench coat is here.", 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
+         Arg1 = 522, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 504, 
       }, 
-      [510] = 
+      [35] = 
       {
-         Name = "Small Briefcase", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "container", 
-         ShortDescr = "a Small Briefcase", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 510, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Small Briefcase is here.", 
-         Weight = 1, 
+         Arg1 = 527, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 505, 
       }, 
-      [511] = 
+      [36] = 
       {
-         Name = "Dirty glass", 
-         Layers = 0, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ShortDescr = "a Dirty glass", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Vnum = 511, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Dirty glass is here.", 
-         Weight = 1, 
+         Arg1 = 523, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 503, 
+      }, 
+      [37] = 
+      {
+         Arg1 = 10312, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [38] = 
+      {
+         Arg1 = 524, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 503, 
+      }, 
+      [39] = 
+      {
+         Arg1 = 56, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [40] = 
+      {
+         Arg1 = 529, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 564, 
+      }, 
+      [41] = 
+      {
+         Arg1 = 524, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [42] = 
+      {
+         Arg1 = 530, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 563, 
+      }, 
+      [43] = 
+      {
+         Arg1 = 28020, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [44] = 
+      {
+         Arg1 = 28120, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 3, 
+      }, 
+      [45] = 
+      {
+         Arg1 = 21059, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 6, 
+      }, 
+      [46] = 
+      {
+         Arg1 = 28017, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 14, 
+      }, 
+      [47] = 
+      {
+         Arg1 = 28011, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 13, 
+      }, 
+      [48] = 
+      {
+         Arg1 = 508, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 507, 
+      }, 
+      [49] = 
+      {
+         Arg1 = 513, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
+      }, 
+      [50] = 
+      {
+         Arg1 = 510, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 17, 
+      }, 
+      [51] = 
+      {
+         Arg1 = 505, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [52] = 
+      {
+         Arg1 = 531, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 507, 
+      }, 
+      [53] = 
+      {
+         Arg1 = 505, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 562, 
+      }, 
+      [54] = 
+      {
+         Arg1 = 32208, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 508, 
+      }, 
+      [55] = 
+      {
+         Arg1 = 532, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 509, 
+      }, 
+      [56] = 
+      {
+         Arg1 = 534, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 509, 
+      }, 
+      [57] = 
+      {
+         Arg1 = 45, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 17, 
+      }, 
+      [58] = 
+      {
+         Arg1 = 66, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [59] = 
+      {
+         Arg1 = 529, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [60] = 
+      {
+         Arg1 = 528, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 509, 
+      }, 
+      [61] = 
+      {
+         Arg1 = 535, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 535, 
+      }, 
+      [62] = 
+      {
+         Arg1 = 535, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 536, 
+      }, 
+      [63] = 
+      {
+         Arg1 = 536, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 537, 
+      }, 
+      [64] = 
+      {
+         Arg1 = 537, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 587, 
+      }, 
+      [65] = 
+      {
+         Arg1 = 538, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 516, 
+      }, 
+      [66] = 
+      {
+         Arg1 = 501, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 516, 
+      }, 
+      [67] = 
+      {
+         Arg1 = 541, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 552, 
+      }, 
+      [68] = 
+      {
+         Arg1 = 542, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 552, 
+      }, 
+      [69] = 
+      {
+         Arg1 = 543, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 552, 
+      }, 
+      [70] = 
+      {
+         Arg1 = 201, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
+      }, 
+      [71] = 
+      {
+         Arg1 = 525, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [72] = 
+      {
+         Arg1 = 545, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 552, 
+      }, 
+      [73] = 
+      {
+         Arg1 = 546, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 555, 
+      }, 
+      [74] = 
+      {
+         Arg1 = 547, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 533, 
+      }, 
+      [75] = 
+      {
+         Arg1 = 526, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [76] = 
+      {
+         Arg1 = 32230, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
+      }, 
+      [77] = 
+      {
+         Arg1 = 552, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 553, 
+      }, 
+      [78] = 
+      {
+         Arg1 = 550, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 539, 
+      }, 
+      [79] = 
+      {
+         Arg1 = 553, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 539, 
+      }, 
+      [80] = 
+      {
+         Arg1 = 554, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 539, 
+      }, 
+      [81] = 
+      {
+         Arg1 = 531, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 539, 
+      }, 
+      [82] = 
+      {
+         Arg1 = 556, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 554, 
+      }, 
+      [83] = 
+      {
+         Arg1 = 557, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 559, 
+      }, 
+      [84] = 
+      {
+         Arg1 = 526, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 532, 
+      }, 
+      [85] = 
+      {
+         Arg1 = 67, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 7, 
+      }, 
+      [86] = 
+      {
+         Arg1 = 504, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 532, 
+      }, 
+      [87] = 
+      {
+         Arg1 = 551, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 515, 
+      }, 
+      [88] = 
+      {
+         Arg1 = 558, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 578, 
+      }, 
+      [89] = 
+      {
+         Arg1 = 559, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 521, 
+      }, 
+      [90] = 
+      {
+         Arg1 = 560, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 522, 
+      }, 
+      [91] = 
+      {
+         Arg1 = 561, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 522, 
+      }, 
+      [92] = 
+      {
+         Arg1 = 510, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 500, 
+      }, 
+      [93] = 
+      {
+         Arg1 = 32258, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 13, 
+      }, 
+      [94] = 
+      {
+         Arg1 = 514, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
+      }, 
+      [95] = 
+      {
+         Arg1 = 528, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 500, 
+      }, 
+      [96] = 
+      {
+         Arg1 = 21061, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 8, 
+      }, 
+      [97] = 
+      {
+         Arg1 = 522, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 12, 
+      }, 
+      [98] = 
+      {
+         Arg1 = 564, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 592, 
+      }, 
+      [99] = 
+      {
+         Arg1 = 563, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 590, 
+      }, 
+      [100] = 
+      {
+         Arg1 = 565, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 594, 
+      }, 
+      [101] = 
+      {
+         Arg1 = 535, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 17, 
+      }, 
+      [102] = 
+      {
+         Arg1 = 566, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 594, 
+      }, 
+      [103] = 
+      {
+         Arg1 = 567, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 593, 
+      }, 
+      [104] = 
+      {
+         Arg1 = 536, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 9, 
+      }, 
+      [105] = 
+      {
+         Arg1 = 525, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 585, 
+      }, 
+      [106] = 
+      {
+         Arg1 = 538, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 20, 
+      }, 
+      [107] = 
+      {
+         Arg1 = 569, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 586, 
+      }, 
+      [108] = 
+      {
+         Arg1 = 537, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [109] = 
+      {
+         Arg1 = 511, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 506, 
+      }, 
+      [110] = 
+      {
+         Arg1 = 504, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg3 = 0, 
+      }, 
+      [111] = 
+      {
+         Arg1 = 509, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [112] = 
+      {
+         Arg1 = 503, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [113] = 
+      {
+         Arg1 = 32228, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 13, 
+      }, 
+      [114] = 
+      {
+         Arg1 = 549, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 506, 
+      }, 
+      [115] = 
+      {
+         Arg1 = 530, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [116] = 
+      {
+         Arg1 = 562, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 506, 
+      }, 
+      [117] = 
+      {
+         Arg1 = 532, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [118] = 
+      {
+         Arg1 = 533, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 5, 
+      }, 
+      [119] = 
+      {
+         Arg1 = 539, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 506, 
+      }, 
+      [120] = 
+      {
+         Arg1 = 505, 
+         Arg2 = 2, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 510, 
+      }, 
+      [121] = 
+      {
+         Arg1 = 539, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 510, 
+      }, 
+      [122] = 
+      {
+         Arg1 = 32238, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 20, 
+      }, 
+      [123] = 
+      {
+         Arg1 = 54, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [124] = 
+      {
+         Arg1 = 540, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "O", 
+         Arg3 = 510, 
+      }, 
+      [125] = 
+      {
+         Arg1 = 572, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 530, 
+      }, 
+      [126] = 
+      {
+         Arg1 = 568, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 513, 
+      }, 
+      [127] = 
+      {
+         Arg1 = 570, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 513, 
+      }, 
+      [128] = 
+      {
+         Arg1 = 571, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 513, 
+      }, 
+      [129] = 
+      {
+         Arg1 = 548, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 579, 
+      }, 
+      [130] = 
+      {
+         Arg1 = 573, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "M", 
+         Arg3 = 579, 
       }, 
    }, 
-   Mobiles = 
-   {
-      [512] = 
-      {
-         ArmorClass = 5, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 8, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 15, 
-         Vnum = 512, 
-         LongDescr = "A hutt is hovering the cash register\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 80, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 16, 
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-         }, 
-         ShortDescr = "A hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 17, 
-         NumberOfAttacks = 0, 
-         Name = "Hutt", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [513] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 513, 
-         LongDescr = "A worker is trying to make something\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "a newly created A worker", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A worker", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [514] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 514, 
-         LongDescr = "A human expert craftsmen\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "Human craftsmen", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A human expert craftswoman", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [515] = 
-      {
-         ArmorClass = 12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Rodian", 
-         DamRoll = 7, 
-         Vnum = 515, 
-         LongDescr = "A doctor is looking at his patients\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 35, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [3] = "rodese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [3] = "rodese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 7, 
-            HitSizeDice = 10, 
-            HitPlus = 350, 
-         }, 
-         ShortDescr = "A doctor", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 7, 
-         NumberOfAttacks = 0, 
-         Name = "Doctor", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [516] = 
-      {
-         ArmorClass = 87, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 1, 
-         Vnum = 516, 
-         LongDescr = "A tourist is looking through the travel guides\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 5, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [8] = "ithorese", 
-            }, 
-            Speaks = 
-            {
-               [8] = "ithorese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-         }, 
-         ShortDescr = "A tourist", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A tourist", 
-         Position = "standing", 
-         Alignment = 10, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [517] = 
-      {
-         ArmorClass = 50, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 517, 
-         LongDescr = "A traffic officer is montering a screen\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 20, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         ShortDescr = "A traffic officer", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A traffic officer", 
-         Position = "standing", 
-         Alignment = 5, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [521] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 521, 
-         LongDescr = "A vending droid\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created A vendin droid", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A vendin droid", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [522] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "_90", 
-         DamRoll = 2, 
-         Vnum = 522, 
-         LongDescr = "A Chubb Scutt is drinking at incredible speed\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [16] = "kubazian", 
-               [4] = "huttese", 
-               [21] = "defel", 
-               [6] = "shistavanen", 
-               [8] = "ithorese", 
-               [30] = "durese", 
-               [10] = "devaronese", 
-               [29] = "gand", 
-               [26] = "falleen", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [22] = "dosh", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [16] = "kubazian", 
-               [4] = "huttese", 
-               [21] = "defel", 
-               [6] = "shistavanen", 
-               [30] = "durese", 
-               [8] = "ithorese", 
-               [29] = "gand", 
-               [10] = "devaronese", 
-               [26] = "falleen", 
-               [22] = "dosh", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "Chubb", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A Chubb Scutt is drinking at incredible speed", 
-         Position = "standing", 
-         Alignment = 10, 
-         Description = "", 
-         Credits = 5, 
-      }, 
-      [523] = 
-      {
-         ArmorClass = 70, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 523, 
-         LongDescr = "A large hutt\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 12, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-         }, 
-         ShortDescr = "A large hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A large hutt", 
-         Position = "standing", 
-         Alignment = -2, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [524] = 
-      {
-         ArmorClass = 50, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 524, 
-         LongDescr = "A devaronian information broker \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 20, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         ShortDescr = "Devaronian", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A deveronian information broker", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 350, 
-      }, 
-      [525] = 
-      {
-         ArmorClass = 70, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 525, 
-         LongDescr = "A Cycy Loctob is selling contraband items to whoever is interested\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 12, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-         }, 
-         ShortDescr = "A Cycy Loctob", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A Cycy Loctob is selling contraband items to whoever is interested", 
-         Position = "standing", 
-         Alignment = -3, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [526] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 526, 
-         LongDescr = "A human citizen\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "A human citizen", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A human citizen", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 50, 
-      }, 
-      [527] = 
-      {
-         ArmorClass = 25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 6, 
-         Vnum = 527, 
-         LongDescr = "A Shistavanen Wolfman\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 30, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 6, 
-            HitSizeDice = 10, 
-            HitPlus = 300, 
-         }, 
-         ShortDescr = "A Shistavanen Wolfman", 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 6, 
-         NumberOfAttacks = 0, 
-         Name = "A Shistavanen Wolfman", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 10, 
-      }, 
-      [528] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Twi'lek", 
-         DamRoll = 0, 
-         Vnum = 528, 
-         LongDescr = "A twi'lek is looking for someone\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A twi'lek", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A twi'lek is looking for someone", 
-         Position = "standing", 
-         Alignment = -2, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [529] = 
-      {
-         ArmorClass = 87, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 1, 
-         Vnum = 529, 
-         LongDescr = "A old man is trying to walk up the catwalk\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 5, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-         }, 
-         ShortDescr = "A old man is trying to walk up the catwalk", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A old man is trying to walk up the catwalk", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [530] = 
-      {
-         ArmorClass = 12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Gamorrean", 
-         DamRoll = 7, 
-         Vnum = 530, 
-         LongDescr = "A Gamorrean is easily walking up the catwalk\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 35, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [14] = "gamorrese", 
-            }, 
-            Speaks = 
-            {
-               [14] = "gamorrese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 7, 
-            HitSizeDice = 10, 
-            HitPlus = 350, 
-         }, 
-         ShortDescr = "A Gamorrean ", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 7, 
-         NumberOfAttacks = 0, 
-         Name = "A Gamorean is easily walking up the catwalk", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [531] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Chadra-Fan", 
-         DamRoll = 2, 
-         Vnum = 531, 
-         LongDescr = "A chadra-fan is waiting for a shuttle\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [23] = "chadra-fan", 
-            }, 
-            Speaks = 
-            {
-               [23] = "chadra-fan", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "A chadra-fan", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A chadra-fran ", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [532] = 
-      {
-         ArmorClass = -25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 10, 
-         Vnum = 532, 
-         LongDescr = "A hutt hostess\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [4] = "huttese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         ShortDescr = "A hutt hostess", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         Name = "A hutt hostess", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [534] = 
-      {
-         ArmorClass = 50, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Rodian", 
-         DamRoll = 4, 
-         Vnum = 534, 
-         LongDescr = "A rodian is waiting in line for a room\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 20, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [3] = "rodese", 
-            }, 
-            Speaks = 
-            {
-               [3] = "rodese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         ShortDescr = "A rodian", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A rodian is waiting in line for a room", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [535] = 
-      {
-         ArmorClass = -87, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 15, 
-         Vnum = 535, 
-         LongDescr = "A diagona is going through the trash\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 75, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 15, 
-            HitSizeDice = 10, 
-            HitPlus = 750, 
-         }, 
-         ShortDescr = "A diagona", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 15, 
-         NumberOfAttacks = 3, 
-         Name = "A diagona", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [536] = 
-      {
-         ArmorClass = -150, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-         }, 
-         Race = "Human", 
-         DamRoll = 20, 
-         Vnum = 536, 
-         LongDescr = "A extremely large diagona\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 100, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         ShortDescr = "A very large diagona", 
-         Immune = 
-         {
-            [8] = "poison", 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 20, 
-         NumberOfAttacks = 4, 
-         Name = "A extremely large diagona", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [537] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 537, 
-         LongDescr = "A Askajian is walking toward the music\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created A Askajian is walking toward the music", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A Askajian is walking toward the music", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [538] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 538, 
-         LongDescr = "A local citizen is waiting for something good to bid on \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "a newly created A local citizen is waiting for something good to bid on", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A local citizen is waiting for something good to bid on", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [539] = 
-      {
-         ArmorClass = -12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 4, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Shistavanen", 
-         DamRoll = 9, 
-         Vnum = 539, 
-         LongDescr = "A small time bounty hunter\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 45, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [6] = "shistavanen", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 9, 
-            HitSizeDice = 10, 
-            HitPlus = 450, 
-         }, 
-         ShortDescr = "A bounty hunter", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 9, 
-         NumberOfAttacks = 0, 
-         Name = "A small time bounty hunter", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [540] = 
-      {
-         ArmorClass = -75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 14, 
-         Vnum = 540, 
-         LongDescr = "Landing pad guard\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 70, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 14, 
-            HitSizeDice = 10, 
-            HitPlus = 700, 
-         }, 
-         ShortDescr = "guard", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
-         Name = "Landing pad guard", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [541] = 
-      {
-         ArmorClass = 37, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 5, 
-         Vnum = 541, 
-         LongDescr = "A hutt is really pigging out on food \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 25, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [4] = "huttese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-         }, 
-         ShortDescr = "A hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
-         Name = "A hutt is really pigging out on food", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [542] = 
-      {
-         ArmorClass = 60, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 3, 
-         Vnum = 542, 
-         LongDescr = "The hutt's wife is looking at her husband devouring food in seconds\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 16, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [4] = "huttese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 10, 
-            HitPlus = 160, 
-         }, 
-         ShortDescr = "A hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 3, 
-         NumberOfAttacks = 0, 
-         Name = "The hutt's wife is looking at her husband devouring food in seconds", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [543] = 
-      {
-         ArmorClass = 67, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 543, 
-         LongDescr = "A bith is slowly taking a bite out of his sandwich\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 13, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 130, 
-         }, 
-         ShortDescr = "A bith", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A bith is slowly taking a bite out of his sandwich", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [544] = 
-      {
-         ArmorClass = -12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 4, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 9, 
-         Vnum = 544, 
-         LongDescr = "A pot belly human is hardly awake\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 45, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 9, 
-            HitSizeDice = 10, 
-            HitPlus = 450, 
-         }, 
-         ShortDescr = "a newly created Pot belly human is hardly awake", 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         Sex = "male", 
-         HitRoll = 9, 
-         NumberOfAttacks = 0, 
-         Name = "Pot belly human is hardly awake", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [545] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [2] = "Scavenger", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 545, 
-         LongDescr = "A small bug is crawling beneath tables and picking up whatever it can\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A small bug", 
-         Immune = 
-         {
-            [8] = "poison", 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A small bug is crawling beneath tables and picking up whatever it can", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [546] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 546, 
-         LongDescr = "A fat man is barely awake\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A fat man", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A large man is barely awake", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [547] = 
-      {
-         ArmorClass = -25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 10, 
-         Vnum = 547, 
-         LongDescr = "A smuggler is looking around for refuge\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         ShortDescr = "A smuggler", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         Name = "A smuggler is looking around for refuge", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [548] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Quarren", 
-         DamRoll = 0, 
-         Vnum = 548, 
-         LongDescr = "A strongly built quarren is easily lifting bags\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A strongly built quarren", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A strongly built quarren is easily lifting bags", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [549] = 
-      {
-         ArmorClass = 50, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 549, 
-         LongDescr = "A ithorian citizen\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 20, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         ShortDescr = "A ithorian", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A ithorian citizen", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [550] = 
-      {
-         ArmorClass = 45, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 550, 
-         LongDescr = "A large man is storing up boxes\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 22, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 220, 
-         }, 
-         ShortDescr = "A large man", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A large man is storing up boxes", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [551] = 
-      {
-         ArmorClass = 12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Shistavanen", 
-         DamRoll = 7, 
-         Vnum = 551, 
-         LongDescr = "A smuggler is waiting inside the turbo-lift\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 35, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [6] = "shistavanen", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 7, 
-            HitSizeDice = 10, 
-            HitPlus = 350, 
-         }, 
-         ShortDescr = "A smuggler", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 7, 
-         NumberOfAttacks = 0, 
-         Name = "A smuggler is waiting inside the turbo-lift", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [552] = 
-      {
-         ArmorClass = 82, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 1, 
-         Vnum = 552, 
-         LongDescr = "A small alien is looking curiously about\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 7, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 70, 
-         }, 
-         ShortDescr = "a newly created A small alien is looking curiously about", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A small alien is looking curiously about", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [553] = 
-      {
-         ArmorClass = 20, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Wookiee", 
-         DamRoll = 6, 
-         Vnum = 553, 
-         LongDescr = "A large wookiee is hauling large crates\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 32, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 6, 
-            HitSizeDice = 10, 
-            HitPlus = 320, 
-         }, 
-         ShortDescr = "a newly created A large wookiee is hauling large crates", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 6, 
-         NumberOfAttacks = 0, 
-         Name = "A large wookiee is hauling large crates", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [554] = 
-      {
-         ArmorClass = 80, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 1, 
-         Vnum = 554, 
-         LongDescr = "A smaller alien is aiding his wookiee friend\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 8, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 80, 
-         }, 
-         ShortDescr = "a newly created A smaller alien is aiding his wookiee friend", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A smaller alien is aiding his wookiee friend", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [555] = 
-      {
-         ArmorClass = 70, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 555, 
-         LongDescr = "A human is running like crazy around\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 12, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-         }, 
-         ShortDescr = "human", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A human is running like crazy around here", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [556] = 
-      {
-         ArmorClass = 65, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 556, 
-         LongDescr = "A kubaz is walking around not knowing what to do\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 14, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 140, 
-         }, 
-         ShortDescr = "a newly created A kubaz is walking around", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A kubaz is walking around", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [557] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 557, 
-         LongDescr = "A droid is gibbering out anything\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created A droid is gibbering out anything", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A droid is gibbering out anything", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [558] = 
-      {
-         ArmorClass = 45, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 558, 
-         LongDescr = "A rodian is carefully handling cargo\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 22, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 220, 
-         }, 
-         ShortDescr = "A rodian", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A rodian is carefully handling cargo", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [559] = 
-      {
-         ArmorClass = 47, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 559, 
-         LongDescr = "A small smuggler is waiting for someone to land \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 21, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 210, 
-         }, 
-         ShortDescr = "smuggler", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A small smuggler is waiting for someone to land", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [560] = 
-      {
-         ArmorClass = 35, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 5, 
-         Vnum = 560, 
-         LongDescr = "A beautiful woman is, standing beside her husband\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 26, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-            HitPlus = 260, 
-         }, 
-         ShortDescr = "a newly created A beautiful women is, standing beside her husband", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
-         Name = "A beautiful women is, standing beside her husband", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [561] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 561, 
-         LongDescr = "A handsome man is standing beside her wife, also waiting for someone\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created A handsome man is standing beside her wife, also waiting for someone", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A handsome man is standing beside her wife, also waiting for someone", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [562] = 
-      {
-         ArmorClass = 37, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 5, 
-         Vnum = 562, 
-         LongDescr = "A experienced smuggler is just hanging around \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 25, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-         }, 
-         ShortDescr = "A experienced smuggler", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
-         Name = "A experienced smuggler is just hanging around", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [563] = 
-      {
-         ArmorClass = 40, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 4, 
-         Vnum = 563, 
-         LongDescr = "A information broker\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 24, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 240, 
-         }, 
-         ShortDescr = "a newly created A information broker", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Name = "A information broker", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [564] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 564, 
-         LongDescr = "Some god abandoned a newly created A human bounty hunter is wearing unsual armor here.\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created A human bounty hunter is wearing unsual armor", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A human bounty hunter is wearing unsual armor", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [565] = 
-      {
-         ArmorClass = 20, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 6, 
-         Vnum = 565, 
-         LongDescr = "The bith band leader is playing the fizz\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 32, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 6, 
-            HitSizeDice = 10, 
-            HitPlus = 320, 
-         }, 
-         ShortDescr = "a newly created The bith band leader is playing the fizz", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 6, 
-         NumberOfAttacks = 0, 
-         Name = "The bith band leader is playing the fizz", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [566] = 
-      {
-         ArmorClass = 67, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 566, 
-         LongDescr = "A bith is playing a weird type of keyboard\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 13, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 130, 
-         }, 
-         ShortDescr = "a newly created A bith is playing a weird type of keyboard", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A bith is playing a weird type of keyboard", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [567] = 
-      {
-         ArmorClass = 77, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 1, 
-         Vnum = 567, 
-         LongDescr = "A hutt is listening attentively to the band \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 9, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [4] = "huttese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 90, 
-         }, 
-         ShortDescr = "A hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A hutt is listening attentively to the band", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [568] = 
-      {
-         ArmorClass = -25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 10, 
-         Vnum = 568, 
-         LongDescr = "A hutt is patiently waiting for his caravel\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [4] = "huttese", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         ShortDescr = "A hutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         Name = "A hutt is patiently waiting for his caravel to come", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 700, 
-      }, 
-      [569] = 
-      {
-         ArmorClass = -10, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 4, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Defel", 
-         DamRoll = 8, 
-         Vnum = 569, 
-         LongDescr = "A defel assasin is swaying in the shadows, barely noticed by some people\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 44, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [21] = "defel", 
-            }, 
-            Speaks = 
-            {
-               [21] = "defel", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 8, 
-            HitSizeDice = 10, 
-            HitPlus = 440, 
-         }, 
-         ShortDescr = "Defel", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 8, 
-         NumberOfAttacks = 0, 
-         Name = "A defel assasin is swaying in the shadows, barely noticed by some people", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [570] = 
-      {
-         ArmorClass = -10, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 4, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 8, 
-         Vnum = 570, 
-         LongDescr = "A Gank bodyguard is watching your every mouvement\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 44, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 8, 
-            HitSizeDice = 10, 
-            HitPlus = 440, 
-         }, 
-         ShortDescr = "Gank bodyguard", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 8, 
-         NumberOfAttacks = 0, 
-         Name = "A Gank bodyguard is watching your every mouvement", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [571] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 571, 
-         LongDescr = "A protocol droid is following his master and translating languages\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A protocol droid", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A protocol droid is following his master everywhere", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [572] = 
-      {
-         ArmorClass = 17, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 6, 
-         Vnum = 572, 
-         LongDescr = "A gank bodyguard has lost his master and is looking for him\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 33, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 6, 
-            HitSizeDice = 10, 
-            HitPlus = 330, 
-         }, 
-         ShortDescr = "a newly created A gank has lost his master", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 6, 
-         NumberOfAttacks = 0, 
-         Name = "A gank has lost his master", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [573] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 573, 
-         LongDescr = "A tourist is waiting for his luggages\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "A tourist", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A tourist is waiting for his luggages", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [500] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 500, 
-         LongDescr = "", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created Auctioner", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "Auctioner", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [501] = 
-      {
-         ArmorClass = -25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 10, 
-         Vnum = 501, 
-         LongDescr = "Some god abandoned a newly created A Gotal bouncers is standing here not allowing any droids to enter here.\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         ShortDescr = "a newly created A Gotal bouncers is standing here not allowing any droids to enter", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         Name = "A Gotal bouncers is standing here not allowing any droids to enter", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [502] = 
-      {
-         ArmorClass = 12, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 7, 
-         Vnum = 502, 
-         LongDescr = "A talz bartender is ready to serve you\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 35, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 7, 
-            HitSizeDice = 10, 
-            HitPlus = 350, 
-         }, 
-         ShortDescr = "A talz", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 7, 
-         NumberOfAttacks = 2, 
-         Name = "A Talz is standing here waiting for someone to serve", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 500, 
-      }, 
-      [503] = 
-      {
-         ArmorClass = 0, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 503, 
-         LongDescr = "A nonhumanoid citizen marches around looking for something\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ShortDescr = "a newly created Chubb Scutt", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "Chubb Scutt", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [504] = 
-      {
-         ArmorClass = 97, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [2] = "Scavenger", 
-            [7] = "Wimpy", 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Vnum = 504, 
-         LongDescr = "A large rodent is looking for some food is being shoved around\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 1, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-         }, 
-         ShortDescr = "A rodent", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Name = "A small rodent", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [505] = 
-      {
-         ArmorClass = 62, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 3, 
-         Vnum = 505, 
-         LongDescr = "A binary load is working hard\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 15, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 3, 
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-         }, 
-         ShortDescr = "A binary load", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 3, 
-         NumberOfAttacks = 0, 
-         Name = "Binary load", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [506] = 
-      {
-         ArmorClass = 87, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-         Race = "Human", 
-         DamRoll = 1, 
-         Vnum = 506, 
-         LongDescr = "A protocol droid is waiting here to help you \
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 5, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-         }, 
-         ShortDescr = "a newly created A protocol droid is waiting here to help you out", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Name = "A protocol droid is waiting here to help you out", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [507] = 
-      {
-         ArmorClass = -150, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 20, 
-         Vnum = 507, 
-         LongDescr = "A Superviser is obviously supervising everyone\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 100, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         ShortDescr = "A superviser", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "male", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         Name = "Superviser", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [508] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 2, 
-         Vnum = 508, 
-         LongDescr = "A human is standing here waiting for the shuttle\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "A human", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "A human", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [509] = 
-      {
-         ArmorClass = 37, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Human", 
-         DamRoll = 5, 
-         Vnum = 509, 
-         LongDescr = "A secretary is standing behind a counter\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 25, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 5, 
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-         }, 
-         ShortDescr = "a newly created A secretary", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
-         Name = "A secretary", 
-         Position = "standing", 
-         Alignment = 0, 
-         Description = "", 
-         Credits = 0, 
-      }, 
-      [510] = 
-      {
-         ArmorClass = 75, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Race = "Hutt", 
-         DamRoll = 2, 
-         Vnum = 510, 
-         LongDescr = "A Hutt citizen is wandering around\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 10, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-         }, 
-         ShortDescr = "a newly created Hutt citizen", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "female", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         Name = "Hutt citizen", 
-         Position = "standing", 
-         Alignment = 2, 
-         Description = "", 
-         Credits = 100, 
-      }, 
-      [511] = 
-      {
-         ArmorClass = -25, 
-         Height = 0, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Race = "Human", 
-         DamRoll = 10, 
-         Vnum = 511, 
-         LongDescr = "A suspicious looking man\
-", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-         Level = 50, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         ShortDescr = "A smuggler", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Intelligence = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-         }, 
-         Sex = "undistinguished", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         Name = "smuggler", 
-         Position = "standing", 
-         Alignment = -20, 
-         Description = "", 
-         Credits = 350, 
-      }, 
-   }, 
+   Author = "Skeesh", 
    Rooms = 
    {
       [512] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Landing pad 101", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -6961,31 +1087,29 @@ AreaEntry
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 521, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "south", 
-               Description = "", 
                DestinationVnum = 511, 
             }, 
          }, 
          Vnum = 512, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You stand on a HUGE platform.  It is filled with atleast fix to ten ships. \
 Most of them a refueling and some of them or getting ready to launch. The\
 breeze of fresh air passes by, but then you get the smell of burnt power\
@@ -6994,11 +1118,13 @@ things into their ships but it is unknown to what they are loading.  The\
 platform is not even guarded one bit except for a couple of traffic\
 officers directing incoming ships.\
 ", 
+         Tag = "", 
       }, 
       [513] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Bravo-Beta Hutt caravel launching bay entrance", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -7008,17 +1134,15 @@ officers directing incoming ships.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
          }, 
          Vnum = 513, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "A large door stands in front of you which is large enough for a hutt to fit\
 through.  Many hutts slide through the automatic door in front of you,\
 trailing behind them a slime trail.  Following the hutts are their\
@@ -7026,47 +1150,48 @@ trailing behind them a slime trail.  Following the hutts are their\
 a large scanner, scanning for weapons.  It is very noticeable so if you\
 are smart enough, you'd put it away. \
 ", 
+         Tag = "", 
       }, 
       [514] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport store", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 514, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "workshop", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               Description = "", 
                DestinationVnum = 526, 
             }, 
             [2] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 514, 
          Description = "You stand in a small room containing: key chains, ammo cells and more\
 accesories.  It is large enough to fit a couple of hutts but can get to\
 crowded.  It is not crowded now and you only notice a small child reading\
@@ -7079,50 +1204,50 @@ will never know.\
       }, 
       [515] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Turbo-lift:Level 1", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 2, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 515, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 553, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
             [3] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 528, 
             }, 
          }, 
-         Tunnel = 2, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 515, 
          Description = "It is very crampy in the Turbo-lift.  As many people try to squeeze their\
 way in but get pushed back out.  A speaker is stuck right into the wall\
 and is playing soothing and relaxing music. The walls are white and the\
@@ -7132,33 +1257,33 @@ floor is tiled black. \
       }, 
       [516] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Auctioning room", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 500, 
+            }, 
+         }, 
          Flags = 
          {
             [31] = "Auction", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 516, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-               DestinationVnum = 500, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "You now stand in a pretty large room.  A large podium is stationed at the\
 far end of the room. Many chairs are set out for people to sit down. \
 Surrounded by many glass cases filled with neat objects, you discover that\
@@ -7168,40 +1293,40 @@ the room is quite neat.\
       }, 
       [517] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Stairway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 517, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 523, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 517, 
          Description = "You head your way down the staircase.  A large railing is stuck firmly to\
 the wall to help people go down. The stairs are kind of slippery because\
 there are already washed.  Not many people follow you down into the\
@@ -7212,41 +1337,41 @@ provides the only light.\
       }, 
       [518] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Shaft car", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 518, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 519, 
             }, 
             [2] = 
             {
+               Direction = "southeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southeast", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 518, 
          Description = "A platform slowly moves upwards toward the roof.  You can see the edges of\
 the shaft from the bottom.  Nothing really to see.  The shaft car makes a\
 funny kind of nois as it creaks up to it's destination. It is a very slow\
@@ -7257,41 +1382,41 @@ virtue. \
       }, 
       [519] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Shaft car", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 519, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 520, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 518, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 519, 
          Description = "THe car suddenly stops.  Atlast after a long ride you have reached the top.\
 The shaft car rumbles for a minute then dies.  You can hear the creaks in\
 the spokes of the shaft car.  You can now see a large catwalk laid out\
@@ -7301,41 +1426,41 @@ before you. \
       }, 
       [520] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Before the catwalk", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 520, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 527, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 519, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 520, 
          Description = "You stand infront a large catwalk overlooking the whole spaceport.  You can\
 see all the way down to the other end of the catwalk.  Beside you is a\
 switch for the shaft car going up or down.  It isn't a very large area so\
@@ -7346,40 +1471,40 @@ onto the catwalk. Luckly there is hardly anyone standing in this area.\
       }, 
       [521] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Bridge", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 521, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 522, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 512, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 521, 
          Description = "A large bridge is linked together between two landing pads.  It is wide\
 enough for many people and can also support many tons of weight. Engine\
 exaust fills the air as you smell the gas right in your face.  A lot of\
@@ -7391,95 +1516,95 @@ and is crossed many times. \
       }, 
       [522] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Landing pad 102", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 521, 
+            }, 
+         }, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 522, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
-               Description = "", 
-               DestinationVnum = 521, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "You now stand on a even larger platform than before.  You can smell the\
 engine exaust.   Many large freighters start landing on the platform. \
 Their repulsor lifts, lift some of your hair on your head.  Many people\
 are on the platform waiting for arrivals but most of them are standing\
 back because the don't want to get blown away by the incoming ships\
 ", 
-         Tag = "", 
+         Tag = "nar_shaddaa_landing", 
       }, 
       [523] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Stairway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 523, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 524, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 546, 
             }, 
             [3] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 517, 
             }, 
             [4] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 558, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 523, 
          Description = "You continue down the dark stairway.  It doesn't seem very hard for you to\
 climb down, but going up is going to take some effort. The staircase\
 splits of to the left and then to the right.  A long gloomy hallway\
@@ -7490,8 +1615,9 @@ many people can go down. The staircase continues further down.\
       }, 
       [524] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Hallway to the Medical bay", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -7501,26 +1627,24 @@ many people can go down. The staircase continues further down.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 525, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 523, 
             }, 
          }, 
          Vnum = 524, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The roof is shaped roundly around your head and is quite high up.   It\
 leads further down to room but you can't make it out completely. You hear\
 cries of agony from the Medical bay as it trails of.    A large white\
@@ -7528,34 +1652,35 @@ light hangs above your head, as you notice a bit more further down the\
 hallway. You conitnue down the hallway until it meets up to the medical\
 bay.\
 ", 
+         Tag = "", 
       }, 
       [525] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Medical bay", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 525, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 524, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 525, 
          Description = "A large desc sits in front of you and behind it, is a Verpine secretary.  \
 A large stack of papers are piled up.   Behind the desc, a large door\
 stands firm.  It sudenly swings open and you get a glimpse of a large\
@@ -7565,37 +1690,37 @@ Bacta tank containing a bunch of people.  \
       }, 
       [526] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Bravo-Beta shop work room", 
-         Flags = 
-         {
-            [26] = "Factory", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 526, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "south", 
-               Description = "", 
                DestinationVnum = 514, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [26] = "Factory", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 526, 
          Description = "You now stand in a large workshop filled with people creating new things. \
 Some creative some not so creative. Everyone is the room seems extremely\
 busy working on something.  Many large tables are set out for people to\
@@ -7607,8 +1732,9 @@ sign hangs on the wall just left of you. \
       }, 
       [527] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -7618,44 +1744,42 @@ sign hangs on the wall just left of you. \
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 540, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 529, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 520, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 531, 
             }, 
          }, 
          Vnum = 527, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You now stand on a large catwalk.  You can get a great view of the You now\
 stand on a large catwalk.  You can get a great view of the spaceport\
 northern section.  You look down and you see many people walking towards\
@@ -7663,52 +1787,53 @@ their destination. It is very wide, but you could still easily fall down\
 since there is no railing on the sides.  Many people have complained\
 aboutthis but nothing has changed. The catwalk leads way further down.\
 ", 
+         Tag = "", 
       }, 
       [528] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Turbo-lift:Level 2", 
-         Flags = 
-         {
-            [18] = "NoDrop", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 2, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 528, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 534, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 515, 
             }, 
             [3] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 538, 
             }, 
          }, 
-         Tunnel = 2, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [18] = "NoDrop", 
+         }, 
+         Vnum = 528, 
          Description = "The turbo-lift goes down and a terrifying speed, then stops abruptly.  You\
 lurch foward as it stops.  A large speaker announces \"Level 2 of Spaceport\
 Bravo-Beta\". The door opens for you to step out.\
@@ -7717,32 +1842,32 @@ Bravo-Beta\". The door opens for you to step out.\
       }, 
       [529] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Of ledge...", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "down", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 532, 
+            }, 
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [24] = "NoFloor", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 529, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
-               Description = "", 
-               DestinationVnum = 532, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "Looks like you made a wrong turn.  You slip and start to fall down towards\
 the ground.  Maybe you should have though before walking in this\
 direction.\
@@ -7751,59 +1876,59 @@ direction.\
       }, 
       [530] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport terminal", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
             [1] = 
             {
-               Keyword = "sign", 
                Description = "Welcome to Spaceport Bravo-Beta. Here you will find many things, including\
 \13landing pads, stores and much much more.  To exit the spaceport is simple.\
 \13All you have to do is find the hallway and you are on your way out. Thank\
 \13you for visiting Spaceport Bravo-Beta.\
 \13", 
+               Keyword = "sign", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 530, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 532, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 533, 
             }, 
             [3] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 579, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Vnum = 530, 
          Description = "The terminal seems extremely large and someone could get lost in such a\
 large spaceport.  There is no one to help you and asking for help would be\
 stupid.  Everyone is in a rush one way or another.  Many binary loads\
@@ -7814,22 +1939,22 @@ couple of directions and there is actually a sign to direct you the way.\
       }, 
       [531] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Of ledge...", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 531, 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "You suddenly drop at a terrying speed.  You will probably die of break\
 something as the ground gets closer to your view.  Watch your steop next\
 time.\
@@ -7838,58 +1963,58 @@ time.\
       }, 
       [532] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Terminal Nothern side", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 532, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 554, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 552, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 553, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 530, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 532, 
          Description = "You step into the nothern side of the spaceport terminal.  It is very\
 similar to the rest of the rooms but is a bit larger. You look over your\
 head and see a large catwalk. A large group of people surrond you as you\
@@ -7899,8 +2024,9 @@ continue your way into the spaceport.\
       }, 
       [533] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Terminal Eastern side", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -7910,26 +2036,24 @@ continue your way into the spaceport.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 530, 
             }, 
             [2] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
          }, 
          Vnum = 533, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You now stand in a large terminal but is the same size as the rest of the\
 terminals.   It is almost as busy as the other spaceports but people\
 quickly leave the eastern side of the spaceport.   Many large windows a\
@@ -7937,11 +2061,13 @@ set out so you can see out of them.  It is very busy outside but there\
 doesn't seem to be an exit to outside.  I guess you have to find another\
 way.\
 ", 
+         Tag = "", 
       }, 
       [534] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "The control room of the garbage compacter", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -7951,59 +2077,57 @@ way.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "Compacter", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               Description = "", 
                DestinationVnum = 537, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "Compacter", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "east", 
-               Description = "", 
                DestinationVnum = 535, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 528, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "Compacter", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "west", 
-               Description = "", 
                DestinationVnum = 536, 
             }, 
          }, 
          Vnum = 534, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many monitors surrond you.  Many of them just are just black or white.  The\
 screen doesn't have many commands but a simple letter on each one.  There\
 are many doors leading to a seperate garbage room.  The garbage room is\
@@ -8012,11 +2136,13 @@ are busy dumping garbage they have collected. The room has a very bad\
 odour as you struggle to clamp your noise shut. EWWW!  You notice a panel\
 infront of the entrance of each door.\
 ", 
+         Tag = "", 
       }, 
       [535] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Garbage compacter", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8026,61 +2152,60 @@ infront of the entrance of each door.\
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "west", 
-               Description = "", 
                DestinationVnum = 534, 
             }, 
          }, 
          Vnum = 535, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Your foot suddenly sinks into the smelly filled compacter as you step into\
 it.  The odor invades your noise as you desperately try to cover it.  Many\
 scraps of metal have been crushed into a very nice square. The more is\
 warm and is yellow.  The compacter is very disgusting and so far no one\
 has volunteered to clean it up.\
 ", 
+         Tag = "", 
       }, 
       [536] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Garbage compacter", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 536, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "east", 
-               Description = "", 
                DestinationVnum = 534, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 536, 
          Description = "Your foot suddenly sinks into the smelly filled compacter as you step into\
 it.  The odor invades your noise as you desperately try to cover it.  Many\
 scraps of metal have been crushed into a very nice square. The more is\
@@ -8091,22 +2216,22 @@ has volunteered to clean it up.\
       }, 
       [537] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "A large garbage compacter", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 537, 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "The smell gets even worse.  You trip over some wires but quickly bring\
 yourself back up.  This is the largest garbage compacter.  The yellowish\
 green water is up to waist level on most humans.  No one has dared you\
@@ -8117,8 +2242,9 @@ the door for you.\
       }, 
       [538] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Turbo-lift:Level 3", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 2, 
          ExtraDescriptions = 
@@ -8128,44 +2254,44 @@ the door for you.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 539, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 528, 
             }, 
             [3] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 577, 
             }, 
          }, 
          Vnum = 538, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The turbo-lift suddenly stops at it's destination.  The music stops as you\
 get in or out. A very bad smell comes from the south, even the workers\
 have to take a break and get some fresh air after a while.\
 ", 
+         Tag = "", 
       }, 
       [539] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Storage room", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8175,78 +2301,77 @@ have to take a break and get some fresh air after a while.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 538, 
             }, 
          }, 
          Vnum = 539, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many large boxes are placed foward everywhere. A whole bunch of aliens and\
 humanoids are working hard lifting heavy boxes.  The room is very bright,\
 but the light is partially covered by the boxes stacked up on together.\
 Aiding the humans and aliens are large binary loads lifting up with their\
 huge claws. \
 ", 
+         Tag = "", 
       }, 
       [540] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Catwalk", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 540, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 573, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 541, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 527, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 544, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 540, 
          Description = "The catwalk is farely large.  It can support many people and their is a\
 sign to prove it.  Even though the sign tells you it is safe, do be\
 careful.  Not many people patrol on this catwalk for their is no support\
@@ -8258,73 +2383,73 @@ accidents have occured....yet.\
       }, 
       [541] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Off ledge", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [24] = "NoFloor", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 541, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 540, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 542, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [24] = "NoFloor", 
+         }, 
+         Vnum = 541, 
          Description = "A long way down! \
 ", 
          Tag = "", 
       }, 
       [542] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Falling down", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "down", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 543, 
+            }, 
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [24] = "NoFloor", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 542, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
-               Description = "", 
-               DestinationVnum = 543, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "You fall extremely fast, as you desperately try to find something to grab\
 onto. Your blood rushed to your head.. FAST!! Everything is happening very\
 fast.  Just hope you will survive this fall.\
@@ -8333,39 +2458,40 @@ fast.  Just hope you will survive this fall.\
       }, 
       [543] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "DOWN...", 
-         Flags = 
-         {
-            [24] = "NoFloor", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 543, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 545, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [24] = "NoFloor", 
+         }, 
+         Vnum = 543, 
          Description = "You continue to fall down into the darkness.\
 ", 
          Tag = "", 
       }, 
       [544] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Of ledge", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8375,24 +2501,24 @@ fast.  Just hope you will survive this fall.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 540, 
             }, 
          }, 
          Vnum = 544, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You suddenly slip and fall down. A long way down!\
 ", 
+         Tag = "", 
       }, 
       [545] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "A small platform", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8402,28 +2528,28 @@ fast.  Just hope you will survive this fall.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 547, 
             }, 
          }, 
          Vnum = 545, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You now stand on a large platform.  It is very thin and you can easily fall\
 down.  You are surrounded by darkness as you can barely see anything. Not\
 many people linger here, but a couple of citizens are in sight.  The\
 platform continues down and as you look up you see the catwalk.  A large\
 door is front of you, but that is all you can see.\
 ", 
+         Tag = "", 
       }, 
       [546] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Gift shop", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8433,26 +2559,24 @@ door is front of you, but that is all you can see.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 550, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 523, 
             }, 
          }, 
          Vnum = 546, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You are surrond by interssing artifacts.  Shelves and shelves of nice items\
 just waiting for people to buy them. A droid is waiting for people to come\
 in, and is obviously operating 24hrs a day.   The gift shop is not very\
@@ -8460,11 +2584,13 @@ large but can contain several people.  You notice that the entrance door\
 is extremely larga and makes a funny noise once you walk in. It is quite\
 interesting.\
 ", 
+         Tag = "", 
       }, 
       [547] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Small platform", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8474,26 +2600,24 @@ interesting.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 548, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 545, 
             }, 
          }, 
          Vnum = 547, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The platform is plain white as you bend over to look at it.  The darkness\
 surrounds you look a large blanket.  Luckily there is a sign of light\
 coming from the wall of the platform. You hear noises from the north.  You\
@@ -8501,11 +2625,13 @@ look straight up to find any signs of the clear blue sky but find nothing\
 but black. You continue your way on the platform, who knows what you can\
 find.\
 ", 
+         Tag = "", 
       }, 
       [548] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Small platform", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8515,39 +2641,39 @@ find.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "Door", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               Description = "", 
                DestinationVnum = 549, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 547, 
             }, 
          }, 
          Vnum = 548, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You stand in front a large stiped yellow door. It is clamp shut but\
 automatically stays open when you open it. You are still engulfed in\
 darkness but light shines through the crack of the door. \
 ", 
+         Tag = "", 
       }, 
       [549] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Inside the Spaceport", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8557,74 +2683,73 @@ darkness but light shines through the crack of the door. \
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 559, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 548, 
             }, 
          }, 
          Vnum = 549, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Light litteraly blinds you as you open the door.  It takes a little while\
 to adjust to the light but you will get use to it. It is extremely crowded\
 in the shipyard, amazing how many people surround you. You can smell\
 perfum, tabac and ale all in one.  It is very loud as everyone begins to\
 talk at the same time indulging in conversations.\
 ", 
+         Tag = "", 
       }, 
       [550] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Behind the counter", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 550, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               Description = "", 
                DestinationVnum = 551, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 546, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 550, 
          Description = "You manage to get behind the counter of the gift shop.  The droid does not\
 appreciate it.  Stuck on the wall is a large defense turret in case of\
 robberies like the one you are trying to make.  A large cash register is\
@@ -8636,8 +2761,9 @@ appreciates someone behind the counter of their store.\
       }, 
       [551] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "In the large safe", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8647,33 +2773,33 @@ appreciates someone behind the counter of their store.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
-               Direction = "south", 
-               Description = "", 
                DestinationVnum = 550, 
             }, 
          }, 
          Vnum = 551, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You somehow get in the large safe of the gift shop.  Not much is in here\
 and the safe is actually not needed.  The room is made out of pure\
 durasteel and can deflect several high powered blaster bolts.  A large\
 lamp hangs violently over your head.  You feel the credits under you feet.\
  This room is highly secured.\
 ", 
+         Tag = "", 
       }, 
       [552] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport food court", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8683,17 +2809,15 @@ lamp hangs violently over your head.  You feel the credits under you feet.\
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 532, 
             }, 
          }, 
          Vnum = 552, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The food court of the spaceport is very very large. They're aren't any\
 seats avaible because everyone is in one.  You might have to share a seat\
 with someone. It smells like klatooine patty frogs, one of Nal Hutta's and\
@@ -8701,11 +2825,13 @@ Nar Shadda's best delicase. Many aliens are carrying trays full of food\
 while others are just lounging in theire chairs.  Maids, and workers are\
 busy cleaning up tables for other people to sit in.\
 ", 
+         Tag = "", 
       }, 
       [553] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Back of the turbo-lift", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8715,34 +2841,34 @@ busy cleaning up tables for other people to sit in.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 532, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 515, 
             }, 
          }, 
          Vnum = 553, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You push your way through into the back of the turbo-lfit.  Another door is\
 faced in your direction.  It leades to the nothern side of the spaceport.\
 ", 
+         Tag = "", 
       }, 
       [554] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport terminal", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8752,78 +2878,77 @@ faced in your direction.  It leades to the nothern side of the spaceport.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 557, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 555, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 532, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 556, 
             }, 
          }, 
          Vnum = 554, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You can now see the exit for the spaceport.  Many people are gathering\
 around, trying to find people that hve just arrived.  Also, taxi drivers\
 are waiting for customers holding up a sign.  Light pours in from the\
 windows above your head.  This time there is no speakers or monitors. You\
 may exit the spaceport further up.\
 ", 
+         Tag = "", 
       }, 
       [555] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Taxi service", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 555, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 554, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 555, 
          Description = "A large counter is set in front of you.  The room is very small and stuffy.\
  A large lign up is started in front of you.   You may get a taxi ride, if\
 you pay the service droid the amount he wants.  The taxi comes in every\
@@ -8834,8 +2959,9 @@ can fit lots of people.  Quickly board the taxi when it comes.\
       }, 
       [556] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Rental", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8845,17 +2971,15 @@ can fit lots of people.  Quickly board the taxi when it comes.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 554, 
             }, 
          }, 
          Vnum = 556, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many speeders are in front of you.  You now are in the spaceport rental\
 shop for speeders. You may rent speeders for a large or small amount of\
 time.  A droid is ready to serve you all day long.  The security is quite\
@@ -8863,11 +2987,13 @@ tight around here, but not to tight.  You may not buy the speeders and\
 over due time will cost you money. Type LIST for a large variety of\
 speeders you can rent. \
 ", 
+         Tag = "", 
       }, 
       [557] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Exit the spaceport", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8877,26 +3003,24 @@ speeders you can rent. \
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 576, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 554, 
             }, 
          }, 
          Vnum = 557, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "As the door opens automaticly, you intake a small breath of fresh air. \
 Ahhhh!  How great it is to go outside. At last you may go outside. You can\
 hear speeders rush by, and people scurrying about the city streets. \
@@ -8904,11 +3028,13 @@ Several people enter and exit the spaceport every now and then.  Nar\
 Shadda is a large place and someone could get lost easily.  Be careful out\
 there.\
 ", 
+         Tag = "", 
       }, 
       [558] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Stairway", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8918,36 +3044,36 @@ there.\
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 523, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 559, 
             }, 
          }, 
          Vnum = 558, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The stairway is not getting any brighter.  The rail is here for your\
 support so you don't fall down but no one has actually fell down. Not many\
 people are here, because most of them don't know where this stairway leads\
 to.    You hear many cries, but can't pin point where it is.\
 ", 
+         Tag = "", 
       }, 
       [559] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Inside the spaceport", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -8957,63 +3083,81 @@ to.    You hear many cries, but can't pin point where it is.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 561, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 549, 
             }, 
             [3] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 558, 
             }, 
             [4] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 583, 
             }, 
             [5] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 560, 
             }, 
          }, 
          Vnum = 559, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You are now standin inside the spaceport.  This is the second floor of the\
 spaceport. The spaceport consists of 2 floors, or so it is said to be. A\
 staircase leads up back to the first floor. It is very large and filled up\
 with people and large crates filled with personal things. Not many workers\
 are here to help people out.  Who said this place had to be nice?\
 ", 
+         Tag = "", 
       }, 
       [560] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport lounge", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "southwest", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 559, 
+            }, 
+         }, 
          Flags = 
          {
             [16] = "Silence", 
@@ -9022,26 +3166,7 @@ are here to help people out.  Who said this place had to be nice?\
             [18] = "NoDrop", 
             [15] = "NoDropAll", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 560, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
-               Description = "", 
-               DestinationVnum = 559, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "A large quiet lounge is here for people to rest.  Some people are a sleep. \
 This is a place to recover after a long journey. It is kept silent and not\
 word is a loud.  Littering is prohibted as a signs tells you. You can stay\
@@ -9051,8 +3176,9 @@ here for as long as you want to.\
       }, 
       [561] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Inside the spaceport", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9062,46 +3188,46 @@ here for as long as you want to.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 562, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 574, 
             }, 
             [3] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 559, 
             }, 
          }, 
          Vnum = 561, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many directions slip of together now.  You can see many things.  In front\
 of you is a large slanted catwalk going upwards. It get's more and more\
 busy as you keep on going. Even more people are now in the spaceport.  You\
 get pushed around like a rag doll, and it takes you a while to get through\
 this crowd.\
 ", 
+         Tag = "", 
       }, 
       [562] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "On the slanted catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9111,37 +3237,37 @@ this crowd.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 561, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 563, 
             }, 
          }, 
          Vnum = 562, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You step onto the large slanted catwalk and quickly loose your stepping. \
 You regather yourself back up and continue. It is not that hard to walk up\
 the catwalk, but takes a little time. You try to look up diagonaly but all\
 you see is the catwalk.  The catwalk ends onto a small two way\
 intersection, the splits of in another direction.\
 ", 
+         Tag = "", 
       }, 
       [563] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Slanted catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9151,36 +3277,36 @@ intersection, the splits of in another direction.\
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 564, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 562, 
             }, 
          }, 
          Vnum = 563, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The catwalk gets very hard now.  It takes a lot of time and effort to get\
 up.  You think to yourself, how can hutts get up here? You can look down\
 at the people below, as you see tiny bald spots on their heads. The\
 catwalk continues further up, then splits off in the other direction.\
 ", 
+         Tag = "", 
       }, 
       [564] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Up the catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9190,82 +3316,81 @@ catwalk continues further up, then splits off in the other direction.\
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 572, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 563, 
             }, 
          }, 
          Vnum = 564, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You made it up the catwalk.  Or atleast half of it.  There more on the east\
 side.  You find out that there is nothing here on the end of this catwalk.\
 You can look down below and see people.  Compared to you, they look like\
 little myrmins (insectes).  It you were to fall, it would hurt a lot. \
 Luckily there is railing here. \
 ", 
+         Tag = "", 
       }, 
       [565] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Higher part of the catwalk", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 565, 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "", 
          Tag = "", 
       }, 
       [566] = 
       {
+         Sector = "inside", 
+         TeleDelay = 0, 
          Name = "An Empty Home", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "southwest", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 567, 
+            }, 
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 566, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
-               Description = "", 
-               DestinationVnum = 567, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "inside", 
-         TeleDelay = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -9273,8 +3398,9 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
       }, 
       [567] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Hotel intersection", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9284,84 +3410,84 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 568, 
             }, 
             [2] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "Door", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "northeast", 
-               Description = "", 
                DestinationVnum = 566, 
             }, 
             [3] = 
             {
+               Direction = "northwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "northwest", 
-               Description = "", 
                DestinationVnum = 569, 
             }, 
             [4] = 
             {
+               Direction = "southeast", 
+               Key = -1, 
                Keyword = "Door", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "southeast", 
-               Description = "", 
                DestinationVnum = 570, 
             }, 
             [5] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "Door", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "southwest", 
-               Description = "", 
                DestinationVnum = 571, 
             }, 
          }, 
          Vnum = 567, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You stand inside the spaceport hotel.  It is a large intersection leading\
 to rooms, suites and time shares.  There is no one to tell you the way but\
 only numbers in all type of languages on the wall. If you were listening,\
 you will know which number you are staying in. If you are just visiting\
 then have fun.  A small signs directs you to the small indoor pool.\
 ", 
+         Tag = "", 
       }, 
       [568] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Stairs", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9371,60 +3497,59 @@ then have fun.  A small signs directs you to the small indoor pool.\
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 567, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 508, 
             }, 
          }, 
          Vnum = 568, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You climb up the stairs of the hotel room.  The stairs in width are very\
 small.  You would have to squish if you met someone on the way up or down.\
 Fortunately there is no one in sight.  The stair leads to the rooms and\
 suites and other several places.  Large lamps are secured tighly onto the\
 wall. They're aren't very many stairs to go up.\
 ", 
+         Tag = "", 
       }, 
       [569] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Hotel room", 
-         Flags = 
-         {
-            [23] = "Hotel", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 1, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 569, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "southeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southeast", 
                Description = "", 
                DestinationVnum = 567, 
             }, 
          }, 
-         Tunnel = 1, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+         }, 
+         Vnum = 569, 
          Description = "A large hotel room it is...compared to some other.  A large king size bed\
 is waiting for someone to sleep on.  The room is nice smelling and\
 recently cleaned.  You may settle in a stay here for the night.  You may\
@@ -9434,8 +3559,9 @@ QUIT here. The room can only contain one person tho.\
       }, 
       [570] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Hotel room", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 1, 
          ExtraDescriptions = 
@@ -9445,27 +3571,27 @@ QUIT here. The room can only contain one person tho.\
          {
             [1] = 
             {
+               Direction = "northwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northwest", 
                Description = "", 
                DestinationVnum = 567, 
             }, 
          }, 
          Vnum = 570, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "A large hotel room it is...compared to some other.  A large king size bed\
 is waiting for someone to sleep on.  The room is nice smelling and\
 recently cleaned.  You may settle in a stay here for the night.  You may\
 QUIT here. Only one person can stay in here.\
 ", 
+         Tag = "", 
       }, 
       [571] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Hotel room", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 1, 
          ExtraDescriptions = 
@@ -9475,27 +3601,27 @@ QUIT here. Only one person can stay in here.\
          {
             [1] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 567, 
             }, 
          }, 
          Vnum = 571, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "A large hotel room it is...compared to some other.  A large king size bed\
 is waiting for someone to sleep on.  The room is nice smelling and\
 recently cleaned.  You may settle in a stay here for the night.  You may\
 QUIT here.\
 ", 
+         Tag = "", 
       }, 
       [572] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9505,36 +3631,36 @@ QUIT here.\
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 500, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 564, 
             }, 
          }, 
          Vnum = 572, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The catwalk gets harder and harder, even comming down. The catwalk goes\
 very high up and you can't see the end of it.  Your almost there.  Come\
 on! If there where to be more than one person, you would get pushed of. \
 Continue your way up or down.\
 ", 
+         Tag = "", 
       }, 
       [573] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "End of the catwalk", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9544,59 +3670,58 @@ Continue your way up or down.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 540, 
             }, 
          }, 
          Vnum = 573, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You finally make it through the large catwalk.  They're starting to build a\
 railing here so you won't fall down. There is nothing really to see here\
 except for the people below you.  The sun is shining bright through the\
 window or the moon. Might as well go back.\
 ", 
+         Tag = "", 
       }, 
       [574] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Traffic control room", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 574, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 561, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 575, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 574, 
          Description = "A large group of people are sitting in front of computer screens.  Some are\
 answering people on the comlinks. This place is the traffic control.  They\
 assist you and tell you where to land.  Of course everyone is too busy to\
@@ -9608,8 +3733,9 @@ light shines down. \
       }, 
       [575] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Observation deck", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9619,17 +3745,15 @@ light shines down. \
          {
             [1] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 574, 
             }, 
          }, 
          Vnum = 575, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The room is filled with transparasteel.  Light pours in from every\
 direction.  It is a very beautiful sight.  You can see vertical city of\
 Nar Shadda.  Large factories produce large quantities of smog. In the air\
@@ -9637,11 +3761,13 @@ you see many star ships and freighters orbiting Nar Shadda spaceport\
 lisntening for directions. Not many people are aloud in here but everyone\
 is to busy working than to notice you. It's an amazing sight isn't it?\
 ", 
+         Tag = "", 
       }, 
       [576] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "City street", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9651,36 +3777,36 @@ is to busy working than to notice you. It's an amazing sight isn't it?\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 584, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 557, 
             }, 
          }, 
          Vnum = 576, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The city streets are very crowded. Speeders pass by you with incredible\
 speed. Nar Shadda is a very busy place and also very big. The Bravo-Beta\
 spaceport is south of where you are standing.  Many towers and buildings\
 are every where you look.\
 ", 
+         Tag = "", 
       }, 
       [577] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Turbo-lift:Level 4", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9690,34 +3816,34 @@ are every where you look.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 578, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 538, 
             }, 
          }, 
          Vnum = 577, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Level 4 is where most of the cargo and baggage go.  The turbo-lift stops at\
 this level then goes back up for other people waiting to use it.\
 ", 
+         Tag = "", 
       }, 
       [578] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Cargo area", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9727,69 +3853,68 @@ this level then goes back up for other people waiting to use it.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 577, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 581, 
             }, 
          }, 
          Vnum = 578, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Precious cargo a being carefully handled by the workers.  They wouldn't\
 want an angry costumer.  The room is filled with boxes bags, and other\
 types of cargo. A large machine is carrying a whole stack load of bags,\
 then ships it of to be carried to the baggage claim.  The baggage claim is\
 only for people taking the shuttles.\
 ", 
+         Tag = "", 
       }, 
       [579] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Baggage claim", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 579, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 530, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 582, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 579, 
          Description = "A large conveyer belt is here bringing up baggage.  Not many people are\
 here since mostly everyone has a ship of their own.  This place is only\
 for people riding on shuttles and transports. Bags are being token of the\
@@ -9799,32 +3924,32 @@ belt.  A large pile of bag and boxes are here, probably forgotten.\
       }, 
       [580] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Outdoor landing pad", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Key = -1, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 581, 
+            }, 
+         }, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 580, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-               Description = "", 
-               DestinationVnum = 581, 
-            }, 
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "Large transports and shuttles land here.  ONLY the transports and shuttles.\
  This place is very busy unloading the belongings of people aboard these\
 ships. The landing pard is farely large.  Enough to have a couple of\
@@ -9836,8 +3961,9 @@ air.  This place also a refueling station for the shuttles .\
       }, 
       [581] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Unloading area", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9847,46 +3973,46 @@ air.  This place also a refueling station for the shuttles .\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 578, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 580, 
             }, 
             [3] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 582, 
             }, 
          }, 
          Vnum = 581, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This part is where people unload their bags and go to the baggage claim.  A\
 large conveyer belt is here so the workerscan put the bags on.  A red\
 button and a green button a secured onto the wall, of course the controls\
 for the belt. This part is only for workers. Why would anyone want to come\
 here? \
 ", 
+         Tag = "", 
       }, 
       [582] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "The conveyer belt", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 1, 
          ExtraDescriptions = 
@@ -9896,58 +4022,57 @@ here? \
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 579, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 581, 
             }, 
          }, 
          Vnum = 582, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Why did you get on the belt.  The metal under you is hard and cold.  Many\
 bags and boxes are in front and in the back of you.  You manage to squish\
 your way through the tunnel.  This is brutal .\
 ", 
+         Tag = "", 
       }, 
       [583] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Stairway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 583, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 559, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 583, 
          Description = "The stairway leads down down down, into the darkness.  There hardly any\
 people comming down the stairs.  The stairways leads down to the deepest\
 catacombs of vertical city. Leading up is the spaceport Bravo-Beta.  You\
@@ -9958,8 +4083,9 @@ built into the wall.\
       }, 
       [584] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "City streets of vertical city", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -9969,55 +4095,55 @@ built into the wall.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 587, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 576, 
             }, 
             [3] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 585, 
             }, 
             [4] = 
             {
+               Direction = "northwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northwest", 
                Description = "", 
                DestinationVnum = 586, 
             }, 
          }, 
          Vnum = 584, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many towers forms a circle around you.  Vertical city is extremely busy. \
 Almost everyone here is carrying a weapon for safety.  Some concealing\
 their weapons while others leave it in the open. The road is busy and\
 filled with speeders.  They're aren't any police patroling around so it\
 isn't very safe around here.\
 ", 
+         Tag = "", 
       }, 
       [585] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Vertical city", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10027,17 +4153,15 @@ isn't very safe around here.\
          {
             [1] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 584, 
             }, 
          }, 
          Vnum = 585, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Large shadows linger above you.  Cloud cars, and repulsor lifts fly\
 steadily toward their destination.  Also the towers cover your view as you\
 try to find the sun. Many people are begging for money, trying to get just\
@@ -10045,11 +4169,13 @@ a few credits from someone.  It is heard that Shug Ninx, the famous\
 mechanic lives here.  Maybe you should visit him on buying some ships and\
 parts. \
 ", 
+         Tag = "", 
       }, 
       [586] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Vertical city", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10059,27 +4185,27 @@ parts. \
          {
             [1] = 
             {
+               Direction = "southeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southeast", 
                Description = "", 
                DestinationVnum = 584, 
             }, 
          }, 
          Vnum = 586, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The towers stand tall.  Their shadows invades you.  This is what it is like\
 in Nar Shadda smuggler's moon.  The planet is filled with smugglers\
 stopping by.   Speeders pass you so fast that you can barely make out the\
 color of the speeder.\
 ", 
+         Tag = "", 
       }, 
       [587] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Vertical city", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10089,36 +4215,36 @@ color of the speeder.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 588, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 584, 
             }, 
          }, 
          Vnum = 587, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You can hear music playing from one of the buildings but you can't just put\
 finger on it. Vertical city is very large, and has many towers.  It seems\
 that a large crowd is walking toward the music.  Where could the music be\
 comming from.\
 ", 
+         Tag = "", 
       }, 
       [588] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Vertical city", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10128,26 +4254,24 @@ comming from.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 589, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 587, 
             }, 
          }, 
          Vnum = 588, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "A very loud music trails of north from where you are standing.  Now a lot\
 of people are walking toward the music with a determined face. Speeders\
 rush past you, also going toward the music.   The towers are still here. \
@@ -10156,11 +4280,13 @@ very large but some are pretty small. A large sign is put up on one of the\
 towers.  It is an avertissment of Klatooine patty frogs.  You should be\
 walking toward the music since everyone else is.\
 ", 
+         Tag = "", 
       }, 
       [589] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Entrance to the Cantina", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10170,26 +4296,24 @@ walking toward the music since everyone else is.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 590, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 588, 
             }, 
          }, 
          Vnum = 589, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You now stand in front of the famous \"Vertical City Cantina\".  There are\
 other cantina's  in vertical city but none are as good as this one. The\
 music is very loud but it seems that most people like it.  A large number\
@@ -10200,11 +4324,13 @@ which guard the place.  The seems to be at ease. Somehow droids are\
 allowed inside the cantina.  Well atleast you think so.  They're aren't\
 any droid detectors.\
 ", 
+         Tag = "", 
       }, 
       [590] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Inside the cantina", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10214,35 +4340,33 @@ any droid detectors.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 593, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 591, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 589, 
             }, 
          }, 
          Vnum = 590, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The music is now playing very loud.  You can see the band playing some\
 sorte of music.  The audience seems to like it a lot. The cantina is very\
 large compared to most others.  It's got many posters of advertissments.\
@@ -10250,11 +4374,13 @@ Booths are every where you look, in every direction.  You can't seem to\
 find the bar. The cantina has many aliens and humanoids but the most\
 common is hutts. \
 ", 
+         Tag = "", 
       }, 
       [591] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Cantina", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10264,60 +4390,59 @@ common is hutts. \
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 592, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 590, 
             }, 
          }, 
          Vnum = 591, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "It is extremely crowded inside here.  A large shadow hangs over one\
 particular conrer of the cantina.  Large lights bathe the room green and\
 white.    Hutt seems to be the dominant species around Nar Shadda and\
 espiecally this cantina.  The cantina is not one bit quiet as you hear\
 many people talking mixed with the music.\
 ", 
+         Tag = "", 
       }, 
       [592] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Booth", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 592, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 591, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 592, 
          Description = "The padding is very nice and comfortable.  It is a very large booth with a\
 small coffey table in the middle.   The seat is farely large and can fit a\
 large hutt.   You are very lucky that you actually found a booth in the\
@@ -10328,8 +4453,9 @@ actually see the band from where you are sitting.\
       }, 
       [593] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Cantina", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10339,78 +4465,77 @@ actually see the band from where you are sitting.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 590, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 594, 
             }, 
             [3] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 596, 
             }, 
          }, 
          Vnum = 593, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You stand with a large group of people.  You get a glimpse of the bar.  Up\
 on the stage is a jizz band of Bith. Most people are trying to find a\
 booth.  You can buy information here and most likely weapons of any sort. \
 They don't serve any food, but only booze.  Some aliens are drunk. The\
 band seems to be draw stares from the crowd.\
 ", 
+         Tag = "", 
       }, 
       [594] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Up on the stage", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 594, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 595, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 593, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 594, 
          Description = "If you were standing from the cantina floor you now notice that they're a\
 lot of people.  The crowd begins to \"Boo\" at you.    A band of Bith are\
 playing some sorte of music but is very amuzing to the ear. The floor is\
@@ -10421,31 +4546,31 @@ curtin. \
       }, 
       [595] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Back of the Stage", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 595, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 594, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Vnum = 595, 
          Description = "You now stand in the back of the stage where no one can actually see you.\
 The music is pretty loud and nice.  It is very stuffy in the back of the\
 stage and also very dusty.  Large group of boxes are piled up onto each\
@@ -10455,8 +4580,9 @@ other.  Nothing really here in the back of the stage.\
       }, 
       [596] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Bar", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10466,26 +4592,24 @@ other.  Nothing really here in the back of the stage.\
          {
             [1] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 597, 
             }, 
             [2] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 593, 
             }, 
          }, 
          Vnum = 596, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "Many large red stools are laid out in front, firmly stuck into the ground. \
 A large bartender waits your order as he cleans a cup. It is extremely\
 crowded around the bar, since everyone want something to drink. They serve\
@@ -10493,11 +4617,13 @@ a large vareity of whisky and acohol.  There are a lot of drunk aliens\
 hanging around the bar. Most of the stools are filled with heavily drunk\
 people as they desperately try to keep themselves up.\
 ", 
+         Tag = "", 
       }, 
       [597] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Behind the bar", 
-         Tag = "", 
          TeleVnum = 0, 
          Tunnel = 0, 
          ExtraDescriptions = 
@@ -10507,107 +4633,106 @@ people as they desperately try to keep themselves up.\
          {
             [1] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 596, 
             }, 
          }, 
          Vnum = 597, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "You now stand behind the bar.  You are not wanted behind the bar and the\
 bartender will most likely kick you out.  You see large shelves of booze\
 and some sorte of acohol. The table is very wet.  Under you, located\
 around your knees are a couple of cupboards also filled with acohol.\
 ", 
+         Tag = "", 
       }, 
       [599] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Floating in a void", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
          Vnum = 599, 
-         Exits = 
-         {
-         }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
          Description = "", 
          Tag = "", 
       }, 
       [500] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Bravo-Beta", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 500, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 516, 
             }, 
             [3] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 572, 
             }, 
             [4] = 
             {
+               Direction = "southeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southeast", 
                Description = "", 
                DestinationVnum = 502, 
             }, 
             [5] = 
             {
+               Direction = "southwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
                Description = "", 
                DestinationVnum = 501, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 500, 
          Description = "Welcome to Nar Shadda, spaceport moon of the famous Nal Hutta. It is\
 considered \"Smugglers Paradise\" to incoming people. Spaceport Bravo-Beta\
 is one of the many spaceports in Nar Shadda.  This spaceport is puny\
@@ -10620,40 +4745,40 @@ in Nar Shadda.  It's a tough life here in Nar Shadda.\
       }, 
       [501] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Bravo-Beta Bistro entrance", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 501, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 503, 
             }, 
             [2] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 500, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 501, 
          Description = "A large sign hangs in front of the entrance way.  It says Bravo-Beta\
 bistro. Music trails of from the middle of the bistro. The entrance is\
 very large, large enough for a hutt to fit through. The hight of the\
@@ -10664,31 +4789,31 @@ use repulsor sleds. The bistro is open for everyone.\
       }, 
       [502] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Lost and Found of Spaceport Bravo-Beta", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 502, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "northwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northwest", 
                Description = "", 
                DestinationVnum = 500, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 502, 
          Description = "You enter a large room.  The walls are painted white. It's a very plain\
 room with absolutely no decorations.  Little money was spent for this room\
 and it was only made because the public wanted one. It's very dusty, and\
@@ -10700,49 +4825,49 @@ dirty boxes filled with people's posessions. \
       }, 
       [503] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Bravo-Beta bistro", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 503, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 504, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 501, 
             }, 
             [3] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 505, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 503, 
          Description = "A large number of people and aliens are stationed here.  It is amazing how\
 many people there are. There are many booths, but most of them are used.  \
 A band is playing a familiar song but can't seem to recall the name.  Many\
@@ -10754,31 +4879,31 @@ everything in the bistro.\
       }, 
       [504] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Bistro bar", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 504, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 503, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 504, 
          Description = "A large booth is lying in front of you.  A large Talz, is cleaning out the\
 dirt out of a dirty glass.  You conclude that it must be the bartender. \
 Many shelfs are stuck into the wall.  You notice various forms of liquor\
@@ -10791,31 +4916,31 @@ stools?\
       }, 
       [505] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Large Booth", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 505, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 503, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 505, 
          Description = "It is very likely for you to find a booth so don't fell lucky.  The seat is\
 very large and is capable of seating up to 5 people. It is empty though.\
 The seat is blood red but is very comfortable.  There are many holes in\
@@ -10826,76 +4951,76 @@ stapled together.  Hey sit back and relax.\
       }, 
       [506] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport Terminal", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 506, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 507, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 500, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 508, 
             }, 
             [5] = 
             {
+               Direction = "down", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "down", 
                Description = "", 
                DestinationVnum = 517, 
             }, 
             [6] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 533, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 506, 
          Description = "You now stand in the terminal of Spaceport Bravo-Beta.  You look around\
 sanning your surronding and you see that they're a lot of people walking\
 about minding their own buisness. The room slits of into many directions\
@@ -10910,31 +5035,31 @@ Which way will you go?\
       }, 
       [507] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Shuttle stop", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 507, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 507, 
          Description = "Everyone is waiting for a shuttle to bring them somewhere.  This shuttle\
 brings you to one of Nar Shadda's closest cities. Many people are in lign\
 to board onto the shuttle.  A large uneasy lign is formed.  It is most\
@@ -10945,49 +5070,49 @@ key!\
       }, 
       [508] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport hotel lobby", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 508, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 509, 
             }, 
             [3] = 
             {
+               Direction = "up", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "up", 
                Description = "", 
                DestinationVnum = 568, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 508, 
          Description = "You stand in the Spaceport hotel lobby of Bravo-Beta.  Not many people are\
 staying at this hotel since people are leaving to Nar Shadda's many\
 cities.  It is still open for everyone.  The hotel is very convenient\
@@ -10998,31 +5123,31 @@ depatures and quick visits.\
       }, 
       [509] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Reception desc", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 509, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 508, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 509, 
          Description = "A large booth is here.  Behind the large booth is a large hutt hostess. \
 The reason for the reception desk is because you may find a room with a\
 bacta tank.  Ifyou will pay here a amount of money. Several large clocks\
@@ -11034,76 +5159,76 @@ behind you as other people wait for their turn.\
       }, 
       [510] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Spaceport terminal", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 510, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
                Description = "", 
                DestinationVnum = 515, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "east", 
                Description = "", 
                DestinationVnum = 511, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
                Description = "", 
                DestinationVnum = 506, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 513, 
             }, 
             [5] = 
             {
+               Direction = "northeast", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
                Description = "", 
                DestinationVnum = 514, 
             }, 
             [6] = 
             {
+               Direction = "northwest", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "northwest", 
                Description = "", 
                DestinationVnum = 518, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 510, 
          Description = "The spaceport terminal is very large.  A large monitor hangs above your\
 head and displays the various flights. Beside the monitor is a pair of\
 speakers which announce's flights.  The spaceport terminal splits of in\
@@ -11113,45 +5238,45 @@ almost every direction. \
       }, 
       [511] = 
       {
+         Sector = "city", 
+         TeleDelay = 0, 
          Name = "Entrance to landing pads", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 511, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Key = -1, 
                Keyword = "Gate", 
                Distance = 0, 
-               Key = -1, 
+               Description = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Direction = "north", 
-               Description = "", 
                DestinationVnum = 512, 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Key = -1, 
                Keyword = "", 
                Distance = 0, 
-               Key = -1, 
-               Direction = "west", 
                Description = "", 
                DestinationVnum = 510, 
             }, 
          }, 
-         Tunnel = 0, 
-         Sector = "city", 
-         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Vnum = 511, 
          Description = "A huge gate blocks your way to the landings pads.  It has been rusted and\
 abused sveral times.  Two security guards stand beside the gate, waiting\
 for unauthorized people to try to enter. You can hear the ROAR of engines\
@@ -11162,7 +5287,6071 @@ If they don't a little bribing won't hurt .\
          Tag = "", 
       }, 
    }, 
-   ResetFrequency = 0, 
-   ResetMessage = "", 
-   HighEconomy = 0, 
+   Objects = 
+   {
+      [512] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 1, 
+               Modifier = 10, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Cyborg leg is here.", 
+         Name = "Cyborg leg", 
+         Tag = "", 
+         ShortDescr = "a Cyborg leg", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [5] = "Legs", 
+         }, 
+         Vnum = 512, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [513] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A briefcase is here.", 
+         Name = "briefcase", 
+         Tag = "", 
+         ShortDescr = "a briefcase", 
+         Layers = 0, 
+         ItemType = "container", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Vnum = 513, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [514] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "Klatooine patty frog", 
+         Name = "Klatooine patty frog", 
+         Tag = "", 
+         ShortDescr = "a Klatooine patty frogs", 
+         Layers = 0, 
+         ItemType = "food", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Vnum = 514, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [517] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 9, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Dark Jedi Cape", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         Name = "Dark Jedi Cape", 
+         Tag = "", 
+         ShortDescr = "A Dark Jedi Cape", 
+         Layers = 0, 
+         ItemType = "armor", 
+         Flags = 
+         {
+            [6] = "Magic", 
+            [31] = "HumanSize", 
+         }, 
+         Vnum = 517, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [518] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "BlasTech DH-17 blaster pistol", 
+         Description = "A BlasTech DH-17 blaster pistol is here.", 
+         ShortDescr = "a BlasTech DH-17 blaster pistol", 
+         Layers = 0, 
+         ItemType = "trash", 
+         Tag = "", 
+         Vnum = 518, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [520] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A guide is here.", 
+         Name = "A guide", 
+         Tag = "", 
+         ShortDescr = "A guide", 
+         Layers = 0, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 520, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [522] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 10, 
+         Description = "A A black robe is here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         Name = "A black robe", 
+         Tag = "", 
+         ShortDescr = "a A black robe", 
+         Layers = 32, 
+         ItemType = "armor", 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         Vnum = 522, 
+         Weight = 5, 
+         ActionDescription = "", 
+      }, 
+      [523] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A large black cape is here.", 
+         Name = "A large black cape", 
+         Tag = "", 
+         ShortDescr = "A long black cape", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 523, 
+         Weight = 6, 
+         ActionDescription = "", 
+      }, 
+      [524] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A dirty old shirt is here.", 
+         Name = "A dirty old shirt", 
+         Tag = "", 
+         ShortDescr = "dirty old shirt", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 524, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [525] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A black one peice suit is here.", 
+         Name = "A black one peice suit", 
+         Tag = "", 
+         ShortDescr = "a A black one peice suit", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 525, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [526] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "Small shirt", 
+         Name = "A small shirt", 
+         Tag = "", 
+         ShortDescr = "Small shirt", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 526, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [527] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "Large bag filled with someone's possesions", 
+         Name = "A large bag", 
+         Tag = "", 
+         ShortDescr = "a A large bag", 
+         Layers = 0, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 527, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [528] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "A large oak desc", 
+         Description = "A A large oak desc is here.", 
+         ShortDescr = "A nicely polished oak desc", 
+         Layers = 0, 
+         ItemType = "furniture", 
+         Tag = "", 
+         Vnum = 528, 
+         Weight = 100, 
+         ActionDescription = "", 
+      }, 
+      [529] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 4, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A rancor skin jacket is here.", 
+         Name = "A rancor skin jacket", 
+         Tag = "", 
+         ShortDescr = "A rancor skin jacket", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 529, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [530] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 2, 
+            [4] = 99, 
+            [5] = 99, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A small legal vibro blade is here.", 
+         Name = "A small legal vibro blade", 
+         Tag = "", 
+         ShortDescr = "A vibro blade", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [13] = "Wield", 
+         }, 
+         Vnum = 530, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [531] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "A large box", 
+         Description = "A A large box is here.", 
+         ShortDescr = "a A large box", 
+         Layers = 0, 
+         ItemType = "furniture", 
+         Tag = "", 
+         Vnum = 531, 
+         Weight = 1000, 
+         ActionDescription = "", 
+      }, 
+      [532] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 6, 
+            [4] = 1000, 
+            [5] = 1000, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Blastech sporting blaster is here.", 
+         Name = "Blastech sporting blaster", 
+         Tag = "", 
+         ShortDescr = "a Blastech sporting blaster", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Vnum = 532, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [533] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "Blue parka", 
+         Name = "A blue parka", 
+         Tag = "", 
+         ShortDescr = "Blue parka", 
+         Layers = 0, 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Vnum = 533, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [535] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A fizz is here.", 
+         Name = "fizz", 
+         Tag = "", 
+         ShortDescr = "a fizz", 
+         Layers = 0, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 535, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [536] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "Fingerless gloves", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [7] = "Hands", 
+         }, 
+         Name = "Fingerless gloves", 
+         Tag = "", 
+         ShortDescr = "a A fingerless glove", 
+         Layers = 0, 
+         ItemType = "armor", 
+         Flags = 
+         {
+            [3] = "HuttSize", 
+         }, 
+         Vnum = 536, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [537] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 2, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 50, 
+         Description = "A small dagger is here.", 
+         Name = "small dagger", 
+         Tag = "", 
+         ShortDescr = "a small dagger", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Vnum = 537, 
+         Weight = 2, 
+         ActionDescription = "", 
+      }, 
+      [538] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A pair of glaces look incredibly weird.  They seem to be all red.", 
+         Name = "pair of glaces", 
+         Tag = "", 
+         ShortDescr = "A unusual pair of glaces", 
+         Layers = 0, 
+         ItemType = "lens", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [17] = "Eyes", 
+         }, 
+         Vnum = 538, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [539] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "A large monitor", 
+         Description = "A Monitor is hanging on the wall", 
+         ShortDescr = "monitor", 
+         Layers = 0, 
+         ItemType = "furniture", 
+         Tag = "", 
+         Vnum = 539, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [540] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "a pair of speakers", 
+         Description = "A pair of speakers", 
+         ShortDescr = "a a pair of speakers", 
+         Layers = 0, 
+         ItemType = "furniture", 
+         Tag = "", 
+         Vnum = 540, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [541] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = -1, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "control panel", 
+         Description = "A control panel is here.", 
+         ShortDescr = "a control panel", 
+         Layers = 0, 
+         ItemType = "button", 
+         Tag = "", 
+         Vnum = 541, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [500] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "Booth", 
+         Description = "A Booth is here.", 
+         ShortDescr = "a Booth", 
+         Layers = 0, 
+         ItemType = "trash", 
+         Tag = "", 
+         Vnum = 500, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [501] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "Large oak podium", 
+         Description = "A polished oak podium stands here solidely.\
+\13", 
+         ShortDescr = "a Large oak podium", 
+         Layers = 0, 
+         ItemType = "trash", 
+         Tag = "", 
+         Vnum = 501, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [502] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 2, 
+            [3] = 6, 
+            [4] = 5, 
+            [5] = 5, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A A slug thrower pistol is here.", 
+         Name = "A slug thrower pistol", 
+         Tag = "", 
+         ShortDescr = "a A slug thrower pistol", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Vnum = 502, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [503] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 10, 
+            [3] = 9, 
+            [4] = 10, 
+            [5] = 10, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 1000, 
+         Description = "A Prax Arms Stealth-2VX Palm Shooter is here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Name = "Prax Arms Stealth-2VX Palm Shooter", 
+         Tag = "", 
+         ShortDescr = "Prax Arms Stealth-2VX Palm Shooter", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         Flags = 
+         {
+            [4] = "Contraband", 
+         }, 
+         Vnum = 503, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [504] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 3, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Darts is here.", 
+         Name = "Darts", 
+         Tag = "", 
+         ShortDescr = "a Darts", 
+         Layers = 0, 
+         ItemType = "bolt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 504, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [505] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 1, 
+            [2] = 2, 
+            [3] = 6, 
+            [4] = 1000, 
+            [5] = 1000, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 2500, 
+         Description = "A Drearian Defense Conglomerate Defender Blaster is here.", 
+         Name = "Drearian Defense Conglomerate Defender Blaster", 
+         Tag = "", 
+         ShortDescr = "a Drearian Defense Conglomerate Defender Blaster", 
+         Layers = 0, 
+         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Vnum = 505, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [506] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 25, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Oversize coat is here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+            [3] = "Body", 
+         }, 
+         Name = "Oversize coat", 
+         Tag = "", 
+         ShortDescr = "a Oversize coat", 
+         Layers = 2, 
+         ItemType = "armor", 
+         Flags = 
+         {
+            [3] = "HuttSize", 
+         }, 
+         Vnum = 506, 
+         Weight = 4, 
+         ActionDescription = "", 
+      }, 
+      [507] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "Chair", 
+         Description = "A Chair is here.", 
+         ShortDescr = "a Chair", 
+         Layers = 0, 
+         ItemType = "trash", 
+         Tag = "", 
+         Vnum = 507, 
+         Weight = 50, 
+         ActionDescription = "", 
+      }, 
+      [509] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Large trench coat is here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+            [3] = "Body", 
+         }, 
+         Name = "Large trench coat", 
+         Tag = "", 
+         ShortDescr = "a Large trench coat", 
+         Layers = 0, 
+         ItemType = "armor", 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         Vnum = 509, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [510] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Small Briefcase is here.", 
+         Name = "Small Briefcase", 
+         Tag = "", 
+         ShortDescr = "a Small Briefcase", 
+         Layers = 0, 
+         ItemType = "container", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 510, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+      [511] = 
+      {
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Description = "A Dirty glass is here.", 
+         Name = "Dirty glass", 
+         Tag = "", 
+         ShortDescr = "a Dirty glass", 
+         Layers = 0, 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         Vnum = 511, 
+         Weight = 1, 
+         ActionDescription = "", 
+      }, 
+   }, 
+   Mobiles = 
+   {
+      [512] = 
+      {
+         Position = "standing", 
+         Level = 80, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
+         }, 
+         DamRoll = 15, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 5, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 512, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Hutt", 
+         Alignment = 0, 
+         ShortDescr = "A hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 8, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A hutt is hovering the cash register\
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 17, 
+      }, 
+      [513] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 513, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A worker", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A worker", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A worker is trying to make something\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [514] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 514, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A human expert craftswoman", 
+         Alignment = 0, 
+         ShortDescr = "Human craftsmen", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A human expert craftsmen\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [515] = 
+      {
+         Position = "standing", 
+         Level = 35, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [3] = "rodese", 
+            }, 
+            Speaking = 
+            {
+               [3] = "rodese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitSizeDice = 10, 
+            HitNoDice = 7, 
+         }, 
+         DamRoll = 7, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 12, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 515, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Doctor", 
+         Alignment = 0, 
+         ShortDescr = "A doctor", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A doctor is looking at his patients\
+", 
+         Tag = "", 
+         Race = "Rodian", 
+         HitRoll = 7, 
+      }, 
+      [516] = 
+      {
+         Position = "standing", 
+         Level = 5, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [8] = "ithorese", 
+            }, 
+            Speaking = 
+            {
+               [8] = "ithorese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 87, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 516, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A tourist", 
+         Alignment = 10, 
+         ShortDescr = "A tourist", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A tourist is looking through the travel guides\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 1, 
+      }, 
+      [517] = 
+      {
+         Position = "standing", 
+         Level = 20, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 50, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 517, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A traffic officer", 
+         Alignment = 5, 
+         ShortDescr = "A traffic officer", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A traffic officer is montering a screen\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [518] = 
+      {
+         Position = "standing", 
+         Level = 105, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         DamRoll = 21, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         ArmorClass = -162, 
+         AffectedBy = 
+         {
+            [1] = "Invisible", 
+            [16] = "Hide", 
+         }, 
+         Vnum = 518, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "automated defence system", 
+         Alignment = 0, 
+         ShortDescr = "an automatic defence laser", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "An automated defence system is installed on the wall.\
+", 
+         Tag = "", 
+         Race = "Droid", 
+         HitRoll = 21, 
+      }, 
+      [521] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 521, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A vendin droid", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A vendin droid", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A vending droid\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [522] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [16] = "kubazian", 
+               [4] = "huttese", 
+               [21] = "defel", 
+               [6] = "shistavanen", 
+               [30] = "durese", 
+               [8] = "ithorese", 
+               [29] = "gand", 
+               [10] = "devaronese", 
+               [26] = "falleen", 
+               [22] = "dosh", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [16] = "kubazian", 
+               [4] = "huttese", 
+               [21] = "defel", 
+               [6] = "shistavanen", 
+               [8] = "ithorese", 
+               [30] = "durese", 
+               [10] = "devaronese", 
+               [29] = "gand", 
+               [26] = "falleen", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [22] = "dosh", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 522, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Chubb Scutt is drinking at incredible speed", 
+         Alignment = 10, 
+         ShortDescr = "Chubb", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 5, 
+         LongDescr = "A Chubb Scutt is drinking at incredible speed\
+", 
+         Tag = "", 
+         Race = "_90", 
+         HitRoll = 2, 
+      }, 
+      [523] = 
+      {
+         Position = "standing", 
+         Level = 12, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 70, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 523, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A large hutt", 
+         Alignment = -2, 
+         ShortDescr = "A large hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A large hutt\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [524] = 
+      {
+         Position = "standing", 
+         Level = 20, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 50, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 524, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A deveronian information broker", 
+         Alignment = 0, 
+         ShortDescr = "Devaronian", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 350, 
+         LongDescr = "A devaronian information broker \
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [525] = 
+      {
+         Position = "standing", 
+         Level = 12, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 70, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 525, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Cycy Loctob is selling contraband items to whoever is interested", 
+         Alignment = -3, 
+         ShortDescr = "A Cycy Loctob", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A Cycy Loctob is selling contraband items to whoever is interested\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [526] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 526, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A human citizen", 
+         Alignment = 0, 
+         ShortDescr = "A human citizen", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 50, 
+         LongDescr = "A human citizen\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [527] = 
+      {
+         Position = "standing", 
+         Level = 30, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 300, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         DamRoll = 6, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         ArmorClass = 25, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+         }, 
+         Vnum = 527, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Shistavanen Wolfman", 
+         Alignment = 0, 
+         ShortDescr = "A Shistavanen Wolfman", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 10, 
+         LongDescr = "A Shistavanen Wolfman\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 6, 
+      }, 
+      [528] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
+            Speaking = 
+            {
+               [2] = "twileki", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 528, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A twi'lek is looking for someone", 
+         Alignment = -2, 
+         ShortDescr = "A twi'lek", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A twi'lek is looking for someone\
+", 
+         Tag = "", 
+         Race = "Twi'lek", 
+         HitRoll = 0, 
+      }, 
+      [529] = 
+      {
+         Position = "standing", 
+         Level = 5, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 87, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 529, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A old man is trying to walk up the catwalk", 
+         Alignment = 0, 
+         ShortDescr = "A old man is trying to walk up the catwalk", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A old man is trying to walk up the catwalk\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 1, 
+      }, 
+      [530] = 
+      {
+         Position = "standing", 
+         Level = 35, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [14] = "gamorrese", 
+            }, 
+            Speaking = 
+            {
+               [14] = "gamorrese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitSizeDice = 10, 
+            HitNoDice = 7, 
+         }, 
+         DamRoll = 7, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 12, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 530, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Gamorean is easily walking up the catwalk", 
+         Alignment = 0, 
+         ShortDescr = "A Gamorrean ", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A Gamorrean is easily walking up the catwalk\
+", 
+         Tag = "", 
+         Race = "Gamorrean", 
+         HitRoll = 7, 
+      }, 
+      [531] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [23] = "chadra-fan", 
+            }, 
+            Speaking = 
+            {
+               [23] = "chadra-fan", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 531, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A chadra-fran ", 
+         Alignment = 0, 
+         ShortDescr = "A chadra-fan", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A chadra-fan is waiting for a shuttle\
+", 
+         Tag = "", 
+         Race = "Chadra-Fan", 
+         HitRoll = 2, 
+      }, 
+      [532] = 
+      {
+         Position = "standing", 
+         Level = 50, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 532, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A hutt hostess", 
+         Alignment = 0, 
+         ShortDescr = "A hutt hostess", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A hutt hostess\
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 10, 
+      }, 
+      [534] = 
+      {
+         Position = "standing", 
+         Level = 20, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [3] = "rodese", 
+            }, 
+            Speaking = 
+            {
+               [3] = "rodese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 50, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 534, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A rodian is waiting in line for a room", 
+         Alignment = 0, 
+         ShortDescr = "A rodian", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A rodian is waiting in line for a room\
+", 
+         Tag = "", 
+         Race = "Rodian", 
+         HitRoll = 4, 
+      }, 
+      [535] = 
+      {
+         Position = "standing", 
+         Level = 75, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 3, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 750, 
+            HitSizeDice = 10, 
+            HitNoDice = 15, 
+         }, 
+         DamRoll = 15, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -87, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 535, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A diagona", 
+         Alignment = 0, 
+         ShortDescr = "A diagona", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A diagona is going through the trash\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 15, 
+      }, 
+      [536] = 
+      {
+         Position = "standing", 
+         Level = 100, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 4, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         DamRoll = 20, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         ArmorClass = -150, 
+         Immune = 
+         {
+            [8] = "poison", 
+         }, 
+         Vnum = 536, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A extremely large diagona", 
+         Alignment = 0, 
+         ShortDescr = "A very large diagona", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A extremely large diagona\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 20, 
+      }, 
+      [537] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 537, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Askajian is walking toward the music", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A Askajian is walking toward the music", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A Askajian is walking toward the music\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [538] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 538, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A local citizen is waiting for something good to bid on", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A local citizen is waiting for something good to bid on", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A local citizen is waiting for something good to bid on \
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [539] = 
+      {
+         Position = "standing", 
+         Level = 45, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+            Speaking = 
+            {
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 450, 
+            HitSizeDice = 10, 
+            HitNoDice = 9, 
+         }, 
+         DamRoll = 9, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -12, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 539, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A small time bounty hunter", 
+         Alignment = 0, 
+         ShortDescr = "A bounty hunter", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A small time bounty hunter\
+", 
+         Tag = "", 
+         Race = "Shistavanen", 
+         HitRoll = 9, 
+      }, 
+      [540] = 
+      {
+         Position = "standing", 
+         Level = 70, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
+         DamRoll = 14, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 540, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Landing pad guard", 
+         Alignment = 0, 
+         ShortDescr = "guard", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "Landing pad guard\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 14, 
+      }, 
+      [541] = 
+      {
+         Position = "standing", 
+         Level = 25, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         DamRoll = 5, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 37, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 541, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A hutt is really pigging out on food", 
+         Alignment = 0, 
+         ShortDescr = "A hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A hutt is really pigging out on food \
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 5, 
+      }, 
+      [542] = 
+      {
+         Position = "standing", 
+         Level = 16, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 160, 
+            HitSizeDice = 10, 
+            HitNoDice = 3, 
+         }, 
+         DamRoll = 3, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 60, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 542, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "The hutt's wife is looking at her husband devouring food in seconds", 
+         Alignment = 0, 
+         ShortDescr = "A hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "The hutt's wife is looking at her husband devouring food in seconds\
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 3, 
+      }, 
+      [543] = 
+      {
+         Position = "standing", 
+         Level = 13, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 130, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 67, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 543, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A bith is slowly taking a bite out of his sandwich", 
+         Alignment = 0, 
+         ShortDescr = "A bith", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A bith is slowly taking a bite out of his sandwich\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [544] = 
+      {
+         Position = "standing", 
+         Level = 45, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 450, 
+            HitSizeDice = 10, 
+            HitNoDice = 9, 
+         }, 
+         DamRoll = 9, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         ArmorClass = -12, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         Vnum = 544, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Pot belly human is hardly awake", 
+         Alignment = 0, 
+         ShortDescr = "a newly created Pot belly human is hardly awake", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A pot belly human is hardly awake\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 9, 
+      }, 
+      [545] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [2] = "Scavenger", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         ArmorClass = 0, 
+         Immune = 
+         {
+            [8] = "poison", 
+         }, 
+         Vnum = 545, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A small bug is crawling beneath tables and picking up whatever it can", 
+         Alignment = 0, 
+         ShortDescr = "A small bug", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A small bug is crawling beneath tables and picking up whatever it can\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [546] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 546, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A large man is barely awake", 
+         Alignment = 0, 
+         ShortDescr = "A fat man", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A fat man is barely awake\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [547] = 
+      {
+         Position = "standing", 
+         Level = 50, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 547, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A smuggler is looking around for refuge", 
+         Alignment = 0, 
+         ShortDescr = "A smuggler", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A smuggler is looking around for refuge\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 10, 
+      }, 
+      [548] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 548, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A strongly built quarren is easily lifting bags", 
+         Alignment = 0, 
+         ShortDescr = "A strongly built quarren", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A strongly built quarren is easily lifting bags\
+", 
+         Tag = "", 
+         Race = "Quarren", 
+         HitRoll = 0, 
+      }, 
+      [549] = 
+      {
+         Position = "standing", 
+         Level = 20, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 50, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 549, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A ithorian citizen", 
+         Alignment = 0, 
+         ShortDescr = "A ithorian", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A ithorian citizen\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [550] = 
+      {
+         Position = "standing", 
+         Level = 22, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 220, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 45, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 550, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A large man is storing up boxes", 
+         Alignment = 0, 
+         ShortDescr = "A large man", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A large man is storing up boxes\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [551] = 
+      {
+         Position = "standing", 
+         Level = 35, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+            Speaking = 
+            {
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitSizeDice = 10, 
+            HitNoDice = 7, 
+         }, 
+         DamRoll = 7, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 12, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 551, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A smuggler is waiting inside the turbo-lift", 
+         Alignment = 0, 
+         ShortDescr = "A smuggler", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A smuggler is waiting inside the turbo-lift\
+", 
+         Tag = "", 
+         Race = "Shistavanen", 
+         HitRoll = 7, 
+      }, 
+      [552] = 
+      {
+         Position = "standing", 
+         Level = 7, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 70, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 82, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 552, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A small alien is looking curiously about", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A small alien is looking curiously about", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A small alien is looking curiously about\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 1, 
+      }, 
+      [553] = 
+      {
+         Position = "standing", 
+         Level = 32, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 320, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         DamRoll = 6, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 20, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 553, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A large wookiee is hauling large crates", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A large wookiee is hauling large crates", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A large wookiee is hauling large crates\
+", 
+         Tag = "", 
+         Race = "Wookiee", 
+         HitRoll = 6, 
+      }, 
+      [554] = 
+      {
+         Position = "standing", 
+         Level = 8, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 80, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 80, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 554, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A smaller alien is aiding his wookiee friend", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A smaller alien is aiding his wookiee friend", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A smaller alien is aiding his wookiee friend\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 1, 
+      }, 
+      [555] = 
+      {
+         Position = "standing", 
+         Level = 12, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 70, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 555, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A human is running like crazy around here", 
+         Alignment = 0, 
+         ShortDescr = "human", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A human is running like crazy around\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [556] = 
+      {
+         Position = "standing", 
+         Level = 14, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 140, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 65, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 556, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A kubaz is walking around", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A kubaz is walking around", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A kubaz is walking around not knowing what to do\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [557] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 557, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A droid is gibbering out anything", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A droid is gibbering out anything", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A droid is gibbering out anything\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [558] = 
+      {
+         Position = "standing", 
+         Level = 22, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 220, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 45, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 558, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A rodian is carefully handling cargo", 
+         Alignment = 0, 
+         ShortDescr = "A rodian", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A rodian is carefully handling cargo\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [559] = 
+      {
+         Position = "standing", 
+         Level = 21, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 210, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 47, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 559, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A small smuggler is waiting for someone to land", 
+         Alignment = 0, 
+         ShortDescr = "smuggler", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A small smuggler is waiting for someone to land \
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [560] = 
+      {
+         Position = "standing", 
+         Level = 26, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 260, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         DamRoll = 5, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 35, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 560, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A beautiful women is, standing beside her husband", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A beautiful women is, standing beside her husband", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A beautiful woman is, standing beside her husband\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 5, 
+      }, 
+      [561] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 561, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A handsome man is standing beside her wife, also waiting for someone", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A handsome man is standing beside her wife, also waiting for someone", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A handsome man is standing beside her wife, also waiting for someone\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [562] = 
+      {
+         Position = "standing", 
+         Level = 25, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         DamRoll = 5, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 37, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 562, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A experienced smuggler is just hanging around", 
+         Alignment = 0, 
+         ShortDescr = "A experienced smuggler", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A experienced smuggler is just hanging around \
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 5, 
+      }, 
+      [563] = 
+      {
+         Position = "standing", 
+         Level = 24, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 240, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         DamRoll = 4, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 40, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 563, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A information broker", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A information broker", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A information broker\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 4, 
+      }, 
+      [564] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 564, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A human bounty hunter is wearing unsual armor", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A human bounty hunter is wearing unsual armor", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created A human bounty hunter is wearing unsual armor here.\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [565] = 
+      {
+         Position = "standing", 
+         Level = 32, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 320, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         DamRoll = 6, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 20, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 565, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "The bith band leader is playing the fizz", 
+         Alignment = 0, 
+         ShortDescr = "a newly created The bith band leader is playing the fizz", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "The bith band leader is playing the fizz\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 6, 
+      }, 
+      [566] = 
+      {
+         Position = "standing", 
+         Level = 13, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 130, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 67, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 566, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A bith is playing a weird type of keyboard", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A bith is playing a weird type of keyboard", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A bith is playing a weird type of keyboard\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [567] = 
+      {
+         Position = "standing", 
+         Level = 9, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 90, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 77, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 567, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A hutt is listening attentively to the band", 
+         Alignment = 0, 
+         ShortDescr = "A hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A hutt is listening attentively to the band \
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 1, 
+      }, 
+      [568] = 
+      {
+         Position = "standing", 
+         Level = 50, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 568, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A hutt is patiently waiting for his caravel to come", 
+         Alignment = 0, 
+         ShortDescr = "A hutt", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Credits = 700, 
+         LongDescr = "A hutt is patiently waiting for his caravel\
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 10, 
+      }, 
+      [569] = 
+      {
+         Position = "standing", 
+         Level = 44, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [21] = "defel", 
+            }, 
+            Speaking = 
+            {
+               [21] = "defel", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 440, 
+            HitSizeDice = 10, 
+            HitNoDice = 8, 
+         }, 
+         DamRoll = 8, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -10, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 569, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A defel assasin is swaying in the shadows, barely noticed by some people", 
+         Alignment = 0, 
+         ShortDescr = "Defel", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A defel assasin is swaying in the shadows, barely noticed by some people\
+", 
+         Tag = "", 
+         Race = "Defel", 
+         HitRoll = 8, 
+      }, 
+      [570] = 
+      {
+         Position = "standing", 
+         Level = 44, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 440, 
+            HitSizeDice = 10, 
+            HitNoDice = 8, 
+         }, 
+         DamRoll = 8, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -10, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 570, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Gank bodyguard is watching your every mouvement", 
+         Alignment = 0, 
+         ShortDescr = "Gank bodyguard", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A Gank bodyguard is watching your every mouvement\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 8, 
+      }, 
+      [571] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 571, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A protocol droid is following his master everywhere", 
+         Alignment = 0, 
+         ShortDescr = "A protocol droid", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A protocol droid is following his master and translating languages\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [572] = 
+      {
+         Position = "standing", 
+         Level = 33, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 330, 
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+         }, 
+         DamRoll = 6, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 17, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 572, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A gank has lost his master", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A gank has lost his master", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A gank bodyguard has lost his master and is looking for him\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 6, 
+      }, 
+      [573] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 573, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A tourist is waiting for his luggages", 
+         Alignment = 0, 
+         ShortDescr = "A tourist", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A tourist is waiting for his luggages\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [500] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 500, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Auctioner", 
+         Alignment = 0, 
+         ShortDescr = "a newly created Auctioner", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [501] = 
+      {
+         Position = "standing", 
+         Level = 50, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 501, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Gotal bouncers is standing here not allowing any droids to enter", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A Gotal bouncers is standing here not allowing any droids to enter", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "Some god abandoned a newly created A Gotal bouncers is standing here not allowing any droids to enter here.\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 10, 
+      }, 
+      [502] = 
+      {
+         Position = "standing", 
+         Level = 35, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 2, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitSizeDice = 10, 
+            HitNoDice = 7, 
+         }, 
+         DamRoll = 7, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 12, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 502, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A Talz is standing here waiting for someone to serve", 
+         Alignment = 0, 
+         ShortDescr = "A talz", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 3, 
+            DamPlus = 2, 
+         }, 
+         Credits = 500, 
+         LongDescr = "A talz bartender is ready to serve you\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 7, 
+      }, 
+      [503] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 503, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Chubb Scutt", 
+         Alignment = 0, 
+         ShortDescr = "a newly created Chubb Scutt", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A nonhumanoid citizen marches around looking for something\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [504] = 
+      {
+         Position = "standing", 
+         Level = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 10, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [2] = "Scavenger", 
+            [7] = "Wimpy", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 97, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 504, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A small rodent", 
+         Alignment = 0, 
+         ShortDescr = "A rodent", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A large rodent is looking for some food is being shoved around\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 0, 
+      }, 
+      [505] = 
+      {
+         Position = "standing", 
+         Level = 15, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 150, 
+            HitSizeDice = 10, 
+            HitNoDice = 3, 
+         }, 
+         DamRoll = 3, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 62, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 505, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Binary load", 
+         Alignment = 0, 
+         ShortDescr = "A binary load", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A binary load is working hard\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 3, 
+      }, 
+      [506] = 
+      {
+         Position = "standing", 
+         Level = 5, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         DamRoll = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 87, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 506, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A protocol droid is waiting here to help you out", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A protocol droid is waiting here to help you out", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A protocol droid is waiting here to help you \
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 1, 
+      }, 
+      [507] = 
+      {
+         Position = "standing", 
+         Level = 100, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         DamRoll = 20, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -150, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 507, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Superviser", 
+         Alignment = 0, 
+         ShortDescr = "A superviser", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A Superviser is obviously supervising everyone\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 20, 
+      }, 
+      [508] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 508, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A human", 
+         Alignment = 0, 
+         ShortDescr = "A human", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A human is standing here waiting for the shuttle\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 2, 
+      }, 
+      [509] = 
+      {
+         Position = "standing", 
+         Level = 25, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         DamRoll = 5, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 37, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 509, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "A secretary", 
+         Alignment = 0, 
+         ShortDescr = "a newly created A secretary", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Credits = 0, 
+         LongDescr = "A secretary is standing behind a counter\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 5, 
+      }, 
+      [510] = 
+      {
+         Position = "standing", 
+         Level = 10, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "female", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         DamRoll = 2, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = 75, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 510, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "Hutt citizen", 
+         Alignment = 2, 
+         ShortDescr = "a newly created Hutt citizen", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Credits = 100, 
+         LongDescr = "A Hutt citizen is wandering around\
+", 
+         Tag = "", 
+         Race = "Hutt", 
+         HitRoll = 2, 
+      }, 
+      [511] = 
+      {
+         Position = "standing", 
+         Level = 50, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Description = "", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Constitution = 10, 
+         }, 
+         Vnum = 511, 
+         Weight = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            Breath = 0, 
+         }, 
+         DefaultPosition = "standing", 
+         Name = "smuggler", 
+         Alignment = -20, 
+         ShortDescr = "A smuggler", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Credits = 350, 
+         LongDescr = "A suspicious looking man\
+", 
+         Tag = "", 
+         Race = "Human", 
+         HitRoll = 10, 
+      }, 
+   }, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
+   LowEconomy = 6229350, 
 }

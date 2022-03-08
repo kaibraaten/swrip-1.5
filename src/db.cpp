@@ -24,23 +24,16 @@ namespace fs = std::filesystem;
 
 #include <fstream>
 #include <cassert>
-#include <ctime>
-#include <cstring>
-#include <cctype>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
-#include "ship.hpp"
 #include "character.hpp"
-#include "reset.hpp"
 #include "shop.hpp"
 #include "command.hpp"
 #include "skill.hpp"
 #include "luascript.hpp"
 #include "area.hpp"
 #include "log.hpp"
-#include "pcdata.hpp"
-#include "plugins.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
@@ -61,15 +54,14 @@ namespace fs = std::filesystem;
 #include "repos/storeroomrepository.hpp"
 #include "repos/vendorrepository.hpp"
 #include "repos/homerepository.hpp"
-#include "repos/macrorepository.hpp"
 #include "repos/imprepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
-#include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "triggers.hpp"
 
 int cur_qobjs = 0;
 int cur_qchars = 0;
@@ -357,9 +349,6 @@ void BootDatabase(bool fCopyOver)
     ASSIGN_GSN(gsn_sullustan, "sullustese");
     ASSIGN_GSN(gsn_shipdocking, "ship docking");
 
-    Log->Boot("Loading mudprog macros");
-    Macros->Load();
-
     /*
      * Read in all the area files.
      */
@@ -435,13 +424,15 @@ void BootDatabase(bool fCopyOver)
     Homes->Load();
 
     Log->Boot("Loading plugins");
-    LoadPlugins();
+    //LoadPlugins();
     
     Log->Boot("Resetting areas");
     AreaUpdate();
 
     MOBtrigger = true;
 
+    RunRoomSpawnTriggers();
+    
     if(fCopyOver)
     {
         Log->Boot("Running RecoverFromCopyover.");
@@ -785,6 +776,42 @@ std::shared_ptr<Room> GetRoom(vnum_t vnum)
     return nullptr;
 }
 
+std::shared_ptr<ProtoMobile> GetProtoMobile(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetProtoMobile(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetMobFromTag(vnumOrTag);
+    }
+}
+
+std::shared_ptr<ProtoObject> GetProtoObject(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetProtoObject(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetObjectFromTag(vnumOrTag);
+    }
+}
+
+std::shared_ptr<Room> GetRoom(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return GetRoom(ToLong(vnumOrTag));
+    }
+    else
+    {
+        return GetRoomFromTag(vnumOrTag);
+    }
+}
+
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
@@ -891,65 +918,44 @@ std::shared_ptr<Room> MakeRoom(vnum_t vnum)
  */
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
 {
-    std::shared_ptr<ProtoObject> cObjIndex;
-    char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<ProtoObject> pObjIndex;
 
-    if(cvnum > 0)
+    if(cvnum == INVALID_VNUM)
     {
-        cObjIndex = GetProtoObject(cvnum);
-    }
-
-    std::shared_ptr<ProtoObject> pObjIndex = std::make_shared<ProtoObject>(vnum);
-
-    pObjIndex->Name = name;
-
-    if(!cObjIndex)
-    {
-        sprintf(buf, "A %s", name.c_str());
-        pObjIndex->ShortDescr = buf;
-        sprintf(buf, "A %s is here.", name.c_str());
-        pObjIndex->Description = buf;
+        pObjIndex = std::make_shared<ProtoObject>(vnum);
+        pObjIndex->ShortDescr = FormatString("a %s", name.c_str());;
+        pObjIndex->Description = FormatString("A %s is here.", name.c_str());
         pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
         pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
         pObjIndex->ItemType = ITEM_TRASH;
         pObjIndex->Weight = 1;
+        pObjIndex->Name = name;
     }
     else
     {
-        pObjIndex->ShortDescr = cObjIndex->ShortDescr;
-        pObjIndex->Description = cObjIndex->Description;
-        pObjIndex->ActionDescription = cObjIndex->ActionDescription;
-        pObjIndex->ItemType = cObjIndex->ItemType;
-        pObjIndex->Flags = cObjIndex->Flags;
-        pObjIndex->WearFlags = cObjIndex->WearFlags;
+        auto cObjIndex = GetProtoObject(cvnum);
 
-        pObjIndex->Weight = cObjIndex->Weight;
-        pObjIndex->Cost = cObjIndex->Cost;
-
-        for(auto ced : cObjIndex->ExtraDescriptions())
+        if(cObjIndex == nullptr)
         {
-            auto ed = std::make_shared<ExtraDescription>();
-            ed->Keyword = ced->Keyword;
-            ed->Description = ced->Description;
-            pObjIndex->Add(ed);
-            top_ed++;
+            Log->Bug("%s: Unknown cvnum %ld.", __FUNCTION__, cvnum);
+            return nullptr;
         }
 
-        for(auto cpaf : cObjIndex->Affects())
+        pObjIndex = std::make_shared<ProtoObject>(*cObjIndex);
+        pObjIndex->Vnum = vnum;
+
+        if(name.empty())
         {
-            std::shared_ptr<Affect> paf = std::make_shared<Affect>();
-            paf->Type = cpaf->Type;
-            paf->Duration = cpaf->Duration;
-            paf->Location = cpaf->Location;
-            paf->Modifier = cpaf->Modifier;
-            paf->AffectedBy = cpaf->AffectedBy;
-            pObjIndex->Add(paf);
-            top_affect++;
+            pObjIndex->Name = pObjIndex->Name;
+        }
+        else
+        {
+            pObjIndex->Name = name;
         }
     }
-
+    
     pObjIndex->Flags.set(Flag::Obj::Prototype);
-    ProtoObjects.insert(std::make_pair(vnum, pObjIndex));
+    ProtoObjects.insert({ vnum, pObjIndex });
 
     return pObjIndex;
 }
@@ -960,23 +966,13 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
  */
 std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
 {
-    std::shared_ptr<ProtoMobile> cMobIndex;
-    char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<ProtoMobile> pMobIndex;
 
-    if(cvnum > 0)
+    if(cvnum == INVALID_VNUM)
     {
-        cMobIndex = GetProtoMobile(cvnum);
-    }
-
-    std::shared_ptr<ProtoMobile> pMobIndex = std::make_shared<ProtoMobile>(vnum);
-    pMobIndex->Name = name;
-
-    if(!cMobIndex)
-    {
-        sprintf(buf, "A newly created %s", name.c_str());
-        pMobIndex->ShortDescr = buf;
-        sprintf(buf, "Some god abandoned a newly created %s here.\r\n", name.c_str());
-        pMobIndex->LongDescr = buf;
+        pMobIndex = std::make_shared<ProtoMobile>(vnum);
+        pMobIndex->ShortDescr = FormatString("a %s", name.c_str());
+        pMobIndex->LongDescr = FormatString("A %s is here.\r\n", name.c_str());
         pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
         pMobIndex->LongDescr[0] = CharToUppercase(pMobIndex->LongDescr[0]);
         pMobIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Mob::Npc, Flag::Mob::Prototype });
@@ -984,56 +980,35 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->Position = DEFAULT_POSITION;
         pMobIndex->DefaultPosition = DEFAULT_POSITION;
         pMobIndex->Sex = SEX_NEUTRAL;
-        pMobIndex->Stats.Str = 10;
-        pMobIndex->Stats.Dex = 10;
-        pMobIndex->Stats.Int = 10;
-        pMobIndex->Stats.Wis = 10;
-        pMobIndex->Stats.Cha = 10;
-        pMobIndex->Stats.Con = 10;
-        pMobIndex->Stats.Lck = 10;
+        pMobIndex->Stats = Stats(10);
         pMobIndex->Race = RACE_HUMAN;
+        pMobIndex->Name = name;
     }
     else
     {
-        pMobIndex->ShortDescr = cMobIndex->ShortDescr;
-        pMobIndex->LongDescr = cMobIndex->LongDescr;
-        pMobIndex->Description = cMobIndex->Description;
-        pMobIndex->Flags = cMobIndex->Flags;
+        auto cMobIndex = GetProtoMobile(cvnum);
+
+        if(cMobIndex == nullptr)
+        {
+            Log->Bug("%s: Unknown cvnum %ld.", __FUNCTION__, cvnum);
+            return nullptr;
+        }
+        
+        pMobIndex = std::make_shared<ProtoMobile>(*cMobIndex);
+        pMobIndex->Vnum = vnum;
         pMobIndex->Flags.set(Flag::Mob::Prototype);
-        pMobIndex->AffectedBy = cMobIndex->AffectedBy;
-        pMobIndex->spec_fun = cMobIndex->spec_fun;
-        pMobIndex->spec_2 = cMobIndex->spec_2;
-        pMobIndex->Alignment = cMobIndex->Alignment;
-        pMobIndex->Level = cMobIndex->Level;
-        pMobIndex->ArmorClass = cMobIndex->ArmorClass;
-        pMobIndex->HitNoDice = cMobIndex->HitNoDice;
-        pMobIndex->HitSizeDice = cMobIndex->HitSizeDice;
-        pMobIndex->HitPlus = cMobIndex->HitPlus;
-        pMobIndex->DamNoDice = cMobIndex->DamNoDice;
-        pMobIndex->DamSizeDice = cMobIndex->DamSizeDice;
-        pMobIndex->DamPlus = cMobIndex->DamPlus;
-        pMobIndex->Gold = cMobIndex->Gold;
-        pMobIndex->exp = cMobIndex->exp;
-        pMobIndex->Position = cMobIndex->Position;
-        pMobIndex->DefaultPosition = cMobIndex->DefaultPosition;
-        pMobIndex->Sex = cMobIndex->Sex;
-        pMobIndex->Stats.Str = cMobIndex->Stats.Str;
-        pMobIndex->Stats.Dex = cMobIndex->Stats.Dex;
-        pMobIndex->Stats.Int = cMobIndex->Stats.Int;
-        pMobIndex->Stats.Wis = cMobIndex->Stats.Wis;
-        pMobIndex->Stats.Cha = cMobIndex->Stats.Cha;
-        pMobIndex->Stats.Con = cMobIndex->Stats.Con;
-        pMobIndex->Stats.Lck = cMobIndex->Stats.Lck;
-        pMobIndex->Race = cMobIndex->Race;
-        pMobIndex->Resistant = cMobIndex->Resistant;
-        pMobIndex->Immune = cMobIndex->Immune;
-        pMobIndex->Susceptible = cMobIndex->Susceptible;
-        pMobIndex->NumberOfAttacks = cMobIndex->NumberOfAttacks;
-        pMobIndex->AttackFlags = cMobIndex->AttackFlags;
-        pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
+
+        if(name.empty())
+        {
+            pMobIndex->Name = cMobIndex->Name;
+        }
+        else
+        {
+            pMobIndex->Name = name;
+        }
     }
 
-    ProtoMobs.insert(std::make_pair(vnum, pMobIndex));
+    ProtoMobs.insert({ vnum, pMobIndex });
 
     return pMobIndex;
 }
@@ -1147,7 +1122,6 @@ void AllocateRepositories()
     Storerooms = NewStoreroomRepository();
     Vendors = NewVendorRepository();
     Homes = NewHomeRepository();
-    Macros = NewMacroRepository();
     ImpScripts = NewImpRepository();
 }
 
@@ -1163,8 +1137,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoObject> obj)
 {
     for(auto area : Areas)
     {
-        if(obj->Vnum >= area->VnumRanges.Object.First
-           && obj->Vnum <= area->VnumRanges.Object.Last)
+        if(ObjectVnumIsInArea(obj->Vnum, area))
         {
             return area;
         }
@@ -1177,8 +1150,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoMobile> mob)
 {
     for(auto area : Areas)
     {
-        if(mob->Vnum >= area->VnumRanges.Mob.First
-           && mob->Vnum <= area->VnumRanges.Mob.Last)
+        if(MobileVnumIsInArea(mob->Vnum, area))
         {
             return area;
         }
@@ -1191,8 +1163,7 @@ std::shared_ptr<Area> GetAreaOf(std::shared_ptr<Room> room)
 {
     for(auto area : Areas)
     {
-        if(room->Vnum >= area->VnumRanges.Room.First
-           && room->Vnum <= area->VnumRanges.Room.Last)
+        if(RoomVnumIsInArea(room->Vnum, area))
         {
             return area;
         }
@@ -1281,4 +1252,88 @@ RoomRepository::iterator RoomRepository::end()
     i.currentRoom = nullptr;
     i.currentKey = MAX_KEY_HASH;
     return i;
+}
+
+std::string VnumOrTag(std::shared_ptr<Room> room)
+{
+    return room->Tag().empty() ? std::to_string(room->Vnum) : room->Tag();
+}
+
+std::string VnumOrTag(std::shared_ptr<ProtoMobile> mob)
+{
+    return mob->Tag().empty() ? std::to_string(mob->Vnum) : mob->Tag();
+}
+
+std::string VnumOrTag(std::shared_ptr<ProtoObject> obj)
+{
+    return obj->Tag().empty() ? std::to_string(obj->Vnum) : obj->Tag();
+}
+
+bool IsValidVnumOrTag(const std::string &vnumOrTag)
+{
+    if(IsNumber(vnumOrTag))
+    {
+        return ToLong(vnumOrTag) != INVALID_VNUM;
+    }
+    else
+    {
+        return !vnumOrTag.empty();
+    }
+}
+
+std::string VnumOrTagForRoom(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto room = GetRoom(vnum);
+
+    if(room != nullptr)
+    {
+        return VnumOrTag(room);
+    }
+    else
+    {
+        return "0";
+    }
+}
+
+std::string VnumOrTagForMobile(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto mob = GetProtoMobile(vnum);
+
+    if(mob != nullptr)
+    {
+        return VnumOrTag(mob);
+    }
+    else
+    {
+        return "0";
+    }
+}
+
+std::string VnumOrTagForObject(vnum_t vnum)
+{
+    if(vnum == INVALID_VNUM)
+    {
+        return "0";
+    }
+
+    auto obj = GetProtoObject(vnum);
+
+    if(obj != nullptr)
+    {
+        return VnumOrTag(obj);
+    }
+    else
+    {
+        return "0";
+    }
 }
