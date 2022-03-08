@@ -44,6 +44,16 @@
 #include "constants.hpp"
 #include "vo.hpp"
 
+class ProtoObject;
+class Race;
+class ProtoMobile;
+class Exit;
+class Area;
+class Reset;
+class Skill;
+class Descriptor;
+class MPROG_DATA;
+
 class TimeInfo
 {
 public:

@@ -7,6 +7,8 @@
 #include "types.hpp"
 #include "constants.hpp"
 
+struct timerset;
+
 class Command
 {
 public:

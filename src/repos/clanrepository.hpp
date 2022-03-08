@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Clan;
+
 class ClanRepository : public Ceris::Repository<std::shared_ptr<Clan>>
 {
 public:

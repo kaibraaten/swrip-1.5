@@ -5,6 +5,9 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Area;
+class VnumConverter;
+
 struct CompareArea
 {
     bool operator()(const std::shared_ptr<Area> &a, const std::shared_ptr<Area> &b) const;

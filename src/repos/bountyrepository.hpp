@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Bounty;
+
 class BountyRepository : public Ceris::Repository<std::shared_ptr<Bounty>>
 {
 public:

@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class HelpFile;
+
 struct CompareHelpFile
 {
     bool operator()(const std::shared_ptr<HelpFile> &pHelp, const std::shared_ptr<HelpFile> &tHelp) const;

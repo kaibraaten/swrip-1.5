@@ -30,6 +30,8 @@
 #include "types.hpp"
 #include "constants.hpp"
 
+class Room;
+
 class ShuttleStop
 {
 public:

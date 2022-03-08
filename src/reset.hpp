@@ -28,6 +28,9 @@
 #include <utility/utility.hpp>
 #include "types.hpp"
 
+class Room;
+class Area;
+
  /*
   * Reset commands:
   *   '*': comment

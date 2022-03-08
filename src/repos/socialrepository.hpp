@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Social;
+
 struct CompareSocial
 {
     bool operator()(std::shared_ptr<Social> lhs, std::shared_ptr<Social> rhs) const;

@@ -8,6 +8,10 @@
 #include "constants.hpp"
 #include "mprog.hpp"
 
+class ExtraDescription;
+class Affect;
+class Plugin;
+
 class ProtoObject
 {
 public:

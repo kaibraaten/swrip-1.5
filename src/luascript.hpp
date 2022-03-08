@@ -24,6 +24,15 @@ extern "C" {
 #include "constants.hpp"
 #include "types.hpp"
 
+class Stats;
+class SaveVs;
+class Affect;
+class SmaugAffect;
+class MProg;
+class Character;
+class Object;
+class ExtraDescription;
+
 lua_State *CreateLuaState();
 lua_State *CreateChildThread(lua_State *master);
 void LuaSetfieldString(lua_State *L, const std::string &key, const std::string &value);

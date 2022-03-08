@@ -10,6 +10,9 @@
 #include "types.hpp"
 #include "vo.hpp"
 
+class MPROG_ACT_LIST;
+class MPROG_DATA;
+
 class MProg
 {
 public:

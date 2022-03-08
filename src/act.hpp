@@ -4,6 +4,9 @@
 #include <string>
 #include "types.hpp"
 
+class Object;
+class Character;
+
 /*
  * TO types for act.
  */

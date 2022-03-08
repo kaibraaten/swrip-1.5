@@ -111,7 +111,7 @@ public:
     {
     }
 
-    void Save(std::shared_ptr<Home> home) const override
+    void Save(const std::shared_ptr<Home> &home) const override
     {
     }
 

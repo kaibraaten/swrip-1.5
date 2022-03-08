@@ -5,10 +5,12 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Ship;
+
 class ShipRepository : public Ceris::Repository<std::shared_ptr<Ship>>
 {
 public:
-  virtual void Save(std::shared_ptr<Ship> entity) const = 0;
+  virtual void Save(const std::shared_ptr<Ship> &entity) const = 0;
   virtual void Save() const = 0;
   virtual void Load() = 0;
 };

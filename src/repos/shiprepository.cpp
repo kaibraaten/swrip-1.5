@@ -21,19 +21,17 @@ static void PushShip(lua_State *L, const void *userData);
 class LuaShipRepository : public ShipRepository
 {
 public:
-    void Save(std::shared_ptr<Ship> entity) const override;
+    void Save(const std::shared_ptr<Ship> &entity) const override;
     void Save() const override;
     void Load() override;
 };
 
-void LuaShipRepository::Save(std::shared_ptr<Ship> ship) const
+void LuaShipRepository::Save(const std::shared_ptr<Ship> &ship) const
 {
-    if(ship->Class == SHIP_DEBRIS)
+    if(ship->Class != SHIP_DEBRIS)
     {
-        return;
+        LuaSaveDataFile(GetShipFilename(ship), PushShip, "ship", &ship);
     }
-
-    LuaSaveDataFile(GetShipFilename(ship), PushShip, "ship", &ship);
 }
 
 void LuaShipRepository::Save() const

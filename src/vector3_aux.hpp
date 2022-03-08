@@ -30,6 +30,10 @@
 #include <utility/vector3.hpp>
 #include "types.hpp"
 
+class Ship;
+class Spaceobject;
+class Missile;
+
  /*
   * To check if a ship is facing a specific position, which can be another
   * ship, a planet, an asteroid, etc.

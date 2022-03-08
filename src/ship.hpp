@@ -34,17 +34,20 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::Ship {
+enum : size_t
 {
-    namespace Ship
-    {
-        enum : size_t
-        {
-            Permanent,
-            Prototype
-        };
-    }
+    Permanent,
+    Prototype
+};
 }
+
+class Turret;
+class Missile;
+class Room;
+class Character;
+class Spaceobject;
+class Exit;
 
 class Ship
 {
@@ -122,7 +125,8 @@ public:
         } TractorBeam;
 
         std::shared_ptr<Ship> Target; /* Not persisted */
-        std::vector<std::shared_ptr<Turret>> Turrets = std::vector<std::shared_ptr<Turret>>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
+        std::vector<std::shared_ptr<Turret>> Turrets = std::vector<std::shared_ptr<Turret>>(
+                MAX_NUMBER_OF_TURRETS_IN_SHIP);
     } WeaponSystems;
 
     struct
@@ -229,14 +233,15 @@ bool IsShipAutoflying(std::shared_ptr<Ship> ship);
 bool CheckPilot(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 bool ShipNameAndPersonalnameComboIsUnique(const std::string &name,
                                           const std::string &personalname);
+
 template<typename CallbackT, typename UserDataT>
 void ForEachShip(CallbackT callback, UserDataT userData)
 {
-    for(auto ship : Ships)
+    for (auto ship : Ships)
     {
         bool keepGoing = callback(ship, userData);
 
-        if(!keepGoing)
+        if (!keepGoing)
         {
             break;
         }
@@ -246,11 +251,11 @@ void ForEachShip(CallbackT callback, UserDataT userData)
 template<typename CallbackT>
 void ForEachShip(CallbackT callback)
 {
-    for(auto ship : Ships)
+    for (auto ship : Ships)
     {
         bool keepGoing = callback(ship);
 
-        if(!keepGoing)
+        if (!keepGoing)
         {
             break;
         }

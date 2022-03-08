@@ -7,13 +7,16 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Character;
+class Descriptor;
+
 class PlayerRepository : public Ceris::Repository<std::shared_ptr<Character>>
 {
 public:
     virtual void Load() = 0;
     virtual bool Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload) = 0;
     virtual void Save() const = 0;
-    virtual void Save(std::shared_ptr<Character> pc) const = 0;
+    virtual void Save(const std::shared_ptr<Character> &pc) const = 0;
     virtual std::string MakeWizlist() const = 0;
     virtual bool Exists(const std::string &name) const = 0;
     virtual void MakeClone(std::shared_ptr<Character> pc) = 0;

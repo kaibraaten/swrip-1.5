@@ -36,7 +36,7 @@ public:
     void Load() override;
     bool Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload) override;
     void Save() const override;
-    void Save(std::shared_ptr<Character> pc) const override;
+    void Save(const std::shared_ptr<Character> &pc) const override;
     std::string MakeWizlist() const override;
     bool Exists(const std::string &name) const override;
     void MakeClone(std::shared_ptr<Character> pc) override;
@@ -938,8 +938,10 @@ void InMemoryPlayerRepository::PushPlayer(lua_State *L, const std::shared_ptr<Ch
     lua_setglobal(L, "character");
 }
 
-void InMemoryPlayerRepository::Save(std::shared_ptr<Character> pc) const
+void InMemoryPlayerRepository::Save(const std::shared_ptr<Character> &constPc) const
 {
+    auto pc = constPc;
+
     if(IsNpc(pc) || !IsAuthed(pc))
     {
         return;

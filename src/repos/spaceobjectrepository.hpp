@@ -6,12 +6,14 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Spaceobject;
+
 class SpaceobjectRepository : public Ceris::Repository<std::shared_ptr<Spaceobject>>
 {
 public:
     virtual void Load() = 0;
     virtual void Save() const = 0;
-    virtual void Save(std::shared_ptr<Spaceobject> spaceobject) const = 0;
+    virtual void Save(const std::shared_ptr<Spaceobject> &spaceobject) const = 0;
 };
 
 inline std::shared_ptr<SpaceobjectRepository> Spaceobjects;

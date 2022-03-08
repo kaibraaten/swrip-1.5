@@ -12,7 +12,7 @@ class LuaShuttleRepository : public ShuttleRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(std::shared_ptr<Shuttle> shuttle) const override;
+    void Save(const std::shared_ptr<Shuttle> &shuttle) const override;
     std::shared_ptr<Shuttle> FindByName(const std::string &name) const override;
     void DeleteFromStorage(std::shared_ptr<Shuttle> shuttle) override;
 
@@ -46,7 +46,7 @@ std::shared_ptr<Shuttle> LuaShuttleRepository::FindByName(const std::string &nam
     return shuttle;
 }
 
-void LuaShuttleRepository::Save(std::shared_ptr<Shuttle> shuttle) const
+void LuaShuttleRepository::Save(const std::shared_ptr<Shuttle> &shuttle) const
 {
     LuaSaveDataFile(GetShuttleFilename(shuttle), PushShuttle, "shuttle", shuttle);
 }

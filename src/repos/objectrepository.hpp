@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Object;
+
 class ObjectRepository : public Ceris::Repository<std::shared_ptr<Object>>
 {
 public:

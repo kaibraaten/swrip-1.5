@@ -22,7 +22,7 @@ public:
     void Load() override;
     void Save() const override;
     void Load(std::shared_ptr<Home> home) override;
-    void Save(std::shared_ptr<Home> home) const override;
+    void Save(const std::shared_ptr<Home> &home) const override;
 
     void Delete(std::shared_ptr<Home> home) override;
     
@@ -102,7 +102,7 @@ void LuaHomeRepository::Load(std::shared_ptr<Home> home)
     LuaLoadDataFile(filename, L_HomeEntryFull, "HomeEntry");
 }
 
-void LuaHomeRepository::Save(std::shared_ptr<Home> home) const
+void LuaHomeRepository::Save(const std::shared_ptr<Home> &home) const
 {
     auto filename = GetHomeFilename(home->Vnum());
     LuaSaveDataFile(filename, PushHome, "home", home);

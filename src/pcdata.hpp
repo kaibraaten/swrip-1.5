@@ -9,27 +9,27 @@
 #include "constants.hpp"
 #include "imc.hpp"
 
-namespace Flag
+class Alias;
+class Editor;
+class KilledData;
+
+namespace Flag::PCData {
+enum : size_t
 {
-    namespace PCData
-    {
-        enum : size_t
-        {
-            _00,
-            _01,
-            Unauthed,
-            _03,
-            _04,
-            Gag,
-            Retired,
-            _07,
-            _08,
-            _09,
-            NoTitle,
-            ShowRoomFlags,
-            DoNotDisturb,
-        };
-    }
+    _00,
+    _01,
+    Unauthed,
+    _03,
+    _04,
+    Gag,
+    Retired,
+    _07,
+    _08,
+    _09,
+    NoTitle,
+    ShowRoomFlags,
+    DoNotDisturb,
+};
 }
 
 class PCData
@@ -77,12 +77,12 @@ public:
     long RestoreTime = 0;         /* The last time the char did a restore all */
 
     std::shared_ptr<Editor> TextEditor;
-    
+
     struct
     {
         std::shared_ptr<class Area> Area;
         std::shared_ptr<class Plugin> Plugin;
-        
+
         struct
         {
             struct
@@ -132,6 +132,6 @@ private:
     std::unique_ptr<Impl> pImpl;
 };
 
-extern const std::array<const char * const, Flag::MAX> PcFlags;
+extern const std::array<const char *const, Flag::MAX> PcFlags;
 
 #endif

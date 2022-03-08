@@ -5,6 +5,9 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Shop;
+class RepairShop;
+
 template<typename T>
 struct CompareShop
 {

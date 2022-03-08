@@ -6,6 +6,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Skill;
+
 class SkillRepository : public Ceris::Repository<std::shared_ptr<Skill>>
 {
 public:

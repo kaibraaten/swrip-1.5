@@ -14,7 +14,7 @@ class LuaSpaceobjectRepository : public SpaceobjectRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(std::shared_ptr<Spaceobject> spaceobject) const override;
+    void Save(const std::shared_ptr<Spaceobject> &spaceobject) const override;
 
 private:
     static bool LandingSiteIsBlank(const LandingSite *site);
@@ -40,7 +40,7 @@ void LuaSpaceobjectRepository::Save() const
     }
 }
 
-void LuaSpaceobjectRepository::Save(std::shared_ptr<Spaceobject> spaceobject) const
+void LuaSpaceobjectRepository::Save(const std::shared_ptr<Spaceobject> &spaceobject) const
 {
     LuaSaveDataFile(GetSpaceobjectFilename(spaceobject),
                     PushSpaceobject, "spaceobject", spaceobject);

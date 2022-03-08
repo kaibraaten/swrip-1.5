@@ -7,16 +7,15 @@
 #include <bitset>
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::Planet {
+enum : size_t
 {
-    namespace Planet
-    {
-        enum : size_t
-        {
-            NoCapture
-        };
-    }
+    NoCapture
+};
 }
+
+class Area;
+class Clan;
 
 class Planet
 {

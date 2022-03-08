@@ -4,6 +4,9 @@
 #include <memory>
 #include "types.hpp"
 
+class Object;
+class Room;
+
 struct Vo
 {
     Vo() = default;

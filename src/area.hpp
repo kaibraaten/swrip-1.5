@@ -19,6 +19,9 @@ namespace Flag
     }
 }
 
+class Reset;
+class Plugin;
+
 class Area
 {
 public:

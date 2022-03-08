@@ -6,6 +6,9 @@
 #include "types.hpp"
 #include "constants.hpp"
 
+class Object;
+class Character;
+
 class Note
 {
 public:

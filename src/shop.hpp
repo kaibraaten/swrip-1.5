@@ -29,6 +29,9 @@
 
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
 
+class Object;
+class Character;
+
 class Shop
 {
 public:

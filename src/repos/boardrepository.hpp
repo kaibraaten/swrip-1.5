@@ -6,6 +6,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Board;
+
 class BoardRepository : public Ceris::Repository<std::shared_ptr<Board>>
 {
 public:

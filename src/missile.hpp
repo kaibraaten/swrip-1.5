@@ -7,7 +7,7 @@
 
 #include "types.hpp"
 
-inline std::list<std::shared_ptr<Missile>> Missiles;
+class Ship;
 
 class Missile
 {
@@ -21,6 +21,8 @@ public:
     Vector3 Position;
     Vector3 Heading;
 };
+
+inline std::list<std::shared_ptr<Missile>> Missiles;
 
 void UpdateMissile(std::shared_ptr<Missile> missile);
 void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,

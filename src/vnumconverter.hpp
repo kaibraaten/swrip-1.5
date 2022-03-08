@@ -5,6 +5,10 @@
 #include <memory>
 #include "types.hpp"
 
+class Reset;
+class Area;
+class Plugin;
+
 class VnumConverter
 {
 public:

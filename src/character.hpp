@@ -42,6 +42,14 @@ namespace Imp
     class RuntimeScope;
 }
 
+class ProtoMobile;
+class Affect;
+class Object;
+class Timer;
+class Fight;
+class Descriptor;
+class HuntHateFear;
+
 class Character
 {
 public:

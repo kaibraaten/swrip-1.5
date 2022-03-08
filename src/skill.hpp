@@ -13,6 +13,10 @@
 #define SKILL_DATA_FILE     DATA_DIR "skills.lua"
 #define HERB_DATA_FILE      DATA_DIR "herbs.lua"
 
+struct timerset;
+class Character;
+class SmaugAffect;
+
 /*
  * Skills include spells as a particular case.
  */

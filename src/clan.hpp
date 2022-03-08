@@ -6,6 +6,9 @@
 #include "types.hpp"
 #include "constants.hpp"
 
+class ClanMember;
+class Character;
+
 class Clan
 {
 public:

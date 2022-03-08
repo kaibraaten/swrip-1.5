@@ -28,6 +28,7 @@
 #include "luascript.hpp"
 
 class Turret;
+class Ship;
 
 std::shared_ptr<Turret> AllocateTurret(ShipClass ownerClass);
 std::shared_ptr<Turret> CopyTurret(const std::shared_ptr<Turret> &old_turret, ShipClass ownerClassOfNewTurret);

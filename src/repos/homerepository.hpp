@@ -6,6 +6,8 @@
 #include <string>
 #include "types.hpp"
 
+class Home;
+
 class HomeRepository : public Ceris::Repository<std::shared_ptr<Home>>
 {
 public:
@@ -13,7 +15,7 @@ public:
     virtual void Save() const = 0;
 
     virtual void Load(std::shared_ptr<Home> home) = 0;
-    virtual void Save(std::shared_ptr<Home> home) const = 0;
+    virtual void Save(const std::shared_ptr<Home> &home) const = 0;
 
     virtual void Delete(std::shared_ptr<Home> home) = 0;
     

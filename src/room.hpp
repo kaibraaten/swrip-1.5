@@ -9,46 +9,48 @@
 #include "constants.hpp"
 #include "mprog.hpp"
 
-namespace Flag
+class Ship;
+class Exit;
+class ExtraDescription;
+class Shuttle;
+class Reset;
+
+namespace Flag::Room {
+enum : size_t
 {
-    namespace Room
-    {
-        enum : size_t
-        {
-            Dark,
-            Reserved, /* BV01 now reserved for track  BV01  and hunt */
-            NoMob,
-            Indoors,
-            CanLand,
-            CanFly,
-            NoDrive,
-            NoMagic,
-            Bank,
-            Private,
-            Safe,
-            _11,
-            PetShop,
-            Arena,
-            _14, // Donation
-            NoDropAll,
-            Silence,
-            LogSpeech,
-            NoDrop,
-            ClanStoreroom,
-            PlayerHome,
-            _21,
-            Teleport,
-            Hotel,
-            NoFloor,
-            Refinery,
-            Factory,
-            _27, //Recruit
-            PlayerShop,
-            Spacecraft,
-            Prototype,
-            Auction
-        };
-    }
+    Dark,
+    Reserved, /* BV01 now reserved for track  BV01  and hunt */
+    NoMob,
+    Indoors,
+    CanLand,
+    CanFly,
+    NoDrive,
+    NoMagic,
+    Bank,
+    Private,
+    Safe,
+    _11,
+    PetShop,
+    Arena,
+    _14, // Donation
+    NoDropAll,
+    Silence,
+    LogSpeech,
+    NoDrop,
+    ClanStoreroom,
+    PlayerHome,
+    _21,
+    Teleport,
+    Hotel,
+    NoFloor,
+    Refinery,
+    Factory,
+    _27, //Recruit
+    PlayerShop,
+    Spacecraft,
+    Prototype,
+    Auction
+};
 }
 
 enum class SectorType
@@ -77,9 +79,9 @@ public:
     Room(vnum_t vnum);
     virtual ~Room();
 
-    Room(const Room&) = delete;
-    Room &operator=(const Room&) = delete;
-    
+    Room(const Room &) = delete;
+    Room &operator=(const Room &) = delete;
+
     void Add(std::shared_ptr<Ship> ship);
     void Remove(std::shared_ptr<Ship> ship);
     const std::list<std::shared_ptr<Ship>> &Ships() const;
@@ -108,7 +110,7 @@ public:
     void Tag(const std::string &tag);
 
     class Plugin *Plugin = nullptr;
-    
+
     std::shared_ptr<Reset> FirstReset;
     std::shared_ptr<Reset> LastReset;
     std::shared_ptr<Room> Next;
@@ -130,10 +132,10 @@ private:
     std::unique_ptr<Impl> pImpl;
 };
 
-extern const char * const SectorNames[(int)SectorType::Max][2];
-extern const std::array<const short, (int)SectorType::Max> MovementLoss;
-extern const int SentTotal[(int)SectorType::Max];
-extern const char * const RoomSents[(int)SectorType::Max][25];
+extern const char *const SectorNames[(int) SectorType::Max][2];
+extern const std::array<const short, (int) SectorType::Max> MovementLoss;
+extern const int SentTotal[(int) SectorType::Max];
+extern const char *const RoomSents[(int) SectorType::Max][25];
 
 SectorType GetSectorType(const std::string &type);
 

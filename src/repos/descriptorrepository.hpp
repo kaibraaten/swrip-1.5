@@ -5,6 +5,8 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
+class Descriptor;
+
 class DescriptorRepository : public Ceris::Repository<std::shared_ptr<Descriptor>>
 {
 public:

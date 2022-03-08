@@ -11,7 +11,7 @@ class VendorRepository : public Ceris::Repository<std::shared_ptr<Character>>
 public:
     virtual void Load() = 0;
     virtual void Save() const = 0;
-    virtual void Save(std::shared_ptr<Character> vendor) const = 0;
+    virtual void Save(const std::shared_ptr<Character> &vendor) const = 0;
     virtual void RemoveVendor(std::shared_ptr<Character> pc) const = 0;
     virtual bool HasVendor(std::shared_ptr<Character> pc) const = 0;
 };

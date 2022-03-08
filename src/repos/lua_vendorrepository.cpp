@@ -24,7 +24,7 @@ class LuaVendorRepository : public VendorRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(std::shared_ptr<Character> vendor) const override;
+    void Save(const std::shared_ptr<Character> &vendor) const override;
     bool HasVendor(std::shared_ptr<Character> pc) const override;
     void RemoveVendor(std::shared_ptr<Character> pc) const override;
 };
@@ -45,7 +45,7 @@ void LuaVendorRepository::Save() const
 
 }
 
-void LuaVendorRepository::Save(std::shared_ptr<Character> vendor) const
+void LuaVendorRepository::Save(const std::shared_ptr<Character> &vendor) const
 {
     assert(vendor != nullptr);
     assert(IsNpc(vendor));

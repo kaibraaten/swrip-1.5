@@ -6,6 +6,8 @@
 #include <string>
 #include "types.hpp"
 
+class Ban;
+
 using BanRepositoryBase = Ceris::Repository<std::shared_ptr<Ban>>;
 
 class BanRepository : public BanRepositoryBase

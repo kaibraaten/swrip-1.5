@@ -14,7 +14,7 @@ class LuaPlanetRepository : public PlanetRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(std::shared_ptr<Planet> planet) const override;
+    void Save(const std::shared_ptr<Planet> &planet) const override;
     std::shared_ptr<Planet> FindByName(const std::string &name) const override;
 
 private:
@@ -33,7 +33,7 @@ void LuaPlanetRepository::Save() const
     }
 }
 
-void LuaPlanetRepository::Save(std::shared_ptr<Planet> planet) const
+void LuaPlanetRepository::Save(const std::shared_ptr<Planet> &planet) const
 {
     LuaSaveDataFile(GetPlanetFilename(planet), PushPlanet, "planet", planet);
 }

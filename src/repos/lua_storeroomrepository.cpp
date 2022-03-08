@@ -15,7 +15,7 @@ class LuaStoreroomRepository : public StoreroomRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(std::shared_ptr<Room> storeroom) override;
+    void Save(const std::shared_ptr<Room> &storeroom) const override;
 };
 
 void LuaStoreroomRepository::Load()
@@ -28,7 +28,7 @@ void LuaStoreroomRepository::Save() const
     // No-op
 }
 
-void LuaStoreroomRepository::Save(std::shared_ptr<Room> storeroom)
+void LuaStoreroomRepository::Save(const std::shared_ptr<Room> &storeroom) const
 {
     std::string filename = FormatString("%s%s",
                                         STOREROOM_DIR,
