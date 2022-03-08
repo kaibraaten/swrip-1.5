@@ -96,4 +96,4 @@ double GetMissileDistanceToShip(std::shared_ptr<Missile> m,
 void RandomizeVector(Vector3 &vec, int from, int to);
 bool IsBeyondGalaxy(const Vector3 &pos);
 
-#endif /* include guard */
+#endif

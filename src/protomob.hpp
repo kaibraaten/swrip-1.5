@@ -13,7 +13,7 @@ class ProtoMobile
 {
 public:
     ProtoMobile() = delete;
-    ProtoMobile(vnum_t vnum);
+    explicit ProtoMobile(vnum_t vnum);
     ProtoMobile(const ProtoMobile &rhv);
     
     virtual ~ProtoMobile();

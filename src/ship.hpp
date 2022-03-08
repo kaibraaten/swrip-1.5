@@ -234,8 +234,7 @@ bool CheckPilot(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 bool ShipNameAndPersonalnameComboIsUnique(const std::string &name,
                                           const std::string &personalname);
 
-template<typename CallbackT, typename UserDataT>
-void ForEachShip(CallbackT callback, UserDataT userData)
+void ForEachShip(auto callback, auto userData)
 {
     for (auto ship : Ships)
     {
@@ -248,8 +247,7 @@ void ForEachShip(CallbackT callback, UserDataT userData)
     }
 }
 
-template<typename CallbackT>
-void ForEachShip(CallbackT callback)
+void ForEachShip(auto callback)
 {
     for (auto ship : Ships)
     {

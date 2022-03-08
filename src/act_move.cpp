@@ -196,7 +196,7 @@ std::shared_ptr<Exit> GetExitNumber(std::shared_ptr<Room> room, short count)
 bool CharacterFallIfNoFloor(std::shared_ptr<Character> ch, int fall)
 {
     if(ch->InRoom->Flags.test(Flag::Room::NoFloor)
-       && CAN_GO(ch, DIR_DOWN)
+       && CanGo(ch, DIR_DOWN)
        && (!IsAffectedBy(ch, Flag::Affect::Flying)
            || (ch->Mount && !IsAffectedBy(ch->Mount, Flag::Affect::Flying))))
     {

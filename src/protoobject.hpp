@@ -16,7 +16,7 @@ class ProtoObject
 {
 public:
     ProtoObject() = delete;
-    ProtoObject(vnum_t vnum);
+    explicit ProtoObject(vnum_t vnum);
     ProtoObject(const ProtoObject &rhv);
     
     virtual ~ProtoObject();

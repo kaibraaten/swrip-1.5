@@ -6,7 +6,7 @@
 class PluginVnumConverter : public VnumConverter
 {
 public:
-    PluginVnumConverter(const Plugin *plugin);
+    explicit PluginVnumConverter(const Plugin *plugin);
     ~PluginVnumConverter();
     std::vector<vnum_t> RoomVnums() const override;
     std::vector<vnum_t> ObjectVnums() const override;

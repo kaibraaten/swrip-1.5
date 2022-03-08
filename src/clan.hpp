@@ -79,4 +79,4 @@ void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
                            const std::shared_ptr<Clan> &mainClan);
 bool IsBountyHuntersGuild(const std::string &clanName);
 
-#endif /* include guard*/
+#endif

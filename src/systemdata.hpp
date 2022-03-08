@@ -34,7 +34,6 @@ public:
     int MaxPlayersEver = 0;             /* Maximum players ever   */
     std::string TimeOfMaxPlayersEver = "(not recorded)"; /* Time of max ever */
     bool NoNameResolving = false;      /* Hostnames are not resolved  */
-    bool DenyNewPlayers = false;       /* New players cannot connect  */
     bool NewPlayersMustWaitForAuth = false;          /* New players must be auth'ed */
     int ReadAllMail = LEVEL_CREATOR;          /* Read all player mail(was 54)*/
     int ReadMailFree = LEVEL_IMMORTAL;         /* Read mail for free (was 51) */
@@ -53,7 +52,6 @@ public:
     int DamageMobVsMob = 100;         /* Damage mod mobile vs. mobile */
     int LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER; /* Get objects without take flag */
     int LevelToForcePlayers = LEVEL_GREATER; /* The level at which you can use force on players. */
-    int MaxSN = 0;                 /* Max skills */
     std::bitset<Flag::MAX> SaveFlags;
     int SaveFrequency = 0;         /* How old to autosave someone */
     unsigned short Port = 7000;
@@ -64,7 +62,6 @@ public:
     bool AllowMultiplaying = false;
     bool DropOnDefeat = true;
     bool TopLevelFromAbility = false;
-    unsigned char *MCCP_Buffer = nullptr;
 };
 
 inline SystemData SysData;

@@ -39,9 +39,8 @@ void LuaSetfieldString(lua_State *L, const std::string &key, const std::string &
 void LuaSetfieldNumber(lua_State *L, const std::string &key, double value);
 void LuaSetfieldBoolean(lua_State *L, const std::string &key, bool value);
 
-template<typename T, typename CallableT>
-void LuaGetfield(lua_State *L, const std::string &key, T *value,
-                 CallableT assignValue)
+void LuaGetfield(lua_State *L, const std::string &key, auto *value,
+                 auto assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -54,8 +53,7 @@ void LuaGetfield(lua_State *L, const std::string &key, T *value,
     lua_pop(L, 1);
 }
 
-template<typename CallableT, typename UserdataT>
-void LuaLoadTable(lua_State *L, const std::string &key, CallableT getFields, UserdataT ud)
+void LuaLoadTable(lua_State *L, const std::string &key, auto getFields, auto ud)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -74,10 +72,9 @@ void LuaLoadTable(lua_State *L, const std::string &key, CallableT getFields, Use
 // array in case you need it. UserdataT is whatever you want.
 // It's the same object as you provide in the third
 // parameter of LuaLoadArray().
-template<typename CallableT, typename UserdataT>
 void LuaLoadArray(lua_State *L, const std::string &key,
-                  CallableT callback,
-                  UserdataT userData)
+                  auto callback,
+                  auto userData)
 {
     auto idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -97,9 +94,8 @@ void LuaLoadArray(lua_State *L, const std::string &key,
     lua_pop(L, 1);
 }
 
-template<typename CallableT, typename CollectionT>
-void LuaPushCollection(lua_State *L, CollectionT collection, const std::string &key,
-                       CallableT callback)
+void LuaPushCollection(lua_State *L, auto collection, const std::string &key,
+                       auto callback)
 {
     if(!collection.empty())
     {
@@ -141,10 +137,9 @@ void LuaLoadDataFile(const std::string &filename,
                      void *userData = nullptr);
 void LuaSaveDataFile(lua_State *L, const std::string &filename, const std::string &data);
 
-template<typename CallableT, typename UserDataT>
 void LuaSaveDataFile(const std::string &filename,
-                     CallableT pushData,
-                     const std::string &data, UserDataT userData)
+                     auto pushData,
+                     const std::string &data, auto userData)
 {
     lua_State *L = CreateLuaState();
     pushData(L, userData);
@@ -152,9 +147,8 @@ void LuaSaveDataFile(const std::string &filename,
     lua_close(L);
 }
 
-template<typename CallbackT>
 void LuaSaveDataFile(const std::string &filename,
-                     CallbackT pushData, const std::string &data)
+                     auto pushData, const std::string &data)
 {
     lua_State *L = CreateLuaState();
     pushData(L);
@@ -219,8 +213,7 @@ void LuaPushSpecFun(lua_State *L, size_t idx,
 void LuaLoadSpecFun(lua_State *L, size_t idx,
                     std::vector<std::function<bool(std::shared_ptr<Character>)>> *specfuns);
 
-template<typename EntityT>
-void AssignSpecFuns(const EntityT &mob,
+void AssignSpecFuns(const auto &mob,
                     const std::vector<std::function<bool(std::shared_ptr<Character>)>> &specfuns)
 {
     if(!specfuns.empty())

@@ -10,7 +10,7 @@
 class Plugin
 {
 public:
-    Plugin(const std::string &id);
+    explicit Plugin(const std::string &id);
     ~Plugin();
     std::string Id() const;
     std::string Name() const;

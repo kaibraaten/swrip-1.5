@@ -76,7 +76,7 @@ enum class SectorType
 class Room
 {
 public:
-    Room(vnum_t vnum);
+    explicit Room(vnum_t vnum);
     virtual ~Room();
 
     Room(const Room &) = delete;

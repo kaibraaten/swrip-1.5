@@ -60,8 +60,7 @@ public:
     short Distance = 0;                  /* how far to the next room     */
 };
 
-template<typename T>
-bool CAN_GO(T thing, DirectionType door)
+bool CanGo(const auto &thing, DirectionType door)
 {
     return GetExit(thing->InRoom, door)
            && GetExit(thing->InRoom, door)->ToRoom != nullptr

@@ -22,20 +22,20 @@
 #include "descriptor.hpp"
 #include "pcdata.hpp"
 
- /****************************************************************************
-  * Data types and other definitions
-  */
+/****************************************************************************
+ * Data types and other definitions
+ */
 
-  //typedef struct editor_line EDITOR_LINE;
+//typedef struct editor_line EDITOR_LINE;
 
 #define CHAR_BLOCK (80)
 
-#define BLOCK_ROUNDUP( size )           (((size)+CHAR_BLOCK-1) / CHAR_BLOCK * CHAR_BLOCK)
+#define BLOCK_ROUNDUP(size)           (((size)+CHAR_BLOCK-1) / CHAR_BLOCK * CHAR_BLOCK)
 
-template< typename T >
+template<typename T>
 void RECREATE(T *&result, size_t number)
 {
-    if(!(result = static_cast<T *>(realloc(result, sizeof(T) * number))))
+    if (!(result = static_cast<T*>(realloc(result, sizeof(T) * number))))
     {
         perror("realloc failure");
         fprintf(stderr, "Realloc failure @ %s:%d\n", __FILE__, __LINE__);
@@ -43,15 +43,14 @@ void RECREATE(T *&result, size_t number)
     }
 }
 
-template< typename T >
-void RESIZE_IF_NEEDED(T *&buf, size_t &buf_size,
+void RESIZE_IF_NEEDED(auto *&buf, size_t &buf_size,
                       size_t buf_used, size_t added_use)
 {
-    if(buf_used + added_use >= buf_size)
+    if (buf_used + added_use >= buf_size)
     {
         size_t added_size = BLOCK_ROUNDUP(added_use);
 
-        if(added_size == 0)
+        if (added_size == 0)
         {
             added_size = CHAR_BLOCK;
         }
@@ -61,20 +60,19 @@ void RESIZE_IF_NEEDED(T *&buf, size_t &buf_size,
     }
 }
 
-template< typename T >
-void DISPOSE(T *&t)
+void DISPOSE(auto *&t)
 {
-    if(t)
+    if (t)
     {
         free(t);
         t = 0;
     }
 }
 
-template< typename T >
+template<typename T>
 void CREATE(T *&result, size_t number)
 {
-    if(!(result = static_cast<T *>(calloc(number, sizeof(T)))))
+    if (!(result = static_cast<T*>(calloc(number, sizeof(T)))))
     {
         perror("calloc failure");
         fprintf(stderr, "Malloc failure @ %s:%d\n", __FILE__, __LINE__);
@@ -133,14 +131,14 @@ private:
  * Thus, if(total_size + line_count * 2 +1) > max_size, the buffer cant
  * hold more data.
  */
- /* Hence, this define: */
-#define TOTAL_BUFFER_SIZE( edd )        (edd->text_size + edd->line_count * 2 +1 )
+/* Hence, this define: */
+#define TOTAL_BUFFER_SIZE(edd)        (edd->text_size + edd->line_count * 2 +1 )
 
 /****************************************************************************
  * Function declarations
  */
 
- /* funcs to manipulate editor datas */
+/* funcs to manipulate editor datas */
 static EditorLine *make_new_line(const char *);
 static std::shared_ptr<Editor> str_to_editdata(const std::string &, int);
 
@@ -149,20 +147,20 @@ static char *finer_OneArgument(char *, char *);
 static char *text_replace(char *, char *, char *, size_t *, size_t *);
 
 EditorLine::EditorLine()
-    : line(0),
-    line_size(0),
-    line_used(0),
-    next(0)
+        : line(0),
+          line_size(0),
+          line_used(0),
+          next(0)
 {
 
 }
 
 Editor::Editor()
-    : first_line(0),
-    line_count(0),
-    on_line(0),
-    text_size(0),
-    max_size(0)
+        : first_line(0),
+          line_count(0),
+          on_line(0),
+          text_size(0),
+          max_size(0)
 {
 
 }
@@ -181,7 +179,7 @@ static EditorLine *make_new_line(const char *str)
     size_t size = strlen(str);
     size = BLOCK_ROUNDUP(size);
 
-    if(size == 0)
+    if (size == 0)
     {
         size = CHAR_BLOCK;
     }
@@ -202,7 +200,7 @@ void Editor::Discard(std::shared_ptr<Editor> edd)
 
     eline = edd->first_line;
 
-    while(eline)
+    while (eline)
     {
         elnext = eline->next;
         DISPOSE(eline->line);
@@ -216,11 +214,11 @@ Editor::Editor(const Editor &edd)
     EditorLine root_line;
     EditorLine *new_line = &root_line;
 
-    for(EditorLine *eline = edd.first_line; eline; eline = eline->next)
+    for (EditorLine *eline = edd.first_line; eline; eline = eline->next)
     {
         new_line->next = make_new_line(eline->line);
 
-        if(edd.on_line == eline)
+        if (edd.on_line == eline)
         {
             this->on_line = new_line->next;
         }
@@ -246,16 +244,17 @@ static std::shared_ptr<Editor> str_to_editdata(const std::string &str, int max_s
 
     edd->first_line = eline;
 
-    while(*p)
+    while (*p)
     {
-        if(tsize + line_count * 2 + 1 >= max_size)
+        if (tsize + line_count * 2 + 1 >= max_size)
         {
             break;
         }
 
-        if(*p == '\r')
-            ;
-        else if(*p == '\n')
+        if (*p == '\r')
+        {
+        }
+        else if (*p == '\n')
         {
             eline->line[i] = '\0';
             eline->next = make_new_line("");
@@ -276,7 +275,7 @@ static std::shared_ptr<Editor> str_to_editdata(const std::string &str, int max_s
         p++;
     }
 
-    if(eline->line[0] != '\0')
+    if (eline->line[0] != '\0')
     {
         eline->line[i] = '\0';
         eline->next = make_new_line("");
@@ -297,12 +296,12 @@ std::string Editor::EditDataToStr() const
     EditorLine *eline = first_line;
     std::ostringstream buf;
 
-    while(eline)
+    while (eline)
     {
         /*
          * ignore the last empty line
          */
-        if(!eline->next && eline->line[0] == '\0')
+        if (!eline->next && eline->line[0] == '\0')
         {
             break;
         }
@@ -320,7 +319,7 @@ std::string Editor::EditDataToStr() const
 
 void SetEditorDesc(std::shared_ptr<Character> ch, const char *desc_fmt, ...)
 {
-    if(!ch || !ch->PCData || !ch->PCData->TextEditor)
+    if (!ch || !ch->PCData || !ch->PCData->TextEditor)
     {
         return;
     }
@@ -336,7 +335,7 @@ void SetEditorDesc(std::shared_ptr<Character> ch, const char *desc_fmt, ...)
 void StartEditing(std::shared_ptr<Character> ch, const std::string &old_text,
                   std::function<void(const std::string &)> onSave)
 {
-    if(!ch->Desc)
+    if (!ch->Desc)
     {
         Log->Bug("Fatal: start_editing: no desc");
         return;
@@ -345,7 +344,7 @@ void StartEditing(std::shared_ptr<Character> ch, const std::string &old_text,
     ch->Echo("&GBegin entering your text now (/? = help /s = save /c = clear /l = list)\r\n");
     ch->Echo(NumberedRuler() + "&d");
 
-    if(ch->PCData->TextEditor)
+    if (ch->PCData->TextEditor)
     {
         StopEditing(ch);
     }
@@ -359,13 +358,13 @@ void StartEditing(std::shared_ptr<Character> ch, const std::string &old_text,
 
 static std::string CopyEditBuffer(std::shared_ptr<Character> ch)
 {
-    if(!ch)
+    if (!ch)
     {
         Log->Bug("%s: null ch", __FUNCTION__);
         return "";
     }
 
-    if(!ch->PCData->TextEditor)
+    if (!ch->PCData->TextEditor)
     {
         Log->Bug("%s: null editor", __FUNCTION__);
         return "";
@@ -391,19 +390,19 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
     int linelen = 0;
     bool cont_line = false;
 
-    if(d == nullptr)
+    if (d == nullptr)
     {
         return;
     }
 
-    if(!IsInEditor(ch))
+    if (!IsInEditor(ch))
     {
         ch->Echo("You can't do that!\r\n");
         Log->Bug("%s: d->ConnectionState != CON_EDITING", __FUNCTION__);
         return;
     }
 
-    if(ch->PCData->TextEditor == nullptr)
+    if (ch->PCData->TextEditor == nullptr)
     {
         ch->Echo("You can't do that!\r\n");
         Log->Bug("%s: null editor", __FUNCTION__);
@@ -414,36 +413,36 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
 
     auto edd = ch->PCData->TextEditor;
 
-    if(argument[0] == '/' || argument[0] == '\\')
+    if (argument[0] == '/' || argument[0] == '\\')
     {
         argument = OneArgument(argument, cmd);
         cmd.erase(0, 1);
 
-        if(!StrCmp(cmd, "?"))
+        if (!StrCmp(cmd, "?"))
         {
             edd->Help(ch, argument);
         }
-        else if(!StrCmp(cmd, "c"))
+        else if (!StrCmp(cmd, "c"))
         {
             Editor::ClearBuf(edd, ch, argument);
         }
-        else if(!StrCmp(cmd, "r"))
+        else if (!StrCmp(cmd, "r"))
         {
             Editor::SearchAndReplace(edd, ch, argument);
         }
-        else if(!StrCmp(cmd, "i"))
+        else if (!StrCmp(cmd, "i"))
         {
             edd->InsertLine(ch, argument);
         }
-        else if(!StrCmp(cmd, "d"))
+        else if (!StrCmp(cmd, "d"))
         {
             edd->DeleteLine(ch, argument);
         }
-        else if(!StrCmp(cmd, "g"))
+        else if (!StrCmp(cmd, "g"))
         {
             edd->GotoLine(ch, argument);
         }
-        else if(!StrCmp(cmd, "l"))
+        else if (!StrCmp(cmd, "l"))
         {
             ch->Echo("\r\n    " + NumberedRuler());
             auto originalColorParser = ch->Desc->ParseColors;
@@ -452,25 +451,25 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
             ch->Desc->ParseColors = originalColorParser;
             ch->Echo("    " + NumberedRuler());
         }
-        else if(!StrCmp(cmd, "v"))
+        else if (!StrCmp(cmd, "v"))
         {
             ch->Echo("\r\n    " + NumberedRuler());
             edd->List(ch, argument);
             ch->Echo("    " + NumberedRuler());
         }
-        else if(!StrCmp(cmd, "a"))
+        else if (!StrCmp(cmd, "a"))
         {
             edd->Abort(ch);
         }
-        else if(!StrCmp(cmd, "s"))
+        else if (!StrCmp(cmd, "s"))
         {
             edd->Save(ch);
         }
-        else if(!StrCmp(cmd, "p"))
+        else if (!StrCmp(cmd, "p"))
         {
             edd->PrintInfo(ch);
         }
-        else if(!StrCmp(cmd, "f"))
+        else if (!StrCmp(cmd, "f"))
         {
             edd->FormatLines(ch, argument);
         }
@@ -479,7 +478,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Uh? Type '/?' to see the list of valid editor commands.\r\n");
         }
 
-        if(StrCmp(cmd, "a") && StrCmp(cmd, "s"))
+        if (StrCmp(cmd, "a") && StrCmp(cmd, "s"))
         {
             ch->Echo("&G> &d");
         }
@@ -491,7 +490,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
      * Kludgy fix. Read_from_buffer in comm.c adds a space on
      * * empty lines. Don't let this fill up usable buffer space..
      */
-    if(!StrCmp(argument, " "))
+    if (!StrCmp(argument, " "))
     {
         argument.erase();
     }
@@ -499,7 +498,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
     linelen = argument.size();
     cont_line = false;
 
-    if(TOTAL_BUFFER_SIZE(edd) + linelen + 2 >= edd->max_size)
+    if (TOTAL_BUFFER_SIZE(edd) + linelen + 2 >= edd->max_size)
     {
         ch->Echo("Buffer full.\r\n");
         edd->Save(ch);
@@ -518,7 +517,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
         /*
          * create a line and advance to it
          */
-        if(!cont_line)
+        if (!cont_line)
         {
             newline = make_new_line("");
             newline->next = edd->on_line->next;
@@ -539,20 +538,20 @@ void Editor::FormatLines(std::shared_ptr<Character> ch, std::string argument)
 {
     EditorLine *eline = first_line;
     int srclen = 0, x = 0, inp = 0;
-    char src[MAX_STRING_LENGTH] = { '\0' };
-    char newsrc[MAX_STRING_LENGTH] = { '\0' };
-    char newsrc2[MAX_STRING_LENGTH] = { '\0' };
+    char src[MAX_STRING_LENGTH] = {'\0'};
+    char newsrc[MAX_STRING_LENGTH] = {'\0'};
+    char newsrc2[MAX_STRING_LENGTH] = {'\0'};
 
-    while(eline)
+    while (eline)
     {
         srclen = strlen(eline->line);
 
-        for(x = 0; x < srclen; x++)
+        for (x = 0; x < srclen; x++)
         {
             src[inp++] = eline->line[x];
         }
 
-        if(src[inp - 1] != ' ' /*&& src[inp - 1] != '.' && src[inp - 1] != '!'*/)
+        if (src[inp - 1] != ' ' /*&& src[inp - 1] != '.' && src[inp - 1] != '!'*/)
         {
             src[inp++] = ' ';
         }
@@ -572,9 +571,9 @@ void Editor::FormatLines(std::shared_ptr<Character> ch, std::string argument)
     inp = 0;
     srclen = strlen(newsrc);
 
-    for(x = 0; x < srclen; x++)
+    for (x = 0; x < srclen; x++)
     {
-        if(newsrc[x] == '\r' || newsrc[x] == '\n')
+        if (newsrc[x] == '\r' || newsrc[x] == '\n')
         {
             x++;
             newsrc2[inp] = '\0';
@@ -596,11 +595,11 @@ void Editor::PrintInfo(std::shared_ptr<Character> ch) const
     int i = 0;
     EditorLine *eline = first_line;
 
-    while(eline)
+    while (eline)
     {
         i++;
 
-        if(eline == on_line)
+        if (eline == on_line)
         {
             break;
         }
@@ -621,72 +620,71 @@ void Editor::Help(std::shared_ptr<Character> ch, std::string argument) const
     int i = 0;
 
     static const char *const arg[] =
-    { "", "l", "v", "c", "d", "g", "i", "r", "a", "f", "p", "s", NULL };
+            {"", "l", "v", "c", "d", "g", "i", "r", "a", "f", "p", "s", NULL};
     static const char *const ceditor_help[] =
+            {
+
+                    /*
+                     * general help
+                     */
+                    "Editing commands\r\n"
+                    "---------------------------------\r\n"
+                    "/l [range]      list buffer with escaped color codes\r\n"
+                    "/v [range]      list buffer with rendered colors\r\n"
+                    "/c              clear buffer\r\n"
+                    "/d <line>       delete line\r\n"
+                    "/g <line>       goto line\r\n"
+                    "/i <line>       insert line\r\n"
+                    "/r <old> <new>  global replace\r\n"
+                    "/a              abort editing\r\n"
+                    "/f [width]      format buffer\r\n"
+                    "/p              print information\r\n"
+                    "/s              save buffer\r\n"
+
+                    "Type /? <command>  to get more information on each command.\r\n\r\n",
+
+                    "/l [range]: Lists the buffer. Shows what you've written. Optionaly\r\n"
+                    "   takes a range of lines as argument. Color codes are escaped.\r\n",
+
+                    "/v [range]: Lists the buffer. Shows what you've written. Optionaly\r\n"
+                    "   takes a range of lines as argument. Colors are rendered.\r\n",
+
+                    "/c: Clears the buffer, leaving only one empty line.\r\n",
+
+                    "/d <line>: Deletes a line. If you delete the line currently being\r\n"
+                    "   edited, the insertion point is moved down if possible, if not, up.\r\n",
+
+                    "/g <line>: Moves the insertion point to a given line.\r\n",
+
+                    "/i <line>: Inserts an empty line before the given line.\r\n",
+
+                    "/r <old text> <new text>: Global search and replace text. The arguments\r\n"
+                    "  are case-sensitive. To replace a multi-word text, surround it with\r\n"
+                    "  single quotes. When inside quotes, you must escape the single quote\r\n"
+                    "  character, double quote character, and the bar: (') becomes (\\'),\r\n"
+                    "  (\") becomes (\\\") and (\\) becomes (\\\\)\r\n",
+
+                    "/a: Aborts edition, terminating the edition session and throwing\r\n"
+                    "   away what you've edited.\r\n",
+
+                    "/f [width]: Format the buffer. The optional argument specifies the\r\n"
+                    "   max width of a line. Defaults to 70. To preserve paragraphs and\r\n"
+                    "   newlines you may insert the (NL) token where appropriate.\r\n",
+
+                    "/p: Prints information about the current editing session.\r\n",
+
+                    "/s: Saves the current buffer, terminating the edition session.\r\n",
+            };
+
+    for (i = 0; arg[i] != NULL; i++)
     {
-
-        /*
-         * general help
-         */
-        "Editing commands\r\n"
-        "---------------------------------\r\n"
-        "/l [range]      list buffer with escaped color codes\r\n"
-        "/v [range]      list buffer with rendered colors\r\n"
-        "/c              clear buffer\r\n"
-        "/d <line>       delete line\r\n"
-        "/g <line>       goto line\r\n"
-        "/i <line>       insert line\r\n"
-        "/r <old> <new>  global replace\r\n"
-        "/a              abort editing\r\n"
-        "/f [width]      format buffer\r\n"
-        "/p              print information\r\n"
-        "/s              save buffer\r\n"
-
-        "Type /? <command>  to get more information on each command.\r\n\r\n",
-
-        "/l [range]: Lists the buffer. Shows what you've written. Optionaly\r\n"
-        "   takes a range of lines as argument. Color codes are escaped.\r\n",
-
-        "/v [range]: Lists the buffer. Shows what you've written. Optionaly\r\n"
-        "   takes a range of lines as argument. Colors are rendered.\r\n",
-
-        "/c: Clears the buffer, leaving only one empty line.\r\n",
-
-        "/d <line>: Deletes a line. If you delete the line currently being\r\n"
-        "   edited, the insertion point is moved down if possible, if not, up.\r\n",
-
-        "/g <line>: Moves the insertion point to a given line.\r\n",
-
-        "/i <line>: Inserts an empty line before the given line.\r\n",
-
-        "/r <old text> <new text>: Global search and replace text. The arguments\r\n"
-        "  are case-sensitive. To replace a multi-word text, surround it with\r\n"
-        "  single quotes. When inside quotes, you must escape the single quote\r\n"
-        "  character, double quote character, and the bar: (') becomes (\\'),\r\n"
-        "  (\") becomes (\\\") and (\\) becomes (\\\\)\r\n",
-
-        "/a: Aborts edition, terminating the edition session and throwing\r\n"
-        "   away what you've edited.\r\n",
-
-        "/f [width]: Format the buffer. The optional argument specifies the\r\n"
-        "   max width of a line. Defaults to 70. To preserve paragraphs and\r\n"
-        "   newlines you may insert the (NL) token where appropriate.\r\n",
-
-
-        "/p: Prints information about the current editing session.\r\n",
-
-        "/s: Saves the current buffer, terminating the edition session.\r\n",
-    };
-
-    for(i = 0; arg[i] != NULL; i++)
-    {
-        if(!StrCmp(argument, arg[i]))
+        if (!StrCmp(argument, arg[i]))
         {
             break;
         }
     }
 
-    if(arg[i] == NULL)
+    if (arg[i] == NULL)
     {
         ch->Echo("No editor help about that.\r\n");
     }
@@ -724,13 +722,13 @@ void Editor::SearchAndReplace(std::shared_ptr<Editor> edd, std::shared_ptr<Chara
     argument = finer_OneArgument(argument, word_src);
     argument = finer_OneArgument(argument, word_dst);
 
-    if(word_src[0] == '\0' || word_dst[0] == '\0')
+    if (word_src[0] == '\0' || word_dst[0] == '\0')
     {
         ch->Echo("Need word to replace, and replacement.\r\n");
         return;
     }
 
-    if(strcmp(word_src, word_dst) == 0)
+    if (strcmp(word_src, word_dst) == 0)
     {
         ch->Echo("Done.\r\n");
         return;
@@ -751,11 +749,11 @@ void Editor::SearchAndReplace(std::shared_ptr<Editor> edd, std::shared_ptr<Chara
     eline = cloned_edd->first_line;
     repl_count = 0;
 
-    while(eline)
+    while (eline)
     {
         new_text =
-            text_replace(eline->line, word_src, word_dst, &new_size,
-                         &line_repl);
+                text_replace(eline->line, word_src, word_dst, &new_size,
+                             &line_repl);
         DISPOSE(eline->line);
         eline->line = new_text;
         cloned_edd->text_size -= eline->line_used;
@@ -766,7 +764,7 @@ void Editor::SearchAndReplace(std::shared_ptr<Editor> edd, std::shared_ptr<Chara
         eline = eline->next;
     }
 
-    if(TOTAL_BUFFER_SIZE(cloned_edd) >= cloned_edd->max_size)
+    if (TOTAL_BUFFER_SIZE(cloned_edd) >= cloned_edd->max_size)
     {
         ch->Echo("&RAs a result of this operation, the buffer would grow\r\n"
                  "larger than its maximum allowed size. Operation has been\r\n"
@@ -785,7 +783,7 @@ void Editor::SearchAndReplace(std::shared_ptr<Editor> edd, std::shared_ptr<Chara
 
 void Editor::InsertLine(std::shared_ptr<Character> ch, std::string arg)
 {
-    if(arg.empty() || !IsNumber(arg))
+    if (arg.empty() || !IsNumber(arg))
     {
         ch->Echo("Must supply the line number.\r\n");
         return;
@@ -793,7 +791,7 @@ void Editor::InsertLine(std::shared_ptr<Character> ch, std::string arg)
 
     int lineindex = strtol(arg.c_str(), 0, 10);
 
-    if(lineindex < 1 || lineindex > line_count)
+    if (lineindex < 1 || lineindex > line_count)
     {
         ch->Echo("Line number is out of range (1-%d).\r\n", line_count);
         return;
@@ -801,7 +799,7 @@ void Editor::InsertLine(std::shared_ptr<Character> ch, std::string arg)
 
     EditorLine *newline = make_new_line("");
 
-    if(lineindex == 1)
+    if (lineindex == 1)
     {
         newline->next = first_line;
         first_line = newline;
@@ -811,7 +809,7 @@ void Editor::InsertLine(std::shared_ptr<Character> ch, std::string arg)
         int num = 1;
         EditorLine *eline = first_line;
 
-        while(num < lineindex - 1)
+        while (num < lineindex - 1)
         {
             eline = eline->next;
             num++;
@@ -830,7 +828,7 @@ void Editor::DeleteLine(std::shared_ptr<Character> ch, std::string arg)
     int lineindex = 0, num = 0;
     EditorLine *prev_line = 0, *del_line = 0;
 
-    if(arg.empty() || !IsNumber(arg))
+    if (arg.empty() || !IsNumber(arg))
     {
         ch->Echo("Must supply the line number.\r\n");
         return;
@@ -838,17 +836,17 @@ void Editor::DeleteLine(std::shared_ptr<Character> ch, std::string arg)
 
     lineindex = strtol(arg.c_str(), 0, 10);
 
-    if(lineindex < 1 || lineindex > line_count)
+    if (lineindex < 1 || lineindex > line_count)
     {
         ch->Echo("Line number is out of range (1-%d).\r\n", line_count);
         return;
     }
 
-    if(lineindex == 1)
+    if (lineindex == 1)
     {
-        if(line_count == 1)
+        if (line_count == 1)
         {
-            if(first_line->line[0] != '\0')
+            if (first_line->line[0] != '\0')
             {
                 first_line->line[0] = '\0';
                 first_line->line_used = 0;
@@ -871,7 +869,7 @@ void Editor::DeleteLine(std::shared_ptr<Character> ch, std::string arg)
         num = 1;
         prev_line = first_line;
 
-        while(num < lineindex - 1)
+        while (num < lineindex - 1)
         {
             prev_line = prev_line->next;
             num++;
@@ -881,13 +879,13 @@ void Editor::DeleteLine(std::shared_ptr<Character> ch, std::string arg)
         prev_line->next = del_line->next;
     }
 
-    if(on_line == del_line)
+    if (on_line == del_line)
     {
-        if(del_line->next)
+        if (del_line->next)
         {
             on_line = del_line->next;
         }
-        else if(prev_line != NULL)
+        else if (prev_line != NULL)
         {
             on_line = prev_line;
         }
@@ -906,7 +904,7 @@ void Editor::DeleteLine(std::shared_ptr<Character> ch, std::string arg)
 
 void Editor::GotoLine(std::shared_ptr<Character> ch, std::string arg)
 {
-    if(arg.empty() || !IsNumber(arg))
+    if (arg.empty() || !IsNumber(arg))
     {
         ch->Echo("Must supply the line number.\r\n");
         return;
@@ -914,7 +912,7 @@ void Editor::GotoLine(std::shared_ptr<Character> ch, std::string arg)
 
     int lineindex = strtol(arg.c_str(), 0, 10);
 
-    if(lineindex < 1 || lineindex > line_count)
+    if (lineindex < 1 || lineindex > line_count)
     {
         ch->Echo("Line number is out of range (1-%d).\r\n", line_count);
         return;
@@ -923,7 +921,7 @@ void Editor::GotoLine(std::shared_ptr<Character> ch, std::string arg)
     on_line = first_line;
     int num = 1;
 
-    while(num < lineindex)
+    while (num < lineindex)
     {
         on_line = on_line->next;
         num++;
@@ -939,7 +937,7 @@ void Editor::List(std::shared_ptr<Character> ch, std::string argument) const
 
     argument = OneArgument(argument, arg1);
 
-    if(!arg1.empty() && IsNumber(arg1))
+    if (!arg1.empty() && IsNumber(arg1))
     {
         from = strtol(arg1.c_str(), 0, 10);
     }
@@ -950,7 +948,7 @@ void Editor::List(std::shared_ptr<Character> ch, std::string argument) const
 
     argument = OneArgument(argument, arg1);
 
-    if(!arg1.empty() && IsNumber(arg1))
+    if (!arg1.empty() && IsNumber(arg1))
     {
         to = strtol(arg1.c_str(), 0, 10);
     }
@@ -962,9 +960,9 @@ void Editor::List(std::shared_ptr<Character> ch, std::string argument) const
     int line_num = 1;
     EditorLine *eline = first_line;
 
-    while(eline)
+    while (eline)
     {
-        if(line_num >= from && line_num <= to)
+        if (line_num >= from && line_num <= to)
         {
             ch->Echo("%2d>%c%s\r\n", line_num,
                      eline == on_line ? '*' : ' ', eline->line);
@@ -994,11 +992,11 @@ void Editor::Save(std::shared_ptr<Character> ch) const
 
 static char *text_replace(char *src, char *word_src, char *word_dst,
                           size_t *pnew_size, size_t *prepl_count)
-    /* Replaces a word word_src in src for word_dst. Returns a pointer to a newly
-     * allocated buffer containing the line with the replacements. Stores in
-     * pnew_size the size of the allocated buffer, wich may be different from the
-     * length of the string and is a multiple of CHAR_BLOCK. Stores in prepl_count
-     * the number of replacements it made */
+/* Replaces a word word_src in src for word_dst. Returns a pointer to a newly
+ * allocated buffer containing the line with the replacements. Stores in
+ * pnew_size the size of the allocated buffer, wich may be different from the
+ * length of the string and is a multiple of CHAR_BLOCK. Stores in prepl_count
+ * the number of replacements it made */
 {
     char *dst_buf = 0;
     char *next_found = 0, *last_found = 0;
@@ -1016,14 +1014,14 @@ static char *text_replace(char *src, char *word_src, char *word_dst,
     last_found = src;
     repl_count = 0;
 
-    for(;; )
+    for (;;)
     {
         /*
          * look for next instance of word
          */
         next_found = strstr(last_found, word_src);
 
-        if(next_found == NULL)
+        if (next_found == NULL)
         {
             /*
              * if theres no more instances of word,
@@ -1068,31 +1066,31 @@ static char *finer_OneArgument(char *argument, char *arg_first)
     u_long count = 0;
     bool escaped = false;
 
-    while(isspace(*argument))
+    while (isspace(*argument))
     {
         argument++;
     }
 
-    if(*argument == '\'' || *argument == '"')
+    if (*argument == '\'' || *argument == '"')
     {
         cEnd = *argument++;
     }
 
     escaped = false;
 
-    while(*argument != '\0' || ++count >= MAX_INPUT_LENGTH)
+    while (*argument != '\0' || ++count >= MAX_INPUT_LENGTH)
     {
-        if(cEnd != ' ' && escaped)
+        if (cEnd != ' ' && escaped)
         {
-            if(*argument == '\\')
+            if (*argument == '\\')
             {
                 *arg_first = '\\';
             }
-            else if(*argument == '\'')
+            else if (*argument == '\'')
             {
                 *arg_first = '\'';
             }
-            else if(*argument == '"')
+            else if (*argument == '"')
             {
                 *arg_first = '"';
             }
@@ -1107,14 +1105,14 @@ static char *finer_OneArgument(char *argument, char *arg_first)
             continue;
         }
 
-        if(cEnd != ' ' && *argument == '\\' && !escaped)
+        if (cEnd != ' ' && *argument == '\\' && !escaped)
         {
             escaped = true;
             argument++;
             continue;
         }
 
-        if(*argument == cEnd)
+        if (*argument == cEnd)
         {
             argument++;
             break;
@@ -1127,7 +1125,7 @@ static char *finer_OneArgument(char *argument, char *arg_first)
 
     *arg_first = '\0';
 
-    while(isspace(*argument))
+    while (isspace(*argument))
     {
         argument++;
     }

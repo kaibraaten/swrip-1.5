@@ -230,7 +230,7 @@ public:
         memset(&MaxTime, 0, sizeof(MaxTime));
     }
 
-    int            NumberOfTimesUsed = 0;
+    int NumberOfTimesUsed = 0;
     timeval TotalTime;
     timeval MinTime;
     timeval MaxTime;
@@ -956,8 +956,6 @@ void ToChannel(const std::string &argument, int channel,
                const std::string &verb, short level);
 void TalkAuction(const std::string &argument);
 bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::shared_ptr<Character> cch);
-bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language);
-int CountLanguages(int languages);
 
 /* act_info.c */
 bool RaceIsAvailableToPlayers(const Race *race);

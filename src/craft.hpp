@@ -129,4 +129,4 @@ std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession>);
 void StartCrafting(std::shared_ptr<CraftingSession>);
 bool IsCrafting(std::shared_ptr<Character> ch);
 
-#endif /* include guard */
+#endif

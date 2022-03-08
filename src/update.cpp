@@ -3097,12 +3097,6 @@ void RebootCheck(time_t reset)
     if(trun != -1 && new_boot_time_t - current_time <= times[trun])
     {
         EchoToAll(AT_YELLOW, tmsg[trun], ECHOTAR_ALL);
-
-        if(trun <= 5)
-        {
-            SysData.DenyNewPlayers = true;
-        }
-
         --trun;
         return;
     }

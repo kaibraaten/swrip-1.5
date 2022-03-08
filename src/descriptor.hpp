@@ -9,7 +9,7 @@
 class Descriptor
 {
 public:
-    Descriptor(socket_t desc);
+    explicit Descriptor(socket_t desc);
     virtual ~Descriptor();
 
     virtual void WriteToBuffer(const std::string &txt, size_t len = 0);

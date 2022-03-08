@@ -6,7 +6,7 @@
 class BuiltinVnumConverter : public VnumConverter
 {
 public:
-    BuiltinVnumConverter(std::shared_ptr<Area> area);
+    explicit BuiltinVnumConverter(std::shared_ptr<Area> area);
     ~BuiltinVnumConverter();
     std::vector<vnum_t> RoomVnums() const override;
     std::vector<vnum_t> ObjectVnums() const override;

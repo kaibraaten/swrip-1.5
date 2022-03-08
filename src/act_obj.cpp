@@ -159,7 +159,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
     }
 
     if(obj->InRoom->Flags.test(Flag::Room::NoFloor)
-       && CAN_GO(obj, DIR_DOWN)
+       && CanGo(obj, DIR_DOWN)
        && !obj->Flags.test(Flag::Obj::Magic))
     {
         auto pexit = GetExit(obj->InRoom, DIR_DOWN);

@@ -95,7 +95,7 @@ class Home
 {
 public:
     Home() = delete;
-    Home(vnum_t room);
+    explicit Home(vnum_t room);
     virtual ~Home();
     std::string Owner() const;
     vnum_t Vnum() const;

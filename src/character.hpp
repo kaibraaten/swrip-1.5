@@ -54,8 +54,8 @@ class Character
 {
 public:
     Character() = delete;
-    Character(std::unique_ptr<class PCData> pcdata);
-    Character(std::shared_ptr<ProtoMobile> protoMob);
+    explicit Character(std::unique_ptr<class PCData> pcdata);
+    explicit Character(std::shared_ptr<ProtoMobile> protoMob);
 
     virtual ~Character();
 

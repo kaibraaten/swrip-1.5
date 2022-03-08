@@ -26,11 +26,6 @@
 #include "pcdata.hpp"
 #include "repos/bountyrepository.hpp"
 
-bool IsBountyOn(std::shared_ptr<Character> victim)
-{
-    return GetBounty(victim->Name) != nullptr;
-}
-
 std::shared_ptr<Bounty> GetBounty(const std::string &name)
 {
     return Bounties->Find([name](const auto &bounty)
