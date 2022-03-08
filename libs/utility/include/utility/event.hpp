@@ -28,144 +28,139 @@
 
 #include <memory>
 #include <functional>
-#include <map>
+#include <unordered_map>
+#include <ranges>
 
-namespace Ceris
+namespace Ceris {
+template<typename ...EventArgT>
+class IEventDispatcher;
+
+template<typename ...EventArgT>
+class Event
 {
-    template<typename EventArgT>
-    class IEventDispatcher;
-
-    template<typename EventArgT>
-    class Event
-    {
-    public:
-        template<typename ObserverT, typename CallableT>
-        unsigned long Add(const ObserverT &observer, const CallableT &callable);
-
-        template<typename CallableT>
-        unsigned long Add(const CallableT &callable);
-
-        void Remove(unsigned long id);
-
-        void Raise(EventArgT &args);
-
-    private:
-        //static unsigned long _lastId;
-        unsigned long GetNextId();
-        unsigned long AddDispatcher(std::shared_ptr<IEventDispatcher<EventArgT>> dispatcher);
-
-        std::multimap<unsigned long, std::shared_ptr<IEventDispatcher<EventArgT>>> _dispatchers;
-    };
-
-    template<typename EventArgT>
-    class IEventDispatcher
-    {
-    public:
-        virtual ~IEventDispatcher()
-        {
-
-        }
-
-        virtual void Call(EventArgT &args) = 0;
-    };
-
-    template<typename EventArgT, typename ObserverT, typename CallableT>
-    class ObserverDispatcher : public IEventDispatcher<EventArgT>
-    {
-    public:
-        ObserverDispatcher(const ObserverT &observer, const CallableT &callback);
-        void Call(EventArgT &args) override;
-
-    private:
-        ObserverT _observer;
-        std::function<void(ObserverT, EventArgT)> _callback;
-    };
-
-    template<typename EventArgT, typename ObserverT, typename CallableT>
-    ObserverDispatcher<EventArgT, ObserverT, CallableT>::ObserverDispatcher(const ObserverT &observer, const CallableT &callback)
-        : _observer(observer),
-        _callback(callback)
-    {
-
-    }
-
-    template<typename EventArgT, typename ObserverT, typename CallableT>
-    void ObserverDispatcher<EventArgT, ObserverT, CallableT>::Call(EventArgT &args)
-    {
-        _callback(_observer, args);
-    }
-
-    template<typename EventArgT, typename CallableT>
-    class FreeFunctionDispatcher : public IEventDispatcher<EventArgT>
-    {
-    public:
-        FreeFunctionDispatcher(const CallableT &callback);
-        void Call(EventArgT &args) override;
-
-    private:
-        std::function<void(EventArgT)> _callback;
-    };
-
-    template<typename EventArgT, typename CallableT>
-    FreeFunctionDispatcher<EventArgT, CallableT>::FreeFunctionDispatcher(const CallableT &callback)
-        : _callback(callback)
-    {
-
-    }
-
-    template<typename EventArgT, typename CallableT>
-    void FreeFunctionDispatcher<EventArgT, CallableT>::Call(EventArgT &args)
-    {
-        _callback(args);
-    }
-
-    template<typename EventArgT>
+public:
     template<typename ObserverT, typename CallableT>
-    unsigned long Event<EventArgT>::Add(const ObserverT &observer, const CallableT &callable)
-    {
-        auto dispatcher = std::make_shared<ObserverDispatcher<EventArgT, ObserverT, CallableT>>(observer, callable);
-        return AddDispatcher(dispatcher);
-    }
+    unsigned long Add(const ObserverT &observer, const CallableT &callable);
 
-    template<typename EventArgT>
     template<typename CallableT>
-    unsigned long Event<EventArgT>::Add(const CallableT &callable)
-    {
-        auto dispatcher = std::make_shared<FreeFunctionDispatcher<EventArgT, CallableT>>(callable);
-        return AddDispatcher(dispatcher);
-    }
+    unsigned long Add(const CallableT &callable);
 
-    template<typename EventArgT>
-    void Event<EventArgT>::Remove(unsigned long id)
-    {
-        _dispatchers.erase(id);
-    }
+    void Remove(unsigned long id);
+    void Raise(const EventArgT &...args);
 
-    template<typename EventArgT>
-    void Event<EventArgT>::Raise(EventArgT &args)
-    {
-        auto dispatchers = _dispatchers;
+private:
+    unsigned long GetNextId();
+    unsigned long AddDispatcher(const std::shared_ptr<IEventDispatcher<EventArgT...>> &dispatcher);
 
-        for(auto d : dispatchers)
-        {
-            d.second->Call(args);
-        }
-    }
+    std::unordered_map<unsigned long, std::shared_ptr<IEventDispatcher<EventArgT...>>> _dispatchers;
+};
 
-    template<typename EventArgT>
-    unsigned long Event<EventArgT>::AddDispatcher(std::shared_ptr<IEventDispatcher<EventArgT>> dispatcher)
-    {
-        unsigned long id = GetNextId();
-        _dispatchers.insert(std::make_pair(id, dispatcher));
-        return id;
-    }
+template<typename ...EventArgT>
+class IEventDispatcher
+{
+public:
+    virtual ~IEventDispatcher() = default;
+    virtual void Call(const EventArgT &...args) = 0;
+};
 
-    template<typename EventArgT>
-    unsigned long Event<EventArgT>::GetNextId()
+template<typename ObserverT, typename CallableT, typename ...EventArgT>
+class ObserverDispatcher : public IEventDispatcher<EventArgT...>
+{
+public:
+    ObserverDispatcher(const ObserverT &observer, const CallableT &callback);
+    void Call(const EventArgT &...args) override;
+
+private:
+    ObserverT _observer;
+    std::function<void(ObserverT, const EventArgT &...)> _callback;
+};
+
+template<typename ObserverT, typename CallableT, typename ...EventArgT>
+ObserverDispatcher<ObserverT, CallableT, EventArgT...>::ObserverDispatcher(const ObserverT &observer,
+                                                                           const CallableT &callback)
+        : _observer(observer),
+          _callback(callback)
+{
+
+}
+
+template<typename ObserverT, typename CallableT, typename ...EventArgT>
+void ObserverDispatcher<ObserverT, CallableT, EventArgT...>::Call(const EventArgT &... args)
+{
+    _callback(_observer, args...);
+}
+
+template<typename CallableT, typename ...EventArgT>
+class FreeFunctionDispatcher : public IEventDispatcher<EventArgT...>
+{
+public:
+    FreeFunctionDispatcher(const CallableT &callback);
+    void Call(const EventArgT &... args) override;
+
+private:
+    std::function<void(const EventArgT &...)> _callback;
+};
+
+template<typename CallableT, typename ...EventArgT>
+FreeFunctionDispatcher<CallableT, EventArgT...>::FreeFunctionDispatcher(const CallableT &callback)
+        : _callback(callback)
+{
+
+}
+
+template<typename CallableT, typename ...EventArgT>
+void FreeFunctionDispatcher<CallableT, EventArgT...>::Call(const EventArgT &...args)
+{
+    _callback(args...);
+}
+
+template<typename ...EventArgT>
+template<typename ObserverT, typename CallableT>
+unsigned long Event<EventArgT...>::Add(const ObserverT &observer, const CallableT &callable)
+{
+    auto dispatcher = std::make_shared<ObserverDispatcher<ObserverT, CallableT, EventArgT...>>(observer, callable);
+    return AddDispatcher(dispatcher);
+}
+
+template<typename ...EventArgT>
+template<typename CallableT>
+unsigned long Event<EventArgT...>::Add(const CallableT &callable)
+{
+    auto dispatcher = std::make_shared<FreeFunctionDispatcher<CallableT, EventArgT...>>(callable);
+    return AddDispatcher(dispatcher);
+}
+
+template<typename ...EventArgT>
+void Event<EventArgT...>::Remove(unsigned long id)
+{
+    _dispatchers.erase(id);
+}
+
+template<typename ...EventArgT>
+void Event<EventArgT...>::Raise(const EventArgT &...args)
+{
+    auto dispatchers = _dispatchers;
+
+    for (const auto &d : dispatchers | std::views::values)
     {
-        static unsigned long _lastId = 0;
-        return ++_lastId;
+        d->Call(args...);
     }
+}
+
+template<typename ...EventArgT>
+unsigned long Event<EventArgT...>::AddDispatcher(const std::shared_ptr<IEventDispatcher<EventArgT...>> &dispatcher)
+{
+    unsigned long id = GetNextId();
+    _dispatchers.insert({id, dispatcher});
+    return id;
+}
+
+template<typename ...EventArgT>
+unsigned long Event<EventArgT...>::GetNextId()
+{
+    static unsigned long _lastId = 0;
+    return ++_lastId;
+}
 }
 
 #endif
