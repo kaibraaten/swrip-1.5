@@ -1,4 +1,4 @@
-#include <utility/algorithms.hpp>
+#include <ranges>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -220,7 +220,9 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
     }
 
     /* start from last to first to get it in the proper order */
-    for (auto d : Reverse(Descriptors->Entities()))
+    const auto descriptors = Descriptors->Entities();
+
+    for (auto d : descriptors | std::views::reverse)
     {
         std::string race;
         char force_char = ' ';

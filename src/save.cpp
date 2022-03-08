@@ -33,12 +33,13 @@
 #endif
 
 #include <filesystem>
+
 namespace fs = std::filesystem;
 
 #include <unordered_map>
 #include <cassert>
 #include <cstring>
-#include <cctype>
+#include <ranges>
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
@@ -89,9 +90,11 @@ std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_
 {
     auto i = SaveEquipment.find(ch);
 
-    if(i == SaveEquipment.end())
+    if (i == SaveEquipment.end())
     {
-        SaveEquipment[ch] = std::vector<std::vector<std::shared_ptr<Object>>>(MAX_WEAR, std::vector<std::shared_ptr<Object>>(MAX_LAYERS));
+        SaveEquipment[ch] = std::vector<std::vector<std::shared_ptr<Object>>>(MAX_WEAR,
+                                                                              std::vector<std::shared_ptr<Object>>(
+                                                                                      MAX_LAYERS));
         return GetSaveEquipment(ch);
     }
 
@@ -107,22 +110,22 @@ void DeEquipCharacter(std::shared_ptr<Character> ch)
     SaveEquipment.erase(ch);
     auto &save_equipment = GetSaveEquipment(ch);
 
-    for(auto obj : ch->Objects())
+    for (auto obj : ch->Objects())
     {
-        if(obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
+        if (obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
         {
             int layer = 0;
 
-            for(layer = 0; layer < MAX_LAYERS; ++layer)
+            for (layer = 0; layer < MAX_LAYERS; ++layer)
             {
-                if(save_equipment[obj->WearLoc][layer] == nullptr)
+                if (save_equipment[obj->WearLoc][layer] == nullptr)
                 {
                     save_equipment[obj->WearLoc][layer] = obj;
                     break;
                 }
             }
 
-            if(layer == MAX_LAYERS)
+            if (layer == MAX_LAYERS)
             {
                 Log->Bug("%s had on more than %d layers of clothing in one location (%d): %s",
                          ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str());
@@ -139,16 +142,16 @@ void DeEquipCharacter(std::shared_ptr<Character> ch)
 void ReEquipCharacter(std::shared_ptr<Character> ch)
 {
     auto &save_equipment = GetSaveEquipment(ch);
-    
-    for(int wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
+
+    for (int wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
     {
-        for(int layer = 0; layer < MAX_LAYERS; ++layer)
+        for (int layer = 0; layer < MAX_LAYERS; ++layer)
         {
-            if(save_equipment[wearLoc][layer] != nullptr)
+            if (save_equipment[wearLoc][layer] != nullptr)
             {
                 if (quitting_char.lock() != ch)
                 {
-                    EquipCharacter(ch, save_equipment[wearLoc][layer], (WearLocation)wearLoc);
+                    EquipCharacter(ch, save_equipment[wearLoc][layer], (WearLocation) wearLoc);
                 }
 
                 save_equipment[wearLoc][layer].reset();
@@ -165,7 +168,7 @@ void ReEquipCharacter(std::shared_ptr<Character> ch)
 
 void SaveHome(std::shared_ptr<Character> ch)
 {
-    for(auto home : Homes->FindHomesForResident(ch->Name))
+    for (auto home : Homes->FindHomesForResident(ch->Name))
     {
         Homes->Save(home);
     }
@@ -232,7 +235,7 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
      * Slick recursion to write lists backwards,
      *   so loading them will load in forwards order.
      */
-    for (auto content : Reverse(obj->Objects()))
+    for (auto content : obj->Objects() | std::views::reverse)
     {
         WriteObject(ch, content, fp, iNest, OS_CARRY);
     }
@@ -314,7 +317,7 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
     wear_loc = -1;
 
     auto &save_equipment = GetSaveEquipment(ch);
-    
+
     for (wear = 0; wear < MAX_WEAR; wear++)
     {
         for (x = 0; x < MAX_LAYERS; x++)
@@ -370,52 +373,52 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
 
     switch (obj->ItemType)
     {
-    case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
-    case ITEM_POTION:
-        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
-        {
-            fprintf(fp, "Spell 1      '%s'\n",
-                    SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str());
-        }
+        case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
+        case ITEM_POTION:
+            if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
+            {
+                fprintf(fp, "Spell 1      '%s'\n",
+                        SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str());
+            }
 
-        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
-        {
-            fprintf(fp, "Spell 2      '%s'\n",
-                    SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str());
-        }
+            if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
+            {
+                fprintf(fp, "Spell 2      '%s'\n",
+                        SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str());
+            }
 
-        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
-        {
-            fprintf(fp, "Spell 3      '%s'\n",
-                    SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str());
-        }
-        break;
+            if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
+            {
+                fprintf(fp, "Spell 3      '%s'\n",
+                        SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str());
+            }
+            break;
 
-    case ITEM_DEVICE:
-        if (IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
-        {
-            fprintf(fp, "Spell 3      '%s'\n",
-                    SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str());
-        }
-        break;
+        case ITEM_DEVICE:
+            if (IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
+            {
+                fprintf(fp, "Spell 3      '%s'\n",
+                        SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str());
+            }
+            break;
 
-    case ITEM_SALVE:
-        if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
-        {
-            fprintf(fp, "Spell 4      '%s'\n",
-                    SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str());
-        }
+        case ITEM_SALVE:
+            if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
+            {
+                fprintf(fp, "Spell 4      '%s'\n",
+                        SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str());
+            }
 
-        if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
-        {
-            fprintf(fp, "Spell 5      '%s'\n",
-                    SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str());
-        }
+            if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
+            {
+                fprintf(fp, "Spell 5      '%s'\n",
+                        SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str());
+            }
 
-        break;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     for (auto paf : obj->Affects())
@@ -436,7 +439,7 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
                     ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
                     paf->Location,
                     paf->AffectedBy.to_ulong()
-                );
+            );
         }
         else
         {
@@ -451,7 +454,7 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
                     ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
                     paf->Location,
                     paf->AffectedBy.to_ulong()
-                );
+            );
         }
     }
 
@@ -463,7 +466,7 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
 
     fprintf(fp, "End\n\n");
 
-    for (auto content : Reverse(obj->Objects()))
+    for (auto content : obj->Objects() | std::views::reverse)
     {
         WriteObject(ch, content, fp, iNest + 1, OS_CARRY);
     }
@@ -477,311 +480,321 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
     std::shared_ptr<Room> room;
     auto obj = std::make_shared<Object>();
 
-    for (; ; )
+    for (;;)
     {
         std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch (CharToUppercase(word[0]))
         {
-        case '*':
-            fMatch = true;
-            ReadToEndOfLine(fp, fBootDb);
-            break;
+            case '*':
+                fMatch = true;
+                ReadToEndOfLine(fp, fBootDb);
+                break;
 
-        case 'A':
-            if (!StrCmp(word, "Affect") || !StrCmp(word, "AffectData"))
-            {
-                std::shared_ptr<Affect> paf = std::make_shared<Affect>();
-                int pafmod = 0;
-
-                if (!StrCmp(word, "Affect"))
+            case 'A':
+                if (!StrCmp(word, "Affect") || !StrCmp(word, "AffectData"))
                 {
-                    paf->Type = ReadInt(fp, fBootDb);
+                    std::shared_ptr<Affect> paf = std::make_shared<Affect>();
+                    int pafmod = 0;
+
+                    if (!StrCmp(word, "Affect"))
+                    {
+                        paf->Type = ReadInt(fp, fBootDb);
+                    }
+                    else
+                    {
+                        int sn = LookupSkill(ReadWord(fp, fBootDb));
+
+                        if (sn < 0)
+                        {
+                            Log->Bug("%s (%d): unknown skill sn %d.",
+                                     __FUNCTION__, __LINE__, sn);
+                        }
+                        else
+                        {
+                            paf->Type = sn;
+                        }
+                    }
+
+                    paf->Duration = ReadInt(fp, fBootDb);
+                    pafmod = ReadInt(fp, fBootDb);
+                    paf->Location = ReadInt(fp, fBootDb);
+                    paf->AffectedBy = ReadInt(fp, fBootDb);
+
+                    if (paf->Location == APPLY_WEAPONSPELL
+                        || paf->Location == APPLY_WEARSPELL
+                        || paf->Location == APPLY_REMOVESPELL)
+                    {
+                        paf->Modifier = SkillNumberFromSlot(pafmod);
+                    }
+                    else
+                    {
+                        paf->Modifier = pafmod;
+                    }
+
+                    obj->Add(paf);
+                    fMatch = true;
+                    break;
                 }
-                else
+
+                KEY("Actiondesc", obj->ActionDescription, ReadStringToTilde(fp, fBootDb));
+                break;
+
+            case 'C':
+                KEY("Cost", obj->Cost, ReadInt(fp, fBootDb));
+                KEY("Count", obj->Count, ReadInt(fp, fBootDb));
+                break;
+
+            case 'D':
+                KEY("Description", obj->Description, ReadStringToTilde(fp, fBootDb));
+                break;
+
+            case 'E':
+                KEY("ExtraFlags", obj->Flags, ReadInt(fp, fBootDb));
+
+                if (!StrCmp(word, "ExtraDescr"))
                 {
+                    auto ed = std::make_shared<ExtraDescription>();
+
+                    ed->Keyword = ReadStringToTilde(fp, fBootDb);
+                    ed->Description = ReadStringToTilde(fp, fBootDb);
+                    obj->Add(ed);
+                    fMatch = true;
+                }
+
+                if (!StrCmp(word, "End"))
+                {
+                    if (!fNest || !fVnum)
+                    {
+                        Log->Bug("Fread_obj: incomplete object.");
+                        return;
+                    }
+                    else
+                    {
+                        short wear_loc = obj->WearLoc;
+
+                        if (obj->Name.empty())
+                        {
+                            obj->Name = obj->Prototype->Name;
+                        }
+
+                        if (obj->Description.empty())
+                        {
+                            obj->Description = obj->Prototype->Description;
+                        }
+
+                        if (obj->ShortDescr.empty())
+                        {
+                            obj->ShortDescr = obj->Prototype->ShortDescr;
+                        }
+
+                        if (obj->ActionDescription.empty())
+                        {
+                            obj->ActionDescription = obj->Prototype->ActionDescription;
+                        }
+
+                        Objects->Add(obj);
+                        obj->Prototype->Count += obj->Count;
+
+                        if (!obj->Serial)
+                        {
+                            cur_obj_serial = umax((cur_obj_serial + 1) & (BV30 - 1), 1);
+                            obj->Serial = obj->Prototype->Serial = cur_obj_serial;
+                        }
+
+                        if (fNest)
+                        {
+                            rgObjNest[iNest] = obj;
+                        }
+
+                        numobjsloaded += obj->Count;
+                        ++physicalobjects;
+
+                        if (file_ver > 1 || obj->WearLoc < -1
+                            || obj->WearLoc >= MAX_WEAR)
+                        {
+                            obj->WearLoc = WEAR_NONE;
+                        }
+
+                        /* Corpse saving. -- Altrag */
+                        if (os_type == OS_CORPSE)
+                        {
+                            if (!room)
+                            {
+                                Log->Bug("Fread_obj: Corpse without room");
+                                room = GetRoom(ROOM_VNUM_LIMBO);
+                            }
+
+                            obj = ObjectToRoom(obj, room);
+                        }
+                        else if (iNest == 0 || rgObjNest[iNest] == NULL)
+                        {
+                            int slot = 0;
+                            bool reslot = false;
+                            auto &save_equipment = GetSaveEquipment(ch);
+
+                            if (file_ver > 1
+                                && wear_loc > -1
+                                && wear_loc < MAX_WEAR)
+                            {
+                                int x = 0;
+
+                                for (x = 0; x < MAX_LAYERS; x++)
+                                {
+                                    if (save_equipment[wear_loc][x] == nullptr)
+                                    {
+                                        save_equipment[wear_loc][x] = obj;
+                                        slot = x;
+                                        reslot = true;
+                                        break;
+                                    }
+                                }
+
+                                if (x == MAX_LAYERS)
+                                {
+                                    Log->Bug("Fread_obj: too many layers %d", wear_loc);
+                                }
+                            }
+
+                            obj = ObjectToCharacter(obj, ch);
+
+                            if (reslot)
+                            {
+                                save_equipment[wear_loc][slot] = obj;
+                            }
+                        }
+                        else
+                        {
+                            if (rgObjNest[iNest - 1])
+                            {
+                                SeparateOneObjectFromGroup(rgObjNest[iNest - 1]);
+                                obj = ObjectToObject(obj, rgObjNest[iNest - 1]);
+                            }
+                            else
+                            {
+                                Log->Bug("Fread_obj: nest layer missing %d", iNest - 1);
+                            }
+                        }
+
+                        if (fNest)
+                        {
+                            rgObjNest[iNest] = obj;
+                        }
+
+                        return;
+                    }
+                }
+                break;
+
+            case 'I':
+                KEY("ItemType", obj->ItemType, (ItemTypes) ReadInt(fp, fBootDb));
+                break;
+
+            case 'L':
+                KEY("Level", obj->Level, ReadInt(fp, fBootDb));
+                break;
+
+            case 'N':
+                KEY("Name", obj->Name, ReadStringToTilde(fp, fBootDb));
+
+                if (!StrCmp(word, "Nest"))
+                {
+                    iNest = ReadInt(fp, fBootDb);
+
+                    if (iNest < 0 || iNest >= MAX_NEST)
+                    {
+                        Log->Bug("Fread_obj: bad nest %d.", iNest);
+                        iNest = 0;
+                        fNest = false;
+                    }
+
+                    fMatch = true;
+                }
+                break;
+
+            case 'R':
+                KEY("Room", room, GetRoom(ReadInt(fp, fBootDb)));
+
+            case 'S':
+                KEY("ShortDescr", obj->ShortDescr, ReadStringToTilde(fp, fBootDb));
+
+                if (!StrCmp(word, "Spell"))
+                {
+                    int iValue = ReadInt(fp, fBootDb);
                     int sn = LookupSkill(ReadWord(fp, fBootDb));
 
-                    if (sn < 0)
+                    if (iValue < 0 || iValue > 5)
+                    {
+                        Log->Bug("Fread_obj: bad iValue %d.", iValue);
+                    }
+                    else if (sn < 0)
                     {
                         Log->Bug("%s (%d): unknown skill sn %d.",
                                  __FUNCTION__, __LINE__, sn);
                     }
                     else
                     {
-                        paf->Type = sn;
+                        obj->Value[iValue] = sn;
                     }
+
+                    fMatch = true;
+                    break;
                 }
 
-                paf->Duration = ReadInt(fp, fBootDb);
-                pafmod = ReadInt(fp, fBootDb);
-                paf->Location = ReadInt(fp, fBootDb);
-                paf->AffectedBy = ReadInt(fp, fBootDb);
-
-                if (paf->Location == APPLY_WEAPONSPELL
-                    || paf->Location == APPLY_WEARSPELL
-                    || paf->Location == APPLY_REMOVESPELL)
-                {
-                    paf->Modifier = SkillNumberFromSlot(pafmod);
-                }
-                else
-                {
-                    paf->Modifier = pafmod;
-                }
-
-                obj->Add(paf);
-                fMatch = true;
                 break;
-            }
 
-            KEY("Actiondesc", obj->ActionDescription, ReadStringToTilde(fp, fBootDb));
-            break;
+            case 'T':
+                KEY("Timer", obj->Timer, ReadInt(fp, fBootDb));
+                break;
 
-        case 'C':
-            KEY("Cost", obj->Cost, ReadInt(fp, fBootDb));
-            KEY("Count", obj->Count, ReadInt(fp, fBootDb));
-            break;
-
-        case 'D':
-            KEY("Description", obj->Description, ReadStringToTilde(fp, fBootDb));
-            break;
-
-        case 'E':
-            KEY("ExtraFlags", obj->Flags, ReadInt(fp, fBootDb));
-
-            if (!StrCmp(word, "ExtraDescr"))
-            {
-                auto ed = std::make_shared<ExtraDescription>();
-
-                ed->Keyword = ReadStringToTilde(fp, fBootDb);
-                ed->Description = ReadStringToTilde(fp, fBootDb);
-                obj->Add(ed);
-                fMatch = true;
-            }
-
-            if (!StrCmp(word, "End"))
-            {
-                if (!fNest || !fVnum)
+            case 'V':
+                if (!StrCmp(word, "Values"))
                 {
-                    Log->Bug("Fread_obj: incomplete object.");
-                    return;
+                    int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
+                    std::string ln = ReadLine(fp, fBootDb);
+
+                    sscanf(ln.c_str(), "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
+
+                    obj->Value[0] = x1;
+                    obj->Value[1] = x2;
+                    obj->Value[2] = x3;
+                    obj->Value[3] = x4;
+                    obj->Value[4] = x5;
+                    obj->Value[5] = x6;
+                    fMatch = true;
+                    break;
                 }
-                else
+
+                if (!StrCmp(word, "Vnum"))
                 {
-                    short wear_loc = obj->WearLoc;
+                    vnum_t vnum = ReadInt(fp, fBootDb);
 
-                    if (obj->Name.empty())
-                        obj->Name = obj->Prototype->Name;
-
-                    if (obj->Description.empty())
-                        obj->Description = obj->Prototype->Description;
-
-                    if (obj->ShortDescr.empty())
-                        obj->ShortDescr = obj->Prototype->ShortDescr;
-
-                    if (obj->ActionDescription.empty())
-                        obj->ActionDescription = obj->Prototype->ActionDescription;
-
-                    Objects->Add(obj);
-                    obj->Prototype->Count += obj->Count;
-
-                    if (!obj->Serial)
+                    if ((obj->Prototype = GetProtoObject(vnum)) == NULL)
                     {
-                        cur_obj_serial = umax((cur_obj_serial + 1) & (BV30 - 1), 1);
-                        obj->Serial = obj->Prototype->Serial = cur_obj_serial;
-                    }
-
-                    if (fNest)
-                        rgObjNest[iNest] = obj;
-
-                    numobjsloaded += obj->Count;
-                    ++physicalobjects;
-
-                    if (file_ver > 1 || obj->WearLoc < -1
-                        || obj->WearLoc >= MAX_WEAR)
-                    {
-                        obj->WearLoc = WEAR_NONE;
-                    }
-
-                    /* Corpse saving. -- Altrag */
-                    if (os_type == OS_CORPSE)
-                    {
-                        if (!room)
-                        {
-                            Log->Bug("Fread_obj: Corpse without room");
-                            room = GetRoom(ROOM_VNUM_LIMBO);
-                        }
-
-                        obj = ObjectToRoom(obj, room);
-                    }
-                    else if (iNest == 0 || rgObjNest[iNest] == NULL)
-                    {
-                        int slot = 0;
-                        bool reslot = false;
-                        auto &save_equipment = GetSaveEquipment(ch);
-                        
-                        if (file_ver > 1
-                            && wear_loc > -1
-                            && wear_loc < MAX_WEAR)
-                        {
-                            int x = 0;
-
-                            for (x = 0; x < MAX_LAYERS; x++)
-                            {
-                                if (save_equipment[wear_loc][x] == nullptr)
-                                {
-                                    save_equipment[wear_loc][x] = obj;
-                                    slot = x;
-                                    reslot = true;
-                                    break;
-                                }
-                            }
-
-                            if (x == MAX_LAYERS)
-                            {
-                                Log->Bug("Fread_obj: too many layers %d", wear_loc);
-                            }
-                        }
-
-                        obj = ObjectToCharacter(obj, ch);
-
-                        if (reslot)
-                        {
-                            save_equipment[wear_loc][slot] = obj;
-                        }
+                        fVnum = false;
+                        Log->Bug("Fread_obj: bad vnum %ld.", vnum);
                     }
                     else
                     {
-                        if (rgObjNest[iNest - 1])
-                        {
-                            SeparateOneObjectFromGroup(rgObjNest[iNest - 1]);
-                            obj = ObjectToObject(obj, rgObjNest[iNest - 1]);
-                        }
-                        else
-                        {
-                            Log->Bug("Fread_obj: nest layer missing %d", iNest - 1);
-                        }
+                        fVnum = true;
+                        obj->Cost = obj->Prototype->Cost;
+                        obj->Weight = obj->Prototype->Weight;
+                        obj->ItemType = obj->Prototype->ItemType;
+                        obj->WearFlags = obj->Prototype->WearFlags;
+                        obj->Flags = obj->Prototype->Flags;
                     }
 
-                    if (fNest)
-                    {
-                        rgObjNest[iNest] = obj;
-                    }
-
-                    return;
+                    fMatch = true;
+                    break;
                 }
-            }
-            break;
-
-        case 'I':
-            KEY("ItemType", obj->ItemType, (ItemTypes)ReadInt(fp, fBootDb));
-            break;
-
-        case 'L':
-            KEY("Level", obj->Level, ReadInt(fp, fBootDb));
-            break;
-
-        case 'N':
-            KEY("Name", obj->Name, ReadStringToTilde(fp, fBootDb));
-
-            if (!StrCmp(word, "Nest"))
-            {
-                iNest = ReadInt(fp, fBootDb);
-
-                if (iNest < 0 || iNest >= MAX_NEST)
-                {
-                    Log->Bug("Fread_obj: bad nest %d.", iNest);
-                    iNest = 0;
-                    fNest = false;
-                }
-
-                fMatch = true;
-            }
-            break;
-
-        case 'R':
-            KEY("Room", room, GetRoom(ReadInt(fp, fBootDb)));
-
-        case 'S':
-            KEY("ShortDescr", obj->ShortDescr, ReadStringToTilde(fp, fBootDb));
-
-            if (!StrCmp(word, "Spell"))
-            {
-                int iValue = ReadInt(fp, fBootDb);
-                int sn = LookupSkill(ReadWord(fp, fBootDb));
-
-                if (iValue < 0 || iValue > 5)
-                {
-                    Log->Bug("Fread_obj: bad iValue %d.", iValue);
-                }
-                else if (sn < 0)
-                {
-                    Log->Bug("%s (%d): unknown skill sn %d.",
-                             __FUNCTION__, __LINE__, sn);
-                }
-                else
-                {
-                    obj->Value[iValue] = sn;
-                }
-
-                fMatch = true;
                 break;
-            }
 
-            break;
-
-        case 'T':
-            KEY("Timer", obj->Timer, ReadInt(fp, fBootDb));
-            break;
-
-        case 'V':
-            if (!StrCmp(word, "Values"))
-            {
-                int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-                std::string ln = ReadLine(fp, fBootDb);
-
-                sscanf(ln.c_str(), "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
-
-                obj->Value[0] = x1;
-                obj->Value[1] = x2;
-                obj->Value[2] = x3;
-                obj->Value[3] = x4;
-                obj->Value[4] = x5;
-                obj->Value[5] = x6;
-                fMatch = true;
+            case 'W':
+                KEY("WearFlags", obj->WearFlags, ReadInt(fp, fBootDb));
+                KEY("WearLoc", obj->WearLoc, (WearLocation) ReadInt(fp, fBootDb));
+                KEY("Weight", obj->Weight, ReadInt(fp, fBootDb));
                 break;
-            }
-
-            if (!StrCmp(word, "Vnum"))
-            {
-                vnum_t vnum = ReadInt(fp, fBootDb);
-
-                if ((obj->Prototype = GetProtoObject(vnum)) == NULL)
-                {
-                    fVnum = false;
-                    Log->Bug("Fread_obj: bad vnum %ld.", vnum);
-                }
-                else
-                {
-                    fVnum = true;
-                    obj->Cost = obj->Prototype->Cost;
-                    obj->Weight = obj->Prototype->Weight;
-                    obj->ItemType = obj->Prototype->ItemType;
-                    obj->WearFlags = obj->Prototype->WearFlags;
-                    obj->Flags = obj->Prototype->Flags;
-                }
-
-                fMatch = true;
-                break;
-            }
-            break;
-
-        case 'W':
-            KEY("WearFlags", obj->WearFlags, ReadInt(fp, fBootDb));
-            KEY("WearLoc", obj->WearLoc, (WearLocation)ReadInt(fp, fBootDb));
-            KEY("Weight", obj->Weight, ReadInt(fp, fBootDb));
-            break;
 
         }
 
@@ -877,7 +890,7 @@ void LoadCorpses()
     {
         falling = 1; /* Arbitrary, must be >0 though. */
 
-        for(const auto &entry : fs::directory_iterator(CORPSE_DIR))
+        for (const auto &entry : fs::directory_iterator(CORPSE_DIR))
         {
             std::string filename = entry.path().filename().string();
 
@@ -893,7 +906,7 @@ void LoadCorpses()
                     continue;
                 }
 
-                for (; ; )
+                for (;;)
                 {
                     const char letter = ReadChar(fpArea, fBootDb);
 
@@ -934,7 +947,7 @@ void LoadCorpses()
             }
         }
     }
-    catch(const fs::filesystem_error&)
+    catch (const fs::filesystem_error &)
     {
         Log->Bug("%s: can't open CORPSE_DIR", __FUNCTION__);
         perror(CORPSE_DIR);

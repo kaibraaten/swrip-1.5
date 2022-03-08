@@ -1,5 +1,5 @@
 #include <cstring>
-#include <utility/algorithms.hpp>
+#include <ranges>
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -125,7 +125,7 @@ void do_buy(std::shared_ptr<Character> ch, std::string argument)
             bool ofound = false;
             const int oref = strtol(arg.substr(1).c_str(), nullptr, 10);
 
-            for(auto iter : Reverse(keeper->Objects()))
+            for(auto iter : keeper->Objects() | std::views::reverse)
             {
                 if(iter->WearLoc == WEAR_NONE
                    && CanSeeObject(ch, iter))

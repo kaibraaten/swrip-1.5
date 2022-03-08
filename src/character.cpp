@@ -19,7 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <cstring>
+#include <ranges>
 #include <cassert>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
@@ -732,7 +732,7 @@ std::shared_ptr<Object> GetCarriedObject(std::shared_ptr<Character> ch, const st
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for(auto obj : Reverse(ch->Objects()))
+    for(auto obj : ch->Objects() | std::views::reverse)
     {
         if(obj->WearLoc == WEAR_NONE
            && CanSeeObject(ch, obj)
@@ -758,7 +758,7 @@ std::shared_ptr<Object> GetCarriedObject(std::shared_ptr<Character> ch, const st
     */
     count = 0;
 
-    for(auto obj : Reverse(ch->Objects()))
+    for(auto obj : ch->Objects() | std::views::reverse)
     {
         if(obj->WearLoc == WEAR_NONE
            && CanSeeObject(ch, obj)
@@ -796,7 +796,7 @@ std::shared_ptr<Object> GetWornObject(std::shared_ptr<Character> ch, const std::
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for(auto obj : Reverse(ch->Objects()))
+    for(auto obj : ch->Objects() | std::views::reverse)
     {
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)
@@ -820,7 +820,7 @@ std::shared_ptr<Object> GetWornObject(std::shared_ptr<Character> ch, const std::
     */
     count = 0;
 
-    for(auto obj : Reverse(ch->Objects()))
+    for(auto obj : ch->Objects() | std::views::reverse)
     {
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)

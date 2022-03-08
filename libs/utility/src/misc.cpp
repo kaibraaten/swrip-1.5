@@ -172,7 +172,7 @@ char *StripColorCodes(char *text)
 std::string PunctuateNumber(long number)
 {
     bool isNegative = number < 0;
-    auto str = std::to_string(abs(number));
+    auto str = std::to_string(std::abs(number));
     std::ostringstream buf;
     int counter = 0;
     
@@ -192,7 +192,7 @@ std::string PunctuateNumber(long number)
         buf << "-";
     }
     
-    return Reverse(buf.str());
+    return {std::rbegin(buf.str()), std::rend(buf.str()) };
 }
 
 long ToLong(const std::string &str)

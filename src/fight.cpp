@@ -2630,9 +2630,9 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     }
     else
     {
-        auto carriedByVictim = Reverse(victim->Objects());
+        auto carriedByVictim = victim->Objects();
 
-        for (auto obj : carriedByVictim)
+        for (auto obj : carriedByVictim | std::views::reverse)
         {
             ObjectFromCharacter(obj);
             ExtractObject(obj);

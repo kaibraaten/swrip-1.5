@@ -104,6 +104,7 @@ TEST_F(AlgorithmsTests, Filter_WorksWithFunctionPointer)
     EXPECT_EQ(reduced.size(), original.size() - 1);
 }
 
+/*
 #ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(AlgorithmsTests, Reverse_WorksWithList)
 {
@@ -129,7 +130,7 @@ TEST_F(AlgorithmsTests, Reverse_WorksWithVector)
     EXPECT_THAT(expected, ::testing::ContainerEq(actual));
 }
 #endif
-
+*/
 TEST_F(AlgorithmsTests, Count)
 {
     const int minAge = 25;

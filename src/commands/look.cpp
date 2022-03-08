@@ -1,5 +1,6 @@
 #include <cstring>
 #include <cctype>
+#include <ranges>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
@@ -120,8 +121,9 @@ void do_look(std::shared_ptr<Character> ch, std::string argument)
     }
 
     number = NumberArgument(arg1, arg);
+    const auto objectCarried = ch->Objects();
 
-    for(auto obj : Reverse(ch->Objects()))
+    for(auto obj : ch->Objects() | std::views::reverse)
     {
         if(CanSeeObject(ch, obj))
         {
@@ -181,7 +183,9 @@ void do_look(std::shared_ptr<Character> ch, std::string argument)
         }
     }
 
-    for(auto obj : Reverse(ch->InRoom->Objects()))
+    const auto objectsInRoom = ch->InRoom->Objects();
+
+    for(auto obj : ch->InRoom->Objects() | std::views::reverse)
     {
         if(CanSeeObject(ch, obj))
         {

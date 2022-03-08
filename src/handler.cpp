@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <ranges>
 #include <cstring>
 #include <cassert>
 #include <utility/algorithms.hpp>
@@ -1454,7 +1455,7 @@ std::shared_ptr<Character> GetCharacterAnywhere(std::shared_ptr<Character> ch, s
  */
 std::shared_ptr<Object> GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndex)
 {
-    return Find(Reverse(Objects->Entities()),
+    return Find(Objects->Entities() | std::views::reverse,
                 [pObjIndex](const auto obj)
                 {
                     return obj->Prototype == pObjIndex;
@@ -1512,7 +1513,7 @@ std::shared_ptr<Object> GetObjectInListReverse(std::shared_ptr<Character> ch, st
     int count = 0;
     int number = NumberArgument(argument, arg);
 
-    for(auto obj : Reverse(list))
+    for(auto obj : list | std::views::reverse)
     {
         if(CanSeeObject(ch, obj)
            && (NiftyIsName(arg, obj->Name)
@@ -1531,7 +1532,7 @@ std::shared_ptr<Object> GetObjectInListReverse(std::shared_ptr<Character> ch, st
     */
     count = 0;
 
-    for(auto obj : Reverse(list))
+    for(auto obj : list | std::views::reverse)
     {
         if(CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
         {
