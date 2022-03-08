@@ -28,7 +28,6 @@
 constexpr vnum_t INVALID_VNUM = 0;
 
 constexpr auto DUR_CONV = 23.333333333333333333333333;
-constexpr auto HIDDEN_TILDE = '*';
 
 constexpr auto BV00 = 1 << 0;
 constexpr auto BV01 = 1 << 1;
@@ -64,44 +63,41 @@ constexpr auto BV30 = 1 << 30;
 constexpr auto BV31 = 1 << 31;
 /* 32 USED! DO NOT ADD MORE! SB */
 
-namespace Flag
-{
-    constexpr size_t MAX = 32;
+namespace Flag {
+constexpr size_t MAX = 32;
+}
 
-    namespace Wanted
-    {
-        enum :size_t
-        {
-            Coruscant,
-            Kashyyyk,
-            Ryloth,
-            _03,
-            _04,
-            MonCalamari,
-            Honoghr,
-            Gamorr,
-            Tatooine,
-            Adari,
-            Byss,
-            Endor,
-            _12,
-            _13,
-            _14,
-            _15,
-            Corellia,
-            Hoth,
-            _18,
-            _19,
-            Kuat
-        };
-    }
+namespace Flag::Wanted {
+enum : size_t
+{
+    Coruscant,
+    Kashyyyk,
+    Ryloth,
+    _03,
+    _04,
+    MonCalamari,
+    Honoghr,
+    Gamorr,
+    Tatooine,
+    Adari,
+    Byss,
+    Endor,
+    _12,
+    _13,
+    _14,
+    _15,
+    Corellia,
+    Hoth,
+    _18,
+    _19,
+    Kuat
+};
 }
 
 constexpr auto MAX_LAYERS = 8;      /* maximum clothing layers */
 constexpr auto MAX_NEST = 100;      /* maximum container nesting */
 
 constexpr auto MAX_KILLTRACK = 20;      /* track mob vnums killed */
-constexpr auto MAX_COMMAND = 126; /* Size of CommandTable */
 constexpr auto MAX_STAT = 25;
 
 /*
@@ -121,10 +117,6 @@ constexpr auto MAX_SKILL = 276;
 constexpr auto MAX_NPC_RACE = 91;
 constexpr auto MAX_LEVEL = 105;
 constexpr auto MAX_ABILITY_LEVEL = 150;
-constexpr auto MAX_CLAN = 50;
-constexpr auto MAX_PLANET = 100;
-constexpr auto MAX_SHIP = 1000;
-constexpr auto MAX_BOUNTY = 255;
 
 constexpr auto MAX_HERB = 20;
 
@@ -136,7 +128,6 @@ constexpr auto LEVEL_IMMORTAL = MAX_LEVEL - 4;
 constexpr auto LEVEL_AVATAR = MAX_LEVEL - 5;
 
 constexpr auto LEVEL_LOG = LEVEL_CREATOR;
-constexpr auto LEVEL_HIGOD = LEVEL_GREATER;
 
 inline vnum_t MOB_VNUM_VENDOR = 4;  /*vnum of vendor*/
 constexpr auto LEVEL_BUY_VENDOR = 50;  /* minimum level to buy a vendor */
@@ -210,7 +201,6 @@ constexpr auto ECHOTAR_IMM = 2;
 /* defines for new do_who */
 constexpr auto WT_MORTAL = 0;
 constexpr auto WT_IMM = 2;
-constexpr auto WT_AVATAR = 1;
 constexpr auto WT_NEWBIE = 3;
 
 /* object saving defines for fread/write_obj. -- Altrag */
@@ -220,7 +210,7 @@ constexpr auto OS_CORPSE = 1;
 /*
  * Time and weather stuff.
  */
- /* Sun position */
+/* Sun position */
 enum class SunPosition
 {
     Dark,
@@ -398,7 +388,6 @@ constexpr auto AT_PLAIN = AT_GREY;
 constexpr auto AT_ACTION = AT_GREY;
 constexpr auto AT_SAY = AT_WHITE;
 constexpr auto AT_GOSSIP = AT_LBLUE;
-constexpr auto AT_YELL = AT_WHITE;
 constexpr auto AT_TELL = AT_BLUE;
 constexpr auto AT_HIT = AT_WHITE;
 constexpr auto AT_HITME = AT_YELLOW;
@@ -416,14 +405,11 @@ constexpr auto AT_SOCIAL = AT_GREY;
 constexpr auto AT_DYING = AT_YELLOW;
 constexpr auto AT_DEAD = AT_RED;
 constexpr auto AT_SKILL = AT_GREEN;
-constexpr auto AT_CARNAGE = AT_BLOOD;
-constexpr auto AT_DAMAGE = AT_WHITE;
 constexpr auto AT_FLEE = AT_YELLOW;
 constexpr auto AT_RMNAME = AT_WHITE;
 constexpr auto AT_RMDESC = AT_GREY;
 constexpr auto AT_OBJECT = AT_GREEN;
 constexpr auto AT_PERSON = AT_PINK;
-constexpr auto AT_LIST = AT_BLUE;
 constexpr auto AT_BYE = AT_GREEN;
 constexpr auto AT_GOLD = AT_YELLOW;
 constexpr auto AT_GTELL = AT_GREEN;
@@ -487,14 +473,14 @@ enum
     SHIP_BUSY,
     SHIP_BUSY_2,
     SHIP_BUSY_3,
-    SHIP_REFUEL,
+    SHIP_UNUSED_05,
     SHIP_LAUNCH,
     SHIP_LAUNCH_2,
     SHIP_LAND,
     SHIP_LAND_2,
     SHIP_HYPERSPACE,
     SHIP_DISABLED,
-    SHIP_FLYING,
+    SHIP_UNUSED_12,
     SHIP_TRACTORED,
     SHIP_DOCKED,
     SHIP_DOCK,
@@ -521,8 +507,8 @@ enum
     CLOUD_CAR,
     OCEAN_SHIP,
     LAND_SPEEDER,
-    WHEELED,
-    LAND_CRAWLER,
+    SHIPCLASS_UNUSED_07,
+    SHIPCLASS_UNUSED_08,
     WALKER,
     SHIP_TRAINER,
     SHIP_DEBRIS,
@@ -545,7 +531,7 @@ enum
 {
     SPACE_SUN,
     SPACE_PLANET,
-    SPACE_MOVEOBJ,
+    SPACEOBJECT_TYPE_UNUSED_02,
     SPACE_OBJ,
     MAX_SPACEOBJECT_TYPE
 };
@@ -561,10 +547,10 @@ constexpr auto MAX_NUMBER_OF_TURRETS_IN_SHIP = 10;
  *                                                                         *
  ***************************************************************************/
 
- /*
-  * Well known mob virtual numbers.
-  * Defined in #MOBILES.
-  */
+/*
+ * Well known mob virtual numbers.
+ * Defined in #MOBILES.
+ */
 inline vnum_t MOB_VNUM_ANIMATED_CORPSE = 5;
 inline vnum_t MOB_VNUM_SUPERMOB = 3;
 inline vnum_t MOB_VNUM_STORMTROOPER = 20;
@@ -587,46 +573,42 @@ inline vnum_t MOB_VNUM_MERC_FORCES = 34;
  * ACT bits for mobs.
  * Used in #MOBILES.
  */
-namespace Flag
+namespace Flag::Mob {
+enum : size_t
 {
-    namespace Mob
-    {
-        enum : size_t
-        {
-            Npc,
-            Sentinel,
-            Scavenger,
-            _03,
-            _04,
-            Aggressive,
-            StayArea,
-            Wimpy,
-            Pet,
-            Train,
-            Practice,
-            Immortal,
-            _12,
-            _13,
-            _14,
-            _15,
-            Running,
-            _17,
-            Mountable,
-            Mounted,
-            Scholar,
-            Secretive,
-            Polymorphed,
-            MobInvis,
-            NoAssist,
-            NoKill,
-            Droid,
-            NoCorpse,
-            _28,
-            _29,
-            Prototype,
-            _31
-        };
-    }
+    Npc,
+    Sentinel,
+    Scavenger,
+    _03,
+    _04,
+    Aggressive,
+    StayArea,
+    Wimpy,
+    Pet,
+    Train,
+    Practice,
+    Immortal,
+    _12,
+    _13,
+    _14,
+    _15,
+    Running,
+    _17,
+    Mountable,
+    Mounted,
+    Scholar,
+    Secretive,
+    Polymorphed,
+    MobInvis,
+    NoAssist,
+    NoKill,
+    Droid,
+    NoCorpse,
+    _28,
+    _29,
+    Prototype,
+    _31
+};
 }
 
 inline vnum_t ROOM_JAIL_MON_CALAMARI_1 = 21148;
@@ -639,181 +621,165 @@ inline vnum_t ROOM_JAIL_ADARI = 29108;
  * Bits for 'affected_by'.
  / * Used in #MOBILES.
 */
-namespace Flag
+namespace Flag::Affect {
+enum : size_t
 {
-    namespace Affect
-    {
-        enum : size_t
-        {
-            Blind,
-            Invisible,
-            DetectEvil,
-            DetectInvis,
-            DetectMagic,
-            DetectHidden,
-            Weaken,
-            Sanctuary,
-            FaerieFire,
-            Infrared,
-            Curse,
-            _flaming,
-            Poison,
-            Protect,
-            Paralysis,
-            Sneak,
-            Hide,
-            Sleep,
-            Charm,
-            Flying,
-            PassDoor,
-            Floating,
-            TrueSight,
-            DetectTraps,
-            Scrying,
-            Fireshield,
-            Shockshield,
-            _27,
-            Iceshield,
-            Possess,
-            Berserk,
-            AquaBreath
-        };
-    }
+    Blind,
+    Invisible,
+    DetectEvil,
+    DetectInvis,
+    DetectMagic,
+    DetectHidden,
+    Weaken,
+    Sanctuary,
+    FaerieFire,
+    Infrared,
+    Curse,
+    _flaming,
+    Poison,
+    Protect,
+    Paralysis,
+    Sneak,
+    Hide,
+    Sleep,
+    Charm,
+    Flying,
+    PassDoor,
+    Floating,
+    TrueSight,
+    DetectTraps,
+    Scrying,
+    Fireshield,
+    Shockshield,
+    _27,
+    _Iceshield,
+    Possess,
+    Berserk,
+    AquaBreath
+};
 }
 
 /*
  * Resistant Immune Susceptible flags
  */
-namespace Flag
+namespace Flag::Ris {
+enum : size_t
 {
-    namespace Ris
-    {
-        enum : size_t
-        {
-            Fire,
-            Cold,
-            Electricity,
-            Energy,
-            Blunt,
-            Pierce,
-            Slash,
-            Acid,
-            Poison,
-            Drain,
-            Sleep,
-            Charm,
-            Hold,
-            NonMagic,
+    Fire,
+    Cold,
+    Electricity,
+    Energy,
+    Blunt,
+    Pierce,
+    Slash,
+    Acid,
+    Poison,
+    Drain,
+    Sleep,
+    Charm,
+    Hold,
+    NonMagic,
 
-            // The Plusx bits have something to do with vs weapon hitroll.
-            Plus1,
-            Plus2,
-            Plus3,
-            Plus4,
-            Plus5,
-            Plus6,
-            Magic,
-            Paralysis,
-            Steal,
-            _23,
-            _24,
-            _25,
-            _26,
-            _27,
-            _28,
-            _29,
-            _30,
-            _31
-        };
-    }
+    // The Plusx bits have something to do with vs weapon hitroll.
+    Plus1,
+    Plus2,
+    Plus3,
+    Plus4,
+    Plus5,
+    Plus6,
+    Magic,
+    Paralysis,
+    Steal,
+    _23,
+    _24,
+    _25,
+    _26,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31
+};
 }
 
-namespace Flag
+namespace Flag::Attack {
+enum : size_t
 {
-    namespace Attack
-    {
-        enum : size_t
-        {
-            Bite,
-            Claws,
-            Tail,
-            Sting,
-            Punch,
-            Kick,
-            Trip,
-            _07,
-            _08,
-            _09,
-            Backstab,
-            _11,
-            _12,
-            _13,
-            _14,
-            _15,
-            _16,
-            _17,
-            _18,
-            _19,
-            _20,
-            _21,
-            _22,
-            _23,
-            _24,
-            _25,
-            _26,
-            _27,
-            _28,
-            _29,
-            _30,
-            _31
-        };
-    }
+    Bite,
+    Claws,
+    Tail,
+    Sting,
+    Punch,
+    Kick,
+    Trip,
+    _07,
+    _08,
+    _09,
+    Backstab,
+    _11,
+    _12,
+    _13,
+    _14,
+    _15,
+    _16,
+    _17,
+    _18,
+    _19,
+    _20,
+    _21,
+    _22,
+    _23,
+    _24,
+    _25,
+    _26,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31
+};
 }
 
 /*
  * Defense types
  */
 
-namespace Flag
+namespace Flag::Defense {
+enum : size_t
 {
-    namespace Defense
-    {
-        enum : size_t
-        {
-            Parry,
-            Dodge,
-            _02,
-            _03,
-            _04,
-            _05,
-            _06,
-            _07,
-            _08,
-            _09,
-            _10,
-            _11,
-            _12,
-            _13,
-            _14,
-            _15,
-            _16,
-            _17,
-            _18,
-            Disarm,
-            _20,
-            Grip,
-            _22,
-            _23,
-            _24,
-            _25,
-            _26,
-            _27,
-            _28,
-            _29,
-            _30,
-            _31
-        };
-    }
+    Parry,
+    Dodge,
+    _02,
+    _03,
+    _04,
+    _05,
+    _06,
+    _07,
+    _08,
+    _09,
+    _10,
+    _11,
+    _12,
+    _13,
+    _14,
+    _15,
+    _16,
+    _17,
+    _18,
+    Disarm,
+    _20,
+    Grip,
+    _22,
+    _23,
+    _24,
+    _25,
+    _26,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31
+};
 }
 
 /*
@@ -921,7 +887,7 @@ enum
  * Sex.
  * Used in #MOBILES.
  */
- /* SexType */
+/* SexType */
 enum
 {
     SEX_NEUTRAL,
@@ -1020,7 +986,7 @@ constexpr auto NEW_CHARACTER_START_CREDITS = 5000;
  * Item types.
  * Used in #OBJECTS.
  */
- /* ItemTypes */
+/* ItemTypes */
 enum
 {
     ITEM_NONE,
@@ -1119,7 +1085,6 @@ enum
     ITEM_DIS_FABRIC,
     ITEM_HAIR
 };
-
 
 constexpr auto MAX_ITEM_TYPE = ITEM_HAIR;
 
@@ -1281,46 +1246,42 @@ constexpr auto PUT_IN = 3;
  * Extra flags.
  * Used in #OBJECTS.
  */
-namespace Flag
+namespace Flag::Obj {
+enum : size_t
 {
-    namespace Obj
-    {
-        enum : size_t
-        {
-            Glow,
-            Hum,
-            _02,
-            HuttSize,
-            Contraband,
-            Invis,
-            Magic,
-            NoDrop,
-            Bless,
-            AntiGood,
-            AntiEvil,
-            AntiNeutral,
-            NoRemove,
-            Inventory,
-            _14,
-            _15,
-            _16,
-            _17,
-            SmallSize,
-            LargeSize,
-            _20,
-            ClanObject,
-            _22,
-            _23,
-            _24,
-            Hidden,
-            Poisoned,
-            Covering,
-            DeathRot,
-            Burried,
-            Prototype,
-            HumanSize
-        };
-    }
+    Glow,
+    Hum,
+    _02,
+    HuttSize,
+    Contraband,
+    Invis,
+    Magic,
+    NoDrop,
+    Bless,
+    AntiGood,
+    AntiEvil,
+    AntiNeutral,
+    NoRemove,
+    Inventory,
+    _14,
+    _15,
+    _16,
+    _17,
+    SmallSize,
+    LargeSize,
+    _20,
+    ClanObject,
+    _22,
+    _23,
+    _24,
+    Hidden,
+    Poisoned,
+    Covering,
+    DeathRot,
+    Burried,
+    Prototype,
+    HumanSize
+};
 }
 
 /* Blaster settings - only saves on characters */
@@ -1358,24 +1319,18 @@ constexpr auto TRIG_D_WEST = BV06;
 constexpr auto TRIG_D_UP = BV07;
 constexpr auto TRIG_D_DOWN = BV08;
 constexpr auto TRIG_DOOR = BV09;
-constexpr auto TRIG_CONTAINER = BV10;
+
 constexpr auto TRIG_OPEN = BV11;
 constexpr auto TRIG_CLOSE = BV12;
 constexpr auto TRIG_PASSAGE = BV13;
-constexpr auto TRIG_OLOAD = BV14;
-constexpr auto TRIG_MLOAD = BV15;
+
 constexpr auto TRIG_TELEPORT = BV16;
 constexpr auto TRIG_TELEPORTALL = BV17;
 constexpr auto TRIG_TELEPORTPLUS = BV18;
-constexpr auto TRIG_DEATH = BV19;
-constexpr auto TRIG_CAST = BV20;
-constexpr auto TRIG_FAKEBLADE = BV21;
+
 constexpr auto TRIG_RAND4 = BV22;
 constexpr auto TRIG_RAND6 = BV23;
-constexpr auto TRIG_TRAPDOOR = BV24;
-constexpr auto TRIG_ANOTHEROOM = BV25;
-constexpr auto TRIG_USEDIAL = BV26;
-constexpr auto TRIG_ABSOLUTEVNUM = BV27;
+
 constexpr auto TRIG_SHOWROOMDESC = BV28;
 constexpr auto TRIG_AUTORETURN = BV29;
 
@@ -1393,71 +1348,54 @@ enum
     SPICE_LUMNI
 };
 
-/* crystal types */
-enum
-{
-    GEM_NON_ADEGAN,
-    GEM_KATHRACITE,
-    GEM_RELACITE,
-    GEM_DANITE,
-    GEM_MEPHITE,
-    GEM_PONITE,
-    GEM_ILLUM,
-    GEM_CORUSCA
-};
-
 /*
  * Wear flags.
  * Used in #OBJECTS.
  */
 
-namespace Flag
+namespace Flag::Wear {
+enum : size_t
 {
-    namespace Wear
-    {
-        enum : size_t
-        {
-            Take,
-            Finger,
-            Neck,
-            Body,
-            Head,
-            Legs,
-            Feet,
-            Hands,
-            Arms,
-            Shield,
-            About,
-            Waist,
-            Wrist,
-            Wield,
-            Hold,
-            _dual_,
-            Ears,
-            Eyes,
-            _missile_,
-            Floating,
-            Over,
-            Disguise,
-            MaxWear,
-            _23,
-            _24,
-            _25,
-            _26,
-            _27,
-            _28,
-            _29,
-            _30,
-            _31
-        };
-    }
+    Take,
+    Finger,
+    Neck,
+    Body,
+    Head,
+    Legs,
+    Feet,
+    Hands,
+    Arms,
+    Shield,
+    About,
+    Waist,
+    Wrist,
+    Wield,
+    Hold,
+    _dual_,
+    Ears,
+    Eyes,
+    _missile_,
+    Floating,
+    Over,
+    Disguise,
+    MaxWear,
+    _23,
+    _24,
+    _25,
+    _26,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31
+};
 }
 
 /*
  * Apply types (for affects).
  * Used in #OBJECTS.
  */
- /* ApplyType */
+/* ApplyType */
 enum
 {
     APPLY_NONE,
@@ -1564,7 +1502,7 @@ inline vnum_t ROOM_VNUM_CLONING_CLINIC = 10002;
  * Directions.
  * Used in #ROOMS.
  */
- /* DirectionType */
+/* DirectionType */
 enum
 {
     DIR_INVALID = -1,
@@ -1587,7 +1525,7 @@ enum
  * Equpiment wear locations.
  * Used in #RESETS.
  */
- /* WearLocation */
+/* WearLocation */
 enum
 {
     WEAR_NONE = -1,
@@ -1634,10 +1572,10 @@ enum
  *                                                                         *
  ***************************************************************************/
 
- /*
-  * Conditions.
-  */
-  /* ConditionType */
+/*
+ * Conditions.
+ */
+/* ConditionType */
 enum
 {
     COND_DRUNK,
@@ -1650,7 +1588,7 @@ enum
 /*
  * Positions.
  */
- /* PositionType */
+/* PositionType */
 enum
 {
     POS_DEAD,
@@ -1673,46 +1611,42 @@ enum
 /*
  * ACT bits for players.
  */
-namespace Flag
+namespace Flag::Plr {
+enum : size_t
 {
-    namespace Plr
-    {
-        enum : size_t
-        {
-            Npc,
-            BoughtPet,
-            ShoveDrag,
-            Autoexits,
-            Autoloot,
-            Autosac,
-            Blank,
-            _07,
-            Brief,
-            Combine,
-            Prompt,
-            _11,
-            Holylight,
-            WizInvis,
-            RoomVnum,
-            Silence,
-            NoEmote,
-            DontAutofuel,
-            NoTell,
-            Log,
-            Deny,
-            Freeze,
-            Killer,
-            _23,
-            Litterbug,
-            Ansi,
-            _26,
-            Nice,
-            Flee,
-            Autocred,
-            Automap,
-            Afk
-        };
-    }
+    Npc,
+    BoughtPet,
+    ShoveDrag,
+    Autoexits,
+    Autoloot,
+    Autosac,
+    Blank,
+    _07,
+    Brief,
+    Combine,
+    Prompt,
+    _11,
+    Holylight,
+    WizInvis,
+    RoomVnum,
+    Silence,
+    NoEmote,
+    DontAutofuel,
+    NoTell,
+    Log,
+    Deny,
+    Freeze,
+    Killer,
+    _23,
+    Litterbug,
+    Ansi,
+    _26,
+    Nice,
+    Flee,
+    Autocred,
+    Automap,
+    Afk
+};
 }
 
 /*
@@ -1772,7 +1706,7 @@ constexpr auto LIQ_MAX = 39;
  *   'R': randomize room exits
  *   'S': stop (end of list)
  */
- /* Constants for arg2 of 'B' resets. */
+/* Constants for arg2 of 'B' resets. */
 
 constexpr auto BIT_RESET_DOOR = 0;
 constexpr auto BIT_RESET_OBJECT = 1;
@@ -1798,7 +1732,7 @@ constexpr auto TYPE_PERSONAL = 3000; /* allows for 1000 herb types    */
 /*
  *  Target types.
  */
- /* SkillTargetType */
+/* SkillTargetType */
 enum
 {
     TAR_IGNORE,
@@ -1827,10 +1761,6 @@ enum
  * (Uses an is_name check). -- Altrag
  */
 constexpr auto CANT_PRAC = "Tongue";
-constexpr const char *Concat(const char *a, const char *b)
-{
-    return "";
-}
 
 /*
  * Data files used by the server.
@@ -1855,43 +1785,6 @@ constexpr const char *Concat(const char *a, const char *b)
 #define USAGE_FILE      LOG_DIR "usage.txt"    /* How many people are on
                                                   every half hour - trying to
                                                   determine best reboot time */
-
-constexpr auto ERROR_PROG = -1;
-constexpr auto ACT_PROG = BV00;
-constexpr auto SPEECH_PROG = BV01;
-constexpr auto RAND_PROG = BV02;
-constexpr auto FIGHT_PROG = BV03;
-constexpr auto RFIGHT_PROG = BV03;
-constexpr auto DEATH_PROG = BV04;
-constexpr auto RDEATH_PROG = BV04;
-constexpr auto HITPRCNT_PROG = BV05;
-constexpr auto ENTRY_PROG = BV06;
-constexpr auto ENTER_PROG = BV06;
-constexpr auto GREET_PROG = BV07;
-constexpr auto ALL_GREET_PROG = BV08;
-constexpr auto GIVE_PROG = BV09;
-constexpr auto BRIBE_PROG = BV10;
-constexpr auto HOUR_PROG = BV11;
-constexpr auto TIME_PROG = BV12;
-constexpr auto WEAR_PROG = BV13;
-constexpr auto REMOVE_PROG = BV14;
-constexpr auto SAC_PROG = BV15;
-constexpr auto LOOK_PROG = BV16;
-constexpr auto EXA_PROG = BV17;
-constexpr auto ZAP_PROG = BV18;
-constexpr auto GET_PROG = BV19;
-constexpr auto DROP_PROG = BV20;
-constexpr auto DAMAGE_PROG = BV21;
-constexpr auto REPAIR_PROG = BV22;
-constexpr auto SPAWN_PROG = BV23;
-//constexpr auto COMMAND_PROG = BV24;
-constexpr auto PULL_PROG = BV25;
-constexpr auto PUSH_PROG = BV26;
-constexpr auto SLEEP_PROG = BV27;
-constexpr auto REST_PROG = BV28;
-constexpr auto LEAVE_PROG = BV29;
-constexpr auto SCRIPT_PROG = BV30;
-constexpr auto USE_PROG = BV31;
 
 extern const std::array<const char *const, (int) AbilityClass::Max> AbilityName;
 extern const std::array<const char *const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;

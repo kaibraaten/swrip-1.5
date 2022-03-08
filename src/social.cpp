@@ -6,6 +6,7 @@
 #include "protomob.hpp"
 #include "repos/socialrepository.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 bool CheckSocial(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument)
 {
@@ -60,8 +61,8 @@ bool CheckSocial(std::shared_ptr<Character> ch, const std::string &command, cons
 
     if(arg.empty())
     {
-        Act(AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, ActTarget::Room);
-        Act(AT_SOCIAL, social->CharNoArg, ch, NULL, victim, ActTarget::Char);
+        Act(AT_SOCIAL, social->OthersNoArg, ch, nullptr, victim, ActTarget::Room);
+        Act(AT_SOCIAL, social->CharNoArg, ch, nullptr, victim, ActTarget::Char);
     }
     else if(!(victim = GetCharacterInRoom(ch, arg)))
     {
@@ -69,14 +70,14 @@ bool CheckSocial(std::shared_ptr<Character> ch, const std::string &command, cons
     }
     else if(victim == ch)
     {
-        Act(AT_SOCIAL, social->OthersAuto, ch, NULL, victim, ActTarget::Room);
-        Act(AT_SOCIAL, social->CharAuto, ch, NULL, victim, ActTarget::Char);
+        Act(AT_SOCIAL, social->OthersAuto, ch, nullptr, victim, ActTarget::Room);
+        Act(AT_SOCIAL, social->CharAuto, ch, nullptr, victim, ActTarget::Char);
     }
     else
     {
-        Act(AT_SOCIAL, social->OthersFound, ch, NULL, victim, ActTarget::NotVict);
-        Act(AT_SOCIAL, social->CharFound, ch, NULL, victim, ActTarget::Char);
-        Act(AT_SOCIAL, social->VictimFound, ch, NULL, victim, ActTarget::Vict);
+        Act(AT_SOCIAL, social->OthersFound, ch, nullptr, victim, ActTarget::NotVict);
+        Act(AT_SOCIAL, social->CharFound, ch, nullptr, victim, ActTarget::Char);
+        Act(AT_SOCIAL, social->VictimFound, ch, nullptr, victim, ActTarget::Vict);
 
         if(!IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, Flag::Affect::Charm)

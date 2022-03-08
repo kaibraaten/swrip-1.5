@@ -7,47 +7,43 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::Exit {
+enum : size_t
 {
-    namespace Exit
-    {
-        enum : size_t
-        {
-            IsDoor,
-            Closed,
-            Locked,
-            Secret,
-            Swim,
-            PickProof,
-            Fly,
-            Climb,
-            Dig,
-            _09,
-            NoPassdoor,
-            Hidden,
-            Passage,
-            Portal,
-            _14,
-            _15,
-            CanClimb,
-            CanEnter,
-            CanLeave,
-            Auto,
-            _20,
-            Searchable,
-            Bashed,
-            BashProof,
-            NoMob,
-            Window,
-            CanLook,
-            _27,
-            _28,
-            _29,
-            _30,
-            _31
-        };
-    }
+    IsDoor,
+    Closed,
+    Locked,
+    Secret,
+    Swim,
+    PickProof,
+    Fly,
+    Climb,
+    Dig,
+    _09,
+    NoPassdoor,
+    Hidden,
+    Passage,
+    Portal,
+    _14,
+    _15,
+    CanClimb,
+    CanEnter,
+    CanLeave,
+    Auto,
+    _20,
+    Searchable,
+    Bashed,
+    BashProof,
+    NoMob,
+    Window,
+    CanLook,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31
 };
+}
 
 class Exit
 {
@@ -68,8 +64,8 @@ template<typename T>
 bool CAN_GO(T thing, DirectionType door)
 {
     return GetExit(thing->InRoom, door)
-        && GetExit(thing->InRoom, door)->ToRoom != nullptr
-        && !GetExit(thing->InRoom, door)->Flags.test(Flag::Exit::Closed);
+           && GetExit(thing->InRoom, door)->ToRoom != nullptr
+           && !GetExit(thing->InRoom, door)->Flags.test(Flag::Exit::Closed);
 }
 
 #endif 

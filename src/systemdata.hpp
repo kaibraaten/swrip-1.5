@@ -4,27 +4,23 @@
 #include <bitset>
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::AutoSave {
+enum : size_t
 {
-    namespace AutoSave
-    {
-        enum : size_t
-        {
-            Death,
-            Kill,
-            ChangePassword,
-            Drop,
-            Put,
-            Give,
-            Auto,
-            Zap,
-            Auction,
-            Get,
-            Receive,
-            Idle,
-            Backup
-        };
-    }
+    Death,
+    Kill,
+    ChangePassword,
+    Drop,
+    Put,
+    Give,
+    Auto,
+    Zap,
+    Auction,
+    Get,
+    Receive,
+    Idle,
+    Backup
+};
 }
 
 class SystemData

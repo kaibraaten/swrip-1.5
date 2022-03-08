@@ -7,16 +7,12 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::Area {
+enum : size_t
 {
-    namespace Area
-    {
-        enum : size_t
-        {
-            PluginZone,
-            Prototype
-        };
-    }
+    PluginZone,
+    Prototype
+};
 }
 
 class Reset;
@@ -36,7 +32,7 @@ public:
     short Age = 0;
     short NumberOfPlayers = 0;
     short ResetFrequency = 0;
-    
+
     struct
     {
         struct

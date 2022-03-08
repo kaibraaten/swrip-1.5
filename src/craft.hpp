@@ -30,18 +30,14 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-namespace Flag
+namespace Flag::Crafting {
+enum : size_t
 {
-    namespace Crafting
-    {
-        enum : size_t
-        {
-            Extract,
-            Optional,
-            NeedsWorkshop,
-            NeedsRefinery
-        };
-    }
+    Extract,
+    Optional,
+    NeedsWorkshop,
+    NeedsRefinery
+};
 }
 
 class CraftRecipe;
@@ -122,8 +118,10 @@ public:
     std::bitset<Flag::MAX> Flags;
 };
 
-std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, std::initializer_list<CraftingMaterial> materials, int duration,
-                                                 std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
+std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, std::initializer_list<CraftingMaterial> materials,
+                                                 int duration,
+                                                 std::shared_ptr<ProtoObject> protoObject,
+                                                 std::initializer_list<size_t> flags);
 std::shared_ptr<CraftingSession> AllocateCraftingSession(std::shared_ptr<CraftRecipe> recipe,
                                                          std::shared_ptr<Character> engineer,
                                                          const std::string &commandArgument);

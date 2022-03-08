@@ -13,8 +13,7 @@ enum class TimerType
     None,
     RecentFight,
     ShoveDrag,
-    Command,
-    Applied
+    Command
 };
 
 class Timer

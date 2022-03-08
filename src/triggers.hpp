@@ -6,8 +6,50 @@
 #include <utility>
 #include <vector>
 #include "types.hpp"
-#include "vo.hpp"
+#include "constants.hpp"
 #include <imp/runtime/runtimevalue.hpp>
+#include "vo.hpp"
+
+constexpr auto ERROR_PROG = -1;
+constexpr auto ACT_PROG = BV00;
+constexpr auto SPEECH_PROG = BV01;
+constexpr auto RAND_PROG = BV02;
+constexpr auto FIGHT_PROG = BV03;
+constexpr auto RFIGHT_PROG = BV03;
+constexpr auto DEATH_PROG = BV04;
+constexpr auto RDEATH_PROG = BV04;
+constexpr auto HITPRCNT_PROG = BV05;
+constexpr auto ENTRY_PROG = BV06;
+constexpr auto ENTER_PROG = BV06;
+constexpr auto GREET_PROG = BV07;
+constexpr auto ALL_GREET_PROG = BV08;
+constexpr auto GIVE_PROG = BV09;
+constexpr auto BRIBE_PROG = BV10;
+constexpr auto HOUR_PROG = BV11;
+constexpr auto TIME_PROG = BV12;
+constexpr auto WEAR_PROG = BV13;
+constexpr auto REMOVE_PROG = BV14;
+constexpr auto SAC_PROG = BV15;
+constexpr auto LOOK_PROG = BV16;
+constexpr auto EXA_PROG = BV17;
+constexpr auto ZAP_PROG = BV18;
+constexpr auto GET_PROG = BV19;
+constexpr auto DROP_PROG = BV20;
+constexpr auto DAMAGE_PROG = BV21;
+constexpr auto REPAIR_PROG = BV22;
+constexpr auto SPAWN_PROG = BV23;
+//constexpr auto COMMAND_PROG = BV24;
+constexpr auto PULL_PROG = BV25;
+constexpr auto PUSH_PROG = BV26;
+constexpr auto SLEEP_PROG = BV27;
+constexpr auto REST_PROG = BV28;
+constexpr auto LEAVE_PROG = BV29;
+constexpr auto SCRIPT_PROG = BV30;
+constexpr auto USE_PROG = BV31;
+
+class Character;
+class Object;
+class Room;
 
 void ImpScriptSpawnTrigger(std::shared_ptr<Character> mob);
 void ImpScriptSpawnTrigger(std::shared_ptr<Object> obj);
