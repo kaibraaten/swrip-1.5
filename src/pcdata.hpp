@@ -98,7 +98,7 @@ public:
     std::array<int, MAX_CONDS> Condition;
     std::array<int, MAX_SKILL> Learned;
     std::list<KilledData> Killed;
-    int AuthState = 0;
+    AuthType AuthState = AuthType::None;
     time_t ReleaseDate = 0;   /* Auto-helling.. Altrag */
     vnum_t JailVnum = INVALID_VNUM;
     std::string HelledBy;

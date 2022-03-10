@@ -1336,7 +1336,7 @@ bool IsWaitingForAuth(std::shared_ptr<Character> ch)
 {
     return !IsNpc(ch)
         && ch->Desc
-        && ch->PCData->AuthState == 1
+        && ch->PCData->AuthState == AuthType::Unauthed
         && ch->PCData->Flags.test(Flag::PCData::Unauthed);
 }
 

@@ -12,15 +12,13 @@ bool spec_clan_guard(std::shared_ptr<Character> ch)
 
     std::shared_ptr<Clan> clan = GetClan(ch->Name);
     auto charactersToActOn = ch->InRoom->Characters();
-
-    for(auto victim : charactersToActOn)
+    auto includeThese = [ch](const auto &victim)
     {
-        if(!CanSeeCharacter(ch, victim))
-            continue;
+        return CanSeeCharacter(ch, victim) && !HasTimer(victim, TimerType::RecentFight);
+    };
 
-        if(HasTimer(victim, TimerType::RecentFight))
-            continue;
-
+    for(auto victim : charactersToActOn | std::views::filter(includeThese))
+    {
         if(!IsNpc(victim)
            && IsClanned(victim)
            && clan

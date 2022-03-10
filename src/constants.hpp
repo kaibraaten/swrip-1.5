@@ -148,6 +148,14 @@ constexpr auto PULSE_ARENA = 30 * PULSE_PER_SECOND;
 
 constexpr auto MAX_OVAL = 6;
 
+enum class AuthType
+{
+    None,
+    Unauthed,
+    MustChangeName,
+    Authed
+};
+
 /*
  * Command logging types.
  */

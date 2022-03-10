@@ -738,12 +738,12 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         if(!SysData.NewPlayersMustWaitForAuth)
         {
             CharacterToRoom(ch, GetRoom(ROOM_VNUM_SCHOOL));
-            ch->PCData->AuthState = 3;
+            ch->PCData->AuthState = AuthType::Authed;
         }
         else
         {
             CharacterToRoom(ch, GetRoom(ROOM_VNUM_SCHOOL));
-            ch->PCData->AuthState = 1;
+            ch->PCData->AuthState = AuthType::Unauthed;
             ch->PCData->Flags.set(Flag::PCData::Unauthed);
         }
     }

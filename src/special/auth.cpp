@@ -6,7 +6,21 @@
 
 bool spec_auth(std::shared_ptr<Character> ch)
 {
-    for (auto victim : ch->InRoom->Characters())
+    auto includeThese = [](const auto &victim)
+    {
+        if (IsNpc(victim)
+            || !victim->PCData->Flags.test(Flag::PCData::Unauthed)
+            || victim->PCData->AuthState == AuthType::MustChangeName)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    for (auto victim : ch->InRoom->Characters() | std::views::filter(includeThese))
     {
         std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_SCHOOL_DIPLOMA);
 
@@ -20,14 +34,7 @@ bool spec_auth(std::shared_ptr<Character> ch)
             }
         }
 
-        if (IsNpc(victim)
-            || !victim->PCData->Flags.test(Flag::PCData::Unauthed)
-            || victim->PCData->AuthState == 2)
-        {
-            continue;
-        }
-
-        victim->PCData->AuthState = 3;
+        victim->PCData->AuthState = AuthType::Authed;
         victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
         victim->PCData->AuthedBy = ch->Name;

@@ -1,4 +1,3 @@
-#include <cctype>
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
@@ -6,17 +5,17 @@
 #include "race.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_name( std::shared_ptr<Character> ch, std::string argument )
+void do_name(std::shared_ptr<Character> ch, std::string argument)
 {
-    if ( IsAuthed(ch) || ch->PCData->AuthState != 2)
+    if (IsAuthed(ch) || ch->PCData->AuthState != AuthType::MustChangeName)
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    if( argument.empty() )
+    if (argument.empty())
     {
-        ch->Echo( "Change your name to what?\r\n" );
+        ch->Echo("Change your name to what?\r\n");
         return;
     }
 
@@ -39,8 +38,8 @@ void do_name( std::shared_ptr<Character> ch, std::string argument )
                       {
                           return StrCmp(argument, pc->Name) == 0;
                       }) != nullptr
-        || PlayerCharacters->Exists(argument);
-    
+                 || PlayerCharacters->Exists(argument);
+
     if (taken)
     {
         ch->Echo("That name is already taken. Please choose another.\r\n");
@@ -48,10 +47,10 @@ void do_name( std::shared_ptr<Character> ch, std::string argument )
     }
 
     ch->Name = argument;
-    std::string buf = FormatString("%s the %s",ch->Name.c_str(),
-                                   RaceTable[ch->Race].Name );
-    SetCharacterTitle( ch, buf );
+    std::string buf = FormatString("%s the %s", ch->Name.c_str(),
+                                   RaceTable[ch->Race].Name);
+    SetCharacterTitle(ch, buf);
 
     ch->Echo("Your name has been changed. Please apply again.\r\n");
-    ch->PCData->AuthState = 1;
+    ch->PCData->AuthState = AuthType::Unauthed;
 }

@@ -17,20 +17,24 @@ bool spec_customs_weapons(std::shared_ptr<Character> ch)
         return false;
     }
 
-    auto charactersToActOn = ch->InRoom->Characters();
-
-    for (auto victim : charactersToActOn)
+    auto includeThese = [ch](const auto &victim)
     {
         if (IsNpc(victim) || victim->Position == POS_FIGHTING)
         {
-            continue;
+            return false;
         }
 
         if (IsClanned(victim) && !StrCmp(victim->PCData->ClanInfo.Clan->Name, ch->MobClan))
         {
-            continue;
+            return false;
         }
 
+        return true;
+    };
+    auto charactersToActOn = ch->InRoom->Characters();
+
+    for (auto victim : charactersToActOn | std::views::filter(includeThese))
+    {
         for (auto obj : victim->Objects() | std::views::reverse)
         {
             if (obj->Prototype->ItemType == ITEM_WEAPON)

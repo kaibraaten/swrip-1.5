@@ -44,7 +44,7 @@ void do_authorize(std::shared_ptr<Character> ch, std::string argument)
 
     if(arg2.empty() || !StrCmp(arg2, "accept") || !StrCmp(arg2, "yes"))
     {
-        victim->PCData->AuthState = 3;
+        victim->PCData->AuthState = AuthType::Authed;
         victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
         victim->PCData->AuthedBy = ch->Name;
@@ -73,10 +73,10 @@ void do_authorize(std::shared_ptr<Character> ch, std::string argument)
         ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
         victim->Echo("The MUD Administrators have found the name %s "
                      "to be unacceptable.\r\n"
-                     "Use 'name' to change it to something more apropriate.\r\n",
+                     "Use 'name' to change it to something more appropriate.\r\n",
                      victim->Name.c_str());
         ch->Echo("You requested %s change names.\r\n", victim->Name.c_str());
-        victim->PCData->AuthState = 2;
+        victim->PCData->AuthState = AuthType::MustChangeName;
     }
     else
     {
