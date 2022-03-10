@@ -4,84 +4,88 @@
 #include "skill.hpp"
 #include "room.hpp"
 
-bool spec_dark_jedi(std::shared_ptr<Character> ch)
+bool spec_dark_jedi(std::shared_ptr<Character> mob)
 {
     std::shared_ptr<Character> victim;
     std::string spell;
     int sn = 0;
 
-    if(!IsFighting(ch))
-        return false;
-
-    for(auto fighter : ch->InRoom->Characters())
+    if (!IsFighting(mob))
     {
-        if(IsFighting(fighter) && NumberBits(2) == 0)
+        return false;
+    }
+
+    for (auto fighter : mob->InRoom->Characters())
+    {
+        if (IsFighting(fighter) && NumberBits(2) == 0)
         {
             victim = fighter;
             break;
         }
     }
 
-    if(!victim || victim == ch)
+    if (!victim || victim == mob)
+    {
         return false;
+    }
 
-    for(;; )
+    for (;;)
     {
         int min_level = 0;
 
-        switch(NumberBits(4))
+        switch (NumberBits(4))
         {
-        case  0:
-            min_level = 5;
-            spell = "blindness";
-            break;
+            case 0:
+                min_level = 5;
+                spell = "blindness";
+                break;
 
-        case  2:
-            min_level = 9;
-            spell = "choke";
-            break;
+            case 2:
+                min_level = 9;
+                spell = "choke";
+                break;
 
-        case  3:
-            min_level = 8;
-            spell = "invade essence";
-            break;
+            case 3:
+                min_level = 8;
+                spell = "invade essence";
+                break;
 
-        case  6:
-            min_level = 13;
-            spell = "drain essence";
-            break;
+            case 6:
+                min_level = 13;
+                spell = "drain essence";
+                break;
 
-        case  8:
-            min_level = 13;
-            spell = "harm";
-            break;
+            case 8:
+                min_level = 13;
+                spell = "harm";
+                break;
 
-        case  9:
-            min_level = 9;
-            spell = "force bolt";
-            break;
+            case 9:
+                min_level = 9;
+                spell = "force bolt";
+                break;
 
-        case 10:
-            min_level = 1;
-            spell = "force spray";
-            break;
+            case 10:
+                min_level = 1;
+                spell = "force spray";
+                break;
 
-        default:
-            return false;
+            default:
+                return false;
         }
 
-        if(ch->TopLevel() >= min_level)
+        if (mob->TopLevel() >= min_level)
         {
             break;
         }
     }
 
-    if((sn = LookupSkill(spell)) < 0)
+    if ((sn = LookupSkill(spell)) < 0)
     {
         return false;
     }
 
-    SkillTable[sn]->SpellFunction(sn, ch->TopLevel(), ch, victim);
+    SkillTable[sn]->SpellFunction(sn, mob->TopLevel(), mob, victim);
 
     return true;
 }

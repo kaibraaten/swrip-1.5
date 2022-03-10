@@ -6,69 +6,83 @@
 #include "room.hpp"
 #include "act.hpp"
 
-ch_ret spell_earthquake(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_earthquake(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     bool ch_died = false;
     ch_ret retcode = rNONE;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if(ch->InRoom->Flags.test(Flag::Room::Safe))
+    if (caster->InRoom->Flags.test(Flag::Room::Safe))
     {
-        FailedCasting(skill, ch, NULL, NULL);
+        FailedCasting(skill, caster, NULL, NULL);
         return rSPELL_FAILED;
     }
 
-    ch->Echo("You feel the hatred grow within you!\r\n");
-    ch->Alignment = ch->Alignment - 100;
-    ch->Alignment = urange(-1000, ch->Alignment, 1000);
-    ApplySithPenalty(ch);
+    caster->Echo("You feel the hatred grow within you!\r\n");
+    caster->Alignment = caster->Alignment - 100;
+    caster->Alignment = urange(-1000, caster->Alignment, 1000);
+    ApplySithPenalty(caster);
 
 
-    Act(AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, ActTarget::Char);
-    Act(AT_MAGIC, "$n makes the earth tremble and shiver.", ch, NULL, NULL, ActTarget::Room);
+    Act(AT_MAGIC, "The earth trembles beneath your feet!", caster, NULL, NULL, ActTarget::Char);
+    Act(AT_MAGIC, "$n makes the earth tremble and shiver.", caster, NULL, NULL, ActTarget::Room);
 
-    for(std::shared_ptr<Character> vch = FirstCharacter, vch_next; vch; vch = vch_next)
+    for (std::shared_ptr<Character> vch = FirstCharacter, vch_next; vch; vch = vch_next)
     {
         vch_next = vch->Next;
 
-        if(!vch->InRoom)
-            continue;
-
-        if(vch->InRoom == ch->InRoom)
+        if (!vch->InRoom)
         {
-            if(!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
-               && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
+            continue;
+        }
+
+        if (vch->InRoom == caster->InRoom)
+        {
+            if (!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
+                && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
+            {
                 continue;
+            }
 
-            if(IsAffectedBy(vch, Flag::Affect::Floating)
-               || IsAffectedBy(vch, Flag::Affect::Flying))
+            if (IsAffectedBy(vch, Flag::Affect::Floating)
+                || IsAffectedBy(vch, Flag::Affect::Flying))
+            {
                 continue;
+            }
 
-            if(ch == vch)
+            if (caster == vch)
+            {
                 continue;
+            }
 
-            retcode = InflictDamage(ch, vch, level + RollDice(2, 8), sn);
+            retcode = InflictDamage(caster, vch, level + RollDice(2, 8), sn);
 
-            if(retcode == rCHAR_DIED || CharacterDiedRecently(ch))
+            if (retcode == rCHAR_DIED || CharacterDiedRecently(caster))
             {
                 ch_died = true;
                 continue;
             }
 
-            if(CharacterDiedRecently(vch))
+            if (CharacterDiedRecently(vch))
+            {
                 continue;
+            }
         }
 
-        if(!ch_died && vch->InRoom->Area == ch->InRoom->Area)
+        if (!ch_died && vch->InRoom->Area == caster->InRoom->Area)
         {
             SetCharacterColor(AT_MAGIC, vch);
             vch->Echo("The earth trembles and shivers.\r\n");
         }
     }
 
-    if(ch_died)
+    if (ch_died)
+    {
         return rCHAR_DIED;
+    }
     else
+    {
         return rNONE;
+    }
 }
 

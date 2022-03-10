@@ -2,24 +2,28 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_flamestrike(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_flamestrike(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     std::shared_ptr<Character> victim = vo.Ch;
     int dam = 0;
 
-    ch->Echo("You feel the hatred grow within you!\r\n");
-    ch->Alignment = ch->Alignment - 100;
-    ch->Alignment = urange(-1000, ch->Alignment, 1000);
-    ApplySithPenalty(ch);
+    caster->Echo("You feel the hatred grow within you!\r\n");
+    caster->Alignment = caster->Alignment - 100;
+    caster->Alignment = urange(-1000, caster->Alignment, 1000);
+    ApplySithPenalty(caster);
 
     dam = RollDice(6, 8);
 
-    if(SaveVsSpellStaff(level, victim))
+    if (SaveVsSpellStaff(level, victim))
+    {
         dam /= 2;
+    }
 
-    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
-        dam -= (int)(dam / 4);
+    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(caster))
+    {
+        dam -= (int) (dam / 4);
+    }
 
-    return InflictDamage(ch, victim, dam, sn);
+    return InflictDamage(caster, victim, dam, sn);
 }
 

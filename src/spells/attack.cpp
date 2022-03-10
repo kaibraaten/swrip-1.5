@@ -6,41 +6,51 @@
 /*
  * Generic offensive spell damage attack                        -Thoric
  */
-ch_ret spell_attack(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_attack(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     std::shared_ptr<Character> victim = vo.Ch;
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    bool saved = CheckSavingThrow(sn, level, ch, victim);
+    bool saved = CheckSavingThrow(sn, level, caster, victim);
     int dam = 0;
     ch_ret retcode = rNONE;
 
-    ch->Echo("You feel the hatred grow within you!\r\n");
-    ch->Alignment -= 100;
-    ch->Alignment = urange(-1000, ch->Alignment, 1000);
-    ApplySithPenalty(ch);
+    caster->Echo("You feel the hatred grow within you!\r\n");
+    caster->Alignment -= 100;
+    caster->Alignment = urange(-1000, caster->Alignment, 1000);
+    ApplySithPenalty(caster);
 
-    if(saved && !SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
+    if (saved && !SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
     {
-        FailedCasting(skill, ch, victim, NULL);
+        FailedCasting(skill, caster, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if(!skill->Dice.empty())
-        dam = umax(0, ParseDice(ch, level, skill->Dice));
+    if (!skill->Dice.empty())
+    {
+        dam = umax(0, ParseDice(caster, level, skill->Dice));
+    }
     else
+    {
         dam = RollDice(1, level);
+    }
 
-    if(saved)
+    if (saved)
+    {
         dam /= 2;
+    }
 
-    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
-        dam -= (int)(dam / 4);
+    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(caster))
+    {
+        dam -= (int) (dam / 4);
+    }
 
-    retcode = InflictDamage(ch, victim, dam, sn);
+    retcode = InflictDamage(caster, victim, dam, sn);
 
-    if(retcode == rNONE && !skill->Affects.empty()
-       && !CharacterDiedRecently(ch) && !CharacterDiedRecently(victim))
-        retcode = spell_affectchar(sn, level, ch, victim);
+    if (retcode == rNONE && !skill->Affects.empty()
+        && !CharacterDiedRecently(caster) && !CharacterDiedRecently(victim))
+    {
+        retcode = spell_affectchar(sn, level, caster, victim);
+    }
 
     return retcode;
 }

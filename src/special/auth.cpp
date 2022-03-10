@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-bool spec_auth(std::shared_ptr<Character> ch)
+bool spec_auth(std::shared_ptr<Character> mob)
 {
     auto includeThese = [](const auto &victim)
     {
@@ -20,7 +20,7 @@ bool spec_auth(std::shared_ptr<Character> ch)
         }
     };
 
-    for (auto victim : ch->InRoom->Characters() | std::views::filter(includeThese))
+    for (auto victim : mob->InRoom->Characters() | std::views::filter(includeThese))
     {
         std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_SCHOOL_DIPLOMA);
 
@@ -37,11 +37,11 @@ bool spec_auth(std::shared_ptr<Character> ch)
         victim->PCData->AuthState = AuthType::Authed;
         victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
-        victim->PCData->AuthedBy = ch->Name;
+        victim->PCData->AuthedBy = mob->Name;
         char buf[MAX_STRING_LENGTH];
-        sprintf(buf, "%s authorized %s", ch->Name.c_str(),
-            victim->Name.c_str());
-        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
+        sprintf(buf, "%s authorized %s", mob->Name.c_str(),
+                victim->Name.c_str());
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", mob->TopLevel());
     }
 
     return false;

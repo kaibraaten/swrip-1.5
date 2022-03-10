@@ -7,29 +7,31 @@
 #include "room.hpp"
 #include "timer.hpp"
 
-bool spec_rebel_trooper(std::shared_ptr<Character> ch)
+bool spec_rebel_trooper(std::shared_ptr<Character> mob)
 {
-    if(!IsAwake(ch) || IsFighting(ch))
+    if (!IsAwake(mob) || IsFighting(mob))
+    {
         return false;
+    }
 
-    std::vector<std::shared_ptr<Character>> imperials(std::begin(ch->InRoom->Characters()),
-                                                      std::end(ch->InRoom->Characters()));
+    std::vector<std::shared_ptr<Character>> imperials(std::begin(mob->InRoom->Characters()),
+                                                      std::end(mob->InRoom->Characters()));
 
     imperials = Filter(imperials,
-                       [ch](auto victim)
+                       [mob](auto victim)
                        {
-                           return CanSeeCharacter(ch, victim)
-                           &&!HasTimer(victim, TimerType::RecentFight)
-                           && ((IsNpc(victim) && NiftyIsName("imperial", victim->Name)
-                                && IsFighting(victim) && WhoFighting(victim) != ch)
-                               || (!IsNpc(victim) && IsClanned(victim) && IsAwake(victim)
-                                   && NiftyIsName("empire", victim->PCData->ClanInfo.Clan->Name)));
+                           return CanSeeCharacter(mob, victim)
+                                  && !HasTimer(victim, TimerType::RecentFight)
+                                  && ((IsNpc(victim) && NiftyIsName("imperial", victim->Name)
+                                       && IsFighting(victim) && WhoFighting(victim) != mob)
+                                      || (!IsNpc(victim) && IsClanned(victim) && IsAwake(victim)
+                                          && NiftyIsName("empire", victim->PCData->ClanInfo.Clan->Name)));
                        });
 
-    for(auto victim : RandomizeOrder(imperials))
+    for (auto victim : RandomizeOrder(imperials))
     {
-        do_yell(ch, "Long live the Rebel Alliance!");
-        HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
+        do_yell(mob, "Long live the Rebel Alliance!");
+        HitMultipleTimes(mob, victim, TYPE_UNDEFINED);
         return true;
     }
 

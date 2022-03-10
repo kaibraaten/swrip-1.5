@@ -6,75 +6,79 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if(spell_target_name.empty())
+    if (spell_target_name.empty())
     {
-        ch->Echo("What should the spell be cast upon?\r\n");
+        caster->Echo("What should the spell be cast upon?\r\n");
         return rSPELL_FAILED;
     }
 
-    auto obj = GetCarriedObject(ch, spell_target_name);
+    auto obj = GetCarriedObject(caster, spell_target_name);
 
-    if(obj)
+    if (obj)
     {
-        if(!obj->Flags.test(Flag::Obj::Invis))
+        if (!obj->Flags.test(Flag::Obj::Invis))
+        {
             return rSPELL_FAILED;
+        }
 
         obj->Flags.reset(Flag::Obj::Invis);
-        Act(AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, ActTarget::Char);
+        Act(AT_MAGIC, "$p becomes visible again.", caster, obj, NULL, ActTarget::Char);
 
-        ch->Echo("Ok.\r\n");
+        caster->Echo("Ok.\r\n");
         return rNONE;
     }
     else
     {
-        auto victim = GetCharacterInRoom(ch, spell_target_name);
+        auto victim = GetCharacterInRoom(caster, spell_target_name);
 
-        if(victim)
+        if (victim)
         {
-            if(!CanSeeCharacter(ch, victim))
+            if (!CanSeeCharacter(caster, victim))
             {
-                ch->Echo("You don't see %s!\r\n", spell_target_name.c_str());
+                caster->Echo("You don't see %s!\r\n", spell_target_name.c_str());
                 return rSPELL_FAILED;
             }
 
-            if(victim->Race == RACE_DEFEL)
-                return rSPELL_FAILED;
-
-            if(!IsAffectedBy(victim, Flag::Affect::Invisible))
+            if (victim->Race == RACE_DEFEL)
             {
-                ch->Echo("They are not invisible!\r\n");
                 return rSPELL_FAILED;
             }
 
-            if(IsSafe(ch, victim))
+            if (!IsAffectedBy(victim, Flag::Affect::Invisible))
             {
-                FailedCasting(skill, ch, victim, NULL);
+                caster->Echo("They are not invisible!\r\n");
                 return rSPELL_FAILED;
             }
 
-            if(victim->Immune.test(Flag::Ris::Magic))
+            if (IsSafe(caster, victim))
             {
-                ImmuneCasting(skill, ch, victim, NULL);
+                FailedCasting(skill, caster, victim, NULL);
                 return rSPELL_FAILED;
             }
-            if(!IsNpc(victim))
+
+            if (victim->Immune.test(Flag::Ris::Magic))
             {
-                if(Chance(ch, 50) && GetAbilityLevel(ch, AbilityClass::Force) < victim->TopLevel())
+                ImmuneCasting(skill, caster, victim, NULL);
+                return rSPELL_FAILED;
+            }
+            if (!IsNpc(victim))
+            {
+                if (Chance(caster, 50) && GetAbilityLevel(caster, AbilityClass::Force) < victim->TopLevel())
                 {
-                    FailedCasting(skill, ch, victim, NULL);
+                    FailedCasting(skill, caster, victim, NULL);
                     return rSPELL_FAILED;
                 }
 
             }
             else
             {
-                if(Chance(ch, 50) && GetAbilityLevel(ch, AbilityClass::Force) + 15 < victim->TopLevel())
+                if (Chance(caster, 50) && GetAbilityLevel(caster, AbilityClass::Force) + 15 < victim->TopLevel())
                 {
-                    FailedCasting(skill, ch, victim, NULL);
+                    FailedCasting(skill, caster, victim, NULL);
                     return rSPELL_FAILED;
                 }
             }
@@ -82,11 +86,11 @@ ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> ch, cons
             StripAffect(victim, gsn_invis);
             StripAffect(victim, gsn_mass_invis);
             victim->AffectedBy.reset(Flag::Affect::Invisible);
-            ch->Echo("Ok.\r\n");
+            caster->Echo("Ok.\r\n");
             return rNONE;
         }
 
-        ch->Echo("You can't find %s!\r\n", spell_target_name.c_str());
+        caster->Echo("You can't find %s!\r\n", spell_target_name.c_str());
         return rSPELL_FAILED;
     }
 }

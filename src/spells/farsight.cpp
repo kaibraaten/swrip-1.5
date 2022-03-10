@@ -6,7 +6,7 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     std::shared_ptr<Character> victim;
     std::shared_ptr<Skill> skill = GetSkill(sn);
@@ -20,34 +20,34 @@ ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> ch, const Vo
 
     int saving = GetRandomPercent();
 
-    if((victim = GetCharacterAnywhere(ch, spell_target_name)) == NULL
-       || victim == ch
-       || !victim->InRoom
-       || victim->InRoom->Flags.test(Flag::Room::Private)
-       || victim->InRoom->Flags.test(Flag::Room::Prototype)
-       || (IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-       || (IsNpc(victim) && SaveVsSpellStaff(level, victim))
-       || saving <= 50)
+    if ((victim = GetCharacterAnywhere(caster, spell_target_name)) == NULL
+        || victim == caster
+        || !victim->InRoom
+        || victim->InRoom->Flags.test(Flag::Room::Private)
+        || victim->InRoom->Flags.test(Flag::Room::Prototype)
+        || (IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
+        || (IsNpc(victim) && SaveVsSpellStaff(level, victim))
+        || saving <= 50)
     {
-        FailedCasting(skill, ch, victim, NULL);
+        FailedCasting(skill, caster, victim, NULL);
         return rSPELL_FAILED;
     }
 
     auto location = victim->InRoom;
 
-    if(!location)
+    if (!location)
     {
-        FailedCasting(skill, ch, victim, NULL);
+        FailedCasting(skill, caster, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    SuccessfulCasting(skill, ch, victim, NULL);
-    auto original = ch->InRoom;
-    CharacterFromRoom(ch);
-    CharacterToRoom(ch, location);
-    do_look(ch, "auto");
-    CharacterFromRoom(ch);
-    CharacterToRoom(ch, original);
+    SuccessfulCasting(skill, caster, victim, NULL);
+    auto original = caster->InRoom;
+    CharacterFromRoom(caster);
+    CharacterToRoom(caster, location);
+    do_look(caster, "auto");
+    CharacterFromRoom(caster);
+    CharacterToRoom(caster, original);
     return rNONE;
 }
 

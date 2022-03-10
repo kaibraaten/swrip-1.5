@@ -3,36 +3,38 @@
 #include "skill.hpp"
 #include "act.hpp"
 
-ch_ret spell_cure_poison(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
+ch_ret spell_cure_poison(int sn, int level, std::shared_ptr<Character> caster, const Vo &vo)
 {
     std::shared_ptr<Character> victim = vo.Ch;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if(victim->Immune.test(Flag::Ris::Magic))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
-        ImmuneCasting(skill, ch, victim, NULL);
+        ImmuneCasting(skill, caster, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if(IsAffected(victim, gsn_poison))
+    if (IsAffected(victim, gsn_poison))
     {
-        if(ch != victim)
+        if (caster != victim)
         {
-            ch->Echo("The noble Jedi use their powers to help others!\r\n");
-            ch->Alignment = ch->Alignment + 25;
-            ch->Alignment = urange(-1000, ch->Alignment, 1000);
-            ApplyJediBonus(ch);
+            caster->Echo("The noble Jedi use their powers to help others!\r\n");
+            caster->Alignment = caster->Alignment + 25;
+            caster->Alignment = urange(-1000, caster->Alignment, 1000);
+            ApplyJediBonus(caster);
         }
 
         StripAffect(victim, gsn_poison);
-        Act(AT_MAGIC, "$N looks better.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_MAGIC, "$N looks better.", caster, NULL, victim, ActTarget::NotVict);
         SetCharacterColor(AT_MAGIC, victim);
         victim->Echo("A warm feeling runs through your body.\r\n");
         victim->MentalState = urange(-100, victim->MentalState, -10);
-        ch->Echo("Ok.\r\n");
+        caster->Echo("Ok.\r\n");
         return rNONE;
     }
     else
+    {
         return rSPELL_FAILED;
+    }
 }
 

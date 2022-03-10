@@ -6,28 +6,30 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-bool spec_janitor( std::shared_ptr<Character> ch )
+bool spec_janitor(std::shared_ptr<Character> mob)
 {
-    if ( !IsAwake(ch) )
+    if (!IsAwake(mob))
+    {
         return false;
+    }
 
-    auto itemsToPickUp = Filter(ch->InRoom->Objects(),
+    auto itemsToPickUp = Filter(mob->InRoom->Objects(),
                                 [](const auto obj)
                                 {
                                     return obj->WearFlags.test(Flag::Wear::Take)
-                                    && !obj->Flags.test(Flag::Obj::Burried)
-                                    && (obj->ItemType == ITEM_DRINK_CON
-                                        || obj->ItemType == ITEM_TRASH
-                                        || obj->Cost < 10
-                                        || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
-                                            && obj->Objects().empty() ));
+                                           && !obj->Flags.test(Flag::Obj::Burried)
+                                           && (obj->ItemType == ITEM_DRINK_CON
+                                               || obj->ItemType == ITEM_TRASH
+                                               || obj->Cost < 10
+                                               || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
+                                                   && obj->Objects().empty()));
                                 });
 
-    for(auto trash : itemsToPickUp)
+    for (const auto &trash : itemsToPickUp)
     {
-        Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, ActTarget::Room );
-        ObjectFromRoom( trash );
-        ObjectToCharacter( trash, ch );
+        Act(AT_ACTION, "$n picks up some trash.", mob, nullptr, nullptr, ActTarget::Room);
+        ObjectFromRoom(trash);
+        ObjectToCharacter(trash, mob);
         return true;
     }
 

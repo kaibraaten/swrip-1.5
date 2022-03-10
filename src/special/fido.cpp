@@ -5,27 +5,27 @@
 #include "object.hpp"
 #include "act.hpp"
 
-bool spec_fido(std::shared_ptr<Character> ch)
+bool spec_fido(std::shared_ptr<Character> mob)
 {
-    if(!IsAwake(ch))
+    if(!IsAwake(mob))
         return false;
 
-    auto corpsesToEat = Filter(ch->InRoom->Objects(),
-                               [](const auto corpse)
+    auto corpsesToEat = Filter(mob->InRoom->Objects(),
+                               [](const auto &corpse)
                                {
                                    return corpse->ItemType == ITEM_CORPSE_NPC;
                                });
 
-    for(auto corpse : corpsesToEat)
+    for(const auto &corpse : corpsesToEat)
     {
-        Act(AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, ActTarget::Room);
+        Act(AT_ACTION, "$n savagely devours a corpse.", mob, nullptr, nullptr, ActTarget::Room);
 
         auto objectsInCorpse = corpse->Objects();
 
-        for(auto obj : objectsInCorpse)
+        for(const auto &obj : objectsInCorpse)
         {
             ObjectFromObject(obj);
-            ObjectToRoom(obj, ch->InRoom);
+            ObjectToRoom(obj, mob->InRoom);
         }
 
         ExtractObject(corpse);

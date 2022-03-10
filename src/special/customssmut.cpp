@@ -5,16 +5,16 @@
 #include "object.hpp"
 #include "act.hpp"
 
-bool spec_customs_smut(std::shared_ptr<Character> ch)
+bool spec_customs_smut(std::shared_ptr<Character> mob)
 {
     char buf[MAX_STRING_LENGTH];
 
-    if (!IsAwake(ch) || ch->Position == POS_FIGHTING)
+    if (!IsAwake(mob) || mob->Position == POS_FIGHTING)
     {
         return false;
     }
 
-    auto charactersToActOn = ch->InRoom->Characters();
+    auto charactersToActOn = mob->InRoom->Characters();
 
     for (auto victim : charactersToActOn)
     {
@@ -27,11 +27,11 @@ bool spec_customs_smut(std::shared_ptr<Character> ch)
         {
             if (obj->ItemType == ITEM_SMUT)
             {
-                if (victim != ch && CanSeeCharacter(ch, victim) && CanSeeObject(ch, obj))
+                if (victim != mob && CanSeeCharacter(mob, victim) && CanSeeObject(mob, obj))
                 {
                     sprintf(buf, "%s is illegal contraband. I'm going to have to confiscate that.",
                             obj->ShortDescr.c_str());
-                    do_say(ch, buf);
+                    do_say(mob, buf);
 
                     if (obj->WearLoc != WEAR_NONE)
                     {
@@ -40,9 +40,9 @@ bool spec_customs_smut(std::shared_ptr<Character> ch)
 
                     SeparateOneObjectFromGroup(obj);
                     ObjectFromCharacter(obj);
-                    Act(AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, ActTarget::NotVict);
-                    Act(AT_ACTION, "$n takes $p from you.", ch, obj, victim, ActTarget::Vict);
-                    obj = ObjectToCharacter(obj, ch);
+                    Act(AT_ACTION, "$n confiscates $p from $N.", mob, obj, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n takes $p from you.", mob, obj, victim, ActTarget::Vict);
+                    obj = ObjectToCharacter(obj, mob);
                     obj->Flags.set(Flag::Obj::Contraband);
                     long ch_exp = umin(obj->Cost * 10,
                                        (GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling) + 1)
@@ -51,7 +51,7 @@ bool spec_customs_smut(std::shared_ptr<Character> ch)
                     GainXP(victim, AbilityClass::Smuggling, 0 - ch_exp);
                     return true;
                 }
-                else if (CanSeeCharacter(ch, victim)
+                else if (CanSeeCharacter(mob, victim)
                          && !obj->Flags.test(Flag::Obj::Contraband))
                 {
                     long ch_exp = umin(obj->Cost * 10,
@@ -61,8 +61,8 @@ bool spec_customs_smut(std::shared_ptr<Character> ch)
                                  ch_exp, obj->ShortDescr.c_str());
                     GainXP(victim, AbilityClass::Smuggling, ch_exp);
 
-                    Act(AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, ActTarget::NotVict);
-                    Act(AT_ACTION, "$n looks at you suspiciously.", ch, NULL, victim, ActTarget::Vict);
+                    Act(AT_ACTION, "$n looks at $N suspiciously.", mob, NULL, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n looks at you suspiciously.", mob, NULL, victim, ActTarget::Vict);
                     obj->Flags.set(Flag::Obj::Contraband);
 
                     return true;
@@ -82,7 +82,9 @@ bool spec_customs_smut(std::shared_ptr<Character> ch)
             else if (obj->ItemType == ITEM_CONTAINER)
             {
                 auto isSmutButNotAlreadySmuggled = [](const auto &item)
-                { return item->ItemType == ITEM_SMUT && !item->Flags.test(Flag::Obj::Contraband); };
+                {
+                    return item->ItemType == ITEM_SMUT && !item->Flags.test(Flag::Obj::Contraband);
+                };
 
                 for (auto content : obj->Objects() | std::views::filter(isSmutButNotAlreadySmuggled))
                 {

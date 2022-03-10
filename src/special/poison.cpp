@@ -4,19 +4,19 @@
 #include "skill.hpp"
 #include "act.hpp"
 
-bool spec_poison(std::shared_ptr<Character> ch)
+bool spec_poison(std::shared_ptr<Character> mob)
 {
-    std::shared_ptr<Character> victim = WhoFighting(ch);
-    int chanceOfBiting = ch->TopLevel() * 2;
-    
-    if(ch->Position == POS_FIGHTING
+    std::shared_ptr<Character> victim = WhoFighting(mob);
+    int chanceOfBiting = mob->TopLevel() * 2;
+
+    if (mob->Position == POS_FIGHTING
         && victim != nullptr
-       && GetRandomPercent() <= chanceOfBiting)
+        && GetRandomPercent() <= chanceOfBiting)
     {
-        Act(AT_HIT, "You bite $N!", ch, NULL, victim, ActTarget::Char);
-        Act(AT_ACTION, "$n bites $N!", ch, NULL, victim, ActTarget::NotVict);
-        Act(AT_POISON, "$n bites you!", ch, NULL, victim, ActTarget::Vict);
-        spell_poison(gsn_poison, ch->TopLevel(), ch, victim);
+        Act(AT_HIT, "You bite $N!", mob, nullptr, victim, ActTarget::Char);
+        Act(AT_ACTION, "$n bites $N!", mob, nullptr, victim, ActTarget::NotVict);
+        Act(AT_POISON, "$n bites you!", mob, nullptr, victim, ActTarget::Vict);
+        spell_poison(gsn_poison, mob->TopLevel(), mob, victim);
 
         return true;
     }

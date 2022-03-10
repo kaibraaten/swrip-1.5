@@ -1,12 +1,11 @@
 #include <utility/algorithms.hpp>
-#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
 
-bool spec_newbie_pilot(std::shared_ptr<Character> ch)
+bool spec_newbie_pilot(std::shared_ptr<Character> mob)
 {
-    auto newbies = Filter(ch->InRoom->Characters(),
+    auto newbies = Filter(mob->InRoom->Characters(),
                           [](auto victim)
                           {
                               return !IsNpc(victim)
@@ -26,7 +25,7 @@ bool spec_newbie_pilot(std::shared_ptr<Character> ch)
         char buf[MAX_STRING_LENGTH];
         sprintf(buf, "%s steps out and the shuttle quickly returns to the academy.\r\n",
                 victim->Name.c_str());
-        EchoToRoom(AT_ACTION, ch->InRoom, buf);
+        EchoToRoom(AT_ACTION, mob->InRoom, buf);
     }
 
     return false;
